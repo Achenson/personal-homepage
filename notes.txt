@@ -1,0 +1,53 @@
+Typescript & tailwing manual updated:
+
+
+
+tailwind ccs && typescript:
+
+1. npx create-react-app my-app --template typescript !!
+2. npm i -D tailwindcss postcss-cli autoprefixer 
+2.5 npm i -D  postcss !
+3. npx tailwind init tailwind.js --full (all settings will be visible) 
+(for some reason has to be tailwind.js not tailwind.config.js!)
+4. change tailwind.js name, so it won't work anymory, but all settings can be checked
+5. npx tailwind init tailwind.js 
+(this time without -- full flag -> in this file we will put only our custom settings)
+6. postcss.config.js -> 
+
+const tailwindcss = require("tailwindcss");
+module.exports = {
+  plugins: [tailwindcss("./tailwind.js"), require("autoprefixer")],
+};
+
+7.  src/assets/main.css
+
+    src/assets/tailwind.css
+    @import "tailwindcss/base";
+    @import "tailwindcss/components";
+    @import "tailwindcss/utilities";
+
+8. delete both .ccs file in root, delete react logo
+
+9. package.json:
+
+"start": "npm run watch:css && react-scripts start",
+"build": "npm run build:css && react-scripts build",
+   ...
+"build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
+"watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"
+
+10. Tailwind css intelisense extension (reinstall if not working)
+
+11.  index.tsx 
+
+    import './assets/main.css';
+
+12. after every change in config file (tailwind.js) run npm run build:css
+(run it once at the beginning!)
+
+13. purgecss when finished with the project?
+
+TO DO:
+
+1. purgecss at the end of project?
+2. react-scripts 4.0.0 not working with typescript (vulnerability)
