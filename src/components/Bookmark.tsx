@@ -19,54 +19,57 @@ interface Props {}
 function Bookmark({}: Props): JSX.Element {
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
   const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
-
-  // useEffect( () => {
-  //   if (colorsVisibility) {
-  //     setIconsVisibility(true)
-  //   }
-
-
-  // },[colorsVisibility])
+  const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
+    false
+  );
 
   return (
-    <div
-     className="relative"
-    >
-      <div className="h-8 px-2 pt-px bg-teal-500 border border-gray-500 shadow-sm flex justify-between cursor-pointer"
-      
-      onMouseEnter={() => {
-        setIconsVisibility(true);
-      }}
-      onMouseLeave={() => {
-        setIconsVisibility(false)
-      }}
+    <div className="relative">
+      <div
+        className="h-8 px-2 pt-px bg-teal-500 border border-gray-500 shadow-sm flex justify-between cursor-pointer"
+        onMouseEnter={() => {
+          setIconsVisibility(true);
+        }}
+        onMouseLeave={() => {
+          setIconsVisibility(false);
+        }}
+        onClick={() => {
+          setSingleLinkVisibility(b => !b)
+        }}
       >
-        <div
-        
-        >Bookmark</div>
+        <div>Bookmark</div>
 
-        <div className={`pt-1 flex ${iconsVisibility ? "visible" : "invisible"} fill-current text-gray-700 `}>
+        <div
+          className={`pt-1 flex ${
+            iconsVisibility ? "visible" : "invisible"
+          } fill-current text-gray-700 `}
+        >
           <CrossArrowsSVG
             className="h-6 ml-2 cursor-move hover:text-black"
             style={{ marginTop: "-2px" }}
           />
           <PencilSmallSVG className="h-5 ml-2 hover:text-black" />
 
-
-          <ColorSmallSVG className="h-5 ml-2 hover:text-black" 
-          
-          onClick={() => {
-            setColorsVisibility( b => !b)
-
-          }}
+          <ColorSmallSVG
+            className="h-5 ml-2 hover:text-black"
+            onClick={() => {
+              setColorsVisibility((b) => !b);
+            }}
           />
           <TrashSmallSVG className="h-5 ml-2 hover:text-black bg-" />
         </div>
       </div>
 
-   {colorsVisibility ? <ColorsToChoose setIconsVisibility={setIconsVisibility}/> : null }   
-      <SingleLink />
-      <SingleLink />
+      {colorsVisibility ? (
+        <ColorsToChoose setIconsVisibility={setIconsVisibility} />
+      ) : null}
+
+      {singleLinkVisibility ? (
+        <div>
+          <SingleLink />
+          <SingleLink />
+        </div>
+      ) : null}
     </div>
   );
 }
