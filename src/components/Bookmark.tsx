@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 import { ReactComponent as PaintSVG } from "../svgs/paint-roller.svg";
@@ -12,15 +12,25 @@ import { ReactComponent as HandSVG } from "../svgs/hand.svg";
 import { ReactComponent as HandSmallSVG } from "../svgs/handSmall.svg";
 import { ReactComponent as CrossArrowsSVG } from "../svgs/cross-arrows.svg";
 import SingleLink from "./SingleLink";
+import ColorsToChoose from "./ColorsToChoose";
 
 interface Props {}
 
 function Bookmark({}: Props): JSX.Element {
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
+  const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
+
+  // useEffect( () => {
+  //   if (colorsVisibility) {
+  //     setIconsVisibility(true)
+  //   }
+
+
+  // },[colorsVisibility])
 
   return (
     <div
-    
+     className="relative"
     >
       <div className="h-8 px-2 pt-px bg-teal-500 border border-gray-500 shadow-sm flex justify-between cursor-pointer"
       
@@ -41,11 +51,20 @@ function Bookmark({}: Props): JSX.Element {
             style={{ marginTop: "-2px" }}
           />
           <PencilSmallSVG className="h-5 ml-2 hover:text-black" />
-          <ColorSmallSVG className="h-5 ml-2 hover:text-black" />
-          <TrashSmallSVG className="h-5 ml-2 hover:text-black" />
+
+
+          <ColorSmallSVG className="h-5 ml-2 hover:text-black" 
+          
+          onClick={() => {
+            setColorsVisibility( b => !b)
+
+          }}
+          />
+          <TrashSmallSVG className="h-5 ml-2 hover:text-black bg-" />
         </div>
       </div>
 
+   {colorsVisibility ? <ColorsToChoose setIconsVisibility={setIconsVisibility}/> : null }   
       <SingleLink />
       <SingleLink />
     </div>
