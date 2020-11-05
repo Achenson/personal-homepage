@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useState } from "react";
 
 import { ReactComponent as PaintSVG } from "../svgs/paint-roller.svg";
 import { ReactComponent as ColorSVG } from "../svgs/beaker.svg";
@@ -16,23 +16,39 @@ import SingleLink from "./SingleLink";
 interface Props {}
 
 function Bookmark({}: Props): JSX.Element {
+  const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
+
   return (
-    <div>
-         <div className="h-8 px-2 pt-px bg-teal-600 border border-gray-500 shadow-sm flex justify-between cursor-pointer">
-      <div>Bookmark</div>
-      <div className="pt-1 flex opacity-0 hover:opacity-100">
-        <CrossArrowsSVG className="h-6 ml-2 cursor-move" style={{marginTop: "-2px"}}/>
-        <PencilSmallSVG className="h-5 ml-2"/>
-        <ColorSmallSVG className="h-5 ml-2" />
-        <TrashSmallSVG className="h-5 ml-2"/>
+    <div
+    
+    >
+      <div className="h-8 px-2 pt-px bg-teal-500 border border-gray-500 shadow-sm flex justify-between cursor-pointer"
+      
+      onMouseEnter={() => {
+        setIconsVisibility(true);
+      }}
+      onMouseLeave={() => {
+        setIconsVisibility(false)
+      }}
+      >
+        <div
+        
+        >Bookmark</div>
+
+        <div className={`pt-1 flex ${iconsVisibility ? "visible" : "invisible"} fill-current text-gray-700 `}>
+          <CrossArrowsSVG
+            className="h-6 ml-2 cursor-move hover:text-black"
+            style={{ marginTop: "-2px" }}
+          />
+          <PencilSmallSVG className="h-5 ml-2 hover:text-black" />
+          <ColorSmallSVG className="h-5 ml-2 hover:text-black" />
+          <TrashSmallSVG className="h-5 ml-2 hover:text-black" />
+        </div>
       </div>
-    </div>
 
-    <SingleLink/>
-    <SingleLink/>
+      <SingleLink />
+      <SingleLink />
     </div>
-
- 
   );
 }
 
