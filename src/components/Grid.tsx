@@ -32,17 +32,17 @@ function Grid({}: Props): JSX.Element {
   const [linksData, setLinksData] = useState([
     {
       title: "facebook",
-      URL: "www.facebook.com",
+      URL: "https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death",
       tags: ["all", "fun"],
     },
     {
       title: "tvn24",
-      URL: "www.facebook.com",
+      URL: "https://en.wikipedia.org/wiki/Webfoot_Technologies",
       tags: ["all", "main"],
     },
     {
       title: "gmail",
-      URL: "www.gmail.com",
+      URL: "https://en.wikipedia.org/wiki/Microsoft_Windows",
       tags: ["all", "main"],
     },
   ]);

@@ -51,3 +51,4 @@ TO DO:
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
+3. how to properly set links

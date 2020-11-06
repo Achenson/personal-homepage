@@ -10,15 +10,23 @@ interface Props {
     title: string;
     URL: string;
     tags: string[];
-}
+  };
 }
 
 function SingleLink({ setEditLinkVis, singleLinkData }: Props): JSX.Element {
+
+
+// let linkURL = new URL(singleLinkData.URL)
+
   return (
     <div className="flex justify-between bg-gray-100 h-10 py-2 border-b">
       <div className="flex">
         <PhotographSVG className="h-6 mr-px" />
-  <div className="cursor-pointer">{singleLinkData.title}</div>
+        <div>
+
+          <a href={singleLinkData.URL} target="_blank" rel="noopener noreferrer">{singleLinkData.title}</a>
+          {/* <a href="https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death" target="_blank" rel="noopener noreferrer">{singleLinkData.title}</a> */}
+        </div>
       </div>
       <div
         className="flex fill-current text-gray-500"
