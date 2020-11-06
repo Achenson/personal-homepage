@@ -15,18 +15,25 @@ import SingleLink from "./SingleLink";
 import ColorsToChoose from "./ColorsToChoose";
 import EditLink from "./EditLink";
 
-interface Props {}
+interface Props {
+  bookmarkTitle: string;
+  linksData: {
+    title: string;
+    URL: string;
+    tags: string[];
+}[];
+}
 
-function Bookmark({}: Props): JSX.Element {
+function Bookmark({bookmarkTitle, linksData}: Props): JSX.Element {
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
   const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
   const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
     false
   );
-  const [editLinkVis, setEditLinkVis] = useState<boolean>(true);
+  const [editLinkVis, setEditLinkVis] = useState<boolean>(false);
 
   return (
-    <div className="relative">
+    <div className="relative mb-6">
       <div
         className="pl-0 h-8 px-2 pt-px bg-teal-500 border border-gray-500 shadow-sm flex justify-between"
         onMouseEnter={() => {
@@ -42,7 +49,7 @@ function Bookmark({}: Props): JSX.Element {
             setSingleLinkVisibility((b) => !b);
           }}
         >
-          Bookmark
+          {bookmarkTitle}
         </div>
 
         <div
@@ -51,7 +58,7 @@ function Bookmark({}: Props): JSX.Element {
           } fill-current text-gray-700 `}
         >
           <CrossArrowsSVG
-            className="h-6 ml-2 cursor-move hover:text-black"
+            className="h-6 ml-2 cursor-move hover:text-black hover:invisible"
             style={{ marginTop: "-2px" }}
           />
           <PencilSmallSVG className="h-5 ml-2 hover:text-black cursor-pointer " />
@@ -70,14 +77,22 @@ function Bookmark({}: Props): JSX.Element {
         <ColorsToChoose setIconsVisibility={setIconsVisibility} />
       ) : null}
 
-      {editLinkVis ? <EditLink
-      setEditLinkVis={setEditLinkVis}
-      /> : null}
+      {editLinkVis ? <EditLink setEditLinkVis={setEditLinkVis} /> : null}
 
       {singleLinkVisibility ? (
         <div>
-          <SingleLink setEditLinkVis={setEditLinkVis} />
-          <SingleLink setEditLinkVis={setEditLinkVis}/>
+
+          {
+          linksData
+          .filter( el => el.tags.indexOf(`${bookmarkTitle}`) > -1 )
+          .map( (el, i) => {
+           return <SingleLink setEditLinkVis={setEditLinkVis} singleLinkData={el} key={i} />
+          })
+
+          }
+
+          {/* <SingleLink setEditLinkVis={setEditLinkVis} /> */}
+          
         </div>
       ) : null}
     </div>
