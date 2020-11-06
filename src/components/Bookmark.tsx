@@ -26,18 +26,22 @@ function Bookmark({}: Props): JSX.Element {
   return (
     <div className="relative">
       <div
-        className="h-8 px-2 pt-px bg-teal-500 border border-gray-500 shadow-sm flex justify-between cursor-pointer"
+        className="pl-0 h-8 px-2 pt-px bg-teal-500 border border-gray-500 shadow-sm flex justify-between"
         onMouseEnter={() => {
           setIconsVisibility(true);
         }}
         onMouseLeave={() => {
           setIconsVisibility(false);
         }}
-        onClick={() => {
-          setSingleLinkVisibility(b => !b)
-        }}
       >
-        <div>Bookmark</div>
+        <div
+          className="pl-1 cursor-pointer w-full"
+          onClick={() => {
+            setSingleLinkVisibility((b) => !b);
+          }}
+        >
+          Bookmark
+        </div>
 
         <div
           className={`pt-1 flex ${
@@ -48,15 +52,15 @@ function Bookmark({}: Props): JSX.Element {
             className="h-6 ml-2 cursor-move hover:text-black"
             style={{ marginTop: "-2px" }}
           />
-          <PencilSmallSVG className="h-5 ml-2 hover:text-black" />
+          <PencilSmallSVG className="h-5 ml-2 hover:text-black cursor-pointer " />
 
           <ColorSmallSVG
-            className="h-5 ml-2 hover:text-black"
+            className="h-5 ml-2 hover:text-black cursor-pointer "
             onClick={() => {
               setColorsVisibility((b) => !b);
             }}
           />
-          <TrashSmallSVG className="h-5 ml-2 hover:text-black bg-" />
+          <TrashSmallSVG className="h-5 ml-2 hover:text-black cursor-pointer " />
         </div>
       </div>
 
