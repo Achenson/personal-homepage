@@ -15,13 +15,15 @@ import SingleLink from "./SingleLink";
 import ColorsToChoose from "./ColorsToChoose";
 import EditLink from "./EditLink";
 
+interface SingleLinkData {
+  title: string;
+  URL: string;
+  tags: string[];
+}
+
 interface Props {
   bookmarkTitle: string;
-  linksData: {
-    title: string;
-    URL: string;
-    tags: string[];
-}[];
+  linksData:  SingleLinkData[];
 }
 
 function Bookmark({bookmarkTitle, linksData}: Props): JSX.Element {
@@ -31,6 +33,12 @@ function Bookmark({bookmarkTitle, linksData}: Props): JSX.Element {
     false
   );
   const [editLinkVis, setEditLinkVis] = useState<boolean>(false);
+  const [editSingleLinkData, setSingleLinkData] = useState<SingleLinkData>({
+    title: "",
+    URL: "",
+    tags: []
+  })
+
 
   return (
     <div className="relative mb-6">
@@ -77,7 +85,7 @@ function Bookmark({bookmarkTitle, linksData}: Props): JSX.Element {
         <ColorsToChoose setIconsVisibility={setIconsVisibility} />
       ) : null}
 
-      {editLinkVis ? <EditLink setEditLinkVis={setEditLinkVis} /> : null}
+      {editLinkVis ? <EditLink setEditLinkVis={setEditLinkVis} editSingleLinkData={editSingleLinkData} /> : null}
 
       {singleLinkVisibility ? (
         <div>
@@ -86,7 +94,7 @@ function Bookmark({bookmarkTitle, linksData}: Props): JSX.Element {
           linksData
           .filter( el => el.tags.indexOf(`${bookmarkTitle}`) > -1 )
           .map( (el, i) => {
-           return <SingleLink setEditLinkVis={setEditLinkVis} singleLinkData={el} key={i} />
+           return <SingleLink setEditLinkVis={setEditLinkVis} singleLinkData={el} setSingleLinkData={setSingleLinkData} key={i} />
           })
 
           }

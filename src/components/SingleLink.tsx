@@ -4,16 +4,19 @@ import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
 import { ReactComponent as PhotographSVG } from "../svgs/photograph.svg";
 
-interface Props {
-  setEditLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  singleLinkData: {
-    title: string;
-    URL: string;
-    tags: string[];
-  };
+interface SingleLinkData {
+  title: string;
+  URL: string;
+  tags: string[];
 }
 
-function SingleLink({ setEditLinkVis, singleLinkData }: Props): JSX.Element {
+interface Props {
+  setEditLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  singleLinkData: SingleLinkData;
+  setSingleLinkData: React.Dispatch<React.SetStateAction<SingleLinkData>>
+}
+
+function SingleLink({ setEditLinkVis, singleLinkData, setSingleLinkData }: Props): JSX.Element {
 
 
 // let linkURL = new URL(singleLinkData.URL)
@@ -36,6 +39,11 @@ function SingleLink({ setEditLinkVis, singleLinkData }: Props): JSX.Element {
           className="h-5 ml-1 hover:text-black cursor-pointer"
           onClick={() => {
             setEditLinkVis((b) => !b);
+            setSingleLinkData({
+              title: singleLinkData.title,
+              URL: singleLinkData.URL,
+              tags: [...singleLinkData.tags]
+            })
           }}
         />
         <TrashSmallSVG className="h-5 ml-1 hover:text-black cursor-pointer" />

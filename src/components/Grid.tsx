@@ -47,11 +47,7 @@ function Grid({}: Props): JSX.Element {
     },
   ]);
 
-  function compareNumeric(a: number, b: number) {
-    if (a > b) return 1;
-    if (a == b) return 0;
-    if (a < b) return -1;
-  }
+
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4">
