@@ -21,6 +21,7 @@ function SingleLink({ setEditLinkVis, singleLinkData, setSingleLinkData }: Props
 
 // let linkURL = new URL(singleLinkData.URL)
 
+
   return (
     <div className="flex justify-between bg-gray-100 h-10 py-2 border-b">
       <div className="flex">
