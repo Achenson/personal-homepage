@@ -23,10 +23,11 @@ interface SingleLinkData {
 
 interface Props {
   bookmarkTitle: string;
-  linksData:  SingleLinkData[];
+  bookmarkColor: string;
+  linksData: SingleLinkData[];
 }
 
-function Bookmark({bookmarkTitle, linksData}: Props): JSX.Element {
+function Bookmark({bookmarkTitle, bookmarkColor, linksData}: Props): JSX.Element {
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
   const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
   const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
@@ -43,7 +44,7 @@ function Bookmark({bookmarkTitle, linksData}: Props): JSX.Element {
   return (
     <div className="relative mb-6">
       <div
-        className="pl-0 h-8 px-2 pt-px bg-teal-500 border border-gray-500 shadow-sm flex justify-between"
+        className={`pl-0 h-8 px-2 pt-px ${bookmarkColor} border border-gray-500 shadow-sm flex justify-between`}
         onMouseEnter={() => {
           setIconsVisibility(true);
         }}

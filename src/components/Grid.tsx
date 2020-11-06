@@ -8,7 +8,7 @@ function Grid({}: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = useState([
     {
       title: "all",
-      color: "bg-teal-500",
+      color: "bg-teal-400",
       column: 1,
       priority: 1,
       linksTitles: ["facebook", "tvn24", "gmail"],
@@ -22,7 +22,7 @@ function Grid({}: Props): JSX.Element {
     },
     {
       title: "fun",
-      color: "bg-teal-500",
+      color: "bg-teal-600",
       column: 2,
       priority: 0,
       linksTitles: ["facebook"],
@@ -56,7 +56,7 @@ function Grid({}: Props): JSX.Element {
           .filter((el) => el.column === 1)
           .sort((a, b) => a.priority - b.priority)
           .map((el, i) => {
-            return <Bookmark bookmarkTitle={el.title} linksData={linksData} key={i} />;
+            return <Bookmark bookmarkTitle={el.title} bookmarkColor={el.color} linksData={linksData} key={i} />;
           })}
       </div>
       <div className="hidden sm:block bg-orange-200">
@@ -64,7 +64,7 @@ function Grid({}: Props): JSX.Element {
           .filter((el) => el.column === 2)
           .sort((a, b) => a.priority - b.priority)
           .map((el, i) => {
-            return <Bookmark bookmarkTitle={el.title} linksData={linksData} key={i} />;
+            return <Bookmark bookmarkTitle={el.title} bookmarkColor={el.color} linksData={linksData} key={i} />;
           })}
       </div>
       <div className="hidden md:block bg-red-200">3</div>
