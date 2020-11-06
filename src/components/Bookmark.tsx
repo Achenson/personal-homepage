@@ -13,6 +13,7 @@ import { ReactComponent as HandSmallSVG } from "../svgs/handSmall.svg";
 import { ReactComponent as CrossArrowsSVG } from "../svgs/cross-arrows.svg";
 import SingleLink from "./SingleLink";
 import ColorsToChoose from "./ColorsToChoose";
+import EditLink from "./EditLink";
 
 interface Props {}
 
@@ -22,6 +23,7 @@ function Bookmark({}: Props): JSX.Element {
   const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
     false
   );
+  const [editLinkVis, setEditLinkVis] = useState<boolean>(true);
 
   return (
     <div className="relative">
@@ -68,10 +70,14 @@ function Bookmark({}: Props): JSX.Element {
         <ColorsToChoose setIconsVisibility={setIconsVisibility} />
       ) : null}
 
+      {editLinkVis ? <EditLink
+      setEditLinkVis={setEditLinkVis}
+      /> : null}
+
       {singleLinkVisibility ? (
         <div>
-          <SingleLink />
-          <SingleLink />
+          <SingleLink setEditLinkVis={setEditLinkVis} />
+          <SingleLink setEditLinkVis={setEditLinkVis}/>
         </div>
       ) : null}
     </div>
