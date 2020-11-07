@@ -3,6 +3,7 @@ import SingleColor from "./SingleColor";
 
 interface Props {
   setIconsVisibility: (value: React.SetStateAction<boolean>) => void;
+  bookmarkTitle: string;
 }
 
 const colors = [
@@ -53,13 +54,13 @@ const colors = [
   ["pink-300", "pink-400", "pink-500", "pink-600", "pink-700", "pink-800"],
 ];
 
-function ColorsToChoose({ setIconsVisibility }: Props): JSX.Element {
+function ColorsToChoose({ setIconsVisibility, bookmarkTitle }: Props): JSX.Element {
   function mappingColors(colors: string[][]) {
     return colors.map((row, i) => {
       return (
         <div className="flex" key={i}>
           {row.map((el, j) => {
-            return <SingleColor color={el} key={j} />;
+            return <SingleColor color={el} bookmarkTitle={bookmarkTitle} key={j} />;
           })}
         </div>
       );

@@ -1,15 +1,10 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-import { ReactComponent as PaintSVG } from "../svgs/paint-roller.svg";
-import { ReactComponent as ColorSVG } from "../svgs/beaker.svg";
+
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
-import { ReactComponent as PencilSVG } from "../svgs/pencil.svg";
 import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
-import { ReactComponent as TrashSVG } from "../svgs/trash.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
-import { ReactComponent as HandSVG } from "../svgs/hand.svg";
-import { ReactComponent as HandSmallSVG } from "../svgs/handSmall.svg";
 import { ReactComponent as CrossArrowsSVG } from "../svgs/cross-arrows.svg";
 import SingleLink from "./SingleLink";
 import ColorsToChoose from "./ColorsToChoose";
@@ -83,7 +78,7 @@ function Bookmark({bookmarkTitle, bookmarkColor, linksData}: Props): JSX.Element
       </div>
 
       {colorsVisibility ? (
-        <ColorsToChoose setIconsVisibility={setIconsVisibility} />
+        <ColorsToChoose setIconsVisibility={setIconsVisibility} bookmarkTitle={bookmarkTitle} />
       ) : null}
 
       {editLinkVis ? <EditLink setEditLinkVis={setEditLinkVis} editSingleLinkData={editSingleLinkData} /> : null}
