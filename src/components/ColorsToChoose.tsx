@@ -54,6 +54,18 @@ const colors = [
 ];
 
 function ColorsToChoose({ setIconsVisibility }: Props): JSX.Element {
+  function mappingColors(colors: string[][]) {
+    return colors.map((row, i) => {
+      return (
+        <div className="flex" key={i}>
+          {row.map((el, j) => {
+            return <SingleColor color={el} key={j} />;
+          })}
+        </div>
+      );
+    });
+  }
+
   return (
     <div
       className="bg-gray-100 absolute right-0 z-50"
@@ -64,56 +76,7 @@ function ColorsToChoose({ setIconsVisibility }: Props): JSX.Element {
       //   setIconsVisibility(false)
       // }}
     >
-      <div className="flex">
-        {colors[0].map((el, i) => {
-          return <SingleColor color={el} key={i} />;
-        })}
-      </div>
-      <div className="flex">
-        {colors[1].map((el, i) => {
-          return <SingleColor color={el} key={i} />;
-        })}
-      </div>
-      <div className="flex">
-        {colors[2].map((el, i) => {
-          return <SingleColor color={el} key={i} />;
-        })}
-      </div>
-      <div className="flex">
-        {colors[3].map((el, i) => {
-          return <SingleColor color={el} key={i} />;
-        })}
-      </div>
-      <div className="flex">
-        {colors[4].map((el, i) => {
-          return <SingleColor color={el} key={i} />;
-        })}
-      </div>
-      <div className="flex">
-        {colors[5].map((el, i) => {
-          return <SingleColor color={el} key={i} />;
-        })}
-      </div>
-      <div className="flex">
-        {colors[6].map((el, i) => {
-          return <SingleColor color={el} key={i} />;
-        })}
-      </div>
-      <div className="flex">
-        {colors[7].map((el, i) => {
-          return <SingleColor color={el} key={i} />;
-        })}
-      </div>
-      <div className="flex">
-        {colors[8].map((el, i) => {
-          return <SingleColor color={el} key={i} />;
-        })}
-      </div>
-      <div className="flex">
-        {colors[9].map((el, i) => {
-          return <SingleColor color={el} key={i} />;
-        })}
-      </div>
+      {mappingColors(colors)}
     </div>
   );
 }

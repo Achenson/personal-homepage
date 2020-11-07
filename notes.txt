@@ -54,4 +54,4 @@ TO DO:
 3. how to properly set links
 3. bookmark move icon - hide when moving?
 4. change pretifier -> .map & .filter from new lines
-5. ColorsToChoose -> better code
+DONE 5. ColorsToChoose -> better code DONE
