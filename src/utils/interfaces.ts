@@ -3,7 +3,7 @@ export interface SingleBookmarkData {
   color: string;
   column: number;
   priority: number;
-  linksTitles: string[];
+  // linksTitles: string[];
 }
 
 export interface SingleLinkData {

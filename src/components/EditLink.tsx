@@ -3,6 +3,7 @@ import { useState } from "react";
 import { produce } from "immer";
 
 import { linksDataState } from "../state/bookmarksAndLinks";
+import { bookmarksDataState } from "../state/bookmarksAndLinks";
 
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
@@ -20,14 +21,19 @@ interface Props {
 
 function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
+  const [bookmarksData, setBookmarksData] = linksDataState.use();
 
   const [titleInput, setTitleInput] = useState<string>(
     editSingleLinkData.title
   );
+
   const [urlInput, setUrlInput] = useState<string>(editSingleLinkData.URL);
   const [tagsInput, setTagsInput] = useState<string[]>([
     ...editSingleLinkData.tags,
   ]);
+
+
+
 
   let linkIndex: number;
 
@@ -89,7 +95,13 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                   })
                 );
 
+
+                
+
                 setEditLinkVis((b) => !b);
+
+
+
 
               }}
             >

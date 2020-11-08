@@ -1,60 +1,38 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Bookmark from "./Bookmark";
-import {bookmarksDataState, linksDataState} from "../state/bookmarksAndLinks"
-
+import { bookmarksDataState, linksDataState } from "../state/bookmarksAndLinks";
+import { produce } from "immer";
 
 interface Props {}
 
 function Grid({}: Props): JSX.Element {
-
-
-  // const [bookmarksData, setBookmarksData] = useState([
-  //   {
-  //     title: "all",
-  //     color: "bg-teal-400",
-  //     column: 1,
-  //     priority: 1,
-  //     linksTitles: ["facebook", "tvn24", "gmail"],
-  //   },
-  //   {
-  //     title: "main",
-  //     color: "bg-teal-500",
-  //     column: 1,
-  //     priority: 0,
-  //     linksTitles: ["tvn24", "gmail"],
-  //   },
-  //   {
-  //     title: "fun",
-  //     color: "bg-teal-600",
-  //     column: 2,
-  //     priority: 0,
-  //     linksTitles: ["facebook"],
-  //   },
-  // ]);
-
-  // const [linksData, setLinksData] = useState([
-  //   {
-  //     title: "facebook",
-  //     URL: "https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death",
-  //     tags: ["all", "fun"],
-  //   },
-  //   {
-  //     title: "tvn24",
-  //     URL: "https://en.wikipedia.org/wiki/Webfoot_Technologies",
-  //     tags: ["all", "main"],
-  //   },
-  //   {
-  //     title: "gmail",
-  //     URL: "https://en.wikipedia.org/wiki/Microsoft_Windows",
-  //     tags: ["all", "main"],
-  //   },
-  // ]);
-
+ 
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [linksData, setLinksData] = linksDataState.use();
 
+  useEffect(() => {
+    let linksDataTags: string[] = [];
+
+    linksData.forEach((obj) => {
+      obj.tags.forEach((el) => {
+        if (linksDataTags.indexOf(el) === -1) {
+          linksDataTags.push(el);
+        }
+      });
+    });
+
+    bookmarksData.forEach((obj, i) => {
+      if (linksDataTags.indexOf(obj.title) === -1) {
+        setBookmarksData((previous) =>
+          produce(previous, (updated) => {
+            updated.splice(i, 1);
+          })
+        );
+      }
+    });
+  }, [bookmarksData, linksData]);
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4">
@@ -63,7 +41,14 @@ function Grid({}: Props): JSX.Element {
           .filter((el) => el.column === 1)
           .sort((a, b) => a.priority - b.priority)
           .map((el, i) => {
-            return <Bookmark bookmarkTitle={el.title} bookmarkColor={el.color} linksData={linksData} key={i} />;
+            return (
+              <Bookmark
+                bookmarkTitle={el.title}
+                bookmarkColor={el.color}
+                linksData={linksData}
+                key={i}
+              />
+            );
           })}
       </div>
       <div className="hidden sm:block bg-orange-200">
@@ -71,7 +56,14 @@ function Grid({}: Props): JSX.Element {
           .filter((el) => el.column === 2)
           .sort((a, b) => a.priority - b.priority)
           .map((el, i) => {
-            return <Bookmark bookmarkTitle={el.title} bookmarkColor={el.color} linksData={linksData} key={i} />;
+            return (
+              <Bookmark
+                bookmarkTitle={el.title}
+                bookmarkColor={el.color}
+                linksData={linksData}
+                key={i}
+              />
+            );
           })}
       </div>
       <div className="hidden md:block bg-red-200">3</div>
