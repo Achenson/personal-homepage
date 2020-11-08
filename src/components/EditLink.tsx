@@ -43,6 +43,10 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
     }
   });
 
+  // ^  and $ -> beginning and end of the text!
+  let regexForTags = /^\w+(,\s\w+)*$/
+
+
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
       <form action="" className="pl-2 pr-4">
@@ -87,6 +91,14 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
               onClick={(e) => {
                 e.preventDefault();
 
+
+                // if(tagsInput.join(", "))
+
+                if(!regexForTags.test(tagsInput.join(", "))) {
+                  alert(`error ${tagsInput.join(", ")}`)
+                  return;
+                }
+
                 setLinksData((previous) =>
                   produce(previous, (updated) => {
                     updated[linkIndex].title = titleInput;
@@ -96,7 +108,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                 );
 
 
-                
+
 
                 setEditLinkVis((b) => !b);
 
