@@ -32,6 +32,11 @@ function EditBookmarkTitle({
     }
   });
 
+  const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
+
+  let regexForTitle = /^\w+$/;
+
+
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
       <form action="" className="pl-2 pr-4">
@@ -47,11 +52,11 @@ function EditBookmarkTitle({
           </div>
         </div>
 
-        {/* {tagErrorVis ? (
+        {tagErrorVis ? (
             <p className={`text-red-600`}>
-              Tags should consist of words separated by coma and space
+              Bookmark title should consist of a single word without special characters
             </p>
-          ) : null} */}
+          ) : null}
 
         <div className="flex justify-start mt-3">
           <p className="w-8"></p>
@@ -67,7 +72,12 @@ function EditBookmarkTitle({
                 //   return;
                 // }
 
-                // setTagErrorVis(false);
+                if (!regexForTitle.test(bookmarkTitleInput)) {
+                  setTagErrorVis(true);
+                  return;
+                }
+
+                setTagErrorVis(false);
 
                 setBookmarksData((previous) =>
                   produce(previous, (updated) => {
