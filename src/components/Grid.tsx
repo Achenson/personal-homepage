@@ -7,13 +7,12 @@ import { produce } from "immer";
 interface Props {}
 
 function Grid({}: Props): JSX.Element {
- 
-
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [linksData, setLinksData] = linksDataState.use();
 
   useEffect(() => {
     let linksDataTags: string[] = [];
+    let bookmarksDataTitles: string[] = [];
 
     linksData.forEach((obj) => {
       obj.tags.forEach((el) => {
@@ -23,6 +22,26 @@ function Grid({}: Props): JSX.Element {
       });
     });
 
+    bookmarksData.forEach((obj) => {
+      bookmarksDataTitles.push(obj.title);
+    });
+
+    linksDataTags.forEach((el) => {
+      if (bookmarksDataTitles.indexOf(el) === -1) {
+        setBookmarksData((previous) =>
+          produce(previous, (updated) => {
+            updated.push({
+              title: el,
+              color: "bg-teal-400",
+              column: 1,
+              priority: 1,
+            });
+          })
+        );
+      }
+    });
+
+    // deleting a tag
     bookmarksData.forEach((obj, i) => {
       if (linksDataTags.indexOf(obj.title) === -1) {
         setBookmarksData((previous) =>
