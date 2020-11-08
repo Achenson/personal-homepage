@@ -32,9 +32,6 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
     ...editSingleLinkData.tags,
   ]);
 
-
-
-
   let linkIndex: number;
 
   linksData.forEach((obj, i) => {
@@ -44,8 +41,9 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
   });
 
   // ^  and $ -> beginning and end of the text!
-  let regexForTags = /^\w+(,\s\w+)*$/
+  let regexForTags = /^\w+(,\s\w+)*$/;
 
+  const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
 
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
@@ -83,6 +81,11 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
             />
           </div>
         </div>
+        {tagErrorVis ? (
+          <p className={`text-red-600`}>
+            Tags should consist of words separated by coma and space
+          </p>
+        ) : null}
 
         <div className="flex justify-start mt-3">
           <p className="w-8"></p>
@@ -91,13 +94,14 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
               onClick={(e) => {
                 e.preventDefault();
 
-
                 // if(tagsInput.join(", "))
 
-                if(!regexForTags.test(tagsInput.join(", "))) {
-                  alert(`error ${tagsInput.join(", ")}`)
+                if (!regexForTags.test(tagsInput.join(", "))) {
+                  setTagErrorVis(true);
                   return;
                 }
+
+                setTagErrorVis(false);
 
                 setLinksData((previous) =>
                   produce(previous, (updated) => {
@@ -107,14 +111,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                   })
                 );
 
-
-
-
                 setEditLinkVis((b) => !b);
-
-
-
-
               }}
             >
               <SaveSVG className="h-5 fill-current text-gray-900 mr-3 hover:text-green-600" />
