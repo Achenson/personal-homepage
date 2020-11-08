@@ -31,7 +31,7 @@ function Bookmark({bookmarkTitle, bookmarkColor, linksData}: Props): JSX.Element
     false
   );
   const [editLinkVis, setEditLinkVis] = useState<boolean>(false);
-  const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(true);
+  const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
 
   const [editSingleLinkData, setSingleLinkData] = useState<SingleLinkData>({
     title: "",
@@ -69,7 +69,12 @@ function Bookmark({bookmarkTitle, bookmarkColor, linksData}: Props): JSX.Element
             className="h-6 ml-2 cursor-move hover:text-black hover:invisible"
             style={{ marginTop: "-2px" }}
           />
-          <PencilSmallSVG className="h-5 ml-2 hover:text-black cursor-pointer " />
+          <PencilSmallSVG className="h-5 ml-2 hover:text-black cursor-pointer "
+          onClick={()=>{
+            setEditBookmarkVis(b=>!b)
+          }}
+
+          />
 
           <ColorSmallSVG
             className="h-5 ml-2 hover:text-black cursor-pointer "
@@ -86,7 +91,7 @@ function Bookmark({bookmarkTitle, bookmarkColor, linksData}: Props): JSX.Element
       ) : null}
 
       {editLinkVis ? <EditLink setEditLinkVis={setEditLinkVis} editSingleLinkData={editSingleLinkData} /> : null}
-      {editBookmarkVis ? <EditBookmarkTitle bookmarkTitle={bookmarkTitle} /> : null}
+      {editBookmarkVis ? <EditBookmarkTitle bookmarkTitle={bookmarkTitle} setEditBookmarkVis={setEditBookmarkVis}/> : null}
 
 
 
