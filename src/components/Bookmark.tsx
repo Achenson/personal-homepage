@@ -10,6 +10,7 @@ import { ReactComponent as CrossArrowsSVG } from "../svgs/cross-arrows.svg";
 import SingleLink from "./SingleLink";
 import ColorsToChoose from "./ColorsToChoose";
 import EditLink from "./EditLink";
+import EditBookmarkTitle from "./EditBookmarkTitle";
 
 interface SingleLinkData {
   title: string;
@@ -30,6 +31,8 @@ function Bookmark({bookmarkTitle, bookmarkColor, linksData}: Props): JSX.Element
     false
   );
   const [editLinkVis, setEditLinkVis] = useState<boolean>(false);
+  const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(true);
+
   const [editSingleLinkData, setSingleLinkData] = useState<SingleLinkData>({
     title: "",
     URL: "",
@@ -83,6 +86,9 @@ function Bookmark({bookmarkTitle, bookmarkColor, linksData}: Props): JSX.Element
       ) : null}
 
       {editLinkVis ? <EditLink setEditLinkVis={setEditLinkVis} editSingleLinkData={editSingleLinkData} /> : null}
+      {editBookmarkVis ? <EditBookmarkTitle bookmarkTitle={bookmarkTitle} /> : null}
+
+
 
       {singleLinkVisibility ? (
         <div>
