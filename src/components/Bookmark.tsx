@@ -33,7 +33,7 @@ function Bookmark({bookmarkTitle, bookmarkColor, linksData}: Props): JSX.Element
   const [editLinkVis, setEditLinkVis] = useState<boolean>(false);
   const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
 
-  const [editSingleLinkData, setSingleLinkData] = useState<SingleLinkData>({
+  const [editSingleLinkData, setEditSingleLinkData] = useState<SingleLinkData>({
     title: "",
     URL: "",
     tags: []
@@ -102,7 +102,7 @@ function Bookmark({bookmarkTitle, bookmarkColor, linksData}: Props): JSX.Element
           linksData
           .filter( el => el.tags.indexOf(`${bookmarkTitle}`) > -1 )
           .map( (el, i) => {
-           return <SingleLink setEditLinkVis={setEditLinkVis} singleLinkData={el} setSingleLinkData={setSingleLinkData} key={i} />
+           return <SingleLink setEditLinkVis={setEditLinkVis} singleLinkData={el} setEditSingleLinkData={setEditSingleLinkData} key={i} />
           })
 
           }
