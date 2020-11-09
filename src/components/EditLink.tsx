@@ -44,6 +44,28 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
   let regexForTags = /^\w+(,\s\w+)*$/;
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
+  const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
+
+  function uniquenessCheck() {
+   let uniquenessVar: boolean = tagsInput.forEach((el, i) => {
+      let tagsInputCopy = [...tagsInput];
+      tagsInputCopy.splice(i, 1);
+      console.log(tagsInput);
+
+      console.log(tagsInputCopy);
+
+      if (tagsInputCopy.indexOf(el) > -1) {
+        return false;
+      }
+    });
+
+    if (uniquenessVar) {
+      return true;
+    } else {
+      return false
+    }
+   
+  }
 
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
@@ -81,10 +103,15 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
             />
           </div>
         </div>
+
         {tagErrorVis ? (
           <p className={`text-red-600`}>
             Tags should consist of words separated by coma and space
           </p>
+        ) : null}
+
+        {tagRepeatErrorVis ? (
+          <p className={`text-red-600`}>Each tag should be unique</p>
         ) : null}
 
         <div className="flex justify-start mt-3">
@@ -101,7 +128,13 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                   return;
                 }
 
+                if (!uniquenessCheck()) {
+                  setTagRepeatErrorVis(true);
+                  return;
+                }
+
                 setTagErrorVis(false);
+                // setTagRepeatErrorVis(false);
 
                 setLinksData((previous) =>
                   produce(previous, (updated) => {
