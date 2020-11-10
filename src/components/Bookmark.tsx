@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-
-
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
 import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
 import { ReactComponent as CrossArrowsSVG } from "../svgs/cross-arrows.svg";
+import { ReactComponent as PlusSVG } from "../svgs/plus.svg";
 import SingleLink from "./SingleLink";
 import ColorsToChoose from "./ColorsToChoose";
 import EditLink from "./EditLink";
+import NewLink from "./NewLink";
 import EditBookmarkTitle from "./EditBookmarkTitle";
 
 interface SingleLinkData {
@@ -24,21 +24,25 @@ interface Props {
   linksData: SingleLinkData[];
 }
 
-function Bookmark({bookmarkTitle, bookmarkColor, linksData}: Props): JSX.Element {
+function Bookmark({
+  bookmarkTitle,
+  bookmarkColor,
+  linksData,
+}: Props): JSX.Element {
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
   const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
   const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
     false
   );
   const [editLinkVis, setEditLinkVis] = useState<boolean>(false);
+  const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
   const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
 
   const [editSingleLinkData, setEditSingleLinkData] = useState<SingleLinkData>({
     title: "",
     URL: "",
-    tags: []
-  })
-
+    tags: [],
+  });
 
   return (
     <div className="relative mb-6">
@@ -69,11 +73,18 @@ function Bookmark({bookmarkTitle, bookmarkColor, linksData}: Props): JSX.Element
             className="h-6 ml-2 cursor-move hover:text-black hover:invisible"
             style={{ marginTop: "-2px" }}
           />
-          <PencilSmallSVG className="h-5 ml-2 hover:text-black cursor-pointer "
-          onClick={()=>{
-            setEditBookmarkVis(b=>!b)
+          <PlusSVG className="h-8  hover:text-black cursor-pointer " 
+          style={{ marginTop: "-6px" }}
+          onClick={() => {
+            setNewLinkVis(b=>!b)
           }}
+          />
 
+          <PencilSmallSVG
+            className="h-5  hover:text-black cursor-pointer "
+            onClick={() => {
+              setEditBookmarkVis((b) => !b);
+            }}
           />
 
           <ColorSmallSVG
@@ -87,28 +98,52 @@ function Bookmark({bookmarkTitle, bookmarkColor, linksData}: Props): JSX.Element
       </div>
 
       {colorsVisibility ? (
-        <ColorsToChoose setIconsVisibility={setIconsVisibility} bookmarkTitle={bookmarkTitle} />
+        <ColorsToChoose
+          setIconsVisibility={setIconsVisibility}
+          bookmarkTitle={bookmarkTitle}
+        />
       ) : null}
 
-      {editLinkVis ? <EditLink setEditLinkVis={setEditLinkVis} editSingleLinkData={editSingleLinkData} /> : null}
-      {editBookmarkVis ? <EditBookmarkTitle bookmarkTitle={bookmarkTitle} setEditBookmarkVis={setEditBookmarkVis}/> : null}
+      {editLinkVis ? (
+        <EditLink
+          setEditLinkVis={setEditLinkVis}
+          editSingleLinkData={editSingleLinkData}
+        />
+      ) : null}
+
+{newLinkVis ? (
+        <NewLink
+          setNewLinkVis={setNewLinkVis}
+        />
+      ) : null}
+
+
+      {editBookmarkVis ? (
+        <EditBookmarkTitle
+          bookmarkTitle={bookmarkTitle}
+          setEditBookmarkVis={setEditBookmarkVis}
+        />
+      ) : null}
+
 
 
 
       {singleLinkVisibility ? (
         <div>
-
-          {
-          linksData
-          .filter( el => el.tags.indexOf(`${bookmarkTitle}`) > -1 )
-          .map( (el, i) => {
-           return <SingleLink setEditLinkVis={setEditLinkVis} singleLinkData={el} setEditSingleLinkData={setEditSingleLinkData} key={i} />
-          })
-
-          }
+          {linksData
+            .filter((el) => el.tags.indexOf(`${bookmarkTitle}`) > -1)
+            .map((el, i) => {
+              return (
+                <SingleLink
+                  setEditLinkVis={setEditLinkVis}
+                  singleLinkData={el}
+                  setEditSingleLinkData={setEditSingleLinkData}
+                  key={i}
+                />
+              );
+            })}
 
           {/* <SingleLink setEditLinkVis={setEditLinkVis} /> */}
-          
         </div>
       ) : null}
     </div>

@@ -1,55 +1,28 @@
 import React from "react";
-import { useState } from "react";
-import { produce } from "immer";
-
-import { linksDataState } from "../state/bookmarksAndLinks";
-import { bookmarksDataState } from "../state/bookmarksAndLinks";
 
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
-
-interface SingleLinkData {
-  title: string;
-  URL: string;
-  tags: string[];
-}
+import { useState } from "react";
 
 interface Props {
-  setEditLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  editSingleLinkData: SingleLinkData;
+  setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
-  const [linksData, setLinksData] = linksDataState.use();
-  const [bookmarksData, setBookmarksData] = linksDataState.use();
+function NewLink({ setNewLinkVis }: Props): JSX.Element {
+  const [titleInput, setTitleInput] = useState<string>("");
 
-  const [titleInput, setTitleInput] = useState<string>(
-    editSingleLinkData.title
-  );
-
-  const [urlInput, setUrlInput] = useState<string>(editSingleLinkData.URL);
-  const [tagsInput, setTagsInput] = useState<string[]>([
-    ...editSingleLinkData.tags,
-  ]);
-
-  let linkIndex: number;
-
-  linksData.forEach((obj, i) => {
-    if (obj.title === editSingleLinkData.title) {
-      linkIndex = i;
-    }
-  });
+  const [urlInput, setUrlInput] = useState<string>("");
+  const [tagsInput, setTagsInput] = useState<string[]>([]);
 
   // ^  and $ -> beginning and end of the text!
   let regexForTags = /^\w+(,\s\w+)*$/;
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
-
-
+  const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(false);
+  const [titleUniquenessErrorVis, setTitleUniquenessErrorVis] = useState<boolean>(false);
 
   return (
-
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
       <form action="" className="pl-2 pr-4">
         <div className="flex justify-around mb-2 mt-2">
@@ -59,6 +32,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
               type="text"
               className="w-full  border"
               value={titleInput}
+              placeholder={"new link title"}
               onChange={(e) => setTitleInput(e.target.value)}
             />
           </div>
@@ -70,6 +44,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
               type="text"
               className="w-full  border"
               value={urlInput}
+              placeholder={"enter proper URL address"}
               onChange={(e) => setUrlInput(e.target.value)}
             />
           </div>
@@ -81,11 +56,22 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
               type="text"
               className="w-full border"
               value={tagsInput.join(", ")}
+              placeholder={"[tag1], [tag2]..."}
               onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
             />
           </div>
         </div>
 
+
+        {titleFormatErrorVis ? (
+          <p className={`text-red-600`}>Link title can contain letters, numbers or underscore</p>
+        ) : null}
+
+        {titleUniquenessErrorVis ? (
+          <p className={`text-red-600`}>Link with that title already exists</p>
+        ) : null}
+
+     
         {tagErrorVis ? (
           <p className={`text-red-600`}>
             Tags should consist of words separated by coma and space
@@ -110,39 +96,45 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                   return;
                 }
 
-                if (!uniquenessCheck()) {
+                if (!tagUniquenessCheck()) {
                   setTagRepeatErrorVis(true);
                   return;
                 }
 
                 setTagErrorVis(false);
+
                 // setTagRepeatErrorVis(false);
 
-                setLinksData((previous) =>
-                  produce(previous, (updated) => {
-                    updated[linkIndex].title = titleInput;
-                    updated[linkIndex].URL = urlInput;
-                    updated[linkIndex].tags = [...tagsInput];
-                  })
-                );
+                //   setLinksData((previous) =>
+                //     produce(previous, (updated) => {
+                //       updated[linkIndex].title = titleInput;
+                //       updated[linkIndex].URL = urlInput;
+                //       updated[linkIndex].tags = [...tagsInput];
+                //     })
+                //   );
 
-                setEditLinkVis((b) => !b);
+                setNewLinkVis((b) => !b);
 
-                function uniquenessCheck() {
+                function tagUniquenessCheck() {
                   let isUnique: boolean = true;
-              
+
                   tagsInput.forEach((el, i) => {
                     let tagsInputCopy = [...tagsInput];
                     tagsInputCopy.splice(i, 1);
-                    
+
                     if (tagsInputCopy.indexOf(el) > -1) {
                       isUnique = false;
                       return;
                     }
                   });
-              
+
                   return isUnique;
                 }
+
+                function titleUniquenessCheck() {
+                    
+                }
+
               }}
             >
               <SaveSVG className="h-5 fill-current text-gray-900 mr-3 hover:text-green-600" />
@@ -150,7 +142,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setEditLinkVis((b) => !b);
+                setNewLinkVis((b) => !b);
               }}
             >
               <CancelSVG className="h-5 fill-current text-gray-900 ml-3 hover:text-red-600" />
@@ -159,10 +151,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
         </div>
       </form>
     </div>
-
-
-
   );
 }
 
-export default EditLink;
+export default NewLink;
