@@ -46,26 +46,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
 
-  function uniquenessCheck() {
-   let uniquenessVar: boolean = tagsInput.forEach((el, i) => {
-      let tagsInputCopy = [...tagsInput];
-      tagsInputCopy.splice(i, 1);
-      console.log(tagsInput);
 
-      console.log(tagsInputCopy);
-
-      if (tagsInputCopy.indexOf(el) > -1) {
-        return false;
-      }
-    });
-
-    if (uniquenessVar) {
-      return true;
-    } else {
-      return false
-    }
-   
-  }
 
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
@@ -145,6 +126,22 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                 );
 
                 setEditLinkVis((b) => !b);
+
+                function uniquenessCheck() {
+                  let isUnique: boolean = true;
+              
+                  tagsInput.forEach((el, i) => {
+                    let tagsInputCopy = [...tagsInput];
+                    tagsInputCopy.splice(i, 1);
+                    
+                    if (tagsInputCopy.indexOf(el) > -1) {
+                      isUnique = false;
+                      return;
+                    }
+                  });
+              
+                  return isUnique;
+                }
               }}
             >
               <SaveSVG className="h-5 fill-current text-gray-900 mr-3 hover:text-green-600" />
