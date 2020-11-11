@@ -32,6 +32,8 @@ function NewLink({ setNewLinkVis }: Props): JSX.Element {
     boolean
   >(false);
 
+ 
+
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
       <form action="" className="pl-2 pr-4">
@@ -101,8 +103,14 @@ function NewLink({ setNewLinkVis }: Props): JSX.Element {
 
                 // if(tagsInput.join(", "))
 
+                setTagErrorVis(false);
+                setTagRepeatErrorVis(false);
+                setTitleFormatErrorVis(false);
+                setTitleUniquenessErrorVis(false);
+
                 if (!regexForTitle.test(titleInput)) {
                   setTitleFormatErrorVis(true);
+                  
                   return;
                 }
 
@@ -121,10 +129,7 @@ function NewLink({ setNewLinkVis }: Props): JSX.Element {
                   return;
                 }
 
-                setTagErrorVis(false);
-                setTagRepeatErrorVis(false);
-                setTitleFormatErrorVis(false);
-                setTitleUniquenessErrorVis(false);
+               
 
                 setLinksData((previous) =>
                   produce(previous, (updated) => {

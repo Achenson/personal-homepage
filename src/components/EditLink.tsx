@@ -42,14 +42,18 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
 
   // ^  and $ -> beginning and end of the text!
   let regexForTags = /^\w+(,\s\w+)*$/;
+  let regexForTitle = /^\w+$/;
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
-
-
+  const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
+    false
+  );
+  const [titleUniquenessErrorVis, setTitleUniquenessErrorVis] = useState<
+    boolean
+  >(false);
 
   return (
-
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
       <form action="" className="pl-2 pr-4">
         <div className="flex justify-around mb-2 mt-2">
@@ -86,6 +90,16 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
           </div>
         </div>
 
+        {titleFormatErrorVis ? (
+          <p className={`text-red-600`}>
+            Link title can contain letters, numbers or underscore
+          </p>
+        ) : null}
+
+        {titleUniquenessErrorVis ? (
+          <p className={`text-red-600`}>Link with that title already exists</p>
+        ) : null}
+
         {tagErrorVis ? (
           <p className={`text-red-600`}>
             Tags should consist of words separated by coma and space
@@ -103,7 +117,21 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
               onClick={(e) => {
                 e.preventDefault();
 
-                // if(tagsInput.join(", "))
+                setTagErrorVis(false);
+                setTagRepeatErrorVis(false);
+                setTitleFormatErrorVis(false);
+                setTitleUniquenessErrorVis(false);
+
+                if (!regexForTitle.test(titleInput)) {
+                  setTitleFormatErrorVis(true);
+                  return;
+                }
+
+                // !!! diff than newink
+                if (!titleUniquenessCheck() && titleInput !== editSingleLinkData.title) {
+                  setTitleUniquenessErrorVis(true);
+                  return;
+                }
 
                 if (!regexForTags.test(tagsInput.join(", "))) {
                   setTagErrorVis(true);
@@ -115,8 +143,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                   return;
                 }
 
-                setTagErrorVis(false);
-                // setTagRepeatErrorVis(false);
+              
 
                 setLinksData((previous) =>
                   produce(previous, (updated) => {
@@ -130,17 +157,29 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
 
                 function uniquenessCheck() {
                   let isUnique: boolean = true;
-              
+
                   tagsInput.forEach((el, i) => {
                     let tagsInputCopy = [...tagsInput];
                     tagsInputCopy.splice(i, 1);
-                    
+
                     if (tagsInputCopy.indexOf(el) > -1) {
                       isUnique = false;
                       return;
                     }
                   });
-              
+
+                  return isUnique;
+                }
+
+                function titleUniquenessCheck() {
+                  let isUnique: boolean = true;
+
+                  linksData.forEach((obj, i) => {
+                    if (obj.title === titleInput) {
+                      isUnique = false;
+                    }
+                  });
+
                   return isUnique;
                 }
               }}
@@ -159,9 +198,6 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
         </div>
       </form>
     </div>
-
-
-
   );
 }
 
