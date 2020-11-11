@@ -3,12 +3,17 @@ import React from "react";
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
 import { useState } from "react";
+import { produce } from "immer";
+
+import { linksDataState } from "../state/bookmarksAndLinks";
 
 interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function NewLink({ setNewLinkVis }: Props): JSX.Element {
+  const [linksData, setLinksData] = linksDataState.use();
+
   const [titleInput, setTitleInput] = useState<string>("");
 
   const [urlInput, setUrlInput] = useState<string>("");
@@ -16,11 +21,16 @@ function NewLink({ setNewLinkVis }: Props): JSX.Element {
 
   // ^  and $ -> beginning and end of the text!
   let regexForTags = /^\w+(,\s\w+)*$/;
+  let regexForTitle = /^\w+$/;
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
-  const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(false);
-  const [titleUniquenessErrorVis, setTitleUniquenessErrorVis] = useState<boolean>(false);
+  const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
+    false
+  );
+  const [titleUniquenessErrorVis, setTitleUniquenessErrorVis] = useState<
+    boolean
+  >(false);
 
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
@@ -62,16 +72,16 @@ function NewLink({ setNewLinkVis }: Props): JSX.Element {
           </div>
         </div>
 
-
         {titleFormatErrorVis ? (
-          <p className={`text-red-600`}>Link title can contain letters, numbers or underscore</p>
+          <p className={`text-red-600`}>
+            Link title can contain letters, numbers or underscore
+          </p>
         ) : null}
 
         {titleUniquenessErrorVis ? (
           <p className={`text-red-600`}>Link with that title already exists</p>
         ) : null}
 
-     
         {tagErrorVis ? (
           <p className={`text-red-600`}>
             Tags should consist of words separated by coma and space
@@ -91,6 +101,16 @@ function NewLink({ setNewLinkVis }: Props): JSX.Element {
 
                 // if(tagsInput.join(", "))
 
+                if (!regexForTitle.test(titleInput)) {
+                  setTitleFormatErrorVis(true);
+                  return;
+                }
+
+                if (!titleUniquenessCheck()) {
+                  setTitleUniquenessErrorVis(true);
+                  return;
+                }
+
                 if (!regexForTags.test(tagsInput.join(", "))) {
                   setTagErrorVis(true);
                   return;
@@ -102,16 +122,21 @@ function NewLink({ setNewLinkVis }: Props): JSX.Element {
                 }
 
                 setTagErrorVis(false);
+                setTagRepeatErrorVis(false);
+                setTitleFormatErrorVis(false);
+                setTitleUniquenessErrorVis(false);
 
-                // setTagRepeatErrorVis(false);
+                setLinksData((previous) =>
+                  produce(previous, (updated) => {
+                    updated.push({
+                      title: titleInput,
+                      URL: urlInput,
+                      tags: [...tagsInput],
+                    });
+                  })
+                );
 
-                //   setLinksData((previous) =>
-                //     produce(previous, (updated) => {
-                //       updated[linkIndex].title = titleInput;
-                //       updated[linkIndex].URL = urlInput;
-                //       updated[linkIndex].tags = [...tagsInput];
-                //     })
-                //   );
+        
 
                 setNewLinkVis((b) => !b);
 
@@ -132,9 +157,16 @@ function NewLink({ setNewLinkVis }: Props): JSX.Element {
                 }
 
                 function titleUniquenessCheck() {
-                    
-                }
+                  let isUnique: boolean = true;
 
+                  linksData.forEach((obj, i) => {
+                    if (obj.title === titleInput) {
+                      isUnique = false;
+                    }
+                  });
+
+                  return isUnique;
+                }
               }}
             >
               <SaveSVG className="h-5 fill-current text-gray-900 mr-3 hover:text-green-600" />
