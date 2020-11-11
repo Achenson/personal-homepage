@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { produce } from "immer";
+
+import { bookmarksDataState } from "../state/bookmarksAndLinks";
+import { linksDataState } from "../state/bookmarksAndLinks";
+import { deletedBookmarkState } from "../state/bookmarksAndLinks";
 
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
 import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
@@ -21,14 +26,13 @@ interface SingleLinkData {
 interface Props {
   bookmarkTitle: string;
   bookmarkColor: string;
-  linksData: SingleLinkData[];
 }
 
-function Bookmark({
-  bookmarkTitle,
-  bookmarkColor,
-  linksData,
-}: Props): JSX.Element {
+function Bookmark({ bookmarkTitle, bookmarkColor }: Props): JSX.Element {
+  const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [linksData, setLinksData] = linksDataState.use();
+
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
   const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
   const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
@@ -42,6 +46,14 @@ function Bookmark({
     title: "",
     URL: "",
     tags: [],
+  });
+
+  let bookmarkIndex: number;
+
+  bookmarksData.forEach((obj, i) => {
+    if (obj.title === bookmarkTitle) {
+      bookmarkIndex = i;
+    }
   });
 
   return (
@@ -73,11 +85,12 @@ function Bookmark({
             className="h-6 ml-2 cursor-move hover:text-black hover:invisible"
             style={{ marginTop: "-2px" }}
           />
-          <PlusSVG className="h-8  hover:text-black cursor-pointer " 
-          style={{ marginTop: "-6px" }}
-          onClick={() => {
-            setNewLinkVis(b=>!b)
-          }}
+          <PlusSVG
+            className="h-8  hover:text-black cursor-pointer "
+            style={{ marginTop: "-6px" }}
+            onClick={() => {
+              setNewLinkVis((b) => !b);
+            }}
           />
 
           <PencilSmallSVG
@@ -93,7 +106,31 @@ function Bookmark({
               setColorsVisibility((b) => !b);
             }}
           />
-          <TrashSmallSVG className="h-5 ml-2 hover:text-black cursor-pointer " />
+          <TrashSmallSVG
+            className="h-5 ml-2 hover:text-black cursor-pointer "
+            onClick={() => {
+              setDeletedBookmark(bookmarkTitle);
+
+              setBookmarksData((previous) =>
+                produce(previous, (updated) => {
+                  updated.splice(bookmarkIndex, 1);
+                })
+              );
+              // removing deleted bookmark(tag) for links
+              linksData.forEach((obj, i) => {
+                if (obj.tags.indexOf(bookmarkTitle) > -1) {
+                  setLinksData((previous) =>
+                    produce(previous, (updated) => {
+                      updated[i].tags.splice(
+                        obj.tags.indexOf(bookmarkTitle),
+                        1
+                      );
+                    })
+                  );
+                }
+              });
+            }}
+          />
         </div>
       </div>
 
@@ -111,12 +148,7 @@ function Bookmark({
         />
       ) : null}
 
-{newLinkVis ? (
-        <NewLink
-          setNewLinkVis={setNewLinkVis}
-        />
-      ) : null}
-
+      {newLinkVis ? <NewLink setNewLinkVis={setNewLinkVis} /> : null}
 
       {editBookmarkVis ? (
         <EditBookmarkTitle
@@ -124,9 +156,6 @@ function Bookmark({
           setEditBookmarkVis={setEditBookmarkVis}
         />
       ) : null}
-
-
-
 
       {singleLinkVisibility ? (
         <div>

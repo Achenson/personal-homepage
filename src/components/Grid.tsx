@@ -1,7 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Bookmark from "./Bookmark";
-import { bookmarksDataState, linksDataState } from "../state/bookmarksAndLinks";
+import {
+  bookmarksDataState,
+  linksDataState,
+  deletedBookmarkState,
+} from "../state/bookmarksAndLinks";
 import { produce } from "immer";
 
 interface Props {}
@@ -9,6 +13,7 @@ interface Props {}
 function Grid({}: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [linksData, setLinksData] = linksDataState.use();
+  const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
 
   useEffect(() => {
     let linksDataTags: string[] = [];
@@ -26,8 +31,10 @@ function Grid({}: Props): JSX.Element {
       bookmarksDataTitles.push(obj.title);
     });
 
+    // adding a bookmark(folder)
     linksDataTags.forEach((el) => {
-      if (bookmarksDataTitles.indexOf(el) === -1) {
+      // no adding bookmark if it was just set up for deletion
+      if (bookmarksDataTitles.indexOf(el) === -1 && deletedBookmark !== el) {
         setBookmarksData((previous) =>
           produce(previous, (updated) => {
             updated.push({
@@ -41,7 +48,7 @@ function Grid({}: Props): JSX.Element {
       }
     });
 
-    // deleting a tag
+    // deleting a bookmark if there is no tags with the same name in links
     bookmarksData.forEach((obj, i) => {
       if (linksDataTags.indexOf(obj.title) === -1) {
         setBookmarksData((previous) =>
@@ -51,7 +58,11 @@ function Grid({}: Props): JSX.Element {
         );
       }
     });
-  }, [bookmarksData, linksData]);
+
+  
+
+
+  }, [bookmarksData, linksData, deletedBookmark]);
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4">
@@ -64,7 +75,7 @@ function Grid({}: Props): JSX.Element {
               <Bookmark
                 bookmarkTitle={el.title}
                 bookmarkColor={el.color}
-                linksData={linksData}
+                
                 key={i}
               />
             );
@@ -79,7 +90,7 @@ function Grid({}: Props): JSX.Element {
               <Bookmark
                 bookmarkTitle={el.title}
                 bookmarkColor={el.color}
-                linksData={linksData}
+                
                 key={i}
               />
             );

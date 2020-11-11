@@ -56,3 +56,5 @@ TO DO:
 4. change pretifier -> .map & .filter from new lines
 DONE 5. ColorsToChoose -> better code DONE
 5. EditLink & NewLink -> unify
+6. edit bookmark & bookkmark color -> join?
+7. one function for bookmark index

@@ -45,3 +45,5 @@ export const linksDataState = newRidgeState<SingleLinkData[]>([
     tags: ["all", "main"],
   },
 ]);
+
+export const deletedBookmarkState = newRidgeState<string | null>(null)
