@@ -58,3 +58,8 @@ DONE 5. ColorsToChoose -> better code DONE
 5. EditLink & NewLink -> unify
 6. edit bookmark & bookkmark color -> join?
 7. one function for bookmark index
+8. "all" bookmark should be non-deletable, non-editable?
+9. auto-completing tags when adding links
+10. undo link & bookmark delete
+11. move grid logic to Main?
+12. components folders?
