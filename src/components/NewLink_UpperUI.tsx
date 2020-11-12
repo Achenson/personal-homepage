@@ -33,7 +33,8 @@ function NewLink_UpperUI({setNewLinkVis}: Props): JSX.Element {
   let regexForTitle = /^\w+$/;
 
   return (
-    <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
+    <div className="flex relative h-screen items-center justify-center">
+         <div className="z-40 bg-gray-100 w-64 pb-3 border absolute md:mb-64">
       <form action="" className="pl-2 pr-4">
         <div className="flex justify-around mb-2 mt-2">
           <p className="w-8">Title</p>
@@ -182,6 +183,9 @@ function NewLink_UpperUI({setNewLinkVis}: Props): JSX.Element {
         </div>
       </form>
     </div>
+
+    </div>
+ 
   );
 }
 
