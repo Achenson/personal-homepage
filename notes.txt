@@ -64,3 +64,4 @@ DONE 5. ColorsToChoose -> better code DONE
 11. move grid logic to Main?
 12. components folders?
 13. useEffect logic in grid -> move to lower components?
+14. newLink -> save & cancel icons not perfectly in the middle

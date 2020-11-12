@@ -95,7 +95,8 @@ function NewLink_UpperUI({setNewLinkVis}: Props): JSX.Element {
 
         <div className="flex justify-start mt-3">
           <p className="w-8"></p>
-          <div className="w-full pl-4 flex justify-center">
+          {/* !!! pl-4 in NewLink */}
+          <div className="w-full flex justify-center">
             <button
               onClick={(e) => {
                 e.preventDefault();
