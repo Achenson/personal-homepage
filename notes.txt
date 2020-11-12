@@ -59,9 +59,12 @@ DONE 5. ColorsToChoose -> better code DONE
 6. edit bookmark & bookkmark color -> join?
 7. one function for bookmark index
 8. "all" bookmark should be non-deletable, non-editable?
+8.5 "all" should be added as a tag automatically
 9. auto-completing tags when adding links
 10. undo link & bookmark delete
 11. move grid logic to Main?
 12. components folders?
 13. useEffect logic in grid -> move to lower components?
 14. newLink -> save & cancel icons not perfectly in the middle
+15. UpperRightMenu on hover -> default App color?
+16. newLink & newLink_UpperUI -> tags too large
