@@ -9,15 +9,16 @@ import { linksDataState } from "../state/bookmarksAndLinks";
 
 interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  bookmarkTitle: string;
 }
 
-function NewLink({ setNewLinkVis }: Props): JSX.Element {
+function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
 
   const [titleInput, setTitleInput] = useState<string>("");
 
   const [urlInput, setUrlInput] = useState<string>("");
-  const [tagsInput, setTagsInput] = useState<string[]>([]);
+  const [tagsInput, setTagsInput] = useState<string[]>([bookmarkTitle]);
 
   // ^  and $ -> beginning and end of the text!
   let regexForTags = /^\w+(,\s\w+)*$/;

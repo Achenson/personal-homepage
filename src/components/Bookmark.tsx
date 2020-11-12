@@ -148,7 +148,7 @@ function Bookmark({ bookmarkTitle, bookmarkColor }: Props): JSX.Element {
         />
       ) : null}
 
-      {newLinkVis ? <NewLink setNewLinkVis={setNewLinkVis} /> : null}
+      {newLinkVis ? <NewLink setNewLinkVis={setNewLinkVis} bookmarkTitle={bookmarkTitle} /> : null}
 
       {editBookmarkVis ? (
         <EditBookmarkTitle
