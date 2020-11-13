@@ -17,8 +17,11 @@ function NewBookmark_UpperUI({setNewBookmarkVis}: Props): JSX.Element{
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [linksData, setLinksData] = linksDataState.use();
-  const [bookmarkTitleInput, setBookmarkTitleInput] = useState<string>(
-   ""
+
+  const [bookmarkTitleInput, setBookmarkTitleInput] = useState<string>("")
+  const [bookmarkLinksInput, setBookmarkLinksInput] = useState<string[]>([])
+  const [bookmarkColumnInput, setBookmarkColumnInput] = useState<number>(
+   1
   );
 
   // let bookmarkIndex: number;
@@ -47,7 +50,7 @@ function NewBookmark_UpperUI({setNewBookmarkVis}: Props): JSX.Element{
     >
       <form action="" className="pl-2 pr-4">
         <div className="flex justify-around mb-2 mt-2">
-          <p className="w-10">Title</p>
+          <p className="w-32">Title</p>
           <div className="w-full pl-2">
             <input
               type="text"
@@ -56,8 +59,49 @@ function NewBookmark_UpperUI({setNewBookmarkVis}: Props): JSX.Element{
               placeholder={"new folder title"}
               onChange={(e) => setBookmarkTitleInput(e.target.value)}
             />
+        
           </div>
+
+
         </div>
+        <div className="flex justify-around mb-2 mt-2">
+          <p className="w-32">Column</p>
+          <div className="w-full pl-2">
+        
+            <input type="number"
+            min="1"
+            max="4"
+              className="w-full border border-gray-500"
+              value={bookmarkColumnInput}
+              onChange={(e) => setBookmarkColumnInput(parseInt(e.target.value))}
+
+            placeholder={"Enter number between 1 and 4"}
+            />
+          </div>
+
+          
+        </div>
+
+        <div className="flex justify-around mb-2 mt-2">
+          <p className="w-32">Bookmarks</p>
+          <div className="w-full pl-2">
+        
+            <input type="text"
+          
+              className="w-full border border-gray-500"
+              value={bookmarkColumnInput}
+              onChange={(e) => setBookmarkColumnInput(parseInt(e.target.value))}
+
+            placeholder={"Choose at least one from existing bookmarks"}
+            />
+          </div>
+
+          
+        </div>
+
+
+
+
 
         {/* <div className="flex justify-around mb-2">
           <p className="w-10">Link</p>
