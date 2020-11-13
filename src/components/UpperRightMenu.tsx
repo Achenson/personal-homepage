@@ -7,12 +7,15 @@ import { ReactComponent as UserSVG } from "../svgs/user.svg";
 
 interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function UpperRightMenu({setNewLinkVis}: Props): JSX.Element {
+function UpperRightMenu({setNewLinkVis, setNewBookmarkVis}: Props): JSX.Element {
   return (
     <div className=" h-10 w-40 absolute right-0 bottom-0 mb-2 flex justify-around items-center">
-      <AddFolderSVG className="h-6" />
+      <AddFolderSVG className="h-6 cursor-pointer hover:text-teal-500"  onClick={() => {
+        setNewBookmarkVis( b => !b)
+      }}/>
       <AddLinkSVG className="h-6 cursor-pointer hover:text-teal-500" onClick={() => {
         setNewLinkVis( b => !b)
       }} />
