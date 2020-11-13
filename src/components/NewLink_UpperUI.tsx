@@ -35,14 +35,14 @@ function NewLink_UpperUI({setNewLinkVis}: Props): JSX.Element {
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable
     <div className="flex z-50 absolute h-screen w-screen items-center justify-center" style={{backgroundColor: "rgba(90, 90, 90, 0.4)" }}>
-         <div className="bg-gray-100 w-1/4 pb-3 pt-6 pt-border border-gray-600 rounded-sm md:mb-48">
+         <div className="bg-gray-200 pb-3 pt-6 border-2 border-teal-500 rounded-sm md:mb-48" style={{width: "350px"}}>
       <form action="" className="pl-2 pr-4">
         <div className="flex justify-around mb-2 mt-2">
-          <p className="w-8">Title</p>
-          <div className="w-full pl-4">
+          <p className="w-10">Title</p>
+          <div className="w-full pl-2">
             <input
               type="text"
-              className="w-full  border"
+              className="w-full border border-gray-500"
               value={titleInput}
               placeholder={"new link title"}
               onChange={(e) => setTitleInput(e.target.value)}
@@ -50,11 +50,11 @@ function NewLink_UpperUI({setNewLinkVis}: Props): JSX.Element {
           </div>
         </div>
         <div className="flex justify-around mb-2">
-          <p className="w-8">Link</p>
-          <div className="w-full pl-4">
+          <p className="w-10">Link</p>
+          <div className="w-full pl-2">
             <input
               type="text"
-              className="w-full  border"
+              className="w-full border border-gray-500"
               value={urlInput}
               placeholder={"enter proper URL address"}
               onChange={(e) => setUrlInput(e.target.value)}
@@ -62,11 +62,11 @@ function NewLink_UpperUI({setNewLinkVis}: Props): JSX.Element {
           </div>
         </div>
         <div className="flex justify-start mb-2">
-          <p className="w-8">Tags</p>
-          <div className="w-full pl-4">
+          <p className="w-10">Tags</p>
+          <div className="w-full pl-2">
             <input
               type="text"
-              className="w-full border"
+              className="w-full border border-gray-500  "
               value={tagsInput.join(", ")}
               placeholder={"[tag1], [tag2]..."}
               onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
@@ -171,7 +171,7 @@ function NewLink_UpperUI({setNewLinkVis}: Props): JSX.Element {
                 }
               }}
             >
-              <SaveSVG className="h-5 fill-current text-gray-900 mr-3 hover:text-green-600" />
+              <SaveSVG className="h-5 fill-current text-black mr-3 hover:text-green-600" />
             </button>
             <button
               onClick={(e) => {
@@ -179,7 +179,7 @@ function NewLink_UpperUI({setNewLinkVis}: Props): JSX.Element {
                 setNewLinkVis((b) => !b);
               }}
             >
-              <CancelSVG className="h-5 fill-current text-gray-900 ml-3 hover:text-red-600" />
+              <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
             </button>
           </div>
         </div>

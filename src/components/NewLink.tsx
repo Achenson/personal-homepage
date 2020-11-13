@@ -39,8 +39,8 @@ function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
       <form action="" className="pl-2 pr-4">
         <div className="flex justify-around mb-2 mt-2">
-          <p className="w-8">Title</p>
-          <div className="w-full pl-4">
+          <p className="w-10">Title</p>
+          <div className="w-full pl-2">
             <input
               type="text"
               className="w-full  border"
@@ -51,8 +51,8 @@ function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
           </div>
         </div>
         <div className="flex justify-around mb-2">
-          <p className="w-8">Link</p>
-          <div className="w-full pl-4">
+          <p className="w-10">Link</p>
+          <div className="w-full pl-2">
             <input
               type="text"
               className="w-full  border"
@@ -63,8 +63,8 @@ function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
           </div>
         </div>
         <div className="flex justify-start mb-2">
-          <p className="w-8">Tags</p>
-          <div className="w-full pl-4">
+          <p className="w-10">Tags</p>
+          <div className="w-full pl-2">
             <input
               type="text"
               className="w-full border"
