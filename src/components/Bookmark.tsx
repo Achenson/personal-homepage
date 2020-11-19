@@ -86,49 +86,24 @@ function Bookmark({ bookmarkTitle, bookmarkColor }: Props): JSX.Element {
             style={{ marginTop: "-2px" }}
           />
           <PlusSVG
-            className="h-8  hover:text-black cursor-pointer "
+            className="h-8 hover:text-black cursor-pointer "
             style={{ marginTop: "-6px" }}
             onClick={() => {
               setNewLinkVis((b) => !b);
             }}
           />
 
-          <PencilSmallSVG
-            className="h-5  hover:text-black cursor-pointer "
-            onClick={() => {
-              setEditBookmarkVis((b) => !b);
-            }}
-          />
-
           <ColorSmallSVG
-            className="h-5 ml-2 hover:text-black cursor-pointer "
+            className="h-5 mr-2 hover:text-black cursor-pointer "
             onClick={() => {
               setColorsVisibility((b) => !b);
             }}
           />
-          <TrashSmallSVG
-            className="h-5 ml-2 hover:text-black cursor-pointer "
-            onClick={() => {
-              setDeletedBookmark(bookmarkTitle);
 
-              setBookmarksData((previous) =>
-                produce(previous, (updated) => {
-                  updated.splice(bookmarkIndex, 1);
-                })
-              );
-              // removing deleted bookmark(tag) for links
-              linksData.forEach((obj, i) => {
-                if (obj.tags.indexOf(bookmarkTitle) > -1) {
-                  setLinksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated[i].tags.splice(
-                        obj.tags.indexOf(bookmarkTitle),
-                        1
-                      );
-                    })
-                  );
-                }
-              });
+          <PencilSmallSVG
+            className="h-5 -ml-px hover:text-black cursor-pointer "
+            onClick={() => {
+              setEditBookmarkVis((b) => !b);
             }}
           />
         </div>
@@ -148,7 +123,9 @@ function Bookmark({ bookmarkTitle, bookmarkColor }: Props): JSX.Element {
         />
       ) : null}
 
-      {newLinkVis ? <NewLink setNewLinkVis={setNewLinkVis} bookmarkTitle={bookmarkTitle} /> : null}
+      {newLinkVis ? (
+        <NewLink setNewLinkVis={setNewLinkVis} bookmarkTitle={bookmarkTitle} />
+      ) : null}
 
       {editBookmarkVis ? (
         <EditBookmarkTitle

@@ -50,7 +50,7 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
                 type="text"
                 className="w-full border border-gray-500"
                 value={titleInput}
-                placeholder={"new link title"}
+                placeholder={"new bookmark title"}
                 onChange={(e) => setTitleInput(e.target.value)}
               />
             </div>

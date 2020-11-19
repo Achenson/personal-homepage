@@ -67,5 +67,7 @@ DONE 5. ColorsToChoose -> better code DONE
 13. useEffect logic in grid -> move to lower components?
 14. newLink -> save & cancel icons not perfectly in the middle
 15. UpperRightMenu on hover, boders for newLink & newBookmark -> default App color?
-16. DONE newLink & newLink_UpperUI -> tags not aligned DONE
+DONE 16. newLink & newLink_UpperUI -> tags not aligned DONE
 17. link/bookmark -> consistent naming!
+18. newBookmark_upperUI -> menu with existing bookmarks to choose
+19. bookmark priorities

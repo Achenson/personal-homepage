@@ -101,7 +101,7 @@ function NewBookmark_UpperUI({ setNewBookmarkVis }: Props): JSX.Element {
                 onChange={(e) =>
                   setBookmarkLinksInput([...e.target.value.split(", ")])
                 }
-                placeholder={"Choose at least one from existing bookmarks"}
+                placeholder={"Choose at least one"}
               />
             </div>
           </div>
