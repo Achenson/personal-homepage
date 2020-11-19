@@ -32,6 +32,23 @@ function NewBookmark_UpperUI({ setNewBookmarkVis }: Props): JSX.Element {
 
   // const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
 
+  const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
+  const [bookmarksRepeatErrorVis, setBookmarksRepeatErrorVis] = useState<
+    boolean
+  >(false);
+  const [bookmarksExistenceErrorVis, setBookmarksExistenceErrorVis] = useState<
+    boolean
+  >(false);
+
+  const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
+    false
+  );
+  const [titleUniquenessErrorVis, setTitleUniquenessErrorVis] = useState<
+    boolean
+  >(false);
+
+  // ^  and $ -> beginning and end of the text!
+  let regexForBookmarks = /^\w+(,\s\w+)*$/;
   let regexForTitle = /^\w+$/;
 
   return (
@@ -117,27 +134,33 @@ function NewBookmark_UpperUI({ setNewBookmarkVis }: Props): JSX.Element {
           </div>
         </div> */}
 
-          {/* {titleFormatErrorVis ? (
-          <p className={`text-red-600`}>
-            Link title can contain letters, numbers or underscore
-          </p>
-        ) : null} */}
+          {titleFormatErrorVis ? (
+            <p className={`text-red-600`}>
+              Folder title can contain letters, numbers or underscore
+            </p>
+          ) : null}
 
-          {/* {titleUniquenessErrorVis ? (
-          <p className={`text-red-600`}>
-            Link with that title already exists
-          </p>
-        ) : null}
+          {titleUniquenessErrorVis ? (
+            <p className={`text-red-600`}>
+              Folder with that title already exists
+            </p>
+          ) : null}
 
-        {tagErrorVis ? (
-          <p className={`text-red-600`}>
-            Tags should consist of words separated by coma and space
-          </p>
-        ) : null}
+          {bookmarksErrorVis ? (
+            <p className={`text-red-600`}>
+              Bookmarks should consist of words separated by coma and space
+            </p>
+          ) : null}
 
-        {tagRepeatErrorVis ? (
-          <p className={`text-red-600`}>Each tag should be unique</p>
-        ) : null} */}
+          {bookmarksExistenceErrorVis ? (
+            <p className={`text-red-600`}>
+              You can choose from existing bookmarks only
+            </p>
+          ) : null}
+
+          {bookmarksRepeatErrorVis ? (
+            <p className={`text-red-600`}>Each bookmark should be unique</p>
+          ) : null}
 
           <div className="flex justify-start mt-3">
             <p className="w-8"></p>
@@ -149,103 +172,108 @@ function NewBookmark_UpperUI({ setNewBookmarkVis }: Props): JSX.Element {
 
                   // if(tagsInput.join(", "))
 
-                  // setTagErrorVis(false);
-                  // setTagRepeatErrorVis(false);
-                  // setTitleFormatErrorVis(false);
-                  // setTitleUniquenessErrorVis(false);
+                  setBookmarksErrorVis(false);
+                  setBookmarksRepeatErrorVis(false);
+                  setTitleFormatErrorVis(false);
+                  setTitleUniquenessErrorVis(false);
+                  setBookmarksExistenceErrorVis(false);
 
-                  // if (!regexForTitle.test(titleInput)) {
-                  //   setTitleFormatErrorVis(true);
+                  if (!regexForTitle.test(bookmarkTitleInput)) {
+                    setTitleFormatErrorVis(true);
 
-                  //   return;
-                  // }
+                    return;
+                  }
 
-                  // if (!titleUniquenessCheck()) {
-                  //   setTitleUniquenessErrorVis(true);
-                  //   return;
-                  // }
+                  if (!titleUniquenessCheck()) {
+                    setTitleUniquenessErrorVis(true);
+                    return;
+                  }
 
-                  // if (!regexForTags.test(tagsInput.join(", "))) {
-                  //   setTagErrorVis(true);
-                  //   return;
-                  // }
+                  if (!regexForBookmarks.test(bookmarkLinksInput.join(", "))) {
+                    setBookmarksErrorVis(true);
+                    return;
+                  }
 
-                  // if (!tagUniquenessCheck()) {
-                  //   setTagRepeatErrorVis(true);
-                  //   return;
-                  // }
+                  if (!bookmarkExistenceCheck()) {
+                    setBookmarksExistenceErrorVis(true);
+                    return;
+                  }
 
-                  // setLinksData((previous) =>
-                  //   produce(previous, (updated) => {
-                  //     updated.push({
-                  //       title: titleInput,
-                  //       URL: urlInput,
-                  //       tags: [...tagsInput],
-                  //     });
-                  //   })
-                  // );
+                  if (!tagUniquenessCheck()) {
+                    setBookmarksRepeatErrorVis(true);
+                    return;
+                  }
 
-                  // setNewLinkVis((b) => !b);
+                  setBookmarksData((previous) =>
+                    produce(previous, (updated) => {
+                      updated.push({
+                        title: bookmarkTitleInput,
+                        column: bookmarkColumnInput,
+                        color: "bg-teal-400",
+                        priority: 0,
+                      });
+                    })
+                  );
 
-                  // function tagUniquenessCheck() {
-                  //   let isUnique: boolean = true;
+                  setLinksData((previous) =>
+                    produce(previous, (updated) => {
+                      updated.forEach((obj) => {
+                        if (
+                          bookmarkLinksInput.indexOf(obj.title) > -1 &&
+                          obj.tags.indexOf(bookmarkTitleInput) === -1
+                        ) {
+                          obj.tags.push(bookmarkTitleInput);
+                        }
+                      });
+                    })
+                  );
 
-                  //   tagsInput.forEach((el, i) => {
-                  //     let tagsInputCopy = [...tagsInput];
-                  //     tagsInputCopy.splice(i, 1);
+                  function bookmarkExistenceCheck() {
+                    let bookmarksArr: string[] = [];
 
-                  //     if (tagsInputCopy.indexOf(el) > -1) {
-                  //       isUnique = false;
-                  //       return;
-                  //     }
-                  //   });
+                    linksData.forEach((obj) => {
+                      bookmarksArr.push(obj.title);
+                    });
 
-                  //   return isUnique;
-                  // }
+                    for (let el of bookmarkLinksInput) {
+                      if (bookmarksArr.indexOf(el) === -1) {
+                        return false;
+                      }
+                    }
 
-                  //   function titleUniquenessCheck() {
-                  //     let isUnique: boolean = true;
+                    return true;
+                  }
 
-                  //     linksData.forEach((obj, i) => {
-                  //       if (obj.title === titleInput) {
-                  //         isUnique = false;
-                  //       }
-                  //     });
+                  function tagUniquenessCheck() {
+                    let isUnique: boolean = true;
 
-                  //     return isUnique;
-                  //   }
+                    bookmarkLinksInput.forEach((el, i) => {
+                      let tagsInputCopy = [...bookmarkLinksInput];
+                      tagsInputCopy.splice(i, 1);
+
+                      if (tagsInputCopy.indexOf(el) > -1) {
+                        isUnique = false;
+                        return;
+                      }
+                    });
+
+                    return isUnique;
+                  }
+
+                  function titleUniquenessCheck() {
+                    let isUnique: boolean = true;
+
+                    linksData.forEach((obj, i) => {
+                      if (obj.title === bookmarkTitleInput) {
+                        isUnique = false;
+                      }
+                    });
+
+                    return isUnique;
+                  }
                 }}
               >
-                <SaveSVG
-                  className="h-5 fill-current text-black mr-3 hover:text-green-600"
-                  onClick={(e) => {
-                    e.preventDefault();
-
-                    setBookmarksData((previous) =>
-                      produce(previous, (updated) => {
-                        updated.push({
-                          title: bookmarkTitleInput,
-                          column: bookmarkColumnInput,
-                          color: "bg-teal-400",
-                          priority: 0,
-                        });
-                      })
-                    );
-
-                    setLinksData((previous) =>
-                      produce(previous, (updated) => {
-                        updated.forEach((obj) => {
-                          if (
-                            bookmarkLinksInput.indexOf(obj.title) > -1 &&
-                            obj.tags.indexOf(bookmarkTitleInput) === -1
-                          ) {
-                            obj.tags.push(bookmarkTitleInput);
-                          }
-                        });
-                      })
-                    );
-                  }}
-                />
+                <SaveSVG className="h-5 fill-current text-black mr-3 hover:text-green-600" />
               </button>
               <button
                 onClick={(e) => {
