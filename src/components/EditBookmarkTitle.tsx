@@ -12,12 +12,16 @@ import { deletedBookmarkState } from "../state/bookmarksAndLinks";
 
 interface Props {
   bookmarkTitle: string;
+  bookmarkType: "folder" | "note";
   setEditBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  noteInput: string | null;
 }
 
 function EditBookmarkTitle({
   bookmarkTitle,
+  bookmarkType,
   setEditBookmarkVis,
+  noteInput
 }: Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
 
@@ -47,17 +51,14 @@ function EditBookmarkTitle({
           <div className="flex justify-around mb-2 mt-2">
             <p className="w-8">Title</p>
             <div className="w-full pl-4">
+              <div className="flex items-center">
               <input
                 type="text"
                 className="w-full  border"
                 value={bookmarkTitleInput}
                 onChange={(e) => setBookmarkTitleInput(e.target.value)}
               />
-            </div>
-          </div>
-        </form>
-
-        <div className=" w-6 mr-2">
+                    <div className=" w-6 mr-2">
           <TrashSmallSVG
             className="h-5  fill-current text-gray-700 hover:text-black cursor-pointer "
             onClick={() => {
@@ -86,6 +87,19 @@ function EditBookmarkTitle({
             }}
           />
         </div>
+              </div>
+          
+
+              {bookmarkType === "note" ? <textarea value={noteInput as string}></textarea> : null
+
+              }
+
+
+            </div>
+          </div>
+        </form>
+
+  
       </div>
 
       {tagErrorVis ? (

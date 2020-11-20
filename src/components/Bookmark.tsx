@@ -16,6 +16,8 @@ import ColorsToChoose from "./ColorsToChoose";
 import EditLink from "./EditLink";
 import NewLink from "./NewLink";
 import EditBookmarkTitle from "./EditBookmarkTitle";
+import NoteInput from "./NoteInput";
+
 
 interface SingleLinkData {
   title: string;
@@ -26,9 +28,11 @@ interface SingleLinkData {
 interface Props {
   bookmarkTitle: string;
   bookmarkColor: string;
+  bookmarkType: "folder" | "note";
+  noteInput: string | null
 }
 
-function Bookmark({ bookmarkTitle, bookmarkColor }: Props): JSX.Element {
+function Bookmark({ bookmarkTitle, bookmarkColor, bookmarkType, noteInput }: Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [linksData, setLinksData] = linksDataState.use();
@@ -41,6 +45,10 @@ function Bookmark({ bookmarkTitle, bookmarkColor }: Props): JSX.Element {
   const [editLinkVis, setEditLinkVis] = useState<boolean>(false);
   const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
   const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
+  // for Note only
+  const [noteInputVisibility, setNoteInputVisibility] = useState<boolean>(
+    false
+  );
 
   const [editSingleLinkData, setEditSingleLinkData] = useState<SingleLinkData>({
     title: "",
@@ -70,7 +78,16 @@ function Bookmark({ bookmarkTitle, bookmarkColor }: Props): JSX.Element {
         <div
           className="pl-1 cursor-pointer w-full"
           onClick={() => {
-            setSingleLinkVisibility((b) => !b);
+            if(bookmarkType === "folder") {
+
+              setSingleLinkVisibility((b) => !b);
+            }
+
+            if(bookmarkType === "note") {
+
+              setNoteInputVisibility((b) => !b);
+            }
+
           }}
         >
           {bookmarkTitle}
@@ -85,16 +102,17 @@ function Bookmark({ bookmarkTitle, bookmarkColor }: Props): JSX.Element {
             className="h-6 ml-2 cursor-move hover:text-black hover:invisible"
             style={{ marginTop: "-2px" }}
           />
-          <PlusSVG
+          {bookmarkType === "folder" ?      <PlusSVG
             className="h-8 hover:text-black cursor-pointer "
             style={{ marginTop: "-6px" }}
             onClick={() => {
               setNewLinkVis((b) => !b);
             }}
-          />
+          /> : null}
+     
 
           <ColorSmallSVG
-            className="h-5 mr-2 hover:text-black cursor-pointer "
+            className={`h-5 mr-2 hover:text-black cursor-pointer ${bookmarkType === "note" ? "ml-2": ""}`}
             onClick={() => {
               setColorsVisibility((b) => !b);
             }}
@@ -106,6 +124,8 @@ function Bookmark({ bookmarkTitle, bookmarkColor }: Props): JSX.Element {
               setEditBookmarkVis((b) => !b);
             }}
           />
+
+
         </div>
       </div>
 
@@ -130,7 +150,9 @@ function Bookmark({ bookmarkTitle, bookmarkColor }: Props): JSX.Element {
       {editBookmarkVis ? (
         <EditBookmarkTitle
           bookmarkTitle={bookmarkTitle}
+          bookmarkType={bookmarkType}
           setEditBookmarkVis={setEditBookmarkVis}
+          noteInput={noteInput}
         />
       ) : null}
 
@@ -152,6 +174,12 @@ function Bookmark({ bookmarkTitle, bookmarkColor }: Props): JSX.Element {
           {/* <SingleLink setEditLinkVis={setEditLinkVis} /> */}
         </div>
       ) : null}
+
+        {
+          noteInputVisibility ? <NoteInput noteInput={noteInput}/> : null
+        }
+
+
     </div>
   );
 }

@@ -38,7 +38,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     column: 2,
     priority: 0,
     type: "note",
-    noteInput: "someText"
+    noteInput: "someText moreText someText moreText someText moreText someText moreText someText moreText someText moreText"
     // linksTitles: ["facebook"],
   },
 

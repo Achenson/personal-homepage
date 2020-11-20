@@ -78,7 +78,8 @@ function Grid({}: Props): JSX.Element {
               <Bookmark
                 bookmarkTitle={el.title}
                 bookmarkColor={el.color}
-                
+                bookmarkType={el.type}
+                noteInput={el.noteInput}
                 key={i}
               />
             );
@@ -93,7 +94,8 @@ function Grid({}: Props): JSX.Element {
               <Bookmark
                 bookmarkTitle={el.title}
                 bookmarkColor={el.color}
-                
+                bookmarkType={el.type}
+                noteInput={el.noteInput}
                 key={i}
               />
             );
