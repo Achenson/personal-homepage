@@ -5,7 +5,7 @@ import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
 import { useState } from "react";
 import { produce } from "immer";
 
-import { linksDataState } from "../state/bookmarksAndLinks";
+import { linksDataState, bookmarksDataState } from "../state/bookmarksAndLinks";
 
 interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,6 +14,7 @@ interface Props {
 
 function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const [titleInput, setTitleInput] = useState<string>("");
 
@@ -32,8 +33,15 @@ function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
   const [titleUniquenessErrorVis, setTitleUniquenessErrorVis] = useState<
     boolean
   >(false);
+  const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
 
- 
+  let notesTitlesArr: string[] = [];
+
+  bookmarksData.forEach((obj) => {
+    if (obj.type === "note") {
+      notesTitlesArr.push(obj.title);
+    }
+  });
 
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
@@ -91,6 +99,12 @@ function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
           </p>
         ) : null}
 
+        {noteErrorVis ? (
+          <p className={`text-red-600`}>
+            Names for tags cannot be the same as Notes titles
+          </p>
+        ) : null}
+
         {tagRepeatErrorVis ? (
           <p className={`text-red-600`}>Each tag should be unique</p>
         ) : null}
@@ -108,10 +122,11 @@ function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
                 setTagRepeatErrorVis(false);
                 setTitleFormatErrorVis(false);
                 setTitleUniquenessErrorVis(false);
+                setNoteErrorVis(false);
 
                 if (!regexForTitle.test(titleInput)) {
                   setTitleFormatErrorVis(true);
-                  
+
                   return;
                 }
 
@@ -125,12 +140,17 @@ function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
                   return;
                 }
 
+                for (let el of tagsInput) {
+                  if (notesTitlesArr.indexOf(el) > -1) {
+                    setNoteErrorVis(true);
+                    return;
+                  }
+                }
+
                 if (!tagUniquenessCheck()) {
                   setTagRepeatErrorVis(true);
                   return;
                 }
-
-               
 
                 setLinksData((previous) =>
                   produce(previous, (updated) => {
@@ -141,8 +161,6 @@ function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
                     });
                   })
                 );
-
-        
 
                 setNewLinkVis((b) => !b);
 

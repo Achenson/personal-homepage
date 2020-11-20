@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 import { produce } from "immer";
-import { linksDataState } from "../state/bookmarksAndLinks";
+import { linksDataState, bookmarksDataState } from "../state/bookmarksAndLinks";
 
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
@@ -13,6 +13,7 @@ interface Props {
 
 function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const [titleInput, setTitleInput] = useState<string>("");
 
@@ -27,6 +28,15 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
   const [titleUniquenessErrorVis, setTitleUniquenessErrorVis] = useState<
     boolean
   >(false);
+  const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
+
+  let notesTitlesArr: string[] = [];
+
+  bookmarksData.forEach((obj) => {
+    if (obj.type === "note") {
+      notesTitlesArr.push(obj.title);
+    }
+  });
 
   // ^  and $ -> beginning and end of the text!
   let regexForTags = /^\w+(,\s\w+)*$/;
@@ -98,6 +108,12 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
             </p>
           ) : null}
 
+          {noteErrorVis ? (
+            <p className={`text-red-600`}>
+              Names for tags cannot be the same as Notes titles
+            </p>
+          ) : null}
+
           {tagRepeatErrorVis ? (
             <p className={`text-red-600`}>Each tag should be unique</p>
           ) : null}
@@ -116,6 +132,7 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
                   setTagRepeatErrorVis(false);
                   setTitleFormatErrorVis(false);
                   setTitleUniquenessErrorVis(false);
+                  setNoteErrorVis(false);
 
                   if (!regexForTitle.test(titleInput)) {
                     setTitleFormatErrorVis(true);
@@ -131,6 +148,13 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
                   if (!regexForTags.test(tagsInput.join(", "))) {
                     setTagErrorVis(true);
                     return;
+                  }
+
+                  for (let el of tagsInput) {
+                    if (notesTitlesArr.indexOf(el) > -1) {
+                      setNoteErrorVis(true);
+                      return;
+                    }
                   }
 
                   if (!tagUniquenessCheck()) {

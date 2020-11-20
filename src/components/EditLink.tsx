@@ -21,7 +21,7 @@ interface Props {
 
 function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
-  const [bookmarksData, setBookmarksData] = linksDataState.use();
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const [titleInput, setTitleInput] = useState<string>(
     editSingleLinkData.title
@@ -52,6 +52,15 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
   const [titleUniquenessErrorVis, setTitleUniquenessErrorVis] = useState<
     boolean
   >(false);
+  const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
+
+  let notesTitlesArr: string[] = [];
+
+  bookmarksData.forEach((obj) => {
+    if (obj.type === "note") {
+      notesTitlesArr.push(obj.title);
+    }
+  });
 
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
@@ -106,6 +115,12 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
           </p>
         ) : null}
 
+        {noteErrorVis ? (
+          <p className={`text-red-600`}>
+            Names for tags cannot be the same as Notes titles
+          </p>
+        ) : null}
+
         {tagRepeatErrorVis ? (
           <p className={`text-red-600`}>Each tag should be unique</p>
         ) : null}
@@ -121,6 +136,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                 setTagRepeatErrorVis(false);
                 setTitleFormatErrorVis(false);
                 setTitleUniquenessErrorVis(false);
+                setNoteErrorVis(false);
 
                 if (!regexForTitle.test(titleInput)) {
                   setTitleFormatErrorVis(true);
@@ -128,7 +144,10 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                 }
 
                 // !!! diff than newink
-                if (!titleUniquenessCheck() && titleInput !== editSingleLinkData.title) {
+                if (
+                  !titleUniquenessCheck() &&
+                  titleInput !== editSingleLinkData.title
+                ) {
                   setTitleUniquenessErrorVis(true);
                   return;
                 }
@@ -138,12 +157,17 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                   return;
                 }
 
-                if (!uniquenessCheck()) {
+                for (let el of tagsInput) {
+                  if (notesTitlesArr.indexOf(el) > -1) {
+                    setNoteErrorVis(true);
+                    return;
+                  }
+                }
+
+                if (!tagUniquenessCheck()) {
                   setTagRepeatErrorVis(true);
                   return;
                 }
-
-              
 
                 setLinksData((previous) =>
                   produce(previous, (updated) => {
@@ -155,7 +179,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
 
                 setEditLinkVis((b) => !b);
 
-                function uniquenessCheck() {
+                function tagUniquenessCheck() {
                   let isUnique: boolean = true;
 
                   tagsInput.forEach((el, i) => {
@@ -182,6 +206,14 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
 
                   return isUnique;
                 }
+
+                // function folderTypeCheck(objType: string) {
+                //   if (objType === "folder") {
+                //     return true;
+                //   }
+
+                //   return false;
+                // }
               }}
             >
               <SaveSVG className="h-5 fill-current text-gray-900 mr-3 hover:text-green-600" />
