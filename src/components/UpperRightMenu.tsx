@@ -2,7 +2,8 @@ import React from "react";
 
 import { ReactComponent as AddFolderSVG } from "../svgs/addFolder.svg";
 import { ReactComponent as AddLinkSVG } from "../svgs/addLink.svg";
-import { ReactComponent as AddNote } from "../svgs/addNote.svg";
+// import { ReactComponent as AddNote } from "../svgs/addNote.svg";
+import { ReactComponent as AddNote } from "../svgs/text-document-add.svg";
 import { ReactComponent as SettingsSVG } from "../svgs/settingsAlt.svg";
 import { ReactComponent as UserSVG } from "../svgs/user.svg";
 
@@ -24,13 +25,13 @@ function UpperRightMenu({
         }}
       />
 
-      <AddNote className="h-6 cursor-pointer hover:text-teal-500" />
       <AddFolderSVG
-        className="h-6 cursor-pointer hover:text-teal-500"
+        className="h-6 cursor-pointer hover:text-teal-500 mr-1"
         onClick={() => {
           setNewBookmarkVis((b) => !b);
         }}
       />
+        <AddNote className="h-6 cursor-pointer fill-current text-black hover:text-teal-500" />
 
       <SettingsSVG className="h-6" />
       <UserSVG className="h-6" />
