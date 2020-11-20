@@ -10,6 +10,8 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     color: "bg-teal-400",
     column: 1,
     priority: 1,
+    type: "folder",
+    noteInput: null
     // linksTitles: ["facebook", "tvn24", "gmail"],
   },
   {
@@ -17,6 +19,8 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     color: "bg-teal-500",
     column: 1,
     priority: 0,
+    type: "folder",
+    noteInput: null
     // linksTitles: ["tvn24", "gmail"],
   },
   {
@@ -24,8 +28,21 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     color: "bg-teal-600",
     column: 2,
     priority: 0,
+    type: "folder",
+    noteInput: null
     // linksTitles: ["facebook"],
   },
+  {
+    title: "note",
+    color: "bg-teal-600",
+    column: 2,
+    priority: 0,
+    type: "note",
+    noteInput: "someText"
+    // linksTitles: ["facebook"],
+  },
+
+
 ]);
 
 export const linksDataState = newRidgeState<SingleLinkData[]>([

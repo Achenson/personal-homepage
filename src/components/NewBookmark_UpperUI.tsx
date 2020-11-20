@@ -211,6 +211,8 @@ function NewBookmark_UpperUI({ setNewBookmarkVis }: Props): JSX.Element {
                         column: bookmarkColumnInput,
                         color: "bg-teal-400",
                         priority: 0,
+                        type: "folder",
+                        noteInput: null
                       });
                     })
                   );

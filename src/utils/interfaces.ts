@@ -3,6 +3,8 @@ export interface SingleBookmarkData {
   color: string;
   column: number;
   priority: number;
+  type: "folder" | "note";
+  noteInput: string | null;
   // linksTitles: string[];
 }
 

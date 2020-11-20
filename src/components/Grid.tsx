@@ -42,6 +42,9 @@ function Grid({}: Props): JSX.Element {
               color: "bg-teal-400",
               column: 1,
               priority: 1,
+              type: "folder",
+              noteInput: null
+
             });
           })
         );
@@ -50,7 +53,7 @@ function Grid({}: Props): JSX.Element {
 
     // deleting a bookmark if there is no tags with the same name in links
     bookmarksData.forEach((obj, i) => {
-      if (linksDataTags.indexOf(obj.title) === -1) {
+      if (linksDataTags.indexOf(obj.title) === -1 && obj.type === "folder" ) {
         setBookmarksData((previous) =>
           produce(previous, (updated) => {
             updated.splice(i, 1);
