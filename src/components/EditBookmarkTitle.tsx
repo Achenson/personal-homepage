@@ -24,6 +24,8 @@ function EditBookmarkTitle({
   noteInput,
 }: Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
+  
+  const [textAreaValue, setTextAreaValue] = useState(noteInput)
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [linksData, setLinksData] = linksDataState.use();
@@ -45,10 +47,10 @@ function EditBookmarkTitle({
   let regexForTitle = /^\w+$/;
 
   return (
-    <div className="absolute z-40 bg-gray-100 pb-3 border w-full">
+    <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-2">
       
         <div className="flex items-center mb-2 mt-2 justify-between">
-          <p className="ml-1 mr-2">Title</p>
+          <p className="mr-2">Title</p>
           <input
             type="text"
             // min-w-0 !!
@@ -58,7 +60,7 @@ function EditBookmarkTitle({
           />
           {/* <div className=""> */}
             <TrashSmallSVG
-              className="h-6  fill-current text-gray-700 hover:text-black cursor-pointer ml-2 mr-2"
+              className="h-6  fill-current text-gray-700 hover:text-black cursor-pointer ml-2"
               onClick={() => {
                 setDeletedBookmark(bookmarkTitle);
 
@@ -96,7 +98,14 @@ function EditBookmarkTitle({
       ) : null}
 
       {bookmarkType === "note" ? (
-        <textarea value={noteInput as string}></textarea>
+        <div style={{marginRight: "27px"}}>
+
+          <textarea value={textAreaValue as string} className="h-full w-full overflow-hidden pl-1 pr-1 border" rows={3} onChange={
+            (e) => {
+              setTextAreaValue(e.target.value)
+            }
+          }></textarea>
+        </div>
       ) : null}
 
       <div className="flex justify-start mt-3">
@@ -123,6 +132,9 @@ function EditBookmarkTitle({
               setBookmarksData((previous) =>
                 produce(previous, (updated) => {
                   updated[bookmarkIndex].title = bookmarkTitleInput;
+                  if(bookmarkType === "note") {
+                    updated[bookmarkIndex].noteInput = textAreaValue;
+                  }
                 })
               );
 
