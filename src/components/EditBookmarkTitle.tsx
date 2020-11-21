@@ -47,17 +47,18 @@ function EditBookmarkTitle({
   return (
     <div className="absolute z-40 bg-gray-100 pb-3 border w-full">
       
-        <div className="flex items-center mb-2 mt-2 justify-between max-w-full">
-          <p className="ml-1 mr-1">Title</p>
+        <div className="flex items-center mb-2 mt-2 justify-between">
+          <p className="ml-1 mr-2">Title</p>
           <input
             type="text"
-            className="border w-full"
+            // min-w-0 !!
+            className="border w-full max-w-6xl min-w-0"
             value={bookmarkTitleInput}
             onChange={(e) => setBookmarkTitleInput(e.target.value)}
           />
           {/* <div className=""> */}
             <TrashSmallSVG
-              className="h-6  fill-current text-gray-700 hover:text-black cursor-pointer ml-1 mr-1"
+              className="h-6  fill-current text-gray-700 hover:text-black cursor-pointer ml-2 mr-2"
               onClick={() => {
                 setDeletedBookmark(bookmarkTitle);
 
