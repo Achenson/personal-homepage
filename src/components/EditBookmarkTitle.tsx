@@ -21,7 +21,7 @@ function EditBookmarkTitle({
   bookmarkTitle,
   bookmarkType,
   setEditBookmarkVis,
-  noteInput
+  noteInput,
 }: Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
 
@@ -45,68 +45,57 @@ function EditBookmarkTitle({
   let regexForTitle = /^\w+$/;
 
   return (
-    <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
-      <div className="flex items-center">
-        <form action="" className="pl-2 pr-2 w-full">
-          <div className="flex justify-around mb-2 mt-2">
-            <p className="w-8">Title</p>
-            <div className="w-full pl-4">
-              <div className="flex items-center">
-              <input
-                type="text"
-                className="w-full  border"
-                value={bookmarkTitleInput}
-                onChange={(e) => setBookmarkTitleInput(e.target.value)}
-              />
-                    <div className=" w-6 mr-2">
-          <TrashSmallSVG
-            className="h-5  fill-current text-gray-700 hover:text-black cursor-pointer "
-            onClick={() => {
-              setDeletedBookmark(bookmarkTitle);
-
-              setBookmarksData((previous) =>
-                produce(previous, (updated) => {
-                  updated.splice(bookmarkIndex, 1);
-                })
-              );
-
-              setEditBookmarkVis((b) => !b);
-              // removing deleted bookmark(tag) for links
-              linksData.forEach((obj, i) => {
-                if (obj.tags.indexOf(bookmarkTitle) > -1) {
-                  setLinksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated[i].tags.splice(
-                        obj.tags.indexOf(bookmarkTitle),
-                        1
-                      );
-                    })
-                  );
-                }
-              });
-            }}
+    <div className="absolute z-40 bg-gray-100 pb-3 border w-full">
+      
+        <div className="flex items-center mb-2 mt-2 justify-between max-w-full">
+          <p className="ml-1 mr-1">Title</p>
+          <input
+            type="text"
+            className="border w-full"
+            value={bookmarkTitleInput}
+            onChange={(e) => setBookmarkTitleInput(e.target.value)}
           />
+          {/* <div className=""> */}
+            <TrashSmallSVG
+              className="h-6  fill-current text-gray-700 hover:text-black cursor-pointer ml-1 mr-1"
+              onClick={() => {
+                setDeletedBookmark(bookmarkTitle);
+
+                setBookmarksData((previous) =>
+                  produce(previous, (updated) => {
+                    updated.splice(bookmarkIndex, 1);
+                  })
+                );
+
+                setEditBookmarkVis((b) => !b);
+                // removing deleted bookmark(tag) for links
+                linksData.forEach((obj, i) => {
+                  if (obj.tags.indexOf(bookmarkTitle) > -1) {
+                    setLinksData((previous) =>
+                      produce(previous, (updated) => {
+                        updated[i].tags.splice(
+                          obj.tags.indexOf(bookmarkTitle),
+                          1
+                        );
+                      })
+                    );
+                  }
+                });
+              }}
+            />
+          {/* </div> */}
         </div>
-              </div>
-          
-
-              {bookmarkType === "note" ? <textarea value={noteInput as string}></textarea> : null
-
-              }
-
-
-            </div>
-          </div>
-        </form>
-
-  
-      </div>
+    
 
       {tagErrorVis ? (
         <p className={`text-red-600`}>
           Bookmark title should consist of a single word without special
           characters
         </p>
+      ) : null}
+
+      {bookmarkType === "note" ? (
+        <textarea value={noteInput as string}></textarea>
       ) : null}
 
       <div className="flex justify-start mt-3">

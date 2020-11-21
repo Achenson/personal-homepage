@@ -65,7 +65,7 @@ function Grid({}: Props): JSX.Element {
   
 
 
-  }, [bookmarksData, linksData, deletedBookmark]);
+  }, [bookmarksData, setBookmarksData, linksData, deletedBookmark]);
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4">
