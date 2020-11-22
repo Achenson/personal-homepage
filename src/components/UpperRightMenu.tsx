@@ -42,7 +42,7 @@ function UpperRightMenu({
         }}
       />
 
-      <SettingsSVG className="h-6" />
+      <SettingsSVG className="h-6 ml-1" />
       <UserSVG className="h-6" />
     </div>
   );

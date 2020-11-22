@@ -52,7 +52,7 @@ TO DO:
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 3. how to properly set links
-3. bookmark move icon - hide when moving?
+DONE 3. bookmark move icon - hide when moving? DONE
 4. change pretifier -> .map & .filter from new lines
 DONE 5. ColorsToChoose -> better code DONE
 5. EditLink & NewLink -> unify
@@ -74,3 +74,5 @@ DONE 16. newLink & newLink_UpperUI -> tags not aligned DONE
 20. note -> newLines not working
 21. newBookmark -> better input for column
 22. bookmark title -> spaces should be permitted too
+23. bg-color vs text color of folders
+24. icon colors on darkBackground

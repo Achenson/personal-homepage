@@ -18,7 +18,6 @@ import NewLink from "./NewLink";
 import EditBookmarkTitle from "./EditBookmarkTitle";
 import NoteInput from "./NoteInput";
 
-
 interface SingleLinkData {
   title: string;
   URL: string;
@@ -29,10 +28,15 @@ interface Props {
   bookmarkTitle: string;
   bookmarkColor: string;
   bookmarkType: "folder" | "note";
-  noteInput: string | null
+  noteInput: string | null;
 }
 
-function Bookmark({ bookmarkTitle, bookmarkColor, bookmarkType, noteInput }: Props): JSX.Element {
+function Bookmark({
+  bookmarkTitle,
+  bookmarkColor,
+  bookmarkType,
+  noteInput,
+}: Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [linksData, setLinksData] = linksDataState.use();
@@ -56,6 +60,8 @@ function Bookmark({ bookmarkTitle, bookmarkColor, bookmarkType, noteInput }: Pro
     tags: [],
   });
 
+  const [crossVis, setCrossVis] = useState<boolean>(true);
+
   let bookmarkIndex: number;
 
   bookmarksData.forEach((obj, i) => {
@@ -76,18 +82,15 @@ function Bookmark({ bookmarkTitle, bookmarkColor, bookmarkType, noteInput }: Pro
         }}
       >
         <div
-          className="pl-1 cursor-pointer w-full"
+          className="pl-1 w-full"
           onClick={() => {
-            if(bookmarkType === "folder") {
-
+            if (bookmarkType === "folder") {
               setSingleLinkVisibility((b) => !b);
             }
 
-            if(bookmarkType === "note") {
-
+            if (bookmarkType === "note") {
               setNoteInputVisibility((b) => !b);
             }
-
           }}
         >
           {bookmarkTitle}
@@ -98,21 +101,39 @@ function Bookmark({ bookmarkTitle, bookmarkColor, bookmarkType, noteInput }: Pro
             iconsVisibility ? "visible" : "invisible"
           } fill-current text-gray-700 `}
         >
-          <CrossArrowsSVG
-            className="h-6 ml-2 cursor-move hover:text-black hover:invisible"
-            style={{ marginTop: "-2px" }}
-          />
-          {bookmarkType === "folder" ?      <PlusSVG
-            className="h-8 hover:text-black cursor-pointer "
-            style={{ marginTop: "-6px" }}
-            onClick={() => {
-              setNewLinkVis((b) => !b);
+          <div
+            className="w-6 -mt-1 pt-1 cursor-move"
+            style={{ height: "29px" }}
+            onMouseEnter={() => {
+              setCrossVis(false);
             }}
-          /> : null}
-     
+            onMouseLeave={() => {
+              setCrossVis(true);
+            }}
+          >
+            {crossVis ? (
+              <CrossArrowsSVG
+                // className="h-6  hover:text-black hover:invisible"
+                className="h-6"
+                style={{ marginTop: "-2px" }}
+              />
+            ) : null}
+          </div>
+
+          {bookmarkType === "folder" ? (
+            <PlusSVG
+              className="h-8 hover:text-black cursor-pointer"
+              style={{ marginTop: "-6px" }}
+              onClick={() => {
+                setNewLinkVis((b) => !b);
+              }}
+            />
+          ) : null}
 
           <ColorSmallSVG
-            className={`h-5 mr-2 hover:text-black cursor-pointer ${bookmarkType === "note" ? "ml-2": ""}`}
+            className={`h-5 mr-2 hover:text-black cursor-pointer ${
+              bookmarkType === "note" ? "ml-2" : ""
+            }`}
             onClick={() => {
               setColorsVisibility((b) => !b);
             }}
@@ -124,8 +145,6 @@ function Bookmark({ bookmarkTitle, bookmarkColor, bookmarkType, noteInput }: Pro
               setEditBookmarkVis((b) => !b);
             }}
           />
-
-
         </div>
       </div>
 
@@ -175,11 +194,7 @@ function Bookmark({ bookmarkTitle, bookmarkColor, bookmarkType, noteInput }: Pro
         </div>
       ) : null}
 
-        {
-          noteInputVisibility ? <NoteInput noteInput={noteInput}/> : null
-        }
-
-
+      {noteInputVisibility ? <NoteInput noteInput={noteInput} /> : null}
     </div>
   );
 }
