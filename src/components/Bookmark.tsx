@@ -70,10 +70,29 @@ function Bookmark({
     }
   });
 
+  function bookmarkTextColor(bookmarkColor: string) {
+
+    let colorsForLightText: string[] = ["bg-black", "bg-gray-700"];
+
+    if (colorsForLightText.indexOf(bookmarkColor) > -1) {
+      return "text-gray-300"
+    }
+
+    let regexForColors_800 = /8/;
+    let regexForColors_700 = /7/;
+    let regexForColors_600 = /6/;
+
+    if (regexForColors_800.test(bookmarkColor) || regexForColors_700.test(bookmarkColor) || regexForColors_600.test(bookmarkColor)) {
+      return "text-gray-300"
+    }
+
+    return "text-black"
+  }
+
   return (
     <div className="relative mb-6">
       <div
-        className={`pl-0 h-8 px-2 pt-px ${bookmarkColor} border border-gray-500 shadow-sm flex justify-between`}
+        className={`pl-0 h-8 px-2 pt-px ${bookmarkColor} ${bookmarkTextColor(bookmarkColor)} border border-gray-500 shadow-sm flex justify-between`}
         onMouseEnter={() => {
           setIconsVisibility(true);
         }}
