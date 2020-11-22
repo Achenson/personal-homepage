@@ -35,7 +35,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
   {
     title: "note",
     color: "bg-teal-600",
-    column: 2,
+    column: 1,
     priority: 0,
     type: "note",
     noteInput: "someText moreText someText moreText someText moreText someText moreText someText moreText someText moreText"

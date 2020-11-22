@@ -100,7 +100,7 @@ function EditBookmarkTitle({
       {bookmarkType === "note" ? (
         <div style={{marginRight: "27px"}}>
 
-          <textarea value={textAreaValue as string} className="h-full w-full overflow-hidden pl-1 pr-1 border" rows={3} onChange={
+          <textarea value={textAreaValue as string} className="h-full w-full overflow-visible pl-1 pr-1 border" rows={(noteInput as string).length/30} onChange={
             (e) => {
               setTextAreaValue(e.target.value)
             }
