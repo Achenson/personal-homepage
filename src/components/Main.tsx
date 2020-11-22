@@ -12,12 +12,13 @@ function Main({}: Props): JSX.Element {
 
   const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
   const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
+  const [bookmarkType, setBookmarkType] = useState<"folder" | "note">("folder");
 
   return (
     <div className="relative">
-      {newBookmarkVis ? <NewBookmark_UpperUI setNewBookmarkVis={setNewBookmarkVis}/> : null }
+      {newBookmarkVis ? <NewBookmark_UpperUI setNewBookmarkVis={setNewBookmarkVis} bookmarkType={bookmarkType}/> : null }
       {newLinkVis ? <NewLink_UpperUI setNewLinkVis={setNewLinkVis}/> : null }    
-      <UpperUI setNewLinkVis={setNewLinkVis} setNewBookmarkVis={setNewBookmarkVis}/>
+      <UpperUI setNewLinkVis={setNewLinkVis} setNewBookmarkVis={setNewBookmarkVis} setBookmarkType={setBookmarkType}/>
       <Grid />
     </div>
   );

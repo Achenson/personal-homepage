@@ -24,8 +24,8 @@ function EditBookmarkTitle({
   noteInput,
 }: Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
-  
-  const [textAreaValue, setTextAreaValue] = useState(noteInput)
+
+  const [textAreaValue, setTextAreaValue] = useState<string | null>(noteInput);
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [linksData, setLinksData] = linksDataState.use();
@@ -43,52 +43,48 @@ function EditBookmarkTitle({
   });
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
+  const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
 
   let regexForTitle = /^\w+$/;
 
   return (
     <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-2">
-      
-        <div className="flex items-center mb-2 mt-2 justify-between">
-          <p className="mr-2">Title</p>
-          <input
-            type="text"
-            // min-w-0 !!
-            className="border w-full max-w-6xl min-w-0"
-            value={bookmarkTitleInput}
-            onChange={(e) => setBookmarkTitleInput(e.target.value)}
-          />
-          {/* <div className=""> */}
-            <TrashSmallSVG
-              className="h-6  fill-current text-gray-700 hover:text-black cursor-pointer ml-2"
-              onClick={() => {
-                setDeletedBookmark(bookmarkTitle);
+      <div className="flex items-center mb-2 mt-2 justify-between">
+        <p className="mr-2">Title</p>
+        <input
+          type="text"
+          // min-w-0 !!
+          className="border w-full max-w-6xl min-w-0"
+          value={bookmarkTitleInput}
+          onChange={(e) => setBookmarkTitleInput(e.target.value)}
+        />
+        {/* <div className=""> */}
+        <TrashSmallSVG
+          className="h-6  fill-current text-gray-700 hover:text-black cursor-pointer ml-2"
+          onClick={() => {
+            setDeletedBookmark(bookmarkTitle);
 
-                setBookmarksData((previous) =>
+            setBookmarksData((previous) =>
+              produce(previous, (updated) => {
+                updated.splice(bookmarkIndex, 1);
+              })
+            );
+
+            setEditBookmarkVis((b) => !b);
+            // removing deleted bookmark(tag) for links
+            linksData.forEach((obj, i) => {
+              if (obj.tags.indexOf(bookmarkTitle) > -1) {
+                setLinksData((previous) =>
                   produce(previous, (updated) => {
-                    updated.splice(bookmarkIndex, 1);
+                    updated[i].tags.splice(obj.tags.indexOf(bookmarkTitle), 1);
                   })
                 );
-
-                setEditBookmarkVis((b) => !b);
-                // removing deleted bookmark(tag) for links
-                linksData.forEach((obj, i) => {
-                  if (obj.tags.indexOf(bookmarkTitle) > -1) {
-                    setLinksData((previous) =>
-                      produce(previous, (updated) => {
-                        updated[i].tags.splice(
-                          obj.tags.indexOf(bookmarkTitle),
-                          1
-                        );
-                      })
-                    );
-                  }
-                });
-              }}
-            />
-          {/* </div> */}
-        </div>
-    
+              }
+            });
+          }}
+        />
+        {/* </div> */}
+      </div>
 
       {tagErrorVis ? (
         <p className={`text-red-600`}>
@@ -97,14 +93,20 @@ function EditBookmarkTitle({
         </p>
       ) : null}
 
-      {bookmarkType === "note" ? (
-        <div style={{marginRight: "27px"}}>
+      {textAreaErrorVis && bookmarkType === "note" ? (
+        <p className={`text-red-600`}>Note cannot be empty</p>
+      ) : null}
 
-          <textarea value={textAreaValue as string} className="h-full w-full overflow-visible pl-1 pr-1 border" rows={(noteInput as string).length/30} onChange={
-            (e) => {
-              setTextAreaValue(e.target.value)
-            }
-          }></textarea>
+      {bookmarkType === "note" ? (
+        <div style={{ marginRight: "27px" }}>
+          <textarea
+            value={textAreaValue as string}
+            className="h-full w-full overflow-visible pl-1 pr-1 border font-mono"
+            rows={(noteInput as string).length / 30}
+            onChange={(e) => {
+              setTextAreaValue(e.target.value);
+            }}
+          ></textarea>
         </div>
       ) : null}
 
@@ -127,34 +129,45 @@ function EditBookmarkTitle({
                 return;
               }
 
+              if (bookmarkType === "note") {
+                if ((textAreaValue as string).length === 0) {
+                  setTextAreaErrorVis(true);
+                  return;
+                }
+              }
+
               setTagErrorVis(false);
+              setTextAreaErrorVis(false);
 
               setBookmarksData((previous) =>
                 produce(previous, (updated) => {
                   updated[bookmarkIndex].title = bookmarkTitleInput;
-                  if(bookmarkType === "note") {
+                  if (bookmarkType === "note") {
                     updated[bookmarkIndex].noteInput = textAreaValue;
                   }
                 })
               );
 
-              setLinksData((previous) =>
-                produce(previous, (updated) => {
-                  updated.forEach((obj) => {
-                    let indexOfBookmarkTitle: number = obj.tags.indexOf(
-                      bookmarkTitle
-                    );
-
-                    if (indexOfBookmarkTitle > -1) {
-                      obj.tags.splice(
-                        indexOfBookmarkTitle,
-                        1,
-                        bookmarkTitleInput
+              if (bookmarkType === "folder") {
+                // deleting tag from links
+                setLinksData((previous) =>
+                  produce(previous, (updated) => {
+                    updated.forEach((obj) => {
+                      let indexOfBookmarkTitle: number = obj.tags.indexOf(
+                        bookmarkTitle
                       );
-                    }
-                  });
-                })
-              );
+
+                      if (indexOfBookmarkTitle > -1) {
+                        obj.tags.splice(
+                          indexOfBookmarkTitle,
+                          1,
+                          bookmarkTitleInput
+                        );
+                      }
+                    });
+                  })
+                );
+              }
 
               setEditBookmarkVis((b) => !b);
             }}

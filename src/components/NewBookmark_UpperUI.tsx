@@ -11,9 +11,13 @@ import { linksDataState } from "../state/bookmarksAndLinks";
 
 interface Props {
   setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  bookmarkType: "folder" | "note";
 }
 
-function NewBookmark_UpperUI({ setNewBookmarkVis }: Props): JSX.Element {
+function NewBookmark_UpperUI({
+  setNewBookmarkVis,
+  bookmarkType,
+}: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [linksData, setLinksData] = linksDataState.use();
 
@@ -33,23 +37,30 @@ function NewBookmark_UpperUI({ setNewBookmarkVis }: Props): JSX.Element {
   // const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
 
   const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
-  const [bookmarksRepeatErrorVis, setBookmarksRepeatErrorVis] = useState<
-    boolean
-  >(false);
-  const [bookmarksExistenceErrorVis, setBookmarksExistenceErrorVis] = useState<
-    boolean
-  >(false);
+  const [
+    bookmarksRepeatErrorVis,
+    setBookmarksRepeatErrorVis,
+  ] = useState<boolean>(false);
+  const [
+    bookmarksExistenceErrorVis,
+    setBookmarksExistenceErrorVis,
+  ] = useState<boolean>(false);
 
   const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
     false
   );
-  const [titleUniquenessErrorVis, setTitleUniquenessErrorVis] = useState<
-    boolean
-  >(false);
+  const [
+    titleUniquenessErrorVis,
+    setTitleUniquenessErrorVis,
+  ] = useState<boolean>(false);
+  // for notes
+  const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
 
   // ^  and $ -> beginning and end of the text!
   let regexForBookmarks = /^\w+(,\s\w+)*$/;
   let regexForTitle = /^\w+$/;
+
+  const [textAreaValue, setTextAreaValue] = useState<string | null>("");
 
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable
@@ -69,7 +80,11 @@ function NewBookmark_UpperUI({ setNewBookmarkVis }: Props): JSX.Element {
                 type="text"
                 className="w-full border border-gray-500"
                 value={bookmarkTitleInput}
-                placeholder={"new folder title"}
+                placeholder={
+                  bookmarkType === "folder"
+                    ? "new folder title"
+                    : "new note title"
+                }
                 onChange={(e) => setBookmarkTitleInput(e.target.value)}
               />
             </div>
@@ -91,48 +106,35 @@ function NewBookmark_UpperUI({ setNewBookmarkVis }: Props): JSX.Element {
             </div>
           </div>
 
-          <div className="flex justify-around mb-2 mt-2">
-            <p className="w-32">Bookmarks</p>
-            <div className="w-full pl-2">
-              <input
-                type="text"
-                className="w-full border border-gray-500"
-                value={bookmarkLinksInput.join(", ")}
-                onChange={(e) =>
-                  setBookmarkLinksInput([...e.target.value.split(", ")])
-                }
-                placeholder={"Choose at least one"}
-              />
+          {bookmarkType === "folder" ? (
+            <div className="flex justify-around mb-2 mt-2">
+              <p className="w-32">Bookmarks</p>
+              <div className="w-full pl-2">
+                <input
+                  type="text"
+                  className="w-full border border-gray-500"
+                  value={bookmarkLinksInput.join(", ")}
+                  onChange={(e) =>
+                    setBookmarkLinksInput([...e.target.value.split(", ")])
+                  }
+                  placeholder={"Choose at least one"}
+                />
+              </div>
             </div>
-          </div>
+          ) : null}
 
-          {/* <div className="flex justify-around mb-2">
-          <p className="w-10">Link</p>
-          <div className="w-full pl-2">
-            <input
-              type="text"
-              className="w-full border border-gray-500"
-              value={urlInput}
-              placeholder={"enter proper URL address"}
-              onChange={(e) => setUrlInput(e.target.value)}
-            />
-          </div>
-
-
-        </div> */}
-
-          {/* <div className="flex justify-start mb-2">
-          <p className="w-10">Tags</p>
-          <div className="w-full pl-2">
-            <input
-              type="text"
-              className="w-full border border-gray-500  "
-              value={tagsInput.join(", ")}
-              placeholder={"[tag1], [tag2]..."}
-              onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
-            />
-          </div>
-        </div> */}
+          {bookmarkType === "note" ? (
+            <div>
+              <textarea
+                value={textAreaValue as string}
+                className="h-full w-full overflow-visible pl-1 pr-1 border font-mono"
+                rows={10}
+                onChange={(e) => {
+                  setTextAreaValue(e.target.value);
+                }}
+              ></textarea>
+            </div>
+          ) : null}
 
           {titleFormatErrorVis ? (
             <p className={`text-red-600`}>
@@ -146,20 +148,24 @@ function NewBookmark_UpperUI({ setNewBookmarkVis }: Props): JSX.Element {
             </p>
           ) : null}
 
-          {bookmarksErrorVis ? (
+          {bookmarksErrorVis && bookmarkType === "folder" ? (
             <p className={`text-red-600`}>
               Bookmarks should consist of words separated by coma and space
             </p>
           ) : null}
 
-          {bookmarksExistenceErrorVis ? (
+          {bookmarksExistenceErrorVis && bookmarkType === "folder" ? (
             <p className={`text-red-600`}>
               You can choose from existing bookmarks only
             </p>
           ) : null}
 
-          {bookmarksRepeatErrorVis ? (
+          {bookmarksRepeatErrorVis && bookmarkType === "folder" ? (
             <p className={`text-red-600`}>Each bookmark should be unique</p>
+          ) : null}
+
+          {textAreaErrorVis && bookmarkType === "note" ? (
+            <p className={`text-red-600`}>Note cannot be empty</p>
           ) : null}
 
           <div className="flex justify-start mt-3">
@@ -177,6 +183,7 @@ function NewBookmark_UpperUI({ setNewBookmarkVis }: Props): JSX.Element {
                   setTitleFormatErrorVis(false);
                   setTitleUniquenessErrorVis(false);
                   setBookmarksExistenceErrorVis(false);
+                  setTextAreaErrorVis(false);
 
                   if (!regexForTitle.test(bookmarkTitleInput)) {
                     setTitleFormatErrorVis(true);
@@ -189,46 +196,77 @@ function NewBookmark_UpperUI({ setNewBookmarkVis }: Props): JSX.Element {
                     return;
                   }
 
-                  if (!regexForBookmarks.test(bookmarkLinksInput.join(", "))) {
-                    setBookmarksErrorVis(true);
-                    return;
+                  if (bookmarkType === "folder") {
+                    if (
+                      !regexForBookmarks.test(bookmarkLinksInput.join(", "))
+                    ) {
+                      setBookmarksErrorVis(true);
+                      return;
+                    }
+
+                    if (!bookmarkExistenceCheck()) {
+                      setBookmarksExistenceErrorVis(true);
+                      return;
+                    }
+
+                    if (!tagUniquenessCheck()) {
+                      setBookmarksRepeatErrorVis(true);
+                      return;
+                    }
                   }
 
-                  if (!bookmarkExistenceCheck()) {
-                    setBookmarksExistenceErrorVis(true);
-                    return;
+                  if (bookmarkType === "note") {
+                    if ((textAreaValue as string).length === 0) {
+                      setTextAreaErrorVis(true);
+                      return;
+                    }
                   }
 
-                  if (!tagUniquenessCheck()) {
-                    setBookmarksRepeatErrorVis(true);
-                    return;
+                  if (bookmarkType === "note") {
+                    setBookmarksData((previous) =>
+                      produce(previous, (updated) => {
+                        updated.push({
+                          title: bookmarkTitleInput,
+                          column: bookmarkColumnInput,
+                          color: "bg-teal-400",
+                          priority: 0,
+                          type: "note",
+                          noteInput: textAreaValue,
+                        });
+                      })
+                    );
                   }
 
-                  setBookmarksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated.push({
-                        title: bookmarkTitleInput,
-                        column: bookmarkColumnInput,
-                        color: "bg-teal-400",
-                        priority: 0,
-                        type: "folder",
-                        noteInput: null
-                      });
-                    })
-                  );
+                  if (bookmarkType === "folder") {
+                    setBookmarksData((previous) =>
+                      produce(previous, (updated) => {
+                        updated.push({
+                          title: bookmarkTitleInput,
+                          column: bookmarkColumnInput,
+                          color: "bg-teal-400",
+                          priority: 0,
+                          type: "folder",
+                          noteInput: null,
+                        });
+                      })
+                    );
 
-                  setLinksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated.forEach((obj) => {
-                        if (
-                          bookmarkLinksInput.indexOf(obj.title) > -1 &&
-                          obj.tags.indexOf(bookmarkTitleInput) === -1
-                        ) {
-                          obj.tags.push(bookmarkTitleInput);
-                        }
-                      });
-                    })
-                  );
+                    // updating links data (tags array)
+                    setLinksData((previous) =>
+                      produce(previous, (updated) => {
+                        updated.forEach((obj) => {
+                          if (
+                            bookmarkLinksInput.indexOf(obj.title) > -1 &&
+                            obj.tags.indexOf(bookmarkTitleInput) === -1
+                          ) {
+                            obj.tags.push(bookmarkTitleInput);
+                          }
+                        });
+                      })
+                    );
+                  }
+
+                  setNewBookmarkVis((b) => !b);
 
                   function bookmarkExistenceCheck() {
                     let bookmarksArr: string[] = [];
@@ -265,7 +303,7 @@ function NewBookmark_UpperUI({ setNewBookmarkVis }: Props): JSX.Element {
                   function titleUniquenessCheck() {
                     let isUnique: boolean = true;
 
-                    linksData.forEach((obj, i) => {
+                    bookmarksData.forEach((obj, i) => {
                       if (obj.title === bookmarkTitleInput) {
                         isUnique = false;
                       }

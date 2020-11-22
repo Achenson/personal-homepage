@@ -71,3 +71,6 @@ DONE 16. newLink & newLink_UpperUI -> tags not aligned DONE
 17. link/bookmark -> consistent naming!
 18. newBookmark_upperUI -> menu with existing bookmarks to choose
 19. bookmark priorities
+20. note -> newLines not working
+21. newBookmark -> better input for column
+22. bookmark title -> spaces should be permitted too
