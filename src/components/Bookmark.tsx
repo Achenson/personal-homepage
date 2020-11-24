@@ -93,6 +93,44 @@ function Bookmark({
     return "text-gray-900"
   }
 
+  function iconColor(bookmarkColor: string) {
+
+        // exceptions
+        let colorsForLightText: string[] = ["bg-black", "bg-teal-500","bg-teal-500", "bg-blue-500", "bg-indigo-500", "bg-purple-500"];
+        let colorsForDarkText: string[] = ["bg-yellow-600"];
+    
+        if (colorsForLightText.indexOf(bookmarkColor) > -1) {
+          return "text-gray-400"
+        }
+    
+        if (colorsForDarkText.indexOf(bookmarkColor) > -1) {
+          return "text-gray-700"
+        }
+    
+        // "default" behaviour
+        let regexForColors = /[678]/;
+    
+        if (regexForColors.test(bookmarkColor)) {
+          return "text-gray-400"
+        }
+    
+        return "text-gray-700"
+      }
+
+    function hoverText(bookmarkColor: string) {
+
+      let colorsForLightIcons: string[] = ["bg-black", "bg-gray-700", "bg-green-800", "bg-teal-800", "bg-blue-800", "bg-indigo-800", "bg-purple-800", "bg-indigo-700"];
+
+      if (colorsForLightIcons.indexOf(bookmarkColor) > -1) {
+        return "text-orange-500"
+      }
+
+      return "text-black"
+
+    }
+
+  
+
   return (
     <div className="relative mb-6">
       <div
@@ -122,7 +160,7 @@ function Bookmark({
         <div
           className={`pt-1 flex ${
             iconsVisibility ? "visible" : "invisible"
-          } fill-current text-gray-700 `}
+          } fill-current ${iconColor(bookmarkColor)} `}
         >
           <div
             className="w-6 -mt-1 pt-1 cursor-move"
@@ -145,7 +183,7 @@ function Bookmark({
 
           {bookmarkType === "folder" ? (
             <PlusSVG
-              className="h-8 hover:text-black cursor-pointer"
+              className={`h-8 hover:${hoverText(bookmarkColor)} cursor-pointer`}
               style={{ marginTop: "-6px" }}
               onClick={() => {
                 setNewLinkVis((b) => !b);
@@ -154,7 +192,7 @@ function Bookmark({
           ) : null}
 
           <ColorSmallSVG
-            className={`h-5 mr-2 hover:text-black cursor-pointer ${
+            className={`h-5 mr-2 hover:${hoverText(bookmarkColor)} cursor-pointer ${
               bookmarkType === "note" ? "ml-2" : ""
             }`}
             onClick={() => {
@@ -163,7 +201,7 @@ function Bookmark({
           />
 
           <PencilSmallSVG
-            className="h-5 -ml-px hover:text-black cursor-pointer "
+            className={`h-5 -ml-px hover:${hoverText(bookmarkColor)} cursor-pointer`}
             onClick={() => {
               setEditBookmarkVis((b) => !b);
             }}
