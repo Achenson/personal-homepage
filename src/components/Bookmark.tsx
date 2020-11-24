@@ -71,22 +71,26 @@ function Bookmark({
   });
 
   function bookmarkTextColor(bookmarkColor: string) {
-
-    let colorsForLightText: string[] = ["bg-black", "bg-gray-700"];
+    // exceptions
+    let colorsForLightText: string[] = ["bg-black", "bg-teal-500","bg-teal-500", "bg-blue-500", "bg-indigo-500", "bg-purple-500"];
+    let colorsForDarkText: string[] = ["bg-yellow-600"];
 
     if (colorsForLightText.indexOf(bookmarkColor) > -1) {
       return "text-gray-300"
     }
 
-    let regexForColors_800 = /8/;
-    let regexForColors_700 = /7/;
-    let regexForColors_600 = /6/;
+    if (colorsForDarkText.indexOf(bookmarkColor) > -1) {
+      return "text-gray-900"
+    }
 
-    if (regexForColors_800.test(bookmarkColor) || regexForColors_700.test(bookmarkColor) || regexForColors_600.test(bookmarkColor)) {
+    // "default" behaviour
+    let regexForColors = /[678]/;
+
+    if (regexForColors.test(bookmarkColor)) {
       return "text-gray-300"
     }
 
-    return "text-black"
+    return "text-gray-900"
   }
 
   return (
@@ -101,7 +105,7 @@ function Bookmark({
         }}
       >
         <div
-          className="pl-1 w-full"
+          className="pl-1 w-full cursor-pointer"
           onClick={() => {
             if (bookmarkType === "folder") {
               setSingleLinkVisibility((b) => !b);
