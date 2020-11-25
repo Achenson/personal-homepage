@@ -112,10 +112,15 @@ function Bookmark({
       "bg-indigo-800",
       "bg-purple-800",
       "bg-indigo-700",
+      "bg-indigo-600",
+      "bg-blue-700",
+      "bg-teal-700",
+      "bg-green-700",
+
     ];
 
     let colorsForLightHoverAlt: string[] = [
-      "bg-pink-800", "bg-purple-700"
+      "bg-pink-800", "bg-purple-700", "bg-orange-800", "bg-red-800"
     ]
 
     if (colorsForLightHoverAlt.indexOf(bookmarkColor) > -1) {
