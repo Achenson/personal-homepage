@@ -80,15 +80,15 @@ function Bookmark({
       "bg-indigo-500",
       "bg-purple-500",
     ];
-    let colorsForDarkText: string[] = ["bg-yellow-600"];
+    // let colorsForDarkText: string[] = ["bg-yellow-600"];
 
     if (colorsForLightText.indexOf(bookmarkColor) > -1) {
       return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
     }
 
-    if (colorsForDarkText.indexOf(bookmarkColor) > -1) {
-      return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
-    }
+    // if (colorsForDarkText.indexOf(bookmarkColor) > -1) {
+    //   return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
+    // }
 
     // "default" behaviour
     let regexForColors = /[678]/;
@@ -97,9 +97,8 @@ function Bookmark({
       return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
     }
 
-    if (textOrIcon === "text") {
       return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
-    }
+    
   }
 
   function hoverText(bookmarkColor: string) {
@@ -136,12 +135,14 @@ function Bookmark({
   }
 
   return (
-    <div className="relative mb-6">
+    <div className="relative mb-6" >
       <div
         className={`pl-0 h-8 px-2 pt-px ${bookmarkColor} ${textOrIconColor(
           bookmarkColor,
           "text"
-        )} border border-gray-500 shadow-sm flex justify-between`}
+        )} border border-gray-400 flex justify-between`}
+        style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.5)"}}
+
         onMouseEnter={() => {
           setIconsVisibility(true);
         }}
