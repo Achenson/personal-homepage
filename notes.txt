@@ -75,5 +75,5 @@ DONE 16. newLink & newLink_UpperUI -> tags not aligned DONE
 21. newBookmark -> better input for column
 22. bookmark title -> spaces should be permitted too
 DONE 23. bg-color vs text color of folders DONE
- 4. icon colors on darkBackground DONE but 1 purple & 1 pink not perfect?
-24. bookmark: almost same function for icons & text color, unify
+ DONE 4. icon colors on darkBackground DONE but 1 purple & 1 pink not perfect? DONE 
+DONE 24. bookmark: almost same function for icons & text color, unify DONE

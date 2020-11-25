@@ -70,71 +70,73 @@ function Bookmark({
     }
   });
 
-  function bookmarkTextColor(bookmarkColor: string) {
+  function textOrIconColor(bookmarkColor: string, textOrIcon: "text" | "icon") {
     // exceptions
-    let colorsForLightText: string[] = ["bg-black", "bg-teal-500","bg-teal-500", "bg-blue-500", "bg-indigo-500", "bg-purple-500"];
+    let colorsForLightText: string[] = [
+      "bg-black",
+      "bg-teal-500",
+      "bg-teal-500",
+      "bg-blue-500",
+      "bg-indigo-500",
+      "bg-purple-500",
+    ];
     let colorsForDarkText: string[] = ["bg-yellow-600"];
 
     if (colorsForLightText.indexOf(bookmarkColor) > -1) {
-      return "text-gray-300"
+      return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
     }
 
     if (colorsForDarkText.indexOf(bookmarkColor) > -1) {
-      return "text-gray-900"
+      return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
     }
 
     // "default" behaviour
     let regexForColors = /[678]/;
 
     if (regexForColors.test(bookmarkColor)) {
-      return "text-gray-300"
+      return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
     }
 
-    return "text-gray-900"
+    if (textOrIcon === "text") {
+      return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
+    }
   }
 
-  function iconColor(bookmarkColor: string) {
+  function hoverText(bookmarkColor: string) {
+    let colorsForLightHover: string[] = [
+      "bg-black",
+      "bg-gray-700",
+      "bg-green-800",
+      "bg-teal-800",
+      "bg-blue-800",
+      "bg-indigo-800",
+      "bg-purple-800",
+      "bg-indigo-700",
+    ];
 
-        // exceptions
-        let colorsForLightText: string[] = ["bg-black", "bg-teal-500","bg-teal-500", "bg-blue-500", "bg-indigo-500", "bg-purple-500"];
-        let colorsForDarkText: string[] = ["bg-yellow-600"];
-    
-        if (colorsForLightText.indexOf(bookmarkColor) > -1) {
-          return "text-gray-400"
-        }
-    
-        if (colorsForDarkText.indexOf(bookmarkColor) > -1) {
-          return "text-gray-700"
-        }
-    
-        // "default" behaviour
-        let regexForColors = /[678]/;
-    
-        if (regexForColors.test(bookmarkColor)) {
-          return "text-gray-400"
-        }
-    
-        return "text-gray-700"
-      }
+    let colorsForLightHoverAlt: string[] = [
+      "bg-pink-800", "bg-purple-700"
+    ]
 
-    function hoverText(bookmarkColor: string) {
-
-      let colorsForLightIcons: string[] = ["bg-black", "bg-gray-700", "bg-green-800", "bg-teal-800", "bg-blue-800", "bg-indigo-800", "bg-purple-800", "bg-indigo-700"];
-
-      if (colorsForLightIcons.indexOf(bookmarkColor) > -1) {
-        return "text-orange-500"
-      }
-
-      return "text-black"
-
+    if (colorsForLightHoverAlt.indexOf(bookmarkColor) > -1) {
+      return "text-yellow-400";
     }
 
-  
+
+    if (colorsForLightHover.indexOf(bookmarkColor) > -1) {
+      return "text-orange-500";
+    }
+
+    return "text-black";
+  }
 
   return (
     <div className="relative mb-6">
       <div
-        className={`pl-0 h-8 px-2 pt-px ${bookmarkColor} ${bookmarkTextColor(bookmarkColor)} border border-gray-500 shadow-sm flex justify-between`}
+        className={`pl-0 h-8 px-2 pt-px ${bookmarkColor} ${textOrIconColor(
+          bookmarkColor,
+          "text"
+        )} border border-gray-500 shadow-sm flex justify-between`}
         onMouseEnter={() => {
           setIconsVisibility(true);
         }}
@@ -160,7 +162,7 @@ function Bookmark({
         <div
           className={`pt-1 flex ${
             iconsVisibility ? "visible" : "invisible"
-          } fill-current ${iconColor(bookmarkColor)} `}
+          } fill-current ${textOrIconColor(bookmarkColor, "icon")} `}
         >
           <div
             className="w-6 -mt-1 pt-1 cursor-move"
@@ -192,16 +194,18 @@ function Bookmark({
           ) : null}
 
           <ColorSmallSVG
-            className={`h-5 mr-2 hover:${hoverText(bookmarkColor)} cursor-pointer ${
-              bookmarkType === "note" ? "ml-2" : ""
-            }`}
+            className={`h-5 mr-2 hover:${hoverText(
+              bookmarkColor
+            )} cursor-pointer ${bookmarkType === "note" ? "ml-2" : ""}`}
             onClick={() => {
               setColorsVisibility((b) => !b);
             }}
           />
 
           <PencilSmallSVG
-            className={`h-5 -ml-px hover:${hoverText(bookmarkColor)} cursor-pointer`}
+            className={`h-5 -ml-px hover:${hoverText(
+              bookmarkColor
+            )} cursor-pointer`}
             onClick={() => {
               setEditBookmarkVis((b) => !b);
             }}
