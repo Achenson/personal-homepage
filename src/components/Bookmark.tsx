@@ -141,7 +141,7 @@ function Bookmark({
           bookmarkColor,
           "text"
         )} border border-gray-400 flex justify-between`}
-        style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.5)"}}
+        style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)"}}
 
         onMouseEnter={() => {
           setIconsVisibility(true);

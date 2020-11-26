@@ -79,3 +79,5 @@ DONE 23. bg-color vs text color of folders DONE
 DONE 24. bookmark: almost same function for icons & text color, unify DONE
 25. Bookmark better css (more like button)
 26. black icont -> not contrastive enough on hover?
+27. auto close bookmark menus when clicking sth else
+28. diff between iGoogle folders and mine
