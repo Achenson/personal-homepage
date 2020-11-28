@@ -1,9 +1,12 @@
 import React from "react";
-import SingleColor from "./SingleColor";
+
+import DefaultSingleColor from "./DefaultSingleColor";
 
 interface Props {
-  setIconsVisibility: (value: React.SetStateAction<boolean>) => void;
-  bookmarkTitle: string;
+  // setIconsVisibility: (value: React.SetStateAction<boolean>) => void;
+
+  // bookmarkTitle: string;
+  defaultColorsFor: "folders" | "notes" | "columns";
 }
 
 const colors = [
@@ -54,15 +57,18 @@ const colors = [
   ["pink-300", "pink-400", "pink-500", "pink-600", "pink-700", "pink-800"],
 ];
 
-function ColorsToChoose({ setIconsVisibility, bookmarkTitle }: Props): JSX.Element {
+function ColorsToChoose({defaultColorsFor}: Props): JSX.Element {
   function mappingColors(colors: string[][]) {
     return colors.map((row, i) => {
       return (
-        <div className="flex" key={i}>
+       
+                  <div className="flex" key={i}>
           {row.map((el, j) => {
-            return <SingleColor color={el} bookmarkTitle={bookmarkTitle} key={j} />;
+            return <DefaultSingleColor color={el} defaultColorsFor={defaultColorsFor} key={j} />;
           })}
         </div>
+        
+
       );
     });
   }
@@ -70,9 +76,11 @@ function ColorsToChoose({ setIconsVisibility, bookmarkTitle }: Props): JSX.Eleme
   return (
     <div
       className="bg-gray-100 absolute right-0 z-50"
-      onMouseEnter={() => {
-        setIconsVisibility(true);
-      }}
+
+      // onMouseEnter={() => {
+      //   setIconsVisibility(true);
+      // }}
+
       // onMouseLeave={() => {
       //   setIconsVisibility(false)
       // }}
