@@ -11,12 +11,14 @@ import { ReactComponent as ColorSVG } from "../svgs/beaker.svg";
 interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
   setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
   setBookmarkType: React.Dispatch<React.SetStateAction<"folder" | "note">>;
 }
 
 function UpperRightMenu({
   setNewLinkVis,
   setNewBookmarkVis,
+  setColorsVis,
   setBookmarkType,
 }: Props): JSX.Element {
   return (
@@ -46,7 +48,11 @@ function UpperRightMenu({
       </div>
    
         <div className="flex w-24 justify-around">
-        <ColorSVG className="h-6" />
+        <ColorSVG className="h-6 cursor-pointer hover:text-teal-500" 
+        onClick={() => {
+          setColorsVis(b=>!b)
+        }}
+        />
       <SettingsSVG className="h-6" />
       <UserSVG className="h-6" />
         </div>
