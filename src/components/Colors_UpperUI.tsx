@@ -12,7 +12,12 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
     "folders" | "notes" | "columns"
   >("folders");
 
+  
   const [colorsToChooseVis, setColorsToChooseVis] = useState<boolean>(false);
+  const [foldersSelected, setFoldersSelected] = useState<boolean>(false);
+  const [notesSelected, setNotesSelected] = useState<boolean>(false);
+  const [columnsSelected, setColumnsSelected] = useState<boolean>(false);
+  
 
   return (
     <div
@@ -41,8 +46,9 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
               onClick={() => {
                 setDefaultColorsFor("folders");
                 setColorsToChooseVis((b) => !b);
+                setFoldersSelected(b=>!b);
               }}
-              className={`h-4 w-8 bg-teal-500 cursor-pointer border border-black hover:border-gray-500`}
+              className={`h-4 w-8 bg-teal-500 cursor-pointer ${foldersSelected ? "border-2" : "border"} border-black hover:border-gray-500`}
             ></div>
           </div>
           <div className="flex justify-around items-center mb-2 mt-2">
@@ -51,8 +57,9 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
               onClick={() => {
                 setDefaultColorsFor("notes");
                 setColorsToChooseVis((b) => !b);
+                setNotesSelected(b=>!b);
               }}
-              className={`h-4 w-8 bg-teal-500 cursor-pointer border border-black hover:border-gray-500`}
+              className={`h-4 w-8 bg-teal-500 cursor-pointer ${notesSelected ? "border-2" : "border"} border-black hover:border-gray-500`}
             ></div>
           </div>
           <div className="flex justify-around items-center mb-2 mt-2">
@@ -61,8 +68,9 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
               onClick={() => {
                 setDefaultColorsFor("columns");
                 setColorsToChooseVis((b) => !b);
+                setColumnsSelected(b=>!b);
               }}
-              className={`h-4 w-8 bg-teal-500 cursor-pointer border border-black hover:border-gray-500`}
+              className={`h-4 w-8 bg-teal-500 cursor-pointer ${columnsSelected ? "border-2" : "border"} border-black hover:border-gray-500`}
             ></div>
           </div>
 
