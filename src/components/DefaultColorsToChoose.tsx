@@ -75,7 +75,7 @@ function ColorsToChoose({defaultColorsFor}: Props): JSX.Element {
 
   return (
     <div
-      className="bg-gray-100 absolute right-0 z-50"
+      className="bg-gray-100 z-50"
 
       // onMouseEnter={() => {
       //   setIconsVisibility(true);

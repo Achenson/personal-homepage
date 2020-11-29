@@ -81,3 +81,7 @@ DONE 24. bookmark: almost same function for icons & text color, unify DONE
 26. black icont -> not contrastive enough on hover?
 27. auto close bookmark menus when clicking sth else
 28. diff between iGoogle folders and mine
+29. colors for individual columns?
+30. colors for UI dep on folder color
+31. margin for new item -> always on?
+32. colors placement in default color settings

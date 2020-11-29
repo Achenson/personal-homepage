@@ -16,13 +16,13 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
 
   return (
     <div
-      className="flex z-50 absolute h-screen w-screen items-center justify-center"
+      className="flex flex-col z-50 absolute h-screen w-screen justify-center items-center"
       style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
-
     >
+      <div className="md:mb-40 relative">
       <div
-        className="bg-gray-200 pb-3 pt-6 border-2 border-teal-500 rounded-sm md:mb-48"
-        style={{ width: "350px" }}
+        className="bg-gray-200 pb-3 pt-6 border-2 border-teal-500 rounded-sm"
+        style={{ width: "350px", height: "200px" }}
       >
         <div className="pl-2 pr-4">
           <p className="text-center">Default color settings</p>
@@ -40,7 +40,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
             <div
               onClick={() => {
                 setDefaultColorsFor("folders");
-                setColorsToChooseVis(b=>!b)
+                setColorsToChooseVis((b) => !b);
               }}
               className={`h-4 w-8 bg-teal-500 cursor-pointer border border-black hover:border-gray-500`}
             ></div>
@@ -50,21 +50,17 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
             <div
               onClick={() => {
                 setDefaultColorsFor("notes");
-                setColorsToChooseVis(b=>!b)
+                setColorsToChooseVis((b) => !b);
               }}
               className={`h-4 w-8 bg-teal-500 cursor-pointer border border-black hover:border-gray-500`}
             ></div>
           </div>
           <div className="flex justify-around items-center mb-2 mt-2">
-            <p
-              className="w-32"
-            >
-              Columns
-            </p>
+            <p className="w-32">Columns</p>
             <div
               onClick={() => {
                 setDefaultColorsFor("columns");
-                setColorsToChooseVis(b=>!b)
+                setColorsToChooseVis((b) => !b);
               }}
               className={`h-4 w-8 bg-teal-500 cursor-pointer border border-black hover:border-gray-500`}
             ></div>
@@ -80,11 +76,15 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
         </div>
       </div>
 
-      
-      <div>
-     {colorsToChooseVis ? <DefaultColorsToChoose defaultColorsFor={defaultColorsFor}/> : null } 
 
+      <div className="absolute" style={{top: "200px", left: "157px"}}>
+        {colorsToChooseVis ? (
+          <DefaultColorsToChoose defaultColorsFor={defaultColorsFor} />
+        ) : null}
       </div>
+      </div>
+
+  
     </div>
   );
 }
