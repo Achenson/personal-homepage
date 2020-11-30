@@ -117,7 +117,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
       </div>
 
 
-      <div className="absolute" style={{top: "200px", left: "157px"}}>
+      <div className="absolute" style={{top: "200px", left: `${defaultColorsFor === "columns" ? "93px" : "157px"}`}}>
         {colorsToChooseVis ? (
           <DefaultColorsToChoose defaultColorsFor={defaultColorsFor} />
         ) : null}
