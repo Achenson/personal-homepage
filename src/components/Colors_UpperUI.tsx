@@ -48,7 +48,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                 setDefaultColorsFor("folders");
 
                 if(defaultColorsFor === "folders") {
-                  setColorsToChooseVis(false);
+                  setColorsToChooseVis(b=>!b);
                 } else {
                   setColorsToChooseVis(true)
                 }
@@ -69,7 +69,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                 setDefaultColorsFor("notes");
 
                 if(defaultColorsFor === "notes") {
-                  setColorsToChooseVis(false);
+                  setColorsToChooseVis(b=>!b);
                 } else {
                   setColorsToChooseVis(true)
                 }
@@ -91,7 +91,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                 setDefaultColorsFor("columns");
 
                 if(defaultColorsFor === "columns") {
-                  setColorsToChooseVis(false);
+                  setColorsToChooseVis(b=>!b);
                 } else {
                   setColorsToChooseVis(true)
                 }
