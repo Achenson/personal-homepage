@@ -14,6 +14,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
 
   
   const [colorsToChooseVis, setColorsToChooseVis] = useState<boolean>(false);
+
   const [foldersSelected, setFoldersSelected] = useState<boolean>(false);
   const [notesSelected, setNotesSelected] = useState<boolean>(false);
   const [columnsSelected, setColumnsSelected] = useState<boolean>(false);
@@ -46,6 +47,10 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
               onClick={() => {
                 setDefaultColorsFor("folders");
                 setColorsToChooseVis((b) => !b);
+                
+                setNotesSelected(false);
+                setColumnsSelected(false);
+
                 setFoldersSelected(b=>!b);
               }}
               className={`h-4 w-8 bg-teal-500 cursor-pointer ${foldersSelected ? "border-2" : "border"} border-black hover:border-gray-500`}
@@ -57,6 +62,10 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
               onClick={() => {
                 setDefaultColorsFor("notes");
                 setColorsToChooseVis((b) => !b);
+
+                setFoldersSelected(false);
+                setColumnsSelected(false);
+
                 setNotesSelected(b=>!b);
               }}
               className={`h-4 w-8 bg-teal-500 cursor-pointer ${notesSelected ? "border-2" : "border"} border-black hover:border-gray-500`}
@@ -68,6 +77,10 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
               onClick={() => {
                 setDefaultColorsFor("columns");
                 setColorsToChooseVis((b) => !b);
+
+                setFoldersSelected(false);
+                setNotesSelected(false);
+
                 setColumnsSelected(b=>!b);
               }}
               className={`h-4 w-8 bg-teal-500 cursor-pointer ${columnsSelected ? "border-2" : "border"} border-black hover:border-gray-500`}
