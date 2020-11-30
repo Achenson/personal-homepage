@@ -5,7 +5,7 @@ import { produce } from "immer";
 interface Props {
   color: string;
   // bookmarkTitle: string;
-  defaultColorsFor: "folders" | "notes" | "columns";
+  defaultColorsFor: "folders" | "notes" | "columns" | "unselected";
 }
 
 function SingleColor({ color, defaultColorsFor }: Props): JSX.Element {

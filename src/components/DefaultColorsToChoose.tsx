@@ -6,7 +6,7 @@ interface Props {
   // setIconsVisibility: (value: React.SetStateAction<boolean>) => void;
 
   // bookmarkTitle: string;
-  defaultColorsFor: "folders" | "notes" | "columns";
+  defaultColorsFor: "folders" | "notes" | "columns" | "unselected";
 }
 
 const colors = [

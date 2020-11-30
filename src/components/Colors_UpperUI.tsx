@@ -9,8 +9,8 @@ interface Props {
 
 function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
   const [defaultColorsFor, setDefaultColorsFor] = useState<
-    "folders" | "notes" | "columns"
-  >("folders");
+    "folders" | "notes" | "columns" | "unselected"
+  >("unselected");
 
   
   const [colorsToChooseVis, setColorsToChooseVis] = useState<boolean>(false);
@@ -46,7 +46,13 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
             <div
               onClick={() => {
                 setDefaultColorsFor("folders");
-                setColorsToChooseVis((b) => !b);
+
+                if(defaultColorsFor === "folders") {
+                  setColorsToChooseVis(false);
+                } else {
+                  setColorsToChooseVis(true)
+                }
+
                 
                 setNotesSelected(false);
                 setColumnsSelected(false);
@@ -61,7 +67,14 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
             <div
               onClick={() => {
                 setDefaultColorsFor("notes");
-                setColorsToChooseVis((b) => !b);
+
+                if(defaultColorsFor === "notes") {
+                  setColorsToChooseVis(false);
+                } else {
+                  setColorsToChooseVis(true)
+                }
+
+                
 
                 setFoldersSelected(false);
                 setColumnsSelected(false);
@@ -76,7 +89,13 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
             <div
               onClick={() => {
                 setDefaultColorsFor("columns");
-                setColorsToChooseVis((b) => !b);
+
+                if(defaultColorsFor === "columns") {
+                  setColorsToChooseVis(false);
+                } else {
+                  setColorsToChooseVis(true)
+                }
+               
 
                 setFoldersSelected(false);
                 setNotesSelected(false);
