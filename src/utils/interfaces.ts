@@ -1,6 +1,6 @@
 export interface SingleBookmarkData {
   title: string;
-  color: string;
+  color: string | null;
   column: number;
   priority: number;
   type: "folder" | "note";

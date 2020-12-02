@@ -7,7 +7,7 @@ import { SingleLinkData } from "../utils/interfaces";
 export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
   {
     title: "all",
-    color: "bg-teal-400",
+    color: null,
     column: 1,
     priority: 1,
     type: "folder",
@@ -16,7 +16,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
   },
   {
     title: "main",
-    color: "bg-teal-500",
+    color: "red-400",
     column: 1,
     priority: 0,
     type: "folder",
@@ -25,7 +25,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
   },
   {
     title: "fun",
-    color: "bg-teal-600",
+    color: null,
     column: 2,
     priority: 0,
     type: "folder",
@@ -34,7 +34,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
   },
   {
     title: "note",
-    color: "bg-yellow-400",
+    color: null,
     column: 1,
     priority: 0,
     type: "note",
@@ -64,3 +64,6 @@ export const linksDataState = newRidgeState<SingleLinkData[]>([
 ]);
 
 export const deletedBookmarkState = newRidgeState<string | null>(null)
+
+
+

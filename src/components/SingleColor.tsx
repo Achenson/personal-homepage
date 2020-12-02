@@ -24,7 +24,7 @@ function SingleColor({ color, bookmarkTitle }: Props): JSX.Element {
       onClick={() => {
         setBookmarksData((previous) =>
           produce(previous, (updated) => {
-            updated[bookmarkIndex].color = `bg-${color}`;
+            updated[bookmarkIndex].color = `${color}`;
           })
         );
       }}

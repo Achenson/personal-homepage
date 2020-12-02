@@ -8,6 +8,8 @@ import {
 } from "../state/bookmarksAndLinks";
 import { produce } from "immer";
 
+import { columnsColorsState } from "../state/colorsState";
+
 interface Props {}
 
 function Grid({}: Props): JSX.Element {
@@ -43,8 +45,7 @@ function Grid({}: Props): JSX.Element {
               column: 1,
               priority: 1,
               type: "folder",
-              noteInput: null
-
+              noteInput: null,
             });
           })
         );
@@ -53,7 +54,7 @@ function Grid({}: Props): JSX.Element {
 
     // deleting a bookmark if there is no tags with the same name in links
     bookmarksData.forEach((obj, i) => {
-      if (linksDataTags.indexOf(obj.title) === -1 && obj.type === "folder" ) {
+      if (linksDataTags.indexOf(obj.title) === -1 && obj.type === "folder") {
         setBookmarksData((previous) =>
           produce(previous, (updated) => {
             updated.splice(i, 1);
@@ -61,15 +62,13 @@ function Grid({}: Props): JSX.Element {
         );
       }
     });
-
-  
-
-
   }, [bookmarksData, setBookmarksData, linksData, deletedBookmark]);
+
+  const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4">
-      <div className="bg-yellow-200">
+      <div className={`bg-${columnsColorsData.column1}`}>
         {bookmarksData
           .filter((el) => el.column === 1)
           .sort((a, b) => a.priority - b.priority)
@@ -85,7 +84,7 @@ function Grid({}: Props): JSX.Element {
             );
           })}
       </div>
-      <div className="hidden sm:block bg-orange-200">
+      <div className={`hidden sm:block bg-${columnsColorsData.column2}`}>
         {bookmarksData
           .filter((el) => el.column === 2)
           .sort((a, b) => a.priority - b.priority)
@@ -101,8 +100,8 @@ function Grid({}: Props): JSX.Element {
             );
           })}
       </div>
-      <div className="hidden md:block bg-red-200">3</div>
-      <div className="hidden lg:block bg-green-200">4</div>
+      <div className={`hidden sm:block bg-${columnsColorsData.column3}`}>3</div>
+      <div className={`hidden sm:block bg-${columnsColorsData.column4}`}>4</div>
     </div>
   );
 }
