@@ -87,3 +87,4 @@ DONE 24. bookmark: almost same function for icons & text color, unify DONE
 32. colors placement in default color settings
 33. change light gray to white on some background in Folders
 34. change folders/notes shadows on darker backgrounds
+35. default color settings should be working only if new folder/note is being added?
