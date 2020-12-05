@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import DefaultColorsToChoose from "./DefaultColorsToChoose";
+import SingleColumnsColor from "./SingleColumnsColor";
 
 import { noteColorState } from "../state/colorsState";
 import { folderColorState } from "../state/colorsState";
@@ -13,7 +14,13 @@ interface Props {
 
 function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
   const [defaultColorsFor, setDefaultColorsFor] = useState<
-    "folders" | "notes" | "columns" | "unselected"
+    | "folders"
+    | "notes"
+    | "column_1"
+    | "column_2"
+    | "column_3"
+    | "column_4"
+    | "unselected"
   >("unselected");
 
   const [colorsToChooseVis, setColorsToChooseVis] = useState<boolean>(false);
@@ -21,6 +28,12 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
   const [foldersSelected, setFoldersSelected] = useState<boolean>(false);
   const [notesSelected, setNotesSelected] = useState<boolean>(false);
   const [columnsSelected, setColumnsSelected] = useState<boolean>(false);
+  const [columnSelected, setColumnSelected] = useState<number | null>(null);
+
+  const [column_1_selected, setColumn_1_selected] = useState<boolean>(false);
+  const [column_2_selected, setColumn_2_selected] = useState<boolean>(false);
+  const [column_3_selected, setColumn_3_selected] = useState<boolean>(false);
+  const [column_4_selected, setColumn_4_selected] = useState<boolean>(false);
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
@@ -37,7 +50,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
           style={{ width: "350px", height: "200px" }}
         >
           <div className="pl-2 pr-4">
-            <p className="text-center">Default color settings</p>
+            <p className="text-center">Color settings</p>
             <div className="flex justify-around items-center mb-2 mt-2">
               <p
                 className="w-32"
@@ -47,7 +60,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                   }
                 }}
               >
-                Folders
+                Folder default
               </p>
               <div
                 onClick={() => {
@@ -70,7 +83,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
               ></div>
             </div>
             <div className="flex justify-around items-center mb-2 mt-2">
-              <p className="w-32">Notes</p>
+              <p className="w-32">Notes default</p>
               <div
                 onClick={() => {
                   setDefaultColorsFor("notes");
@@ -91,29 +104,73 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                 } border-black hover:border-gray-500`}
               ></div>
             </div>
+
             <div className="flex justify-around items-center mb-2 mt-2">
               <p className="w-32">Columns</p>
-              <div
-                onClick={() => {
-                  setDefaultColorsFor("columns");
+              <div className="flex">
+                {/* <div
+                  onClick={() => {
+                    setDefaultColorsFor("columns");
 
-                  if (defaultColorsFor === "columns") {
-                    setColorsToChooseVis((b) => !b);
-                  } else {
-                    setColorsToChooseVis(true);
-                  }
+                    if (defaultColorsFor === "columns") {
+                      setColorsToChooseVis((b) => !b);
+                    } else {
+                      setColorsToChooseVis(true);
+                    }
 
-                  setFoldersSelected(false);
-                  setNotesSelected(false);
+                    setFoldersSelected(false);
+                    setNotesSelected(false);
 
-                  setColumnsSelected((b) => !b);
-                }}
-                className={`h-4 w-8 bg-${
-                  columnsColorData.column1
-                } cursor-pointer ${
-                  columnsSelected ? "border-2" : "border"
-                } border-black hover:border-gray-500`}
-              ></div>
+                    setColumnsSelected((b) => !b);
+                  }}
+                  className={`h-4 w-8 bg-${
+                    columnsColorData.column1
+                  } cursor-pointer ${
+                    columnsSelected ? "border-2" : "border"
+                  } border-black hover:border-gray-500`}
+                ></div> */}
+
+                <SingleColumnsColor
+                  colNumber={1}
+                  colSelected={false}
+                  defaultColorsFor={defaultColorsFor}
+                  setColorsToChooseVis={setColorsToChooseVis}
+                  setColumnSelected={setColumnSelected}
+                  setDefaultColorsFor={setDefaultColorsFor}
+                  setFoldersSelected={setFoldersSelected}
+                  setNotesSelected={setNotesSelected}
+                />
+                <SingleColumnsColor
+                  colNumber={2}
+                  colSelected={false}
+                  defaultColorsFor={defaultColorsFor}
+                  setColorsToChooseVis={setColorsToChooseVis}
+                  setColumnSelected={setColumnSelected}
+                  setDefaultColorsFor={setDefaultColorsFor}
+                  setFoldersSelected={setFoldersSelected}
+                  setNotesSelected={setNotesSelected}
+                />
+                <SingleColumnsColor
+                  colNumber={3}
+                  colSelected={false}
+                  defaultColorsFor={defaultColorsFor}
+                  setColorsToChooseVis={setColorsToChooseVis}
+                  setColumnSelected={setColumnSelected}
+                  setDefaultColorsFor={setDefaultColorsFor}
+                  setFoldersSelected={setFoldersSelected}
+                  setNotesSelected={setNotesSelected}
+                />
+                <SingleColumnsColor
+                  colNumber={4}
+                  colSelected={false}
+                  defaultColorsFor={defaultColorsFor}
+                  setColorsToChooseVis={setColorsToChooseVis}
+                  setColumnSelected={setColumnSelected}
+                  setDefaultColorsFor={setDefaultColorsFor}
+                  setFoldersSelected={setFoldersSelected}
+                  setNotesSelected={setNotesSelected}
+                />
+              </div>
             </div>
 
             <p className="text-center mt-5">
@@ -142,7 +199,14 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
           className="absolute"
           style={{
             top: "200px",
-            left: `${defaultColorsFor === "columns" ? "93px" : "157px"}`,
+            left: `${
+              defaultColorsFor === "column_1" ||
+              "column_2" ||
+              "column_3" ||
+              "column_4"
+                ? "93px"
+                : "157px"
+            }`,
           }}
         >
           {colorsToChooseVis ? (

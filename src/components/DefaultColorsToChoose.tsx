@@ -6,7 +6,13 @@ interface Props {
   // setIconsVisibility: (value: React.SetStateAction<boolean>) => void;
 
   // bookmarkTitle: string;
-  defaultColorsFor: "folders" | "notes" | "columns" | "unselected";
+  defaultColorsFor:   | "folders"
+  | "notes"
+  | "column_1"
+  | "column_2"
+  | "column_3"
+  | "column_4"
+  | "unselected";
 }
 
 const colors: string[][] = [
@@ -201,7 +207,7 @@ function ColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
       //   setIconsVisibility(false)
       // }}
     >
-      {defaultColorsFor === "columns"
+      {defaultColorsFor === "column_1" || defaultColorsFor === "column_2" || defaultColorsFor === "column_3" || defaultColorsFor === "column_4"
         ? mappingColors(colors2)
         : mappingColors(colors)}
     </div>
