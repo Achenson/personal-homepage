@@ -108,7 +108,9 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
 
                   setColumnsSelected((b) => !b);
                 }}
-                className={`h-4 w-8 bg-${columnsColorData.column1} cursor-pointer ${
+                className={`h-4 w-8 bg-${
+                  columnsColorData.column1
+                } cursor-pointer ${
                   columnsSelected ? "border-2" : "border"
                 } border-black hover:border-gray-500`}
               ></div>
@@ -116,7 +118,19 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
 
             <p className="text-center mt-5">
               {" "}
-              <span className="text-red-600 hover:underline cursor-pointer">
+              <span
+                className="text-red-600 hover:underline cursor-pointer"
+                onClick={() => {
+                  setFolderColorData("teal-500");
+                  setNoteColorData("yellow-500");
+                  setColumnsColorData({
+                    column1: "yellow-200",
+                    column2: "orange-200",
+                    column3: "red-200",
+                    column4: "green-200",
+                  });
+                }}
+              >
                 RESET
               </span>{" "}
               all colours to default
