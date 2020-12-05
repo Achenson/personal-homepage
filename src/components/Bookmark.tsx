@@ -64,6 +64,12 @@ function Bookmark({
   });
 
   const [crossVis, setCrossVis] = useState<boolean>(true);
+  
+  console.log(bookmarkTitle);
+  
+  console.log(bookmarkColor);
+
+
 
   let bookmarkIndex: number;
 
@@ -72,10 +78,10 @@ function Bookmark({
       bookmarkIndex = i;
     }
   });
-
+  
   const [folderColorData, setFolderColorData] = folderColorState.use()
   const [noteColorData, setNoteColorData] = noteColorState.use();
-
+  
 
   let finalBookmarkColor: string = ""
 
@@ -155,6 +161,8 @@ function Bookmark({
 
     return "text-black";
   }
+
+  
 
   return (
     <div className="relative mb-6" >

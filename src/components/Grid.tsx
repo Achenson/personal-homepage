@@ -33,7 +33,7 @@ function Grid({}: Props): JSX.Element {
       bookmarksDataTitles.push(obj.title);
     });
 
-    // adding a bookmark(folder) if previously non-existing tag was added to a link
+    // adding a bookmark(folder) if previously non-existing tag was added to a link / if new bookmark is being added
     linksDataTags.forEach((el) => {
       // no adding bookmark if it was just set up for deletion
       if (bookmarksDataTitles.indexOf(el) === -1 && deletedBookmark !== el) {
@@ -41,7 +41,7 @@ function Grid({}: Props): JSX.Element {
           produce(previous, (updated) => {
             updated.push({
               title: el,
-              color: "bg-teal-400",
+              color: null,
               column: 1,
               priority: 1,
               type: "folder",

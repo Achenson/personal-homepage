@@ -228,7 +228,7 @@ function NewBookmark_UpperUI({
                         updated.push({
                           title: bookmarkTitleInput,
                           column: bookmarkColumnInput,
-                          color: "bg-teal-400",
+                          color: null,
                           priority: 0,
                           type: "note",
                           noteInput: textAreaValue,
@@ -243,7 +243,7 @@ function NewBookmark_UpperUI({
                         updated.push({
                           title: bookmarkTitleInput,
                           column: bookmarkColumnInput,
-                          color: "bg-teal-400",
+                          color: null,
                           priority: 0,
                           type: "folder",
                           noteInput: null,
