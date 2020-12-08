@@ -40,7 +40,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
       arrOfColumns.push(i);
     }
 
-  return arrOfColumns.map((el, index) => {
+    return arrOfColumns.map((el, index) => {
       return (
         <SingleColumnsColor
           colNumber={el}
@@ -65,92 +65,88 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
     >
       <div className="md:mb-40 relative">
         <div
-          className="bg-gray-200 pb-3 pt-6 border-2 border-teal-500 rounded-sm"
+          className="bg-gray-200 pb-3 pt-6 border-2 px-4 border-teal-500 rounded-sm"
           style={{ width: "350px", height: "200px" }}
         >
-          <div className="pl-2 pr-4">
-            <p className="text-center">Color settings</p>
-            <div className="flex justify-around items-center mb-2 mt-2">
-              <p
-                className="w-32"
-                onClick={() => {
-                  if (colorsVis) {
-                    setColorsVis(false);
-                  }
-                }}
-              >
-                Folder default
-              </p>
-              <div
-                onClick={() => {
-                  setDefaultColorsFor("folders");
-
-                  if (defaultColorsFor === "folders") {
-                    setColorsToChooseVis((b) => !b);
-                  } else {
-                    setColorsToChooseVis(true);
-                  }
-
-                  setNotesSelected(false);
-                  setColumnSelected(null);
-
-                  setFoldersSelected((b) => !b);
-                }}
-                className={`h-4 w-8 bg-${folderColorData} cursor-pointer ${
-                  foldersSelected ? "border-2" : "border"
-                } border-black hover:border-gray-500`}
-              ></div>
-            </div>
-            <div className="flex justify-around items-center mb-2 mt-2">
-              <p className="w-32">Notes default</p>
-              <div
-                onClick={() => {
-                  setDefaultColorsFor("notes");
-
-                  if (defaultColorsFor === "notes") {
-                    setColorsToChooseVis((b) => !b);
-                  } else {
-                    setColorsToChooseVis(true);
-                  }
-
-                  setFoldersSelected(false);
-                  setColumnSelected(null);
-
-                  setNotesSelected((b) => !b);
-                }}
-                className={`h-4 w-8 bg-${noteColorData} cursor-pointer ${
-                  notesSelected ? "border-2" : "border"
-                } border-black hover:border-gray-500`}
-              ></div>
-            </div>
-
-            <div className="flex justify-around items-center mb-2 mt-2">
-              <p className="w-32">Columns</p>
-              <div className="flex">
-                {columnsRendering(4)}
-              </div>
-            </div>
-
-            <p className="text-center mt-5">
-              {" "}
-              <span
-                className="text-red-600 hover:underline cursor-pointer"
-                onClick={() => {
-                  setFolderColorData("teal-500");
-                  setNoteColorData("yellow-500");
-                  setColumnsColorData({
-                    column_1: "yellow-200",
-                    column_2: "orange-200",
-                    column_3: "red-200",
-                    column_4: "green-200",
-                  });
-                }}
-              >
-                RESET
-              </span>{" "}
-              all colours to default
+          <p className="text-center">Color settings</p>
+          <div className="flex justify-between items-center mb-2 mt-2">
+            <p
+              className="w-32"
+              onClick={() => {
+                if (colorsVis) {
+                  setColorsVis(false);
+                }
+              }}
+            >
+              Folder default
             </p>
+            <div
+              onClick={() => {
+                setDefaultColorsFor("folders");
+
+                if (defaultColorsFor === "folders") {
+                  setColorsToChooseVis((b) => !b);
+                } else {
+                  setColorsToChooseVis(true);
+                }
+
+                setNotesSelected(false);
+                setColumnSelected(null);
+
+                setFoldersSelected((b) => !b);
+              }}
+              className={`h-4 w-8 bg-${folderColorData} cursor-pointer ${
+                foldersSelected ? "border-2" : "border"
+              } border-black hover:border-gray-500`}
+            ></div>
           </div>
+          <div className="flex justify-between items-center mb-2 mt-2">
+            <p className="w-32">Notes default</p>
+            <div
+              onClick={() => {
+                setDefaultColorsFor("notes");
+
+                if (defaultColorsFor === "notes") {
+                  setColorsToChooseVis((b) => !b);
+                } else {
+                  setColorsToChooseVis(true);
+                }
+
+                setFoldersSelected(false);
+                setColumnSelected(null);
+
+                setNotesSelected((b) => !b);
+              }}
+              className={`h-4 w-8 bg-${noteColorData} cursor-pointer ${
+                notesSelected ? "border-2" : "border"
+              } border-black hover:border-gray-500`}
+            ></div>
+          </div>
+
+          <div className="flex justify-between items-center mb-2 mt-2">
+            <p className="w-32">Columns</p>
+            <div className="flex">{columnsRendering(4)}</div>
+          </div>
+
+          <p className="text-center mt-5">
+            {" "}
+            <span
+              className="text-red-600 hover:underline cursor-pointer"
+              onClick={() => {
+                setFolderColorData("teal-500");
+                setNoteColorData("yellow-500");
+                setColumnsColorData({
+                  column_1: "yellow-200",
+                  column_2: "orange-200",
+                  column_3: "red-200",
+                  column_4: "green-200",
+                });
+              }}
+            >
+              RESET
+            </span>{" "}
+            all colours to default
+          </p>
         </div>
 
         <div
