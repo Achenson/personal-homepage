@@ -30,14 +30,33 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
   // const [columnsSelected, setColumnsSelected] = useState<boolean>(false);
   const [columnSelected, setColumnSelected] = useState<number | null>(null);
 
-  // const [column_1_selected, setColumn_1_selected] = useState<boolean>(false);
-  // const [column_2_selected, setColumn_2_selected] = useState<boolean>(false);
-  // const [column_3_selected, setColumn_3_selected] = useState<boolean>(false);
-  // const [column_4_selected, setColumn_4_selected] = useState<boolean>(false);
-
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
   const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
+
+  function columnsRendering(howMany: number) {
+    let arrOfColumns = [];
+    for (let i = 1; i <= howMany; i++) {
+      arrOfColumns.push(i);
+    }
+
+  return arrOfColumns.map((el, index) => {
+      return (
+        <SingleColumnsColor
+          colNumber={el}
+          // colSelected={false}
+          defaultColorsFor={defaultColorsFor}
+          setColorsToChooseVis={setColorsToChooseVis}
+          columnSelected={columnSelected}
+          setColumnSelected={setColumnSelected}
+          setDefaultColorsFor={setDefaultColorsFor}
+          setFoldersSelected={setFoldersSelected}
+          setNotesSelected={setNotesSelected}
+          key={index}
+        />
+      );
+    });
+  }
 
   return (
     <div
@@ -108,74 +127,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
             <div className="flex justify-around items-center mb-2 mt-2">
               <p className="w-32">Columns</p>
               <div className="flex">
-                {/* <div
-                  onClick={() => {
-                    setDefaultColorsFor("columns");
-
-                    if (defaultColorsFor === "columns") {
-                      setColorsToChooseVis((b) => !b);
-                    } else {
-                      setColorsToChooseVis(true);
-                    }
-
-                    setFoldersSelected(false);
-                    setNotesSelected(false);
-
-                    setColumnsSelected((b) => !b);
-                  }}
-                  className={`h-4 w-8 bg-${
-                    columnsColorData.column1
-                  } cursor-pointer ${
-                    columnsSelected ? "border-2" : "border"
-                  } border-black hover:border-gray-500`}
-                ></div> */}
-
-                <SingleColumnsColor
-                  colNumber={1}
-                  // colSelected={false}
-                  defaultColorsFor={defaultColorsFor}
-                  setColorsToChooseVis={setColorsToChooseVis}
-                  columnSelected={columnSelected}
-                  setColumnSelected={setColumnSelected}
-                  setDefaultColorsFor={setDefaultColorsFor}
-                  setFoldersSelected={setFoldersSelected}
-                  setNotesSelected={setNotesSelected}
-                />
-                <SingleColumnsColor
-                  colNumber={2}
-                  // colSelected={false}
-
-                  defaultColorsFor={defaultColorsFor}
-                  setColorsToChooseVis={setColorsToChooseVis}
-
-                  columnSelected={columnSelected}
-                  setColumnSelected={setColumnSelected}
-                  setDefaultColorsFor={setDefaultColorsFor}
-                  setFoldersSelected={setFoldersSelected}
-                  setNotesSelected={setNotesSelected}
-                />
-                <SingleColumnsColor
-                  colNumber={3}
-                  // colSelected={false}
-                  defaultColorsFor={defaultColorsFor}
-                  setColorsToChooseVis={setColorsToChooseVis}
-                  columnSelected={columnSelected}
-                  setColumnSelected={setColumnSelected}
-                  setDefaultColorsFor={setDefaultColorsFor}
-                  setFoldersSelected={setFoldersSelected}
-                  setNotesSelected={setNotesSelected}
-                />
-                <SingleColumnsColor
-                  colNumber={4}
-                  // colSelected={false}
-                  defaultColorsFor={defaultColorsFor}
-                  setColorsToChooseVis={setColorsToChooseVis}
-                  columnSelected={columnSelected}
-                  setColumnSelected={setColumnSelected}
-                  setDefaultColorsFor={setDefaultColorsFor}
-                  setFoldersSelected={setFoldersSelected}
-                  setNotesSelected={setNotesSelected}
-                />
+                {columnsRendering(4)}
               </div>
             </div>
 
