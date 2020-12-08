@@ -68,7 +68,7 @@ function Grid({}: Props): JSX.Element {
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4">
-      <div className={`bg-${columnsColorsData.column1}`}>
+      <div className={`bg-${columnsColorsData.column_1}`}>
         {bookmarksData
           .filter((el) => el.column === 1)
           .sort((a, b) => a.priority - b.priority)
@@ -84,7 +84,7 @@ function Grid({}: Props): JSX.Element {
             );
           })}
       </div>
-      <div className={`hidden sm:block bg-${columnsColorsData.column2}`}>
+      <div className={`hidden sm:block bg-${columnsColorsData.column_2}`}>
         {bookmarksData
           .filter((el) => el.column === 2)
           .sort((a, b) => a.priority - b.priority)
@@ -100,8 +100,8 @@ function Grid({}: Props): JSX.Element {
             );
           })}
       </div>
-      <div className={`hidden sm:block bg-${columnsColorsData.column3}`}>3</div>
-      <div className={`hidden sm:block bg-${columnsColorsData.column4}`}>4</div>
+      <div className={`hidden sm:block bg-${columnsColorsData.column_3}`}>3</div>
+      <div className={`hidden sm:block bg-${columnsColorsData.column_4}`}>4</div>
     </div>
   );
 }

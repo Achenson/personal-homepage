@@ -4,15 +4,15 @@ export const folderColorState = newRidgeState<string>("teal-500");
 export const noteColorState = newRidgeState<string>("yellow-500");
 
 interface ColumnsColors {
-  column1: string;
-  column2: string;
-  column3: string;
-  column4: string;
+  column_1: string;
+  column_2: string;
+  column_3: string;
+  column_4: string;
 }
 
 export const columnsColorsState = newRidgeState<ColumnsColors>({
-  column1: "yellow-200",
-  column2: "orange-200",
-  column3: "red-200",
-  column4: "green-200",
+  column_1: "yellow-200",
+  column_2: "orange-200",
+  column_3: "red-200",
+  column_4: "green-200",
 });

@@ -27,13 +27,13 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
 
   const [foldersSelected, setFoldersSelected] = useState<boolean>(false);
   const [notesSelected, setNotesSelected] = useState<boolean>(false);
-  const [columnsSelected, setColumnsSelected] = useState<boolean>(false);
+  // const [columnsSelected, setColumnsSelected] = useState<boolean>(false);
   const [columnSelected, setColumnSelected] = useState<number | null>(null);
 
-  const [column_1_selected, setColumn_1_selected] = useState<boolean>(false);
-  const [column_2_selected, setColumn_2_selected] = useState<boolean>(false);
-  const [column_3_selected, setColumn_3_selected] = useState<boolean>(false);
-  const [column_4_selected, setColumn_4_selected] = useState<boolean>(false);
+  // const [column_1_selected, setColumn_1_selected] = useState<boolean>(false);
+  // const [column_2_selected, setColumn_2_selected] = useState<boolean>(false);
+  // const [column_3_selected, setColumn_3_selected] = useState<boolean>(false);
+  // const [column_4_selected, setColumn_4_selected] = useState<boolean>(false);
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
@@ -73,7 +73,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                   }
 
                   setNotesSelected(false);
-                  setColumnsSelected(false);
+                  setColumnSelected(null);
 
                   setFoldersSelected((b) => !b);
                 }}
@@ -95,7 +95,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                   }
 
                   setFoldersSelected(false);
-                  setColumnsSelected(false);
+                  setColumnSelected(null);
 
                   setNotesSelected((b) => !b);
                 }}
@@ -132,9 +132,10 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
 
                 <SingleColumnsColor
                   colNumber={1}
-                  colSelected={false}
+                  // colSelected={false}
                   defaultColorsFor={defaultColorsFor}
                   setColorsToChooseVis={setColorsToChooseVis}
+                  columnSelected={columnSelected}
                   setColumnSelected={setColumnSelected}
                   setDefaultColorsFor={setDefaultColorsFor}
                   setFoldersSelected={setFoldersSelected}
@@ -142,9 +143,12 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                 />
                 <SingleColumnsColor
                   colNumber={2}
-                  colSelected={false}
+                  // colSelected={false}
+
                   defaultColorsFor={defaultColorsFor}
                   setColorsToChooseVis={setColorsToChooseVis}
+
+                  columnSelected={columnSelected}
                   setColumnSelected={setColumnSelected}
                   setDefaultColorsFor={setDefaultColorsFor}
                   setFoldersSelected={setFoldersSelected}
@@ -152,9 +156,10 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                 />
                 <SingleColumnsColor
                   colNumber={3}
-                  colSelected={false}
+                  // colSelected={false}
                   defaultColorsFor={defaultColorsFor}
                   setColorsToChooseVis={setColorsToChooseVis}
+                  columnSelected={columnSelected}
                   setColumnSelected={setColumnSelected}
                   setDefaultColorsFor={setDefaultColorsFor}
                   setFoldersSelected={setFoldersSelected}
@@ -162,9 +167,10 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                 />
                 <SingleColumnsColor
                   colNumber={4}
-                  colSelected={false}
+                  // colSelected={false}
                   defaultColorsFor={defaultColorsFor}
                   setColorsToChooseVis={setColorsToChooseVis}
+                  columnSelected={columnSelected}
                   setColumnSelected={setColumnSelected}
                   setDefaultColorsFor={setDefaultColorsFor}
                   setFoldersSelected={setFoldersSelected}
@@ -181,10 +187,10 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                   setFolderColorData("teal-500");
                   setNoteColorData("yellow-500");
                   setColumnsColorData({
-                    column1: "yellow-200",
-                    column2: "orange-200",
-                    column3: "red-200",
-                    column4: "green-200",
+                    column_1: "yellow-200",
+                    column_2: "orange-200",
+                    column_3: "red-200",
+                    column_4: "green-200",
                   });
                 }}
               >

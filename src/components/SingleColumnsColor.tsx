@@ -3,7 +3,6 @@ import { columnsColorsState } from "../state/colorsState";
 
 interface Props {
   colNumber: number;
-  colSelected: boolean;
   setNotesSelected: React.Dispatch<React.SetStateAction<boolean>>;
   setFoldersSelected: React.Dispatch<React.SetStateAction<boolean>>;
   defaultColorsFor:
@@ -26,31 +25,32 @@ interface Props {
     >
   >;
   setColorsToChooseVis: React.Dispatch<React.SetStateAction<boolean>>;
+  columnSelected: number | null;
   setColumnSelected: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-function Test({
+function SingleColumnsColor({
   colNumber,
-  colSelected,
   setNotesSelected,
   setFoldersSelected,
   defaultColorsFor,
   setDefaultColorsFor,
   setColorsToChooseVis,
-  setColumnSelected
+  columnSelected,
+  setColumnSelected,
 }: Props): JSX.Element {
   const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
   function columnsColor(colNumber: number) {
     switch (colNumber) {
       case 1:
-        return columnsColorData.column1;
+        return columnsColorData.column_1;
       case 2:
-        return columnsColorData.column2;
+        return columnsColorData.column_2;
       case 3:
-        return columnsColorData.column2;
+        return columnsColorData.column_3;
       case 4:
-        return columnsColorData.column2;
+        return columnsColorData.column_4;
     }
   }
 
@@ -70,12 +70,14 @@ function Test({
 
         // setColumnsSelected((b) => !b);
         setColumnSelected(colNumber);
+
+        
       }}
       className={`h-4 w-8 bg-${columnsColor(colNumber)} cursor-pointer ${
-        colSelected ? "border-2" : "border"
+        columnSelected === colNumber ? "border-2" : "border"
       } border-black hover:border-gray-500`}
     ></div>
   );
 }
 
-export default Test;
+export default SingleColumnsColor;

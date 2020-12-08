@@ -9,14 +9,13 @@ interface Props {
   color: string;
   // bookmarkTitle: string;
   defaultColorsFor:
-  | "folders"
-  | "notes"
-  | "column_1"
-  | "column_2"
-  | "column_3"
-  | "column_4"
-  | "unselected";
-  
+    | "folders"
+    | "notes"
+    | "column_1"
+    | "column_2"
+    | "column_3"
+    | "column_4"
+    | "unselected";
 }
 
 function SingleColor({ color, defaultColorsFor }: Props): JSX.Element {
@@ -38,10 +37,6 @@ function SingleColor({ color, defaultColorsFor }: Props): JSX.Element {
     <div
       className={`h-4 w-8 bg-${color} cursor-pointer border border-black hover:border-gray-500`}
       onClick={() => {
-
-
-
-        
         if (defaultColorsFor === "folders") {
           setFolderColorData(color);
         }
@@ -50,16 +45,21 @@ function SingleColor({ color, defaultColorsFor }: Props): JSX.Element {
           setNoteColorData(color);
         }
 
-        if (defaultColorsFor === "column_1"
-        || "column_2"
-        || "column_3"
-        || "column_4") {
+        if (
+          defaultColorsFor === "column_1" ||
+          "column_2" ||
+          "column_3" ||
+          "column_4"
+        ) {
           setColumnsColorsData((previous) =>
             produce(previous, (updated) => {
-              updated.column1 = color;
-              updated.column2 = color;
-              updated.column3 = color;
-              updated.column4 = color;
+              updated[
+                defaultColorsFor as
+                  | "column_1"
+                  | "column_2"
+                  | "column_3"
+                  | "column_4"
+              ] = color;
             })
           );
         }
