@@ -5,9 +5,9 @@ import { produce } from "immer";
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
 import { linksDataState } from "../state/bookmarksAndLinks";
 import { deletedBookmarkState } from "../state/bookmarksAndLinks";
-import {noteColorState} from "../state/colorsState";
-import {folderColorState} from "../state/colorsState";
-
+import { noteColorState } from "../state/colorsState";
+import { folderColorState } from "../state/colorsState";
+import { columnsColorsState } from "../state/colorsState";
 
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
 import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
@@ -64,41 +64,41 @@ function Bookmark({
   });
 
   const [crossVis, setCrossVis] = useState<boolean>(true);
-  
-  console.log(bookmarkTitle);
-  
-  console.log(bookmarkColor);
-
-
 
   let bookmarkIndex: number;
+
+  // for conditional shadow rendering
+  let bookmarkColumn: number;
 
   bookmarksData.forEach((obj, i) => {
     if (obj.title === bookmarkTitle) {
       bookmarkIndex = i;
+      bookmarkColumn = obj.column;
     }
   });
-  
-  const [folderColorData, setFolderColorData] = folderColorState.use()
+
+  const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
-  
+  const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
 
-  let finalBookmarkColor: string = ""
+  let finalBookmarkColor: string = "";
 
-  if(bookmarkColor) {
+  if (bookmarkColor) {
     finalBookmarkColor = bookmarkColor;
   } else {
-    
     if (bookmarkType === "folder") {
       finalBookmarkColor = folderColorData;
     }
 
-    if (bookmarkType ==="note") {
-      finalBookmarkColor = noteColorData
+    if (bookmarkType === "note") {
+      finalBookmarkColor = noteColorData;
     }
   }
 
-  function textOrIconColor(finalBookmarkColor: string, textOrIcon: "text" | "icon") {
+  function textOrIconColor(
+    finalBookmarkColor: string,
+    textOrIcon: "text" | "icon"
+  ) {
     // exceptions
     let colorsForLightText: string[] = [
       "bg-black",
@@ -125,8 +125,7 @@ function Bookmark({
       return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
     }
 
-      return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
-    
+    return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
   }
 
   function hoverText(finalBookmarkColor: string) {
@@ -143,17 +142,18 @@ function Bookmark({
       "bg-blue-700",
       "bg-teal-700",
       "bg-green-700",
-
     ];
 
     let colorsForLightHoverAlt: string[] = [
-      "bg-pink-800", "bg-purple-700", "bg-orange-800", "bg-red-800"
-    ]
+      "bg-pink-800",
+      "bg-purple-700",
+      "bg-orange-800",
+      "bg-red-800",
+    ];
 
     if (colorsForLightHoverAlt.indexOf(finalBookmarkColor) > -1) {
       return "text-yellow-400";
     }
-
 
     if (colorsForLightHover.indexOf(finalBookmarkColor) > -1) {
       return "text-orange-500";
@@ -162,17 +162,43 @@ function Bookmark({
     return "text-black";
   }
 
-  
+  function boxShadowCalc() {
+    let bookmarkColumnColor: string = "";
+
+    switch (bookmarkColumn) {
+      case 1:
+        bookmarkColumnColor = columnsColorsData.column_1;
+      case 2:
+        bookmarkColumnColor = columnsColorsData.column_2;
+      case 3:
+        bookmarkColumnColor = columnsColorsData.column_3;
+      case 4:
+        bookmarkColumnColor = columnsColorsData.column_4;
+      default:
+        bookmarkColumnColor = columnsColorsData.column_1;
+    }
+
+    // if ()
+    let regexForColors = /[345678]/;
+
+    if (regexForColors.test(bookmarkColumnColor)) {
+      // return { boxShadow: "0px -1px  black" };
+      return { boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)" };
+    }
+    return { boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)" };
+  }
 
   return (
-    <div className="relative mb-6" >
+    <div className="relative mb-6">
       <div
-        className={`pl-0 h-8 px-2 pt-px bg-${bookmarkColor ? bookmarkColor : finalBookmarkColor} ${textOrIconColor(
+        className={`pl-0 h-8 px-2 pt-px bg-${
+          bookmarkColor ? bookmarkColor : finalBookmarkColor
+        } ${textOrIconColor(
           finalBookmarkColor,
           "text"
-        )} border border-gray-400 flex justify-between`}
-        style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)"}}
-
+        )} border border-gray-800 flex justify-between`}
+        // style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)"}}
+        style={boxShadowCalc()}
         onMouseEnter={() => {
           setIconsVisibility(true);
         }}
@@ -221,7 +247,9 @@ function Bookmark({
 
           {bookmarkType === "folder" ? (
             <PlusSVG
-              className={`h-8 hover:${hoverText(finalBookmarkColor)} cursor-pointer`}
+              className={`h-8 hover:${hoverText(
+                finalBookmarkColor
+              )} cursor-pointer`}
               style={{ marginTop: "-6px" }}
               onClick={() => {
                 setNewLinkVis((b) => !b);

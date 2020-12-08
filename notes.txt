@@ -90,3 +90,4 @@ DONE 24. bookmark: almost same function for icons & text color, unify DONE
 35. default color settings should be working only if new folder/note is being added?
 36. diff color for diff columns?
 37. add background color/header column color 
+38. Folders: not wide enough relative to columns?
