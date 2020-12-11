@@ -162,31 +162,31 @@ function Bookmark({
     return "text-black";
   }
 
-  function boxShadowCalc() {
-    let bookmarkColumnColor: string = "";
+  // function boxShadowCalc() {
+  //   let bookmarkColumnColor: string = "";
 
-    switch (bookmarkColumn) {
-      case 1:
-        bookmarkColumnColor = columnsColorsData.column_1;
-      case 2:
-        bookmarkColumnColor = columnsColorsData.column_2;
-      case 3:
-        bookmarkColumnColor = columnsColorsData.column_3;
-      case 4:
-        bookmarkColumnColor = columnsColorsData.column_4;
-      default:
-        bookmarkColumnColor = columnsColorsData.column_1;
-    }
+  //   switch (bookmarkColumn) {
+  //     case 1:
+  //       bookmarkColumnColor = columnsColorsData.column_1;
+  //     case 2:
+  //       bookmarkColumnColor = columnsColorsData.column_2;
+  //     case 3:
+  //       bookmarkColumnColor = columnsColorsData.column_3;
+  //     case 4:
+  //       bookmarkColumnColor = columnsColorsData.column_4;
+  //     default:
+  //       bookmarkColumnColor = columnsColorsData.column_1;
+  //   }
 
-    // if ()
-    let regexForColors = /[345678]/;
+  //   // if ()
+  //   let regexForColors = /[345678]/;
 
-    if (regexForColors.test(bookmarkColumnColor)) {
-      // return { boxShadow: "0px -1px  black" };
-      return { boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)" };
-    }
-    return { boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)" };
-  }
+  //   if (regexForColors.test(bookmarkColumnColor)) {
+  //     // return { boxShadow: "0px -1px  black" };
+  //     return { boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)" };
+  //   }
+  //   return { boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)" };
+  // }
 
   return (
     <div className="relative mb-6">
@@ -196,9 +196,16 @@ function Bookmark({
         } ${textOrIconColor(
           finalBookmarkColor,
           "text"
-        )} border border-gray-800 flex justify-between`}
+          
+          )} border border-t-0 border-r-0 border-l-0 border-gray-700 border-opacity-25 flex justify-between`}
+          style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)"}}
+        
+        // old style
+
+          // )} border border-t-0 border-r-0 border-l-0 border-gray-400 flex justify-between`}
         // style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)"}}
-        style={boxShadowCalc()}
+     
+
         onMouseEnter={() => {
           setIconsVisibility(true);
         }}
