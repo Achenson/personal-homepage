@@ -101,24 +101,25 @@ function Bookmark({
   ) {
     // exceptions
     let colorsForLightText: string[] = [
-      // "bg-black",
-      // "red-500",
+      "black",
+      // "orange-500",
+      "red-500",
       // "teal-500",
       // "teal-500",
-      // "blue-500",
+      "blue-500",
       "indigo-500",
       "purple-500",
-      // "pink-500"
+      "pink-500"
     ];
-    // let colorsForDarkText: string[] = ["bg-yellow-600"];
+    let colorsForDarkText: string[] = ["yellow-600"];
 
     if (colorsForLightText.indexOf(finalBookmarkColor) > -1) {
       return textOrIcon === "text" ? "text-gray-200" : "text-gray-300";
     }
 
-    // if (colorsForDarkText.indexOf(bookmarkColor) > -1) {
-    //   return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
-    // }
+    if (colorsForDarkText.indexOf(finalBookmarkColor) > -1) {
+      return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
+    }
 
     // "default" behaviour
     let regexForColors = /[678]/;
