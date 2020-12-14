@@ -94,3 +94,4 @@ DONE 24. bookmark: almost same function for icons & text color, unify DONE
 39. Folder: abandon darkest colors? btn like styling not visible
 40. Bookmark darkBackground hover
 41. better cancel btn in Colors_UpperUI
+42. changing notes color?
