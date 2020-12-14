@@ -101,20 +101,23 @@ function Bookmark({
   ) {
     // exceptions
     let colorsForLightText: string[] = [
-      "black",
       // "orange-500",
-      "red-500",
       // "teal-500",
-      // "teal-500",
-      "blue-500",
-      "indigo-500",
-      "purple-500",
-      "pink-500"
+      
+      
+      "black",
+      // "red-500",
+                    // "teal-500",
+      // "blue-500",
+      // "indigo-500",
+      // "purple-500",
+      // "pink-500"
     ];
     let colorsForDarkText: string[] = ["yellow-600"];
 
     if (colorsForLightText.indexOf(finalBookmarkColor) > -1) {
       return textOrIcon === "text" ? "text-gray-200" : "text-gray-300";
+      // return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
     }
 
     if (colorsForDarkText.indexOf(finalBookmarkColor) > -1) {
@@ -125,7 +128,9 @@ function Bookmark({
     let regexForColors = /[678]/;
 
     if (regexForColors.test(finalBookmarkColor)) {
-      return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
+      // return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
+      return textOrIcon === "text" ? "text-gray-100" : "text-gray-200";
+     
     }
 
     return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
@@ -229,7 +234,7 @@ function Bookmark({
             }
           }}
         >
-          {bookmarkTitle}
+        <p className=""> {bookmarkTitle}</p> 
         </div>
 
         <div
