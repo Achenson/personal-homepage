@@ -1,4 +1,4 @@
-const colors = require('tailwindcss/colors')
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   purge: [],
@@ -8,11 +8,33 @@ module.exports = {
       colors: {
         blueGray: colors.blueGray,
         warmGray: colors.warmGray,
-        orange: colors.orange,
-        yellow: colors.yellow,
+        orange: {
+          ...colors.orange,
+          440: "#FF6347",
+          444: "#FFA500",
+          660: "#FF4500",
+        },
+        red: {
+          ...colors.red,
+          440: "#E9967A",
+          660: "#FF0000",
+        },
+        blue: {
+          ...colors.blue,
+          770: "#0000FF",
+        },
+        yellow: {
+          ...colors.yellow,
+          330: "#FFFF00",
+          333: "#FFD700",
+        },
         amber: colors.amber,
         lime: colors.lime,
-        green: colors.green,
+        green: {
+          ...colors.green,
+          330: "#9ACD32"
+
+        },
         emerald: colors.emerald,
         teal: colors.teal,
         cyan: colors.cyan,
@@ -21,13 +43,11 @@ module.exports = {
         violet: colors.violet,
         fuchsia: colors.fuchsia,
         rose: colors.rose,
-      }
+      },
     },
   },
   variants: {
-    extend: {
-
-    },
+    extend: {},
   },
   plugins: [],
-}
+};

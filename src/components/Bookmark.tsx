@@ -103,8 +103,8 @@ function Bookmark({
     let colorsForLightText: string[] = [
       // "orange-500",
       // "teal-500",
-      
-      
+      "blueGray-500",
+      "gray-500",
       "black",
       // "red-500",
                     // "teal-500",
@@ -125,7 +125,7 @@ function Bookmark({
     }
 
     // "default" behaviour
-    let regexForColors = /[678]/;
+    let regexForColors = /[6789]/;
 
     if (regexForColors.test(finalBookmarkColor)) {
       // return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
