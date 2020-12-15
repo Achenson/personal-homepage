@@ -13,7 +13,7 @@ module.exports = {
         amber: colors.amber,
         lime: colors.lime,
         green: colors.green,
-        emarald: colors.emerald,
+        emerald: colors.emerald,
         teal: colors.teal,
         cyan: colors.cyan,
         lightBlue: colors.lightBlue,
