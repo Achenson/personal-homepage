@@ -13,7 +13,7 @@ function Main({}: Props): JSX.Element {
 
   const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
   const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
-  const [colorsVis, setColorsVis] = useState<boolean>(true);
+  const [colorsVis, setColorsVis] = useState<boolean>(false);
   const [bookmarkType, setBookmarkType] = useState<"folder" | "note">("folder");
 
   return (
