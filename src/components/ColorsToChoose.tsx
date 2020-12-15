@@ -79,6 +79,15 @@ const colors = [
 
     // "yellow-330",
   ],
+  [
+    "yellow-330",
+    "lime-300",
+    "lime-400",
+    "green-330",
+    "green-400",
+    "green-500",
+  ],
+
 
   [
     "orange-300",
@@ -91,6 +100,7 @@ const colors = [
     // "orange-440",
     // "orange-660",
   ],
+  ["red-440", "orange-440", "orange-660", "red-660", "amber-700", "amber-900"],
   [
     "red-300",
     "red-400",
@@ -210,6 +220,14 @@ const colors = [
   //   "fuchsia-800",
   // ],
   [
+    "lightBlue-400",
+    "lightBlue-600",
+    "lightBlue-700",
+    "blue-770",
+    "violet-600",
+    "violet-700",
+  ],
+  [
     "purple-300",
     // "fuchsia-400",
     "purple-400",
@@ -230,25 +248,10 @@ const colors = [
     "fuchsia-700",
   ],
   // ["white", "white", "white", "white", "white", "white"],
-  [
-    "lightBlue-400",
-    "lightBlue-600",
-    "lightBlue-700",
-    "blue-770",
-    "violet-600",
-    "violet-700",
-  ],
 
-  [
-    "yellow-330",
-    "green-330",
-    "lime-300",
-    "lime-400",
-    "green-400",
-    "green-500",
-  ],
 
-  ["red-440", "orange-440", "orange-660", "red-660", "amber-700", "amber-900"],
+
+  
 ];
 
 // const colorsBackUp = [
