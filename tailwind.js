@@ -6,7 +6,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        blueGray: colors.blueGray,
+        blueGray: {
+        ...colors.blueGray,
+        303: "#CCDADF"
+        },
         warmGray: colors.warmGray,
         orange: {
           ...colors.orange,
@@ -34,7 +37,8 @@ module.exports = {
         lime: colors.lime,
         green: {
           ...colors.green,
-          330: "#9ACD32"
+          330: "#9ACD32",
+          505: "#008000"
 
         },
         emerald: colors.emerald,

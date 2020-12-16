@@ -106,6 +106,7 @@ function Bookmark({
       "blueGray-500",
       "gray-500",
       "black",
+      "green-505"
       // "red-500",
                     // "teal-500",
       // "blue-500",

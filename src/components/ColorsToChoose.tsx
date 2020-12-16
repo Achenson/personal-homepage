@@ -7,65 +7,45 @@ interface Props {
 }
 
 const colors = [
-  // ["gray-300", "gray-400", "gray-500", "gray-600", "gray-700", "gray-800"],
-  // [
-  //   "blueGray-300",
-  //   "blueGray-400",
-  //   "blueGray-500",
-  //   "blueGray-600",
-  //   "blueGray-700",
-  //   "blueGray-800",
+
+
   // ],
   // [
+  //   "warmGray-200",
   //   "warmGray-300",
   //   "warmGray-400",
-  //   "warmGray-500",
-  //   "warmGray-600",
+  //   // "warmGray-500",
+  //   // "warmGray-600",
   //   "warmGray-700",
   //   "warmGray-800",
-
+  //   "warmGray-900",
+  //   //  "gray-500",
+  //   // "black",
   // ],
-  [
-    "warmGray-200",
-    "warmGray-300",
-    "warmGray-400",
-    // "warmGray-500",
-    // "warmGray-600",
-    "warmGray-700",
-    "warmGray-800",
-    "warmGray-900",
-    //  "gray-500",
-    // "black",
-  ],
+
+  // [
+  //   "gray-300",
+  //   "blueGray-300",
+  //   "blueGray-400",
+  //   // "blueGray-500",
+  //   "gray-500",
+  //   "blueGray-600",
+  //   "blueGray-700",
+  //   "gray-800",
+  // ],
 
   [
-    "gray-300",
-    "blueGray-300",
+    "blueGray-303",
+    // "blueGray-300",
     "blueGray-400",
-    // "blueGray-500",
-    // "gray-500",
     "blueGray-600",
-    "blueGray-700",
+    // "blueGray-500",
+    "gray-300",
+    "gray-500",
+    // "gray-500",
+    // "blueGray-700",
     "gray-800",
   ],
-
-  // [
-  //   "yellow-300",
-  //   "yellow-400",
-  //   "yellow-500",
-  //   "yellow-600",
-  //   "yellow-700",
-  //   "yellow-800",
-  // ],
-  // [
-  //   "amber-300",
-  //   "amber-400",
-  //   "amber-500",
-  //   "amber-600",
-  //   "amber-700",
-  //   "amber-800",
-  // ],
-
   [
     "yellow-300",
     "yellow-333",
@@ -81,11 +61,12 @@ const colors = [
   ],
   [
     "yellow-330",
-    "lime-300",
+    // "lime-300",
     "lime-400",
     "green-330",
     "green-400",
     "green-500",
+    "green-505",
   ],
 
 
@@ -100,7 +81,7 @@ const colors = [
     // "orange-440",
     // "orange-660",
   ],
-  ["red-440", "orange-440", "orange-660", "red-660", "amber-700", "amber-900"],
+  [ "red-440","orange-440", "orange-660", "red-660", "amber-700", "amber-900", ],
   [
     "red-300",
     "red-400",
