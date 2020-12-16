@@ -7,8 +7,6 @@ interface Props {
 }
 
 const colors = [
-
-
   // ],
   // [
   //   "warmGray-200",
@@ -48,7 +46,7 @@ const colors = [
   ],
   [
     "yellow-300",
-    "yellow-333",
+    "yellow-330",
     // "amber-300",
     "yellow-400",
     "amber-400",
@@ -60,15 +58,14 @@ const colors = [
     // "yellow-330",
   ],
   [
-    "yellow-330",
+    "yellow-303",
     // "lime-300",
     "lime-400",
-    "green-330",
+    "green-303",
     "green-400",
     "green-500",
     "green-505",
   ],
-
 
   [
     "orange-300",
@@ -81,7 +78,7 @@ const colors = [
     // "orange-440",
     // "orange-660",
   ],
-  [ "red-440","orange-440", "orange-660", "red-660", "amber-700", "amber-900", ],
+  ["red-404", "orange-404", "orange-606", "red-606", "amber-700", "amber-900"],
   [
     "red-300",
     "red-400",
@@ -204,9 +201,9 @@ const colors = [
     "lightBlue-400",
     "lightBlue-600",
     "lightBlue-700",
+    "blue-707",
     "blue-770",
     "blue-777",
-    "blue-707",
     // "violet-600",
     // "violet-700",
   ],
@@ -219,7 +216,7 @@ const colors = [
     "indigo-400",
     "indigo-600",
     "indigo-800",
-  
+
     // "fuchsia-400",
     // "fuchsia-600",
     // "fuchsia-700",
@@ -233,13 +230,8 @@ const colors = [
     "purple-600",
     // "purple-700",
     "purple-800",
-    
   ],
   // ["white", "white", "white", "white", "white", "white"],
-
-
-
-  
 ];
 
 // const colorsBackUp = [

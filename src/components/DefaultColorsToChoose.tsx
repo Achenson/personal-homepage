@@ -62,11 +62,12 @@ const colors: string[][] = [
   ],
   ["pink-300", "pink-400", "pink-500", "pink-600", "pink-700", "pink-800"],
 ];
-
+// colors for columns
 const colors2: string[][] = [
   [
     "white",
-    // "gray-100",
+    "gray-50",
+    "gray-100",
     "gray-200",
     "gray-300",
     "gray-400",
@@ -76,7 +77,7 @@ const colors2: string[][] = [
     "black",
   ],
   [
-    // "yellow-50",
+    "yellow-50",
     "yellow-100",
     "yellow-200",
     "yellow-300",
@@ -87,7 +88,7 @@ const colors2: string[][] = [
     "yellow-800",
   ],
   [
-    // "orange-50",
+    "orange-50",
     "orange-100",
     "orange-200",
     "orange-300",
@@ -98,7 +99,7 @@ const colors2: string[][] = [
     "orange-800",
   ],
   [
-    // "red-50",
+    "red-50",
     "red-100",
     "red-200",
     "red-300",
@@ -109,7 +110,7 @@ const colors2: string[][] = [
     "red-800",
   ],
   [
-    // "green-50",
+    "green-50",
     "green-100",
     "green-200",
     "green-300",
@@ -120,7 +121,7 @@ const colors2: string[][] = [
     "green-800",
   ],
   [
-    // "teal-50",
+    "teal-50",
     "teal-100",
     "teal-200",
     "teal-300",
@@ -131,7 +132,7 @@ const colors2: string[][] = [
     "teal-800",
   ],
   [
-    // "blue-50",
+    "blue-50",
     "blue-100",
     "blue-200",
     "blue-300",
@@ -142,7 +143,7 @@ const colors2: string[][] = [
     "blue-800",
   ],
   [
-    // "indigo-50",
+    "indigo-50",
     "indigo-100",
     "indigo-200",
     "indigo-300",
@@ -153,7 +154,7 @@ const colors2: string[][] = [
     "indigo-800",
   ],
   [
-    // "purple-50",
+    "purple-50",
     "purple-100",
     "purple-200",
     "purple-300",
@@ -164,7 +165,7 @@ const colors2: string[][] = [
     "purple-800",
   ],
   [
-    // "pink-50",
+    "pink-50",
     "pink-100",
     "pink-200",
     "pink-300",

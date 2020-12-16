@@ -13,31 +13,34 @@ module.exports = {
         warmGray: colors.warmGray,
         orange: {
           ...colors.orange,
-          440: "#FF6347",
-          444: "#FFA500",
-          660: "#FF4500",
+          404: "#FF6347",
+          // 444: "#FFA500",
+          606: "#FF4500",
         },
         red: {
           ...colors.red,
-          440: "#E9967A",
-          660: "#FF0000",
+          404: "#E9967A",
+          606: "#FF0000",
         },
         blue: {
           ...colors.blue,
-          770: "#0000FF",
-          777: "#0000CD",
-          707: "#000080"
+          // 1
+          707: "#0000FF", 
+          // 2
+          770: "#0000CD",
+          // 3
+          777: "#000080"
         },
         yellow: {
           ...colors.yellow,
-          330: "#FFFF00",
-          333: "#FFD700",
+          303: "#FFFF00",
+          330: "#FFD700",
         },
         amber: colors.amber,
         lime: colors.lime,
         green: {
           ...colors.green,
-          330: "#9ACD32",
+          303: "#9ACD32",
           505: "#008000"
 
         },
