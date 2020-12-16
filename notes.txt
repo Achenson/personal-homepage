@@ -95,3 +95,6 @@ DONE 24. bookmark: almost same function for icons & text color, unify DONE
 40. Bookmark darkBackground hover
 41. better cancel btn in Colors_UpperUI
 42. changing notes color?
+43. upperUI changing colors -> lower, do not dim the background
+44. upperUI changing colors -> white, semiTransparent, transparent
+45. bug: nothing shortest width: no other columns?
