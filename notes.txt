@@ -63,7 +63,7 @@ DONE 5. ColorsToChoose -> better code DONE
 9. auto-completing tags when adding links
 10. undo link & bookmark delete
 11. move grid logic to Main?
-12. components folders?
+DONE 12. components folders? DONE
 13. useEffect logic in grid -> move to lower components?
 14. newLink -> save & cancel icons not perfectly in the middle
 15. UpperRightMenu on hover, boders for newLink & newBookmark -> default App color?
@@ -81,17 +81,18 @@ DONE 24. bookmark: almost same function for icons & text color, unify DONE
 26. black icont -> not contrastive enough on hover?
 27. auto close bookmark menus when clicking sth else
 28. diff between iGoogle folders and mine
-29. colors for individual columns?
+
 30. colors for UI dep on folder color
+
 31. margin for new item -> always on?
 32. colors placement in default color settings
 33. change light gray to white on some background in Folders
-34. change folders/notes shadows on darker backgrounds
+XXX 34. change folders/notes shadows on darker backgrounds XXX
 35. default color settings should be working only if new folder/note is being added?
-36. diff color for diff columns?
+DONE 36. diff color for diff columns? DONE
 37. add background color/header column color 
 38. Folders: not wide enough relative to columns?
-39. Folder: abandon darkest colors? btn like styling not visible
+DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 40. Bookmark darkBackground hover
 41. better cancel btn in Colors_UpperUI
 42. changing notes color?

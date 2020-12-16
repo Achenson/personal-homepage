@@ -1,5 +1,5 @@
 import React from "react";
-import { columnsColorsState } from "../state/colorsState";
+import { columnsColorsState } from "../../state/colorsState";
 
 interface Props {
   colNumber: number;

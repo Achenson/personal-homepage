@@ -15,7 +15,7 @@ import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
 import { ReactComponent as CrossArrowsSVG } from "../svgs/cross-arrows.svg";
 import { ReactComponent as PlusSVG } from "../svgs/plus.svg";
 import SingleLink from "./SingleLink";
-import ColorsToChoose from "./ColorsToChoose";
+import ColorsToChoose from "./Colors/ColorsToChoose";
 import EditLink from "./EditLink";
 import NewLink from "./NewLink";
 import EditBookmarkTitle from "./EditBookmarkTitle";

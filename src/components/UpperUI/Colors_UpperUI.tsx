@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-import DefaultColorsToChoose from "./DefaultColorsToChoose";
-import SingleColumnsColor from "./SingleColumnsColor";
+import DefaultColorsToChoose from "../Colors/DefaultColorsToChoose";
+import SingleColumnsColor from "../Colors/SingleColumnsColor";
 
-import { noteColorState } from "../state/colorsState";
-import { folderColorState } from "../state/colorsState";
-import { columnsColorsState } from "../state/colorsState";
+import { noteColorState } from "../../state/colorsState";
+import { folderColorState } from "../../state/colorsState";
+import { columnsColorsState } from "../../state/colorsState";
 
-import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
+import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
 interface Props {
   colorsVis: boolean;

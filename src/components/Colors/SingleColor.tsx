@@ -1,5 +1,5 @@
 import React from "react";
-import { bookmarksDataState } from "../state/bookmarksAndLinks";
+import { bookmarksDataState } from "../../state/bookmarksAndLinks";
 import { produce } from "immer";
 
 interface Props {

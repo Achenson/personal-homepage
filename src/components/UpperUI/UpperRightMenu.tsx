@@ -1,12 +1,12 @@
 import React from "react";
 
-import { ReactComponent as AddFolderSVG } from "../svgs/addFolder.svg";
-import { ReactComponent as AddLinkSVG } from "../svgs/addLink.svg";
-// import { ReactComponent as AddNote } from "../svgs/addNote.svg";
-import { ReactComponent as AddNote } from "../svgs/text-document-add.svg";
-import { ReactComponent as SettingsSVG } from "../svgs/settingsAlt.svg";
-import { ReactComponent as UserSVG } from "../svgs/user.svg";
-import { ReactComponent as ColorSVG } from "../svgs/beaker.svg";
+import { ReactComponent as AddFolderSVG } from "../../svgs/addFolder.svg";
+import { ReactComponent as AddLinkSVG } from "../../svgs/addLink.svg";
+// import { ReactComponent as AddNote } from "../../svgs/addNote.svg";
+import { ReactComponent as AddNote } from "../../svgs/text-document-add.svg";
+import { ReactComponent as SettingsSVG } from "../../svgs/settingsAlt.svg";
+import { ReactComponent as UserSVG } from "../../svgs/user.svg";
+import { ReactComponent as ColorSVG } from "../../svgs/beaker.svg";
 
 interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;

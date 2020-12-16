@@ -1,7 +1,7 @@
 import React from "react";
-import { folderColorState } from "../state/colorsState";
-import { noteColorState } from "../state/colorsState";
-import { columnsColorsState } from "../state/colorsState";
+import { folderColorState } from "../../state/colorsState";
+import { noteColorState } from "../../state/colorsState";
+import { columnsColorsState } from "../../state/colorsState";
 
 import { produce } from "immer";
 

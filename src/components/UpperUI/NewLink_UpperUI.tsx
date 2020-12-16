@@ -2,10 +2,10 @@ import React from "react";
 import { useState } from "react";
 
 import { produce } from "immer";
-import { linksDataState, bookmarksDataState } from "../state/bookmarksAndLinks";
+import { linksDataState, bookmarksDataState } from "../../state/bookmarksAndLinks";
 
-import { ReactComponent as SaveSVG } from "../svgs/save.svg";
-import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
+import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
+import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
 interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
