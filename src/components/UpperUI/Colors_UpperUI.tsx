@@ -68,7 +68,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
       <div className="md:mb-40 relative">
         <div
           className="bg-gray-200 pb-3 pt-5 border-2 px-4 border-teal-500 rounded-sm relative"
-          style={{ width: "350px", height: "200px" }}
+          style={{ width: "417px", height: "200px" }}
         >
           <div className="absolute right-0 top-0 mt-1 mr-1">
             <CancelSVG className="h-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"
