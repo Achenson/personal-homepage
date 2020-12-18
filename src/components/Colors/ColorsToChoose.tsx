@@ -9,14 +9,14 @@ interface Props {
 const colors = [
   [
     "blueGray-303",
-    // "blueGray-300",
+    
     "blueGray-400",
     "blueGray-600",
-    // "blueGray-500",
+   
     "gray-300",
     "gray-500",
-    // "gray-500",
-    // "blueGray-700",
+    // "warmGray-400",
+   
     "gray-800",
   ],
   [
