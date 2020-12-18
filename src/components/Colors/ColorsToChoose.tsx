@@ -20,11 +20,11 @@ const colors = [
     "gray-800",
   ],
   [
-    "yellow-303",
+    // "yellow-303",
     "yellow-300",
     "yellow-330",
     // "amber-300",
-    // "yellow-400",
+    "yellow-400",
     "amber-400",
     "amber-500",
     "amber-600",
@@ -68,12 +68,21 @@ const colors = [
   ],
 
   [
-    "lime-300",
     "lime-400",
     "green-303",
+    "lime-500",
+    // "lime-600",
+    
     "green-400",
     "green-500",
+    // "green-600",
     "green-505",
+    // "lime-300",
+    // "lime-700",
+    // "lime-800",
+    // "green-700",
+   
+   
   ],
   [
     "emerald-300",
@@ -106,6 +115,7 @@ const colors = [
     "blue-600",
     "blue-700",
     "blue-800",
+    
   ],
   [
     "lightBlue-400",
