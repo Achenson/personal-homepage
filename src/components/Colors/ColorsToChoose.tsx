@@ -9,14 +9,14 @@ interface Props {
 const colors = [
   [
     "blueGray-303",
-    
+
     "blueGray-400",
     "blueGray-600",
-   
+
     "gray-300",
     "gray-500",
     // "warmGray-400",
-   
+
     "gray-800",
   ],
   [
@@ -30,7 +30,6 @@ const colors = [
     "amber-600",
   ],
 
-
   [
     "orange-300",
     "orange-400",
@@ -40,39 +39,28 @@ const colors = [
     "orange-800",
   ],
   ["red-404", "orange-404", "orange-606", "red-606", "amber-700", "amber-900"],
+  ["red-300", "red-400", "red-500", "red-600", "red-700", "red-800"],
   [
-    "red-300",
-    "red-400",
-    "red-500",
-    "red-600",
-    "red-700",
-    "red-800",
-  ],
-  [
-    "rose-300",
-    "rose-400",
-    "rose-500",
-    "rose-600",
-    "rose-700",
-    "rose-800",
-  ],
-  [
-
     "pink-300",
     "pink-400",
     "pink-600",
-    "fuchsia-400",
-    "fuchsia-600",
-    "fuchsia-700",
+    // "rose-300",
+    "rose-400",
+    // "rose-500",
+    "rose-600",
+    "rose-700",
 
+    // "rose-800",
   ],
+
+
 
   [
     "lime-400",
     "green-303",
     "lime-500",
     // "lime-600",
-    
+
     "green-400",
     "green-500",
     // "green-600",
@@ -81,8 +69,6 @@ const colors = [
     // "lime-700",
     // "lime-800",
     // "green-700",
-   
-   
   ],
   [
     "emerald-300",
@@ -92,31 +78,9 @@ const colors = [
     "emerald-700",
     "emerald-800",
   ],
-  [
-    "teal-300",
-    "teal-400",
-    "teal-500",
-    "teal-600",
-    "teal-700",
-    "teal-800",
-  ],
-  [
-    "cyan-300",
-    "cyan-400",
-    "cyan-500",
-    "cyan-600",
-    "cyan-700",
-    "cyan-800",
-  ],
-  [
-    "blue-300",
-    "blue-400",
-    "blue-500",
-    "blue-600",
-    "blue-700",
-    "blue-800",
-    
-  ],
+  ["teal-300", "teal-400", "teal-500", "teal-600", "teal-700", "teal-800"],
+  ["cyan-300", "cyan-400", "cyan-500", "cyan-600", "cyan-700", "cyan-800"],
+  ["blue-300", "blue-400", "blue-500", "blue-600", "blue-700", "blue-800"],
   [
     "lightBlue-400",
     "lightBlue-600",
@@ -126,23 +90,31 @@ const colors = [
     "blue-777",
   ],
   [
-  
+    "violet-300",
+    "violet-400",
+    //  "purple-500",
+    "violet-600",
+
+    "indigo-400",
+    "indigo-600",
+    "indigo-800",
+
+    //  "purple-700",
+    //  "purple-800",
+  ],
+  [
     "purple-400",
     // "purple-500",
     "purple-600",
     // "purple-700",
     "purple-800",
-
-    "indigo-400",
-    "indigo-600",
-    "indigo-800",
-   
-
+    "fuchsia-400",
+    "fuchsia-600",
+    "fuchsia-700",
 
   ],
 
 ];
-
 
 // const colorsBackup2 = [
 //   [
