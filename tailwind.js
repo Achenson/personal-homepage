@@ -6,11 +6,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        gray: {
+          ...colors.gray,
+          404: "#C0C0C0"
+        },
         blueGray: {
         ...colors.blueGray,
         303: "#CCDADF"
         },
-        warmGray: colors.warmGray,
+        warmGray: {
+        ...colors.warmGray,
+        303: "#D8BFD8",
+        404: "#BC8F8F"
+        }, 
         orange: {
           ...colors.orange,
           404: "#FF6347",

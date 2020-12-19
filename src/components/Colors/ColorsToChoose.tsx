@@ -7,17 +7,37 @@ interface Props {
 }
 
 const colors = [
+  // [
+  //   "blueGray-303",
+
+  //   "blueGray-400",
+  //   "blueGray-600",
+
+  //   "gray-300",
+  //   "gray-500",
+  //   // "warmGray-400",
+
+  //   "gray-800",
+  // ],
   [
     "blueGray-303",
-
-    "blueGray-400",
+    // "gray-300",
+    "gray-404",
+    // "gray-400",
+    // "blueGray-400",
     "blueGray-600",
 
-    "gray-300",
-    "gray-500",
-    // "warmGray-400",
-
+    // "gray-300",
+    // "gray-500",
+    // "warmGray-303",
+    "warmGray-404",
+    "warmGray-600",
     "gray-800",
+    // "warmGray-300",
+    // "warmGray-400",
+    // "warmGray-500",
+    // "warmGray-600",
+    // "warmGray-700",
   ],
   [
     // "yellow-303",
@@ -40,18 +60,7 @@ const colors = [
   ],
   ["red-404", "orange-404", "orange-606", "red-606", "amber-700", "amber-900"],
   ["red-300", "red-400", "red-500", "red-600", "red-700", "red-800"],
-  [
-    "pink-300",
-    "pink-400",
-    "pink-600",
-    // "rose-300",
-    "rose-400",
-    // "rose-500",
-    "rose-600",
-    "rose-700",
 
-    // "rose-800",
-  ],
 
 
 
@@ -92,7 +101,7 @@ const colors = [
   [
     "violet-300",
     "violet-400",
-    //  "purple-500",
+    //  "violet-500",
     "violet-600",
 
     "indigo-400",
@@ -103,6 +112,7 @@ const colors = [
     //  "purple-800",
   ],
   [
+    // "purple-300",
     "purple-400",
     // "purple-500",
     "purple-600",
@@ -112,6 +122,19 @@ const colors = [
     "fuchsia-600",
     "fuchsia-700",
 
+  ],
+  [
+    "rose-400",
+    // "rose-500",
+    "rose-600",
+    "rose-700",
+    "pink-300",
+    "pink-400",
+    "pink-600",
+    // "rose-300",
+ 
+
+    // "rose-800",
   ],
 
 ];
