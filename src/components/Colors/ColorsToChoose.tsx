@@ -25,14 +25,12 @@ const colors = [
     // "blueGray-400",
     "blueGray-404",
     "blueGray-600",
-    
-    
-    
+
     "gray-404",
     "warmGray-404",
     // "gray-700",
-    "black"
-    
+    "black",
+
     // "gray-800",
   ],
   [
@@ -57,9 +55,6 @@ const colors = [
   ["red-404", "orange-404", "orange-606", "red-606", "amber-700", "amber-900"],
   ["red-300", "red-400", "red-500", "red-600", "red-700", "red-800"],
 
-
-
-
   [
     "lime-400",
     "green-303",
@@ -68,10 +63,10 @@ const colors = [
 
     "green-400",
     "green-500",
-   
+
     // "green-600",
     "green-505",
-    
+
     // "lime-300",
     // "lime-700",
     // "lime-800",
@@ -87,39 +82,80 @@ const colors = [
   ],
   ["teal-300", "teal-400", "teal-500", "teal-600", "teal-700", "teal-800"],
   ["cyan-300", "cyan-400", "cyan-500", "cyan-600", "cyan-700", "cyan-800"],
-  ["blue-300", "blue-400", "blue-500", "blue-600", "blue-700", "blue-800"],
   [
+    "blue-300",
+    "blue-700",
+    "blue-800",
     "lightBlue-400",
     "lightBlue-600",
     "lightBlue-700",
-    "blue-707",
-    "blue-770",
-    "blue-777",
+  
+  ],
+  // ["blue-300", "blue-400", "blue-500", "blue-600", "blue-700", "blue-800"],
+  // [
+  // "lightBlue-400",
+  // "lightBlue-600",
+  // "lightBlue-700",
+  //   "blue-707",
+  //   "blue-770",
+  //   "blue-777",
+  // ],
+
+    [
+      "indigo-300",
+      "indigo-600",
+      "indigo-800",
+      "blue-707",
+      "blue-770",
+      "blue-777",
+ 
+  
+ 
+
   ],
   [
     "violet-300",
     "violet-400",
-    //  "violet-500",
+    "violet-500",
     "violet-600",
-
-    "indigo-400",
-    "indigo-600",
-    "indigo-800",
-
-    //  "purple-700",
-    //  "purple-800",
+    "violet-700",
+    "violet-800",
+    
   ],
+  // [
+  //   "purple-300",
+  //   "purple-400",
+  //   "purple-500",
+  //   "purple-600",
+  //   "purple-700",
+  //   "purple-800",
+    
+  // ],
+
+
+  // [
+  //   "violet-300",
+  //   "violet-400",
+  //   //  "violet-500",
+  //   "violet-600",
+
+  //   "indigo-400",
+  //   "indigo-600",
+  //   "indigo-800",
+
+  //   //  "purple-700",
+  //   //  "purple-800",
+  // ],
   [
-    // "purple-300",
-    "purple-400",
+    "purple-300",
+    // "purple-400",
     // "purple-500",
     "purple-600",
     // "purple-700",
-    "purple-800",
+    "purple-700",
     "fuchsia-400",
     "fuchsia-600",
     "fuchsia-700",
-
   ],
   [
     "rose-400",
@@ -130,11 +166,9 @@ const colors = [
     "pink-400",
     "pink-600",
     // "rose-300",
- 
 
     // "rose-800",
   ],
-
 ];
 
 // const colorsBackup2 = [

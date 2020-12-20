@@ -112,6 +112,8 @@ function Bookmark({
      
   
       "red-500",
+      "violet-500",
+      "purple-500"
                     // "teal-500",
       // "blue-500",
       // "indigo-500",
@@ -156,6 +158,7 @@ function Bookmark({
       "bg-blue-700",
       "bg-teal-700",
       "bg-green-700",
+    
     ];
 
     let colorsForLightHoverAlt: string[] = [
