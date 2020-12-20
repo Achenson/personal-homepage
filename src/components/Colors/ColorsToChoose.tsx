@@ -82,14 +82,19 @@ const colors = [
   ],
   ["teal-300", "teal-400", "teal-500", "teal-600", "teal-700", "teal-800"],
   ["cyan-300", "cyan-400", "cyan-500", "cyan-600", "cyan-700", "cyan-800"],
+  ["blue-300", "blue-400", "blue-500", "blue-600", "blue-700", "blue-800"],
   [
-    "blue-300",
-    "blue-700",
-    "blue-800",
+    // "blue-300",
+    // "blue-700",
+    // "blue-800",
     "lightBlue-400",
     "lightBlue-600",
     "lightBlue-700",
-  
+    "blue-707",
+    "blue-770",
+    "blue-777",
+    
+    
   ],
   // ["blue-300", "blue-400", "blue-500", "blue-600", "blue-700", "blue-800"],
   // [
@@ -102,26 +107,22 @@ const colors = [
   // ],
 
     [
+      "violet-300",
+      // "violet-400",
+    // "violet-500",
+      // "violet-600",
+      "violet-700",
+      "violet-800",
       "indigo-300",
       "indigo-600",
       "indigo-800",
-      "blue-707",
-      "blue-770",
-      "blue-777",
+ 
  
   
  
 
   ],
-  [
-    "violet-300",
-    "violet-400",
-    "violet-500",
-    "violet-600",
-    "violet-700",
-    "violet-800",
-    
-  ],
+
   // [
   //   "purple-300",
   //   "purple-400",
