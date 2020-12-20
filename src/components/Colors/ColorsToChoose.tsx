@@ -22,22 +22,18 @@ const colors = [
   [
     "blueGray-303",
     // "gray-300",
-    "gray-404",
-    // "gray-400",
     // "blueGray-400",
+    "blueGray-404",
     "blueGray-600",
-
-    // "gray-300",
-    // "gray-500",
-    // "warmGray-303",
+    
+    
+    
+    "gray-404",
     "warmGray-404",
-    "warmGray-600",
-    "gray-800",
-    // "warmGray-300",
-    // "warmGray-400",
-    // "warmGray-500",
-    // "warmGray-600",
-    // "warmGray-700",
+    // "gray-700",
+    "black"
+    
+    // "gray-800",
   ],
   [
     // "yellow-303",
@@ -72,8 +68,10 @@ const colors = [
 
     "green-400",
     "green-500",
+   
     // "green-600",
     "green-505",
+    
     // "lime-300",
     // "lime-700",
     // "lime-800",

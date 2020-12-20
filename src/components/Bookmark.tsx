@@ -107,7 +107,8 @@ function Bookmark({
       "gray-500",
       "black",
       "green-505",
-      
+      // "warmGray-404",
+      "blue-500",
      
   
       "red-500",
@@ -120,7 +121,8 @@ function Bookmark({
     let colorsForDarkText: string[] = ["yellow-600"];
 
     if (colorsForLightText.indexOf(finalBookmarkColor) > -1) {
-      return textOrIcon === "text" ? "text-gray-200" : "text-gray-300";
+      // return textOrIcon === "text" ? "text-gray-200" : "text-gray-300";
+      return textOrIcon === "text" ? "text-gray-100" : "text-gray-200";
       // return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
     }
 

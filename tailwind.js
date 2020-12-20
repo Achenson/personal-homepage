@@ -12,7 +12,8 @@ module.exports = {
         },
         blueGray: {
         ...colors.blueGray,
-        303: "#CCDADF"
+        303: "#CCDADF",
+        404: "#B0C4DE"
         },
         warmGray: {
         ...colors.warmGray,
@@ -49,7 +50,8 @@ module.exports = {
         green: {
           ...colors.green,
           303: "#9ACD32",
-          505: "#008000"
+          505: "#008000",
+          
 
         },
         emerald: colors.emerald,
