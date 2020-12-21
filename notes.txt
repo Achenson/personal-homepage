@@ -99,3 +99,5 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 43. upperUI changing colors -> lower, do not dim the background
 44. upperUI changing colors -> white, semiTransparent, transparent
 45. bug: nothing shortest width: no other columns?
+46. "Test" wrong naming
+47. clean tailwind.js -> color naming

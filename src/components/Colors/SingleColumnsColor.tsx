@@ -3,21 +3,21 @@ import { columnsColorsState } from "../../state/colorsState";
 
 interface Props {
   colNumber: number;
-  setNotesSelected: React.Dispatch<React.SetStateAction<boolean>>;
-  setFoldersSelected: React.Dispatch<React.SetStateAction<boolean>>;
+  // setNotesSelected: React.Dispatch<React.SetStateAction<boolean>>;
+  // setFoldersSelected: React.Dispatch<React.SetStateAction<boolean>>;
   defaultColorsFor:
-    | "folders"
-    | "notes"
-    | "column_1"
+    // | "folders"
+    // | "notes"
+     "column_1"
     | "column_2"
     | "column_3"
     | "column_4"
     | "unselected";
   setDefaultColorsFor: React.Dispatch<
     React.SetStateAction<
-      | "folders"
-      | "notes"
-      | "column_1"
+      // | "folders"
+      // | "notes"
+       "column_1"
       | "column_2"
       | "column_3"
       | "column_4"
@@ -31,8 +31,8 @@ interface Props {
 
 function SingleColumnsColor({
   colNumber,
-  setNotesSelected,
-  setFoldersSelected,
+  // setNotesSelected,
+  // setFoldersSelected,
   defaultColorsFor,
   setDefaultColorsFor,
   setColorsToChooseVis,
@@ -57,6 +57,7 @@ function SingleColumnsColor({
   return (
     <div
       onClick={() => {
+
         setDefaultColorsFor(`column_${colNumber}` as any);
 
         if (defaultColorsFor === `columns_${colNumber}`) {
@@ -65,8 +66,8 @@ function SingleColumnsColor({
           setColorsToChooseVis(true);
         }
 
-        setFoldersSelected(false);
-        setNotesSelected(false);
+        // setFoldersSelected(false);
+        // setNotesSelected(false);
 
         // setColumnsSelected((b) => !b);
         setColumnSelected(colNumber);

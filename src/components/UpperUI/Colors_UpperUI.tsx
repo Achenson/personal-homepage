@@ -36,29 +36,31 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
   const [noteColorData, setNoteColorData] = noteColorState.use();
   const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
-  function columnsRendering(howMany: number) {
-    let arrOfColumns = [];
-    for (let i = 1; i <= howMany; i++) {
-      arrOfColumns.push(i);
-    }
+  // function columnsRendering(howMany: number) {
+  //   let arrOfColumns = [];
+  //   for (let i = 1; i <= howMany; i++) {
+  //     arrOfColumns.push(i);
+  //   }
 
-    return arrOfColumns.map((el, index) => {
-      return (
-        <SingleColumnsColor
-          colNumber={el}
-          // colSelected={false}
-          defaultColorsFor={defaultColorsFor}
-          setColorsToChooseVis={setColorsToChooseVis}
-          columnSelected={columnSelected}
-          setColumnSelected={setColumnSelected}
-          setDefaultColorsFor={setDefaultColorsFor}
-          setFoldersSelected={setFoldersSelected}
-          setNotesSelected={setNotesSelected}
-          key={index}
-        />
-      );
-    });
-  }
+  //   return arrOfColumns.map((el, index) => {
+  //     return (
+  //       <SingleColumnsColor
+  //         colNumber={el}
+  //         // colSelected={false}
+  //         defaultColorsFor={defaultColorsFor}
+  //         setColorsToChooseVis={setColorsToChooseVis}
+  //         columnSelected={columnSelected}
+  //         setColumnSelected={setColumnSelected}
+  //         setDefaultColorsFor={setDefaultColorsFor}
+  //         // setFoldersSelected={setFoldersSelected}
+  //         // setNotesSelected={setNotesSelected}
+  //         key={index}
+  //       />
+  //     );
+
+
+  //   });
+  // }
 
   return (
     <div
@@ -131,10 +133,13 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
             ></div>
           </div>
 
-          <div className="flex justify-between items-center mb-2 mt-2">
+
+          {/* <div className="flex justify-between items-center mb-2 mt-2">
             <p className="w-32">Columns</p>
             <div className="flex">{columnsRendering(4)}</div>
-          </div>
+          </div> */}
+
+
 
           <p className="text-center mt-5">
             {" "}

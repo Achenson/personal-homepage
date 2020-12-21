@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 // import NewLink_UpperUI from './NewLink_UpperUI';
 
 import UpperRightMenu from './UpperRightMenu'
+import UpperLeftMenu from './UpperLeftMenu'
 
 
 interface Props {
@@ -17,6 +18,7 @@ function UpperUI({setNewLinkVis, setNewBookmarkVis, setColorsVis, setBookmarkTyp
 
     return (
         <div className="h-32 relative mx-4">
+            <UpperLeftMenu/>
             <UpperRightMenu setNewLinkVis={setNewLinkVis} setNewBookmarkVis={setNewBookmarkVis} setColorsVis={setColorsVis} setBookmarkType={setBookmarkType}/>
 
         
