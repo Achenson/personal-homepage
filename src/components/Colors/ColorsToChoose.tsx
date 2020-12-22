@@ -7,18 +7,6 @@ interface Props {
 }
 
 const colors = [
-  // [
-  //   "blueGray-303",
-
-  //   "blueGray-400",
-  //   "blueGray-600",
-
-  //   "gray-300",
-  //   "gray-500",
-  //   // "warmGray-400",
-
-  //   "gray-800",
-  // ],
   [
     "blueGray-303",
     // "gray-300",
@@ -55,23 +43,7 @@ const colors = [
   ["red-404", "orange-404", "orange-606", "red-606", "amber-700", "amber-900"],
   ["red-300", "red-400", "red-500", "red-600", "red-700", "red-800"],
 
-  [
-    "lime-400",
-    "green-303",
-    "lime-500",
-    // "lime-600",
-
-    "green-400",
-    "green-500",
-
-    // "green-600",
-    "green-505",
-
-    // "lime-300",
-    // "lime-700",
-    // "lime-800",
-    // "green-700",
-  ],
+  ["lime-400", "green-303", "lime-500", "green-400", "green-500", "green-505"],
   [
     "emerald-300",
     "emerald-400",
@@ -93,8 +65,6 @@ const colors = [
     "blue-707",
     "blue-770",
     "blue-777",
-    
-    
   ],
   // ["blue-300", "blue-400", "blue-500", "blue-600", "blue-700", "blue-800"],
   // [
@@ -106,47 +76,18 @@ const colors = [
   //   "blue-777",
   // ],
 
-    [
-      "violet-300",
-      // "violet-400",
+  [
+    "violet-300",
+    // "violet-400",
     // "violet-500",
-      // "violet-600",
-      "violet-700",
-      "violet-800",
-      "indigo-300",
-      "indigo-600",
-      "indigo-800",
- 
- 
-  
- 
-
+    // "violet-600",
+    "violet-700",
+    "violet-800",
+    "indigo-300",
+    "indigo-600",
+    "indigo-800",
   ],
 
-  // [
-  //   "purple-300",
-  //   "purple-400",
-  //   "purple-500",
-  //   "purple-600",
-  //   "purple-700",
-  //   "purple-800",
-    
-  // ],
-
-
-  // [
-  //   "violet-300",
-  //   "violet-400",
-  //   //  "violet-500",
-  //   "violet-600",
-
-  //   "indigo-400",
-  //   "indigo-600",
-  //   "indigo-800",
-
-  //   //  "purple-700",
-  //   //  "purple-800",
-  // ],
   [
     "purple-300",
     // "purple-400",
@@ -167,7 +108,6 @@ const colors = [
     "pink-400",
     "pink-600",
     // "rose-300",
-
     // "rose-800",
   ],
 ];

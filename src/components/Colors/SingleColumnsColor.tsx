@@ -62,15 +62,17 @@ function SingleColumnsColor({
 
         if (defaultColorsFor === `column_${colNumber}`) {
           setColorsToChooseVis((b) => !b);
+          setColumnSelected(null);
         } else {
           setColorsToChooseVis(true);
+          setColumnSelected(colNumber);
+
         }
 
         // setFoldersSelected(false);
         // setNotesSelected(false);
 
         // setColumnsSelected((b) => !b);
-        setColumnSelected(colNumber);
 
         
       }}
