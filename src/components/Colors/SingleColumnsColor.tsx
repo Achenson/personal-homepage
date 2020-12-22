@@ -60,7 +60,7 @@ function SingleColumnsColor({
 
         setDefaultColorsFor(`column_${colNumber}` as any);
 
-        if (defaultColorsFor === `columns_${colNumber}`) {
+        if (defaultColorsFor === `column_${colNumber}`) {
           setColorsToChooseVis((b) => !b);
         } else {
           setColorsToChooseVis(true);
