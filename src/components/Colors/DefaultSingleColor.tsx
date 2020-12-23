@@ -1,7 +1,7 @@
 import React from "react";
 import { folderColorState } from "../../state/colorsState";
 import { noteColorState } from "../../state/colorsState";
-import { uiColorState } from "../../state/colorsState";
+// import { uiColorState } from "../../state/colorsState";
 import { columnsColorsState } from "../../state/colorsState";
 
 import { produce } from "immer";
@@ -32,7 +32,7 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
-  const [uiColorData, setUiColorData] = uiColorState.use();
+  // const [uiColorData, setUiColorData] = uiColorState.use();
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
 
   function borderMaker(
@@ -50,29 +50,65 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
     }
 
     // const arrForLightSelect = ["blueGray-303", "blueGray-404", "gray-404", "yellow-300", "yellow-330", "yellow-400", "lime-400", "orange-300"];
-    const arrForLightSelect = ["blueGray-404", "yellow-300"];
 
     if (defaultColorsFor === "folders") {
       if (color !== folderColorData) {
         return "border border-black";
       }
 
-
-      if ( arrForLightSelect.indexOf(color) > -1) {
-       return "border-2 border-white";
-      } else {
-       return "border-2 border-white";
-      }
-
-    
-
+      return "border-2 border-white";
     }
 
     if (defaultColorsFor === "notes") {
-      return color === noteColorData ? true : false;
+      if (color !== noteColorData) {
+        return "border border-black";
+      }
+
+      return "border-2 border-white";
     }
 
-    return color === columnsColorsData[defaultColorsFor] ? true : false;
+    // return color === columnsColorsData[defaultColorsFor] ? true : false;
+
+    if (
+      defaultColorsFor === "column_1"
+    ) {
+      if (color !== columnsColorsData.column_1) {
+        return "border border-black";
+      }
+
+      return "border-2 border-black";
+    }
+
+    if (
+      defaultColorsFor === "column_2"
+    ) {
+      if (color !== columnsColorsData.column_2) {
+        return "border border-black";
+      }
+
+      return "border-2 border-black";
+    }
+
+    if (
+      defaultColorsFor === "column_3"
+    ) {
+      if (color !== columnsColorsData.column_3) {
+        return "border border-black";
+      }
+
+      return "border-2 border-black";
+    }
+
+    if (
+      defaultColorsFor === "column_4"
+    ) {
+      if (color !== columnsColorsData.column_4) {
+        return "border border-black";
+      }
+
+      return "border-2 border-black";
+    }
+
   }
 
   return (

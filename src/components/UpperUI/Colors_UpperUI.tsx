@@ -18,10 +18,10 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
   const [defaultColorsFor, setDefaultColorsFor] = useState<
     | "folders"
     | "notes"
-    | "column_1"
-    | "column_2"
-    | "column_3"
-    | "column_4"
+    // | "column_1"
+    // | "column_2"
+    // | "column_3"
+    // | "column_4"
     | "unselected"
   >("unselected");
 
@@ -30,11 +30,11 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
   const [foldersSelected, setFoldersSelected] = useState<boolean>(false);
   const [notesSelected, setNotesSelected] = useState<boolean>(false);
   // const [columnsSelected, setColumnsSelected] = useState<boolean>(false);
-  const [columnSelected, setColumnSelected] = useState<number | null>(null);
+  // const [columnSelected, setColumnSelected] = useState<number | null>(null);
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
-  const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
+  // const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
   // function columnsRendering(howMany: number) {
   //   let arrOfColumns = [];
@@ -61,6 +61,24 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
 
   //   });
   // }
+
+  function calcColorTop(defaultColorsFor :  "folders"
+  | "notes"
+  | "unselected" ) {
+    if (defaultColorsFor === "folders") {
+       return "90px"
+    }
+
+    if (defaultColorsFor === "notes") {
+      return "122px"
+   }
+
+   if (defaultColorsFor === "unselected") {
+    return "0px"
+ }
+
+
+  }
 
   return (
     <div
@@ -101,7 +119,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                 }
 
                 setNotesSelected(false);
-                setColumnSelected(null);
+                // setColumnSelected(null);
 
                 setFoldersSelected((b) => !b);
               }}
@@ -123,7 +141,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                 }
 
                 setFoldersSelected(false);
-                setColumnSelected(null);
+                // setColumnSelected(null);
 
                 setNotesSelected((b) => !b);
               }}
@@ -148,12 +166,13 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
               onClick={() => {
                 setFolderColorData("teal-500");
                 setNoteColorData("yellow-500");
-                setColumnsColorData({
-                  column_1: "yellow-200",
-                  column_2: "orange-200",
-                  column_3: "red-200",
-                  column_4: "green-200",
-                });
+                // setColumnsColorData({
+                //   column_1: "yellow-200",
+                //   column_2: "orange-200",
+                //   column_3: "red-200",
+                //   column_4: "green-200",
+                // });
+
               }}
             >
               RESET
@@ -165,15 +184,20 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
         <div
           className="absolute"
           style={{
-            top: "200px",
-            left: `${
-              defaultColorsFor === "column_1" ||
-              "column_2" ||
-              "column_3" ||
-              "column_4"
-                ? "93px"
-                : "157px"
-            }`,
+            // top: "200px",
+            // left: "93px"
+
+            top: calcColorTop(defaultColorsFor),
+            left: "300px"
+            // `${
+              // defaultColorsFor === "column_1" ||
+              // "column_2" ||
+              // "column_3" ||
+              // "column_4"
+              //   ? "93px"
+              //   : 
+                // "157px"
+            ,
           }}
         >
           {colorsToChooseVis ? (
