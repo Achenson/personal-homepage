@@ -6,6 +6,7 @@ import SingleColumnsColor from "../Colors/SingleColumnsColor";
 import { noteColorState } from "../../state/colorsState";
 import { folderColorState } from "../../state/colorsState";
 import { columnsColorsState } from "../../state/colorsState";
+import { uiColorState } from "../../state/colorsState";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
@@ -34,6 +35,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
+  const [uiColorData, setUiColorData] = uiColorState.use();
   // const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
   // function columnsRendering(howMany: number) {
@@ -87,7 +89,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
     >
       <div className="md:mb-40 relative">
         <div
-          className="bg-gray-200 pb-3 pt-5 border-2 px-4 border-teal-500 rounded-sm relative"
+          className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
           style={{ width: "417px", height: "200px" }}
         >
           <div className="absolute right-0 top-0 mt-1 mr-1">

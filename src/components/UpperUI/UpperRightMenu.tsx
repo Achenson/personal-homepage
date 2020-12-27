@@ -8,6 +8,8 @@ import { ReactComponent as SettingsSVG } from "../../svgs/settingsAlt.svg";
 import { ReactComponent as UserSVG } from "../../svgs/user.svg";
 import { ReactComponent as ColorSVG } from "../../svgs/beaker.svg";
 
+import { uiColorState } from "../../state/colorsState";
+
 interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
   setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,25 +23,30 @@ function UpperRightMenu({
   setColorsVis,
   setBookmarkType,
 }: Props): JSX.Element {
+
+
+  const [uiColorData, setUiColorData] = uiColorState.use();
+
+
   return (
     <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
       <div className="flex w-24 justify-around">
       <AddLinkSVG
-        className="h-6 cursor-pointer hover:text-teal-500"
+        className={`h-6 cursor-pointer hover:text-${uiColorData}`}
         onClick={() => {
           setNewLinkVis((b) => !b);
         }}
       />
 
       <AddFolderSVG
-        className="h-6 cursor-pointer hover:text-teal-500 mr-1"
+          className={`h-6 cursor-pointer hover:text-${uiColorData} mr-1`}
         onClick={() => {
           setNewBookmarkVis((b) => !b);
           setBookmarkType("folder");
         }}
       />
       <AddNote
-        className="h-6 cursor-pointer fill-current text-black hover:text-teal-500"
+        className={`h-6 cursor-pointer fill-current text-black hover:text-${uiColorData}`}
         onClick={() => {
           setNewBookmarkVis((b) => !b);
           setBookmarkType("note");
@@ -48,7 +55,7 @@ function UpperRightMenu({
       </div>
    
         <div className="flex w-24 justify-around">
-        <ColorSVG className="h-6 cursor-pointer hover:text-teal-500" 
+        <ColorSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} 
         onClick={() => {
           setColorsVis(b=>!b)
         }}
