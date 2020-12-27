@@ -104,14 +104,81 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
   }
 
   function setComplementaryUiColor(color: string) {
-    let tealRegex = /teal/;
+    let grayRgx = /gray/i;
 
-    if (tealRegex.test(color)) {
-      setUiColorData("teal-500");
-    } else {
-      setUiColorData("red-500");
+    let yellowRgx = /yellow/;
+    let amberRgx = /amber/;
+
+    let orangeRgx = /orange/;
+
+    let redRgx = /red/;
+
+    let tealRgx = /teal/;
+    let greenRgx = /green/;
+    let limeRgx = /lime/;
+    let emeraldRgx = /emerald/;
+
+    let cyanRgx = /cyan/;
+    let lightBlueRgx = /lightBlue/;
+
+    let blueRgx = /blue/;
+    let indigoRgx = /indigo/;
+
+    let violetRgx = /violet/;
+    let purpleRgx = /purple/;
+    let fuchsiaRgx = /fuchsia/;
+
+    let roseRgx = /rose/;
+    let pinkRgx = /pink/;
+
+    if (grayRgx.test(color)) {
+      setUiColorData("blueGray-400");
     }
-    
+
+    if (yellowRgx.test(color) || amberRgx.test(color)) {
+      setUiColorData("yellow-500");
+    }
+
+    if (orangeRgx.test(color)) {
+      setUiColorData("orange-500");
+    }
+
+    if (redRgx.test(color)) {
+      setUiColorData("red-400");
+    }
+
+    if (
+      tealRgx.test(color) ||
+      greenRgx.test(color) ||
+      limeRgx.test(color) ||
+      emeraldRgx.test(color)
+    ) {
+      setUiColorData("teal-500");
+    }
+
+    if (cyanRgx.test(color) || lightBlueRgx.test(color)) {
+      setUiColorData("lightBlue-500");
+    }
+
+    if (blueRgx.test(color) || indigoRgx.test(color)) {
+      setUiColorData("blue-500");
+    }
+
+    if (violetRgx.test(color) || purpleRgx.test(color)) {
+      setUiColorData("violet-500");
+    }
+
+    if (fuchsiaRgx.test(color)) {
+      setUiColorData("fuchsia-500");
+    }
+
+    if (roseRgx.test(color)) {
+      setUiColorData("rose-400");
+    }
+
+    if (pinkRgx.test(color)) {
+      setUiColorData("pink-400");
+    }
   }
 
   return (
