@@ -3,6 +3,7 @@ import { folderColorState } from "../../state/colorsState";
 import { noteColorState } from "../../state/colorsState";
 // import { uiColorState } from "../../state/colorsState";
 import { columnsColorsState } from "../../state/colorsState";
+import { uiColorState } from "../../state/colorsState";
 
 import { produce } from "immer";
 
@@ -32,8 +33,8 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
-  // const [uiColorData, setUiColorData] = uiColorState.use();
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
+  const [uiColorData, setUiColorData] = uiColorState.use();
 
   function borderMaker(
     defaultColorsFor:
@@ -69,9 +70,7 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
 
     // return color === columnsColorsData[defaultColorsFor] ? true : false;
 
-    if (
-      defaultColorsFor === "column_1"
-    ) {
+    if (defaultColorsFor === "column_1") {
       if (color !== columnsColorsData.column_1) {
         return "border border-black";
       }
@@ -79,9 +78,7 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
       return "border-2 border-black";
     }
 
-    if (
-      defaultColorsFor === "column_2"
-    ) {
+    if (defaultColorsFor === "column_2") {
       if (color !== columnsColorsData.column_2) {
         return "border border-black";
       }
@@ -89,9 +86,7 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
       return "border-2 border-black";
     }
 
-    if (
-      defaultColorsFor === "column_3"
-    ) {
+    if (defaultColorsFor === "column_3") {
       if (color !== columnsColorsData.column_3) {
         return "border border-black";
       }
@@ -99,16 +94,24 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
       return "border-2 border-black";
     }
 
-    if (
-      defaultColorsFor === "column_4"
-    ) {
+    if (defaultColorsFor === "column_4") {
       if (color !== columnsColorsData.column_4) {
         return "border border-black";
       }
 
       return "border-2 border-black";
     }
+  }
 
+  function setComplementaryUiColor(color: string) {
+    let tealRegex = /teal/;
+
+    if (tealRegex.test(color)) {
+      setUiColorData("teal-500");
+    } else {
+      setUiColorData("red-500");
+    }
+    
   }
 
   return (
@@ -120,6 +123,8 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
       onClick={() => {
         if (defaultColorsFor === "folders") {
           setFolderColorData(color);
+
+          setComplementaryUiColor(color);
         }
 
         if (defaultColorsFor === "notes") {

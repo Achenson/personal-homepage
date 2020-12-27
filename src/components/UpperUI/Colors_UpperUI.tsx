@@ -38,31 +38,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
   // const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
-  // function columnsRendering(howMany: number) {
-  //   let arrOfColumns = [];
-  //   for (let i = 1; i <= howMany; i++) {
-  //     arrOfColumns.push(i);
-  //   }
 
-  //   return arrOfColumns.map((el, index) => {
-  //     return (
-  //       <SingleColumnsColor
-  //         colNumber={el}
-  //         // colSelected={false}
-  //         defaultColorsFor={defaultColorsFor}
-  //         setColorsToChooseVis={setColorsToChooseVis}
-  //         columnSelected={columnSelected}
-  //         setColumnSelected={setColumnSelected}
-  //         setDefaultColorsFor={setDefaultColorsFor}
-  //         // setFoldersSelected={setFoldersSelected}
-  //         // setNotesSelected={setNotesSelected}
-  //         key={index}
-  //       />
-  //     );
-
-
-  //   });
-  // }
 
   function calcColorTop(defaultColorsFor :  "folders"
   | "notes"
@@ -113,6 +89,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
             <div
               onClick={() => {
                 setDefaultColorsFor("folders");
+
 
                 if (defaultColorsFor === "folders") {
                   setColorsToChooseVis((b) => !b);
