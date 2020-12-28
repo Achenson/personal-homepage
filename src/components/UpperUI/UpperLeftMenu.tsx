@@ -1,24 +1,17 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
 import SingleColumnsColor from "../Colors/SingleColumnsColor";
 import DefaultColorsToChoose from "../Colors/DefaultColorsToChoose";
 
-interface Props {
+interface Props {}
 
-}
-
-function UpperLeftMenu({}: Props): JSX.Element{
-
+function UpperLeftMenu({}: Props): JSX.Element {
   const [columnSelected, setColumnSelected] = useState<number | null>(null);
 
   const [colorsToChooseVis, setColorsToChooseVis] = useState<boolean>(false);
 
   const [defaultColorsFor, setDefaultColorsFor] = useState<
-    "column_1"
-    | "column_2"
-    | "column_3"
-    | "column_4"
-    | "unselected"
+    "column_1" | "column_2" | "column_3" | "column_4" | "unselected"
   >("unselected");
 
   function columnsRendering(howMany: number) {
@@ -45,23 +38,20 @@ function UpperLeftMenu({}: Props): JSX.Element{
     });
   }
 
-    return (
-        <div className="absolute left-0 bottom-0">
-  
-  <div className="flex justify-between items-center mb-2 mt-2">
-            {/* <p className="w-32">Columns</p> */}
-            <div className="flex">{columnsRendering(4)}</div>
-          </div>
-          <div className="absolute left-60" style={{bottom: "104px"}}>
-          {colorsToChooseVis ? (
-            <DefaultColorsToChoose defaultColorsFor={defaultColorsFor} />
-          ) : null}
-          </div>
-  
-
-         
-        </div>
-    )
-};
+  return (
+    <div className="">
+      {/* <div className="absolute left-0 bottom-0"> */}
+      <div className="flex justify-between items-center mb-2 mt-2">
+        {/* <p className="w-32">Columns</p> */}
+        <div className="flex">{columnsRendering(4)}</div>
+      </div>
+      <div className="absolute left-60" style={{ bottom: "104px" }}>
+        {colorsToChooseVis ? (
+          <DefaultColorsToChoose defaultColorsFor={defaultColorsFor} />
+        ) : null}
+      </div>
+    </div>
+  );
+}
 
 export default UpperLeftMenu;

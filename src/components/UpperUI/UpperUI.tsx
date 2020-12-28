@@ -17,7 +17,7 @@ function UpperUI({setNewLinkVis, setNewBookmarkVis, setColorsVis, setBookmarkTyp
   // const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
 
     return (
-        <div className="h-32 relative mx-4">
+        <div className="h-32 relative mx-4 flex justify-between items-end">
             <UpperLeftMenu/>
             <UpperRightMenu setNewLinkVis={setNewLinkVis} setNewBookmarkVis={setNewBookmarkVis} setColorsVis={setColorsVis} setBookmarkType={setBookmarkType}/>
 

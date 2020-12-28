@@ -23,48 +23,45 @@ function UpperRightMenu({
   setColorsVis,
   setBookmarkType,
 }: Props): JSX.Element {
-
-
   const [uiColorData, setUiColorData] = uiColorState.use();
 
-
   return (
-    <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
+    // <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
+    <div className=" h-10 w-56 mb-2 flex justify-between items-center">
       <div className="flex w-24 justify-around">
-      <AddLinkSVG
-        className={`h-6 cursor-pointer hover:text-${uiColorData}`}
-        onClick={() => {
-          setNewLinkVis((b) => !b);
-        }}
-      />
-
-      <AddFolderSVG
-          className={`h-6 cursor-pointer hover:text-${uiColorData} mr-1`}
-        onClick={() => {
-          setNewBookmarkVis((b) => !b);
-          setBookmarkType("folder");
-        }}
-      />
-      <AddNote
-        className={`h-6 cursor-pointer fill-current text-black hover:text-${uiColorData}`}
-        onClick={() => {
-          setNewBookmarkVis((b) => !b);
-          setBookmarkType("note");
-        }}
-      />
-      </div>
-   
-        <div className="flex w-24 justify-around">
-        <ColorSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} 
-        onClick={() => {
-          setColorsVis(b=>!b)
-        }}
+        <AddLinkSVG
+          className={`h-6 cursor-pointer hover:text-${uiColorData}`}
+          onClick={() => {
+            setNewLinkVis((b) => !b);
+          }}
         />
-      <SettingsSVG className="h-6" />
-      <UserSVG className="h-6" />
-        </div>
 
-     
+        <AddFolderSVG
+          className={`h-6 cursor-pointer hover:text-${uiColorData} mr-1`}
+          onClick={() => {
+            setNewBookmarkVis((b) => !b);
+            setBookmarkType("folder");
+          }}
+        />
+        <AddNote
+          className={`h-6 cursor-pointer fill-current text-black hover:text-${uiColorData}`}
+          onClick={() => {
+            setNewBookmarkVis((b) => !b);
+            setBookmarkType("note");
+          }}
+        />
+      </div>
+
+      <div className="flex w-24 justify-around">
+        <ColorSVG
+          className={`h-6 cursor-pointer hover:text-${uiColorData}`}
+          onClick={() => {
+            setColorsVis((b) => !b);
+          }}
+        />
+        <SettingsSVG className="h-6" />
+        <UserSVG className="h-6" />
+      </div>
     </div>
   );
 }
