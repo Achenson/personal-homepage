@@ -7,6 +7,7 @@ import { linksDataState } from "../state/bookmarksAndLinks";
 import { deletedBookmarkState } from "../state/bookmarksAndLinks";
 import { noteColorState } from "../state/colorsState";
 import { folderColorState } from "../state/colorsState";
+import { rssColorState } from "../state/colorsState";
 import { columnsColorsState } from "../state/colorsState";
 
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
@@ -20,6 +21,7 @@ import EditLink from "./EditLink";
 import NewLink from "./NewLink";
 import EditBookmarkTitle from "./EditBookmarkTitle";
 import NoteInput from "./NoteInput";
+import RSS from "./RSS";
 
 interface SingleLinkData {
   title: string;
@@ -32,6 +34,7 @@ interface Props {
   bookmarkColor: string | null;
   bookmarkType: "folder" | "note" | "rss";
   noteInput: string | null;
+  rssLink: string | null;
 }
 
 function Bookmark({
@@ -39,6 +42,7 @@ function Bookmark({
   bookmarkColor,
   bookmarkType,
   noteInput,
+  rssLink
 }: Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
@@ -47,6 +51,9 @@ function Bookmark({
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
   const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
   const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
+    false
+  );
+  const [rssVisibility, setRssVisibility] = useState<boolean>(
     false
   );
   const [editLinkVis, setEditLinkVis] = useState<boolean>(false);
@@ -79,6 +86,7 @@ function Bookmark({
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
+  const [rssColorData, setRssColorData] = rssColorState.use();
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
 
   let finalBookmarkColor: string = "";
@@ -93,6 +101,12 @@ function Bookmark({
     if (bookmarkType === "note") {
       finalBookmarkColor = noteColorData;
     }
+
+    if (bookmarkType === "rss") {
+      finalBookmarkColor = rssColorData;
+    }
+
+
   }
 
   function textOrIconColor(
@@ -241,6 +255,12 @@ function Bookmark({
             if (bookmarkType === "note") {
               setNoteInputVisibility((b) => !b);
             }
+
+            if (bookmarkType === "rss") {
+              setRssVisibility((b) => !b);
+            }
+
+
           }}
         >
         <p className=""> {bookmarkTitle}</p> 
@@ -349,6 +369,12 @@ function Bookmark({
       ) : null}
 
       {noteInputVisibility ? <NoteInput noteInput={noteInput} /> : null}
+
+      {rssVisibility ? (
+        <RSS rssLink={rssLink}/>
+      ) :  (
+        null
+      )}
     </div>
   );
 }

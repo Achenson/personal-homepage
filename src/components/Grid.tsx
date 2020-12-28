@@ -80,6 +80,7 @@ function Grid({}: Props): JSX.Element {
                 bookmarkColor={el.color}
                 bookmarkType={el.type}
                 noteInput={el.noteInput}
+                rssLink={el.rssLink}
                 key={i}
               />
             );
@@ -96,6 +97,7 @@ function Grid({}: Props): JSX.Element {
                 bookmarkColor={el.color}
                 bookmarkType={el.type}
                 noteInput={el.noteInput}
+                rssLink={el.rssLink}
                 key={i}
               />
             );
