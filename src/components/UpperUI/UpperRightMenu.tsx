@@ -7,6 +7,7 @@ import { ReactComponent as AddNote } from "../../svgs/text-document-add.svg";
 import { ReactComponent as SettingsSVG } from "../../svgs/settingsAlt.svg";
 import { ReactComponent as UserSVG } from "../../svgs/user.svg";
 import { ReactComponent as ColorSVG } from "../../svgs/beaker.svg";
+import { ReactComponent as RssSVG } from "../../svgs/rss.svg";
 
 import { uiColorState } from "../../state/colorsState";
 
@@ -27,8 +28,8 @@ function UpperRightMenu({
 
   return (
     // <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
-    <div className=" h-10 w-56 mb-2 flex justify-between items-center">
-      <div className="flex w-24 justify-around">
+    <div className=" h-10 w-56 flex justify-between items-center">
+      <div className="flex w-28 justify-around">
         <AddLinkSVG
           className={`h-6 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
@@ -50,9 +51,11 @@ function UpperRightMenu({
             setBookmarkType("note");
           }}
         />
+
+        <RssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} />
       </div>
 
-      <div className="flex w-24 justify-around">
+      <div className="flex w-20 justify-around">
         <ColorSVG
           className={`h-6 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {

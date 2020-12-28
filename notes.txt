@@ -102,3 +102,4 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 46. "Test" wrong naming
 47. clean tailwind.js -> color naming
 48. white color select border to change?
+49. UpperRightMenu icons change to icon without pluses
