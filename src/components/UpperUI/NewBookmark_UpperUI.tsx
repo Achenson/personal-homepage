@@ -11,7 +11,7 @@ import { linksDataState } from "../../state/bookmarksAndLinks";
 
 interface Props {
   setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  bookmarkType: "folder" | "note";
+  bookmarkType: "folder" | "note" | "rss";
 }
 
 function NewBookmark_UpperUI({
@@ -232,6 +232,7 @@ function NewBookmark_UpperUI({
                           priority: 0,
                           type: "note",
                           noteInput: textAreaValue,
+                          rssLink: null
                         });
                       })
                     );
@@ -247,6 +248,7 @@ function NewBookmark_UpperUI({
                           priority: 0,
                           type: "folder",
                           noteInput: null,
+                          rssLink: null
                         });
                       })
                     );

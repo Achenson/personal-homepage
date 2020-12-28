@@ -46,6 +46,7 @@ function Grid({}: Props): JSX.Element {
               priority: 1,
               type: "folder",
               noteInput: null,
+              rssLink: null
             });
           })
         );

@@ -12,7 +12,7 @@ import { deletedBookmarkState } from "../state/bookmarksAndLinks";
 
 interface Props {
   bookmarkTitle: string;
-  bookmarkType: "folder" | "note";
+  bookmarkType: "folder" | "note" | "rss";
   setEditBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   noteInput: string | null;
 }

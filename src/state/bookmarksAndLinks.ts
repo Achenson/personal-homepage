@@ -11,7 +11,8 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     column: 1,
     priority: 1,
     type: "folder",
-    noteInput: null
+    noteInput: null,
+    rssLink: null
     // linksTitles: ["facebook", "tvn24", "gmail"],
   },
   {
@@ -20,7 +21,8 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     column: 1,
     priority: 0,
     type: "folder",
-    noteInput: null
+    noteInput: null,
+    rssLink: null
     // linksTitles: ["tvn24", "gmail"],
   },
   {
@@ -29,7 +31,8 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     column: 2,
     priority: 0,
     type: "folder",
-    noteInput: null
+    noteInput: null,
+    rssLink: null
     // linksTitles: ["facebook"],
   },
   {
@@ -38,9 +41,21 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     column: 1,
     priority: 0,
     type: "note",
-    noteInput: "someText moreText someText moreText someText moreText someText moreText someText moreText someText moreText"
+    noteInput: "someText moreText someText moreText someText moreText someText moreText someText moreText someText moreText",
+    rssLink: null
     // linksTitles: ["facebook"],
   },
+  {
+    title: "SciAmerican",
+    color: null,
+    column: 2,
+    priority: 0,
+    type: "rss",
+    noteInput: null,
+    rssLink: "http://rss.sciam.com/basic-science"
+    // linksTitles: ["facebook"],
+  },
+
 
 
 ]);

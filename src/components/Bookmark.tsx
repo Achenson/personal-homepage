@@ -30,7 +30,7 @@ interface SingleLinkData {
 interface Props {
   bookmarkTitle: string;
   bookmarkColor: string | null;
-  bookmarkType: "folder" | "note";
+  bookmarkType: "folder" | "note" | "rss";
   noteInput: string | null;
 }
 

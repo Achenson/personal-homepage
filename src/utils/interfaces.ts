@@ -3,8 +3,9 @@ export interface SingleBookmarkData {
   color: string | null;
   column: number;
   priority: number;
-  type: "folder" | "note";
+  type: "folder" | "note" | "rss";
   noteInput: string | null;
+  rssLink: string | null;
   // linksTitles: string[];
 }
 
