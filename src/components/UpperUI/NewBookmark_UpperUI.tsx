@@ -227,7 +227,7 @@ function NewBookmark_UpperUI({
                           priority: 0,
                           type: "note",
                           noteInput: textAreaValue,
-                          rssLink: null
+                          // rssLink: null
                         });
                       })
                     );
@@ -236,16 +236,22 @@ function NewBookmark_UpperUI({
                   if (bookmarkType === "folder") {
                     setBookmarksData((previous) =>
                       produce(previous, (updated) => {
-                        updated.push({
-                          id: uuidv4(),
-                          title: bookmarkTitleInput,
-                          column: bookmarkColumnInput,
-                          color: null,
-                          priority: 0,
-                          type: "folder",
-                          noteInput: null,
-                          rssLink: null
-                        });
+                        updated.push(
+                        //   {
+                        //   id: uuidv4(),
+                        //   title: bookmarkTitleInput,
+                        //   column: bookmarkColumnInput,
+                        //   color: null,
+                        //   priority: 0,
+                        //   type: "folder",
+                        //   // noteInput: null,
+                        //   // rssLink: null
+                        // }
+                        {
+                        ...createBookmarkFolder(bookmarkTitleInput, bookmarkColumnInput, 0)
+                        }
+                        
+                        );
                       })
                     );
 

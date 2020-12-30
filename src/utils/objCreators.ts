@@ -14,23 +14,23 @@ export function createBasicFolder(
   };
 }
 
-export function createBookmarkFolder_partial() {
+export function createBookmarkFolder_partial(type: "folder" | "note" | "rss" = "folder") {
   return {
-    type: "folder",
+    type,
   };
 }
 
-export function createNote_partial(noteInput: string | null) {
+export function createNote_partial(noteInput: string | null, type: ("folder" | "note" | "rss") = "note") {
   return {
     noteInput,
-    type: "note",
+    type,
   };
 }
 
-export function createRSS_partial(rssLink: string | null) {
+export function createRSS_partial(rssLink: string | null, type: ("folder" | "note" | "rss") = "rss") {
   return {
     rssLink,
-    type: "rss",
+    type,
   };
 }
 

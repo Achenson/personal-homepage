@@ -1,12 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import Bookmark from "./Bookmark";
 import {
   bookmarksDataState,
   linksDataState,
   deletedBookmarkState,
 } from "../state/bookmarksAndLinks";
+
+import { createBookmarkFolder } from "../utils/objCreators";
+
 import { produce } from "immer";
 
 import { columnsColorsState } from "../state/colorsState";
@@ -41,14 +44,7 @@ function Grid({}: Props): JSX.Element {
         setBookmarksData((previous) =>
           produce(previous, (updated) => {
             updated.push({
-              id: uuidv4(),
-              title: el,
-              color: null,
-              column: 1,
-              priority: 1,
-              type: "folder",
-              noteInput: null,
-              rssLink: null
+              ...createBookmarkFolder(el, 1, 1),
             });
           })
         );
@@ -96,7 +92,7 @@ function Grid({}: Props): JSX.Element {
           .map((el, i) => {
             return (
               <Bookmark
-              bookmarkID={el.id}
+                bookmarkID={el.id}
                 bookmarkTitle={el.title}
                 bookmarkColor={el.color}
                 bookmarkType={el.type}
@@ -107,8 +103,12 @@ function Grid({}: Props): JSX.Element {
             );
           })}
       </div>
-      <div className={`hidden sm:block bg-${columnsColorsData.column_3}`}>3</div>
-      <div className={`hidden sm:block bg-${columnsColorsData.column_4}`}>4</div>
+      <div className={`hidden sm:block bg-${columnsColorsData.column_3}`}>
+        3
+      </div>
+      <div className={`hidden sm:block bg-${columnsColorsData.column_4}`}>
+        4
+      </div>
     </div>
   );
 }
