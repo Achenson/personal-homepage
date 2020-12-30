@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import Bookmark from "./Bookmark";
 import {
   bookmarksDataState,
@@ -40,6 +41,7 @@ function Grid({}: Props): JSX.Element {
         setBookmarksData((previous) =>
           produce(previous, (updated) => {
             updated.push({
+              id: uuidv4(),
               title: el,
               color: null,
               column: 1,
@@ -76,11 +78,12 @@ function Grid({}: Props): JSX.Element {
           .map((el, i) => {
             return (
               <Bookmark
+                bookmarkID={el.id}
                 bookmarkTitle={el.title}
                 bookmarkColor={el.color}
                 bookmarkType={el.type}
-                noteInput={el.noteInput}
-                rssLink={el.rssLink}
+                // noteInput={el.noteInput}
+                // rssLink={el.rssLink}
                 key={i}
               />
             );
@@ -93,11 +96,12 @@ function Grid({}: Props): JSX.Element {
           .map((el, i) => {
             return (
               <Bookmark
+              bookmarkID={el.id}
                 bookmarkTitle={el.title}
                 bookmarkColor={el.color}
                 bookmarkType={el.type}
-                noteInput={el.noteInput}
-                rssLink={el.rssLink}
+                // noteInput={el.noteInput}
+                // rssLink={el.rssLink}
                 key={i}
               />
             );

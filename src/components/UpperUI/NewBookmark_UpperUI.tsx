@@ -2,8 +2,11 @@ import React from "react";
 
 import { useState } from "react";
 
+import { v4 as uuidv4 } from 'uuid';
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
+import {createBookmarkFolder, createNote, createRSS} from "../../utils/objCreators"
+
 import { produce } from "immer";
 
 import { bookmarksDataState } from "../../state/bookmarksAndLinks";
@@ -26,15 +29,6 @@ function NewBookmark_UpperUI({
   const [bookmarkColumnInput, setBookmarkColumnInput] = useState<number>(1);
   const [bookmarkLinksInput, setBookmarkLinksInput] = useState<string[]>([]);
 
-  // let bookmarkIndex: number;
-
-  // bookmarksData.forEach((obj, i) => {
-  //   if (obj.title === bookmarkTitle) {
-  //     bookmarkIndex = i;
-  //   }
-  // });
-
-  // const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
 
   const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
   const [
@@ -226,6 +220,7 @@ function NewBookmark_UpperUI({
                     setBookmarksData((previous) =>
                       produce(previous, (updated) => {
                         updated.push({
+                          id: uuidv4(),
                           title: bookmarkTitleInput,
                           column: bookmarkColumnInput,
                           color: null,
@@ -242,6 +237,7 @@ function NewBookmark_UpperUI({
                     setBookmarksData((previous) =>
                       produce(previous, (updated) => {
                         updated.push({
+                          id: uuidv4(),
                           title: bookmarkTitleInput,
                           column: bookmarkColumnInput,
                           color: null,

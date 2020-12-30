@@ -1,15 +1,23 @@
 import React from 'react'
 
+import { bookmarksDataState } from "../state/bookmarksAndLinks";
+
 let Parser = require('rss-parser');
 let parser = new Parser();
 
 interface Props {
-   rssLink: string | null
+  //  rssLink: string | null
+   bookmarkID: string | number
 }
 
 
 
-function RSS({rssLink}: Props): JSX.Element{
+function RSS({bookmarkID}: Props): JSX.Element{
+
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+
+  let currentBookmark = bookmarksData.filter( obj => obj.id === bookmarkID);
+
 
     // fetchRSS(rssLink as string);
 
@@ -37,7 +45,7 @@ function RSS({rssLink}: Props): JSX.Element{
 (async () => {
 
     // let feed = await parser.parseURL('https://www.reddit.com/.rss');
-    let feed = await parser.parseURL(rssLink);
+    let feed = await parser.parseURL(currentBookmark[0].rssLink);
     console.log(feed.title);
   
   // @ts-ignore: Unreachable code error

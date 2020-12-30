@@ -30,22 +30,32 @@ interface SingleLinkData {
 }
 
 interface Props {
+  bookmarkID: string | number;
   bookmarkTitle: string;
   bookmarkColor: string | null;
   bookmarkType: "folder" | "note" | "rss";
-  noteInput: string | null;
-  rssLink: string | null;
+  // noteInput: string | null;
+  // rssLink: string | null;
 }
 
 function Bookmark({
+  bookmarkID,
   bookmarkTitle,
   bookmarkColor,
   bookmarkType,
-  noteInput,
-  rssLink
+  // noteInput,
+  // rssLink
 }: Props): JSX.Element {
+
+
+
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+
+
+
+
+
   const [linksData, setLinksData] = linksDataState.use();
 
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
@@ -342,10 +352,11 @@ function Bookmark({
 
       {editBookmarkVis ? (
         <EditBookmarkTitle
+        bookmarkID={bookmarkID}
           bookmarkTitle={bookmarkTitle}
           bookmarkType={bookmarkType}
           setEditBookmarkVis={setEditBookmarkVis}
-          noteInput={noteInput}
+          // noteInput={noteInput}
         />
       ) : null}
 
@@ -368,10 +379,14 @@ function Bookmark({
         </div>
       ) : null}
 
-      {noteInputVisibility ? <NoteInput noteInput={noteInput} /> : null}
+      {noteInputVisibility ? <NoteInput
+      //  noteInput={noteInput} 
+       bookmarkID={bookmarkID}/> : null}
 
       {rssVisibility ? (
-        <RSS rssLink={rssLink}/>
+        <RSS 
+        // rssLink={rssLink} 
+        bookmarkID={bookmarkID}/>
       ) :  (
         null
       )}

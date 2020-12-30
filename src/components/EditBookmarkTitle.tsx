@@ -14,27 +14,34 @@ interface Props {
   bookmarkTitle: string;
   bookmarkType: "folder" | "note" | "rss";
   setEditBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  noteInput: string | null;
+  // noteInput: string | null;
+  bookmarkID: string | number;
 }
 
 function EditBookmarkTitle({
+  bookmarkID,
   bookmarkTitle,
   bookmarkType,
   setEditBookmarkVis,
-  noteInput,
+  // noteInput,
 }: Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
 
-  const [textAreaValue, setTextAreaValue] = useState<string | null>(noteInput);
-
+  
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  let currentBookmark = bookmarksData.filter( obj => obj.id === bookmarkID);
+  
   const [linksData, setLinksData] = linksDataState.use();
+  // for note only
+  const [textAreaValue, setTextAreaValue] = useState<string | null>(currentBookmark[0].noteInput as string | null);
 
   const [bookmarkTitleInput, setBookmarkTitleInput] = useState<string>(
     bookmarkTitle
   );
 
   let bookmarkIndex: number;
+
+ 
 
   bookmarksData.forEach((obj, i) => {
     if (obj.title === bookmarkTitle) {
@@ -102,7 +109,7 @@ function EditBookmarkTitle({
           <textarea
             value={textAreaValue as string}
             className="h-full w-full overflow-visible pl-1 pr-1 border font-mono"
-            rows={(noteInput as string).length / 30}
+            rows={(currentBookmark[0].noteInput as string).length / 30}
             onChange={(e) => {
               setTextAreaValue(e.target.value);
             }}
