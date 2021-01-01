@@ -43,18 +43,11 @@ function Bookmark({
   bookmarkTitle,
   bookmarkColor,
   bookmarkType,
-  // noteInput,
-  // rssLink
-}: Props): JSX.Element {
-
-
-
+}: // noteInput,
+// rssLink
+Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-
-
-
-
 
   const [linksData, setLinksData] = linksDataState.use();
 
@@ -63,9 +56,7 @@ function Bookmark({
   const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
     false
   );
-  const [rssVisibility, setRssVisibility] = useState<boolean>(
-    false
-  );
+  const [rssVisibility, setRssVisibility] = useState<boolean>(false);
   const [editLinkVis, setEditLinkVis] = useState<boolean>(false);
   const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
   const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
@@ -82,7 +73,8 @@ function Bookmark({
 
   const [crossVis, setCrossVis] = useState<boolean>(true);
 
-  let bookmarkIndex: number;
+  // 0 to not show typescript errors
+  let bookmarkIndex: number = 0;
 
   // for conditional shadow rendering
   let bookmarkColumn: number;
@@ -115,8 +107,6 @@ function Bookmark({
     if (bookmarkType === "rss") {
       finalBookmarkColor = rssColorData;
     }
-
-
   }
 
   function textOrIconColor(
@@ -133,16 +123,10 @@ function Bookmark({
       "green-505",
       // "warmGray-404",
       "blue-500",
-     
-  
+
       "red-500",
       "violet-500",
-      "purple-500"
-                    // "teal-500",
-      // "blue-500",
-      // "indigo-500",
-      // "purple-500",
-      // "pink-500"
+      "purple-500",
     ];
     let colorsForDarkText: string[] = ["yellow-600"];
 
@@ -162,7 +146,6 @@ function Bookmark({
     if (regexForColors.test(finalBookmarkColor)) {
       // return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
       return textOrIcon === "text" ? "text-gray-100" : "text-gray-200";
-     
     }
 
     return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
@@ -182,7 +165,6 @@ function Bookmark({
       "bg-blue-700",
       "bg-teal-700",
       "bg-green-700",
-    
     ];
 
     let colorsForLightHoverAlt: string[] = [
@@ -203,50 +185,21 @@ function Bookmark({
     return "text-black";
   }
 
-  // function boxShadowCalc() {
-  //   let bookmarkColumnColor: string = "";
-
-  //   switch (bookmarkColumn) {
-  //     case 1:
-  //       bookmarkColumnColor = columnsColorsData.column_1;
-  //     case 2:
-  //       bookmarkColumnColor = columnsColorsData.column_2;
-  //     case 3:
-  //       bookmarkColumnColor = columnsColorsData.column_3;
-  //     case 4:
-  //       bookmarkColumnColor = columnsColorsData.column_4;
-  //     default:
-  //       bookmarkColumnColor = columnsColorsData.column_1;
-  //   }
-
-  //   // if ()
-  //   let regexForColors = /[345678]/;
-
-  //   if (regexForColors.test(bookmarkColumnColor)) {
-  //     // return { boxShadow: "0px -1px  black" };
-  //     return { boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)" };
-  //   }
-  //   return { boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)" };
-  // }
-
   return (
     <div className="relative mb-6">
       <div
         className={`pl-0 h-8 px-2 pt-px bg-${
           // bookmarkColor ? bookmarkColor : finalBookmarkColor
-        finalBookmarkColor
+          finalBookmarkColor
         } ${textOrIconColor(
           finalBookmarkColor,
           "text"
-          
-          )} border border-t-0 border-r-0 border-l-0 border-gray-700 border-opacity-25 flex justify-between`}
-          style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)"}}
-        
+        )} border border-t-0 border-r-0 border-l-0 border-gray-700 border-opacity-25 flex justify-between`}
+        style={{ boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)" }}
         // old style
 
-          // )} border border-t-0 border-r-0 border-l-0 border-gray-400 flex justify-between`}
+        // )} border border-t-0 border-r-0 border-l-0 border-gray-400 flex justify-between`}
         // style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)"}}
-     
 
         onMouseEnter={() => {
           setIconsVisibility(true);
@@ -269,11 +222,9 @@ function Bookmark({
             if (bookmarkType === "rss") {
               setRssVisibility((b) => !b);
             }
-
-
           }}
         >
-        <p className=""> {bookmarkTitle}</p> 
+          <p className=""> {bookmarkTitle}</p>
         </div>
 
         <div
@@ -352,7 +303,7 @@ function Bookmark({
 
       {editBookmarkVis ? (
         <EditBookmarkTitle
-        bookmarkID={bookmarkID}
+          bookmarkID={bookmarkID}
           bookmarkTitle={bookmarkTitle}
           bookmarkType={bookmarkType}
           setEditBookmarkVis={setEditBookmarkVis}
@@ -379,17 +330,20 @@ function Bookmark({
         </div>
       ) : null}
 
-      {noteInputVisibility ? <NoteInput
-      //  noteInput={noteInput} 
-       bookmarkID={bookmarkID}/> : null}
+      {noteInputVisibility ? (
+        <NoteInput
+          //  noteInput={noteInput}
+          bookmarkID={bookmarkID}
+        />
+      ) : null}
 
       {rssVisibility ? (
-        <RSS 
-        // rssLink={rssLink} 
-        bookmarkID={bookmarkID}/>
-      ) :  (
-        null
-      )}
+        <RSS
+          // rssLink={rssLink}
+          bookmarkID={bookmarkID}
+          bookmarkIndex={bookmarkIndex}
+        />
+      ) : null}
     </div>
   );
 }

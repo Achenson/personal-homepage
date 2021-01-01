@@ -31,6 +31,7 @@ export function createRSS_partial(rssLink: string | null, type: ("folder" | "not
   return {
     rssLink,
     type,
+    items: [],
   };
 }
 
