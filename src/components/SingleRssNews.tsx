@@ -4,24 +4,22 @@ import { bookmarksDataState } from "../state/bookmarksAndLinks";
 
 
 interface Props {
-    bookmarkID: string | number;
+    title: string,
+    link: string
     
 }
 
-function SingeRssNews({bookmarkID}: Props): JSX.Element{
+function SingeRssNews({title, link}: Props): JSX.Element{
 
 
-    const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+    // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
-    let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
+    // let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
 
     return (
         <div>
-            nullllll
-            {
-               // @ts-ignore: Unreachable code error
-            currentBookmark[0].items[0].title
-            }
+         <p>{title}</p>
+         <p>{link}</p>
         </div>
     )
 }
