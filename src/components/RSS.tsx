@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
+import { uiColorState } from "../state/colorsState";
 
 import { produce } from "immer";
 import SingleRssNews from "./SingleRssNews";
+
+import { ReactComponent as ArrowLeft } from "../svgs/arrowLeft.svg";
+import { ReactComponent as ArrowRight } from "../svgs/arrowRight.svg";
 
 let Parser = require("rss-parser");
 let parser = new Parser();
@@ -14,6 +18,8 @@ interface Props {
 }
 
 function RSS({ bookmarkID, bookmarkIndex }: Props): JSX.Element {
+  let bgOnHover = `hover:bg-${uiColorState}`;
+
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [toDisplay, setToDisplay] = useState([
     {
@@ -35,7 +41,7 @@ function RSS({ bookmarkID, bookmarkIndex }: Props): JSX.Element {
   ) {
     let arrOfObj = [];
 
-    for (let i = 0 + (pageNumber*10); i < itemsPerPage + (pageNumber*10); i++) {
+    for (let i = 0 + pageNumber * 10; i < itemsPerPage + pageNumber * 10; i++) {
       if (toDisplay[i]) {
         arrOfObj.push(toDisplay[i]);
       }
@@ -97,8 +103,12 @@ function RSS({ bookmarkID, bookmarkIndex }: Props): JSX.Element {
         produce(previous, (updated) => {
           if (toDisplay.length === 1) {
             updated.shift();
-            // @ts-ignore: Unreachable code error
-            for (let i = 0; i < bookmarksData[bookmarkIndex].items?.length; i++) {
+            for (
+              let i = 0;
+              // @ts-ignore: Unreachable code error
+              i < bookmarksData[bookmarkIndex].items?.length;
+              i++
+            ) {
               // @ts-ignore: Unreachable code error
               updated.push(bookmarksData[bookmarkIndex].items[i]);
             }
@@ -133,6 +143,32 @@ function RSS({ bookmarkID, bookmarkIndex }: Props): JSX.Element {
           />
         );
       })}
+      <div className="flex bg-gray-50 justify-end ">
+        <ArrowLeft
+          className={`h-8 ${
+            pageNumber === 0
+              ? `text-gray-400`
+              : `cursor-pointer text-black hover:bg-gray-200`
+          }`}
+          onClick={() => {
+            if (pageNumber > 0) {
+              setPageNumber(pageNumber - 1);
+            }
+          }}
+        />
+        <ArrowRight
+          className={`h-8 ${
+            pageNumber === 4
+              ? `text-gray-400`
+              : `cursor-pointer text-black hover:bg-gray-200`
+          }`}
+          onClick={() => {
+            if (pageNumber < 4) {
+              setPageNumber(pageNumber + 1);
+            }
+          }}
+        />
+      </div>
     </div>
   );
 }
