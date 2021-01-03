@@ -62,7 +62,7 @@ export function createRSS(
   title: string,
   column: number,
   priority: number,
-  rssLink: string | null
+  rssLink: string
 ) {
   return {
     ...createBasicFolder(title, column, priority),

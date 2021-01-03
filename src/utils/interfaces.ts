@@ -7,7 +7,7 @@ export interface SingleBookmarkData {
   type: "folder" | "note" | "rss";
   noteInput?: string | null;
   rssLink?: string | null;
-  items?: [object] | [];
+  items?: [object] | never[] | [];
   // linksTitles: string[];
 }
 

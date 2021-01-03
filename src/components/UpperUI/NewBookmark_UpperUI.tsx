@@ -2,10 +2,14 @@ import React from "react";
 
 import { useState } from "react";
 
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
-import {createBookmarkFolder, createNote, createRSS} from "../../utils/objCreators"
+import {
+  createBookmarkFolder,
+  createNote,
+  createRSS,
+} from "../../utils/objCreators";
 
 import { produce } from "immer";
 
@@ -25,10 +29,10 @@ function NewBookmark_UpperUI({
   const [linksData, setLinksData] = linksDataState.use();
 
   const [bookmarkTitleInput, setBookmarkTitleInput] = useState<string>("");
+  const [rssLinkInput, setRssLinkInput] = useState<string>("");
 
   const [bookmarkColumnInput, setBookmarkColumnInput] = useState<number>(1);
   const [bookmarkLinksInput, setBookmarkLinksInput] = useState<string[]>([]);
-
 
   const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
   const [
@@ -75,9 +79,14 @@ function NewBookmark_UpperUI({
                 className="w-full border border-gray-500"
                 value={bookmarkTitleInput}
                 placeholder={
+                  // bookmarkType === "folder"
+                  //   ? "new folder title"
+                  //   : "new note title"
                   bookmarkType === "folder"
                     ? "new folder title"
-                    : "new note title"
+                    : bookmarkType === "note"
+                    ? "new note title"
+                    : "new RSS title"
                 }
                 onChange={(e) => setBookmarkTitleInput(e.target.value)}
               />
@@ -127,6 +136,21 @@ function NewBookmark_UpperUI({
                   setTextAreaValue(e.target.value);
                 }}
               ></textarea>
+            </div>
+          ) : null}
+
+          {bookmarkType === "rss" ? (
+            <div className="flex justify-around mb-2 mt-2">
+              <p className="w-32">RSS link</p>
+              <div className="w-full pl-2">
+                <input
+                  type="text"
+                  className="w-full border border-gray-500"
+                  value={rssLinkInput}
+                  placeholder="enter RSS link"
+                  onChange={(e) => setRssLinkInput(e.target.value)}
+                />
+              </div>
             </div>
           ) : null}
 
@@ -237,20 +261,14 @@ function NewBookmark_UpperUI({
                     setBookmarksData((previous) =>
                       produce(previous, (updated) => {
                         updated.push(
-                        //   {
-                        //   id: uuidv4(),
-                        //   title: bookmarkTitleInput,
-                        //   column: bookmarkColumnInput,
-                        //   color: null,
-                        //   priority: 0,
-                        //   type: "folder",
-                        //   // noteInput: null,
-                        //   // rssLink: null
-                        // }
-                        {
-                        ...createBookmarkFolder(bookmarkTitleInput, bookmarkColumnInput, 0)
-                        }
-                        
+                    
+                          {
+                            ...createBookmarkFolder(
+                              bookmarkTitleInput,
+                              bookmarkColumnInput,
+                              0
+                            ),
+                          }
                         );
                       })
                     );
@@ -269,6 +287,33 @@ function NewBookmark_UpperUI({
                       })
                     );
                   }
+
+                  if (bookmarkType === "rss") {
+                    setBookmarksData((previous) =>
+                      produce(previous, (updated) => {
+                        updated.push(
+                    
+                          {
+                            // ...createBookmarkFolder(
+                            //   bookmarkTitleInput,
+                            //   bookmarkColumnInput,
+                            //   0
+                            // ),
+
+                            ...createRSS(
+                              bookmarkTitleInput,
+                              bookmarkColumnInput,
+                              0,
+                              rssLinkInput
+                            ),
+
+
+                          }
+                        );
+                      })
+                    );
+                    }
+
 
                   setNewBookmarkVis((b) => !b);
 

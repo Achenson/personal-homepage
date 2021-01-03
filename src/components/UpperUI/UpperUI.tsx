@@ -9,7 +9,7 @@ interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
   setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  setBookmarkType: React.Dispatch<React.SetStateAction<"folder" | "note">>;
+  setBookmarkType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
 }
 
 function UpperUI({setNewLinkVis, setNewBookmarkVis, setColorsVis, setBookmarkType}: Props): JSX.Element{

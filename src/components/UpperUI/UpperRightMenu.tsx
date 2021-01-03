@@ -7,7 +7,7 @@ import { ReactComponent as AddNote } from "../../svgs/text-document-add.svg";
 import { ReactComponent as SettingsSVG } from "../../svgs/settingsAlt.svg";
 import { ReactComponent as UserSVG } from "../../svgs/user.svg";
 import { ReactComponent as ColorSVG } from "../../svgs/beaker.svg";
-import { ReactComponent as RssSVG } from "../../svgs/rss.svg";
+import { ReactComponent as AddRssSVG } from "../../svgs/rss.svg";
 
 import { uiColorState } from "../../state/colorsState";
 
@@ -15,7 +15,7 @@ interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
   setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  setBookmarkType: React.Dispatch<React.SetStateAction<"folder" | "note">>;
+  setBookmarkType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
 }
 
 function UpperRightMenu({
@@ -52,7 +52,11 @@ function UpperRightMenu({
           }}
         />
 
-        <RssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} />
+        <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`}
+          onClick={() => {
+            setNewBookmarkVis((b) => !b);
+            setBookmarkType("rss");
+          }} />
       </div>
 
       <div className="flex w-20 justify-around">
