@@ -5,10 +5,12 @@ import { produce } from "immer";
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
 import { linksDataState } from "../state/bookmarksAndLinks";
 import { deletedBookmarkState } from "../state/bookmarksAndLinks";
-import { noteColorState } from "../state/colorsState";
-import { folderColorState } from "../state/colorsState";
-import { rssColorState } from "../state/colorsState";
-import { columnsColorsState } from "../state/colorsState";
+import {
+  noteColorState,
+  folderColorState,
+  rssColorState,
+  columnsColorsState,
+} from "../state/colorsState";
 
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
 import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
@@ -72,6 +74,8 @@ Props): JSX.Element {
   });
 
   const [crossVis, setCrossVis] = useState<boolean>(true);
+
+ 
 
   // 0 to not show typescript errors
   let bookmarkIndex: number = 0;

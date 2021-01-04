@@ -12,14 +12,35 @@ import { createBookmarkFolder } from "../utils/objCreators";
 
 import { produce } from "immer";
 
-import { columnsColorsState } from "../state/colorsState";
+import { columnsColorsState, resetColorsState } from "../state/colorsState";
 
 interface Props {}
 
 function Grid({}: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [linksData, setLinksData] = linksDataState.use();
+  const [resetColorsData, setResetColorsData] = resetColorsState.use();
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
+
+  useEffect(() => {
+    if (resetColorsData) {
+      // bookmarksData.forEach((obj, i) => {});
+
+      setBookmarksData((previous) =>
+        produce(previous, (updated) => {
+          updated.forEach((obj, i) => {
+            obj.color = null;
+          });
+
+          // updated.push({
+          //   ...createBookmarkFolder(el, 1, 1),
+          // });
+        })
+      );
+
+      setResetColorsData(false);
+    }
+  }, [resetColorsData, setBookmarksData, setResetColorsData]);
 
   useEffect(() => {
     let linksDataTags: string[] = [];

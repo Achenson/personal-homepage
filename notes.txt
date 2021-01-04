@@ -106,3 +106,16 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 50. "all" is not being updated with new links
 51. Double nested string problem in classes - uiColorState on Hover in RSS?
 52. make SingleRssNews same height always
+
+
+
+App structure:
+Main
+  newBookmark
+  newLink
+  Colors_UpperUI *
+  Upper_UI
+    UpperLeftMenu
+    UpperRightMenu *
+  Grid
+    Bookmark

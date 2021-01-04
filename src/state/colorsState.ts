@@ -5,6 +5,8 @@ export const noteColorState = newRidgeState<string>("yellow-500");
 export const rssColorState = newRidgeState<string>("lightBlue-500");
 export const uiColorState = newRidgeState<string>("teal-500");
 
+export const resetColorsState = newRidgeState<boolean>(false);
+
 interface ColumnsColors {
   column_1: string;
   column_2: string;

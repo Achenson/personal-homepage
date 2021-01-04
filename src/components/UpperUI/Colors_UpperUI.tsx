@@ -3,8 +3,14 @@ import React, { useState } from "react";
 import DefaultColorsToChoose from "../Colors/DefaultColorsToChoose";
 import SingleColumnsColor from "../Colors/SingleColumnsColor";
 
-import { noteColorState, folderColorState, rssColorState, uiColorState, columnsColorsState } from "../../state/colorsState";
-
+import {
+  noteColorState,
+  folderColorState,
+  rssColorState,
+  uiColorState,
+  columnsColorsState,
+  resetColorsState,
+} from "../../state/colorsState";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
@@ -37,6 +43,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
   const [noteColorData, setNoteColorData] = noteColorState.use();
   const [rssColorData, setRssColorData] = rssColorState.use();
   const [uiColorData, setUiColorData] = uiColorState.use();
+  const [resetColorsData, setResetColorsData] = resetColorsState.use();
   // const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
   function calcColorTop(
@@ -162,14 +169,9 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
             <span
               className="text-red-600 hover:underline cursor-pointer"
               onClick={() => {
-                setFolderColorData("teal-500");
-                setNoteColorData("yellow-500");
-                // setColumnsColorData({
-                //   column_1: "yellow-200",
-                //   column_2: "orange-200",
-                //   column_3: "red-200",
-                //   column_4: "green-200",
-                // });
+                // setFolderColorData("teal-500");
+                // setNoteColorData("yellow-500");
+              setResetColorsData(true);
               }}
             >
               RESET
