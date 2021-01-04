@@ -185,6 +185,12 @@ function EditBookmarkTitle({
                   if (bookmarkType === "note") {
                     updated[bookmarkIndex].noteInput = textAreaValue;
                   }
+                  if (bookmarkType === "rss") {
+                    updated[bookmarkIndex].rssLink = rssLinkInput;
+                  }
+
+
+
                 })
               );
 
