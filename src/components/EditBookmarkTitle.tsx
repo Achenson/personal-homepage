@@ -23,45 +23,36 @@ function EditBookmarkTitle({
 
   bookmarkType,
   setEditBookmarkVis,
-  // noteInput,
-}: Props): JSX.Element {
+}: // noteInput,
+Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
 
-  
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
- const [rssItemsPerPage, setRssItemsPerPage] = useState(7);
+  const [rssItemsPerPage, setRssItemsPerPage] = useState(7);
 
-  let currentBookmark = bookmarksData.filter( obj => obj.id === bookmarkID);
-  let bookmarkTitle = currentBookmark[0].title
+  let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
+  let bookmarkTitle = currentBookmark[0].title;
 
-  let rssLink: string | null| undefined = "no link";
+  let rssLink: string | null | undefined = "no link";
   // let rssLink;
 
-  
-
-  if(bookmarkType === "rss") {
-    rssLink = currentBookmark[0].rssLink
+  if (bookmarkType === "rss") {
+    rssLink = currentBookmark[0].rssLink;
   }
 
-  
   const [linksData, setLinksData] = linksDataState.use();
   // for note only
-  const [textAreaValue, setTextAreaValue] = useState<string | null>(currentBookmark[0].noteInput as string | null);
+  const [textAreaValue, setTextAreaValue] = useState<string | null>(
+    currentBookmark[0].noteInput as string | null
+  );
 
   const [bookmarkTitleInput, setBookmarkTitleInput] = useState<string>(
     bookmarkTitle
   );
 
-  const [rssLinkInput, setRssLinkInput] = useState<string>(
-    rssLink as string
-  );
-
-
-
+  const [rssLinkInput, setRssLinkInput] = useState<string>(rssLink as string);
 
   let bookmarkIndex: number;
-
- 
 
   bookmarksData.forEach((obj, i) => {
     if (obj.title === bookmarkTitle) {
@@ -82,7 +73,6 @@ function EditBookmarkTitle({
           type="text"
           // min-w-0 !!
           className="border w-full max-w-6xl min-w-0 mr-2"
-          
           value={bookmarkTitleInput}
           onChange={(e) => setBookmarkTitleInput(e.target.value)}
         />
@@ -138,56 +128,76 @@ function EditBookmarkTitle({
         </div>
       ) : null}
 
-      {
-        bookmarkType === "rss" ? (
-          <div>
-             <div className="flex items-center mb-2 mt-2 justify-between">
-               <p className="w-24 whitespace-nowrap">RSS link</p>
-          <input
-            type="text"
-            // min-w-0 !!
-            className="border w-full max-w-6xl min-w-0 mr-6"
-            value={rssLinkInput}
-            onChange={(e) => setRssLinkInput(e.target.value)}
-          />
+      {bookmarkType === "rss" ? (
+        <div>
+          <div className="flex items-center mb-2 mt-2 justify-between">
+            <p className="w-24 whitespace-nowrap">RSS link</p>
+            <input
+              type="text"
+              // min-w-0 !!
+              className="border w-full max-w-6xl min-w-0 mr-6"
+              value={rssLinkInput}
+              onChange={(e) => setRssLinkInput(e.target.value)}
+            />
           </div>
-                   <div className="flex items-center mb-2 mt-2 justify-between">
-                   <p className="whitespace-nowrap w-32">Items per page</p>
-                   <input
-                type="number"
-                min="5"
-                max="15"
-               
+          <div className="flex items-center mb-2 mt-2 justify-between">
+            <p className="whitespace-nowrap w-32">Display options</p>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                name="description"
                 // className="w-full border border-gray-500"
-                className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
+                // className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
                 value={rssItemsPerPage}
-                onChange={(e) =>
-                  setRssItemsPerPage(parseInt(e.target.value))
-                }
-                placeholder={"5-15"}
+                onChange={(e) => setRssItemsPerPage(parseInt(e.target.value))}
+                // placeholder={"5-15"}
               />
-              {/* <input
+              <label htmlFor="description">Description</label>
+            </div>
+
+            <div className="flex items-center mr-6">
+              <input
+                type="checkbox"
+                name="date"
+                // className="w-full border border-gray-500"
+                // className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
+                value={rssItemsPerPage}
+                onChange={(e) => setRssItemsPerPage(parseInt(e.target.value))}
+                // placeholder={"5-15"}
+              />
+              <label htmlFor="date">Date</label>
+            </div>
+
+            {/* <input
                 type="text"
                 // min-w-0 !!
                 className="border w-full max-w-6xl min-w-0 mr-6"
                 value={rssLinkInput}
                 onChange={(e) => setRssLinkInput(e.target.value)}
               /> */}
-              </div>
           </div>
-         
-       
-
-    
-     
-
-
-
-
-
-        )
-        : null 
-      }
+          <div className="flex items-center mb-2 mt-2 justify-between">
+            <p className="whitespace-nowrap w-32">Items per page</p>
+            <input
+              type="number"
+              min="5"
+              max="15"
+              // className="w-full border border-gray-500"
+              className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
+              value={rssItemsPerPage}
+              onChange={(e) => setRssItemsPerPage(parseInt(e.target.value))}
+              placeholder={"5-15"}
+            />
+            {/* <input
+                type="text"
+                // min-w-0 !!
+                className="border w-full max-w-6xl min-w-0 mr-6"
+                value={rssLinkInput}
+                onChange={(e) => setRssLinkInput(e.target.value)}
+              /> */}
+          </div>
+        </div>
+      ) : null}
 
       <div className="flex justify-start mt-3">
         <p className="w-8"></p>
@@ -227,9 +237,6 @@ function EditBookmarkTitle({
                   if (bookmarkType === "rss") {
                     updated[bookmarkIndex].rssLink = rssLinkInput;
                   }
-
-
-
                 })
               );
 
