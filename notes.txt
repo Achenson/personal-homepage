@@ -108,6 +108,9 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 52. make SingleRssNews same height always
 53. RSS -> proxy server or fetching from backend
 54. notes default colors: initial colors not selected
+55. change svg to version whitout plus sign
+56. convert
+57. get rid of its ignore lines
 
 
 App structure:

@@ -11,7 +11,7 @@ import { linksDataState } from "../state/bookmarksAndLinks";
 import { deletedBookmarkState } from "../state/bookmarksAndLinks";
 
 interface Props {
-  bookmarkTitle: string;
+  // bookmarkTitle: string;
   bookmarkType: "folder" | "note" | "rss";
   setEditBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   // noteInput: string | null;
@@ -20,7 +20,7 @@ interface Props {
 
 function EditBookmarkTitle({
   bookmarkID,
-  bookmarkTitle,
+
   bookmarkType,
   setEditBookmarkVis,
   // noteInput,
@@ -30,6 +30,15 @@ function EditBookmarkTitle({
   
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   let currentBookmark = bookmarksData.filter( obj => obj.id === bookmarkID);
+  let bookmarkTitle = currentBookmark[0].title
+
+  let rssLink: string | null| undefined = "no link";
+  // let rssLink;
+
+  if(bookmarkType === "rss") {
+    rssLink = currentBookmark[0].rssLink
+  }
+
   
   const [linksData, setLinksData] = linksDataState.use();
   // for note only
@@ -38,6 +47,13 @@ function EditBookmarkTitle({
   const [bookmarkTitleInput, setBookmarkTitleInput] = useState<string>(
     bookmarkTitle
   );
+
+  const [rssLinkInput, setRssLinkInput] = useState<string>(
+    rssLink as string
+  );
+
+
+
 
   let bookmarkIndex: number;
 
@@ -116,6 +132,23 @@ function EditBookmarkTitle({
           ></textarea>
         </div>
       ) : null}
+
+      {
+        bookmarkType === "rss" ? (
+          <div>
+               <p className="mr-2">RSS link</p>
+          <input
+            type="text"
+            // min-w-0 !!
+            className="border w-full max-w-6xl min-w-0"
+            value={rssLinkInput}
+            onChange={(e) => setRssLinkInput(e.target.value)}
+          />
+          </div>
+       
+        )
+        : null 
+      }
 
       <div className="flex justify-start mt-3">
         <p className="w-8"></p>

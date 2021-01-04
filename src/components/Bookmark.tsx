@@ -306,7 +306,6 @@ Props): JSX.Element {
       {editBookmarkVis ? (
         <EditBookmarkTitle
           bookmarkID={bookmarkID}
-          bookmarkTitle={bookmarkTitle}
           bookmarkType={bookmarkType}
           setEditBookmarkVis={setEditBookmarkVis}
           // noteInput={noteInput}
