@@ -49,9 +49,10 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
   const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
     false
   );
-  const [titleUniquenessErrorVis, setTitleUniquenessErrorVis] = useState<
-    boolean
-  >(false);
+  const [
+    titleUniquenessErrorVis,
+    setTitleUniquenessErrorVis,
+  ] = useState<boolean>(false);
   const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
 
   let notesTitlesArr: string[] = [];

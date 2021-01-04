@@ -75,8 +75,6 @@ Props): JSX.Element {
 
   const [crossVis, setCrossVis] = useState<boolean>(true);
 
- 
-
   // 0 to not show typescript errors
   let bookmarkIndex: number = 0;
 
@@ -338,6 +336,7 @@ Props): JSX.Element {
         <NoteInput
           //  noteInput={noteInput}
           bookmarkID={bookmarkID}
+          setEditBookmarkVis={setEditBookmarkVis}
         />
       ) : null}
 
