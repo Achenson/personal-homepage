@@ -52,6 +52,9 @@ Props): JSX.Element {
 
   const [rssLinkInput, setRssLinkInput] = useState<string>(rssLink as string);
 
+  const [descriptionCheckbox, setDescriptionCheckbox] = useState(false);
+  const [dateCheckbox, setDateCheckbox] = useState(true);
+
   let bookmarkIndex: number;
 
   bookmarksData.forEach((obj, i) => {
@@ -148,11 +151,12 @@ Props): JSX.Element {
                 name="description"
                 // className="w-full border border-gray-500"
                 // className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
-                value={rssItemsPerPage}
-                onChange={(e) => setRssItemsPerPage(parseInt(e.target.value))}
-                // placeholder={"5-15"}
+                checked={descriptionCheckbox}
+                onChange={() => setDescriptionCheckbox((b) => !b)}
               />
-              <label htmlFor="description">Description</label>
+              <label className="ml-1" htmlFor="description">
+                Description
+              </label>
             </div>
 
             <div className="flex items-center mr-6">
@@ -161,11 +165,17 @@ Props): JSX.Element {
                 name="date"
                 // className="w-full border border-gray-500"
                 // className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
-                value={rssItemsPerPage}
-                onChange={(e) => setRssItemsPerPage(parseInt(e.target.value))}
+                // value={rssItemsPerPage}
+                // onChange={(e) => setRssItemsPerPage(parseInt(e.target.value))}
+
+                checked={dateCheckbox}
+                onChange={() => setDateCheckbox((b) => !b)}
+
                 // placeholder={"5-15"}
               />
-              <label htmlFor="date">Date</label>
+              <label className="ml-1" htmlFor="date">
+                Date
+              </label>
             </div>
 
             {/* <input
@@ -188,13 +198,6 @@ Props): JSX.Element {
               onChange={(e) => setRssItemsPerPage(parseInt(e.target.value))}
               placeholder={"5-15"}
             />
-            {/* <input
-                type="text"
-                // min-w-0 !!
-                className="border w-full max-w-6xl min-w-0 mr-6"
-                value={rssLinkInput}
-                onChange={(e) => setRssLinkInput(e.target.value)}
-              /> */}
           </div>
         </div>
       ) : null}
