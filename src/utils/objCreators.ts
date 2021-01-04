@@ -14,23 +14,37 @@ export function createBasicFolder(
   };
 }
 
-export function createBookmarkFolder_partial(type: "folder" | "note" | "rss" = "folder") {
+export function createBookmarkFolder_partial(
+  type: "folder" | "note" | "rss" = "folder"
+) {
   return {
     type,
   };
 }
 
-export function createNote_partial(noteInput: string | null, type: ("folder" | "note" | "rss") = "note") {
+export function createNote_partial(
+  noteInput: string | null,
+  type: "folder" | "note" | "rss" = "note"
+) {
   return {
     noteInput,
     type,
   };
 }
 
-export function createRSS_partial(rssLink: string | null, type: ("folder" | "note" | "rss") = "rss") {
+export function createRSS_partial(
+  rssLink: string | null,
+  type: "folder" | "note" | "rss" = "rss",
+  date: null | boolean = null,
+  description: null | boolean = null,
+  itemsPerPage: null | number = null
+) {
   return {
     rssLink,
     type,
+    date,
+    description,
+    itemsPerPage,
     items: [],
   };
 }

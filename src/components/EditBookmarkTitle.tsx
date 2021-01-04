@@ -9,6 +9,7 @@ import { produce } from "immer";
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
 import { linksDataState } from "../state/bookmarksAndLinks";
 import { deletedBookmarkState } from "../state/bookmarksAndLinks";
+import { rssSettingsState } from "../state/defaultSettings";
 
 interface Props {
   // bookmarkTitle: string;
@@ -28,6 +29,8 @@ Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
+
   const [rssItemsPerPage, setRssItemsPerPage] = useState(7);
 
   let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
@@ -52,8 +55,26 @@ Props): JSX.Element {
 
   const [rssLinkInput, setRssLinkInput] = useState<string>(rssLink as string);
 
-  const [descriptionCheckbox, setDescriptionCheckbox] = useState(false);
-  const [dateCheckbox, setDateCheckbox] = useState(true);
+  const [descriptionCheckbox, setDescriptionCheckbox] = useState(() => {
+    if (currentBookmark[0].description) {
+      return currentBookmark[0].description;
+    }
+    return rssSettingsData.description;
+  });
+  const [dateCheckbox, setDateCheckbox] = useState(() => {
+    if (currentBookmark[0].date) {
+      return currentBookmark[0].date;
+    }
+    return rssSettingsData.date;
+  });
+
+  // function calcDescriptionCheckbox() {
+  //   if (currentBookmark[0].description) {
+  //     return currentBookmark[0].description;
+  //   }
+
+  //   return rssSettingsData.date;
+  // }
 
   let bookmarkIndex: number;
 
