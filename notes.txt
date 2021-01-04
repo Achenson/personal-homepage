@@ -113,6 +113,8 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 57. get rid of its ignore lines
 58. change all bookmark index logic to bookmark ID
 59. EditBookmarkTitle errors
+60. EditBookmarkTitle: RSS Title & RRS Link not aligned
+61. styling numerical inputs
 
 App structure:
 Main

@@ -29,11 +29,15 @@ function EditBookmarkTitle({
 
   
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+ const [rssItemsPerPage, setRssItemsPerPage] = useState(7);
+
   let currentBookmark = bookmarksData.filter( obj => obj.id === bookmarkID);
   let bookmarkTitle = currentBookmark[0].title
 
   let rssLink: string | null| undefined = "no link";
   // let rssLink;
+
+  
 
   if(bookmarkType === "rss") {
     rssLink = currentBookmark[0].rssLink
@@ -73,17 +77,18 @@ function EditBookmarkTitle({
   return (
     <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-2">
       <div className="flex items-center mb-2 mt-2 justify-between">
-        <p className="mr-2">Title</p>
+        <p className="w-24">Title</p>
         <input
           type="text"
           // min-w-0 !!
-          className="border w-full max-w-6xl min-w-0"
+          className="border w-full max-w-6xl min-w-0 mr-2"
+          
           value={bookmarkTitleInput}
           onChange={(e) => setBookmarkTitleInput(e.target.value)}
         />
         {/* <div className=""> */}
         <TrashSmallSVG
-          className="h-6  fill-current text-gray-700 hover:text-black cursor-pointer ml-2"
+          className="h-6  fill-current text-gray-700 hover:text-black cursor-pointer"
           onClick={() => {
             setDeletedBookmark(bookmarkTitle);
 
@@ -136,16 +141,50 @@ function EditBookmarkTitle({
       {
         bookmarkType === "rss" ? (
           <div>
-               <p className="mr-2">RSS link</p>
+             <div className="flex items-center mb-2 mt-2 justify-between">
+               <p className="w-24 whitespace-nowrap">RSS link</p>
           <input
             type="text"
             // min-w-0 !!
-            className="border w-full max-w-6xl min-w-0"
+            className="border w-full max-w-6xl min-w-0 mr-6"
             value={rssLinkInput}
             onChange={(e) => setRssLinkInput(e.target.value)}
           />
           </div>
+                   <div className="flex items-center mb-2 mt-2 justify-between">
+                   <p className="whitespace-nowrap w-32">Items per page</p>
+                   <input
+                type="number"
+                min="5"
+                max="15"
+               
+                // className="w-full border border-gray-500"
+                className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
+                value={rssItemsPerPage}
+                onChange={(e) =>
+                  setRssItemsPerPage(parseInt(e.target.value))
+                }
+                placeholder={"5-15"}
+              />
+              {/* <input
+                type="text"
+                // min-w-0 !!
+                className="border w-full max-w-6xl min-w-0 mr-6"
+                value={rssLinkInput}
+                onChange={(e) => setRssLinkInput(e.target.value)}
+              /> */}
+              </div>
+          </div>
+         
        
+
+    
+     
+
+
+
+
+
         )
         : null 
       }
