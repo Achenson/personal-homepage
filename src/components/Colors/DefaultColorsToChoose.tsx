@@ -12,6 +12,7 @@ interface Props {
   defaultColorsFor:
     | "folders"
     | "notes"
+    | "rss"
     | "column_1"
     | "column_2"
     | "column_3"

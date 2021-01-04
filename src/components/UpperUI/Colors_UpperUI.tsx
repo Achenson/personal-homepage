@@ -3,10 +3,8 @@ import React, { useState } from "react";
 import DefaultColorsToChoose from "../Colors/DefaultColorsToChoose";
 import SingleColumnsColor from "../Colors/SingleColumnsColor";
 
-import { noteColorState } from "../../state/colorsState";
-import { folderColorState } from "../../state/colorsState";
-import { columnsColorsState } from "../../state/colorsState";
-import { uiColorState } from "../../state/colorsState";
+import { noteColorState, folderColorState, rssColorState, uiColorState, columnsColorsState } from "../../state/colorsState";
+
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
@@ -19,6 +17,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
   const [defaultColorsFor, setDefaultColorsFor] = useState<
     | "folders"
     | "notes"
+    | "rss"
     // | "column_1"
     // | "column_2"
     // | "column_3"
@@ -30,32 +29,34 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
 
   const [foldersSelected, setFoldersSelected] = useState<boolean>(false);
   const [notesSelected, setNotesSelected] = useState<boolean>(false);
+  const [rssSelected, setRssSelected] = useState<boolean>(false);
   // const [columnsSelected, setColumnsSelected] = useState<boolean>(false);
   // const [columnSelected, setColumnSelected] = useState<number | null>(null);
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
+  const [rssColorData, setRssColorData] = rssColorState.use();
   const [uiColorData, setUiColorData] = uiColorState.use();
   // const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
-
-
-  function calcColorTop(defaultColorsFor :  "folders"
-  | "notes"
-  | "unselected" ) {
+  function calcColorTop(
+    defaultColorsFor: "folders" | "notes" | "rss" | "unselected"
+  ) {
     if (defaultColorsFor === "folders") {
-       return "90px"
+      return "90px";
     }
 
     if (defaultColorsFor === "notes") {
-      return "122px"
-   }
+      return "122px";
+    }
 
-   if (defaultColorsFor === "unselected") {
-    return "0px"
- }
+    if (defaultColorsFor === "rss") {
+      return "154px";
+    }
 
-
+    if (defaultColorsFor === "unselected") {
+      return "0px";
+    }
   }
 
   return (
@@ -69,27 +70,22 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
           style={{ width: "417px", height: "200px" }}
         >
           <div className="absolute right-0 top-0 mt-1 mr-1">
-            <CancelSVG className="h-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"
-             onClick={() => {
-              if (colorsVis) {
-                setColorsVis(false);
-              }
-            }}
+            <CancelSVG
+              className="h-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"
+              onClick={() => {
+                if (colorsVis) {
+                  setColorsVis(false);
+                }
+              }}
             />
           </div>
 
           <p className="text-center">Color settings</p>
           <div className="flex justify-between items-center mb-2 mt-2">
-            <p
-              className="w-32"
-             
-            >
-              Folder default
-            </p>
+            <p className="w-32">Folder default</p>
             <div
               onClick={() => {
                 setDefaultColorsFor("folders");
-
 
                 if (defaultColorsFor === "folders") {
                   setColorsToChooseVis((b) => !b);
@@ -98,6 +94,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                 }
 
                 setNotesSelected(false);
+                setRssSelected(false);
                 // setColumnSelected(null);
 
                 setFoldersSelected((b) => !b);
@@ -120,6 +117,7 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                 }
 
                 setFoldersSelected(false);
+                setRssSelected(false);
                 // setColumnSelected(null);
 
                 setNotesSelected((b) => !b);
@@ -129,14 +127,35 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
               } border-black hover:border-gray-500`}
             ></div>
           </div>
+          <div className="flex justify-between items-center mb-2 mt-2">
+            <p className="w-32">RSS default</p>
+            <div
+              onClick={() => {
+                setDefaultColorsFor("rss");
 
+                if (defaultColorsFor === "rss") {
+                  setColorsToChooseVis((b) => !b);
+                } else {
+                  setColorsToChooseVis(true);
+                }
+
+                setFoldersSelected(false);
+                setNotesSelected(false);
+
+                // setColumnSelected(null);
+
+                setRssSelected((b) => !b);
+              }}
+              className={`h-4 w-8 bg-${rssColorData} cursor-pointer ${
+                rssSelected ? "border-2" : "border"
+              } border-black hover:border-gray-500`}
+            ></div>
+          </div>
 
           {/* <div className="flex justify-between items-center mb-2 mt-2">
             <p className="w-32">Columns</p>
             <div className="flex">{columnsRendering(4)}</div>
           </div> */}
-
-
 
           <p className="text-center mt-5">
             {" "}
@@ -151,7 +170,6 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
                 //   column_3: "red-200",
                 //   column_4: "green-200",
                 // });
-
               }}
             >
               RESET
@@ -167,16 +185,15 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
             // left: "93px"
 
             top: calcColorTop(defaultColorsFor),
-            left: "300px"
+            left: "300px",
             // `${
-              // defaultColorsFor === "column_1" ||
-              // "column_2" ||
-              // "column_3" ||
-              // "column_4"
-              //   ? "93px"
-              //   : 
-                // "157px"
-            ,
+            // defaultColorsFor === "column_1" ||
+            // "column_2" ||
+            // "column_3" ||
+            // "column_4"
+            //   ? "93px"
+            //   :
+            // "157px"
           }}
         >
           {colorsToChooseVis ? (

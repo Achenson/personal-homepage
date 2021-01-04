@@ -1,6 +1,7 @@
 import React from "react";
 import { folderColorState } from "../../state/colorsState";
 import { noteColorState } from "../../state/colorsState";
+import { rssColorState } from "../../state/colorsState";
 // import { uiColorState } from "../../state/colorsState";
 import { columnsColorsState } from "../../state/colorsState";
 import { uiColorState } from "../../state/colorsState";
@@ -13,6 +14,7 @@ interface Props {
   defaultColorsFor:
     | "folders"
     | "notes"
+    | "rss"
     | "column_1"
     | "column_2"
     | "column_3"
@@ -33,6 +35,7 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
+  const [rssColorData, setRssColorData] = rssColorState.use();
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [uiColorData, setUiColorData] = uiColorState.use();
 
@@ -40,6 +43,7 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
     defaultColorsFor:
       | "folders"
       | "notes"
+      | "rss"
       | "column_1"
       | "column_2"
       | "column_3"
@@ -67,6 +71,16 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
 
       return "border-2 border-white";
     }
+
+    if (defaultColorsFor === "rss") {
+      if (color !== rssColorData) {
+        return "border border-black";
+      }
+
+      return "border-2 border-white";
+    }
+
+
 
     // return color === columnsColorsData[defaultColorsFor] ? true : false;
 
@@ -173,6 +187,10 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
 
         if (defaultColorsFor === "notes") {
           setNoteColorData(color);
+        }
+
+        if (defaultColorsFor === "rss") {
+          setRssColorData(color)
         }
 
         if (
