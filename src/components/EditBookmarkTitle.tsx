@@ -56,16 +56,18 @@ Props): JSX.Element {
   const [rssLinkInput, setRssLinkInput] = useState<string>(rssLink as string);
 
   const [descriptionCheckbox, setDescriptionCheckbox] = useState(() => {
-    if (currentBookmark[0].description) {
+    if (typeof(currentBookmark[0].description) === "boolean") {
       return currentBookmark[0].description;
+    } else {
+      return rssSettingsData.description;
     }
-    return rssSettingsData.description;
   });
   const [dateCheckbox, setDateCheckbox] = useState(() => {
-    if (currentBookmark[0].date) {
+    if (typeof(currentBookmark[0].date) === "boolean") {
       return currentBookmark[0].date;
+    } else {
+      return rssSettingsData.date;
     }
-    return rssSettingsData.date;
   });
 
   // function calcDescriptionCheckbox() {
@@ -165,7 +167,7 @@ Props): JSX.Element {
             />
           </div>
           <div className="flex items-center mb-2 mt-2 justify-between">
-            <p className="whitespace-nowrap w-32">Display options</p>
+            <p className="whitespace-nowrap w-32">Display</p>
             <div className="flex items-center">
               <input
                 type="checkbox"
@@ -260,6 +262,15 @@ Props): JSX.Element {
                   }
                   if (bookmarkType === "rss") {
                     updated[bookmarkIndex].rssLink = rssLinkInput;
+
+                    if (typeof(dateCheckbox) === "boolean") {
+                      updated[bookmarkIndex].date = dateCheckbox;
+                    }
+
+                    // if (descriptionCheckbox !== rssSettingsData.description) {
+                    if (typeof(descriptionCheckbox) === "boolean") {
+                      updated[bookmarkIndex].description = descriptionCheckbox;
+                    }
                   }
                 })
               );
