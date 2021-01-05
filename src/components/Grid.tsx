@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Bookmark from "./Bookmark";
+import Column from "./Column";
 import {
   bookmarksDataState,
   linksDataState,
@@ -14,6 +15,7 @@ import { produce } from "immer";
 
 import { columnsColorsState, resetColorsState } from "../state/colorsState";
 
+
 interface Props {}
 
 function Grid({}: Props): JSX.Element {
@@ -21,6 +23,10 @@ function Grid({}: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
   const [resetColorsData, setResetColorsData] = resetColorsState.use();
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
+
+  // const [{addedProps}, drop] = useDrop({
+
+  // })
 
   useEffect(() => {
     if (resetColorsData) {
@@ -88,7 +94,13 @@ function Grid({}: Props): JSX.Element {
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4">
-      <div className={`bg-${columnsColorsData.column_1}`}>
+
+      <Column colNumber={1}/>
+      <Column colNumber={2}/>
+      <Column colNumber={3}/>
+      <Column colNumber={4}/>
+
+      {/* <div className={`bg-${columnsColorsData.column_1}`}>
         {bookmarksData
           .filter((el) => el.column === 1)
           // lower priority, higher in the column
@@ -130,7 +142,10 @@ function Grid({}: Props): JSX.Element {
       </div>
       <div className={`hidden sm:block bg-${columnsColorsData.column_4}`}>
         4
-      </div>
+      </div> */}
+
+
+
     </div>
   );
 }

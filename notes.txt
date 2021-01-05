@@ -123,6 +123,8 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 67. RSS refresh button
 68. note & RSS improve SVG icon placement
 69. EditBookmark -> improve checkboxes -> add initial checks, compare vs later
+70. make column component
+71. Column -> make them stack when the screen is smaller
 
 App structure:
 Main
