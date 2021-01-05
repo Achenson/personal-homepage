@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useState, useEffect } from "react";
+import {ItemTypes} from "../utils/itemsDnd"
 
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
 import { columnsColorsState, resetColorsState } from "../state/colorsState";
@@ -16,6 +17,14 @@ interface Props {
 function Column({ colNumber }: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+
+   const [{isOver}, drop] = useDrop({
+    //    required property
+    accept: ItemTypes.BOOKMARK,
+    collect: monitor => ({
+        isOver: !!monitor.isOver()
+    })
+  })
 
   function calcColumnColor(colNumber: number) {
     switch (colNumber) {
@@ -35,7 +44,8 @@ function Column({ colNumber }: Props): JSX.Element {
     <div
       className={`bg-${calcColumnColor(colNumber)} ${
         colNumber !== 1 ? "hidden sm:block" : ""
-      }`}
+      }  ${isOver ? "opacity-50" : ""}`}
+      ref={drop}
     >
       {bookmarksData
         .filter((el) => el.column === colNumber)

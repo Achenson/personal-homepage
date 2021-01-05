@@ -125,6 +125,7 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 69. EditBookmark -> improve checkboxes -> add initial checks, compare vs later
 70. make column component
 71. Column -> make them stack when the screen is smaller
+72. Column & Grid -> clean code between them
 
 App structure:
 Main

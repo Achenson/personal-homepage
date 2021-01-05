@@ -25,7 +25,7 @@ import EditBookmarkTitle from "./EditBookmarkTitle";
 import NoteInput from "./NoteInput";
 import RSS from "./RSS";
 import { useDrag } from "react-dnd";
-import { ItemType } from "../utils/itemsDnd";
+import { ItemTypes } from "../utils/itemsDnd";
 
 interface SingleLinkData {
   title: string;
@@ -86,7 +86,7 @@ Props): JSX.Element {
       // the result that will come from out useDrag hook
       item: {
         // type is required
-        type: ItemType.BOOKMARK,
+        type: ItemTypes.BOOKMARK,
         id: bookmarkID
       },
       collect: monitor => ({

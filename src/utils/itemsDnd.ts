@@ -1,3 +1,3 @@
-export const ItemType = {
+export const ItemTypes = {
     BOOKMARK: "bookmark"
 }
