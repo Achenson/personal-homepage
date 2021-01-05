@@ -24,6 +24,8 @@ import NewLink from "./NewLink";
 import EditBookmarkTitle from "./EditBookmarkTitle";
 import NoteInput from "./NoteInput";
 import RSS from "./RSS";
+import { useDrag } from "react-dnd";
+import { ItemType } from "../utils/itemsDnd";
 
 interface SingleLinkData {
   title: string;
@@ -74,6 +76,25 @@ Props): JSX.Element {
   });
 
   const [crossVis, setCrossVis] = useState<boolean>(true);
+  // we get two things:
+  //  1.) object containing all props - we will get that from collection functions
+  // the collecting functions will turn monitor events into props
+  // 2.) A ref - the result of this useDrag hook is going to be attached to that specific DOM element
+  // isDragging - props coming from collecting function
+  const[{isDragging}, drag] = useDrag(
+    {
+      // the result that will come from out useDrag hook
+      item: {
+        // type is required
+        type: ItemType.BOOKMARK,
+        id: bookmarkID
+      },
+      collect: monitor => ({
+        isDragging: !!monitor.isDragging()
+      })
+    }
+  )
+
 
   // 0 to not show typescript errors
   let bookmarkIndex: number = 0;
@@ -188,7 +209,7 @@ Props): JSX.Element {
   }
 
   return (
-    <div className="relative mb-6">
+    <div className="relative mb-6" ref={drag}>
       <div
         className={`pl-0 h-8 px-2 pt-px bg-${
           // bookmarkColor ? bookmarkColor : finalBookmarkColor
@@ -249,6 +270,7 @@ Props): JSX.Element {
                 // className="h-6  hover:text-black hover:invisible"
                 className="h-6"
                 style={{ marginTop: "-2px" }}
+                
               />
             ) : null}
           </div>
