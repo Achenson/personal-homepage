@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useState, useEffect } from "react";
-import {ItemTypes} from "../utils/itemsDnd"
+import { ItemTypes } from "../utils/itemsDnd";
 
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
 import { columnsColorsState, resetColorsState } from "../state/colorsState";
@@ -9,6 +9,7 @@ import { columnsColorsState, resetColorsState } from "../state/colorsState";
 import Bookmark from "./Bookmark";
 
 import { useDrop } from "react-dnd";
+import { produce } from "immer";
 
 interface Props {
   colNumber: number;
@@ -18,13 +19,35 @@ function Column({ colNumber }: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
-   const [{isOver}, drop] = useDrop({
+  const [{ isOver }, drop] = useDrop({
     //    required property
     accept: ItemTypes.BOOKMARK,
-    collect: monitor => ({
-        isOver: !!monitor.isOver()
-    })
-  })
+    // @ts-ignore: Unreachable code error
+    drop: (item, monitor) => dragBookmark(item.bookmarkID),
+    // drop: (item, monitor) => console.log(item.bookmarkID),
+
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  });
+
+  function dragBookmark(itemID: number | string) {
+    setBookmarksData((previous) =>
+      produce(previous, (updated) => {
+        let bookmarkIndex: number = 0;
+
+        bookmarksData.forEach((obj, i) => {
+          if (obj.id === itemID) {
+            bookmarkIndex = i;
+          }
+        });
+        // let currentBookmark = bookmarksData.filter( obj => obj.id === itemID )
+
+        updated[bookmarkIndex].column = colNumber;
+        //  updated[currentBookmark]
+      })
+    );
+  }
 
   function calcColumnColor(colNumber: number) {
     switch (colNumber) {

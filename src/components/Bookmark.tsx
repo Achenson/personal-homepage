@@ -87,7 +87,7 @@ Props): JSX.Element {
       item: {
         // type is required
         type: ItemTypes.BOOKMARK,
-        id: bookmarkID
+        bookmarkID: bookmarkID
       },
       collect: monitor => ({
         isDragging: !!monitor.isDragging()
