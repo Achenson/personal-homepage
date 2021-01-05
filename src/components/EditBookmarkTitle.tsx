@@ -31,8 +31,6 @@ Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
 
-  const [rssItemsPerPage, setRssItemsPerPage] = useState(7);
-
   let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
   let bookmarkTitle = currentBookmark[0].title;
 
@@ -56,20 +54,29 @@ Props): JSX.Element {
   const [rssLinkInput, setRssLinkInput] = useState<string>(rssLink as string);
 
   const [descriptionCheckbox, setDescriptionCheckbox] = useState(() => {
-    if (typeof(currentBookmark[0].description) === "boolean") {
+    if (typeof currentBookmark[0].description === "boolean") {
       return currentBookmark[0].description;
-    } else {
-      return rssSettingsData.description;
     }
+
+    return rssSettingsData.description;
   });
   const [dateCheckbox, setDateCheckbox] = useState(() => {
-    if (typeof(currentBookmark[0].date) === "boolean") {
+    if (typeof currentBookmark[0].date === "boolean") {
       return currentBookmark[0].date;
-    } else {
-      return rssSettingsData.date;
     }
+    return rssSettingsData.date;
   });
 
+  const [wasCheckboxClicked, setWasCheckboxClicked] = useState(false);
+  
+  const [rssItemsPerPage, setRssItemsPerPage] = useState(() => {
+    if (typeof currentBookmark[0].itemsPerPage === "number") {
+      return currentBookmark[0].itemsPerPage;
+    }
+    return rssSettingsData.itemsPerPage;
+  });
+  
+  const [wasItemsPerPageClicked, setWasItemsPerPageClicked] = useState(false);
   // function calcDescriptionCheckbox() {
   //   if (currentBookmark[0].description) {
   //     return currentBookmark[0].description;
@@ -163,7 +170,9 @@ Props): JSX.Element {
               // min-w-0 !!
               className="border w-full max-w-6xl min-w-0 mr-6"
               value={rssLinkInput}
-              onChange={(e) => setRssLinkInput(e.target.value)}
+              onChange={(e) => {
+                setRssLinkInput(e.target.value);
+              }}
             />
           </div>
           <div className="flex items-center mb-2 mt-2 justify-between">
@@ -175,7 +184,10 @@ Props): JSX.Element {
                 // className="w-full border border-gray-500"
                 // className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
                 checked={descriptionCheckbox}
-                onChange={() => setDescriptionCheckbox((b) => !b)}
+                onChange={() => {
+                  setDescriptionCheckbox((b) => !b);
+                  setWasCheckboxClicked(true);
+                }}
               />
               <label className="ml-1" htmlFor="description">
                 Description
@@ -192,7 +204,10 @@ Props): JSX.Element {
                 // onChange={(e) => setRssItemsPerPage(parseInt(e.target.value))}
 
                 checked={dateCheckbox}
-                onChange={() => setDateCheckbox((b) => !b)}
+                onChange={() => {
+                  setDateCheckbox((b) => !b);
+                  setWasCheckboxClicked(true);
+                }}
 
                 // placeholder={"5-15"}
               />
@@ -218,7 +233,13 @@ Props): JSX.Element {
               // className="w-full border border-gray-500"
               className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
               value={rssItemsPerPage}
-              onChange={(e) => setRssItemsPerPage(parseInt(e.target.value))}
+              onChange={(e) => {
+
+                setRssItemsPerPage(parseInt(e.target.value))
+                setWasItemsPerPageClicked(true);
+
+
+              }}
               placeholder={"5-15"}
             />
           </div>
@@ -231,6 +252,9 @@ Props): JSX.Element {
           <button
             onClick={(e) => {
               e.preventDefault();
+
+              setWasCheckboxClicked(false);
+              setWasItemsPerPageClicked(false);
 
               // if(tagsInput.join(", "))
 
@@ -263,14 +287,18 @@ Props): JSX.Element {
                   if (bookmarkType === "rss") {
                     updated[bookmarkIndex].rssLink = rssLinkInput;
 
-                    if (typeof(dateCheckbox) === "boolean") {
+                    if (wasCheckboxClicked) {
                       updated[bookmarkIndex].date = dateCheckbox;
                     }
-
-                    // if (descriptionCheckbox !== rssSettingsData.description) {
-                    if (typeof(descriptionCheckbox) === "boolean") {
+                   
+                    if (wasCheckboxClicked) {
                       updated[bookmarkIndex].description = descriptionCheckbox;
                     }
+
+                    if (wasItemsPerPageClicked) {
+                      updated[bookmarkIndex].itemsPerPage = rssItemsPerPage;
+                    }
+       
                   }
                 })
               );
