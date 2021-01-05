@@ -66,16 +66,18 @@ Props): JSX.Element {
     }
     return rssSettingsData.date;
   });
-
+  // checkboxes won't be saved on Save if there were not manipulated
+  //  (so they will still respond to changing default setting (they will have null as a property))
   const [wasCheckboxClicked, setWasCheckboxClicked] = useState(false);
-  
+
   const [rssItemsPerPage, setRssItemsPerPage] = useState(() => {
     if (typeof currentBookmark[0].itemsPerPage === "number") {
       return currentBookmark[0].itemsPerPage;
     }
     return rssSettingsData.itemsPerPage;
   });
-  
+
+  // items per page won't be saved on Save if there were not manipulated
   const [wasItemsPerPageClicked, setWasItemsPerPageClicked] = useState(false);
   // function calcDescriptionCheckbox() {
   //   if (currentBookmark[0].description) {
@@ -234,11 +236,8 @@ Props): JSX.Element {
               className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
               value={rssItemsPerPage}
               onChange={(e) => {
-
-                setRssItemsPerPage(parseInt(e.target.value))
+                setRssItemsPerPage(parseInt(e.target.value));
                 setWasItemsPerPageClicked(true);
-
-
               }}
               placeholder={"5-15"}
             />
@@ -290,7 +289,7 @@ Props): JSX.Element {
                     if (wasCheckboxClicked) {
                       updated[bookmarkIndex].date = dateCheckbox;
                     }
-                   
+
                     if (wasCheckboxClicked) {
                       updated[bookmarkIndex].description = descriptionCheckbox;
                     }
@@ -298,7 +297,6 @@ Props): JSX.Element {
                     if (wasItemsPerPageClicked) {
                       updated[bookmarkIndex].itemsPerPage = rssItemsPerPage;
                     }
-       
                   }
                 })
               );

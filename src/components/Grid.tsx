@@ -65,7 +65,7 @@ function Grid({}: Props): JSX.Element {
         setBookmarksData((previous) =>
           produce(previous, (updated) => {
             updated.push({
-              ...createBookmarkFolder(el, 1, 1),
+              ...createBookmarkFolder(el, 1, 0),
             });
           })
         );
@@ -91,6 +91,7 @@ function Grid({}: Props): JSX.Element {
       <div className={`bg-${columnsColorsData.column_1}`}>
         {bookmarksData
           .filter((el) => el.column === 1)
+          // lower priority, higher in the column
           .sort((a, b) => a.priority - b.priority)
           .map((el, i) => {
             return (

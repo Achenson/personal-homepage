@@ -117,6 +117,12 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 61. styling numerical inputs
 62. input htmlFor
 63. rss edit -> reset to default settings
+64. rss description
+65. rss linksPerPage
+66. createObj should calc priority so new folder land last in a given column
+67. RSS refresh button
+68. note & RSS improve SVG icon placement
+69. EditBookmark -> improve checkboxes -> add initial checks, compare vs later
 
 App structure:
 Main
