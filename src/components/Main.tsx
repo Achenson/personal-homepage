@@ -17,7 +17,7 @@ function Main({}: Props): JSX.Element {
   const [bookmarkType, setBookmarkType] = useState<"folder" | "note" | "rss">("folder");
 
   return (
-    <div className="relative min-h-screen bg-testBackground">
+    <div className="relative min-h-screen bg-testBackground bg-cover">
       {newBookmarkVis ? <NewBookmark_UpperUI setNewBookmarkVis={setNewBookmarkVis} bookmarkType={bookmarkType}/> : null }
       {newLinkVis ? <NewLink_UpperUI setNewLinkVis={setNewLinkVis}/> : null }
       {colorsVis ? <Colors_UpperUI colorsVis={colorsVis} setColorsVis={setColorsVis}/> : null}    
