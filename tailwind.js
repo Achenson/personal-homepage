@@ -8,18 +8,18 @@ module.exports = {
       colors: {
         gray: {
           ...colors.gray,
-          404: "#C0C0C0"
+          404: "#C0C0C0",
         },
         blueGray: {
-        ...colors.blueGray,
-        303: "#CCDADF",
-        404: "#B0C4DE"
+          ...colors.blueGray,
+          303: "#CCDADF",
+          404: "#B0C4DE",
         },
         warmGray: {
-        ...colors.warmGray,
-        303: "#D8BFD8",
-        404: "#BC8F8F"
-        }, 
+          ...colors.warmGray,
+          303: "#D8BFD8",
+          404: "#BC8F8F",
+        },
         orange: {
           ...colors.orange,
           404: "#FF6347",
@@ -34,11 +34,11 @@ module.exports = {
         blue: {
           ...colors.blue,
           // 1
-          707: "#0000FF", 
+          707: "#0000FF",
           // 2
           770: "#0000CD",
           // 3
-          777: "#000080"
+          777: "#000080",
         },
         yellow: {
           ...colors.yellow,
@@ -51,8 +51,6 @@ module.exports = {
           ...colors.green,
           303: "#9ACD32",
           505: "#008000",
-          
-
         },
         emerald: colors.emerald,
         teal: colors.teal,
@@ -63,6 +61,9 @@ module.exports = {
         fuchsia: colors.fuchsia,
         rose: colors.rose,
       },
+      backgroundImage: (theme) => ({
+        testBackground: "url('../images/unsplash.jpg')",
+      }),
     },
   },
   variants: {
