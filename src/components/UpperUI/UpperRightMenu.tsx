@@ -21,6 +21,7 @@ import { ReactComponent as UserSVG } from "../../svgs/user.svg";
 import { ReactComponent as ColorSVG } from "../../svgs/beaker.svg";
 import { ReactComponent as AddRssSVG } from "../../svgs/rss.svg";
 import { ReactComponent as RssSVG } from "../../svgs/rss_UXwing.svg";
+import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 import { uiColorState } from "../../state/colorsState";
 
@@ -76,7 +77,8 @@ function UpperRightMenu({
           }} />
       </div>
 
-      <div className="flex w-20 justify-around">
+      <div className="flex w-24 justify-around">
+      <PhotographSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`}/>
         <ColorSVG
           className={`h-6 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {

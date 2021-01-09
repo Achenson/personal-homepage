@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import SingleColumnsColor from "../Colors/SingleColumnsColor";
 import DefaultColorsToChoose from "../Colors/DefaultColorsToChoose";
 
+
+
 interface Props {}
 
 function UpperLeftMenu({}: Props): JSX.Element {
@@ -39,7 +41,8 @@ function UpperLeftMenu({}: Props): JSX.Element {
   }
 
   return (
-    <div className="">
+    
+        <div className="">
       {/* <div className="absolute left-0 bottom-0"> */}
       <div className="flex justify-between items-center mb-2 mt-2">
         {/* <p className="w-32">Columns</p> */}
@@ -51,6 +54,9 @@ function UpperLeftMenu({}: Props): JSX.Element {
         ) : null}
       </div>
     </div>
+    
+  
+  
   );
 }
 
