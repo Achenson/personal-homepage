@@ -1,6 +1,7 @@
 import React from "react";
 
 import DefaultSingleColor from "./DefaultSingleColor";
+import DefaultSingleColor_Img from "./DefaultSingleColor_Img";
 
 import { folderColors } from "../../utils/folderColors";
 import { columnColors, imageColumnColors } from "../../utils/columnColors";
@@ -23,9 +24,7 @@ interface Props {
 }
 
 function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
-
-
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use()
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function mapFolderColors() {
     return folderColors.map((row, i) => {
@@ -37,8 +36,6 @@ function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
                 color={el}
                 defaultColorsFor={defaultColorsFor}
                 key={j}
-                colorsForImageBackground={false}
-                index={j}
               />
             );
           })}
@@ -55,11 +52,9 @@ function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
             {row.map((el, j) => {
               return (
                 <DefaultSingleColor
-                colorsForImageBackground={false}
                   color={el}
                   defaultColorsFor={defaultColorsFor}
                   key={j}
-                  index={j}
                 />
               );
             })}
@@ -73,12 +68,10 @@ function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
         <div className="flex" key={i}>
           {row.map((el, j) => {
             return (
-              <DefaultSingleColor
-              colorsForImageBackground={true}
+              <DefaultSingleColor_Img
                 color={el}
                 defaultColorsFor={defaultColorsFor}
                 key={j}
-                index={j}
               />
             );
           })}
@@ -88,9 +81,7 @@ function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
   }
 
   return (
-    <div
-      className="bg-gray-100 z-50 relative"
-    >
+    <div className="bg-gray-100 z-50 relative">
       <div className="absolute" style={{ left: "-93px", top: "0px" }}>
         {defaultColorsFor === "column_1" ||
         defaultColorsFor === "column_2" ||

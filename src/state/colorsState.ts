@@ -14,9 +14,19 @@ interface ColumnsColors {
   column_4: string;
 }
 
+
+
+
 export const columnsColorsState = newRidgeState<ColumnsColors>({
   column_1: "yellow-200",
   column_2: "orange-200",
   column_3: "red-200",
   column_4: "green-200",
+});
+
+export const columnsColorsImg_State = newRidgeState<ColumnsColors>({
+  column_1: "blue-200",
+  column_2: "green-200",
+  column_3: "indigo-200",
+  column_4: "purple-200",
 });

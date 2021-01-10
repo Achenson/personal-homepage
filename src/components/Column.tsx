@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { ItemTypes } from "../utils/itemsDnd";
 
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
-import { columnsColorsState, resetColorsState } from "../state/colorsState";
+import { columnsColorsState, resetColorsState, columnsColorsImg_State } from "../state/colorsState";
+import { globalSettingsState } from "../state/defaultSettings";
 
 import Bookmark from "./Bookmark";
 
@@ -17,6 +18,8 @@ interface Props {
 
 function Column({ colNumber }: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
+  const [columnsColorsImg_Data, setColumnsColorsImg_Data] = columnsColorsImg_State.use();
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const [{ isOver }, drop] = useDrop({
@@ -49,23 +52,37 @@ function Column({ colNumber }: Props): JSX.Element {
     );
   }
 
-  function calcColumnColor(colNumber: number) {
+  function calcColumnColor(colNumber: number, globalColumnSetting: boolean) {
+
+    if(!globalSettingsState) {
+      switch (colNumber) {
+        case 1:
+          return columnsColorsData.column_1;
+        case 2:
+          return columnsColorsData.column_2;
+        case 3:
+          return columnsColorsData.column_3;
+        case 4:
+          return columnsColorsData.column_4;
+      }
+    }
+
     switch (colNumber) {
       case 1:
-        return columnsColorsData.column_1;
+        return columnsColorsImg_Data.column_1;
       case 2:
-        return columnsColorsData.column_2;
+        return columnsColorsImg_Data.column_2;
       case 3:
-        return columnsColorsData.column_3;
+        return columnsColorsImg_Data.column_3;
       case 4:
-        return columnsColorsData.column_4;
+        return columnsColorsImg_Data.column_4;
     }
   }
 
   //   return <div className={`bg-${columnsColorsData.column_1}`}>
   return (
     <div
-      className={`bg-${calcColumnColor(colNumber)} ${
+      className={`bg-${calcColumnColor(colNumber, globalSettingsData.picBackground)} ${
         colNumber !== 1 ? "hidden sm:block" : ""
       }  ${isOver ? "opacity-50" : ""}`}
       ref={drop}
