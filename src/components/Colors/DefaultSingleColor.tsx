@@ -20,9 +20,11 @@ interface Props {
     | "column_3"
     | "column_4"
     | "unselected";
+  colorsForImageBackground: boolean;
+  index: number;  
 }
 
-function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
+function DefaultSingleColor({ color, defaultColorsFor, colorsForImageBackground, index }: Props): JSX.Element {
   // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   // let bookmarkIndex: number;
@@ -172,9 +174,16 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
     }
   }
 
+  function calcOpacity(index: number) {
+    if (colorsForImageBackground) {
+      return `opacity-${index+1}0`
+    }
+    return ""
+  }
+
   return (
     <div
-      className={`h-4 w-8 bg-${color} cursor-pointer ${
+      className={`h-4 w-8 bg-${color} ${calcOpacity(index)} cursor-pointer ${
         // isThisSelected(defaultColorsFor) ? "border-2" : "border"
         borderMaker(defaultColorsFor)
       } hover:border-gray-400`}

@@ -2,8 +2,10 @@ import React from "react";
 
 import DefaultSingleColor from "./DefaultSingleColor";
 
-import {folderColors} from "../../utils/folderColors";
-import {columnColors} from "../../utils/columnColors";
+import { folderColors } from "../../utils/folderColors";
+import { columnColors, imageColumnColors } from "../../utils/columnColors";
+
+import { globalSettingsState } from "../../state/defaultSettings";
 
 interface Props {
   // setIconsVisibility: (value: React.SetStateAction<boolean>) => void;
@@ -20,11 +22,13 @@ interface Props {
     | "unselected";
 }
 
-
-
 function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
-  function mappingColors(colors: string[][]) {
-    return colors.map((row, i) => {
+
+
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use()
+
+  function mapFolderColors() {
+    return folderColors.map((row, i) => {
       return (
         <div className="flex" key={i}>
           {row.map((el, j) => {
@@ -33,6 +37,48 @@ function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
                 color={el}
                 defaultColorsFor={defaultColorsFor}
                 key={j}
+                colorsForImageBackground={false}
+                index={j}
+              />
+            );
+          })}
+        </div>
+      );
+    });
+  }
+
+  function mapColumnColors() {
+    if (!globalSettingsData.picBackground) {
+      return columnColors.map((row, i) => {
+        return (
+          <div className="flex" key={i}>
+            {row.map((el, j) => {
+              return (
+                <DefaultSingleColor
+                colorsForImageBackground={false}
+                  color={el}
+                  defaultColorsFor={defaultColorsFor}
+                  key={j}
+                  index={j}
+                />
+              );
+            })}
+          </div>
+        );
+      });
+    }
+
+    return imageColumnColors.map((row, i) => {
+      return (
+        <div className="flex" key={i}>
+          {row.map((el, j) => {
+            return (
+              <DefaultSingleColor
+              colorsForImageBackground={true}
+                color={el}
+                defaultColorsFor={defaultColorsFor}
+                key={j}
+                index={j}
               />
             );
           })}
@@ -44,22 +90,14 @@ function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
   return (
     <div
       className="bg-gray-100 z-50 relative"
-
-      // onMouseEnter={() => {
-      //   setIconsVisibility(true);
-      // }}
-
-      // onMouseLeave={() => {
-      //   setIconsVisibility(false)
-      // }}
     >
       <div className="absolute" style={{ left: "-93px", top: "0px" }}>
         {defaultColorsFor === "column_1" ||
         defaultColorsFor === "column_2" ||
         defaultColorsFor === "column_3" ||
         defaultColorsFor === "column_4"
-          ? mappingColors(columnColors)
-          : mappingColors(folderColors)}
+          ? mapColumnColors()
+          : mapFolderColors()}
       </div>
     </div>
   );

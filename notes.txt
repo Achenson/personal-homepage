@@ -126,6 +126,8 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 70. make column component
 71. Column -> make them stack when the screen is smaller
 72. Column & Grid -> clean code between them
+73. Main bg picture is moving a little when opening a column
+74. forms -> consistency in aligning
 
 App structure:
 Main
@@ -145,3 +147,9 @@ Main
       ?EditLink
       ?NewLink
       ?EditBookmarkTitle
+
+
+      
+      
+      
+      ${isOver ? "opacity-50" : ""}`

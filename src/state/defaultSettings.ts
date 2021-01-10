@@ -7,3 +7,6 @@ export const rssSettingsState = newRidgeState({
     itemsPerPage: 7
 }) 
 
+export const globalSettingsState = newRidgeState({
+    picBackground: true
+})

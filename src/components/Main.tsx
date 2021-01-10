@@ -5,11 +5,15 @@ import NewBookmark_UpperUI from "./UpperUI/NewBookmark_UpperUI";
 import Colors_UpperUI from "./UpperUI/Colors_UpperUI";
 import UpperUI from "./UpperUI/UpperUI";
 
+import {globalSettingsState} from "../state/defaultSettings";
+
 
 
 interface Props {}
 
 function Main({}: Props): JSX.Element {
+
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use()
 
   const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
   const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
@@ -17,7 +21,8 @@ function Main({}: Props): JSX.Element {
   const [bookmarkType, setBookmarkType] = useState<"folder" | "note" | "rss">("folder");
 
   return (
-    <div className="relative min-h-screen bg-testBackground bg-cover">
+    // <div className="relative h-screen bg-testBackground bg-cover">
+    <div className={`relative h-screen  ${globalSettingsData.picBackground ? "bg-testBackground" : "bg-white"} bg-cover`}>
       {newBookmarkVis ? <NewBookmark_UpperUI setNewBookmarkVis={setNewBookmarkVis} bookmarkType={bookmarkType}/> : null }
       {newLinkVis ? <NewLink_UpperUI setNewLinkVis={setNewLinkVis}/> : null }
       {colorsVis ? <Colors_UpperUI colorsVis={colorsVis} setColorsVis={setColorsVis}/> : null}    
