@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import SingleColumnsColor from "../Colors/SingleColumnsColor";
 import DefaultColorsToChoose from "../Colors/DefaultColorsToChoose";
 
-
+import {globalSettingsState} from "../../state/defaultSettings";
+import SingleColumnsColor_Img from "../Colors/SingleColumnsColor_Img";
 
 interface Props {}
 
@@ -16,6 +17,8 @@ function UpperLeftMenu({}: Props): JSX.Element {
     "column_1" | "column_2" | "column_3" | "column_4" | "unselected"
   >("unselected");
 
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use()
+
   function columnsRendering(howMany: number) {
     let arrOfColumns = [];
     for (let i = 1; i <= howMany; i++) {
@@ -23,8 +26,10 @@ function UpperLeftMenu({}: Props): JSX.Element {
     }
 
     return arrOfColumns.map((el, index) => {
-      return (
-        <SingleColumnsColor
+      return globalSettingsData.picBackground ?  (
+
+   
+        <SingleColumnsColor_Img
           colNumber={el}
           // colSelected={false}
           defaultColorsFor={defaultColorsFor}
@@ -36,7 +41,25 @@ function UpperLeftMenu({}: Props): JSX.Element {
           // setNotesSelected={setNotesSelected}
           key={index}
         />
+      ) : (
+
+        <SingleColumnsColor
+        colNumber={el}
+        // colSelected={false}
+        defaultColorsFor={defaultColorsFor}
+        setColorsToChooseVis={setColorsToChooseVis}
+        columnSelected={columnSelected}
+        setColumnSelected={setColumnSelected}
+        setDefaultColorsFor={setDefaultColorsFor}
+        // setFoldersSelected={setFoldersSelected}
+        // setNotesSelected={setNotesSelected}
+        key={index}
+      />
       );
+
+
+
+
     });
   }
 
