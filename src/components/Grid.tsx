@@ -15,6 +15,8 @@ import { produce } from "immer";
 
 import { columnsColorsState, resetColorsState } from "../state/colorsState";
 
+import { globalSettingsState } from "../state/defaultSettings";
+import Column_Img from "./Column_Img";
 
 interface Props {}
 
@@ -23,6 +25,8 @@ function Grid({}: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
   const [resetColorsData, setResetColorsData] = resetColorsState.use();
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
+
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   // const [{addedProps}, drop] = useDrop({
 
@@ -94,11 +98,21 @@ function Grid({}: Props): JSX.Element {
 
   return (
     <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4">
-
-      <Column colNumber={1}/>
-      <Column colNumber={2}/>
-      <Column colNumber={3}/>
-      <Column colNumber={4}/>
+      {globalSettingsData.picBackground ? (
+        <>
+          <Column_Img colNumber={1} />
+          <Column_Img colNumber={2} />
+          <Column_Img colNumber={3} />
+          <Column_Img colNumber={4} />
+        </>
+      ) : (
+        <>
+          <Column colNumber={1} />
+          <Column colNumber={2} />
+          <Column colNumber={3} />
+          <Column colNumber={4} />
+        </>
+      )}
 
       {/* <div className={`bg-${columnsColorsData.column_1}`}>
         {bookmarksData
@@ -143,9 +157,6 @@ function Grid({}: Props): JSX.Element {
       <div className={`hidden sm:block bg-${columnsColorsData.column_4}`}>
         4
       </div> */}
-
-
-
     </div>
   );
 }

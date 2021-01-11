@@ -81,10 +81,11 @@ function DefaultSingleColor_Img({ color, defaultColorsFor }: Props): JSX.Element
 
   return (
     <div
-      className={`h-4 w-8 bg-${color} cursor-pointer ${
+      className={`h-4 w-8 cursor-pointer ${
         // isThisSelected(defaultColorsFor) ? "border-2" : "border"
         borderMaker(defaultColorsFor)
       } hover:border-gray-400`}
+      style={{backgroundColor: color }}
       onClick={() => {
         if (
           defaultColorsFor === "column_1" ||
@@ -105,11 +106,7 @@ function DefaultSingleColor_Img({ color, defaultColorsFor }: Props): JSX.Element
           );
         }
 
-        // setBookmarksData((previous) =>
-        //   produce(previous, (updated) => {
-        //     updated[bookmarkIndex].color = `bg-${color}`;
-        //   })
-        // );
+  
       }}
     ></div>
   );

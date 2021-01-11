@@ -25,8 +25,8 @@ export const columnsColorsState = newRidgeState<ColumnsColors>({
 });
 
 export const columnsColorsImg_State = newRidgeState<ColumnsColors>({
-  column_1: "blue-200",
-  column_2: "green-200",
-  column_3: "indigo-200",
-  column_4: "purple-200",
+  column_1: "rgba(10,10,10,0.5)",
+  column_2: "rgba(10,10,20,0.5)",
+  column_3: "rgba(10,10,30,0.5)",
+  column_4: "rgba(10,10,40,0.5)",
 });

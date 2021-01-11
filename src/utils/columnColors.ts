@@ -87,15 +87,16 @@ export const columnColors: string[][] = [
 export const imageColumnColors: string[][] = [
   [
     
-    "red-500",
-    "red-500",
-    "red-500",
-    "red-500",
-    "red-500",
-    "red-500",
-    "red-500",
-    "red-500",
-    "red-500",
+  
+    "rgba(10,20,30,0.5)",
+    "rgba(100,20,30,0.5)",
+    "rgba(10,200,30,0.5)",
+    "rgba(10,20,300,0.5)",
+    "rgba(10,20,30,0.5)",
+    "rgba(110,210,130,0.5)",
+    "rgba(10,20,30,0.5)",
+    "rgba(10,201,30,0.5)",
+    "rgba(100,20,30,0.5)",
     
   ],
   [

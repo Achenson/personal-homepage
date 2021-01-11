@@ -63,6 +63,8 @@ function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
       });
     }
 
+
+
     return imageColumnColors.map((row, i) => {
       return (
         <div className="flex" key={i}>

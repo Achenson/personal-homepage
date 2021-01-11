@@ -42,8 +42,10 @@ module.exports = {
 
     import './assets/main.css';
 
+!!!!!
 12. after every change in config file (tailwind.js) run npm run build:css
 (run it once at the beginning!)
+!!!!!
 
 13. purgecss when finished with the project?
 

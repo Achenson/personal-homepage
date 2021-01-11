@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import { ItemTypes } from "../utils/itemsDnd";
 
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
-import { columnsColorsState, resetColorsState, columnsColorsImg_State } from "../state/colorsState";
+import {
+  columnsColorsState,
+  resetColorsState,
+  columnsColorsImg_State,
+} from "../state/colorsState";
 import { globalSettingsState } from "../state/defaultSettings";
 
 import Bookmark from "./Bookmark";
@@ -16,9 +20,12 @@ interface Props {
   colNumber: number;
 }
 
-function Column({ colNumber }: Props): JSX.Element {
+function Column_Img({ colNumber }: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
-  const [columnsColorsImg_Data, setColumnsColorsImg_Data] = columnsColorsImg_State.use();
+  const [
+    columnsColorsImg_Data,
+    setColumnsColorsImg_Data,
+  ] = columnsColorsImg_State.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
@@ -53,8 +60,7 @@ function Column({ colNumber }: Props): JSX.Element {
   }
 
   function calcColumnColor(colNumber: number, globalColumnSetting: boolean) {
-
-    if(!globalColumnSetting) {
+    if (!globalSettingsState) {
       switch (colNumber) {
         case 1:
           return columnsColorsData.column_1;
@@ -82,11 +88,16 @@ function Column({ colNumber }: Props): JSX.Element {
   //   return <div className={`bg-${columnsColorsData.column_1}`}>
   return (
     <div
-      className={`bg-${calcColumnColor(colNumber, globalSettingsData.picBackground)} ${
-        colNumber !== 1 ? "hidden sm:block" : ""
-      }  ${isOver ? "opacity-50" : ""}`}
+      className={`${colNumber !== 1 ? "hidden sm:block" : ""}  ${
+        isOver ? "opacity-50" : ""
+      }`}
       ref={drop}
-      // style={{backgroundColor: calcColumnColor(colNumber, globalSettingsData.picBackground)}}
+      style={{
+        backgroundColor: calcColumnColor(
+          colNumber,
+          globalSettingsData.picBackground
+        ),
+      }}
     >
       {bookmarksData
         .filter((el) => el.column === colNumber)
@@ -109,4 +120,4 @@ function Column({ colNumber }: Props): JSX.Element {
   );
 }
 
-export default Column;
+export default Column_Img;
