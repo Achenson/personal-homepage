@@ -15,6 +15,7 @@ import Bookmark from "./Bookmark";
 
 import { useDrop } from "react-dnd";
 import { produce } from "immer";
+import GapAfterBookmark_Img from "./GapAfterBookmark_Img";
 
 interface Props {
   colNumber: number;
@@ -92,12 +93,14 @@ function Column_Img({ colNumber }: Props): JSX.Element {
         isOver ? "opacity-50" : ""
       }`}
       ref={drop}
-      style={{
-        backgroundColor: calcColumnColor(
-          colNumber,
-          globalSettingsData.picBackground
-        ),
-      }}
+      // style={{
+      //   backgroundColor: calcColumnColor(
+      //     colNumber,
+      //     globalSettingsData.picBackground
+      //   ),
+      // }}
+
+
     >
       {bookmarksData
         .filter((el) => el.column === colNumber)
@@ -105,6 +108,7 @@ function Column_Img({ colNumber }: Props): JSX.Element {
         .sort((a, b) => a.priority - b.priority)
         .map((el, i) => {
           return (
+            <>
             <Bookmark
               bookmarkID={el.id}
               bookmarkTitle={el.title}
@@ -114,6 +118,11 @@ function Column_Img({ colNumber }: Props): JSX.Element {
               // rssLink={el.rssLink}
               key={i}
             />
+            <GapAfterBookmark_Img
+            singleColumnColor={calcColumnColor(colNumber, globalSettingsData.picBackground)}
+            key={i}
+            />
+            </>
           );
         })}
     </div>

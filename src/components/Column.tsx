@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import { ItemTypes } from "../utils/itemsDnd";
 
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
-import { columnsColorsState, resetColorsState, columnsColorsImg_State } from "../state/colorsState";
+import {
+  columnsColorsState,
+  resetColorsState,
+  columnsColorsImg_State,
+} from "../state/colorsState";
 import { globalSettingsState } from "../state/defaultSettings";
 
 import Bookmark from "./Bookmark";
@@ -18,7 +22,10 @@ interface Props {
 
 function Column({ colNumber }: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
-  const [columnsColorsImg_Data, setColumnsColorsImg_Data] = columnsColorsImg_State.use();
+  const [
+    columnsColorsImg_Data,
+    setColumnsColorsImg_Data,
+  ] = columnsColorsImg_State.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
@@ -53,8 +60,7 @@ function Column({ colNumber }: Props): JSX.Element {
   }
 
   function calcColumnColor(colNumber: number, globalColumnSetting: boolean) {
-
-    if(!globalColumnSetting) {
+    if (!globalColumnSetting) {
       switch (colNumber) {
         case 1:
           return columnsColorsData.column_1;
@@ -82,9 +88,12 @@ function Column({ colNumber }: Props): JSX.Element {
   //   return <div className={`bg-${columnsColorsData.column_1}`}>
   return (
     <div
-      className={`bg-${calcColumnColor(colNumber, globalSettingsData.picBackground)} ${
-        colNumber !== 1 ? "hidden sm:block" : ""
-      }  ${isOver ? "opacity-50" : ""}`}
+      className={`bg-${calcColumnColor(
+        colNumber,
+        globalSettingsData.picBackground
+      )} ${colNumber !== 1 ? "hidden sm:block" : ""}  ${
+        isOver ? "opacity-50" : ""
+      }`}
       ref={drop}
       // style={{backgroundColor: calcColumnColor(colNumber, globalSettingsData.picBackground)}}
     >

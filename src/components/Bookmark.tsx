@@ -209,7 +209,7 @@ Props): JSX.Element {
   }
 
   return (
-    <div className="relative mb-6" ref={drag}>
+    <div className="relative" ref={drag}>
       <div
         className={`pl-0 h-8 px-2 pt-px bg-${
           // bookmarkColor ? bookmarkColor : finalBookmarkColor
