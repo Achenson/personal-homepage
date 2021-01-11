@@ -130,6 +130,8 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 72. Column & Grid -> clean code between them
 73. Main bg picture is moving a little when opening a column
 74. forms -> consistency in aligning
+75. Column & Column_img -> less code needed
+76. transparent colors for color control if background img is on issue
 
 App structure:
 Main
