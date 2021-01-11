@@ -9,10 +9,11 @@ import { bookmarksDataState } from "../state/bookmarksAndLinks";
 
 interface Props {
     singleColumnColor: string | undefined;
-    colNumber: number
+    colNumber: number;
+    bookmarkID: number | string;
 }
 
-function GapAfterBookmark_Img({singleColumnColor, colNumber}: Props): JSX.Element{
+function GapAfterBookmark_Img({singleColumnColor, colNumber, bookmarkID}: Props): JSX.Element{
 
     const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
@@ -41,7 +42,27 @@ function GapAfterBookmark_Img({singleColumnColor, colNumber}: Props): JSX.Elemen
             // let currentBookmark = bookmarksData.filter( obj => obj.id === itemID )
     
             updated[bookmarkIndex].column = colNumber;
-            //  updated[currentBookmark]
+
+            // bookmark before the gap the the bookmark is dragged into
+
+            let draggedIntoIndex: number = 0
+
+            bookmarksData.forEach((obj, i) => {
+                if (obj.id === bookmarkID) {
+                  draggedIntoIndex = i;
+                }
+              });
+
+              let draggedIntoPriority = updated[draggedIntoIndex].priority; 
+
+            updated[bookmarkIndex].priority = draggedIntoPriority+ 1; 
+
+            for (let i = draggedIntoPriority+2; i< updated.length; i++) {
+                updated[i].priority =+ 1;
+            }
+            
+
+           
           })
         );
       }

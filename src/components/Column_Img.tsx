@@ -120,6 +120,7 @@ function Column_Img({ colNumber }: Props): JSX.Element {
                   globalSettingsData.picBackground
                 )}
                 colNumber={colNumber}
+                bookmarkID={el.id}
                 key={i}
               />
             </>
