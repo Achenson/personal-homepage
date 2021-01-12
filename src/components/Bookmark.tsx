@@ -247,7 +247,7 @@ Props): JSX.Element {
             }
           }}
         >
-          <p className=""> {bookmarkTitle}</p>
+          <p className=""> {bookmarkTitle} {bookmarksData[bookmarkIndex].priority}</p>
         </div>
 
         <div
