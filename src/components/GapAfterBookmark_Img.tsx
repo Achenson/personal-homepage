@@ -68,19 +68,17 @@ function GapAfterBookmark_Img({
           let currentBookmarkIndex: number = i;
 
           if (obj.id === itemID) {
-            updated[currentBookmarkIndex].priority = draggedIntoPriority +1;
+            updated[currentBookmarkIndex].priority = draggedIntoPriority + 1;
           }
 
           if (obj.column === colNumber) {
             if (obj.id !== itemID) {
               if (obj.priority > draggedIntoPriority) {
-                updated[currentBookmarkIndex].priority =
-                  draggedIntoPriority + 1;
+                updated[currentBookmarkIndex].priority += 1;
               }
 
               if (obj.priority < draggedIntoPriority) {
-                updated[currentBookmarkIndex].priority =
-                  draggedIntoPriority - 1;
+                updated[currentBookmarkIndex].priority -=1;
               }
             }
           }
