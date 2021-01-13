@@ -137,6 +137,7 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 79. note background -> gray?
 80. warning: two childer with the same key
 81 potential problem: if changing bookmarks within column only, the priority nrs can reach v.high numbers
+82. background img problem is opening long RSS
 
 App structure:
 Main

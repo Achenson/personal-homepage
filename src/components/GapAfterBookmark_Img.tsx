@@ -33,8 +33,6 @@ function GapAfterBookmark_Img({
   });
 
   function dragBookmark(itemID: number | string, itemColNumber: number) {
-    console.log("itemColNumber");
-    console.log(itemColNumber);
 
     setBookmarksData((previous) =>
       produce(previous, (updated) => {
@@ -45,12 +43,11 @@ function GapAfterBookmark_Img({
             bookmarkIndex = i;
           }
         });
-        // let currentBookmark = bookmarksData.filter( obj => obj.id === itemID )
 
+        // changing item column number
         updated[bookmarkIndex].column = colNumber;
 
-        // bookmark before the gap the the bookmark is dragged into
-
+        //index of bookmark before the gap the bookmark is dragged into
         let draggedIntoIndex: number = 0;
 
         bookmarksData.forEach((obj, i) => {
@@ -61,25 +58,23 @@ function GapAfterBookmark_Img({
 
         let draggedIntoPriority = bookmarksData[draggedIntoIndex].priority;
 
-        // updated[bookmarkIndex].priority = draggedIntoPriority + 1;
-
-        // for (let i = draggedIntoPriority+2; i< updated.length; i++) {
-        //     updated[i].priority =+ 1;
-        // }
-
         bookmarksData.forEach((obj, i) => {
           let currentBookmarkIndex: number = i;
 
+          // setting item priority to 1 higher than the bookmark placed right before the gap
           if (obj.id === itemID) {
             updated[currentBookmarkIndex].priority = draggedIntoPriority + 1;
           }
 
+          // incrementing by 1 priorities of Bookmarks positioned after the place where the item is being dragged to
           if (obj.column === colNumber && obj.id !== itemID) {
             if (obj.priority > draggedIntoPriority) {
               updated[currentBookmarkIndex].priority += 1;
             }
           }
         });
+
+        // reseting priority numbers in column that was item origin
 
         if (itemColNumber !== colNumber) {
           bookmarksData
@@ -101,6 +96,8 @@ function GapAfterBookmark_Img({
       })
     );
   }
+
+  
 
   return (
     <div
