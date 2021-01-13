@@ -24,7 +24,7 @@ function GapAfterBookmark_Img({
     //    required property
     accept: ItemTypes.BOOKMARK,
     // @ts-ignore: Unreachable code error
-    drop: (item, monitor) => dragBookmark(item.bookmarkID),
+    drop: (item, monitor) => dragBookmark(item.bookmarkID, item.colNumber),
     // drop: (item, monitor) => console.log(item.bookmarkID),
 
     collect: (monitor) => ({
@@ -32,7 +32,10 @@ function GapAfterBookmark_Img({
     }),
   });
 
-  function dragBookmark(itemID: number | string) {
+  function dragBookmark(itemID: number | string, itemColNumber: number) {
+    console.log("itemColNumber");
+    console.log(itemColNumber);
+
     setBookmarksData((previous) =>
       produce(previous, (updated) => {
         let bookmarkIndex: number = 0;
@@ -71,41 +74,30 @@ function GapAfterBookmark_Img({
             updated[currentBookmarkIndex].priority = draggedIntoPriority + 1;
           }
 
-          if (obj.column === colNumber) {
-            if (obj.id !== itemID) {
-              if (obj.priority > draggedIntoPriority) {
-                updated[currentBookmarkIndex].priority += 1;
-              }
-
-              if (obj.priority < draggedIntoPriority) {
-                updated[currentBookmarkIndex].priority -=1;
-              }
+          if (obj.column === colNumber && obj.id !== itemID) {
+            if (obj.priority > draggedIntoPriority) {
+              updated[currentBookmarkIndex].priority += 1;
             }
           }
         });
 
-        // for (let obj of bookmarksData) {
+        if (itemColNumber !== colNumber) {
+          bookmarksData
+            .filter((obj, i) => obj.column === itemColNumber)
+            .filter((obj, i) => obj.id !== itemID)
+            .sort((a, b) => a.priority - b.priority)
+            .forEach((obj, i) => {
+              let currentBookmarkIndex: number = 0;
 
-        //   if (obj.column === colNumber) {
+              bookmarksData.forEach((obj2, j) => {
+                if (obj2.id === obj.id) {
+                  currentBookmarkIndex = j;
+                }
+              });
 
-        //     if (obj.id !== bookmarkID) {
-        //       // updated[bookmarkIndex].priority = draggedIntoPriority+ 1;
-
-        //       let currentBookmarkIndex: number = 0;
-
-        //       bookmarksData.forEach((obj, i) => {
-        //         if (obj.id === bookmarkID) {
-        //           currentBookmarkIndex = i;
-        //         }
-        //       });
-
-        //       if (obj.priority >= updated[bookmarkIndex].priority +1) {
-        //         obj.priority =+ 1;
-        //       }
-
-        //     }
-        //   }
-        // }
+              updated[currentBookmarkIndex].priority = i;
+            });
+        }
       })
     );
   }

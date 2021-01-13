@@ -38,6 +38,7 @@ interface Props {
   bookmarkTitle: string;
   bookmarkColor: string | null;
   bookmarkType: "folder" | "note" | "rss";
+  colNumber: number
   // noteInput: string | null;
   // rssLink: string | null;
 }
@@ -47,6 +48,7 @@ function Bookmark({
   bookmarkTitle,
   bookmarkColor,
   bookmarkType,
+  colNumber
 }: // noteInput,
 // rssLink
 Props): JSX.Element {
@@ -87,7 +89,8 @@ Props): JSX.Element {
       item: {
         // type is required
         type: ItemTypes.BOOKMARK,
-        bookmarkID: bookmarkID
+        bookmarkID: bookmarkID,
+        colNumber: colNumber
       },
       collect: monitor => ({
         isDragging: !!monitor.isDragging()

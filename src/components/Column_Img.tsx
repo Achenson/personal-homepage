@@ -110,6 +110,7 @@ function Column_Img({ colNumber }: Props): JSX.Element {
                 bookmarkTitle={el.title}
                 bookmarkColor={el.color}
                 bookmarkType={el.type}
+                colNumber={el.column}
                 // noteInput={el.noteInput}
                 // rssLink={el.rssLink}
                 key={i}

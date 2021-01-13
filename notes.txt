@@ -135,6 +135,8 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 77. GapAfterBookmark background color vs Column background color: make last Gap height longer?
 78. UpperLeftMenu weakly visible if image in the background -> larger borders?
 79. note background -> gray?
+80. warning: two childer with the same key
+81 potential problem: if changing bookmarks within column only, the priority nrs can reach v.high numbers
 
 App structure:
 Main
