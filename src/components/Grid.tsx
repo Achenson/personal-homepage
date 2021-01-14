@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Bookmark from "./Bookmark";
 import Column from "./Column";
@@ -27,6 +27,31 @@ function Grid({}: Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+  const col_1_height = useRef(0);
+  const col_2_height = useRef(0);
+  const col_3_height = useRef(0);
+  const col_4_height = useRef(0);
+
+  const [columnsHeights, setColumnsHeights] = useState({
+    col1: undefined,
+    col2: undefined,
+    col3: undefined,
+    col4: undefined,
+  });
+
+  useEffect(() => {
+    setColumnsHeights({
+         // @ts-ignore: Unreachable code error
+      col1: col_1_height.current.offsetHeight,
+      // @ts-ignore: Unreachable code error
+      col2: col_2_height.current.offsetHeight,
+      // @ts-ignore: Unreachable code error
+      col3: col_3_height.current.offsetHeight,
+      // @ts-ignore: Unreachable code error
+      col4: col_4_height.current.offsetHeight,
+    });
+  }, [columnsHeights]);
 
   // const [{addedProps}, drop] = useDrop({
 
@@ -100,10 +125,26 @@ function Grid({}: Props): JSX.Element {
     <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4">
       {globalSettingsData.picBackground ? (
         <>
-          <Column_Img colNumber={1} />
-          <Column_Img colNumber={2} />
-          <Column_Img colNumber={3} />
-          <Column_Img colNumber={4} />
+          <Column_Img
+            colNumber={1}
+            // @ts-ignore: Unreachable code error
+            ref={col_1_height}
+          />
+          <Column_Img
+            colNumber={2}
+            // @ts-ignore: Unreachable code error
+            ref={col_2_height}
+          />
+          <Column_Img
+            colNumber={3}
+            // @ts-ignore: Unreachable code error
+            ref={col_3_height}
+          />
+          <Column_Img
+            colNumber={4}
+            // @ts-ignore: Unreachable code error
+            ref={col_4_height}
+          />
         </>
       ) : (
         <>
