@@ -11,6 +11,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     color: null,
     column: 1,
     priority: 5,
+    opened: false,
     type: "folder",
     // noteInput: null,
     // rssLink: null
@@ -22,6 +23,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     color: "red-400",
     column: 1,
     priority: 1,
+    opened: false,
     type: "folder",
     // noteInput: null,
     // rssLink: null
@@ -33,6 +35,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     color: null,
     column: 3,
     priority: 0,
+    opened: true,
     type: "folder",
     // noteInput: null,
     // rssLink: null
@@ -44,6 +47,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     color: null,
     column: 1,
     priority: 0,
+    opened: false,
     type: "note",
     noteInput: "someText moreText someText moreText someText moreText someText moreText someText moreText someText moreText",
     // rssLink: null
@@ -55,6 +59,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     color: null,
     column: 2,
     priority: 1,
+    opened: false,
     type: "rss",
     date: null,
     description: null,

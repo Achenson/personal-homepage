@@ -59,17 +59,13 @@ Props): JSX.Element {
 
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
   const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
-  const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
-    false
-  );
-  const [rssVisibility, setRssVisibility] = useState<boolean>(false);
+ 
+
   const [editLinkVis, setEditLinkVis] = useState<boolean>(false);
   const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
   const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
-  // for Note only
-  const [noteInputVisibility, setNoteInputVisibility] = useState<boolean>(
-    false
-  );
+
+ 
 
   const [editSingleLinkData, setEditSingleLinkData] = useState<SingleLinkData>({
     title: "",
@@ -111,6 +107,25 @@ Props): JSX.Element {
       bookmarkColumn = obj.column;
     }
   });
+
+   // bookmark content
+   const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
+    // bookmarksData[bookmarkIndex].opened
+    false
+  );
+  // rss content
+  const [rssVisibility, setRssVisibility] = useState<boolean>(
+    // bookmarksData[bookmarkIndex].opened
+    false
+  );
+
+   // for Note only / note content
+   const [noteInputVisibility, setNoteInputVisibility] = useState<boolean>(
+    // bookmarksData[bookmarkIndex].opened
+    false
+  );
+
+
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();

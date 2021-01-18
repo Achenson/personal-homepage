@@ -3,7 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 export function createBasicFolder(
   title: string,
   column: number,
-  priority: number
+  priority: number,
+  opened: boolean = false
 ) {
   return {
     id: uuidv4(),
@@ -11,6 +12,7 @@ export function createBasicFolder(
     color: null,
     column,
     priority,
+    opened,
   };
 }
 

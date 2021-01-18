@@ -243,18 +243,26 @@ function NewBookmark_UpperUI({
                   if (bookmarkType === "note") {
                     setBookmarksData((previous) =>
                       produce(previous, (updated) => {
+
+                        
                         updated.push({
-                          id: uuidv4(),
-                          title: bookmarkTitleInput,
-                          column: bookmarkColumnInput,
-                          color: null,
-                          priority: 0,
-                          type: "note",
-                          noteInput: textAreaValue,
-                          // rssLink: null
-                        });
+                          ...createNote(bookmarkTitleInput, bookmarkColumnInput, 0, textAreaValue)
+                        }
+                        //   {
+                        //   id: uuidv4(),
+                        //   title: bookmarkTitleInput,
+                        //   column: bookmarkColumnInput,
+                        //   color: null,
+                        //   priority: 0,
+                        //   type: "note",
+                        //   noteInput: textAreaValue,
+                        //   // rssLink: null
+                        // }
+                        
+                        )
+
                       })
-                    );
+                    )
                   }
 
                   if (bookmarkType === "folder") {
