@@ -8,16 +8,11 @@ import { ItemTypes } from "../utils/itemsDnd";
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
 
 interface Props {
-  singleColumnColor: string | undefined;
   colNumber: number;
-  bookmarkID: number | string;
+  bookmarkID: number | string | null;
 }
 
-function GapAfterBookmark_Img({
-  singleColumnColor,
-  colNumber,
-  bookmarkID,
-}: Props): JSX.Element {
+function GapAfterBookmark_Img({ colNumber, bookmarkID }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const [{ isOver }, drop] = useDrop({
@@ -33,7 +28,6 @@ function GapAfterBookmark_Img({
   });
 
   function dragBookmark(itemID: number | string, itemColNumber: number) {
-
     setBookmarksData((previous) =>
       produce(previous, (updated) => {
         let bookmarkIndex: number = 0;
@@ -46,6 +40,32 @@ function GapAfterBookmark_Img({
 
         // changing item column number
         updated[bookmarkIndex].column = colNumber;
+
+        // reseting priority numbers in column that was item origin
+
+        if (itemColNumber !== colNumber) {
+          bookmarksData
+            .filter((obj, i) => obj.column === itemColNumber)
+            .filter((obj, i) => obj.id !== itemID)
+            .sort((a, b) => a.priority - b.priority)
+            .forEach((obj, i) => {
+              let currentBookmarkIndex: number = 0;
+
+              bookmarksData.forEach((obj2, j) => {
+                if (obj2.id === obj.id) {
+                  currentBookmarkIndex = j;
+                }
+              });
+
+              updated[currentBookmarkIndex].priority = i;
+            });
+        }
+
+        // when column is empty
+        if (!bookmarkID) {
+          updated[bookmarkIndex].priority = 0;
+          return;
+        }
 
         //index of bookmark before the gap the bookmark is dragged into
         let draggedIntoIndex: number = 0;
@@ -73,31 +93,9 @@ function GapAfterBookmark_Img({
             }
           }
         });
-
-        // reseting priority numbers in column that was item origin
-
-        if (itemColNumber !== colNumber) {
-          bookmarksData
-            .filter((obj, i) => obj.column === itemColNumber)
-            .filter((obj, i) => obj.id !== itemID)
-            .sort((a, b) => a.priority - b.priority)
-            .forEach((obj, i) => {
-              let currentBookmarkIndex: number = 0;
-
-              bookmarksData.forEach((obj2, j) => {
-                if (obj2.id === obj.id) {
-                  currentBookmarkIndex = j;
-                }
-              });
-
-              updated[currentBookmarkIndex].priority = i;
-            });
-        }
       })
     );
   }
-
-  
 
   return (
     <div

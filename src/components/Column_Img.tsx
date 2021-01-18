@@ -110,16 +110,19 @@ const Column_Img = React.forwardRef( ({colNumber}: Props, ref ) => {
                 // rssLink={el.rssLink}
               />
               <GapAfterBookmark_Img
-                singleColumnColor={calcColumnColor(
-                  colNumber,
-                  globalSettingsData.picBackground
-                )}
                 colNumber={colNumber}
                 bookmarkID={el.id}
               />
             </div>
           );
         })}
+        {
+
+          bookmarksData.filter(el => el.column === colNumber).length === 0 ? <GapAfterBookmark_Img
+          colNumber={colNumber}
+          bookmarkID={null}
+          /> : null
+        }
     </div>
   );
 })

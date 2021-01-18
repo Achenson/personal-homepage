@@ -138,8 +138,11 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 80. warning: two childer with the same key
 81. potential problem: if changing bookmarks within column only, the priority nrs can reach v.high numbers
 82. background img problem is opening long RSS
-83. get rid of useSize/dimensions hook
+83. get rid of useSize/dimensions hook?
 84. always open property on folder 
+85. get rid of bookmark priorities being displayed in the end
+86. bigger draggable space in GapAfterBookmark_Img if column is empty
+
 
 App structure:
 Main
