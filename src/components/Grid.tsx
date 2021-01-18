@@ -18,8 +18,7 @@ import { columnsColorsState, resetColorsState } from "../state/colorsState";
 import { globalSettingsState } from "../state/defaultSettings";
 import Column_Img from "./Column_Img";
 
-
-import useSize from '@react-hook/size'
+import useSize from "@react-hook/size";
 
 interface Props {}
 
@@ -31,8 +30,8 @@ function Grid({}: Props): JSX.Element {
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  const target = React.useRef(null)
-  const [width, height] = useSize(target)
+  const target = React.useRef(null);
+  const [width, height] = useSize(target);
 
   // const [{addedProps}, drop] = useDrop({
 
@@ -103,32 +102,16 @@ function Grid({}: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
 
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4"
-    
-    ref={target}
+    <div
+      className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4"
+      ref={target}
     >
       {globalSettingsData.picBackground ? (
         <>
-          <Column_Img
-            colNumber={1}
-            // @ts-ignore: Unreachable code error
-            ref={col_1_height}
-          />
-          <Column_Img
-            colNumber={2}
-            // @ts-ignore: Unreachable code error
-            ref={col_2_height}
-          />
-          <Column_Img
-            colNumber={3}
-            // @ts-ignore: Unreachable code error
-            ref={col_3_height}
-          />
-          <Column_Img
-            colNumber={4}
-            // @ts-ignore: Unreachable code error
-            ref={col_4_height}
-          />
+          <Column_Img colNumber={1} />
+          <Column_Img colNumber={2} />
+          <Column_Img colNumber={3} />
+          <Column_Img colNumber={4} />
         </>
       ) : (
         <>

@@ -78,7 +78,11 @@ const Column_Img = React.forwardRef( ({colNumber}: Props, ref ) => {
   //   return <div className={`bg-${columnsColorsData.column_1}`}>
   return (
     <div
-    className={`${colNumber !== 1 ? "hidden sm:block" : ""}  `}
+    className={`${colNumber !== 1 ? "hidden sm:block" : ""}`}
+    style={{ backgroundColor: calcColumnColor(
+      colNumber,
+      globalSettingsData.picBackground
+    ) }}
     // ref={drop}
     // ref={target}
 
@@ -95,7 +99,7 @@ const Column_Img = React.forwardRef( ({colNumber}: Props, ref ) => {
         .sort((a, b) => a.priority - b.priority)
         .map((el, i) => {
           return (
-            <Fragment key={i}>
+            <div key={i} className="">
               <Bookmark
                 bookmarkID={el.id}
                 bookmarkTitle={el.title}
@@ -113,7 +117,7 @@ const Column_Img = React.forwardRef( ({colNumber}: Props, ref ) => {
                 colNumber={colNumber}
                 bookmarkID={el.id}
               />
-            </Fragment>
+            </div>
           );
         })}
     </div>

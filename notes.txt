@@ -136,8 +136,10 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 78. UpperLeftMenu weakly visible if image in the background -> larger borders?
 79. note background -> gray?
 80. warning: two childer with the same key
-81 potential problem: if changing bookmarks within column only, the priority nrs can reach v.high numbers
+81. potential problem: if changing bookmarks within column only, the priority nrs can reach v.high numbers
 82. background img problem is opening long RSS
+83. get rid of useSize/dimensions hook
+84. always open property on folder 
 
 App structure:
 Main

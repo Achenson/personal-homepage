@@ -101,8 +101,8 @@ function GapAfterBookmark_Img({
 
   return (
     <div
-      className={`h-6 ${isOver ? "opacity-0" : ""}`}
-      style={{ backgroundColor: singleColumnColor }}
+      className={`h-6 ${isOver ? "bg-black opacity-50" : ""}`}
+      // style={{ backgroundColor: singleColumnColor }}
       ref={drop}
     ></div>
   );
