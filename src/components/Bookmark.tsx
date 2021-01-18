@@ -148,6 +148,7 @@ Props): JSX.Element {
     if (bookmarkType === "rss") {
       finalBookmarkColor = rssColorData;
     }
+
   }
 
   function textOrIconColor(
@@ -352,7 +353,7 @@ Props): JSX.Element {
         />
       ) : null}
 
-      {singleLinkVisibility ? (
+      {singleLinkVisibility && bookmarkType === "folder" ? (
         <div>
           {linksData
             .filter((el) => el.tags.indexOf(`${bookmarkTitle}`) > -1)
@@ -371,7 +372,7 @@ Props): JSX.Element {
         </div>
       ) : null}
 
-      {noteInputVisibility ? (
+      {noteInputVisibility && bookmarkType === "note" ? (
         <NoteInput
           //  noteInput={noteInput}
           bookmarkID={bookmarkID}
