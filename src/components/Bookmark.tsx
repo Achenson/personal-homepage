@@ -110,8 +110,8 @@ Props): JSX.Element {
 
    // bookmark content
    const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
-    // bookmarksData[bookmarkIndex].opened
-    false
+    bookmarksData[bookmarkIndex].opened
+    // false
   );
   // rss content
   const [rssVisibility, setRssVisibility] = useState<boolean>(
@@ -121,8 +121,8 @@ Props): JSX.Element {
 
    // for Note only / note content
    const [noteInputVisibility, setNoteInputVisibility] = useState<boolean>(
-    // bookmarksData[bookmarkIndex].opened
-    false
+    bookmarksData[bookmarkIndex].opened
+    // false
   );
 
 

@@ -142,6 +142,7 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 84. always open property on folder 
 85. get rid of bookmark priorities being displayed in the end
 86. bigger draggable space in GapAfterBookmark_Img if column is empty
+87. rss reader cannot be initially always opened
 
 
 App structure:
