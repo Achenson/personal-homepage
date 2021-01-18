@@ -19,9 +19,10 @@ import GapAfterBookmark_Img from "./GapAfterBookmark_Img";
 
 interface Props {
   colNumber: number;
+  // ref: React.MutableRefObject<number>
 }
 
-function Column_Img({ colNumber }: Props): JSX.Element {
+const Column_Img = React.forwardRef( ({colNumber}: Props, ref ) => {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [
     columnsColorsImg_Data,
@@ -117,6 +118,6 @@ function Column_Img({ colNumber }: Props): JSX.Element {
         })}
     </div>
   );
-}
+})
 
 export default Column_Img;

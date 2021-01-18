@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Bookmark from "./Bookmark";
 import Column from "./Column";
@@ -109,10 +109,26 @@ function Grid({}: Props): JSX.Element {
     >
       {globalSettingsData.picBackground ? (
         <>
-          <Column_Img colNumber={1} />
-          <Column_Img colNumber={2} />
-          <Column_Img colNumber={3} />
-          <Column_Img colNumber={4} />
+          <Column_Img
+            colNumber={1}
+            // @ts-ignore: Unreachable code error
+            ref={col_1_height}
+          />
+          <Column_Img
+            colNumber={2}
+            // @ts-ignore: Unreachable code error
+            ref={col_2_height}
+          />
+          <Column_Img
+            colNumber={3}
+            // @ts-ignore: Unreachable code error
+            ref={col_3_height}
+          />
+          <Column_Img
+            colNumber={4}
+            // @ts-ignore: Unreachable code error
+            ref={col_4_height}
+          />
         </>
       ) : (
         <>
