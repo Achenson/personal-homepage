@@ -18,6 +18,9 @@ import { columnsColorsState, resetColorsState } from "../state/colorsState";
 import { globalSettingsState } from "../state/defaultSettings";
 import Column_Img from "./Column_Img";
 
+
+import useSize from '@react-hook/size'
+
 interface Props {}
 
 function Grid({}: Props): JSX.Element {
@@ -27,6 +30,9 @@ function Grid({}: Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+  const target = React.useRef(null)
+  const [width, height] = useSize(target)
 
   // const [{addedProps}, drop] = useDrop({
 
@@ -97,7 +103,10 @@ function Grid({}: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
 
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4">
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4"
+    
+    ref={target}
+    >
       {globalSettingsData.picBackground ? (
         <>
           <Column_Img colNumber={1} />
@@ -157,6 +166,7 @@ function Grid({}: Props): JSX.Element {
       <div className={`hidden sm:block bg-${columnsColorsData.column_4}`}>
         4
       </div> */}
+      <p>grid height: {height}</p>
     </div>
   );
 }

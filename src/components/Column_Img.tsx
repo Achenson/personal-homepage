@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import { useState, useEffect } from "react";
 import { ItemTypes } from "../utils/itemsDnd";
@@ -29,18 +29,6 @@ function Column_Img({ colNumber }: Props): JSX.Element {
   ] = columnsColorsImg_State.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-
-  // const [{ isOver }, drop] = useDrop({
-  //   //    required property
-  //   accept: ItemTypes.BOOKMARK,
-  //   // @ts-ignore: Unreachable code error
-  //   drop: (item, monitor) => dragBookmark(item.bookmarkID),
-  //   // drop: (item, monitor) => console.log(item.bookmarkID),
-
-  //   collect: (monitor) => ({
-  //     isOver: !!monitor.isOver(),
-  //   }),
-  // });
 
   function dragBookmark(itemID: number | string) {
     setBookmarksData((previous) =>
@@ -89,14 +77,16 @@ function Column_Img({ colNumber }: Props): JSX.Element {
   //   return <div className={`bg-${columnsColorsData.column_1}`}>
   return (
     <div
-      className={`${colNumber !== 1 ? "hidden sm:block" : ""}  `}
-      // ref={drop}
-      // style={{
-      //   backgroundColor: calcColumnColor(
-      //     colNumber,
-      //     globalSettingsData.picBackground
-      //   ),
-      // }}
+    className={`${colNumber !== 1 ? "hidden sm:block" : ""}  `}
+    // ref={drop}
+    // ref={target}
+
+    // style={{
+    //   backgroundColor: calcColumnColor(
+    //     colNumber,
+    //     globalSettingsData.picBackground
+    //   ),
+    // }}
     >
       {bookmarksData
         .filter((el) => el.column === colNumber)
@@ -104,7 +94,7 @@ function Column_Img({ colNumber }: Props): JSX.Element {
         .sort((a, b) => a.priority - b.priority)
         .map((el, i) => {
           return (
-            <>
+            <Fragment key={i}>
               <Bookmark
                 bookmarkID={el.id}
                 bookmarkTitle={el.title}
@@ -113,7 +103,6 @@ function Column_Img({ colNumber }: Props): JSX.Element {
                 colNumber={el.column}
                 // noteInput={el.noteInput}
                 // rssLink={el.rssLink}
-                key={i}
               />
               <GapAfterBookmark_Img
                 singleColumnColor={calcColumnColor(
@@ -122,9 +111,8 @@ function Column_Img({ colNumber }: Props): JSX.Element {
                 )}
                 colNumber={colNumber}
                 bookmarkID={el.id}
-                key={i}
               />
-            </>
+            </Fragment>
           );
         })}
     </div>

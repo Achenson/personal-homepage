@@ -31,7 +31,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     id: 3,
     title: "fun",
     color: null,
-    column: 2,
+    column: 3,
     priority: 0,
     type: "folder",
     // noteInput: null,
