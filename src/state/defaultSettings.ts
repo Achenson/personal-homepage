@@ -8,5 +8,5 @@ export const rssSettingsState = newRidgeState({
 }) 
 
 export const globalSettingsState = newRidgeState({
-    picBackground: true
+    picBackground: false
 })

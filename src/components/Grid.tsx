@@ -106,7 +106,17 @@ function Grid({}: Props): JSX.Element {
       className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mx-4"
       ref={target}
     >
-      {globalSettingsData.picBackground ? (
+
+      
+        <>
+          <Column_Img colNumber={1} />
+          <Column_Img colNumber={2} />
+          <Column_Img colNumber={3} />
+          <Column_Img colNumber={4} />
+        </>
+  
+         {/* {
+      globalSettingsData.picBackground ? (
         <>
           <Column_Img colNumber={1} />
           <Column_Img colNumber={2} />
@@ -120,51 +130,9 @@ function Grid({}: Props): JSX.Element {
           <Column colNumber={3} />
           <Column colNumber={4} />
         </>
-      )}
+      )} */}
 
-      {/* <div className={`bg-${columnsColorsData.column_1}`}>
-        {bookmarksData
-          .filter((el) => el.column === 1)
-          // lower priority, higher in the column
-          .sort((a, b) => a.priority - b.priority)
-          .map((el, i) => {
-            return (
-              <Bookmark
-                bookmarkID={el.id}
-                bookmarkTitle={el.title}
-                bookmarkColor={el.color}
-                bookmarkType={el.type}
-                // noteInput={el.noteInput}
-                // rssLink={el.rssLink}
-                key={i}
-              />
-            );
-          })}
-      </div>
-      <div className={`hidden sm:block bg-${columnsColorsData.column_2}`}>
-        {bookmarksData
-          .filter((el) => el.column === 2)
-          .sort((a, b) => a.priority - b.priority)
-          .map((el, i) => {
-            return (
-              <Bookmark
-                bookmarkID={el.id}
-                bookmarkTitle={el.title}
-                bookmarkColor={el.color}
-                bookmarkType={el.type}
-                // noteInput={el.noteInput}
-                // rssLink={el.rssLink}
-                key={i}
-              />
-            );
-          })}
-      </div>
-      <div className={`hidden sm:block bg-${columnsColorsData.column_3}`}>
-        3
-      </div>
-      <div className={`hidden sm:block bg-${columnsColorsData.column_4}`}>
-        4
-      </div> */}
+     
       <p>grid height: {height}</p>
     </div>
   );

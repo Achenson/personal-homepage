@@ -22,7 +22,7 @@ interface Props {
   // ref: React.MutableRefObject<number>
 }
 
-const Column_Img = React.forwardRef( ({colNumber}: Props, ref ) => {
+const Column_Img = React.forwardRef(({ colNumber }: Props, ref) => {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [
     columnsColorsImg_Data,
@@ -50,17 +50,18 @@ const Column_Img = React.forwardRef( ({colNumber}: Props, ref ) => {
   }
 
   function calcColumnColor(colNumber: number, globalColumnSetting: boolean) {
-    if (!globalSettingsState) {
-      switch (colNumber) {
-        case 1:
-          return columnsColorsData.column_1;
-        case 2:
-          return columnsColorsData.column_2;
-        case 3:
-          return columnsColorsData.column_3;
-        case 4:
-          return columnsColorsData.column_4;
-      }
+    if (!globalColumnSetting) {
+      // switch (colNumber) {
+      //   case 1:
+      //     return columnsColorsData.column_1;
+      //   case 2:
+      //     return columnsColorsData.column_2;
+      //   case 3:
+      //     return columnsColorsData.column_3;
+      //   case 4:
+      //     return columnsColorsData.column_4;
+      // }
+      return "";
     }
 
     switch (colNumber) {
@@ -75,23 +76,50 @@ const Column_Img = React.forwardRef( ({colNumber}: Props, ref ) => {
     }
   }
 
+  function calcColumnColor_picBackground(
+    colNumber: number,
+    globalColumnSetting: boolean
+  ) {
+    if (globalColumnSetting) {
+      return "";
+    }
+
+    switch (colNumber) {
+      case 1:
+        return "bg-" + columnsColorsData.column_1;
+      case 2:
+        return "bg-" + columnsColorsData.column_2;
+      case 3:
+        return "bg-" + columnsColorsData.column_3;
+      case 4:
+        return "bg-" + columnsColorsData.column_4;
+    }
+  }
+
   //   return <div className={`bg-${columnsColorsData.column_1}`}>
   return (
     <div
-    className={`${colNumber !== 1 ? "hidden sm:block" : ""}`}
-    style={{ backgroundColor: calcColumnColor(
-      colNumber,
-      globalSettingsData.picBackground
-    ) }}
-    // ref={drop}
-    // ref={target}
+      className={`${
+        colNumber !== 1 ? "hidden sm:block" : ""
+      } ${calcColumnColor_picBackground(
+        colNumber,
+        globalSettingsData.picBackground
+      )}`}
+      style={{
+        backgroundColor: calcColumnColor(
+          colNumber,
+          globalSettingsData.picBackground
+        ),
+      }}
+      // ref={drop}
+      // ref={target}
 
-    // style={{
-    //   backgroundColor: calcColumnColor(
-    //     colNumber,
-    //     globalSettingsData.picBackground
-    //   ),
-    // }}
+      // style={{
+      //   backgroundColor: calcColumnColor(
+      //     colNumber,
+      //     globalSettingsData.picBackground
+      //   ),
+      // }}
     >
       {bookmarksData
         .filter((el) => el.column === colNumber)
@@ -109,22 +137,15 @@ const Column_Img = React.forwardRef( ({colNumber}: Props, ref ) => {
                 // noteInput={el.noteInput}
                 // rssLink={el.rssLink}
               />
-              <GapAfterBookmark_Img
-                colNumber={colNumber}
-                bookmarkID={el.id}
-              />
+              <GapAfterBookmark_Img colNumber={colNumber} bookmarkID={el.id} />
             </div>
           );
         })}
-        {
-
-          bookmarksData.filter(el => el.column === colNumber).length === 0 ? <GapAfterBookmark_Img
-          colNumber={colNumber}
-          bookmarkID={null}
-          /> : null
-        }
+      {bookmarksData.filter((el) => el.column === colNumber).length === 0 ? (
+        <GapAfterBookmark_Img colNumber={colNumber} bookmarkID={null} />
+      ) : null}
     </div>
   );
-})
+});
 
 export default Column_Img;
