@@ -147,6 +147,7 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 89. add second image for the background
 90. rss error handling
 91. && operators instead of ?
+92. two !! at the begining GapAfterBookmark_Img
 
 
 App structure:

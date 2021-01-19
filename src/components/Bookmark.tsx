@@ -10,6 +10,7 @@ import {
   folderColorState,
   rssColorState,
   columnsColorsState,
+  bookmarkBeingDraggedColor_State,
 } from "../state/colorsState";
 
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
@@ -38,7 +39,7 @@ interface Props {
   bookmarkTitle: string;
   bookmarkColor: string | null;
   bookmarkType: "folder" | "note" | "rss";
-  colNumber: number
+  colNumber: number;
   // noteInput: string | null;
   // rssLink: string | null;
 }
@@ -48,7 +49,7 @@ function Bookmark({
   bookmarkTitle,
   bookmarkColor,
   bookmarkType,
-  colNumber
+  colNumber,
 }: // noteInput,
 // rssLink
 Props): JSX.Element {
@@ -59,13 +60,10 @@ Props): JSX.Element {
 
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
   const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
- 
 
   const [editLinkVis, setEditLinkVis] = useState<boolean>(false);
   const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
   const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
-
- 
 
   const [editSingleLinkData, setEditSingleLinkData] = useState<SingleLinkData>({
     title: "",
@@ -74,26 +72,6 @@ Props): JSX.Element {
   });
 
   const [crossVis, setCrossVis] = useState<boolean>(true);
-  // we get two things:
-  //  1.) object containing all props - we will get that from collection functions
-  // the collecting functions will turn monitor events into props
-  // 2.) A ref - the result of this useDrag hook is going to be attached to that specific DOM element
-  // isDragging - props coming from collecting function
-  const[{isDragging}, drag] = useDrag(
-    {
-      // the result that will come from out useDrag hook
-      item: {
-        // type is required
-        type: ItemTypes.BOOKMARK,
-        bookmarkID: bookmarkID,
-        colNumber: colNumber
-      },
-      collect: monitor => ({
-        isDragging: !!monitor.isDragging()
-      })
-    }
-  )
-
 
   // 0 to not show typescript errors
   let bookmarkIndex: number = 0;
@@ -108,8 +86,8 @@ Props): JSX.Element {
     }
   });
 
-   // bookmark content
-   const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
+  // bookmark content
+  const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
     bookmarksData[bookmarkIndex].opened
     // false
   );
@@ -119,13 +97,11 @@ Props): JSX.Element {
     false
   );
 
-   // for Note only / note content
-   const [noteInputVisibility, setNoteInputVisibility] = useState<boolean>(
+  // for Note only / note content
+  const [noteInputVisibility, setNoteInputVisibility] = useState<boolean>(
     bookmarksData[bookmarkIndex].opened
     // false
   );
-
-
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
@@ -148,8 +124,38 @@ Props): JSX.Element {
     if (bookmarkType === "rss") {
       finalBookmarkColor = rssColorData;
     }
-
   }
+
+  // we get two things:
+  //  1.) object containing all props - we will get that from collection functions
+  // the collecting functions will turn monitor events into props
+  // 2.) A ref - the result of this useDrag hook is going to be attached to that specific DOM element
+  // isDragging - props coming from collecting function
+  const [{ isDragging }, drag] = useDrag({
+    // the result that will come from out useDrag hook
+    item: {
+      // type is required
+      type: ItemTypes.BOOKMARK,
+      bookmarkID: bookmarkID,
+      colNumber: colNumber,
+      bookmarkColor: finalBookmarkColor,
+    },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  });
+
+  const [
+    bookmarkBeingDraggedColor_Data,
+    setBookmarkBeingDraggedColor_Data,
+  ] = bookmarkBeingDraggedColor_State.use();
+
+  useEffect( () => {
+    if(isDragging) {
+      setBookmarkBeingDraggedColor_Data({bookmarkColor: finalBookmarkColor})
+    }
+
+  }, [isDragging])
 
   function textOrIconColor(
     finalBookmarkColor: string,
@@ -266,7 +272,10 @@ Props): JSX.Element {
             }
           }}
         >
-          <p className=""> {bookmarkTitle} {bookmarksData[bookmarkIndex].priority}</p>
+          <p className="">
+            {" "}
+            {bookmarkTitle} {bookmarksData[bookmarkIndex].priority}
+          </p>
         </div>
 
         <div
@@ -289,7 +298,6 @@ Props): JSX.Element {
                 // className="h-6  hover:text-black hover:invisible"
                 className="h-6"
                 style={{ marginTop: "-2px" }}
-                
               />
             ) : null}
           </div>
@@ -309,7 +317,9 @@ Props): JSX.Element {
           <ColorSmallSVG
             className={`h-5 mr-2 hover:${hoverText(
               finalBookmarkColor
-            )} cursor-pointer ${bookmarkType === "note" || bookmarkType === "rss"  ? "ml-2" : ""}`}
+            )} cursor-pointer ${
+              bookmarkType === "note" || bookmarkType === "rss" ? "ml-2" : ""
+            }`}
             onClick={() => {
               setColorsVisibility((b) => !b);
             }}

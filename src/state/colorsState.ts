@@ -27,3 +27,10 @@ export const columnsColorsImg_State = newRidgeState<ColumnsColors>({
   column_3: "rgba(0,0,0,0.2)",
   column_4: "rgba(0,0,0,0.2)",
 });
+
+export const bookmarkBeingDraggedColor_State = newRidgeState<{
+  bookmarkColor: string
+}>(
+  {bookmarkColor: ""
+}
+)

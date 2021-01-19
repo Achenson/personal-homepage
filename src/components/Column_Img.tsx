@@ -31,6 +31,7 @@ const Column_Img = React.forwardRef(({ colNumber }: Props, ref) => {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
+
   function dragBookmark(itemID: number | string) {
     setBookmarksData((previous) =>
       produce(previous, (updated) => {

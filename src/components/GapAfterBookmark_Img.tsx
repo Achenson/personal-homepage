@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDrop } from "react-dnd";
 import { produce } from "immer";
@@ -7,28 +7,50 @@ import { ItemTypes } from "../utils/itemsDnd";
 
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
 
+import {
+  bookmarkBeingDraggedColor_State,
+} from "../state/colorsState";
+
 interface Props {
   colNumber: number;
   bookmarkID: number | string | null;
-  picBackground: boolean
+  picBackground: boolean;
 }
 
-function GapAfterBookmark_Img({ colNumber, bookmarkID, picBackground }: Props): JSX.Element {
+function GapAfterBookmark_Img({
+  colNumber,
+  bookmarkID,
+  picBackground,
+}: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  
+  const [
+    bookmarkBeingDraggedColor_Data,
+    setBookmarkBeingDraggedColor_Data,
+  ] = bookmarkBeingDraggedColor_State.use();
 
   const [{ isOver }, drop] = useDrop({
     //    required property
     accept: ItemTypes.BOOKMARK,
+    drop: (item, monitor) =>
     // @ts-ignore: Unreachable code error
-    drop: (item, monitor) => dragBookmark(item.bookmarkID, item.colNumber),
+      dragBookmark(item.bookmarkID, item.colNumber, item.bookmarkColor),
     // drop: (item, monitor) => console.log(item.bookmarkID),
 
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
+
+   
   });
 
-  function dragBookmark(itemID: number | string, itemColNumber: number) {
+
+
+  function dragBookmark(
+    itemID: number | string,
+    itemColNumber: number,
+    bookmarkColor: string
+  ) {
     setBookmarksData((previous) =>
       produce(previous, (updated) => {
         let bookmarkIndex: number = 0;
@@ -99,13 +121,13 @@ function GapAfterBookmark_Img({ colNumber, bookmarkID, picBackground }: Props): 
   }
 
   function calcOpacityOnDrop(picBackground: boolean) {
-    
-      if(picBackground) {
-        return "bg-black opacity-50"
-      }
+    if (picBackground) {
+      return "bg-black opacity-50";
+    }
 
-      return "bg-teal-500 opacity-50";
+    // console.log(draggedBookmarkColor);
 
+    return `bg-${bookmarkBeingDraggedColor_Data.bookmarkColor} opacity-60`;
   }
 
   return (
