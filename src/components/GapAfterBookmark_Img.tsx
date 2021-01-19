@@ -10,9 +10,10 @@ import { bookmarksDataState } from "../state/bookmarksAndLinks";
 interface Props {
   colNumber: number;
   bookmarkID: number | string | null;
+  picBackground: boolean
 }
 
-function GapAfterBookmark_Img({ colNumber, bookmarkID }: Props): JSX.Element {
+function GapAfterBookmark_Img({ colNumber, bookmarkID, picBackground }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const [{ isOver }, drop] = useDrop({
@@ -97,10 +98,20 @@ function GapAfterBookmark_Img({ colNumber, bookmarkID }: Props): JSX.Element {
     );
   }
 
+  function calcOpacityOnDrop(picBackground: boolean) {
+    
+      if(picBackground) {
+        return "bg-black opacity-50"
+      }
+
+      return "bg-teal-500 opacity-50";
+
+  }
+
   return (
     <div
       className={`${bookmarkID ? "h-6" : "h-14"} ${
-        isOver ? "bg-black opacity-50" : ""
+        isOver ? calcOpacityOnDrop(picBackground) : ""
       }`}
       // style={{ backgroundColor: singleColumnColor }}
       ref={drop}

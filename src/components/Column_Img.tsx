@@ -137,12 +137,12 @@ const Column_Img = React.forwardRef(({ colNumber }: Props, ref) => {
                 // noteInput={el.noteInput}
                 // rssLink={el.rssLink}
               />
-              <GapAfterBookmark_Img colNumber={colNumber} bookmarkID={el.id} />
+              <GapAfterBookmark_Img colNumber={colNumber} bookmarkID={el.id} picBackground={globalSettingsData.picBackground} />
             </div>
           );
         })}
       {bookmarksData.filter((el) => el.column === colNumber).length === 0 ? (
-        <GapAfterBookmark_Img colNumber={colNumber} bookmarkID={null} />
+        <GapAfterBookmark_Img colNumber={colNumber} bookmarkID={null} picBackground={globalSettingsData.picBackground} />
       ) : null}
     </div>
   );
