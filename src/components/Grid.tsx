@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Bookmark from "./Bookmark";
-import Column from "./Column";
+
 import {
   bookmarksDataState,
   linksDataState,
@@ -16,7 +16,7 @@ import { produce } from "immer";
 import { columnsColorsState, resetColorsState } from "../state/colorsState";
 
 import { globalSettingsState } from "../state/defaultSettings";
-import Column_Img from "./Column_Img";
+import Column from "./Column";
 
 import useSize from "@react-hook/size";
 
@@ -109,29 +109,11 @@ function Grid({}: Props): JSX.Element {
 
       
         <>
-          <Column_Img colNumber={1} />
-          <Column_Img colNumber={2} />
-          <Column_Img colNumber={3} />
-          <Column_Img colNumber={4} />
-        </>
-  
-         {/* {
-      globalSettingsData.picBackground ? (
-        <>
-          <Column_Img colNumber={1} />
-          <Column_Img colNumber={2} />
-          <Column_Img colNumber={3} />
-          <Column_Img colNumber={4} />
-        </>
-      ) : (
-        <>
           <Column colNumber={1} />
           <Column colNumber={2} />
           <Column colNumber={3} />
           <Column colNumber={4} />
         </>
-      )} */}
-
      
       <p>grid height: {height}</p>
     </div>

@@ -141,13 +141,14 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 83. get rid of useSize/dimensions hook?
 84. always open property on folder 
 85. get rid of bookmark priorities being displayed in the end
-86. bigger draggable space in GapAfterBookmark_Img if column is empty
+DONE 86. bigger draggable space in GapAfterBookmark if column is empty DONE
 87. rss reader cannot be initially always opened
 88. columnImg -> make color cntrls more visible
 89. add second image for the background
 90. rss error handling
 91. && operators instead of ?
-92. two !! at the begining GapAfterBookmark_Img
+92. two !! at the begining GapAfterBookmark
+93. GapAfterBookmark: decide isOver color (bookmark being dragged dependend, or column dependend)
 
 
 App structure:
@@ -159,15 +160,17 @@ Main
     UpperLeftMenu
     UpperRightMenu *
   Grid
-    Bookmark
-      SingleLink |
-      NoteInput |
-      RSS       |
+    Column
+      Bookmark
+        SingleLink |
+        NoteInput |
+        RSS       |
+      GapAfterBookmark
 
-      ?ColorsToChoose
-      ?EditLink
-      ?NewLink
-      ?EditBookmarkTitle
+        ?ColorsToChoose
+        ?EditLink
+        ?NewLink
+        ?EditBookmarkTitle
 
 
       

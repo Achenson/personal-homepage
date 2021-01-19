@@ -17,7 +17,7 @@ interface Props {
   picBackground: boolean;
 }
 
-function GapAfterBookmark_Img({
+function GapAfterBookmark({
   colNumber,
   bookmarkID,
   picBackground,
@@ -128,6 +128,8 @@ function GapAfterBookmark_Img({
     // console.log(draggedBookmarkColor);
 
     return `bg-${bookmarkBeingDraggedColor_Data.bookmarkColor} opacity-60`;
+    
+
   }
 
   return (
@@ -141,4 +143,4 @@ function GapAfterBookmark_Img({
   );
 }
 
-export default GapAfterBookmark_Img;
+export default GapAfterBookmark;
