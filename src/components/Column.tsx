@@ -98,11 +98,11 @@ const Column = React.forwardRef(({ colNumber }: Props, ref) => {
   }
 
   //   return <div className={`bg-${columnsColorsData.column_1}`}>
+
   return (
     <div
-      className={`${
-        colNumber !== 1 ? "hidden sm:block" : ""
-      } ${calcColumnColor_picBackground(
+      className={`
+       ${calcColumnColor_picBackground(
         colNumber,
         globalSettingsData.picBackground
       )}`}

@@ -149,6 +149,7 @@ DONE 86. bigger draggable space in GapAfterBookmark if column is empty DONE
 91. && operators instead of ?
 92. two !! at the begining GapAfterBookmark
 93. GapAfterBookmark: decide isOver color (bookmark being dragged dependend, or column dependend)
+94. no x gaps between columns?
 
 
 App structure:

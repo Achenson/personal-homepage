@@ -115,7 +115,7 @@ function Grid({}: Props): JSX.Element {
           <Column colNumber={4} />
         </>
      
-      <p>grid height: {height}</p>
+      {/* <p>grid height: {height}</p> */}
     </div>
   );
 }
