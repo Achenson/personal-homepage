@@ -309,7 +309,7 @@ Props): JSX.Element {
           <ColorSmallSVG
             className={`h-5 mr-2 hover:${hoverText(
               finalBookmarkColor
-            )} cursor-pointer ${bookmarkType === "note" ? "ml-2" : ""}`}
+            )} cursor-pointer ${bookmarkType === "note" || bookmarkType === "rss"  ? "ml-2" : ""}`}
             onClick={() => {
               setColorsVisibility((b) => !b);
             }}

@@ -143,6 +143,9 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 85. get rid of bookmark priorities being displayed in the end
 86. bigger draggable space in GapAfterBookmark_Img if column is empty
 87. rss reader cannot be initially always opened
+88. columnImg -> make color cntrls more visible
+89. add second image for the background
+90. rss error handling
 
 
 App structure:
