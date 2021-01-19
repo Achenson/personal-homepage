@@ -99,7 +99,9 @@ function GapAfterBookmark_Img({ colNumber, bookmarkID }: Props): JSX.Element {
 
   return (
     <div
-      className={`h-6 ${isOver ? "bg-black opacity-50" : ""}`}
+      className={`${bookmarkID ? "h-6" : "h-14"} ${
+        isOver ? "bg-black opacity-50" : ""
+      }`}
       // style={{ backgroundColor: singleColumnColor }}
       ref={drop}
     ></div>
