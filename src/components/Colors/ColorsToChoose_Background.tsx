@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { columnColors} from "../../utils/columnColors";
+import { backgroundColors} from "../../utils/backgroundColors";
 
 
 import SingleColor_Background from './SingleColor_Background';
@@ -14,7 +14,7 @@ function BackgroundColorsToChoose({}: Props): JSX.Element{
   
   
   function mapBackgroundColors() {
-    return columnColors.map((row, i) => {
+    return backgroundColors.map((row, i) => {
       return (
         <div className="flex" key={i}>
           {row.map((el, j) => {
