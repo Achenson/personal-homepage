@@ -34,3 +34,7 @@ export const bookmarkBeingDraggedColor_State = newRidgeState<{
   {bookmarkColor: ""
 }
 )
+
+export const backgroundColorState = newRidgeState<string>(
+  "green-500"
+)

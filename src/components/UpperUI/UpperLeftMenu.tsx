@@ -5,6 +5,7 @@ import DefaultColorsToChoose from "../Colors/DefaultColorsToChoose";
 
 import {globalSettingsState} from "../../state/defaultSettings";
 import SingleColumnsColor_Img from "../Colors/SingleColumnsColor_Img";
+import BackgroundColor from "../Colors/BackgroundColor";
 
 interface Props {}
 
@@ -72,7 +73,7 @@ function UpperLeftMenu({}: Props): JSX.Element {
         <div className="flex">{columnsRendering(4)}</div>
 
       </div>
-        <div className="h-8 w-6 border border-black"></div>
+      { globalSettingsData.picBackground ? null : <BackgroundColor/>}
 
       <div className="absolute left-60" style={{ bottom: "104px" }}>
         {colorsToChooseVis ? (
