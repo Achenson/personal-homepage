@@ -65,12 +65,15 @@ function UpperLeftMenu({}: Props): JSX.Element {
 
   return (
     
-        <div className="">
+        <div className="flex items-baseline justify-between w-44">
       {/* <div className="absolute left-0 bottom-0"> */}
       <div className="flex justify-between items-center mb-2 mt-2">
         {/* <p className="w-32">Columns</p> */}
         <div className="flex">{columnsRendering(4)}</div>
+
       </div>
+        <div className="h-8 w-6 border border-black"></div>
+
       <div className="absolute left-60" style={{ bottom: "104px" }}>
         {colorsToChooseVis ? (
           <DefaultColorsToChoose defaultColorsFor={defaultColorsFor} />
