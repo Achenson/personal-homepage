@@ -7,13 +7,16 @@ import UpperUI from "./UpperUI/UpperUI";
 
 import {globalSettingsState} from "../state/defaultSettings";
 
-
+import {backgroundColorState} from "../state/colorsState"
 
 interface Props {}
 
 function Main({}: Props): JSX.Element {
 
+
+
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use()
+  const [backgroundColorData, setBackgroundColorData] = backgroundColorState.use()
 
   const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
   const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
@@ -22,7 +25,7 @@ function Main({}: Props): JSX.Element {
 
   return (
     // <div className="relative h-screen bg-testBackground bg-cover">
-    <div className={`relative h-screen  ${globalSettingsData.picBackground ? "bg-testBackground" : "bg-white"} bg-cover`}>
+    <div className={`relative h-screen  ${globalSettingsData.picBackground ? "bg-testBackground" : `bg-${backgroundColorData}`} bg-cover`}>
       {newBookmarkVis ? <NewBookmark_UpperUI setNewBookmarkVis={setNewBookmarkVis} bookmarkType={bookmarkType}/> : null }
       {newLinkVis ? <NewLink_UpperUI setNewLinkVis={setNewLinkVis}/> : null }
       {colorsVis ? <Colors_UpperUI colorsVis={colorsVis} setColorsVis={setColorsVis}/> : null}    

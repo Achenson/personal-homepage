@@ -1,7 +1,7 @@
 import React from "react";
 
-import DefaultSingleColor from "./DefaultSingleColor";
-import DefaultSingleColor_Img from "./DefaultSingleColor_Img";
+import DefaultSingleColor from "./SingleColor_Default";
+import DefaultSingleColor_Img from "./SingleColor_Default_Img";
 
 import { folderColors } from "../../utils/folderColors";
 import { columnColors, imageColumnColors } from "../../utils/columnColors";

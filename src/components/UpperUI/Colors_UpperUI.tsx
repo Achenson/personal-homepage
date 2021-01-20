@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import DefaultColorsToChoose from "../Colors/DefaultColorsToChoose";
-import SingleColumnsColor from "../Colors/SingleColumnsColor";
+import DefaultColorsToChoose from "../Colors/ColorsToChoose_Default";
+import SingleColumnsColor from "../Colors/ColumnColor";
 
 import {
   noteColorState,

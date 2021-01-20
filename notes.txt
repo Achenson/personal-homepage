@@ -151,28 +151,35 @@ DONE 86. bigger draggable space in GapAfterBookmark if column is empty DONE
 93. GapAfterBookmark: decide isOver color (bookmark being dragged dependend, or column dependend)
 94. no x gaps between columns?
 95. UpperLeftMenu: inner border too wide?
+96. colors components -> make them more consistent! SingleColor_Default(columns & defaults) vs SingleColor_Default_Img (columns only)
+  ColorsToChooseDefault used both for columns and Defaults vs ColorsToChoose
 
 
 App structure:
 Main
-  ?newBookmark
-  ?newLink
-  ?Colors_UpperUI *
-  Upper_UI
-    UpperLeftMenu
-    UpperRightMenu *
-  Grid
-    Column
-      Bookmark
-        SingleLink |
-        NoteInput |
-        RSS       |
-      GapAfterBookmark
-
-        ?ColorsToChoose
-        ?EditLink
-        ?NewLink
-        ?EditBookmarkTitle
+    ?newBookmark
+    ?newLink
+    ?Colors_UpperUI *
+        ?DefaultColorsToChoose
+            DefaultSingleColor
+    Upper_UI
+        UpperLeftMenu
+            SingleColumnColors/SingleColumnColors_Img
+            ?DefaultColorsToChoose
+                DefaultSingleColor
+        UpperRightMenu *
+    Grid
+        Column
+            Bookmark
+                SingleLink |
+                NoteInput |
+                RSS       |
+            GapAfterBookmark
+                ?ColorsToChoose
+                    SingleColor
+                ?EditLink
+                ?NewLink
+                ?EditBookmarkTitle
 
 
       
