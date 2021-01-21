@@ -63,7 +63,7 @@ function UpperLeftMenu({}: Props): JSX.Element {
   }
 
   return (
-    <div className="flex items-baseline justify-between w-44">
+    <div className="flex items-center justify-between w-44">
       {/* <div className="absolute left-0 bottom-0"> */}
       <div className="flex justify-between items-center mb-2 mt-2">
         {/* <p className="w-32">Columns</p> */}
