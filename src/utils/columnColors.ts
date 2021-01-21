@@ -1,8 +1,8 @@
 export const columnColors: string[][] = [
   [
     "white",
-    "white",
-    "white",
+    "gray-100",
+    "gray-200",
     "blueGray-50",
     "blueGray-100",
     "blueGray-200",
