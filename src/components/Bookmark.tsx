@@ -25,6 +25,7 @@ import NewLink from "./NewLink";
 import EditBookmarkTitle from "./EditBookmarkTitle";
 import NoteInput from "./NoteInput";
 import RSS from "./RSS";
+import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "../utils/itemsDnd";
 
@@ -391,11 +392,16 @@ Props): JSX.Element {
       ) : null}
 
       {rssVisibility ? (
-        <RSS
-          // rssLink={rssLink}
+        // <RSS
+        //   // rssLink={rssLink}
+        //   bookmarkID={bookmarkID}
+        //   bookmarkIndex={bookmarkIndex}
+        // />
+            <RSS_reactQuery
           bookmarkID={bookmarkID}
-          bookmarkIndex={bookmarkIndex}
         />
+
+        
       ) : null}
     </div>
   );
