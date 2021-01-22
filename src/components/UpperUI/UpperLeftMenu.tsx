@@ -7,6 +7,7 @@ import { globalSettingsState } from "../../state/defaultSettings";
 import SingleColumnsColor_Img from "../Colors/ColumnColor_Img";
 import BackgroundColor from "../Colors/BackgroundColor";
 import BackgroundColorsToChoose from "../Colors/ColorsToChoose_Background";
+import { DndProvider } from "react-dnd";
 
 interface Props {}
 
@@ -71,11 +72,18 @@ function UpperLeftMenu({}: Props): JSX.Element {
       </div>
       {globalSettingsData.picBackground ? null : <BackgroundColor  setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis} />}
 
-      <div className="absolute left-60" style={{ bottom: "104px" }}>
+      {/* <div className="absolute left-0" style={{ bottom: "104px" }}> */}
+      <div className="absolute left-0 top-3" >
         {colorsToChooseVis ? (
           <DefaultColorsToChoose defaultColorsFor={defaultColorsFor} />
         ) : null}
-        {backgroundColorsToChooseVis ? <BackgroundColorsToChoose /> : null}
+        {backgroundColorsToChooseVis ? 
+        <div className="absolute left-60 top-7">
+
+          <BackgroundColorsToChoose />
+        </div>
+        
+        : null}
       </div>
     </div>
   );

@@ -153,7 +153,7 @@ DONE 86. bigger draggable space in GapAfterBookmark if column is empty DONE
 95. UpperLeftMenu: inner border too wide?
 96. colors components -> make them more consistent! SingleColor_Default(columns & defaults) vs SingleColor_Default_Img (columns only)
   ColorsToChooseDefault used both for columns and Defaults vs ColorsToChoose
-
+97. change positioning of colors to choose for columns
 
 App structure:
 Main

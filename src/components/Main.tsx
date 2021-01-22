@@ -25,7 +25,7 @@ function Main({}: Props): JSX.Element {
 
   return (
     // <div className="relative h-screen bg-testBackground bg-cover">
-    <div className={`relative h-screen  ${globalSettingsData.picBackground ? "bg-testBackground" : `bg-${backgroundColorData}`} bg-cover`}>
+    <div className={`relative h-screen ${globalSettingsData.picBackground ? "bg-testBackground" : `bg-${backgroundColorData}`} bg-cover`}>
       {newBookmarkVis ? <NewBookmark_UpperUI setNewBookmarkVis={setNewBookmarkVis} bookmarkType={bookmarkType}/> : null }
       {newLinkVis ? <NewLink_UpperUI setNewLinkVis={setNewLinkVis}/> : null }
       {colorsVis ? <Colors_UpperUI colorsVis={colorsVis} setColorsVis={setColorsVis}/> : null}    
