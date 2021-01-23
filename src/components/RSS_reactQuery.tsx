@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import SingleRssNews from "./SingleRssNews";
 
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
+import { rssSettingsState } from "../state/defaultSettings";
 
 import { ReactComponent as ArrowLeft } from "../svgs/arrowLeft.svg";
 import { ReactComponent as ArrowRight } from "../svgs/arrowRight.svg";
@@ -16,8 +17,16 @@ interface Props {
 
 function ReactQuery({ bookmarkID }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
+  let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
 
-  const itemsPerPage = 10;
+  const [itemsPerPage, setItemsPerPage] = useState(() => {
+    if (typeof currentBookmark[0].itemsPerPage === "number") {
+      return currentBookmark[0].itemsPerPage;
+    }
+
+    return rssSettingsData.itemsPerPage;
+  });
   const [pageNumber, setPageNumber] = useState(0);
 
   const { data, status } = useQuery("feed", fetchFeed, {

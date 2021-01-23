@@ -155,6 +155,8 @@ DONE 71. Column -> make them stack when the screen is smaller DONE
 97. change positioning of colors to choose for columns
 98. change top level (Colors, Settings) positioning
 99. react query devtools not working
+100. useState usual vs function !!! check
+101. update itemsPerPage immediately when itemsPerPage is changed
 
 App structure:
 Main
