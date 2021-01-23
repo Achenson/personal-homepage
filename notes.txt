@@ -51,12 +51,21 @@ module.exports = {
 
 TO DO:
 
+DONE 3. bookmark move icon - hide when moving? DONE
+ DONE 4. icon colors on darkBackground DONE but 1 purple & 1 pink not perfect? DONE 
+DONE 5. ColorsToChoose -> better code DONE
+DONE 12. components folders? DONE
+DONE 16. newLink & newLink_UpperUI -> tags not aligned DONE
+DONE 23. bg-color vs text color of folders DONE
+DONE 24. bookmark: almost same function for icons & text color, unify DONE
+DONE 36. diff color for diff columns? DONE
+DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
+DONE 86. bigger draggable space in GapAfterBookmark if column is empty DONE
+
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 3. how to properly set links
-DONE 3. bookmark move icon - hide when moving? DONE
 4. change pretifier -> .map & .filter from new lines
-DONE 5. ColorsToChoose -> better code DONE
 5. EditLink & NewLink -> unify
 6. edit bookmark & bookkmark color -> join?
 7. one function for bookmark index
@@ -65,36 +74,27 @@ DONE 5. ColorsToChoose -> better code DONE
 9. auto-completing tags when adding links
 10. undo link & bookmark delete
 11. move grid logic to Main?
-DONE 12. components folders? DONE
 13. useEffect logic in grid -> move to lower components?
 14. newLink -> save & cancel icons not perfectly in the middle
 15. UpperRightMenu on hover, boders for newLink & newBookmark -> default App color?
-DONE 16. newLink & newLink_UpperUI -> tags not aligned DONE
 17. link/bookmark -> consistent naming!
 18. newBookmark_upperUI -> menu with existing bookmarks to choose
 19. bookmark priorities
 20. note -> newLines not working
 21. newBookmark -> better input for column
 22. bookmark title -> spaces should be permitted too
-DONE 23. bg-color vs text color of folders DONE
- DONE 4. icon colors on darkBackground DONE but 1 purple & 1 pink not perfect? DONE 
-DONE 24. bookmark: almost same function for icons & text color, unify DONE
 25. Bookmark better css (more like button)
 26. black icont -> not contrastive enough on hover?
 27. auto close bookmark menus when clicking sth else
 28. diff between iGoogle folders and mine
-
 30. colors for UI dep on folder color
-
 31. margin for new item -> always on?
 32. colors placement in default color settings
 33. change light gray to white on some background in Folders
 XXX 34. change folders/notes shadows on darker backgrounds XXX
 35. default color settings should be working only if new folder/note is being added?
-DONE 36. diff color for diff columns? DONE
 37. add background color/header column color 
 38. Folders: not wide enough relative to columns?
-DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 40. Bookmark darkBackground hover
 41. better cancel btn in Colors_UpperUI
 42. changing notes color?
@@ -122,11 +122,11 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 64. rss description
 65. rss linksPerPage
 66. createObj should calc priority so new folder land last in a given column
-67. RSS refresh button
+xxx 67. RSS refresh button xx reactQuery is taking care of this
 68. note & RSS improve SVG icon placement
 69. EditBookmark -> improve checkboxes -> add initial checks, compare vs later
-70. make column component
-71. Column -> make them stack when the screen is smaller
+DONR 70. make column component DONE
+DONE 71. Column -> make them stack when the screen is smaller DONE 
 72. Column & Grid -> clean code between them
 73. Main bg picture is moving a little when opening a column
 74. forms -> consistency in aligning
@@ -141,7 +141,6 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 83. get rid of useSize/dimensions hook?
 84. always open property on folder 
 85. get rid of bookmark priorities being displayed in the end
-DONE 86. bigger draggable space in GapAfterBookmark if column is empty DONE
 87. rss reader cannot be initially always opened
 88. columnImg -> make color cntrls more visible
 89. add second image for the background
@@ -155,6 +154,7 @@ DONE 86. bigger draggable space in GapAfterBookmark if column is empty DONE
   ColorsToChooseDefault used both for columns and Defaults vs ColorsToChoose
 97. change positioning of colors to choose for columns
 98. change top level (Colors, Settings) positioning
+99. react query devtools not working
 
 App structure:
 Main
