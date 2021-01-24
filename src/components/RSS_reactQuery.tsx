@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import SingleRssNews from "./SingleRssNews";
 
@@ -20,13 +20,42 @@ function ReactQuery({ bookmarkID }: Props): JSX.Element {
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
   let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
 
-  const [itemsPerPage, setItemsPerPage] = useState(() => {
+  const [itemsPerPage, setItemsPerPage] = useState(calcItemsPerPage());
+
+  function calcItemsPerPage() {
     if (typeof currentBookmark[0].itemsPerPage === "number") {
       return currentBookmark[0].itemsPerPage;
     }
 
     return rssSettingsData.itemsPerPage;
-  });
+  }
+
+   // const [itemsPerPage, setItemsPerPage] = useState(() => {
+  //   if (typeof currentBookmark[0].itemsPerPage === "number") {
+  //     return currentBookmark[0].itemsPerPage;
+  //   }
+  //   return rssSettingsData.itemsPerPage;
+  // });
+
+
+  useEffect(() => {
+     
+    let bookmarkIndex: number = 0;
+
+    bookmarksData.forEach((obj, i) => {
+      if (obj.id === bookmarkID) {
+        bookmarkIndex = i;
+      }
+    });
+
+    if(bookmarksData[bookmarkIndex].itemsPerPage !== itemsPerPage && typeof(bookmarksData[bookmarkIndex].itemsPerPage) === "number"  ) {
+      setItemsPerPage(bookmarksData[bookmarkIndex].itemsPerPage as number)
+    }
+
+  }, [bookmarksData])
+
+ 
+
   const [pageNumber, setPageNumber] = useState(0);
 
   const { data, status } = useQuery("feed", fetchFeed, {
@@ -34,7 +63,7 @@ function ReactQuery({ bookmarkID }: Props): JSX.Element {
     // cacheTime: 10,
     onSuccess: () => console.log("data fetched with no problems"),
   });
-  console.log(data);
+  // console.log(data);
 
   async function fetchFeed() {
     let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);

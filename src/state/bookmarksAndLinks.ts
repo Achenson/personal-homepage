@@ -66,7 +66,8 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     itemsPerPage: null,
     // noteInput: null,
     // rssLink: "http://rss.sciam.com/basic-science"
-    rssLink: "https://tvn24.pl/najwazniejsze.xml",
+    // rssLink: "https://tvn24.pl/najwazniejsze.xml",
+    rssLink: "https://dailygalaxy.com/feed/",
 
     items: []
     // rssLink: "https://techbeacon.com/rss.xml"
