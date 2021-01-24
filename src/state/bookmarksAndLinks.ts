@@ -68,7 +68,8 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     // rssLink: "http://rss.sciam.com/basic-science"
     // rssLink: "https://tvn24.pl/najwazniejsze.xml",
     rssLink: "https://dailygalaxy.com/feed/",
-
+    // rssLink: "https://feeds.feedburner.com/sciencealert-latestnews",
+    // rssLink: "https://science.sciencemag.org/rss/twis.xml", <- works
     items: []
     // rssLink: "https://techbeacon.com/rss.xml"
     // linksTitles: ["facebook"],

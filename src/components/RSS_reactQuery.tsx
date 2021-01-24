@@ -30,16 +30,14 @@ function ReactQuery({ bookmarkID }: Props): JSX.Element {
     return rssSettingsData.itemsPerPage;
   }
 
-   // const [itemsPerPage, setItemsPerPage] = useState(() => {
+  // const [itemsPerPage, setItemsPerPage] = useState(() => {
   //   if (typeof currentBookmark[0].itemsPerPage === "number") {
   //     return currentBookmark[0].itemsPerPage;
   //   }
   //   return rssSettingsData.itemsPerPage;
   // });
 
-
   useEffect(() => {
-     
     let bookmarkIndex: number = 0;
 
     bookmarksData.forEach((obj, i) => {
@@ -48,13 +46,13 @@ function ReactQuery({ bookmarkID }: Props): JSX.Element {
       }
     });
 
-    if(bookmarksData[bookmarkIndex].itemsPerPage !== itemsPerPage && typeof(bookmarksData[bookmarkIndex].itemsPerPage) === "number"  ) {
-      setItemsPerPage(bookmarksData[bookmarkIndex].itemsPerPage as number)
+    if (
+      bookmarksData[bookmarkIndex].itemsPerPage !== itemsPerPage &&
+      typeof bookmarksData[bookmarkIndex].itemsPerPage === "number"
+    ) {
+      setItemsPerPage(bookmarksData[bookmarkIndex].itemsPerPage as number);
     }
-
-  }, [bookmarksData])
-
- 
+  }, [bookmarksData]);
 
   const [pageNumber, setPageNumber] = useState(0);
 
@@ -63,7 +61,7 @@ function ReactQuery({ bookmarkID }: Props): JSX.Element {
     // cacheTime: 10,
     onSuccess: () => console.log("data fetched with no problems"),
   });
-  // console.log(data);
+  console.log(data);
 
   async function fetchFeed() {
     let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
@@ -84,21 +82,17 @@ function ReactQuery({ bookmarkID }: Props): JSX.Element {
     return arrOfObj.map((el, i) => (
       <SingleRssNews
         title={el.title}
+        descripion={el.contentSnippet}
         link={el.link}
         key={i}
         pubDate={el.pubDate}
+       
       />
     ));
   }
 
   return (
     <div>
-      {status === "loading" && <div>Loading data</div>}
-
-      {status === "error" && <div>Error fetching data</div>}
-
-      {status === "success" && <div>{mapData()}</div>}
-
       <div className="flex bg-gray-50 justify-end ">
         <ArrowLeft
           className={`h-8 ${
@@ -125,6 +119,12 @@ function ReactQuery({ bookmarkID }: Props): JSX.Element {
           }}
         />
       </div>
+
+      {status === "loading" && <div>Loading data</div>}
+
+      {status === "error" && <div>Error fetching data</div>}
+
+      {status === "success" && <div>{mapData()}</div>}
     </div>
   );
 }

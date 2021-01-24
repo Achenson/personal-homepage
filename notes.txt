@@ -157,6 +157,8 @@ DONE 71. Column -> make them stack when the screen is smaller DONE
 99. react query devtools not working
 100. useState usual vs function !!! check
 101. update itemsPerPage immediately when itemsPerPage is changed
+102. bookmark get dragged when trying to edit sth in EditBookmark
+103 RSS make control arrows smaller? 
 
 App structure:
 Main

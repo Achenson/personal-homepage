@@ -24,7 +24,6 @@ import EditLink from "./EditLink";
 import NewLink from "./NewLink";
 import EditBookmarkTitle from "./EditBookmarkTitle";
 import NoteInput from "./NoteInput";
-import RSS from "./RSS";
 import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "../utils/itemsDnd";

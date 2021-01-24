@@ -4,9 +4,10 @@ interface Props {
   title: string;
   link: string;
   pubDate: string;
+  descripion: string;
 }
 
-function SingeRssNews({ title, link, pubDate }: Props): JSX.Element {
+function SingeRssNews({ title, link, pubDate, descripion }: Props): JSX.Element {
   if (title === "loading data...") {
     return <div>{title}</div>;
   }
@@ -24,6 +25,9 @@ function SingeRssNews({ title, link, pubDate }: Props): JSX.Element {
       >
         {title}
       </a>
+      <p>
+        {descripion}
+      </p>
       <p>{pubDate}</p>
     </div>
   );
