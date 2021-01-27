@@ -159,6 +159,8 @@ DONE 71. Column -> make them stack when the screen is smaller DONE
 101. update itemsPerPage immediately when itemsPerPage is changed
 102. bookmark get dragged when trying to edit sth in EditBookmark
 103 RSS make control arrows smaller? 
+104. RSS description -> potential problems if there is none?
+105. gap-y doesn't look good in case of single column size?
 
 App structure:
 Main
