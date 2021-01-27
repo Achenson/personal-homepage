@@ -161,6 +161,7 @@ DONE 71. Column -> make them stack when the screen is smaller DONE
 103 RSS make control arrows smaller? 
 104. RSS description -> potential problems if there is none?
 105. gap-y doesn't look good in case of single column size?
+106. change Upper_UI components naming?
 
 App structure:
 Main

@@ -28,13 +28,17 @@ import { uiColorState } from "../../state/colorsState";
 interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
   setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
   setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  setBookmarkType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
+  setBookmarkType: React.Dispatch<
+    React.SetStateAction<"folder" | "note" | "rss">
+  >;
 }
 
 function UpperRightMenu({
   setNewLinkVis,
   setNewBookmarkVis,
+  setBackgroundSettingsVis,
   setColorsVis,
   setBookmarkType,
 }: Props): JSX.Element {
@@ -70,15 +74,22 @@ function UpperRightMenu({
         />
 
         {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
-        <AddRssSVG className={`h-7 cursor-pointer hover:text-${uiColorData}`}
+        <AddRssSVG
+          className={`h-7 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
             setNewBookmarkVis((b) => !b);
             setBookmarkType("rss");
-          }} />
+          }}
+        />
       </div>
 
       <div className="flex w-24 justify-around">
-      <PhotographSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`}/>
+        <PhotographSVG
+          className={`h-6 cursor-pointer hover:text-${uiColorData}`}
+          onClick={() => {
+            setBackgroundSettingsVis((b) => !b);
+          }}
+        />
         <ColorSVG
           className={`h-6 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {

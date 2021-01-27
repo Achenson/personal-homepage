@@ -19,7 +19,7 @@ interface Props {
   setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
+function Colors_UpperUI({ setColorsVis, colorsVis }: Props): JSX.Element {
   const [defaultColorsFor, setDefaultColorsFor] = useState<
     | "folders"
     | "notes"
@@ -209,4 +209,4 @@ function Test({ setColorsVis, colorsVis }: Props): JSX.Element {
   );
 }
 
-export default Test;
+export default Colors_UpperUI;
