@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
+
+import { globalSettingsState } from "../../state/defaultSettings";
 
 import {
   noteColorState,
@@ -21,6 +23,16 @@ function Background_UpperUI({
   setBackgroundSettingsVis,
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
+
+  const [imgBackgroundMode, setImgBackgroundMode] = useState(true);
+
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+  let finalColorForImgBackgroundMode = uiColorData;
+
+  if (uiColorData === "blueGray-400") {
+    finalColorForImgBackgroundMode = "blueGray-700";
+  }
 
   return (
     <div
@@ -43,7 +55,56 @@ function Background_UpperUI({
             />
           </div>
 
-          <p className="text-center">Background settings</p>
+          <div className="mx-2">
+            <p className="text-center mb-2">Choose background mode</p>
+            <div className="flex justify-between">
+              <p
+                className={`${
+                  imgBackgroundMode
+                    ? "cursor-default"
+                    : "hover:text-opacity-50 cursor-pointer"
+                } ${
+                  imgBackgroundMode
+                    ? "text-" + finalColorForImgBackgroundMode
+                    : "text-gray-400"
+                }`}
+                onClick={() => {
+                  if (!imgBackgroundMode) {
+                    setImgBackgroundMode(true);
+                    setGlobalSettingsData( {
+                      ...globalSettingsData,
+                      picBackground: true
+                    })
+                  }
+                }}
+              >
+                Background image
+              </p>
+              <p>|</p>
+              <p
+                className={`${
+                  imgBackgroundMode
+                    ? "hover:text-opacity-50 cursor-pointer"
+                    : "cursor-default"
+                } ${
+                  imgBackgroundMode
+                    ? "text-gray-400"
+                    : "text-" + finalColorForImgBackgroundMode
+                }`}
+                onClick={() => {
+                  if (imgBackgroundMode) {
+                    setImgBackgroundMode(false)
+                   setGlobalSettingsData( {
+                      ...globalSettingsData,
+                      picBackground: false
+                    })
+                  }
+                }}
+              >
+                No background image
+              </p>
+            </div>
+          </div>
           {/* <div className="flex justify-between items-center mb-2 mt-2">
             <p className="w-32">Folder default</p>
             <div
