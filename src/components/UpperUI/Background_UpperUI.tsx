@@ -34,6 +34,9 @@ function Background_UpperUI({
     finalColorForImgBackgroundMode = "blueGray-700";
   }
 
+  const imgDescription = "Upload custom background image or use default. Custom transparent color columns"
+  
+  const noImgDescription = "Custom full color background and columns"
   return (
     <div
       className="flex flex-col z-50 absolute h-screen w-screen justify-center items-center"
@@ -42,7 +45,7 @@ function Background_UpperUI({
       <div className="md:mb-40 relative">
         <div
           className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
-          style={{ width: "417px", height: "200px" }}
+          style={{ width: "417px", height: "205px" }}
         >
           <div className="absolute right-0 top-0 mt-1 mr-1">
             <CancelSVG
@@ -56,8 +59,8 @@ function Background_UpperUI({
           </div>
 
           <div className="mx-2">
-            <p className="text-center mb-2">Choose background mode</p>
-            <div className="flex justify-between">
+            <p className="text-center mb-3">Background mode</p>
+            <div className="flex justify-between mb-3">
               <p
                 className={`${
                   imgBackgroundMode
@@ -67,7 +70,7 @@ function Background_UpperUI({
                   imgBackgroundMode
                     ? "text-" + finalColorForImgBackgroundMode
                     : "text-gray-400"
-                }`}
+                } text-lg`}
                 onClick={() => {
                   if (!imgBackgroundMode) {
                     setImgBackgroundMode(true);
@@ -80,7 +83,7 @@ function Background_UpperUI({
               >
                 Background image
               </p>
-              <p>|</p>
+              {/* <p>|</p> */}
               <p
                 className={`${
                   imgBackgroundMode
@@ -90,7 +93,7 @@ function Background_UpperUI({
                   imgBackgroundMode
                     ? "text-gray-400"
                     : "text-" + finalColorForImgBackgroundMode
-                }`}
+                } text-lg`}
                 onClick={() => {
                   if (imgBackgroundMode) {
                     setImgBackgroundMode(false)
@@ -103,7 +106,17 @@ function Background_UpperUI({
               >
                 No background image
               </p>
+
+            
             </div>
+
+            <p className="text-justify mb-3">{imgBackgroundMode ? imgDescription : noImgDescription}</p>
+          
+            <div className={`flex justify-between items-center ${imgBackgroundMode ? "" : "hidden"}`}>
+               <div className="bg-white h-6 w-60"></div>
+               <button className={`border border-${uiColorData} rounded-md px-1 pb-1 hover:bg-${uiColorData}`}>Upload image</button>
+            </div>
+
           </div>
           {/* <div className="flex justify-between items-center mb-2 mt-2">
             <p className="w-32">Folder default</p>

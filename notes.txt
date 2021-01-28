@@ -163,6 +163,8 @@ DONE 71. Column -> make them stack when the screen is smaller DONE
 105. gap-y doesn't look good in case of single column size?
 106. change Upper_UI components naming?
 107. Background_UpperUI: proper contidion inside conditional in className - check with some other components 
+108. btn animation, better Background settings btn?
+109. bug: note default color not selected by border
 
 App structure:
 Main
