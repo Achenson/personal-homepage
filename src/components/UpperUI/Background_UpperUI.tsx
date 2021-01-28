@@ -114,7 +114,7 @@ function Background_UpperUI({
           
             <div className={`flex justify-between items-center ${imgBackgroundMode ? "" : "hidden"}`}>
                <div className="bg-white h-6 w-60"></div>
-               <button className={`border border-${uiColorData} rounded-md px-1 pb-1 hover:bg-${uiColorData}`}>Upload image</button>
+               <button className={`border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData}`}>Upload image</button>
             </div>
 
           </div>

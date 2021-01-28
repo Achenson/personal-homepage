@@ -165,6 +165,7 @@ DONE 71. Column -> make them stack when the screen is smaller DONE
 107. Background_UpperUI: proper contidion inside conditional in className - check with some other components 
 108. btn animation, better Background settings btn?
 109. bug: note default color not selected by border
+110. UpperRightUI does not look good in imgBackgroud mode, should be higher?
 
 App structure:
 Main
