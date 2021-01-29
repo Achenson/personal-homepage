@@ -22,12 +22,35 @@ function ReactQuery({ bookmarkID }: Props): JSX.Element {
 
   const [itemsPerPage, setItemsPerPage] = useState(calcItemsPerPage());
 
+  const [descriptionVis, setDescriptionVis] = useState(calcDescriptionVis());
+  const [dateVis, setDateVis] = useState(calcDateVis());
+
+  
   function calcItemsPerPage() {
+    // if currentBookmars itemsPerPage is set, return it, otherwise
+    // return defaul option for RSS setting
+    
     if (typeof currentBookmark[0].itemsPerPage === "number") {
       return currentBookmark[0].itemsPerPage;
     }
 
     return rssSettingsData.itemsPerPage;
+  }
+
+  function calcDescriptionVis() {
+    if (typeof currentBookmark[0].itemsPerPage === "boolean") {
+      return currentBookmark[0].description;
+    }
+
+    return rssSettingsData.description;
+  }
+
+  function calcDateVis() {
+    if (typeof currentBookmark[0].itemsPerPage === "boolean") {
+      return currentBookmark[0].date;
+    }
+
+    return rssSettingsData.date;
   }
 
   // const [itemsPerPage, setItemsPerPage] = useState(() => {
@@ -52,6 +75,23 @@ function ReactQuery({ bookmarkID }: Props): JSX.Element {
     ) {
       setItemsPerPage(bookmarksData[bookmarkIndex].itemsPerPage as number);
     }
+
+
+    if (
+      bookmarksData[bookmarkIndex].description !== descriptionVis &&
+      typeof bookmarksData[bookmarkIndex].description === "boolean"
+    ) {
+      setDescriptionVis(bookmarksData[bookmarkIndex].description as boolean);
+    }
+
+
+    if (
+      bookmarksData[bookmarkIndex].date!== dateVis &&
+      typeof bookmarksData[bookmarkIndex].date === "boolean"
+    ) {
+      setDateVis(bookmarksData[bookmarkIndex].date as boolean);
+    }
+
   }, [bookmarksData]);
 
   const [pageNumber, setPageNumber] = useState(0);
@@ -82,11 +122,12 @@ function ReactQuery({ bookmarkID }: Props): JSX.Element {
     return arrOfObj.map((el, i) => (
       <SingleRssNews
         title={el.title}
-        descripion={el.contentSnippet}
+        description={el.contentSnippet}
+        descriptionVis={descriptionVis}
+        dateVis={dateVis}
         link={el.link}
         key={i}
         pubDate={el.pubDate}
-       
       />
     ));
   }

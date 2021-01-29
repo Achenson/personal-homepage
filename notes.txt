@@ -166,6 +166,9 @@ DONE 71. Column -> make them stack when the screen is smaller DONE
 108. btn animation, better Background settings btn?
 109. bug: note default color not selected by border
 110. UpperRightUI does not look good in imgBackgroud mode, should be higher?
+111. bigger droppable areas!
+112. backgroundSettings how to choose default img
+113. test more RSS channels
 
 App structure:
 Main

@@ -4,14 +4,19 @@ interface Props {
   title: string;
   link: string;
   pubDate: string;
-  descripion: string;
+  description: string;
+  // to change types?
+  descriptionVis: boolean | null | undefined;
+  dateVis: boolean | null | undefined;
 }
 
 function SingeRssNews({
   title,
   link,
   pubDate,
-  descripion,
+  description,
+  descriptionVis,
+  dateVis,
 }: Props): JSX.Element {
   // if (title === "loading data...") {
   //   return <div>{title}</div>;
@@ -29,7 +34,7 @@ function SingeRssNews({
       newArr.push(descriptionSplitted[i]);
     }
 
-    return newArr.join(" ");
+    return newArr.join(" ") + "...";
   }
 
   return (
@@ -42,8 +47,8 @@ function SingeRssNews({
       >
         {title}
       </a>
-      <p>{renderDescription(descripion)}...</p>
-      <p>{pubDate}</p>
+      <p>{descriptionVis && renderDescription(description)}</p>
+      <p>{dateVis && pubDate}</p>
     </div>
   );
 }
