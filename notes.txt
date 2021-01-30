@@ -61,19 +61,26 @@ DONE 24. bookmark: almost same function for icons & text color, unify DONE
 DONE 36. diff color for diff columns? DONE
 DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 DONE 86. bigger draggable space in GapAfterBookmark if column is empty DONE
+DONR 70. make column component DONE
+DONE 71. Column -> make them stack when the screen is smaller DONE 
+
+XXX 11. move grid logic to Main? XXX
+XXX 6. edit bookmark & bookkmarks for color -> join? XXX
+XXX 10. undo link XX
+
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
-3. how to properly set links
-4. change pretifier -> .map & .filter from new lines
+3. how to properly set links !!!
 5. EditLink & NewLink -> unify
-6. edit bookmark & bookkmark color -> join?
 7. one function for bookmark index
+
 8. "all" bookmark should be non-deletable, non-editable?
+
+
 8.5 "all" should be added as a tag automatically
 9. auto-completing tags when adding links
-10. undo link & bookmark delete
-11. move grid logic to Main?
+10.5 bookmark delete svg icon
 13. useEffect logic in grid -> move to lower components?
 14. newLink -> save & cancel icons not perfectly in the middle
 15. UpperRightMenu on hover, boders for newLink & newBookmark -> default App color?
@@ -125,8 +132,6 @@ XXX 34. change folders/notes shadows on darker backgrounds XXX
 xxx 67. RSS refresh button xx reactQuery is taking care of this
 68. note & RSS improve SVG icon placement
 69. EditBookmark -> improve checkboxes -> add initial checks, compare vs later
-DONR 70. make column component DONE
-DONE 71. Column -> make them stack when the screen is smaller DONE 
 72. Column & Grid -> clean code between them
 73. Main bg picture is moving a little when opening a column
 74. forms -> consistency in aligning
@@ -169,6 +174,8 @@ DONE 71. Column -> make them stack when the screen is smaller DONE
 111. bigger droppable areas!
 112. backgroundSettings how to choose default img
 113. test more RSS channels
+
+114. reset color data - what for?
 
 App structure:
 Main

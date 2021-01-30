@@ -200,10 +200,6 @@ Props): JSX.Element {
               <input
                 type="checkbox"
                 name="date"
-                // className="w-full border border-gray-500"
-                // className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
-                // value={rssItemsPerPage}
-                // onChange={(e) => setRssItemsPerPage(parseInt(e.target.value))}
 
                 checked={dateCheckbox}
                 onChange={() => {
@@ -218,13 +214,6 @@ Props): JSX.Element {
               </label>
             </div>
 
-            {/* <input
-                type="text"
-                // min-w-0 !!
-                className="border w-full max-w-6xl min-w-0 mr-6"
-                value={rssLinkInput}
-                onChange={(e) => setRssLinkInput(e.target.value)}
-              /> */}
           </div>
           <div className="flex items-center mb-2 mt-2 justify-between">
             <p className="whitespace-nowrap w-32">Items per page</p>
@@ -254,13 +243,6 @@ Props): JSX.Element {
 
               setWasCheckboxClicked(false);
               setWasItemsPerPageClicked(false);
-
-              // if(tagsInput.join(", "))
-
-              // if (!regexForTags.test(tagsInput.join(", "))) {
-              //   setTagErrorVis(true);
-              //   return;
-              // }
 
               if (!regexForTitle.test(bookmarkTitleInput)) {
                 setTagErrorVis(true);

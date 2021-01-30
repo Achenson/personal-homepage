@@ -47,9 +47,6 @@ function Grid({}: Props): JSX.Element {
             obj.color = null;
           });
 
-          // updated.push({
-          //   ...createBookmarkFolder(el, 1, 1),
-          // });
         })
       );
 
@@ -106,15 +103,13 @@ function Grid({}: Props): JSX.Element {
       className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-6 mx-4"
       ref={target}
     >
+      <>
+        <Column colNumber={1} />
+        <Column colNumber={2} />
+        <Column colNumber={3} />
+        <Column colNumber={4} />
+      </>
 
-      
-        <>
-          <Column colNumber={1} />
-          <Column colNumber={2} />
-          <Column colNumber={3} />
-          <Column colNumber={4} />
-        </>
-     
       {/* <p>grid height: {height}</p> */}
     </div>
   );
