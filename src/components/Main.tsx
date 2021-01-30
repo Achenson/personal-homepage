@@ -9,6 +9,7 @@ import { globalSettingsState } from "../state/defaultSettings";
 
 import { backgroundColorState } from "../state/colorsState";
 import Background_UpperUI from "./UpperUI/Background_UpperUI";
+import Settings_UpperUI from "./UpperUI/Settings_UpperUI";
 
 interface Props {}
 
@@ -25,6 +26,8 @@ function Main({}: Props): JSX.Element {
   const [backgroundSettingsVis, setBackgroundSettingsVis] = useState<boolean>(
     false
   );
+
+  const [settingsVis, setSettingsVis] = useState<boolean>(false);
 
   const [colorsVis, setColorsVis] = useState<boolean>(false);
   const [bookmarkType, setBookmarkType] = useState<"folder" | "note" | "rss">(
@@ -53,6 +56,13 @@ function Main({}: Props): JSX.Element {
           backgroundSettingsVis={backgroundSettingsVis}
         />
       ) : null}
+      {settingsVis ? (
+        <Settings_UpperUI
+          setSettingsVis={setSettingsVis}
+          settingsVis={settingsVis}
+        />
+      ) : null}
+
       {colorsVis ? (
         <Colors_UpperUI colorsVis={colorsVis} setColorsVis={setColorsVis} />
       ) : null}
@@ -60,6 +70,7 @@ function Main({}: Props): JSX.Element {
         setNewLinkVis={setNewLinkVis}
         setNewBookmarkVis={setNewBookmarkVis}
         setBackgroundSettingsVis={setBackgroundSettingsVis}
+        setSettingsVis={setSettingsVis}
         setColorsVis={setColorsVis}
         setBookmarkType={setBookmarkType}
       />

@@ -29,6 +29,7 @@ interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
   setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
+  setSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
   setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
   setBookmarkType: React.Dispatch<
     React.SetStateAction<"folder" | "note" | "rss">
@@ -39,6 +40,7 @@ function UpperRightMenu({
   setNewLinkVis,
   setNewBookmarkVis,
   setBackgroundSettingsVis,
+  setSettingsVis,
   setColorsVis,
   setBookmarkType,
 }: Props): JSX.Element {
@@ -96,7 +98,12 @@ function UpperRightMenu({
             setColorsVis((b) => !b);
           }}
         />
-        <SettingsSVG className="h-6" />
+        <SettingsSVG
+          className={`h-6 cursor-pointer hover:text-${uiColorData}`}
+          onClick={() => {
+            setSettingsVis((b) => !b);
+          }}
+        />
         <UserSVG className="h-6" />
       </div>
     </div>
