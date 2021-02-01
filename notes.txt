@@ -174,8 +174,10 @@ xxx 67. RSS refresh button xx reactQuery is taking care of this
 111. bigger droppable areas!
 112. backgroundSettings how to choose default img
 113. test more RSS channels
+114. persist open state of bookmark (if is closed by default) if it is being dragged?
+DONE 115. rss cannot be always open? bug DONE
+DONE 116. BUG: rss cannot be properly moved when opened! DONE
 
-114. reset color data - what for?
 
 App structure:
 Main

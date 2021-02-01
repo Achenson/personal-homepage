@@ -59,7 +59,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     color: null,
     column: 2,
     priority: 1,
-    opened: false,
+    opened: true,
     type: "rss",
     date: null,
     description: null,

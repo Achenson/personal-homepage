@@ -93,8 +93,8 @@ Props): JSX.Element {
   );
   // rss content
   const [rssVisibility, setRssVisibility] = useState<boolean>(
-    // bookmarksData[bookmarkIndex].opened
-    false
+    bookmarksData[bookmarkIndex].opened
+    // false
   );
 
   // for Note only / note content
@@ -390,7 +390,7 @@ Props): JSX.Element {
         />
       ) : null}
 
-      {rssVisibility ? (
+      {rssVisibility  && bookmarkType === "rss"? (
         // <RSS
         //   // rssLink={rssLink}
         //   bookmarkID={bookmarkID}
