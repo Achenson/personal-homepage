@@ -4,6 +4,10 @@ import { useState } from "react";
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
+import { ReactComponent as TrashSVG } from "../svgs/trash.svg";
+import { ReactComponent as LockClosedSVG } from "../svgs/lock-closed.svg";
+
+
 import { produce } from "immer";
 
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
@@ -233,6 +237,53 @@ Props): JSX.Element {
           </div>
         </div>
       ) : null}
+
+      
+      {/* <div className="flex justify-between items-center mt-1">
+         <p>
+         Folder opened on start and on drag
+       </p>
+  <button>
+              <LockClosedSVG className="h-6 text-gray-700 hover:text-black cursor-pointer"/>
+  </button>
+           
+
+      </div> */}
+      <div className="flex justify-between items-center">
+        <p>Lock folder in open position</p>
+        <button>
+          <LockClosedSVG className="h-6 text-gray-700 hover:text-black cursor-pointer"/>
+        </button>
+      </div>
+
+      <div className="flex justify-between items-center mt-1">
+        <p>Delete Folder</p>
+        <button>
+          <TrashSVG className="h-6 text-gray-600 hover:text-black cursor-pointer"
+                 onClick={() => {
+                  setDeletedBookmark(bookmarkTitle);
+      
+                  setBookmarksData((previous) =>
+                    produce(previous, (updated) => {
+                      updated.splice(bookmarkIndex, 1);
+                    })
+                  );
+      
+                  setEditBookmarkVis((b) => !b);
+                  // removing deleted bookmark(tag) for links
+                  linksData.forEach((obj, i) => {
+                    if (obj.tags.indexOf(bookmarkTitle) > -1) {
+                      setLinksData((previous) =>
+                        produce(previous, (updated) => {
+                          updated[i].tags.splice(obj.tags.indexOf(bookmarkTitle), 1);
+                        })
+                      );
+                    }
+                  });
+                }}
+          />
+        </button>
+      </div>
 
       <div className="flex justify-start mt-3">
         <p className="w-8"></p>
