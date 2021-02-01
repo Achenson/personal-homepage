@@ -6,7 +6,7 @@ import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
 import { ReactComponent as TrashSVG } from "../svgs/trash.svg";
 import { ReactComponent as LockClosedSVG } from "../svgs/lock-closed.svg";
-
+import { ReactComponent as LockOpenSVG } from "../svgs/lock-open.svg";
 
 import { produce } from "immer";
 
@@ -104,42 +104,21 @@ Props): JSX.Element {
 
   let regexForTitle = /^\w+$/;
 
+  const [folderOpen, setFolderOpen] = useState(currentBookmark[0].opened);
+
   return (
-    <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-2">
+    <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-3">
       <div className="flex items-center mb-2 mt-2 justify-between">
         <p className="w-24">Title</p>
         <input
           type="text"
           // min-w-0 !!
-          className="border w-full max-w-6xl min-w-0 mr-2"
+          className="border w-full max-w-6xl min-w-0"
           value={bookmarkTitleInput}
           onChange={(e) => setBookmarkTitleInput(e.target.value)}
         />
         {/* <div className=""> */}
-        <TrashSmallSVG
-          className="h-6  fill-current text-gray-700 hover:text-black cursor-pointer"
-          onClick={() => {
-            setDeletedBookmark(bookmarkTitle);
 
-            setBookmarksData((previous) =>
-              produce(previous, (updated) => {
-                updated.splice(bookmarkIndex, 1);
-              })
-            );
-
-            setEditBookmarkVis((b) => !b);
-            // removing deleted bookmark(tag) for links
-            linksData.forEach((obj, i) => {
-              if (obj.tags.indexOf(bookmarkTitle) > -1) {
-                setLinksData((previous) =>
-                  produce(previous, (updated) => {
-                    updated[i].tags.splice(obj.tags.indexOf(bookmarkTitle), 1);
-                  })
-                );
-              }
-            });
-          }}
-        />
         {/* </div> */}
       </div>
 
@@ -155,7 +134,7 @@ Props): JSX.Element {
       ) : null}
 
       {bookmarkType === "note" ? (
-        <div style={{ marginRight: "27px" }}>
+        <div className="mb-2">
           <textarea
             value={textAreaValue as string}
             className="h-full w-full overflow-visible pl-1 pr-1 border font-mono"
@@ -174,7 +153,7 @@ Props): JSX.Element {
             <input
               type="text"
               // min-w-0 !!
-              className="border w-full max-w-6xl min-w-0 mr-6"
+              className="border w-full max-w-6xl min-w-0"
               value={rssLinkInput}
               onChange={(e) => {
                 setRssLinkInput(e.target.value);
@@ -183,41 +162,41 @@ Props): JSX.Element {
           </div>
           <div className="flex items-center mb-2 mt-2 justify-between">
             <p className="whitespace-nowrap w-32">Display</p>
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                name="description"
-                // className="w-full border border-gray-500"
-                // className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
-                checked={descriptionCheckbox}
-                onChange={() => {
-                  setDescriptionCheckbox((b) => !b);
-                  setWasCheckboxClicked(true);
-                }}
-              />
-              <label className="ml-1" htmlFor="description">
-                Description
-              </label>
+            <div className="flex">
+              <div className="flex items-center mr-2">
+                <input
+                  type="checkbox"
+                  name="description"
+                  // className="w-full border border-gray-500"
+                  // className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
+                  checked={descriptionCheckbox}
+                  onChange={() => {
+                    setDescriptionCheckbox((b) => !b);
+                    setWasCheckboxClicked(true);
+                  }}
+                />
+                <label className="ml-1" htmlFor="description">
+                  Description
+                </label>
+              </div>
+
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  name="date"
+                  checked={dateCheckbox}
+                  onChange={() => {
+                    setDateCheckbox((b) => !b);
+                    setWasCheckboxClicked(true);
+                  }}
+
+                  // placeholder={"5-15"}
+                />
+                <label className="ml-1" htmlFor="date">
+                  Date
+                </label>
+              </div>
             </div>
-
-            <div className="flex items-center mr-6">
-              <input
-                type="checkbox"
-                name="date"
-
-                checked={dateCheckbox}
-                onChange={() => {
-                  setDateCheckbox((b) => !b);
-                  setWasCheckboxClicked(true);
-                }}
-
-                // placeholder={"5-15"}
-              />
-              <label className="ml-1" htmlFor="date">
-                Date
-              </label>
-            </div>
-
           </div>
           <div className="flex items-center mb-2 mt-2 justify-between">
             <p className="whitespace-nowrap w-32">Items per page</p>
@@ -226,7 +205,7 @@ Props): JSX.Element {
               min="5"
               max="15"
               // className="w-full border border-gray-500"
-              className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
+              className="border w-14 max-w-6xl min-w-0 pl-1"
               value={rssItemsPerPage}
               onChange={(e) => {
                 setRssItemsPerPage(parseInt(e.target.value));
@@ -238,7 +217,6 @@ Props): JSX.Element {
         </div>
       ) : null}
 
-      
       {/* <div className="flex justify-between items-center mt-1">
          <p>
          Folder opened on start and on drag
@@ -250,37 +228,45 @@ Props): JSX.Element {
 
       </div> */}
       <div className="flex justify-between items-center">
-        <p>Lock folder in open position</p>
+        <p>Lock in open position</p>
         <button>
-          <LockClosedSVG className="h-6 text-gray-700 hover:text-black cursor-pointer"/>
+          {folderOpen ? (
+            <LockClosedSVG className="h-6 text-gray-700 hover:text-black cursor-pointer" />
+          ) : (
+            <LockOpenSVG className="h-6 text-gray-700 hover:text-black cursor-pointer" />
+          )}
         </button>
       </div>
 
-      <div className="flex justify-between items-center mt-1">
-        <p>Delete Folder</p>
+      <div className="flex justify-between items-center mt-2">
+        <p>Delete</p>
         <button>
-          <TrashSVG className="h-6 text-gray-600 hover:text-black cursor-pointer"
-                 onClick={() => {
-                  setDeletedBookmark(bookmarkTitle);
-      
-                  setBookmarksData((previous) =>
+          <TrashSVG
+            className="h-6 text-gray-500 hover:text-black cursor-pointer"
+            onClick={() => {
+              setDeletedBookmark(bookmarkTitle);
+
+              setBookmarksData((previous) =>
+                produce(previous, (updated) => {
+                  updated.splice(bookmarkIndex, 1);
+                })
+              );
+
+              setEditBookmarkVis((b) => !b);
+              // removing deleted bookmark(tag) for links
+              linksData.forEach((obj, i) => {
+                if (obj.tags.indexOf(bookmarkTitle) > -1) {
+                  setLinksData((previous) =>
                     produce(previous, (updated) => {
-                      updated.splice(bookmarkIndex, 1);
+                      updated[i].tags.splice(
+                        obj.tags.indexOf(bookmarkTitle),
+                        1
+                      );
                     })
                   );
-      
-                  setEditBookmarkVis((b) => !b);
-                  // removing deleted bookmark(tag) for links
-                  linksData.forEach((obj, i) => {
-                    if (obj.tags.indexOf(bookmarkTitle) > -1) {
-                      setLinksData((previous) =>
-                        produce(previous, (updated) => {
-                          updated[i].tags.splice(obj.tags.indexOf(bookmarkTitle), 1);
-                        })
-                      );
-                    }
-                  });
-                }}
+                }
+              });
+            }}
           />
         </button>
       </div>

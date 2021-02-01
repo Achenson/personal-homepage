@@ -182,6 +182,9 @@ DONE 116. BUG: rss cannot be properly moved when opened! DONE
 117. rename EditBookmarkTitle
 118. 1st column bug on color change
 119. confirmation for folder delete
+120. shorter "title" in EditBookmarkTitle for Note & Folder
+121. opened -> open
+122. is save btn needed in edit bookmark
 
 
 App structure:
