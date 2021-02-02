@@ -9,6 +9,8 @@ import {
   deletedBookmarkState,
 } from "../state/bookmarksAndLinks";
 
+import { closeAllFoldersState} from "../state/defaultSettings";
+
 import { createBookmarkFolder } from "../utils/objCreators";
 
 import { produce } from "immer";
@@ -30,12 +32,26 @@ function Grid({}: Props): JSX.Element {
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
+  
+  
+  const [closeAllFolders, setCloseAllFolders] = useState(false)
+  const [closeAllFoldersData, setCloseAllFoldersData] = closeAllFoldersState.use()
+
   const target = React.useRef(null);
   const [width, height] = useSize(target);
 
   // const [{addedProps}, drop] = useDrop({
 
   // })
+
+  useEffect( () => {
+
+   if (closeAllFoldersData) {
+     setCloseAllFoldersData(false)
+   }
+   
+
+  }, [closeAllFoldersData, setCloseAllFoldersData])
 
   useEffect(() => {
     if (resetColorsData) {
@@ -104,10 +120,10 @@ function Grid({}: Props): JSX.Element {
       ref={target}
     >
       <>
-        <Column colNumber={1} />
-        <Column colNumber={2} />
-        <Column colNumber={3} />
-        <Column colNumber={4} />
+        <Column colNumber={1} closeAllFolders={closeAllFoldersData} />
+        <Column colNumber={2} closeAllFolders={closeAllFoldersData} />
+        <Column colNumber={3} closeAllFolders={closeAllFoldersData}/>
+        <Column colNumber={4} closeAllFolders={closeAllFoldersData}/>
       </>
 
       {/* <p>grid height: {height}</p> */}

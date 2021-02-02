@@ -194,10 +194,11 @@ DONE 116. BUG: rss cannot be properly moved when opened! DONE
 129. EyeOff: version for background image on
 130. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen?
 131. to make delayed Icons Appearence on Folders
-132. Bookmark missing hooks
-133. EyeOff does not work on RSS and all?
+DONE 132. Bookmark missing hooks DONE
+DONE 133. EyeOff does not work on RSS and all? DONE
 134. EyeOff should also close all BookmarkEdits
-125: Bug: EyeOff
+DONE 125: Bug: EyeOff DONE
+126. make a note about Grid's logic for setting closeAllFolders !!!
 
 App structure:
 Main

@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import { ItemTypes } from "../utils/itemsDnd";
 
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
+
+
 import {
   columnsColorsState,
   resetColorsState,
   columnsColorsImg_State,
 } from "../state/colorsState";
-import { globalSettingsState } from "../state/defaultSettings";
+import {globalSettingsState } from "../state/defaultSettings";
 
 import Bookmark from "./Bookmark";
 
@@ -20,9 +22,10 @@ import GapAfterBookmark from "./GapAfterBookmark";
 interface Props {
   colNumber: number;
   // ref: React.MutableRefObject<number>
+  closeAllFolders: boolean;
 }
 
-const Column = React.forwardRef(({ colNumber }: Props, ref) => {
+const Column = React.forwardRef(({ colNumber, closeAllFolders }: Props, ref) => {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [
     columnsColorsImg_Data,
@@ -135,6 +138,7 @@ const Column = React.forwardRef(({ colNumber }: Props, ref) => {
                 bookmarkColor={el.color}
                 bookmarkType={el.type}
                 colNumber={el.column}
+                closeAllFolders={closeAllFolders}
                 // noteInput={el.noteInput}
                 // rssLink={el.rssLink}
               />

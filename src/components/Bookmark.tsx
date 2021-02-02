@@ -44,6 +44,7 @@ interface Props {
   colNumber: number;
   // noteInput: string | null;
   // rssLink: string | null;
+  closeAllFolders: boolean;
 }
 
 function Bookmark({
@@ -52,6 +53,7 @@ function Bookmark({
   bookmarkColor,
   bookmarkType,
   colNumber,
+  closeAllFolders
 }: // noteInput,
 // rssLink
 Props): JSX.Element {
@@ -109,14 +111,14 @@ Props): JSX.Element {
 
   useEffect( () => {
 
-    if(closeAllFoldersData) {
+    if(closeAllFolders) {
       setSingleLinkVisibility(false)
       setRssVisibility(false)
       setNoteInputVisibility(false)
     }
-    setCloseAllFoldersData(false)
+   
 
-  }, [closeAllFoldersData, setCloseAllFoldersData])
+  }, [closeAllFolders])
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
