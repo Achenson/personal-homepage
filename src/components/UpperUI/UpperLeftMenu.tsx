@@ -6,8 +6,11 @@ import DefaultColorsToChoose from "../Colors/ColorsToChoose_Default";
 import { globalSettingsState } from "../../state/defaultSettings";
 import SingleColumnsColor_Img from "../Colors/ColumnColor_Img";
 import BackgroundColor from "../Colors/BackgroundColor";
+import EyeOff from "../Colors/EyeOff";
 import BackgroundColorsToChoose from "../Colors/ColorsToChoose_Background";
 import { DndProvider } from "react-dnd";
+
+import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
 
 interface Props {}
 
@@ -64,13 +67,17 @@ function UpperLeftMenu({}: Props): JSX.Element {
   }
 
   return (
-    <div className="flex items-center justify-between w-44">
+    
+      
+        <div className="flex items-center justify-between w-48 sm:w-52">
       {/* <div className="absolute left-0 bottom-0"> */}
       <div className="flex justify-between items-center mb-2 mt-2">
         {/* <p className="w-32">Columns</p> */}
         <div className="flex">{columnsRendering(4)}</div>
       </div>
       {globalSettingsData.picBackground ? null : <BackgroundColor  setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis} />}
+      <EyeOff setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}/>
+
 
       {/* <div className="absolute left-0" style={{ bottom: "104px" }}> */}
       <div className="absolute left-0 top-3" >
@@ -79,13 +86,20 @@ function UpperLeftMenu({}: Props): JSX.Element {
         ) : null}
         {backgroundColorsToChooseVis ? 
         <div className="absolute left-60 top-7">
-
           <BackgroundColorsToChoose />
+
+
         </div>
         
         : null}
+
       </div>
+        
+
+    
     </div>
+    
+  
   );
 }
 
