@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
@@ -85,6 +85,18 @@ Props): JSX.Element {
   const [wasItemsPerPageClicked, setWasItemsPerPageClicked] = useState(false);
   
   const [wasFolderOpenClicked, setWasFolderOpenClicked] = useState(false);
+  
+  // for disabling save btn
+  const [wasAnythingClicked, setWasAnythingClicked] = useState(false);
+
+  useEffect( () => {
+
+    if (wasCheckboxClicked || wasFolderOpenClicked || wasItemsPerPageClicked) {
+      setWasAnythingClicked(true);
+    }
+
+
+  }, [wasCheckboxClicked, wasFolderOpenClicked, wasItemsPerPageClicked])
 
 
   let bookmarkIndex: number;
@@ -102,6 +114,11 @@ Props): JSX.Element {
 
   const [folderOpen, setFolderOpen] = useState(currentBookmark[0].opened);
 
+  
+
+
+ 
+
   return (
     <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-3">
       <div className="flex items-center mt-2 justify-between">
@@ -112,7 +129,12 @@ Props): JSX.Element {
           // className="border w-full max-w-6xl min-w-0"
           className="border w-full"
           value={bookmarkTitleInput}
-          onChange={(e) => setBookmarkTitleInput(e.target.value)}
+          onChange={(e) => {
+
+            setBookmarkTitleInput(e.target.value)
+            setWasAnythingClicked(true)
+          }
+          }
         />
         {/* <div className=""> */}
 
@@ -138,6 +160,7 @@ Props): JSX.Element {
             rows={(currentBookmark[0].noteInput as string).length / 30}
             onChange={(e) => {
               setTextAreaValue(e.target.value);
+              setWasAnythingClicked(true);
             }}
           ></textarea>
         </div>
@@ -154,6 +177,7 @@ Props): JSX.Element {
               value={rssLinkInput}
               onChange={(e) => {
                 setRssLinkInput(e.target.value);
+                setWasAnythingClicked(true);
               }}
             />
           </div>
@@ -279,8 +303,13 @@ Props): JSX.Element {
         <p className="w-8"></p>
         <div className="w-full pl-4 flex justify-center">
           <button
+         
             onClick={(e) => {
               e.preventDefault();
+
+              if (!wasAnythingClicked) {
+                return
+              }
 
               setWasCheckboxClicked(false);
               setWasItemsPerPageClicked(false);
@@ -359,7 +388,7 @@ Props): JSX.Element {
               setEditBookmarkVis((b) => !b);
             }}
           >
-            <SaveSVG className="h-5 fill-current text-gray-900 mr-3 hover:text-green-600" />
+            <SaveSVG className={`h-5 fill-current mr-3 ${wasAnythingClicked ? "text-gray-900 hover:text-green-600" : "text-blueGray-400 cursor-default"}`} />
           </button>
           <button
             onClick={(e) => {
