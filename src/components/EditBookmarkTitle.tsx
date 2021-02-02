@@ -108,7 +108,7 @@ Props): JSX.Element {
 
   return (
     <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-3">
-      <div className="flex items-center mb-2 mt-2 justify-between">
+      <div className="flex items-center mt-2 justify-between">
         <p className={ bookmarkType === "rss" ? "w-24" : "w-12"}>Title</p>
         <input
           type="text"
@@ -135,7 +135,7 @@ Props): JSX.Element {
       ) : null}
 
       {bookmarkType === "note" ? (
-        <div className="mb-2">
+        <div className="mt-2">
           <textarea
             value={textAreaValue as string}
             className="h-full w-full overflow-visible pl-1 pr-1 border font-mono"
@@ -199,7 +199,7 @@ Props): JSX.Element {
               </div>
             </div>
           </div>
-          <div className="flex items-center mb-2 mt-2 justify-between">
+          <div className="flex items-center mt-2 justify-between">
             <p className="whitespace-nowrap w-32">Items per page</p>
             <input
               type="number"
@@ -228,6 +228,11 @@ Props): JSX.Element {
            
 
       </div> */}
+      {/* <div className={`${bookmarkType === "rss" ? "pt-2" : ""}`}> */}
+      {/* <div className={`mt-4 pt-2`} style={{borderTop: "solid lightGray 1px"}}> */}
+      <div className={`mt-3 pt-2`} 
+      style={{borderTop: "solid lightGray 1px"}}
+      >
       <div className="flex justify-between items-center">
         <p>Lock as always-open</p>
         <button>
@@ -271,8 +276,10 @@ Props): JSX.Element {
           />
         </button>
       </div>
+      </div>
+   
 
-      <div className="flex justify-start mt-3">
+      <div className="flex justify-start mt-2" >
         <p className="w-8"></p>
         <div className="w-full pl-4 flex justify-center">
           <button
