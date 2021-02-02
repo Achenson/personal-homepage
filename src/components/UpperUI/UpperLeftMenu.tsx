@@ -76,7 +76,7 @@ function UpperLeftMenu({}: Props): JSX.Element {
         <div className="flex">{columnsRendering(4)}</div>
       </div>
       {globalSettingsData.picBackground ? null : <BackgroundColor  setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis} />}
-      <EyeOff setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}/>
+      <EyeOff/>
 
 
       {/* <div className="absolute left-0" style={{ bottom: "104px" }}> */}

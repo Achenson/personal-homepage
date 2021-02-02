@@ -13,6 +13,8 @@ import {
   bookmarkBeingDraggedColor_State,
 } from "../state/colorsState";
 
+import { closeAllFoldersState } from "../state/defaultSettings";
+
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
 import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
@@ -103,6 +105,19 @@ Props): JSX.Element {
     // false
   );
 
+  const [closeAllFoldersData, setCloseAllFoldersData] = closeAllFoldersState.use()
+
+  useEffect( () => {
+
+    if(closeAllFoldersData) {
+      setSingleLinkVisibility(false)
+      setRssVisibility(false)
+      setNoteInputVisibility(false)
+    }
+    setCloseAllFoldersData(false)
+
+  }, [closeAllFoldersData, setCloseAllFoldersData])
+
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
   const [rssColorData, setRssColorData] = rssColorState.use();
@@ -155,7 +170,7 @@ Props): JSX.Element {
       setBookmarkBeingDraggedColor_Data({bookmarkColor: finalBookmarkColor})
     }
 
-  }, [isDragging])
+  }, [isDragging, finalBookmarkColor, setBookmarkBeingDraggedColor_Data])
 
   function textOrIconColor(
     finalBookmarkColor: string,

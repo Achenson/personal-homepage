@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 
 import { backgroundColorState } from "../../state/colorsState";
+import { closeAllFoldersState } from "../../state/defaultSettings";
 
 
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
 
 interface Props {
-  setBackgroundColorsToChooseVis: React.Dispatch<React.SetStateAction<boolean>>;
+  
 }
 
 function EyeOff({
-  setBackgroundColorsToChooseVis,
+ 
 }: Props): JSX.Element {
   const [
     backgroundColorData,
@@ -18,6 +19,8 @@ function EyeOff({
   ] = backgroundColorState.use();
 
   const [selected, setSelected] = useState(false);
+
+  const [closeAllFoldersData, setCloseAllFoldersData] = closeAllFoldersState.use()
 
   function calcIconBackground(pageBackgroundColor: string) {
     if (pageBackgroundColor === "white") {
@@ -48,6 +51,8 @@ function EyeOff({
       onClick={() => {
         // setSelected((b) => !b);
         // setBackgroundColorsToChooseVis((b) => !b);
+        setCloseAllFoldersData(true);
+        
       }}
     />
   );

@@ -190,7 +190,14 @@ DONE 116. BUG: rss cannot be properly moved when opened! DONE
 125. button inside svgs -> not a good idea, just make svgs clickable?
 126. bug: wrong background settings on start
 127. move BackgroudColor and EyeOff to upperUI components
-
+128. Bookmark: merge 3 visibilities (from different folders types) into one?
+129. EyeOff: version for background image on
+130. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen?
+131. to make delayed Icons Appearence on Folders
+132. Bookmark missing hooks
+133. EyeOff does not work on RSS and all?
+134. EyeOff should also close all BookmarkEdits
+125: Bug: EyeOff
 
 App structure:
 Main

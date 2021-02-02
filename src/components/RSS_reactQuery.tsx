@@ -92,7 +92,7 @@ function ReactQuery({ bookmarkID }: Props): JSX.Element {
       setDateVis(bookmarksData[bookmarkIndex].date as boolean);
     }
 
-  }, [bookmarksData]);
+  }, [bookmarksData, bookmarkID, dateVis, descriptionVis, itemsPerPage]);
 
   const [pageNumber, setPageNumber] = useState(0);
 
