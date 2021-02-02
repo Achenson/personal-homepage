@@ -185,6 +185,7 @@ DONE 116. BUG: rss cannot be properly moved when opened! DONE
 120. shorter "title" in EditBookmarkTitle for Note & Folder
 121. opened -> open
 122. is save btn needed in edit bookmark
+123 EditBookmarkTitle gray border test diff options
 
 
 App structure:

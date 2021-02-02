@@ -83,13 +83,9 @@ Props): JSX.Element {
 
   // items per page won't be saved on Save if there were not manipulated
   const [wasItemsPerPageClicked, setWasItemsPerPageClicked] = useState(false);
-  // function calcDescriptionCheckbox() {
-  //   if (currentBookmark[0].description) {
-  //     return currentBookmark[0].description;
-  //   }
+  
+  const [wasFolderOpenClicked, setWasFolderOpenClicked] = useState(false);
 
-  //   return rssSettingsData.date;
-  // }
 
   let bookmarkIndex: number;
 
@@ -218,18 +214,7 @@ Props): JSX.Element {
         </div>
       ) : null}
 
-      {/* <div className="flex justify-between items-center mt-1">
-         <p>
-         Folder opened on start and on drag
-       </p>
-  <button>
-              <LockClosedSVG className="h-6 text-gray-700 hover:text-black cursor-pointer"/>
-  </button>
-           
-
-      </div> */}
-      {/* <div className={`${bookmarkType === "rss" ? "pt-2" : ""}`}> */}
-      {/* <div className={`mt-4 pt-2`} style={{borderTop: "solid lightGray 1px"}}> */}
+     
       <div className={`mt-3 pt-2`} 
       style={{borderTop: "solid lightGray 1px"}}
       >
@@ -237,9 +222,20 @@ Props): JSX.Element {
         <p>Lock as always-open</p>
         <button>
           {folderOpen ? (
-            <LockClosedSVG className="h-6 text-gray-700 hover:text-black cursor-pointer" />
+            <LockClosedSVG className="h-6 text-gray-700 hover:text-black cursor-pointer"
+            onClick={ () => {
+              setFolderOpen(b => !b)
+              setWasFolderOpenClicked(true)
+              
+            }}
+            />
           ) : (
-            <LockOpenSVG className="h-6 text-gray-700 hover:text-black cursor-pointer" />
+            <LockOpenSVG className="h-6 text-gray-700 hover:text-black cursor-pointer"
+            onClick={ () => {
+              setFolderOpen(b => !b)
+              setWasFolderOpenClicked(true)
+            }}
+            />
           )}
         </button>
       </div>
@@ -307,6 +303,13 @@ Props): JSX.Element {
               setBookmarksData((previous) =>
                 produce(previous, (updated) => {
                   updated[bookmarkIndex].title = bookmarkTitleInput;
+
+
+                  if (wasFolderOpenClicked) {
+                    updated[bookmarkIndex].opened = folderOpen;
+                  }
+
+
                   if (bookmarkType === "note") {
                     updated[bookmarkIndex].noteInput = textAreaValue;
                   }
@@ -324,6 +327,10 @@ Props): JSX.Element {
                     if (wasItemsPerPageClicked) {
                       updated[bookmarkIndex].itemsPerPage = rssItemsPerPage;
                     }
+
+                  
+
+
                   }
                 })
               );
