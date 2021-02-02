@@ -109,11 +109,12 @@ Props): JSX.Element {
   return (
     <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-3">
       <div className="flex items-center mb-2 mt-2 justify-between">
-        <p className="w-24">Title</p>
+        <p className={ bookmarkType === "rss" ? "w-24" : "w-12"}>Title</p>
         <input
           type="text"
           // min-w-0 !!
-          className="border w-full max-w-6xl min-w-0"
+          // className="border w-full max-w-6xl min-w-0"
+          className="border w-full"
           value={bookmarkTitleInput}
           onChange={(e) => setBookmarkTitleInput(e.target.value)}
         />
@@ -228,7 +229,7 @@ Props): JSX.Element {
 
       </div> */}
       <div className="flex justify-between items-center">
-        <p>Lock in open position</p>
+        <p>Lock as always-open</p>
         <button>
           {folderOpen ? (
             <LockClosedSVG className="h-6 text-gray-700 hover:text-black cursor-pointer" />
