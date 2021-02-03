@@ -56,6 +56,23 @@ function Settings_UpperUI({ settingsVis, setSettingsVis }: Props): JSX.Element {
             }}
             ></div>
           </div>
+          <div className="flex justify-between items-center mb-2 mt-2">
+            <p className="">Hide folder containing all bookmarks</p>
+            <div className={`h-4 w-4 cursor-pointer border-2 border-${uiColorData} ${globalSettingsData.hideNonDeletable ? `bg-${uiColorData} hover:bg-opacity-50` : `hover:bg-${uiColorData} hover:bg-opacity-50` } `}
+            onClick={() => {
+              setGlobalSettingsData(
+                {
+                  ...globalSettingsData,
+                  hideNonDeletable: !globalSettingsData.hideNonDeletable
+                }
+              )
+            }}
+            ></div>
+          </div>
+
+
+
+
 
           {/* <div className="flex justify-between items-center mb-2 mt-2">
             <p className="w-32">Folder default</p>
