@@ -5,7 +5,6 @@ import { ItemTypes } from "../utils/itemsDnd";
 
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
 
-
 import {
   columnsColorsState,
   resetColorsState,
@@ -53,8 +52,8 @@ const Column = React.forwardRef(({ colNumber, closeAllFolders }: Props, ref) => 
     );
   }
 
-  function calcColumnColor(colNumber: number, globalColumnSetting: boolean) {
-    if (!globalColumnSetting) {
+  function calcColumnColor(colNumber: number, picBackground: boolean, oneColorForAllColumns: boolean) {
+    if (!picBackground) {
       // switch (colNumber) {
       //   case 1:
       //     return columnsColorsData.column_1;
@@ -66,6 +65,10 @@ const Column = React.forwardRef(({ colNumber, closeAllFolders }: Props, ref) => 
       //     return columnsColorsData.column_4;
       // }
       return "";
+    }
+
+    if (oneColorForAllColumns) {
+      return columnsColorsImg_Data.column_1;
     }
 
     switch (colNumber) {
@@ -82,10 +85,15 @@ const Column = React.forwardRef(({ colNumber, closeAllFolders }: Props, ref) => 
 
   function calcColumnColor_picBackground(
     colNumber: number,
-    globalColumnSetting: boolean
+    picBackground: boolean,
+    oneColorForAllColumns: boolean
   ) {
-    if (globalColumnSetting) {
+    if (picBackground) {
       return "";
+    }
+
+    if (oneColorForAllColumns) {
+      return "bg-" + columnsColorsData.column_1;
     }
 
     switch (colNumber) {
@@ -107,23 +115,17 @@ const Column = React.forwardRef(({ colNumber, closeAllFolders }: Props, ref) => 
       className={`
        ${calcColumnColor_picBackground(
         colNumber,
-        globalSettingsData.picBackground
+        globalSettingsData.picBackground,
+        globalSettingsData.oneColorForAllCols
       )}`}
       style={{
         backgroundColor: calcColumnColor(
           colNumber,
-          globalSettingsData.picBackground
+          globalSettingsData.picBackground,
+          globalSettingsData.oneColorForAllCols
         ),
       }}
-      // ref={drop}
-      // ref={target}
-
-      // style={{
-      //   backgroundColor: calcColumnColor(
-      //     colNumber,
-      //     globalSettingsData.picBackground
-      //   ),
-      // }}
+     
     >
       {bookmarksData
         .filter((el) => el.column === colNumber)
@@ -139,8 +141,7 @@ const Column = React.forwardRef(({ colNumber, closeAllFolders }: Props, ref) => 
                 bookmarkType={el.type}
                 colNumber={el.column}
                 closeAllFolders={closeAllFolders}
-                // noteInput={el.noteInput}
-                // rssLink={el.rssLink}
+                
               />
               <GapAfterBookmark colNumber={colNumber} bookmarkID={el.id} picBackground={globalSettingsData.picBackground} />
             </div>

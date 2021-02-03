@@ -29,16 +29,19 @@ function UpperLeftMenu({}: Props): JSX.Element {
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  function columnsRendering(howMany: number) {
+  function columnsRendering(howMany: number, oneColorForAllCols: boolean) {
+  
+
     let arrOfColumns = [];
     for (let i = 1; i <= howMany; i++) {
       arrOfColumns.push(i);
     }
 
+
     return arrOfColumns.map((el, index) => {
       return globalSettingsData.picBackground ? (
         <SingleColumnsColor_Img
-          colNumber={el}
+          colNumber={oneColorForAllCols ? 1 : el}
           // colSelected={false}
           defaultColorsFor={defaultColorsFor}
           setColorsToChooseVis={setColorsToChooseVis}
@@ -51,7 +54,7 @@ function UpperLeftMenu({}: Props): JSX.Element {
         />
       ) : (
         <SingleColumnsColor
-          colNumber={el}
+          colNumber={oneColorForAllCols ? 1 : el}
           // colSelected={false}
           defaultColorsFor={defaultColorsFor}
           setColorsToChooseVis={setColorsToChooseVis}
@@ -67,39 +70,31 @@ function UpperLeftMenu({}: Props): JSX.Element {
   }
 
   return (
-    
-      
-        <div className="flex items-center justify-between w-48 sm:w-52">
+    <div className="flex items-center justify-between w-48 sm:w-52">
       {/* <div className="absolute left-0 bottom-0"> */}
       <div className="flex justify-between items-center mb-2 mt-2">
         {/* <p className="w-32">Columns</p> */}
-        <div className="flex">{columnsRendering(4)}</div>
+        <div className="flex">{columnsRendering(4, globalSettingsData.oneColorForAllCols)}</div>
       </div>
-      {globalSettingsData.picBackground ? null : <BackgroundColor  setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis} />}
-      <EyeOff/>
-
+      {globalSettingsData.picBackground ? null : (
+        <BackgroundColor
+          setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
+        />
+      )}
+      <EyeOff />
 
       {/* <div className="absolute left-0" style={{ bottom: "104px" }}> */}
-      <div className="absolute left-0 top-3" >
+      <div className="absolute left-0 top-3">
         {colorsToChooseVis ? (
           <DefaultColorsToChoose defaultColorsFor={defaultColorsFor} />
         ) : null}
-        {backgroundColorsToChooseVis ? 
-        <div className="absolute left-60 top-7">
-          <BackgroundColorsToChoose />
-
-
-        </div>
-        
-        : null}
-
+        {backgroundColorsToChooseVis ? (
+          <div className="absolute left-60 top-7">
+            <BackgroundColorsToChoose />
+          </div>
+        ) : null}
       </div>
-        
-
-    
     </div>
-    
-  
   );
 }
 

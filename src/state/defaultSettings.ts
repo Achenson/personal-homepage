@@ -8,7 +8,8 @@ export const rssSettingsState = newRidgeState({
 }) 
 
 export const globalSettingsState = newRidgeState({
-    picBackground: false
+    picBackground: false,
+    oneColorForAllCols: true
 })
 
 export const closeAllFoldersState = newRidgeState(false);
