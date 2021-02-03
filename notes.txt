@@ -203,7 +203,9 @@ DONE 125: Bug: EyeOff DONE
 128. colums color control - problem with border width when clicked in some case (oneColorForAllCols also)
 129. change components to container styles divs instead of mx margins everywhere
 130. useEffect -> some should be unmounted? check in the end
-131. BUG: after saving, Folders with type "folder" can be deleted even if deletable set to false, +problems with priority render
+131. BUG: after saving after changin title, Folders with type "folder" can be deleted even if deletable set to false, +problems with priority render
+132. bug: unwanted gap when dragging folder to empty column nr 1
+
 App structure:
 Main
     ?newBookmark

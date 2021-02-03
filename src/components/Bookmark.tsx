@@ -14,6 +14,7 @@ import {
 } from "../state/colorsState";
 
 import { closeAllFoldersState } from "../state/defaultSettings";
+import { globalSettingsState } from "../state/defaultSettings";
 
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
 import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
@@ -57,6 +58,8 @@ function Bookmark({
 }: // noteInput,
 // rssLink
 Props): JSX.Element {
+
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
@@ -79,6 +82,8 @@ Props): JSX.Element {
 
   // 0 to not show typescript errors
   let bookmarkIndex: number = 0;
+
+  let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
 
   // for conditional shadow rendering
   let bookmarkColumn: number;
@@ -251,7 +256,7 @@ Props): JSX.Element {
   }
 
   return (
-    <div className="relative" ref={drag}>
+    <div className={`relative ${globalSettingsData.hideNonDeletable && !currentBookmark[0].deletable ? "hidden" : ""}`} ref={drag}>
       <div
         className={`pl-0 h-8 px-2 pt-px bg-${
           // bookmarkColor ? bookmarkColor : finalBookmarkColor
