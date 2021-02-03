@@ -11,16 +11,20 @@ import {
   resetColorsState,
 } from "../../state/colorsState";
 
+import {
+  globalSettingsState
+} from "../../state/defaultSettings"
+
 interface Props {
   settingsVis: boolean;
   setSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Settings_UpperUI({
-  settingsVis,
-  setSettingsVis,
-}: Props): JSX.Element {
+function Settings_UpperUI({ settingsVis, setSettingsVis }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
+
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use()
+  
 
   return (
     <div
@@ -44,6 +48,20 @@ function Settings_UpperUI({
           </div>
 
           <p className="text-center">Global settings</p>
+          <div className="flex justify-between items-center mb-2 mt-2">
+            <p className="">One color for all columns</p>
+            <div className={`h-4 w-4 cursor-pointer border-2 border-${uiColorData} ${globalSettingsData.oneColorForAllCols ? `bg-${uiColorData} hover:bg-opacity-50` : `hover:bg-${uiColorData} hover:bg-opacity-50` } `}
+            onClick={() => {
+              setGlobalSettingsData(
+                {
+                  ...globalSettingsData,
+                  oneColorForAllCols: !globalSettingsData.oneColorForAllCols
+                }
+              )
+            }}
+            ></div>
+          </div>
+
           {/* <div className="flex justify-between items-center mb-2 mt-2">
             <p className="w-32">Folder default</p>
             <div
