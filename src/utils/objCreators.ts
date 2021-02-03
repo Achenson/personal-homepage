@@ -4,7 +4,8 @@ export function createBasicFolder(
   title: string,
   column: number,
   priority: number,
-  opened: boolean = false
+  opened: boolean = false,
+  deletable: boolean = true
 ) {
   return {
     id: uuidv4(),
@@ -13,6 +14,7 @@ export function createBasicFolder(
     column,
     priority,
     opened,
+    deletable
   };
 }
 

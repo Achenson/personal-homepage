@@ -5,6 +5,7 @@ export interface SingleBookmarkData {
   column: number;
   priority: number;
   opened: boolean;
+  deletable: boolean;
   type: "folder" | "note" | "rss";
   noteInput?: string | null;
   rssLink?: string | null;

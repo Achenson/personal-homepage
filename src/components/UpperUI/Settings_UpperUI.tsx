@@ -3,12 +3,7 @@ import React from "react";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
 import {
-  noteColorState,
-  folderColorState,
-  rssColorState,
-  uiColorState,
-  columnsColorsState,
-  resetColorsState,
+  uiColorState
 } from "../../state/colorsState";
 
 import {

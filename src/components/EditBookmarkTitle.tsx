@@ -83,21 +83,17 @@ Props): JSX.Element {
 
   // items per page won't be saved on Save if there were not manipulated
   const [wasItemsPerPageClicked, setWasItemsPerPageClicked] = useState(false);
-  
+
   const [wasFolderOpenClicked, setWasFolderOpenClicked] = useState(false);
-  
+
   // for disabling save btn
   const [wasAnythingClicked, setWasAnythingClicked] = useState(false);
 
-  useEffect( () => {
-
+  useEffect(() => {
     if (wasCheckboxClicked || wasFolderOpenClicked || wasItemsPerPageClicked) {
       setWasAnythingClicked(true);
     }
-
-
-  }, [wasCheckboxClicked, wasFolderOpenClicked, wasItemsPerPageClicked])
-
+  }, [wasCheckboxClicked, wasFolderOpenClicked, wasItemsPerPageClicked]);
 
   let bookmarkIndex: number;
 
@@ -109,20 +105,16 @@ Props): JSX.Element {
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
+  const [noDeletionErrorVis, setNoDeletionErrorVis] = useState<boolean>(false);
 
   let regexForTitle = /^\w+$/;
 
   const [folderOpen, setFolderOpen] = useState(currentBookmark[0].opened);
 
-  
-
-
- 
-
   return (
     <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-3">
       <div className="flex items-center mt-2 justify-between">
-        <p className={ bookmarkType === "rss" ? "w-24" : "w-12"}>Title</p>
+        <p className={bookmarkType === "rss" ? "w-24" : "w-12"}>Title</p>
         <input
           type="text"
           // min-w-0 !!
@@ -130,11 +122,9 @@ Props): JSX.Element {
           className="border w-full"
           value={bookmarkTitleInput}
           onChange={(e) => {
-
-            setBookmarkTitleInput(e.target.value)
-            setWasAnythingClicked(true)
-          }
-          }
+            setBookmarkTitleInput(e.target.value);
+            setWasAnythingClicked(true);
+          }}
         />
         {/* <div className=""> */}
 
@@ -150,6 +140,13 @@ Props): JSX.Element {
 
       {textAreaErrorVis && bookmarkType === "note" ? (
         <p className={`text-red-600`}>Note cannot be empty</p>
+      ) : null}
+
+      {noDeletionErrorVis ? (
+        <p className={`text-red-600`}>
+          Folder with all bookmarks cannot be deleted. You can hide it in the
+          global settings instead
+        </p>
       ) : null}
 
       {bookmarkType === "note" ? (
@@ -238,77 +235,78 @@ Props): JSX.Element {
         </div>
       ) : null}
 
-     
-      <div className={`mt-3 pt-2`} 
-      style={{borderTop: "solid lightGray 1px"}}
-      >
-      <div className="flex justify-between items-center">
-        <p>Lock as always-open</p>
-        <button>
-          {folderOpen ? (
-            <LockClosedSVG className="h-6 text-gray-700 hover:text-black cursor-pointer"
-            onClick={ () => {
-              setFolderOpen(b => !b)
-              setWasFolderOpenClicked(true)
-              
-            }}
-            />
-          ) : (
-            <LockOpenSVG className="h-6 text-gray-700 hover:text-black cursor-pointer"
-            onClick={ () => {
-              setFolderOpen(b => !b)
-              setWasFolderOpenClicked(true)
-            }}
-            />
-          )}
-        </button>
-      </div>
+      <div className={`mt-3 pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
+        <div className="flex justify-between items-center">
+          <p>Lock as always-open</p>
+          <button>
+            {folderOpen ? (
+              <LockClosedSVG
+                className="h-6 text-gray-700 hover:text-black cursor-pointer"
+                onClick={() => {
+                  setFolderOpen((b) => !b);
+                  setWasFolderOpenClicked(true);
+                }}
+              />
+            ) : (
+              <LockOpenSVG
+                className="h-6 text-gray-700 hover:text-black cursor-pointer"
+                onClick={() => {
+                  setFolderOpen((b) => !b);
+                  setWasFolderOpenClicked(true);
+                }}
+              />
+            )}
+          </button>
+        </div>
 
-      <div className="flex justify-between items-center mt-2">
-        <p>Delete</p>
-        <button>
-          <TrashSVG
-            className="h-6 text-gray-500 hover:text-black cursor-pointer"
-            onClick={() => {
-              setDeletedBookmark(bookmarkTitle);
-
-              setBookmarksData((previous) =>
-                produce(previous, (updated) => {
-                  updated.splice(bookmarkIndex, 1);
-                })
-              );
-
-              setEditBookmarkVis((b) => !b);
-              // removing deleted bookmark(tag) for links
-              linksData.forEach((obj, i) => {
-                if (obj.tags.indexOf(bookmarkTitle) > -1) {
-                  setLinksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated[i].tags.splice(
-                        obj.tags.indexOf(bookmarkTitle),
-                        1
-                      );
-                    })
-                  );
+        <div className="flex justify-between items-center mt-2">
+          <p>Delete</p>
+          <button>
+            <TrashSVG
+              className="h-6 text-gray-500 hover:text-black cursor-pointer"
+              onClick={() => {
+                if (!currentBookmark[0].deletable) {
+                  setNoDeletionErrorVis(true);
+                  return;
                 }
-              });
-            }}
-          />
-        </button>
-      </div>
-      </div>
-   
 
-      <div className="flex justify-start mt-2" >
+                setDeletedBookmark(bookmarkTitle);
+
+                setBookmarksData((previous) =>
+                  produce(previous, (updated) => {
+                    updated.splice(bookmarkIndex, 1);
+                  })
+                );
+
+                setEditBookmarkVis((b) => !b);
+                // removing deleted bookmark(tag) for links
+                linksData.forEach((obj, i) => {
+                  if (obj.tags.indexOf(bookmarkTitle) > -1) {
+                    setLinksData((previous) =>
+                      produce(previous, (updated) => {
+                        updated[i].tags.splice(
+                          obj.tags.indexOf(bookmarkTitle),
+                          1
+                        );
+                      })
+                    );
+                  }
+                });
+              }}
+            />
+          </button>
+        </div>
+      </div>
+
+      <div className="flex justify-start mt-2">
         <p className="w-8"></p>
         <div className="w-full pl-4 flex justify-center">
           <button
-         
             onClick={(e) => {
               e.preventDefault();
 
               if (!wasAnythingClicked) {
-                return
+                return;
               }
 
               setWasCheckboxClicked(false);
@@ -328,6 +326,7 @@ Props): JSX.Element {
 
               setTagErrorVis(false);
               setTextAreaErrorVis(false);
+              setNoDeletionErrorVis(false);
 
               setBookmarksData((previous) =>
                 produce(previous, (updated) => {
@@ -337,7 +336,6 @@ Props): JSX.Element {
                   if (wasFolderOpenClicked) {
                     updated[bookmarkIndex].opened = folderOpen;
                   }
-
 
                   if (bookmarkType === "note") {
                     updated[bookmarkIndex].noteInput = textAreaValue;
@@ -356,10 +354,6 @@ Props): JSX.Element {
                     if (wasItemsPerPageClicked) {
                       updated[bookmarkIndex].itemsPerPage = rssItemsPerPage;
                     }
-
-                  
-
-
                   }
                 })
               );
@@ -388,7 +382,13 @@ Props): JSX.Element {
               setEditBookmarkVis((b) => !b);
             }}
           >
-            <SaveSVG className={`h-5 fill-current mr-3 ${wasAnythingClicked ? "text-gray-900 hover:text-green-600" : "text-blueGray-400 cursor-default"}`} />
+            <SaveSVG
+              className={`h-5 fill-current mr-3 ${
+                wasAnythingClicked
+                  ? "text-gray-900 hover:text-green-600"
+                  : "text-blueGray-400 cursor-default"
+              }`}
+            />
           </button>
           <button
             onClick={(e) => {
