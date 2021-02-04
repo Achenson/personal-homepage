@@ -223,13 +223,13 @@ Props): JSX.Element {
               min="5"
               max="15"
               // className="w-full border border-gray-500"
-              className="border w-14 max-w-6xl min-w-0 pl-1"
+              className="border w-11 pl-1"
               value={rssItemsPerPage}
               onChange={(e) => {
                 setRssItemsPerPage(parseInt(e.target.value));
                 setWasItemsPerPageClicked(true);
               }}
-              placeholder={"5-15"}
+              // placeholder={"5-15"}
             />
           </div>
         </div>
