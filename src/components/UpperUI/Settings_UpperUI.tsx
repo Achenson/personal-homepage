@@ -19,10 +19,17 @@ function Settings_UpperUI({ settingsVis, setSettingsVis }: Props): JSX.Element {
   function renderColsNumberControls() {
     let arrOfColsNumbers: (1|2|3|4)[] = [1, 2, 3, 4];
 
+    let colsNumbering = {
+      1: "I",
+      2: "II",
+      3: "III",
+      4: "IV",
+    }
+
     return arrOfColsNumbers.map((el, i) => {
       return (
         <div className="flex items-center ml-2">
-          <p>{el}</p>
+          <p className="mr-px">{colsNumbering[el]}</p>
           <div
             className={`h-4 w-4 ml-px mt-px cursor-pointer border-2 border-${uiColorData} ${
               globalSettingsData.numberOfCols === el
