@@ -2,13 +2,9 @@ import React from "react";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
-import {
-  uiColorState
-} from "../../state/colorsState";
+import { uiColorState } from "../../state/colorsState";
 
-import {
-  globalSettingsState
-} from "../../state/defaultSettings"
+import { globalSettingsState } from "../../state/defaultSettings";
 
 interface Props {
   settingsVis: boolean;
@@ -18,9 +14,34 @@ interface Props {
 function Settings_UpperUI({ settingsVis, setSettingsVis }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use()
-  
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
+  function renderColsNumberControls() {
+    let arrOfColsNumbers: (1|2|3|4)[] = [1, 2, 3, 4];
+
+    return arrOfColsNumbers.map((el, i) => {
+      return (
+        <div className="flex items-center ml-2">
+          <p>{el}</p>
+          <div
+            className={`h-4 w-4 ml-px mt-px cursor-pointer border-2 border-${uiColorData} ${
+              globalSettingsData.numberOfCols === el
+                ? `bg-${uiColorData} hover:bg-opacity-50`
+                : `hover:bg-${uiColorData} hover:bg-opacity-50`
+            } `}
+            onClick={() => {
+              setGlobalSettingsData(
+                {
+                  ...globalSettingsData,
+                  numberOfCols: el
+                }
+              )
+            }}
+          ></div>
+        </div>
+      );
+    });
+  }
   return (
     <div
       className="flex flex-col z-50 absolute h-screen w-screen justify-center items-center"
@@ -45,34 +66,41 @@ function Settings_UpperUI({ settingsVis, setSettingsVis }: Props): JSX.Element {
           <p className="text-center">Global settings</p>
           <div className="flex justify-between items-center mb-2 mt-2">
             <p className="">One color for all columns</p>
-            <div className={`h-4 w-4 cursor-pointer border-2 border-${uiColorData} ${globalSettingsData.oneColorForAllCols ? `bg-${uiColorData} hover:bg-opacity-50` : `hover:bg-${uiColorData} hover:bg-opacity-50` } `}
-            onClick={() => {
-              setGlobalSettingsData(
-                {
+            <div
+              className={`h-4 w-4 cursor-pointer border-2 border-${uiColorData} ${
+                globalSettingsData.oneColorForAllCols
+                  ? `bg-${uiColorData} hover:bg-opacity-50`
+                  : `hover:bg-${uiColorData} hover:bg-opacity-50`
+              } `}
+              onClick={() => {
+                setGlobalSettingsData({
                   ...globalSettingsData,
-                  oneColorForAllCols: !globalSettingsData.oneColorForAllCols
-                }
-              )
-            }}
+                  oneColorForAllCols: !globalSettingsData.oneColorForAllCols,
+                });
+              }}
             ></div>
           </div>
           <div className="flex justify-between items-center mb-2 mt-2">
             <p className="">Hide folder containing all bookmarks</p>
-            <div className={`h-4 w-4 cursor-pointer border-2 border-${uiColorData} ${globalSettingsData.hideNonDeletable ? `bg-${uiColorData} hover:bg-opacity-50` : `hover:bg-${uiColorData} hover:bg-opacity-50` } `}
-            onClick={() => {
-              setGlobalSettingsData(
-                {
+            <div
+              className={`h-4 w-4 cursor-pointer border-2 border-${uiColorData} ${
+                globalSettingsData.hideNonDeletable
+                  ? `bg-${uiColorData} hover:bg-opacity-50`
+                  : `hover:bg-${uiColorData} hover:bg-opacity-50`
+              } `}
+              onClick={() => {
+                setGlobalSettingsData({
                   ...globalSettingsData,
-                  hideNonDeletable: !globalSettingsData.hideNonDeletable
-                }
-              )
-            }}
+                  hideNonDeletable: !globalSettingsData.hideNonDeletable,
+                });
+              }}
             ></div>
           </div>
+          <div className="flex justify-between items-center mb-2 mt-2">
+            <p className="">Number of columns</p>
 
-
-
-
+            <div className="flex">{renderColsNumberControls()}</div>
+          </div>
 
           {/* <div className="flex justify-between items-center mb-2 mt-2">
             <p className="w-32">Folder default</p>

@@ -207,6 +207,7 @@ DONE 125: Bug: EyeOff DONE
 132. bug: unwanted gap when dragging folder to empty column nr 1
 133. hide Left UI btn?
 134. logo
+135. column numbers: change bookmarks colNumber & priority if changed down?
 
 App structure:
 Main
