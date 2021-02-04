@@ -23,3 +23,9 @@ export interface SingleLinkData {
   tags: string[]
 }
 
+export interface GlobalSettingsState {
+  picBackground: boolean,
+    oneColorForAllCols: boolean,
+    hideNonDeletable: boolean,
+    numberOfCols: 1 | 2 | 3 | 4
+}

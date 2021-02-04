@@ -205,6 +205,8 @@ DONE 125: Bug: EyeOff DONE
 130. useEffect -> some should be unmounted? check in the end
 131. BUG: after saving after changin title, Folders with type "folder" can be deleted even if deletable set to false, +problems with priority render
 132. bug: unwanted gap when dragging folder to empty column nr 1
+133. hide Left UI btn?
+134. logo
 
 App structure:
 Main

@@ -9,7 +9,7 @@ import {
   deletedBookmarkState,
 } from "../state/bookmarksAndLinks";
 
-import { closeAllFoldersState} from "../state/defaultSettings";
+import { closeAllFoldersState } from "../state/defaultSettings";
 
 import { createBookmarkFolder } from "../utils/objCreators";
 
@@ -32,10 +32,11 @@ function Grid({}: Props): JSX.Element {
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  
-  
-  const [closeAllFolders, setCloseAllFolders] = useState(false)
-  const [closeAllFoldersData, setCloseAllFoldersData] = closeAllFoldersState.use()
+  const [closeAllFolders, setCloseAllFolders] = useState(false);
+  const [
+    closeAllFoldersData,
+    setCloseAllFoldersData,
+  ] = closeAllFoldersState.use();
 
   const target = React.useRef(null);
   const [width, height] = useSize(target);
@@ -44,14 +45,11 @@ function Grid({}: Props): JSX.Element {
 
   // })
 
-  useEffect( () => {
-
-   if (closeAllFoldersData) {
-     setCloseAllFoldersData(false)
-   }
-   
-
-  }, [closeAllFoldersData, setCloseAllFoldersData])
+  useEffect(() => {
+    if (closeAllFoldersData) {
+      setCloseAllFoldersData(false);
+    }
+  }, [closeAllFoldersData, setCloseAllFoldersData]);
 
   useEffect(() => {
     if (resetColorsData) {
@@ -62,7 +60,6 @@ function Grid({}: Props): JSX.Element {
           updated.forEach((obj, i) => {
             obj.color = null;
           });
-
         })
       );
 
@@ -112,21 +109,69 @@ function Grid({}: Props): JSX.Element {
     });
   }, [bookmarksData, setBookmarksData, linksData, deletedBookmark]);
 
-  const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
+  
+
+  function renderColumns(numberOfCols: 1 | 2 | 3 |4) {
+    switch (numberOfCols) {
+      case 1:
+        return <Column colNumber={1} closeAllFolders={closeAllFoldersData} />;
+      case 2:
+        return (
+          <>
+            <Column colNumber={1} closeAllFolders={closeAllFoldersData} />
+            <Column colNumber={2} closeAllFolders={closeAllFoldersData} />
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <Column colNumber={1} closeAllFolders={closeAllFoldersData} />
+            <Column colNumber={2} closeAllFolders={closeAllFoldersData} />
+            <Column colNumber={3} closeAllFolders={closeAllFoldersData} />
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <Column colNumber={1} closeAllFolders={closeAllFoldersData} />
+            <Column colNumber={2} closeAllFolders={closeAllFoldersData} />
+            <Column colNumber={3} closeAllFolders={closeAllFoldersData} />
+            <Column colNumber={4} closeAllFolders={closeAllFoldersData} />
+          </>
+        );
+    }
+  }
+
+
+  function gridSettings(numberOfCols: 1 | 2 | 3 |4) {
+
+    switch (numberOfCols) {
+      case 1:
+        return ``
+      case 2:
+        return `sm:grid-cols-2`
+      case 3:
+        return `sm:grid-cols-2 md:grid-cols-3`
+      case 4:
+        return `sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`
+    }
+
+  }
 
   return (
     <div
-      className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-6 mx-4"
+      className={`grid gap-x-2 gap-y-6 mx-4 ${gridSettings(globalSettingsData.numberOfCols)}`}
+      // className={`grid gap-x-2 gap-y-6 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`}
       ref={target}
     >
-      <>
+      {/* <>
         <Column colNumber={1} closeAllFolders={closeAllFoldersData} />
         <Column colNumber={2} closeAllFolders={closeAllFoldersData} />
-        <Column colNumber={3} closeAllFolders={closeAllFoldersData}/>
-        <Column colNumber={4} closeAllFolders={closeAllFoldersData}/>
-      </>
+        <Column colNumber={3} closeAllFolders={closeAllFoldersData} />
+        <Column colNumber={4} closeAllFolders={closeAllFoldersData} />
+      </> */}
 
-      {/* <p>grid height: {height}</p> */}
+      {renderColumns(globalSettingsData.numberOfCols)}
     </div>
   );
 }
