@@ -7,6 +7,7 @@ import { produce } from "immer";
 
 import { linksDataState, bookmarksDataState } from "../state/bookmarksAndLinks";
 
+
 interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
   bookmarkTitle: string;
@@ -34,6 +35,9 @@ function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
     boolean
   >(false);
   const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
+
+  const [tagsListVis, setTagsListVis] = useState<boolean>(true);
+
 
   let notesTitlesArr: string[] = [];
 
@@ -82,6 +86,15 @@ function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
             />
           </div>
         </div>
+  
+        
+
+
+
+
+
+
+
 
         {titleFormatErrorVis ? (
           <p className={`text-red-600`}>

@@ -14,7 +14,7 @@ export const globalSettingsState = newRidgeState<GlobalSettingsState>({
     picBackground: false,
     oneColorForAllCols: false,
     hideNonDeletable: false,
-    numberOfCols: 3
+    numberOfCols: 4
 })
 
 export const closeAllFoldersState = newRidgeState(false);

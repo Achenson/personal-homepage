@@ -7,6 +7,8 @@ import { linksDataState, bookmarksDataState } from "../../state/bookmarksAndLink
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
+import TagsList_UpperUI from "./TagsList_UpperUI";
+
 interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -29,6 +31,8 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
     boolean
   >(false);
   const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
+
+  const [tagsListVis, setTagsListVis] = useState<boolean>(true);
 
   let notesTitlesArr: string[] = [];
 
@@ -89,6 +93,10 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
               />
             </div>
           </div>
+
+          {
+      tagsListVis ? <TagsList_UpperUI/> : null
+    }
 
           {titleFormatErrorVis ? (
             <p className={`text-red-600`}>

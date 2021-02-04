@@ -209,6 +209,8 @@ DONE 125: Bug: EyeOff DONE
 134. logo
 135. column numbers: change bookmarks colNumber & priority if changed down?
 136. css method to get rid of input numbers' arrows
+137. input's left padding
+138. new bookmark: not entering any tag should be optional
 
 App structure:
 Main
