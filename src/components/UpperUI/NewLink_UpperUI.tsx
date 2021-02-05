@@ -6,6 +6,8 @@ import { linksDataState, bookmarksDataState } from "../../state/bookmarksAndLink
 
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
+import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
+import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
 import TagsList_UpperUI from "./TagsList_UpperUI";
 
@@ -32,7 +34,9 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
   >(false);
   const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
 
-  const [tagsListVis, setTagsListVis] = useState<boolean>(true);
+  const [tagsListVis, setTagsListVis] = useState<boolean>(false);
+
+  const [chevronDown, setChevronDown] = useState(true);
 
   let notesTitlesArr: string[] = [];
 
@@ -53,45 +57,55 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
       style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
     >
       <div
-        className="bg-gray-200 pb-3 pt-6 border-2 border-teal-500 rounded-sm md:mb-48"
+        className="bg-gray-200 pb-3 pt-6 pl-2 pr-1 border-2 border-teal-500 rounded-sm md:mb-48"
         style={{ width: "350px" }}
       >
-        <form action="" className="pl-2 pr-4">
+        
           <div className="flex justify-around mb-2 mt-2">
             <p className="w-10">Title</p>
-            <div className="w-full pl-2">
+            
               <input
                 type="text"
-                className="w-full border border-gray-500"
+                className="w-full ml-2 border border-gray-500"
                 value={titleInput}
                 placeholder={"new bookmark title"}
                 onChange={(e) => setTitleInput(e.target.value)}
               />
-            </div>
+               <ChevronDownSVG className="h-6 invisible"/>
+            
           </div>
           <div className="flex justify-around mb-2">
             <p className="w-10">Link</p>
-            <div className="w-full pl-2">
+            
               <input
                 type="text"
-                className="w-full border border-gray-500"
+                className="w-full ml-2 border border-gray-500"
                 value={urlInput}
                 placeholder={"enter proper URL address"}
                 onChange={(e) => setUrlInput(e.target.value)}
               />
-            </div>
+               <ChevronDownSVG className="h-6 invisible"/>
+           
           </div>
           <div className="flex justify-start mb-2">
             <p className="w-10">Tags</p>
-            <div className="w-full pl-2">
+            
               <input
                 type="text"
-                className="w-full border border-gray-500  "
+                className="w-full ml-2 border border-gray-500  "
                 value={tagsInput.join(", ")}
                 placeholder={"[tag1], [tag2]..."}
                 onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
               />
-            </div>
+          {chevronDown ?  <ChevronDownSVG className="h-6 cursor-pointer hover:text-gray-500" onClick={() => {
+            setChevronDown(b => !b)
+            setTagsListVis(b=>!b)
+          }}/> :  <ChevronUpSVG className="h-6 cursor-pointer hover:text-gray-500" onClick={() => {
+            setChevronDown(b => !b)
+            setTagsListVis(b=>!b)
+          }} /> }   
+
+            
           </div>
 
           {
@@ -223,7 +237,7 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
               </button>
             </div>
           </div>
-        </form>
+       
       </div>
     </div>
   );

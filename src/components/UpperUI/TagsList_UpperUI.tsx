@@ -22,7 +22,7 @@ function TagsList_UpperUI({}: Props): JSX.Element{
 
 
     return (
-        <div className="absolute z-50 bg-white ml-11 -mt-2" style={{width: "277px"}}>
+        <div className="absolute z-50 bg-white -mt-2" style={{width: "271px", marginLeft: "42px"}}>
           {tags.map(el => {
             return (
               <p className="cursor-pointer hover:bg-blueGray-200 pl-px">
