@@ -1,47 +1,49 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 
 import { bookmarksDataState } from "../../state/bookmarksAndLinks";
 
 interface Props {
-  setTagsInputStr: React.Dispatch<React.SetStateAction<string>>
+  tagsInputStr: string;
+  setTagsInputStr: React.Dispatch<React.SetStateAction<string>>;
+  visibleTags: string[];
 }
 
-function TagsList_UpperUI({setTagsInputStr}: Props): JSX.Element {
+function TagsList_UpperUI({
+  setTagsInputStr,
+  tagsInputStr,
+  visibleTags,
+}: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-
-  let bookmarkFolders = bookmarksData.filter((obj) => obj.type === "folder");
-
-
-  const initialTags = makeInitialTags();
-
-  const [visibleTags, setVisibleTags] = useState(makeInitialTags());
-
-
-
-  function makeInitialTags(): string[] {
-    let tags: string[] = [];
-
-    bookmarkFolders.forEach((obj) => {
-      tags.push(obj.title);
-    });
-
-    return tags;
-  }
 
   return (
     <div
       className="absolute z-50 bg-white -mt-2"
       style={{ width: "271px", marginLeft: "42px" }}
     >
-      {visibleTags.map((el) => {
-        return (
-          <p className="cursor-pointer hover:bg-blueGray-200 pl-px" onClick={
-            () => {
+      {visibleTags.length === 0 ? (
+        <p className="invisible">[empty]</p>
+      ) : (
+        visibleTags.map((el) => {
+          return (
+            <p
+              className="cursor-pointer hover:bg-blueGray-200 pl-px"
+              onClick={() => {
+                if (tagsInputStr.length === 0) {
+                  setTagsInputStr(el);
 
-            }
-          }>{el}</p>
-        );
-      })}
+                  return;
+                }
+
+                setTagsInputStr(tagsInputStr.concat(", " + el));
+              }}
+            >
+              {el}
+            </p>
+          );
+        })
+      )}
+
+    
     </div>
   );
 }

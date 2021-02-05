@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { produce } from "immer";
 import {
@@ -21,6 +21,8 @@ interface Props {
 function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+
+  let bookmarkFolders = bookmarksData.filter((obj) => obj.type === "folder");
 
   const [titleInput, setTitleInput] = useState<string>("");
 
@@ -44,6 +46,8 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
 
   const [chevronDown, setChevronDown] = useState(true);
 
+  const [visibleTags, setVisibleTags] = useState<string[]>(makeInitialTags());
+
   let notesTitlesArr: string[] = [];
 
   bookmarksData.forEach((obj) => {
@@ -55,6 +59,36 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
   // ^  and $ -> beginning and end of the text!
   let regexForTags = /^\w+(,\s\w+)*$/;
   let regexForTitle = /^\w+$/;
+
+  const [tagsInputArr, setTagsInputArr] = useState<string[]>([])
+
+  useEffect(() => {
+
+    let tagsInputArr = tagsInputStr.split(", ");
+
+    // setTagsInputArr(tagsInputStr.split(" ,"))
+
+    // let newVisibleTags = [...visibleTags];
+    let newVisibleTags: string[] = [];
+
+    visibleTags.forEach((el) => {
+      if (tagsInputArr.indexOf(el) === -1) {
+        newVisibleTags.push(el);
+      }
+    });
+
+    setVisibleTags([...newVisibleTags]);
+  }, [tagsInputStr, visibleTags, setVisibleTags]);
+
+  function makeInitialTags(): string[] {
+    let tags: string[] = [];
+
+    bookmarkFolders.forEach((obj) => {
+      tags.push(obj.title);
+    });
+
+    return tags;
+  }
 
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable
@@ -99,7 +133,10 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
             // value={tagsInput.join(", ")}
             value={tagsInputStr}
             placeholder={"[tag1], [tag2]..."}
-            onChange={(e) => setTagsInputStr(e.target.value)}
+            onChange={(e) => {
+              setTagsInputStr(e.target.value)
+            }}
+              
             // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
           />
           {chevronDown ? (
@@ -122,7 +159,11 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
         </div>
 
         {tagsListVis ? (
-          <TagsList_UpperUI setTagsInputStr={setTagsInputStr} />
+          <TagsList_UpperUI
+            setTagsInputStr={setTagsInputStr}
+            tagsInputStr={tagsInputStr}
+            visibleTags={visibleTags}
+          />
         ) : null}
 
         {titleFormatErrorVis ? (
@@ -167,9 +208,7 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
                 setTitleUniquenessErrorVis(false);
                 setNoteErrorVis(false);
 
-
-                let tagsInputArr = tagsInputStr.split(", ")
-
+                let tagsInputArr = tagsInputStr.split(", ");
 
                 if (!regexForTitle.test(titleInput)) {
                   setTitleFormatErrorVis(true);
