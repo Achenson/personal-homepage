@@ -2,7 +2,10 @@ import React from "react";
 import { useState } from "react";
 
 import { produce } from "immer";
-import { linksDataState, bookmarksDataState } from "../../state/bookmarksAndLinks";
+import {
+  linksDataState,
+  bookmarksDataState,
+} from "../../state/bookmarksAndLinks";
 
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
@@ -22,16 +25,19 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
   const [titleInput, setTitleInput] = useState<string>("");
 
   const [urlInput, setUrlInput] = useState<string>("");
-  const [tagsInput, setTagsInput] = useState<string[]>([]);
+
+  const [tagsInputStr, setTagsInputStr] = useState<string>("");
+  // const [tagsInputArr, setTagsInputArr] = useState<string[]>([]);
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
   const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
     false
   );
-  const [titleUniquenessErrorVis, setTitleUniquenessErrorVis] = useState<
-    boolean
-  >(false);
+  const [
+    titleUniquenessErrorVis,
+    setTitleUniquenessErrorVis,
+  ] = useState<boolean>(false);
   const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
 
   const [tagsListVis, setTagsListVis] = useState<boolean>(false);
@@ -60,184 +66,192 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
         className="bg-gray-200 pb-3 pt-6 pl-2 pr-1 border-2 border-teal-500 rounded-sm md:mb-48"
         style={{ width: "350px" }}
       >
-        
-          <div className="flex justify-around mb-2 mt-2">
-            <p className="w-10">Title</p>
-            
-              <input
-                type="text"
-                className="w-full ml-2 border border-gray-500"
-                value={titleInput}
-                placeholder={"new bookmark title"}
-                onChange={(e) => setTitleInput(e.target.value)}
-              />
-               <ChevronDownSVG className="h-6 invisible"/>
-            
-          </div>
-          <div className="flex justify-around mb-2">
-            <p className="w-10">Link</p>
-            
-              <input
-                type="text"
-                className="w-full ml-2 border border-gray-500"
-                value={urlInput}
-                placeholder={"enter proper URL address"}
-                onChange={(e) => setUrlInput(e.target.value)}
-              />
-               <ChevronDownSVG className="h-6 invisible"/>
-           
-          </div>
-          <div className="flex justify-start mb-2">
-            <p className="w-10">Tags</p>
-            
-              <input
-                type="text"
-                className="w-full ml-2 border border-gray-500  "
-                value={tagsInput.join(", ")}
-                placeholder={"[tag1], [tag2]..."}
-                onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
-              />
-          {chevronDown ?  <ChevronDownSVG className="h-6 cursor-pointer hover:text-gray-500" onClick={() => {
-            setChevronDown(b => !b)
-            setTagsListVis(b=>!b)
-          }}/> :  <ChevronUpSVG className="h-6 cursor-pointer hover:text-gray-500" onClick={() => {
-            setChevronDown(b => !b)
-            setTagsListVis(b=>!b)
-          }} /> }   
+        <div className="flex justify-around mb-2 mt-2">
+          <p className="w-10">Title</p>
 
-            
-          </div>
+          <input
+            type="text"
+            className="w-full ml-2 border border-gray-500"
+            value={titleInput}
+            placeholder={"new bookmark title"}
+            onChange={(e) => setTitleInput(e.target.value)}
+          />
+          <ChevronDownSVG className="h-6 invisible" />
+        </div>
+        <div className="flex justify-around mb-2">
+          <p className="w-10">Link</p>
 
-          {
-      tagsListVis ? <TagsList_UpperUI/> : null
-    }
+          <input
+            type="text"
+            className="w-full ml-2 border border-gray-500"
+            value={urlInput}
+            placeholder={"enter proper URL address"}
+            onChange={(e) => setUrlInput(e.target.value)}
+          />
+          <ChevronDownSVG className="h-6 invisible" />
+        </div>
+        <div className="flex justify-start mb-2">
+          <p className="w-10">Tags</p>
 
-          {titleFormatErrorVis ? (
-            <p className={`text-red-600`}>
-              Link title can contain letters, numbers or underscore
-            </p>
-          ) : null}
+          <input
+            type="text"
+            className="w-full ml-2 border border-gray-500  "
+            // value={tagsInput.join(", ")}
+            value={tagsInputStr}
+            placeholder={"[tag1], [tag2]..."}
+            onChange={(e) => setTagsInputStr(e.target.value)}
+            // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
+          />
+          {chevronDown ? (
+            <ChevronDownSVG
+              className="h-6 cursor-pointer hover:text-blueGray-500"
+              onClick={() => {
+                setChevronDown((b) => !b);
+                setTagsListVis((b) => !b);
+              }}
+            />
+          ) : (
+            <ChevronUpSVG
+              className="h-6 cursor-pointer hover:text-blueGray-500"
+              onClick={() => {
+                setChevronDown((b) => !b);
+                setTagsListVis((b) => !b);
+              }}
+            />
+          )}
+        </div>
 
-          {titleUniquenessErrorVis ? (
-            <p className={`text-red-600`}>
-              Link with that title already exists
-            </p>
-          ) : null}
+        {tagsListVis ? (
+          <TagsList_UpperUI setTagsInputStr={setTagsInputStr} />
+        ) : null}
 
-          {tagErrorVis ? (
-            <p className={`text-red-600`}>
-              Tags should consist of words separated by coma and space
-            </p>
-          ) : null}
+        {titleFormatErrorVis ? (
+          <p className={`text-red-600`}>
+            Link title can contain letters, numbers or underscore
+          </p>
+        ) : null}
 
-          {noteErrorVis ? (
-            <p className={`text-red-600`}>
-              Names for tags cannot be the same as Notes titles
-            </p>
-          ) : null}
+        {titleUniquenessErrorVis ? (
+          <p className={`text-red-600`}>Link with that title already exists</p>
+        ) : null}
 
-          {tagRepeatErrorVis ? (
-            <p className={`text-red-600`}>Each tag should be unique</p>
-          ) : null}
+        {tagErrorVis ? (
+          <p className={`text-red-600`}>
+            Tags should consist of words separated by coma and space
+          </p>
+        ) : null}
 
-          <div className="flex justify-start mt-3">
-            <p className="w-8"></p>
-            {/* !!! pl-4 in NewLink */}
-            <div className="w-full flex justify-center">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
+        {noteErrorVis ? (
+          <p className={`text-red-600`}>
+            Names for tags cannot be the same as Notes titles
+          </p>
+        ) : null}
 
-                  // if(tagsInput.join(", "))
+        {tagRepeatErrorVis ? (
+          <p className={`text-red-600`}>Each tag should be unique</p>
+        ) : null}
 
-                  setTagErrorVis(false);
-                  setTagRepeatErrorVis(false);
-                  setTitleFormatErrorVis(false);
-                  setTitleUniquenessErrorVis(false);
-                  setNoteErrorVis(false);
+        <div className="flex justify-start mt-3">
+          <p className="w-8"></p>
+          {/* !!! pl-4 in NewLink */}
+          <div className="w-full flex justify-center">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
 
-                  if (!regexForTitle.test(titleInput)) {
-                    setTitleFormatErrorVis(true);
+                // if(tagsInput.join(", "))
 
+                setTagErrorVis(false);
+                setTagRepeatErrorVis(false);
+                setTitleFormatErrorVis(false);
+                setTitleUniquenessErrorVis(false);
+                setNoteErrorVis(false);
+
+
+                let tagsInputArr = tagsInputStr.split(", ")
+
+
+                if (!regexForTitle.test(titleInput)) {
+                  setTitleFormatErrorVis(true);
+
+                  return;
+                }
+
+                if (!titleUniquenessCheck()) {
+                  setTitleUniquenessErrorVis(true);
+                  return;
+                }
+
+                if (!regexForTags.test(tagsInputArr.join(", "))) {
+                  setTagErrorVis(true);
+                  return;
+                }
+
+                for (let el of tagsInputArr) {
+                  if (notesTitlesArr.indexOf(el) > -1) {
+                    setNoteErrorVis(true);
                     return;
                   }
+                }
 
-                  if (!titleUniquenessCheck()) {
-                    setTitleUniquenessErrorVis(true);
-                    return;
-                  }
+                if (!tagUniquenessCheck()) {
+                  setTagRepeatErrorVis(true);
+                  return;
+                }
 
-                  if (!regexForTags.test(tagsInput.join(", "))) {
-                    setTagErrorVis(true);
-                    return;
-                  }
+                setLinksData((previous) =>
+                  produce(previous, (updated) => {
+                    updated.push({
+                      title: titleInput,
+                      URL: urlInput,
+                      tags: [...tagsInputArr],
+                    });
+                  })
+                );
 
-                  for (let el of tagsInput) {
-                    if (notesTitlesArr.indexOf(el) > -1) {
-                      setNoteErrorVis(true);
+                setNewLinkVis((b) => !b);
+
+                function tagUniquenessCheck() {
+                  let isUnique: boolean = true;
+
+                  tagsInputArr.forEach((el, i) => {
+                    let tagsInputCopy = [...tagsInputArr];
+                    tagsInputCopy.splice(i, 1);
+
+                    if (tagsInputCopy.indexOf(el) > -1) {
+                      isUnique = false;
                       return;
                     }
-                  }
+                  });
 
-                  if (!tagUniquenessCheck()) {
-                    setTagRepeatErrorVis(true);
-                    return;
-                  }
+                  return isUnique;
+                }
 
-                  setLinksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated.push({
-                        title: titleInput,
-                        URL: urlInput,
-                        tags: [...tagsInput],
-                      });
-                    })
-                  );
+                function titleUniquenessCheck() {
+                  let isUnique: boolean = true;
 
-                  setNewLinkVis((b) => !b);
+                  linksData.forEach((obj, i) => {
+                    if (obj.title === titleInput) {
+                      isUnique = false;
+                    }
+                  });
 
-                  function tagUniquenessCheck() {
-                    let isUnique: boolean = true;
-
-                    tagsInput.forEach((el, i) => {
-                      let tagsInputCopy = [...tagsInput];
-                      tagsInputCopy.splice(i, 1);
-
-                      if (tagsInputCopy.indexOf(el) > -1) {
-                        isUnique = false;
-                        return;
-                      }
-                    });
-
-                    return isUnique;
-                  }
-
-                  function titleUniquenessCheck() {
-                    let isUnique: boolean = true;
-
-                    linksData.forEach((obj, i) => {
-                      if (obj.title === titleInput) {
-                        isUnique = false;
-                      }
-                    });
-
-                    return isUnique;
-                  }
-                }}
-              >
-                <SaveSVG className="h-5 fill-current text-black mr-3 hover:text-green-600" />
-              </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setNewLinkVis((b) => !b);
-                }}
-              >
-                <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
-              </button>
-            </div>
+                  return isUnique;
+                }
+              }}
+            >
+              <SaveSVG className="h-5 fill-current text-black mr-3 hover:text-green-600" />
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setNewLinkVis((b) => !b);
+              }}
+            >
+              <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
+            </button>
           </div>
-       
+        </div>
       </div>
     </div>
   );
