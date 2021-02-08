@@ -65,31 +65,19 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
   const [tagsInputArr, setTagsInputArr] = useState<string[]>([]);
 
   useEffect(() => {
-    // let tagsInputArr = tagsInputStr.split(", ");
 
     let newVisibleTags: string[] = [];
 
-    // initialTags.forEach((el) => {
-    //   if (tagsInputArr.indexOf(el) === -1) {
-    //     newVisibleTags.push(el);
-    //   }
-    // });
-
     initialTags.forEach((el) => {
       
-      // let tagRegex = new RegExp(`\s${el},`);
+      // in new RegExp the \ needs to be escaped!
       let tagRegex = new RegExp(`\\b${el}\\b`);
 
       if (!tagRegex.test(tagsInputStr)) {
         newVisibleTags.push(el);
       }
-      
-      // if (tagsInputArr.indexOf(el) === -1) {
-      //   newVisibleTags.push(el);
-      // }
 
     });
-
 
     setVisibleTags([...newVisibleTags]);
 
@@ -97,22 +85,11 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
       setTagsListVis(false);
     }
 
-    console.log("useEffect");
-    
-
+    if(newVisibleTags.length > 0) {
+      setTagsListVis(true);
+    }
   
   }, [tagsInputStr, initialTags, setVisibleTags, setTagsListVis]);
-
-
-
-  // useEffect(() => {
-    
-  //   if(visibleTags && visibleTags.length === 0) {
-
-  //   }
-   
-  // }, [visibleTags, tagsListVis, setTagsListVis])
-
 
 
   function makeInitialTags(): string[] {
@@ -230,7 +207,7 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
 
         {tagErrorVis ? (
           <p className={`text-red-600`}>
-            Tags should consist of words separated by coma and space
+            Tags should consist of words separated by coma and single space
           </p>
         ) : null}
 
