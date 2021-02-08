@@ -30,7 +30,6 @@ function TagsList_UpperUI({
               onClick={() => {
                 if (tagsInputStr.length === 0) {
                   setTagsInputStr(el);
-
                   return;
                 }
 

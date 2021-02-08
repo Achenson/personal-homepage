@@ -215,7 +215,9 @@ DONE 125: Bug: EyeOff DONE
 in that case the value would be calc on each render which would cause useEffect to crash the app (too many renders)
 instead: initialTags in useState. Or could have been outside funcion component(global scope)
 140. make notes about useState, useEffect life cycle
-
+141. make note about resolving conflict when going back one commit: 
+142. select prev commit in git history 2. git pull 3. resolving conflicts (accept current chagne) 4. git add * 5. git commit
+143. make NewLink_UpperUI save and cance little lower
 
 
 

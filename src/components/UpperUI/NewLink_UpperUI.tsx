@@ -76,7 +76,28 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
     });
 
     setVisibleTags([...newVisibleTags]);
-  }, [tagsInputStr, initialTags, setVisibleTags]);
+
+    if(newVisibleTags.length === 0) {
+      setTagsListVis(false);
+    }
+
+    console.log("useEffect");
+    
+
+  
+  }, [tagsInputStr, initialTags, setVisibleTags, setTagsListVis]);
+
+
+
+  // useEffect(() => {
+    
+  //   if(visibleTags && visibleTags.length === 0) {
+
+  //   }
+   
+  // }, [visibleTags, tagsListVis, setTagsListVis])
+
+
 
   function makeInitialTags(): string[] {
     let tags: string[] = [];
@@ -207,7 +228,7 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
           <p className={`text-red-600`}>Each tag should be unique</p>
         ) : null}
 
-        <div className="flex justify-start mt-3">
+        <div className="flex justify-start mt-6">
           <p className="w-8"></p>
           {/* !!! pl-4 in NewLink */}
           <div className="w-full flex justify-center">
