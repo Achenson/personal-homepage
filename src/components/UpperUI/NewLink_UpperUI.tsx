@@ -65,15 +65,31 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
   const [tagsInputArr, setTagsInputArr] = useState<string[]>([]);
 
   useEffect(() => {
-    let tagsInputArr = tagsInputStr.split(", ");
+    // let tagsInputArr = tagsInputStr.split(", ");
 
     let newVisibleTags: string[] = [];
 
+    // initialTags.forEach((el) => {
+    //   if (tagsInputArr.indexOf(el) === -1) {
+    //     newVisibleTags.push(el);
+    //   }
+    // });
+
     initialTags.forEach((el) => {
-      if (tagsInputArr.indexOf(el) === -1) {
+      
+      // let tagRegex = new RegExp(`\s${el},`);
+      let tagRegex = new RegExp(`\\b${el}\\b`);
+
+      if (!tagRegex.test(tagsInputStr)) {
         newVisibleTags.push(el);
       }
+      
+      // if (tagsInputArr.indexOf(el) === -1) {
+      //   newVisibleTags.push(el);
+      // }
+
     });
+
 
     setVisibleTags([...newVisibleTags]);
 
