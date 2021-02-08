@@ -10,6 +10,8 @@ import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
+import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
+
 interface SingleLinkData {
   title: string;
   URL: string;
@@ -24,6 +26,8 @@ interface Props {
 function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+
+  let bookmarkFolders = bookmarksData.filter((obj) => obj.type === "folder");
 
   const [titleInput, setTitleInput] = useState<string>(
     editSingleLinkData.title
@@ -109,7 +113,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
   function makeInitialTags(): string[] {
     let tags: string[] = [];
 
-    bookmarksData.forEach((obj) => {
+    bookmarkFolders.forEach((obj) => {
       tags.push(obj.title);
     });
 
@@ -195,6 +199,14 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
         </div>
       </div>
 
+      {tagsListVis ? (
+          <TagsList_UpperUI
+            setTagsInputStr={setTagsInputStr}
+            tagsInputStr={tagsInputStr}
+            visibleTags={visibleTags}
+          />
+        ) : null}
+
       {titleFormatErrorVis ? (
         <p className={`text-red-600`}>
           Link title can contain letters, numbers or underscore
@@ -221,7 +233,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
         <p className={`text-red-600`}>Each tag should be unique</p>
       ) : null}
 
-      <div className="flex justify-start mt-3">
+      <div className="flex justify-start mt-6">
         <p className="w-8"></p>
         <div className="w-full pl-4 flex justify-center">
           <button
