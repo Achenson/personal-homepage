@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { produce } from "immer";
 
 import { linksDataState } from "../state/bookmarksAndLinks";
@@ -7,6 +7,8 @@ import { bookmarksDataState } from "../state/bookmarksAndLinks";
 
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
+import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
+import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
 interface SingleLinkData {
   title: string;
@@ -27,10 +29,25 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
     editSingleLinkData.title
   );
 
+  
+  
   const [urlInput, setUrlInput] = useState<string>(editSingleLinkData.URL);
-  const [tagsInput, setTagsInput] = useState<string[]>([
-    ...editSingleLinkData.tags,
-  ]);
+
+  const [tagsInputStr, setTagsInputStr] = useState<string>(editSingleLinkData.tags.join(", "));
+
+  // const [tagsInput, setTagsInput] = useState<string[]>([
+  //   ...editSingleLinkData.tags,
+  // ]);
+
+
+  const [tagsListVis, setTagsListVis] = useState<boolean>(false);
+
+  const [visibleTags, setVisibleTags] = useState<string[]>(makeInitialTags());
+
+  const [initialTags, setInitialTags] = useState(makeInitialTags());
+
+  // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
+  const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
   let linkIndex: number;
 
@@ -55,6 +72,37 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
   ] = useState<boolean>(false);
   const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
 
+
+  useEffect(() => {
+
+    let newVisibleTags: string[] = [];
+
+    initialTags.forEach((el) => {
+      
+      // in new RegExp the \ needs to be escaped!
+      let tagRegex = new RegExp(`\\b${el}\\b`);
+
+      if (!tagRegex.test(tagsInputStr)) {
+        newVisibleTags.push(el);
+      }
+
+    });
+
+    setVisibleTags([...newVisibleTags]);
+
+    if(newVisibleTags.length === 0) {
+      setTagsListVis(false);
+    }
+
+    if(newVisibleTags.length > 0 && !isThisTheFirstRender) {
+      setTagsListVis(true);
+    }
+
+    setIsThisTheFirstRender(false);
+  
+  }, [tagsInputStr, initialTags, setVisibleTags, setTagsListVis]);
+
+
   let notesTitlesArr: string[] = [];
 
   bookmarksData.forEach((obj) => {
@@ -62,6 +110,17 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
       notesTitlesArr.push(obj.title);
     }
   });
+
+
+  function makeInitialTags(): string[] {
+    let tags: string[] = [];
+
+    bookmarksData.forEach((obj) => {
+      tags.push(obj.title);
+    });
+
+    return tags;
+  }
 
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
@@ -94,8 +153,27 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
             <input
               type="text"
               className="w-full border"
-              value={tagsInput.join(", ")}
-              onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
+              value={tagsInputStr}
+              onChange={(e) => {
+                let target = e.target.value;
+
+                setTagsInputStr(target);
+
+              let tagsInputArr = target.split(", ");
+
+              let newVisibleTags: string[] = [];
+
+
+              visibleTags.forEach((el) => {
+                if (tagsInputArr.indexOf(el) === -1) {
+                  newVisibleTags.push(el);
+                }
+              });
+
+              setVisibleTags([...newVisibleTags]);
+
+              }
+              }
             />
           </div>
         </div>
@@ -112,7 +190,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
 
         {tagErrorVis ? (
           <p className={`text-red-600`}>
-            Tags should consist of words separated by coma and space
+            Tags should consist of words separated by coma and single space
           </p>
         ) : null}
 
@@ -139,6 +217,8 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                 setTitleUniquenessErrorVis(false);
                 setNoteErrorVis(false);
 
+                let tagsInputArr = tagsInputStr.split(", ");
+
                 if (!regexForTitle.test(titleInput)) {
                   setTitleFormatErrorVis(true);
                   return;
@@ -153,12 +233,12 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                   return;
                 }
 
-                if (!regexForTags.test(tagsInput.join(", "))) {
+                if (!regexForTags.test(tagsInputArr.join(", "))) {
                   setTagErrorVis(true);
                   return;
                 }
 
-                for (let el of tagsInput) {
+                for (let el of tagsInputArr) {
                   if (notesTitlesArr.indexOf(el) > -1) {
                     setNoteErrorVis(true);
                     return;
@@ -174,7 +254,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                   produce(previous, (updated) => {
                     updated[linkIndex].title = titleInput;
                     updated[linkIndex].URL = urlInput;
-                    updated[linkIndex].tags = [...tagsInput];
+                    updated[linkIndex].tags = [...tagsInputArr];
                   })
                 );
 
@@ -183,8 +263,8 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                 function tagUniquenessCheck() {
                   let isUnique: boolean = true;
 
-                  tagsInput.forEach((el, i) => {
-                    let tagsInputCopy = [...tagsInput];
+                  tagsInputArr.forEach((el, i) => {
+                    let tagsInputCopy = [...tagsInputArr];
                     tagsInputCopy.splice(i, 1);
 
                     if (tagsInputCopy.indexOf(el) > -1) {

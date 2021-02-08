@@ -221,7 +221,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 144. NOTE Regex: word boundary & the need to escape different character in new RegEx! ( / vs \)
 145. closing tags when tags are empty is not needed? as Save & cancel are visible anyway
 146. tag regex works also if there is more than one space: to change or not?
-
+147. unify EditLink and NewLink
 
 
 
