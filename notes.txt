@@ -211,6 +211,14 @@ DONE 125: Bug: EyeOff DONE
 136. css method to get rid of input numbers' arrows
 137. input's left padding
 138. new bookmark: not entering any tag should be optional
+139. make a note about fixed too many renders in newLink_UpperUI ! initialTags could have not been a var in component:\
+in that case the value would be calc on each render which would cause useEffect to crash the app (too many renders)
+instead: initialTags in useState. Or could have been outside funcion component(global scope)
+140. make notes about useState, useEffect life cycle
+
+
+
+
 
 App structure:
 Main

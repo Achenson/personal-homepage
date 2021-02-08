@@ -48,6 +48,8 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
 
   const [visibleTags, setVisibleTags] = useState<string[]>(makeInitialTags());
 
+  const [initialTags, setInitialTags] = useState(makeInitialTags());
+
   let notesTitlesArr: string[] = [];
 
   bookmarksData.forEach((obj) => {
@@ -60,25 +62,21 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
   let regexForTags = /^\w+(,\s\w+)*$/;
   let regexForTitle = /^\w+$/;
 
-  const [tagsInputArr, setTagsInputArr] = useState<string[]>([])
+  const [tagsInputArr, setTagsInputArr] = useState<string[]>([]);
 
   useEffect(() => {
-
     let tagsInputArr = tagsInputStr.split(", ");
 
-    // setTagsInputArr(tagsInputStr.split(" ,"))
-
-    // let newVisibleTags = [...visibleTags];
     let newVisibleTags: string[] = [];
 
-    visibleTags.forEach((el) => {
+    initialTags.forEach((el) => {
       if (tagsInputArr.indexOf(el) === -1) {
         newVisibleTags.push(el);
       }
     });
 
     setVisibleTags([...newVisibleTags]);
-  }, [tagsInputStr, visibleTags, setVisibleTags]);
+  }, [tagsInputStr, initialTags, setVisibleTags]);
 
   function makeInitialTags(): string[] {
     let tags: string[] = [];
@@ -134,9 +132,26 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
             value={tagsInputStr}
             placeholder={"[tag1], [tag2]..."}
             onChange={(e) => {
-              setTagsInputStr(e.target.value)
+              let target = e.target.value;
+
+              setTagsInputStr(target);
+
+              let tagsInputArr = target.split(", ");
+
+              // setTagsInputArr(tagsInputStr.split(" ,"))
+
+              // let newVisibleTags = [...visibleTags];
+              let newVisibleTags: string[] = [];
+
+              visibleTags.forEach((el) => {
+                if (tagsInputArr.indexOf(el) === -1) {
+                  newVisibleTags.push(el);
+                }
+              });
+
+              setVisibleTags([...newVisibleTags]);
             }}
-              
+
             // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
           />
           {chevronDown ? (

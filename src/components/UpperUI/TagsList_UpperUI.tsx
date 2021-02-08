@@ -23,7 +23,7 @@ function TagsList_UpperUI({
       {visibleTags.length === 0 ? (
         <p className="invisible">[empty]</p>
       ) : (
-        visibleTags.map((el) => {
+        visibleTags.map((el, i) => {
           return (
             <p
               className="cursor-pointer hover:bg-blueGray-200 pl-px"
@@ -36,6 +36,7 @@ function TagsList_UpperUI({
 
                 setTagsInputStr(tagsInputStr.concat(", " + el));
               }}
+              key={i}
             >
               {el}
             </p>
