@@ -5,6 +5,10 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
+import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
+import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
+
+
 import {
   createBookmarkFolder,
   createNote,
@@ -54,11 +58,16 @@ function NewBookmark_UpperUI({
   // for notes
   const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
 
+  const [tagsListVis, setTagsListVis] = useState<boolean>(false);
+
+
   // ^  and $ -> beginning and end of the text!
   let regexForBookmarks = /^\w+(,\s\w+)*$/;
   let regexForTitle = /^\w+$/;
 
   const [textAreaValue, setTextAreaValue] = useState<string | null>("");
+
+  const [chevronDown, setChevronDown] = useState(true);
 
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable
@@ -67,13 +76,13 @@ function NewBookmark_UpperUI({
       style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
     >
       <div
-        className="bg-gray-200 pb-3 pt-6 border-2 border-teal-500 rounded-sm md:mb-48"
+        className="bg-gray-200 pb-3 pt-6 pl-2 pr-1 border-2 border-teal-500 rounded-sm md:mb-48"
         style={{ width: "350px" }}
       >
-        <form action="" className="pl-2 pr-4">
+        
           <div className="flex justify-around mb-2 mt-2">
             <p className="w-32">Title</p>
-            <div className="w-full pl-2">
+            {/* <div className="w-full pl-2"> */}
               <input
                 type="text"
                 className="w-full border border-gray-500"
@@ -90,11 +99,13 @@ function NewBookmark_UpperUI({
                 }
                 onChange={(e) => setBookmarkTitleInput(e.target.value)}
               />
-            </div>
+            {/* </div> */}
+            <ChevronDownSVG className="h-6 invisible" />
+
           </div>
           <div className="flex justify-around mb-2 mt-2">
             <p className="w-32">Column</p>
-            <div className="w-full pl-2">
+            {/* <div className="w-full pl-2"> */}
               <input
                 type="number"
                 min="1"
@@ -106,13 +117,14 @@ function NewBookmark_UpperUI({
                 }
                 placeholder={"Enter number between 1 and 4"}
               />
-            </div>
+            {/* </div> */}
+            <ChevronDownSVG className="h-6 invisible" />
           </div>
 
           {bookmarkType === "folder" ? (
             <div className="flex justify-around mb-2 mt-2">
               <p className="w-32">Bookmarks</p>
-              <div className="w-full pl-2">
+              {/* <div className="w-full pl-2"> */}
                 <input
                   type="text"
                   className="w-full border border-gray-500"
@@ -122,7 +134,25 @@ function NewBookmark_UpperUI({
                   }
                   placeholder={"Choose at least one"}
                 />
-              </div>
+              {/* </div> */}
+              {chevronDown ? (
+            <ChevronDownSVG
+              className="h-6 cursor-pointer hover:text-blueGray-500"
+              onClick={() => {
+                setChevronDown((b) => !b);
+                setTagsListVis((b) => !b);
+              }}
+            />
+          ) : (
+            <ChevronUpSVG
+              className="h-6 cursor-pointer hover:text-blueGray-500"
+              onClick={() => {
+                setChevronDown((b) => !b);
+                setTagsListVis((b) => !b);
+              }}
+            />
+          )}
+
             </div>
           ) : null}
 
@@ -186,7 +216,7 @@ function NewBookmark_UpperUI({
             <p className={`text-red-600`}>Note cannot be empty</p>
           ) : null}
 
-          <div className="flex justify-start mt-3">
+          <div className="flex justify-start mt-6">
             <p className="w-8"></p>
             {/* !!! pl-4 in NewLink */}
             <div className="w-full flex justify-center">
@@ -243,41 +273,28 @@ function NewBookmark_UpperUI({
                   if (bookmarkType === "note") {
                     setBookmarksData((previous) =>
                       produce(previous, (updated) => {
-
-                        
                         updated.push({
-                          ...createNote(bookmarkTitleInput, bookmarkColumnInput, 0, textAreaValue)
-                        }
-                        //   {
-                        //   id: uuidv4(),
-                        //   title: bookmarkTitleInput,
-                        //   column: bookmarkColumnInput,
-                        //   color: null,
-                        //   priority: 0,
-                        //   type: "note",
-                        //   noteInput: textAreaValue,
-                        //   // rssLink: null
-                        // }
-                        
-                        )
-
+                          ...createNote(
+                            bookmarkTitleInput,
+                            bookmarkColumnInput,
+                            0,
+                            textAreaValue
+                          ),
+                        });
                       })
-                    )
+                    );
                   }
 
                   if (bookmarkType === "folder") {
                     setBookmarksData((previous) =>
                       produce(previous, (updated) => {
-                        updated.push(
-                    
-                          {
-                            ...createBookmarkFolder(
-                              bookmarkTitleInput,
-                              bookmarkColumnInput,
-                              0
-                            ),
-                          }
-                        );
+                        updated.push({
+                          ...createBookmarkFolder(
+                            bookmarkTitleInput,
+                            bookmarkColumnInput,
+                            0
+                          ),
+                        });
                       })
                     );
 
@@ -299,29 +316,18 @@ function NewBookmark_UpperUI({
                   if (bookmarkType === "rss") {
                     setBookmarksData((previous) =>
                       produce(previous, (updated) => {
-                        updated.push(
-                    
-                          {
-                            // ...createBookmarkFolder(
-                            //   bookmarkTitleInput,
-                            //   bookmarkColumnInput,
-                            //   0
-                            // ),
-
-                            ...createRSS(
-                              bookmarkTitleInput,
-                              bookmarkColumnInput,
-                              0,
-                              rssLinkInput
-                            ),
-
-
-                          }
-                        );
+                        updated.push({
+                   
+                          ...createRSS(
+                            bookmarkTitleInput,
+                            bookmarkColumnInput,
+                            0,
+                            rssLinkInput
+                          ),
+                        });
                       })
                     );
-                    }
-
+                  }
 
                   setNewBookmarkVis((b) => !b);
 
@@ -382,7 +388,7 @@ function NewBookmark_UpperUI({
               </button>
             </div>
           </div>
-        </form>
+        
       </div>
     </div>
   );

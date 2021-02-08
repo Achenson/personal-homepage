@@ -224,8 +224,10 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 147. unify EditLink and NewLink
 148. EditLink paddings
 149. make EyeOff hide also edits
-
-
+150. Folders: only 1 edit should be opened at the same time
+151. In Folder Edit: it should be possible to choose existing bookmarks similar to new Bookmark
+152. move TagsList from UpperUI
+153. globalSetting - change number of columns to sth else
 
 App structure:
 Main
