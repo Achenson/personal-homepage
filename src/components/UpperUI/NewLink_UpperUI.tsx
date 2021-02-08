@@ -50,6 +50,9 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
 
   const [initialTags, setInitialTags] = useState(makeInitialTags());
 
+  // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
+  const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
+
   let notesTitlesArr: string[] = [];
 
   bookmarksData.forEach((obj) => {
@@ -85,9 +88,11 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
       setTagsListVis(false);
     }
 
-    if(newVisibleTags.length > 0) {
+    if(newVisibleTags.length > 0 && !isThisTheFirstRender) {
       setTagsListVis(true);
     }
+
+    setIsThisTheFirstRender(false);
   
   }, [tagsInputStr, initialTags, setVisibleTags, setTagsListVis]);
 
