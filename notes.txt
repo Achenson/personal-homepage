@@ -231,6 +231,11 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 154. input width problem for tags in NewLink & EditLink & newBookmark_upperUI
 155. different name for TagsList: this is also being used for Bookmarks
 156. always open lock should open folder immediately
+157. clicking on folder should close edit
+158. Links' tags are opened on first render (NewLink is OK)
+159. tags suggestions width and marginLeft should not be hardcoded
+
+
 
 App structure:
 Main

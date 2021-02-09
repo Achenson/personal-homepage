@@ -260,6 +260,8 @@ function NewBookmark_UpperUI({
             setTagsInputStr={setBookmarksInputStr}
             tagsInputStr={bookmarksInputStr}
             visibleTags={visibleBookmarks}
+            width="228px"
+            marginLeft="89px"
           />
         ) : null}
 

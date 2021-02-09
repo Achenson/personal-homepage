@@ -179,6 +179,8 @@ function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
           setTagsInputStr={setTagsInputStr}
           tagsInputStr={tagsInputStr}
           visibleTags={visibleTags}
+          width="271px"
+          marginLeft="42px"
         />
       ) : null}
 

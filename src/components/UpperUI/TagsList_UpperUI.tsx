@@ -6,19 +6,24 @@ interface Props {
   tagsInputStr: string;
   setTagsInputStr: React.Dispatch<React.SetStateAction<string>>;
   visibleTags: string[];
+  width: string;
+  marginLeft: string;
 }
 
 function TagsList_UpperUI({
   setTagsInputStr,
   tagsInputStr,
   visibleTags,
+  width,
+  marginLeft
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   return (
     <div
       className="absolute z-50 bg-white -mt-2"
-      style={{ width: "271px", marginLeft: "42px" }}
+      // style={{ width: "271px", marginLeft: "42px" }}
+      style={{ width: width, marginLeft: marginLeft }}
     >
       {visibleTags.length === 0 ? (
         <p className="invisible">[empty]</p>
