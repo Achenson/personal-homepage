@@ -228,7 +228,9 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 151. In Folder Edit: it should be possible to choose existing bookmarks similar to new Bookmark
 152. move TagsList from UpperUI
 153. globalSetting - change number of columns to sth else
-154. input width problem for tags
+154. input width problem for tags in NewLink & EditLink & newBookmark_upperUI
+155. different name for TagsList: this is also being used for Bookmarks
+156. always open lock should open folder immediately
 
 App structure:
 Main
