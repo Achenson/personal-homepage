@@ -7,6 +7,8 @@ import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
 import { ReactComponent as TrashSVG } from "../svgs/trash.svg";
 import { ReactComponent as LockClosedSVG } from "../svgs/lock-closed.svg";
 import { ReactComponent as LockOpenSVG } from "../svgs/lock-open.svg";
+import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
+import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
 import { produce } from "immer";
 
@@ -89,6 +91,34 @@ Props): JSX.Element {
   // for disabling save btn
   const [wasAnythingClicked, setWasAnythingClicked] = useState(false);
 
+  const [chevronDown, setChevronDown] = useState(true);
+
+  const [tagsListVis, setTagsListVis] = useState<boolean>(false);
+
+  
+
+  
+  let filteredLinks = linksData.filter(obj => obj.tags.indexOf(currentBookmark[0].title) > -1)
+
+  let arrOfLinksNames: string[] = [];
+
+  filteredLinks.forEach(obj => {
+    arrOfLinksNames.push(obj.title)
+  })
+
+  const [bookmarksInputStr, setBookmarksInputStr] = useState<string>(
+
+    arrOfLinksNames.join(", ")
+
+  );
+
+  const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(
+    makeInitialBookmarks()
+  );
+
+
+
+
   useEffect(() => {
     if (wasCheckboxClicked || wasFolderOpenClicked || wasItemsPerPageClicked) {
       setWasAnythingClicked(true);
@@ -111,8 +141,20 @@ Props): JSX.Element {
 
   const [folderOpen, setFolderOpen] = useState(currentBookmark[0].opened);
 
+
+  
+  function makeInitialBookmarks(): string[] {
+    let bookmarks: string[] = [];
+
+    linksData.forEach((obj) => {
+      bookmarks.push(obj.title);
+    });
+
+    return bookmarks;
+  }
+
   return (
-    <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-3">
+    <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-2">
       <div className="flex items-center mt-2 justify-between">
         <p
           className={
@@ -136,6 +178,8 @@ Props): JSX.Element {
             setWasAnythingClicked(true);
           }}
         />
+                  <ChevronDownSVG className="h-6 invisible" />
+
       </div>
       {bookmarkType === "folder" && (
         <div className="flex items-center mt-2 justify-between">
@@ -145,12 +189,51 @@ Props): JSX.Element {
             // min-w-0 !!
             // className="border w-full max-w-6xl min-w-0"
             className="border w-full min-w-0"
-            value={bookmarkTitleInput}
+            value={bookmarksInputStr}
             onChange={(e) => {
-              setBookmarkTitleInput(e.target.value);
+              // setBookmarkTitleInput(e.target.value);
               setWasAnythingClicked(true);
+
+              let target = e.target.value;
+
+              setBookmarksInputStr(target);
+
+              let bookmarksInputArr = target.split(", ");
+
+              // setTagsInputArr(tagsInputStr.split(" ,"))
+
+              // let newVisibleTags = [...visibleTags];
+              let newVisibleBookmarks: string[] = [];
+
+              visibleBookmarks.forEach((el) => {
+                if (bookmarksInputArr.indexOf(el) === -1) {
+                  newVisibleBookmarks.push(el);
+                }
+              });
+
+              setVisibleBookmarks([...newVisibleBookmarks]);
+
+
+
             }}
           />
+              {chevronDown ? (
+            <ChevronDownSVG
+              className="h-6 cursor-pointer hover:text-blueGray-500"
+              onClick={() => {
+                setChevronDown((b) => !b);
+                setTagsListVis((b) => !b);
+              }}
+            />
+          ) : (
+            <ChevronUpSVG
+              className="h-6 cursor-pointer hover:text-blueGray-500"
+              onClick={() => {
+                setChevronDown((b) => !b);
+                setTagsListVis((b) => !b);
+              }}
+            />
+          )}
         </div>
       )}
 

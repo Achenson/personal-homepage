@@ -239,6 +239,8 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 162. RSS links inputs margin problem
 163. unify css logic between diff folder type in edit bookmarks
 164. note: min-w crucial for proper display in EditBookmarkTitle!
+165. edit link input border shouldn't be black
+166. data: links should have IDs, folders should have ids of links in an array, change EdidBookmarkTile properly
 
 
 
