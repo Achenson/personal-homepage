@@ -114,22 +114,45 @@ Props): JSX.Element {
   return (
     <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-3">
       <div className="flex items-center mt-2 justify-between">
-        <p className={bookmarkType === "rss" ? "w-24" : "w-12"}>Title</p>
+        <p
+          className={
+            bookmarkType === "folder"
+              ? "mr-14"
+              : bookmarkType === "rss"
+              ? "w-24"
+              : "w-10"
+          }
+        >
+          Title
+        </p>
         <input
           type="text"
           // min-w-0 !!
           // className="border w-full max-w-6xl min-w-0"
-          className="border w-full"
+          className="border w-full min-w-0"
           value={bookmarkTitleInput}
           onChange={(e) => {
             setBookmarkTitleInput(e.target.value);
             setWasAnythingClicked(true);
           }}
         />
-        {/* <div className=""> */}
-
-        {/* </div> */}
       </div>
+      {bookmarkType === "folder" && (
+        <div className="flex items-center mt-2 justify-between">
+          <p className={`mr-2`}>Bookmarks</p>
+          <input
+            type="text"
+            // min-w-0 !!
+            // className="border w-full max-w-6xl min-w-0"
+            className="border w-full min-w-0"
+            value={bookmarkTitleInput}
+            onChange={(e) => {
+              setBookmarkTitleInput(e.target.value);
+              setWasAnythingClicked(true);
+            }}
+          />
+        </div>
+      )}
 
       {tagErrorVis ? (
         <p className={`text-red-600`}>
@@ -331,7 +354,6 @@ Props): JSX.Element {
               setBookmarksData((previous) =>
                 produce(previous, (updated) => {
                   updated[bookmarkIndex].title = bookmarkTitleInput;
-
 
                   if (wasFolderOpenClicked) {
                     updated[bookmarkIndex].opened = folderOpen;

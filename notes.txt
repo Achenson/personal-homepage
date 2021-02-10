@@ -234,6 +234,11 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 157. clicking on folder should close edit
 158. Links' tags are opened on first render (NewLink is OK)
 159. tags suggestions width and marginLeft should not be hardcoded
+160. unify paddings etc between EditBookmarkTitle & EditLink
+161. use {...params} is props somewhere if there is repetition?
+162. RSS links inputs margin problem
+163. unify css logic between diff folder type in edit bookmarks
+164. note: min-w crucial for proper display in EditBookmarkTitle!
 
 
 
