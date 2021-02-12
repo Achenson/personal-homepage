@@ -10,6 +10,8 @@ import { ReactComponent as LockOpenSVG } from "../svgs/lock-open.svg";
 import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
+import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
+
 import { produce } from "immer";
 
 import { bookmarksDataState } from "../state/bookmarksAndLinks";
@@ -93,31 +95,25 @@ Props): JSX.Element {
 
   const [chevronDown, setChevronDown] = useState(true);
 
-  const [tagsListVis, setTagsListVis] = useState<boolean>(false);
+  // const [tagsListVis, setTagsListVis] = useState<boolean>(false);
 
-  
-
-  
-  let filteredLinks = linksData.filter(obj => obj.tags.indexOf(currentBookmark[0].title) > -1)
+  let filteredLinks = linksData.filter(
+    (obj) => obj.tags.indexOf(currentBookmark[0].title) > -1
+  );
 
   let arrOfLinksNames: string[] = [];
 
-  filteredLinks.forEach(obj => {
-    arrOfLinksNames.push(obj.title)
-  })
+  filteredLinks.forEach((obj) => {
+    arrOfLinksNames.push(obj.title);
+  });
 
   const [bookmarksInputStr, setBookmarksInputStr] = useState<string>(
-
     arrOfLinksNames.join(", ")
-
   );
 
   const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(
     makeInitialBookmarks()
   );
-
-
-
 
   useEffect(() => {
     if (wasCheckboxClicked || wasFolderOpenClicked || wasItemsPerPageClicked) {
@@ -137,12 +133,59 @@ Props): JSX.Element {
   const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
   const [noDeletionErrorVis, setNoDeletionErrorVis] = useState<boolean>(false);
 
+  const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
+  const [
+    bookmarksRepeatErrorVis,
+    setBookmarksRepeatErrorVis,
+  ] = useState<boolean>(false);
+  const [
+    bookmarksExistenceErrorVis,
+    setBookmarksExistenceErrorVis,
+  ] = useState<boolean>(false);
+
   let regexForTitle = /^\w+$/;
 
   const [folderOpen, setFolderOpen] = useState(currentBookmark[0].opened);
 
+  // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
+  const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
-  
+  const [initialBookmarks, setInitialBookmarks] = useState(
+    makeInitialBookmarks()
+  );
+
+  const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
+
+  useEffect(() => {
+    let newVisibleTags: string[] = [];
+
+    initialBookmarks.forEach((el) => {
+      // in new RegExp the \ needs to be escaped!
+      let tagRegex = new RegExp(`\\b${el}\\b`);
+
+      if (!tagRegex.test(bookmarksInputStr)) {
+        newVisibleTags.push(el);
+      }
+    });
+
+    setVisibleBookmarks([...newVisibleTags]);
+
+    if (newVisibleTags.length === 0) {
+      setBookmarksListVis(false);
+    }
+
+    if (newVisibleTags.length > 0 && !isThisTheFirstRender) {
+      setBookmarksListVis(true);
+    }
+
+    setIsThisTheFirstRender(false);
+  }, [
+    bookmarksInputStr,
+    initialBookmarks,
+    setVisibleBookmarks,
+    setBookmarksListVis,
+  ]);
+
   function makeInitialBookmarks(): string[] {
     let bookmarks: string[] = [];
 
@@ -152,6 +195,9 @@ Props): JSX.Element {
 
     return bookmarks;
   }
+
+  // ^  and $ -> beginning and end of the text!
+  let regexForBookmarks = /^\w+(,\s\w+)*$/;
 
   return (
     <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-2">
@@ -178,8 +224,7 @@ Props): JSX.Element {
             setWasAnythingClicked(true);
           }}
         />
-                  <ChevronDownSVG className="h-6 invisible" />
-
+        <ChevronDownSVG className="h-6 invisible" />
       </div>
       {bookmarkType === "folder" && (
         <div className="flex items-center mt-2 justify-between">
@@ -212,17 +257,14 @@ Props): JSX.Element {
               });
 
               setVisibleBookmarks([...newVisibleBookmarks]);
-
-
-
             }}
           />
-              {chevronDown ? (
+          {chevronDown ? (
             <ChevronDownSVG
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
                 setChevronDown((b) => !b);
-                setTagsListVis((b) => !b);
+                setBookmarksListVis((b) => !b);
               }}
             />
           ) : (
@@ -230,18 +272,44 @@ Props): JSX.Element {
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
                 setChevronDown((b) => !b);
-                setTagsListVis((b) => !b);
+                setBookmarksListVis((b) => !b);
               }}
             />
           )}
         </div>
       )}
 
+      {bookmarkType === "folder" && bookmarksListVis ? (
+        <TagsList_UpperUI
+          setTagsInputStr={setBookmarksInputStr}
+          tagsInputStr={bookmarksInputStr}
+          visibleTags={visibleBookmarks}
+          width="271px"
+          marginLeft="42px"
+        />
+      ) : null}
+
       {tagErrorVis ? (
         <p className={`text-red-600`}>
           Bookmark title should consist of a single word without special
           characters
         </p>
+      ) : null}
+
+      {bookmarksErrorVis && bookmarkType === "folder" ? (
+        <p className={`text-red-600`}>
+          Bookmarks should consist of words separated by coma and space
+        </p>
+      ) : null}
+
+      {bookmarksExistenceErrorVis && bookmarkType === "folder" ? (
+        <p className={`text-red-600`}>
+          You can choose from existing bookmarks only
+        </p>
+      ) : null}
+
+      {bookmarksRepeatErrorVis && bookmarkType === "folder" ? (
+        <p className={`text-red-600`}>Each bookmark should be unique</p>
       ) : null}
 
       {textAreaErrorVis && bookmarkType === "note" ? (
@@ -411,6 +479,15 @@ Props): JSX.Element {
             onClick={(e) => {
               e.preventDefault();
 
+              setTagErrorVis(false);
+              setTextAreaErrorVis(false);
+              setNoDeletionErrorVis(false);
+              setBookmarksErrorVis(false);
+              setBookmarksRepeatErrorVis(false);
+              setBookmarksExistenceErrorVis(false);
+
+              let bookmarksInputArr = bookmarksInputStr.split(", ");
+
               if (!wasAnythingClicked) {
                 return;
               }
@@ -430,9 +507,61 @@ Props): JSX.Element {
                 }
               }
 
-              setTagErrorVis(false);
-              setTextAreaErrorVis(false);
-              setNoDeletionErrorVis(false);
+              // setTagErrorVis(false);
+              // setTextAreaErrorVis(false);
+              // setNoDeletionErrorVis(false);
+              // setBookmarksErrorVis(false);
+              //   setBookmarksRepeatErrorVis(false);
+              //   setBookmarksExistenceErrorVis(false);
+
+              if (bookmarkType === "folder") {
+                if (!regexForBookmarks.test(bookmarksInputStr)) {
+                  setBookmarksErrorVis(true);
+                  return;
+                }
+
+                if (!bookmarkExistenceCheck()) {
+                  setBookmarksExistenceErrorVis(true);
+                  return;
+                }
+
+                if (!tagUniquenessCheck()) {
+                  setBookmarksRepeatErrorVis(true);
+                  return;
+                }
+              }
+
+              function bookmarkExistenceCheck() {
+                let bookmarksArr: string[] = [];
+
+                linksData.forEach((obj) => {
+                  bookmarksArr.push(obj.title);
+                });
+
+                for (let el of bookmarksInputArr) {
+                  if (bookmarksArr.indexOf(el) === -1) {
+                    return false;
+                  }
+                }
+
+                return true;
+              }
+
+              function tagUniquenessCheck() {
+                let isUnique: boolean = true;
+
+                bookmarksInputArr.forEach((el, i) => {
+                  let tagsInputCopy = [...bookmarksInputArr];
+                  tagsInputCopy.splice(i, 1);
+
+                  if (tagsInputCopy.indexOf(el) > -1) {
+                    isUnique = false;
+                    return;
+                  }
+                });
+
+                return isUnique;
+              }
 
               setBookmarksData((previous) =>
                 produce(previous, (updated) => {
@@ -464,11 +593,12 @@ Props): JSX.Element {
               );
 
               if (bookmarkType === "folder") {
-                // deleting tag from links
+                // changing tags in links
                 setLinksData((previous) =>
                   produce(previous, (updated) => {
                     updated.forEach((obj) => {
                       let indexOfBookmarkTitle: number = obj.tags.indexOf(
+                        // folder title
                         bookmarkTitle
                       );
 
@@ -478,6 +608,15 @@ Props): JSX.Element {
                           1,
                           bookmarkTitleInput
                         );
+                      }
+
+                      let bookmarksInputArr = bookmarksInputStr.split(", ");
+
+                      //  if link title is present in folder's input for bookmarks
+                      if (bookmarksInputArr.indexOf(obj.title) > -1) {
+                        // then push bookmark title (original or changed now) to the link's tags array
+
+                        obj.tags.push(bookmarkTitleInput);
                       }
                     });
                   })

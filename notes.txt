@@ -241,6 +241,8 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 164. note: min-w crucial for proper display in EditBookmarkTitle!
 165. edit link input border shouldn't be black
 166. data: links should have IDs, folders should have ids of links in an array, change EdidBookmarkTile properly
+167. EditBookmarkTitle - not possible to save if changing links with mouse
+
 
 
 

@@ -343,6 +343,8 @@ function NewBookmark_UpperUI({
                     setBookmarksRepeatErrorVis(true);
                     return;
                   }
+
+                  
                 }
 
                 if (bookmarkType === "note") {
