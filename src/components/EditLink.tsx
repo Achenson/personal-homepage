@@ -33,6 +33,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
     editSingleLinkData.title
   );
 
+  // to put in lower component!
   const [urlInput, setUrlInput] = useState<string>(editSingleLinkData.URL);
 
   const [tagsInputStr, setTagsInputStr] = useState<string>(
@@ -281,6 +282,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
                 return;
               }
 
+              // !!! diff in EditLink 
               setLinksData((previous) =>
                 produce(previous, (updated) => {
                   updated[linkIndex].title = titleInput;

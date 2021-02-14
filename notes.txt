@@ -68,11 +68,17 @@ XXX 11. move grid logic to Main? XXX
 XXX 6. edit bookmark & bookkmarks for color -> join? XXX
 XXX 10. undo link XX
 
+DONE 3. how to properly set links !!! works on firefox DONE
+
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
-3. how to properly set links !!!
+
+
+
 5. EditLink & NewLink -> unify
+
+
 7. one function for bookmark index
 
 8. "all" bookmark should be non-deletable, non-editable?
@@ -242,7 +248,9 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 165. edit link input border shouldn't be black
 166. data: links should have IDs, folders should have ids of links in an array, change EdidBookmarkTile properly
 167. EditBookmarkTitle - not possible to save if changing links with mouse
+168. setting thumbnail on links
 
+169. NewLink x2: tags should not be the same as rss tiles (already implemented for notes)
 
 
 
