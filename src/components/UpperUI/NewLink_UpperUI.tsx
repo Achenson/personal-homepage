@@ -7,6 +7,8 @@ import {
   bookmarksDataState,
 } from "../../state/bookmarksAndLinks";
 
+import {createLink} from "../../utils/objCreators"
+
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
@@ -279,11 +281,17 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
 
                 setLinksData((previous) =>
                   produce(previous, (updated) => {
-                    updated.push({
-                      title: titleInput,
-                      URL: urlInput,
-                      tags: [...tagsInputArr],
-                    });
+                    updated.push(
+                      
+
+                      createLink(titleInput, urlInput, tagsInputArr)
+                    //   {
+                    //   title: titleInput,
+                    //   URL: urlInput,
+                    //   tags: [...tagsInputArr],
+                    // }
+                    
+                    );
                   })
                 );
 

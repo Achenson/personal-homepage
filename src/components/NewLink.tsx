@@ -5,6 +5,8 @@ import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
+import { createLink } from "../utils/objCreators";
+
 import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
 
 import { useState } from "react";
@@ -255,11 +257,15 @@ function NewLink({ setNewLinkVis, bookmarkTitle }: Props): JSX.Element {
 
               setLinksData((previous) =>
                 produce(previous, (updated) => {
-                  updated.push({
-                    title: titleInput,
-                    URL: urlInput,
-                    tags: [...tagsInput],
-                  });
+                  updated.push(
+                    //   {
+                    //   title: titleInput,
+                    //   URL: urlInput,
+                    //   tags: [...tagsInput],
+                    // }
+
+                    createLink(titleInput, urlInput, tagsInput)
+                  );
                 })
               );
 

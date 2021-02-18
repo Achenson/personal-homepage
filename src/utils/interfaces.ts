@@ -18,6 +18,7 @@ export interface SingleBookmarkData {
 
 
 export interface SingleLinkData {
+  id: number | string;
   title: string;
   URL: string;
   tags: string[]

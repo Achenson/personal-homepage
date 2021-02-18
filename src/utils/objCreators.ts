@@ -14,7 +14,7 @@ export function createBasicFolder(
     column,
     priority,
     opened,
-    deletable
+    deletable,
   };
 }
 
@@ -85,5 +85,14 @@ export function createRSS(
   return {
     ...createBasicFolder(title, column, priority),
     ...createRSS_partial(rssLink),
+  };
+}
+
+export function createLink(title: string, URL: string, tags: string[]) {
+  return {
+    id: uuidv4(),
+    title,
+    URL,
+    tags,
   };
 }

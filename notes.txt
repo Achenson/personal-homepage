@@ -72,6 +72,7 @@ XXX 10. undo link XX
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 3. how to properly set links !!!
+
 5. EditLink & NewLink -> unify
 7. one function for bookmark index
 

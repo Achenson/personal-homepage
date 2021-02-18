@@ -86,16 +86,19 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
 
 export const linksDataState = newRidgeState<SingleLinkData[]>([
   {
+    id: 1,
     title: "facebook",
     URL: "https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death",
     tags: ["all", "fun"],
   },
   {
+    id: 2,
     title: "tvn24",
     URL: "https://en.wikipedia.org/wiki/Webfoot_Technologies",
     tags: ["all", "main"],
   },
   {
+    id: 3,
     title: "gmail",
     URL: "https://en.wikipedia.org/wiki/Microsoft_Windows",
     tags: ["all", "main"],
