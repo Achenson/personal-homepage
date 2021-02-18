@@ -12,11 +12,6 @@ import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
 import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
 
-// interface SingleLinkData {
-//   title: string;
-//   URL: string;
-//   tags: string[];
-// }
 
 interface Props {
   setEditLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,21 +22,21 @@ interface Props {
 function EditLink({ setEditLinkVis, linkId }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
 
-  let currentLink = linksData.filter( obj => obj.id === linkId )
+  let currentLink = linksData.filter( obj => obj.id === linkId )[0]
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   let bookmarkFolders = bookmarksData.filter((obj) => obj.type === "folder");
 
   const [titleInput, setTitleInput] = useState<string>(
-    currentLink[0].title
+    currentLink.title
   );
 
   // to put in lower component!
-  const [urlInput, setUrlInput] = useState<string>(currentLink[0].URL);
+  const [urlInput, setUrlInput] = useState<string>(currentLink.URL);
 
   const [tagsInputStr, setTagsInputStr] = useState<string>(
-    currentLink[0].tags.join(", ")
+    currentLink.tags.join(", ")
   );
 
   // const [tagsInput, setTagsInput] = useState<string[]>([
@@ -62,7 +57,7 @@ function EditLink({ setEditLinkVis, linkId }: Props): JSX.Element {
   let linkIndex: number;
 
   linksData.forEach((obj, i) => {
-    if (obj.title === currentLink[0].title) {
+    if (obj.title === currentLink.title) {
       linkIndex = i;
     }
   });
@@ -263,7 +258,7 @@ function EditLink({ setEditLinkVis, linkId }: Props): JSX.Element {
               // !!! diff than newink
               if (
                 !titleUniquenessCheck() &&
-                titleInput !== currentLink[0].title
+                titleInput !== currentLink.title
               ) {
                 setTitleUniquenessErrorVis(true);
                 return;

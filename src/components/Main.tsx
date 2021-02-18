@@ -49,7 +49,7 @@ function Main({}: Props): JSX.Element {
           bookmarkType={bookmarkType}
         />
       ) : null}
-      {newLinkVis ? <NewLink_UpperUI setNewLinkVis={setNewLinkVis} /> : null}
+      {newLinkVis ? <NewLink_UpperUI setLinkVis={setNewLinkVis} linkComponentType={"new_upperUI"} /> : null}
       {backgroundSettingsVis ? (
         <Background_UpperUI
           setBackgroundSettingsVis={setBackgroundSettingsVis}

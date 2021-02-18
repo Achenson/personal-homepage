@@ -7,7 +7,7 @@ import {
   bookmarksDataState,
 } from "../../state/bookmarksAndLinks";
 
-import {createLink} from "../../utils/objCreators"
+import { createLink } from "../../utils/objCreators";
 
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
@@ -15,26 +15,48 @@ import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
 import TagsList_UpperUI from "./TagsList_UpperUI";
+import { SingleLinkData } from "../../utils/interfaces";
 
 interface Props {
   // !!! setLinkVis instead
-  setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  setLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setEditLinkVis?: React.Dispatch<React.SetStateAction<boolean>>;
+  linkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
+  // for "edit" type only
+  linkId?: string | number | undefined;
 }
 
-function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
+function NewLink_UpperUI({
+  setLinkVis,
+  linkComponentType,
+  linkId,
+}: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
+
+  let currentLink: SingleLinkData | undefined;
+
+  if (linkComponentType === "edit") {
+    currentLink = linksData.filter((obj) => obj.id === linkId)[0];
+  }
+
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   let bookmarkFolders = bookmarksData.filter((obj) => obj.type === "folder");
 
   // to put in lower component!!!
-  const [titleInput, setTitleInput] = useState<string>("");
+  const [titleInput, setTitleInput] = useState<string>(
+    linkComponentType === "edit" ? (currentLink as SingleLinkData).title : ""
+  );
 
   //  !!! diff in editLink
-  const [urlInput, setUrlInput] = useState<string>("");
+  const [urlInput, setUrlInput] = useState<string>(
+    linkComponentType === "edit" ? (currentLink as SingleLinkData).URL : ""
+  );
 
-   //  !!! diff in editLink
-  const [tagsInputStr, setTagsInputStr] = useState<string>("");
+  //  !!! diff in editLink
+  const [tagsInputStr, setTagsInputStr] = useState<string>(
+    linkComponentType === "edit" ? (currentLink as SingleLinkData).tags.join(", ") : ""
+  );
   // const [tagsInputArr, setTagsInputArr] = useState<string[]>([]);
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
@@ -73,38 +95,42 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
 
   // const [tagsInputArr, setTagsInputArr] = useState<string[]>([]);
 
-  useEffect(() => {
+  // for editingLink only !!!
+  let linkIndex: number;
 
+  if (linkComponentType === "edit") {
+    linksData.forEach((obj, i) => {
+      if (obj.title === (currentLink as SingleLinkData).title) {
+        linkIndex = i;
+      }
+    });
+  }
+
+
+  useEffect(() => {
     let newVisibleTags: string[] = [];
 
     initialTags.forEach((el) => {
-      
       // in new RegExp the \ needs to be escaped!
       let tagRegex = new RegExp(`\\b${el}\\b`);
 
       if (!tagRegex.test(tagsInputStr)) {
         newVisibleTags.push(el);
       }
-
     });
 
     setVisibleTags([...newVisibleTags]);
 
-    if(newVisibleTags.length === 0) {
+    if (newVisibleTags.length === 0) {
       setTagsListVis(false);
     }
 
-    if(newVisibleTags.length > 0 && !isThisTheFirstRender) {
+    if (newVisibleTags.length > 0 && !isThisTheFirstRender) {
       setTagsListVis(true);
     }
 
     setIsThisTheFirstRender(false);
-  
   }, [tagsInputStr, initialTags, setVisibleTags, setTagsListVis]);
-
-
-  
-
 
   function makeInitialTags(): string[] {
     let tags: string[] = [];
@@ -261,7 +287,21 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
                   return;
                 }
 
-                // !!! differenct in editLink
+                // !!! difference in editLink - not needed??? check !!!
+                // if ((linkComponentType = "edit")) {
+                //   if (
+                //     !titleUniquenessCheck() &&
+                //     titleInput !== currentLink.title
+                //   ) {
+                //     setTitleUniquenessErrorVis(true);
+                //     return;
+                //   }
+                // } else {
+                //   if (!titleUniquenessCheck()) {
+                //     setTitleUniquenessErrorVis(true);
+                //     return;
+                //   }
+                // }
                 if (!titleUniquenessCheck()) {
                   setTitleUniquenessErrorVis(true);
                   return;
@@ -284,24 +324,27 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
                   return;
                 }
 
-                // !!! diff in EditLink 
-                setLinksData((previous) =>
-                  produce(previous, (updated) => {
-                    updated.push(
-                      
+                // !!! diff in EditLink
 
-                      createLink(titleInput, urlInput, tagsInputArr)
-                    //   {
-                    //   title: titleInput,
-                    //   URL: urlInput,
-                    //   tags: [...tagsInputArr],
-                    // }
-                    
-                    );
-                  })
-                );
+                if (linkComponentType === "edit") {
+                  setLinksData((previous) =>
+                    produce(previous, (updated) => {
+                      updated[linkIndex].title = titleInput;
+                      updated[linkIndex].URL = urlInput;
+                      updated[linkIndex].tags = [...tagsInputArr];
+                    })
+                  );
+                } else {
+                  setLinksData((previous) =>
+                    produce(previous, (updated) => {
+                      updated.push(
+                        createLink(titleInput, urlInput, tagsInputArr)
+                      );
+                    })
+                  );
+                }
 
-                setNewLinkVis((b) => !b);
+                setLinkVis((b) => !b);
 
                 function tagUniquenessCheck() {
                   let isUnique: boolean = true;
@@ -337,7 +380,7 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setNewLinkVis((b) => !b);
+                setLinkVis((b) => !b);
               }}
             >
               <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
