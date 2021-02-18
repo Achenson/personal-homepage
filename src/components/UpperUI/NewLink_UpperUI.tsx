@@ -15,6 +15,8 @@ import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
 import TagsList_UpperUI from "./TagsList_UpperUI";
+import Link_newLink_JSX from "../Link_newLink_JSX";
+
 import { SingleLinkData } from "../../utils/interfaces";
 
 interface Props {
@@ -55,7 +57,9 @@ function NewLink_UpperUI({
 
   //  !!! diff in editLink
   const [tagsInputStr, setTagsInputStr] = useState<string>(
-    linkComponentType === "edit" ? (currentLink as SingleLinkData).tags.join(", ") : ""
+    linkComponentType === "edit"
+      ? (currentLink as SingleLinkData).tags.join(", ")
+      : ""
   );
   // const [tagsInputArr, setTagsInputArr] = useState<string[]>([]);
 
@@ -106,7 +110,6 @@ function NewLink_UpperUI({
     });
   }
 
-
   useEffect(() => {
     let newVisibleTags: string[] = [];
 
@@ -143,252 +146,255 @@ function NewLink_UpperUI({
   }
 
   return (
+    <>
+      <Link_newLink_JSX
+        titleInput={titleInput}
+        setTitleInput={setTitleInput}
+        urlInput={urlInput}
+        setUrlInput={setUrlInput}
+        tagsInputStr={tagsInputStr}
+        setTagsInputStr={setTagsInputStr}
+        visibleTags={visibleTags}
+        setVisibleTags={setVisibleTags}
+        tagsListVis={tagsListVis}
+        setTagsListVis={setTagsListVis}
+        notesTitlesArr={notesTitlesArr}
+      />
+    </>
+
     // opacity cannot be used, because children will inherit it and the text won't be readable
-    <div
-      className="flex z-50 absolute h-screen w-screen items-center justify-center"
-      style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
-    >
-      <div
-        className="bg-gray-200 pb-3 pt-6 pl-2 pr-1 border-2 border-teal-500 rounded-sm md:mb-48"
-        style={{ width: "350px" }}
-      >
-        <div className="flex justify-around mb-2 mt-2">
-          <p className="w-10">Title</p>
+    // <div
+    //   className="flex z-50 absolute h-screen w-screen items-center justify-center"
+    //   style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
+    // >
+    //   <div
+    //     className="bg-gray-200 pb-3 pt-6 pl-2 pr-1 border-2 border-teal-500 rounded-sm md:mb-48"
+    //     style={{ width: "350px" }}
+    //   >
+    //     <div className="flex justify-around mb-2 mt-2">
+    //       <p className="w-10">Title</p>
 
-          <input
-            type="text"
-            className="w-full ml-2 border border-gray-500"
-            value={titleInput}
-            placeholder={"new bookmark title"}
-            onChange={(e) => setTitleInput(e.target.value)}
-          />
-          <ChevronDownSVG className="h-6 invisible" />
-        </div>
-        <div className="flex justify-around mb-2">
-          <p className="w-10">Link</p>
+    //       <input
+    //         type="text"
+    //         className="w-full ml-2 border border-gray-500"
+    //         value={titleInput}
+    //         placeholder={"new bookmark title"}
+    //         onChange={(e) => setTitleInput(e.target.value)}
+    //       />
+    //       <ChevronDownSVG className="h-6 invisible" />
+    //     </div>
+    //     <div className="flex justify-around mb-2">
+    //       <p className="w-10">Link</p>
 
-          <input
-            type="text"
-            className="w-full ml-2 border border-gray-500"
-            value={urlInput}
-            placeholder={"enter proper URL address"}
-            onChange={(e) => setUrlInput(e.target.value)}
-          />
-          <ChevronDownSVG className="h-6 invisible" />
-        </div>
-        <div className="flex justify-start mb-2">
-          <p className="w-10">Tags</p>
+    //       <input
+    //         type="text"
+    //         className="w-full ml-2 border border-gray-500"
+    //         value={urlInput}
+    //         placeholder={"enter proper URL address"}
+    //         onChange={(e) => setUrlInput(e.target.value)}
+    //       />
+    //       <ChevronDownSVG className="h-6 invisible" />
+    //     </div>
+    //     <div className="flex justify-start mb-2">
+    //       <p className="w-10">Tags</p>
 
-          <input
-            type="text"
-            className="w-full ml-2 border border-gray-500  "
-            // value={tagsInput.join(", ")}
-            value={tagsInputStr}
-            placeholder={"[tag1], [tag2]..."}
-            onChange={(e) => {
-              let target = e.target.value;
+    //       <input
+    //         type="text"
+    //         className="w-full ml-2 border border-gray-500  "
+    //         // value={tagsInput.join(", ")}
+    //         value={tagsInputStr}
+    //         placeholder={"[tag1], [tag2]..."}
+    //         onChange={(e) => {
+    //           let target = e.target.value;
 
-              setTagsInputStr(target);
+    //           setTagsInputStr(target);
 
-              let tagsInputArr = target.split(", ");
+    //           let tagsInputArr = target.split(", ");
 
-              // setTagsInputArr(tagsInputStr.split(" ,"))
+    //           // setTagsInputArr(tagsInputStr.split(" ,"))
 
-              // let newVisibleTags = [...visibleTags];
-              let newVisibleTags: string[] = [];
+    //           // let newVisibleTags = [...visibleTags];
+    //           let newVisibleTags: string[] = [];
 
-              visibleTags.forEach((el) => {
-                if (tagsInputArr.indexOf(el) === -1) {
-                  newVisibleTags.push(el);
-                }
-              });
+    //           visibleTags.forEach((el) => {
+    //             if (tagsInputArr.indexOf(el) === -1) {
+    //               newVisibleTags.push(el);
+    //             }
+    //           });
 
-              setVisibleTags([...newVisibleTags]);
-            }}
+    //           setVisibleTags([...newVisibleTags]);
+    //         }}
 
-            // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
-          />
-          {chevronDown ? (
-            <ChevronDownSVG
-              className="h-6 cursor-pointer hover:text-blueGray-500"
-              onClick={() => {
-                setChevronDown((b) => !b);
-                setTagsListVis((b) => !b);
-              }}
-            />
-          ) : (
-            <ChevronUpSVG
-              className="h-6 cursor-pointer hover:text-blueGray-500"
-              onClick={() => {
-                setChevronDown((b) => !b);
-                setTagsListVis((b) => !b);
-              }}
-            />
-          )}
-        </div>
+    //         // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
+    //       />
+    //       {chevronDown ? (
+    //         <ChevronDownSVG
+    //           className="h-6 cursor-pointer hover:text-blueGray-500"
+    //           onClick={() => {
+    //             setChevronDown((b) => !b);
+    //             setTagsListVis((b) => !b);
+    //           }}
+    //         />
+    //       ) : (
+    //         <ChevronUpSVG
+    //           className="h-6 cursor-pointer hover:text-blueGray-500"
+    //           onClick={() => {
+    //             setChevronDown((b) => !b);
+    //             setTagsListVis((b) => !b);
+    //           }}
+    //         />
+    //       )}
+    //     </div>
 
-        {tagsListVis ? (
-          <TagsList_UpperUI
-            setTagsInputStr={setTagsInputStr}
-            tagsInputStr={tagsInputStr}
-            visibleTags={visibleTags}
-            width="271px"
-            marginLeft="42px"
-          />
-        ) : null}
+    //     {tagsListVis ? (
+    //       <TagsList_UpperUI
+    //         setTagsInputStr={setTagsInputStr}
+    //         tagsInputStr={tagsInputStr}
+    //         visibleTags={visibleTags}
+    //         width="271px"
+    //         marginLeft="42px"
+    //       />
+    //     ) : null}
 
-        {titleFormatErrorVis ? (
-          <p className={`text-red-600`}>
-            Link title can contain letters, numbers or underscore
-          </p>
-        ) : null}
+    //     {titleFormatErrorVis ? (
+    //       <p className={`text-red-600`}>
+    //         Link title can contain letters, numbers or underscore
+    //       </p>
+    //     ) : null}
 
-        {titleUniquenessErrorVis ? (
-          <p className={`text-red-600`}>Link with that title already exists</p>
-        ) : null}
+    //     {titleUniquenessErrorVis ? (
+    //       <p className={`text-red-600`}>Link with that title already exists</p>
+    //     ) : null}
 
-        {tagErrorVis ? (
-          <p className={`text-red-600`}>
-            Tags should consist of words separated by coma and single space
-          </p>
-        ) : null}
+    //     {tagErrorVis ? (
+    //       <p className={`text-red-600`}>
+    //         Tags should consist of words separated by coma and single space
+    //       </p>
+    //     ) : null}
 
-        {noteErrorVis ? (
-          <p className={`text-red-600`}>
-            Names for tags cannot be the same as Notes titles
-          </p>
-        ) : null}
+    //     {noteErrorVis ? (
+    //       <p className={`text-red-600`}>
+    //         Names for tags cannot be the same as Notes titles
+    //       </p>
+    //     ) : null}
 
-        {tagRepeatErrorVis ? (
-          <p className={`text-red-600`}>Each tag should be unique</p>
-        ) : null}
+    //     {tagRepeatErrorVis ? (
+    //       <p className={`text-red-600`}>Each tag should be unique</p>
+    //     ) : null}
 
-        <div className="flex justify-start mt-6">
-          <p className="w-8"></p>
-          {/* !!! pl-4 in NewLink */}
-          <div className="w-full flex justify-center">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
+    //     <div className="flex justify-start mt-6">
+    //       <p className="w-8"></p>
+    //       {/* !!! pl-4 in NewLink */}
+    //       <div className="w-full flex justify-center">
+    //         <button
+    //           onClick={(e) => {
+    //             e.preventDefault();
 
-                // if(tagsInput.join(", "))
+    //             // if(tagsInput.join(", "))
 
-                setTagErrorVis(false);
-                setTagRepeatErrorVis(false);
-                setTitleFormatErrorVis(false);
-                setTitleUniquenessErrorVis(false);
-                setNoteErrorVis(false);
+    //             setTagErrorVis(false);
+    //             setTagRepeatErrorVis(false);
+    //             setTitleFormatErrorVis(false);
+    //             setTitleUniquenessErrorVis(false);
+    //             setNoteErrorVis(false);
 
-                let tagsInputArr = tagsInputStr.split(", ");
+    //             let tagsInputArr = tagsInputStr.split(", ");
 
-                if (!regexForTitle.test(titleInput)) {
-                  setTitleFormatErrorVis(true);
+    //             if (!regexForTitle.test(titleInput)) {
+    //               setTitleFormatErrorVis(true);
 
-                  return;
-                }
+    //               return;
+    //             }
 
-                // !!! difference in editLink - not needed??? check !!!
-                // if ((linkComponentType = "edit")) {
-                //   if (
-                //     !titleUniquenessCheck() &&
-                //     titleInput !== currentLink.title
-                //   ) {
-                //     setTitleUniquenessErrorVis(true);
-                //     return;
-                //   }
-                // } else {
-                //   if (!titleUniquenessCheck()) {
-                //     setTitleUniquenessErrorVis(true);
-                //     return;
-                //   }
-                // }
-                if (!titleUniquenessCheck()) {
-                  setTitleUniquenessErrorVis(true);
-                  return;
-                }
+    //             // !!! difference in editLink - not needed??? check !!!
 
-                if (!regexForTags.test(tagsInputArr.join(", "))) {
-                  setTagErrorVis(true);
-                  return;
-                }
+    //             if (!titleUniquenessCheck()) {
+    //               setTitleUniquenessErrorVis(true);
+    //               return;
+    //             }
 
-                for (let el of tagsInputArr) {
-                  if (notesTitlesArr.indexOf(el) > -1) {
-                    setNoteErrorVis(true);
-                    return;
-                  }
-                }
+    //             if (!regexForTags.test(tagsInputArr.join(", "))) {
+    //               setTagErrorVis(true);
+    //               return;
+    //             }
 
-                if (!tagUniquenessCheck()) {
-                  setTagRepeatErrorVis(true);
-                  return;
-                }
+    //             for (let el of tagsInputArr) {
+    //               if (notesTitlesArr.indexOf(el) > -1) {
+    //                 setNoteErrorVis(true);
+    //                 return;
+    //               }
+    //             }
 
-                // !!! diff in EditLink
+    //             if (!tagUniquenessCheck()) {
+    //               setTagRepeatErrorVis(true);
+    //               return;
+    //             }
 
-                if (linkComponentType === "edit") {
-                  setLinksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated[linkIndex].title = titleInput;
-                      updated[linkIndex].URL = urlInput;
-                      updated[linkIndex].tags = [...tagsInputArr];
-                    })
-                  );
-                } else {
-                  setLinksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated.push(
-                        createLink(titleInput, urlInput, tagsInputArr)
-                      );
-                    })
-                  );
-                }
+    //             // !!! diff in EditLink
 
-                setLinkVis((b) => !b);
+    //             if (linkComponentType === "edit") {
+    //               setLinksData((previous) =>
+    //                 produce(previous, (updated) => {
+    //                   updated[linkIndex].title = titleInput;
+    //                   updated[linkIndex].URL = urlInput;
+    //                   updated[linkIndex].tags = [...tagsInputArr];
+    //                 })
+    //               );
+    //             } else {
+    //               setLinksData((previous) =>
+    //                 produce(previous, (updated) => {
+    //                   updated.push(
+    //                     createLink(titleInput, urlInput, tagsInputArr)
+    //                   );
+    //                 })
+    //               );
+    //             }
 
-                function tagUniquenessCheck() {
-                  let isUnique: boolean = true;
+    //             setLinkVis((b) => !b);
 
-                  tagsInputArr.forEach((el, i) => {
-                    let tagsInputCopy = [...tagsInputArr];
-                    tagsInputCopy.splice(i, 1);
+    //             function tagUniquenessCheck() {
+    //               let isUnique: boolean = true;
 
-                    if (tagsInputCopy.indexOf(el) > -1) {
-                      isUnique = false;
-                      return;
-                    }
-                  });
+    //               tagsInputArr.forEach((el, i) => {
+    //                 let tagsInputCopy = [...tagsInputArr];
+    //                 tagsInputCopy.splice(i, 1);
 
-                  return isUnique;
-                }
+    //                 if (tagsInputCopy.indexOf(el) > -1) {
+    //                   isUnique = false;
+    //                   return;
+    //                 }
+    //               });
 
-                function titleUniquenessCheck() {
-                  let isUnique: boolean = true;
+    //               return isUnique;
+    //             }
 
-                  linksData.forEach((obj, i) => {
-                    if (obj.title === titleInput) {
-                      isUnique = false;
-                    }
-                  });
+    //             function titleUniquenessCheck() {
+    //               let isUnique: boolean = true;
 
-                  return isUnique;
-                }
-              }}
-            >
-              <SaveSVG className="h-5 fill-current text-black mr-3 hover:text-green-600" />
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setLinkVis((b) => !b);
-              }}
-            >
-              <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    //               linksData.forEach((obj, i) => {
+    //                 if (obj.title === titleInput) {
+    //                   isUnique = false;
+    //                 }
+    //               });
+
+    //               return isUnique;
+    //             }
+    //           }}
+    //         >
+    //           <SaveSVG className="h-5 fill-current text-black mr-3 hover:text-green-600" />
+    //         </button>
+    //         <button
+    //           onClick={(e) => {
+    //             e.preventDefault();
+    //             setLinkVis((b) => !b);
+    //           }}
+    //         >
+    //           <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
+    //         </button>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 
