@@ -17,6 +17,7 @@ import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 import TagsList_UpperUI from "./TagsList_UpperUI";
 
 interface Props {
+  // !!! setLinkVis instead
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -26,10 +27,13 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
 
   let bookmarkFolders = bookmarksData.filter((obj) => obj.type === "folder");
 
+  // to put in lower component!!!
   const [titleInput, setTitleInput] = useState<string>("");
 
+  //  !!! diff in editLink
   const [urlInput, setUrlInput] = useState<string>("");
 
+   //  !!! diff in editLink
   const [tagsInputStr, setTagsInputStr] = useState<string>("");
   // const [tagsInputArr, setTagsInputArr] = useState<string[]>([]);
 
@@ -67,7 +71,7 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
   let regexForTags = /^\w+(,\s\w+)*$/;
   let regexForTitle = /^\w+$/;
 
-  const [tagsInputArr, setTagsInputArr] = useState<string[]>([]);
+  // const [tagsInputArr, setTagsInputArr] = useState<string[]>([]);
 
   useEffect(() => {
 
@@ -257,6 +261,7 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
                   return;
                 }
 
+                // !!! differenct in editLink
                 if (!titleUniquenessCheck()) {
                   setTitleUniquenessErrorVis(true);
                   return;
@@ -279,6 +284,7 @@ function NewLink_UpperUI({ setNewLinkVis }: Props): JSX.Element {
                   return;
                 }
 
+                // !!! diff in EditLink 
                 setLinksData((previous) =>
                   produce(previous, (updated) => {
                     updated.push(
