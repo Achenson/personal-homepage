@@ -6,22 +6,27 @@ import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
 import { ReactComponent as PhotographSVG } from "../svgs/photograph.svg";
 
-interface SingleLinkData {
-  title: string;
-  URL: string;
-  tags: string[];
-}
+import {SingleLinkData} from "../utils/interfaces"
+
+// interface SingleLinkData {
+//   id: number | string;
+//   title: string;
+//   URL: string;
+//   tags: string[];
+// }
 
 interface Props {
   setEditLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
   singleLinkData: SingleLinkData;
-  setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleLinkData>>;
+  setLinkId: React.Dispatch<React.SetStateAction<string | number | undefined>>
+  // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleLinkData>>;
 }
 
 function SingleLink({
   setEditLinkVis,
   singleLinkData,
-  setEditSingleLinkData,
+  // setEditSingleLinkData,
+  setLinkId
 }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
   // let linkURL = new URL(singleLinkData.URL)
@@ -57,11 +62,14 @@ function SingleLink({
           className="h-5 ml-1 hover:text-black cursor-pointer"
           onClick={() => {
             setEditLinkVis((b) => !b);
-            setEditSingleLinkData({
-              title: singleLinkData.title,
-              URL: singleLinkData.URL,
-              tags: [...singleLinkData.tags],
-            });
+            // setEditSingleLinkData({
+            //   title: singleLinkData.title,
+            //   URL: singleLinkData.URL,
+            //   tags: [...singleLinkData.tags],
+            // });
+
+            setLinkId(singleLinkData.id)
+
           }}
         />
         <TrashSmallSVG

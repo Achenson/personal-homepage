@@ -12,32 +12,36 @@ import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
 import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
 
-interface SingleLinkData {
-  title: string;
-  URL: string;
-  tags: string[];
-}
+// interface SingleLinkData {
+//   title: string;
+//   URL: string;
+//   tags: string[];
+// }
 
 interface Props {
   setEditLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  editSingleLinkData: SingleLinkData;
+  // editSingleLinkData: SingleLinkData;
+  linkId: string | number | undefined;
 }
 
-function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
+function EditLink({ setEditLinkVis, linkId }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
+
+  let currentLink = linksData.filter( obj => obj.id === linkId )
+
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   let bookmarkFolders = bookmarksData.filter((obj) => obj.type === "folder");
 
   const [titleInput, setTitleInput] = useState<string>(
-    editSingleLinkData.title
+    currentLink[0].title
   );
 
   // to put in lower component!
-  const [urlInput, setUrlInput] = useState<string>(editSingleLinkData.URL);
+  const [urlInput, setUrlInput] = useState<string>(currentLink[0].URL);
 
   const [tagsInputStr, setTagsInputStr] = useState<string>(
-    editSingleLinkData.tags.join(", ")
+    currentLink[0].tags.join(", ")
   );
 
   // const [tagsInput, setTagsInput] = useState<string[]>([
@@ -58,7 +62,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
   let linkIndex: number;
 
   linksData.forEach((obj, i) => {
-    if (obj.title === editSingleLinkData.title) {
+    if (obj.title === currentLink[0].title) {
       linkIndex = i;
     }
   });
@@ -259,7 +263,7 @@ function EditLink({ setEditLinkVis, editSingleLinkData }: Props): JSX.Element {
               // !!! diff than newink
               if (
                 !titleUniquenessCheck() &&
-                titleInput !== editSingleLinkData.title
+                titleInput !== currentLink[0].title
               ) {
                 setTitleUniquenessErrorVis(true);
                 return;

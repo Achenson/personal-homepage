@@ -72,11 +72,13 @@ Props): JSX.Element {
   const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
   const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
 
-  const [editSingleLinkData, setEditSingleLinkData] = useState<SingleLinkData>({
-    title: "",
-    URL: "",
-    tags: [],
-  });
+  // const [editSingleLinkData, setEditSingleLinkData] = useState<SingleLinkData>({
+  //   title: "",
+  //   URL: "",
+  //   tags: [],
+  // });
+
+  const [linkId, setLinkId] = useState<number|string>()
 
   const [crossVis, setCrossVis] = useState<boolean>(true);
 
@@ -368,7 +370,8 @@ Props): JSX.Element {
       {editLinkVis ? (
         <EditLink
           setEditLinkVis={setEditLinkVis}
-          editSingleLinkData={editSingleLinkData}
+          // editSingleLinkData={editSingleLinkData}
+          linkId={linkId}
         />
       ) : null}
 
@@ -394,7 +397,8 @@ Props): JSX.Element {
                 <SingleLink
                   setEditLinkVis={setEditLinkVis}
                   singleLinkData={el}
-                  setEditSingleLinkData={setEditSingleLinkData}
+                  // setEditSingleLinkData={setEditSingleLinkData}
+                  setLinkId={setLinkId}
                   key={i}
                 />
               );
