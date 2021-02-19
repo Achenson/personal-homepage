@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 
+import { produce } from "immer";
+
 import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
+
+import { createLink } from "../utils/objCreators";
 
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
+
+import {
+  linksDataState,
+
+} from "../state/bookmarksAndLinks";
 
 interface Props {
   titleInput: string;
@@ -18,11 +27,14 @@ interface Props {
   setVisibleTags: React.Dispatch<React.SetStateAction<string[]>>;
   tagsListVis: boolean;
   setTagsListVis: React.Dispatch<React.SetStateAction<boolean>>;
-  notesTitlesArr: string[]
+  notesTitlesArr: string[];
+  linkComponentType:  "new_upperUI" | "new_lowerUI" | "edit";
+  linkIndex: number;
+  setLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
   
 }
 
-function Link_newLink_JSX({
+function Link_upper_JSX({
   titleInput,
   setTitleInput,
   urlInput,
@@ -33,8 +45,13 @@ function Link_newLink_JSX({
   setVisibleTags,
   tagsListVis,
   setTagsListVis,
-  notesTitlesArr
+  notesTitlesArr,
+  linkComponentType,
+  linkIndex,
+  setLinkVis
 }: Props): JSX.Element {
+  const [linksData, setLinksData] = linksDataState.use();
+
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
   const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
@@ -289,4 +306,4 @@ function Link_newLink_JSX({
   );
 }
 
-export default Link_newLink_JSX;
+export default Link_upper_JSX;

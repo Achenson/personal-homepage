@@ -15,7 +15,7 @@ import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
 import TagsList_UpperUI from "./TagsList_UpperUI";
-import Link_newLink_JSX from "../Link_newLink_JSX";
+import Link_upper_JSX from "../Link_upper_JSX";
 
 import { SingleLinkData } from "../../utils/interfaces";
 
@@ -100,7 +100,8 @@ function NewLink_UpperUI({
   // const [tagsInputArr, setTagsInputArr] = useState<string[]>([]);
 
   // for editingLink only !!!
-  let linkIndex: number;
+//  shouldn't be 0, but got error otherwise
+  let linkIndex: number = 0;
 
   if (linkComponentType === "edit") {
     linksData.forEach((obj, i) => {
@@ -147,7 +148,7 @@ function NewLink_UpperUI({
 
   return (
     <>
-      <Link_newLink_JSX
+      <Link_upper_JSX
         titleInput={titleInput}
         setTitleInput={setTitleInput}
         urlInput={urlInput}
@@ -159,6 +160,9 @@ function NewLink_UpperUI({
         tagsListVis={tagsListVis}
         setTagsListVis={setTagsListVis}
         notesTitlesArr={notesTitlesArr}
+        linkComponentType={linkComponentType}
+        linkIndex={linkIndex}
+        setLinkVis={setLinkVis}
       />
     </>
 
