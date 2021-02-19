@@ -26,9 +26,6 @@ import ColorsToChoose from "./Colors/ColorsToChoose";
 
 // import EditLink from "./EditLink";
 import Link_newAndEdit from "./Link_newAndEdit";
-
-
-import NewLink from "./NewLink";
 import EditBookmarkTitle from "./EditBookmarkTitle";
 import NoteInput from "./NoteInput";
 import RSS_reactQuery from "./RSS_reactQuery";
@@ -95,7 +92,7 @@ Props): JSX.Element {
   let bookmarkColumn: number;
 
   bookmarksData.forEach((obj, i) => {
-    if (obj.title === bookmarkTitle) {
+    if (obj.id === bookmarkID) {
       bookmarkIndex = i;
       bookmarkColumn = obj.column;
     }
@@ -302,7 +299,7 @@ Props): JSX.Element {
         >
           <p className="">
             {" "}
-            {bookmarkTitle} {bookmarksData[bookmarkIndex].priority}
+            {bookmarkTitle} {bookmarksData[bookmarkIndex].priority} {bookmarksData[bookmarkIndex].deletable.toString()}
           </p>
         </div>
 

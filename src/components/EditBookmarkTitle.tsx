@@ -124,7 +124,7 @@ Props): JSX.Element {
   let bookmarkIndex: number;
 
   bookmarksData.forEach((obj, i) => {
-    if (obj.title === bookmarkTitle) {
+    if (obj.id === bookmarkID) {
       bookmarkIndex = i;
     }
   });
@@ -566,6 +566,7 @@ Props): JSX.Element {
               setBookmarksData((previous) =>
                 produce(previous, (updated) => {
                   updated[bookmarkIndex].title = bookmarkTitleInput;
+                  // updated[bookmarkIndex].deletable = currentBookmark[0].deletable
 
                   if (wasFolderOpenClicked) {
                     updated[bookmarkIndex].opened = folderOpen;

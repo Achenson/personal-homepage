@@ -68,6 +68,7 @@ DONE 71. Column -> make them stack when the screen is smaller DONE
 
 XXX 11. move grid logic to Main? XXX
 XXX 6. edit bookmark & bookkmarks for color -> join? XXX
+XXX 7. one function for bookmark indexXXX will be deleted for backend?
 XXX 10. undo link XX
 
 DONE 3. how to properly set links !!! works on firefox DONE
@@ -76,11 +77,7 @@ DONE 3. how to properly set links !!! works on firefox DONE
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-
-7. one function for bookmark index
-
 8. "all" bookmark should be non-deletable, non-editable?
-
 
 8.5 "all" should be added as a tag automatically
 9. auto-completing tags when adding links
