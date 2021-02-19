@@ -13,7 +13,7 @@ import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
 import { linksDataState } from "../state/bookmarksAndLinks";
 
-import {SingleLinkData} from "../utils/interfaces"
+import { SingleLinkData } from "../utils/interfaces";
 
 interface Props {
   titleInput: string;
@@ -30,7 +30,7 @@ interface Props {
   linkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   linkIndex: number;
   setLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  currentLink: SingleLinkData | undefined
+  currentLink: SingleLinkData | undefined;
 }
 
 function Link_lower_JSX({
@@ -48,7 +48,7 @@ function Link_lower_JSX({
   linkComponentType,
   linkIndex,
   setLinkVis,
-  currentLink
+  currentLink,
 }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
 
@@ -185,7 +185,6 @@ function Link_lower_JSX({
 
         <div className="flex justify-start mt-6">
           <p className="w-8"></p>
-          {/* !!! pl-4 in NewLink */}
           <div className="w-full flex justify-center">
             <button
               onClick={(e) => {
@@ -207,28 +206,23 @@ function Link_lower_JSX({
                   return;
                 }
 
-                // !!! difference in editLink - not needed??? check !!!
+                // !!! difference in Link_upper_JSX
 
-                   if (linkComponentType === "edit") {
-                    if (
-                      !titleUniquenessCheck() &&
-                      // for editing it is permitted to have same title as before
-                      titleInput !== (currentLink as SingleLinkData).title
-                    ) {
-                      setTitleUniquenessErrorVis(true);
-                      return;
-                    }
-                  } else {
-                    if (!titleUniquenessCheck()) {
-                      setTitleUniquenessErrorVis(true);
-                      return;
-                    }
+                if (linkComponentType === "edit") {
+                  if (
+                    !titleUniquenessCheck() &&
+                    // for editing it is permitted to have same title as before
+                    titleInput !== (currentLink as SingleLinkData).title
+                  ) {
+                    setTitleUniquenessErrorVis(true);
+                    return;
                   }
-
-                // if (!titleUniquenessCheck()) {
-                //   setTitleUniquenessErrorVis(true);
-                //   return;
-                // }
+                } else {
+                  if (!titleUniquenessCheck()) {
+                    setTitleUniquenessErrorVis(true);
+                    return;
+                  }
+                }
 
                 if (!regexForTags.test(tagsInputArr.join(", "))) {
                   setTagErrorVis(true);
@@ -247,7 +241,7 @@ function Link_lower_JSX({
                   return;
                 }
 
-                // !!! diff in EditLink
+                // !!! diff in Link_upper_JSX
 
                 if (linkComponentType === "edit") {
                   setLinksData((previous) =>

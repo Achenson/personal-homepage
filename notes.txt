@@ -54,6 +54,8 @@ TO DO:
 DONE 3. bookmark move icon - hide when moving? DONE
  DONE 4. icon colors on darkBackground DONE but 1 purple & 1 pink not perfect? DONE 
 DONE 5. ColorsToChoose -> better code DONE
+DONE 5. EditLink & NewLink -> unify DONE
+
 DONE 12. components folders? DONE
 DONE 16. newLink & newLink_UpperUI -> tags not aligned DONE
 DONE 23. bg-color vs text color of folders DONE
@@ -73,10 +75,6 @@ DONE 3. how to properly set links !!! works on firefox DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
-
-
-
-5. EditLink & NewLink -> unify
 
 
 7. one function for bookmark index
@@ -251,7 +249,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 168. setting thumbnail on links
 
 169. NewLink x2: tags should not be the same as rss tiles (already implemented for notes)
-
+170. adding new link to bookmark should have this bookmark title as a tag automatically
 
 
 App structure:

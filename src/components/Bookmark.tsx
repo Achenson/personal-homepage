@@ -384,7 +384,12 @@ Props): JSX.Element {
       ) : null}
 
       {newLinkVis ? (
-        <NewLink setNewLinkVis={setNewLinkVis} bookmarkTitle={bookmarkTitle} />
+
+
+        // <NewLink setNewLinkVis={setNewLinkVis} bookmarkTitle={bookmarkTitle} />
+
+        <Link_newAndEdit setLinkVis={setNewLinkVis} linkComponentType={"new_lowerUI"}/>
+
       ) : null}
 
       {editBookmarkVis ? (

@@ -9,9 +9,7 @@ import Link_lower_JSX from "./Link_lower_JSX";
 import { SingleLinkData } from "../utils/interfaces";
 
 interface Props {
-  // !!! setLinkVis instead
   setLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  // setEditLinkVis?: React.Dispatch<React.SetStateAction<boolean>>;
   linkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   // for "edit" type only
   linkId?: string | number | undefined;
@@ -116,22 +114,22 @@ function Link_newAndEdit({
   }
 
   const linkJSX_props = {
-    titleInput: titleInput,
-    setTitleInput: setTitleInput,
-    urlInput: urlInput,
-    setUrlInput: setUrlInput,
-    tagsInputStr: tagsInputStr,
-    setTagsInputStr: setTagsInputStr,
-    visibleTags: visibleTags,
-    setVisibleTags: setVisibleTags,
-    tagsListVis: tagsListVis,
-    setTagsListVis: setTagsListVis,
-    notesTitlesArr: notesTitlesArr,
-    linkComponentType: linkComponentType,
-    linkIndex: linkIndex,
-    setLinkVis: setLinkVis,
+    titleInput,
+    setTitleInput,
+    urlInput,
+    setUrlInput,
+    tagsInputStr,
+    setTagsInputStr,
+    visibleTags,
+    setVisibleTags,
+    tagsListVis,
+    setTagsListVis,
+    notesTitlesArr,
+    linkComponentType,
+    linkIndex,
+    setLinkVis,
     // !!! for lower JSX only, change?
-    currentLink: currentLink,
+    // currentLink: currentLink,
   };
 
   return (
@@ -139,7 +137,7 @@ function Link_newAndEdit({
       {linkComponentType === "new_upperUI" ? (
         <Link_upper_JSX {...linkJSX_props} />
       ) : (
-        <Link_lower_JSX {...linkJSX_props} />
+        <Link_lower_JSX {...linkJSX_props} currentLink={currentLink} />
       )}
     </>
   );

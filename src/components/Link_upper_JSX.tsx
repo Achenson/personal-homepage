@@ -4,7 +4,7 @@ import { produce } from "immer";
 
 import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
 
-import {SingleLinkData} from "../utils/interfaces"
+import { SingleLinkData } from "../utils/interfaces";
 
 import { createLink } from "../utils/objCreators";
 
@@ -30,8 +30,7 @@ interface Props {
   linkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   linkIndex: number;
   setLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  // !!! for edit only, delete? 
-  currentLink: SingleLinkData | undefined
+  // currentLink: SingleLinkData | undefined
 }
 
 function Link_upper_JSX({
@@ -49,7 +48,6 @@ function Link_upper_JSX({
   linkComponentType,
   linkIndex,
   setLinkVis,
-  currentLink
 }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
 
@@ -193,7 +191,6 @@ function Link_upper_JSX({
 
         <div className="flex justify-start mt-6">
           <p className="w-8"></p>
-          {/* !!! pl-4 in NewLink */}
           <div className="w-full flex justify-center">
             <button
               onClick={(e) => {
@@ -215,22 +212,11 @@ function Link_upper_JSX({
                   return;
                 }
 
-                // !!! difference in editLink - not needed??? check !!!
+                // !!! difference in Link_lower_JSX for edit type
 
-                if (linkComponentType === "edit") {
-                  if (
-                    !titleUniquenessCheck() &&
-                    // for editing it is permitted to have same title as before
-                    titleInput !== (currentLink as SingleLinkData).title
-                  ) {
-                    setTitleUniquenessErrorVis(true);
-                    return;
-                  }
-                } else {
-                  if (!titleUniquenessCheck()) {
-                    setTitleUniquenessErrorVis(true);
-                    return;
-                  }
+                if (!titleUniquenessCheck()) {
+                  setTitleUniquenessErrorVis(true);
+                  return;
                 }
 
                 if (!regexForTags.test(tagsInputArr.join(", "))) {
@@ -250,26 +236,15 @@ function Link_upper_JSX({
                   return;
                 }
 
-                // !!! diff in EditLink
-                // !!! not needed ->  editLink in lower UI only
+                // !!! diff in Link_lower_JSX
 
-                if (linkComponentType === "edit") {
-                  setLinksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated[linkIndex].title = titleInput;
-                      updated[linkIndex].URL = urlInput;
-                      updated[linkIndex].tags = [...tagsInputArr];
-                    })
-                  );
-                } else {
-                  setLinksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated.push(
-                        createLink(titleInput, urlInput, tagsInputArr)
-                      );
-                    })
-                  );
-                }
+                setLinksData((previous) =>
+                  produce(previous, (updated) => {
+                    updated.push(
+                      createLink(titleInput, urlInput, tagsInputArr)
+                    );
+                  })
+                );
 
                 setLinkVis((b) => !b);
 
