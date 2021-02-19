@@ -4,8 +4,6 @@ import { produce } from "immer";
 
 import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
 
-import {SingleLinkData} from "../utils/interfaces"
-
 import { createLink } from "../utils/objCreators";
 
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
@@ -14,6 +12,8 @@ import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
 import { linksDataState } from "../state/bookmarksAndLinks";
+
+import {SingleLinkData} from "../utils/interfaces"
 
 interface Props {
   titleInput: string;
@@ -30,11 +30,10 @@ interface Props {
   linkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   linkIndex: number;
   setLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  // !!! for edit only, delete? 
   currentLink: SingleLinkData | undefined
 }
 
-function Link_upper_JSX({
+function Link_lower_JSX({
   titleInput,
   setTitleInput,
   urlInput,
@@ -71,15 +70,8 @@ function Link_upper_JSX({
   let regexForTitle = /^\w+$/;
 
   return (
-    // opacity cannot be used, because children will inherit it and the text won't be readable
-    <div
-      className="flex z-50 absolute h-screen w-screen items-center justify-center"
-      style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
-    >
-      <div
-        className="bg-gray-200 pb-3 pt-6 pl-2 pr-1 border-2 border-teal-500 rounded-sm md:mb-48"
-        style={{ width: "350px" }}
-      >
+    <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
+      <div className="mb-2 mt-2">
         <div className="flex justify-around mb-2 mt-2">
           <p className="w-10">Title</p>
 
@@ -217,21 +209,26 @@ function Link_upper_JSX({
 
                 // !!! difference in editLink - not needed??? check !!!
 
-                if (linkComponentType === "edit") {
-                  if (
-                    !titleUniquenessCheck() &&
-                    // for editing it is permitted to have same title as before
-                    titleInput !== (currentLink as SingleLinkData).title
-                  ) {
-                    setTitleUniquenessErrorVis(true);
-                    return;
+                   if (linkComponentType === "edit") {
+                    if (
+                      !titleUniquenessCheck() &&
+                      // for editing it is permitted to have same title as before
+                      titleInput !== (currentLink as SingleLinkData).title
+                    ) {
+                      setTitleUniquenessErrorVis(true);
+                      return;
+                    }
+                  } else {
+                    if (!titleUniquenessCheck()) {
+                      setTitleUniquenessErrorVis(true);
+                      return;
+                    }
                   }
-                } else {
-                  if (!titleUniquenessCheck()) {
-                    setTitleUniquenessErrorVis(true);
-                    return;
-                  }
-                }
+
+                // if (!titleUniquenessCheck()) {
+                //   setTitleUniquenessErrorVis(true);
+                //   return;
+                // }
 
                 if (!regexForTags.test(tagsInputArr.join(", "))) {
                   setTagErrorVis(true);
@@ -251,7 +248,6 @@ function Link_upper_JSX({
                 }
 
                 // !!! diff in EditLink
-                // !!! not needed ->  editLink in lower UI only
 
                 if (linkComponentType === "edit") {
                   setLinksData((previous) =>
@@ -319,4 +315,4 @@ function Link_upper_JSX({
   );
 }
 
-export default Link_upper_JSX;
+export default Link_lower_JSX;

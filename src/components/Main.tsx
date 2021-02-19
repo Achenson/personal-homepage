@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Grid from "./Grid";
-import NewLink_UpperUI from "./UpperUI/NewLink_UpperUI";
+import NewLink_UpperUI from "./Link_newAndEdit";
 import NewBookmark_UpperUI from "./UpperUI/NewBookmark_UpperUI";
 import Colors_UpperUI from "./UpperUI/Colors_UpperUI";
 import UpperUI from "./UpperUI/UpperUI";

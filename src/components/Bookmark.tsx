@@ -23,7 +23,11 @@ import { ReactComponent as CrossArrowsSVG } from "../svgs/cross-arrows.svg";
 import { ReactComponent as PlusSVG } from "../svgs/plus.svg";
 import SingleLink from "./SingleLink";
 import ColorsToChoose from "./Colors/ColorsToChoose";
-import EditLink from "./EditLink";
+
+// import EditLink from "./EditLink";
+import Link_newAndEdit from "./Link_newAndEdit";
+
+
 import NewLink from "./NewLink";
 import EditBookmarkTitle from "./EditBookmarkTitle";
 import NoteInput from "./NoteInput";
@@ -368,11 +372,15 @@ Props): JSX.Element {
       ) : null}
 
       {editLinkVis ? (
-        <EditLink
-          setEditLinkVis={setEditLinkVis}
-          // editSingleLinkData={editSingleLinkData}
-          linkId={linkId}
-        />
+
+        // <EditLink
+        //   setEditLinkVis={setEditLinkVis}
+        //   // editSingleLinkData={editSingleLinkData}
+        //   linkId={linkId}
+        // />
+
+        <Link_newAndEdit setLinkVis={setEditLinkVis} linkComponentType={"edit"} linkId={linkId}/>
+
       ) : null}
 
       {newLinkVis ? (
