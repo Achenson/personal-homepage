@@ -68,7 +68,7 @@ function Grid({}: Props): JSX.Element {
   }, [resetColorsData, setBookmarksData, setResetColorsData]);
 
   useEffect(() => {
-    let linksDataTags: string[] = [];
+    let linksDataTags: (string | number)[] = [];
     let bookmarksDataTitles: string[] = [];
 
     linksData.forEach((obj) => {
@@ -83,9 +83,18 @@ function Grid({}: Props): JSX.Element {
       bookmarksDataTitles.push(obj.title);
     });
 
+    let linksDataTagsTitles: string[] = [];
+
+
+    linksDataTags.forEach((id) => {
+      let filteredBookmark = bookmarksData.filter((obj) => obj.id === id)[0];
+      linksDataTagsTitles.push(filteredBookmark.title);
+    });
+
     // adding a bookmark(folder) if previously non-existing tag was added to a link / if new bookmark is being added
-    linksDataTags.forEach((el) => {
+    linksDataTagsTitles.forEach((el) => {
       // no adding bookmark if it was just set up for deletion
+
       if (bookmarksDataTitles.indexOf(el) === -1 && deletedBookmark !== el) {
         setBookmarksData((previous) =>
           produce(previous, (updated) => {
@@ -99,7 +108,7 @@ function Grid({}: Props): JSX.Element {
 
     // deleting a bookmark if there is no tags with the same name in links
     bookmarksData.forEach((obj, i) => {
-      if (linksDataTags.indexOf(obj.title) === -1 && obj.type === "folder") {
+      if (linksDataTags.indexOf(obj.id) === -1 && obj.type === "folder") {
         setBookmarksData((previous) =>
           produce(previous, (updated) => {
             updated.splice(i, 1);
@@ -107,11 +116,10 @@ function Grid({}: Props): JSX.Element {
         );
       }
     });
+
   }, [bookmarksData, setBookmarksData, linksData, deletedBookmark]);
 
-  
-
-  function renderColumns(numberOfCols: 1 | 2 | 3 |4) {
+  function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
     switch (numberOfCols) {
       case 1:
         return <Column colNumber={1} closeAllFolders={closeAllFoldersData} />;
@@ -142,25 +150,24 @@ function Grid({}: Props): JSX.Element {
     }
   }
 
-
-  function gridSettings(numberOfCols: 1 | 2 | 3 |4) {
-
+  function gridSettings(numberOfCols: 1 | 2 | 3 | 4) {
     switch (numberOfCols) {
       case 1:
-        return ``
+        return ``;
       case 2:
-        return `sm:grid-cols-2`
+        return `sm:grid-cols-2`;
       case 3:
-        return `sm:grid-cols-2 md:grid-cols-3`
+        return `sm:grid-cols-2 md:grid-cols-3`;
       case 4:
-        return `sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`
+        return `sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`;
     }
-
   }
 
   return (
     <div
-      className={`grid gap-x-2 gap-y-6 mx-4 ${gridSettings(globalSettingsData.numberOfCols)}`}
+      className={`grid gap-x-2 gap-y-6 mx-4 ${gridSettings(
+        globalSettingsData.numberOfCols
+      )}`}
       // className={`grid gap-x-2 gap-y-6 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`}
       ref={target}
     >

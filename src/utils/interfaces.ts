@@ -21,7 +21,7 @@ export interface SingleLinkData {
   id: number | string;
   title: string;
   URL: string;
-  tags: string[]
+  tags: (string |number)[]
 }
 
 export interface GlobalSettingsState {
