@@ -97,8 +97,9 @@ Props): JSX.Element {
 
   // const [tagsListVis, setTagsListVis] = useState<boolean>(false);
 
+  // filtered lknks
   let filteredLinks = linksData.filter(
-    (obj) => obj.tags.indexOf(currentBookmark[0].title) > -1
+    (obj) => obj.tags.indexOf(currentBookmark[0].id) > -1
   );
 
   let arrOfLinksNames: string[] = [];
@@ -444,7 +445,7 @@ Props): JSX.Element {
                   return;
                 }
 
-                setDeletedBookmark(bookmarkTitle);
+                setDeletedBookmark(bookmarkID);
 
                 setBookmarksData((previous) =>
                   produce(previous, (updated) => {

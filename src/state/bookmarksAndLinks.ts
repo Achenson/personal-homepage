@@ -108,7 +108,7 @@ export const linksDataState = newRidgeState<SingleLinkData[]>([
   },
 ]);
 
-export const deletedBookmarkState = newRidgeState<string | null>(null)
+export const deletedBookmarkState = newRidgeState<string | number>("")
 
 
 

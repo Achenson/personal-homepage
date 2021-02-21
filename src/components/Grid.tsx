@@ -69,7 +69,7 @@ function Grid({}: Props): JSX.Element {
 
   useEffect(() => {
     let linksDataTags: (string | number)[] = [];
-    let bookmarksDataTitles: string[] = [];
+    let bookmarksDataIds: (string | number)[] = [];
 
     linksData.forEach((obj) => {
       obj.tags.forEach((el) => {
@@ -80,26 +80,25 @@ function Grid({}: Props): JSX.Element {
     });
 
     bookmarksData.forEach((obj) => {
-      bookmarksDataTitles.push(obj.title);
+      bookmarksDataIds.push(obj.id);
     });
 
-    let linksDataTagsTitles: string[] = [];
-
+    let linksDataTagsIds: (string | number)[] = [];
 
     linksDataTags.forEach((id) => {
       let filteredBookmark = bookmarksData.filter((obj) => obj.id === id)[0];
-      linksDataTagsTitles.push(filteredBookmark.title);
+      linksDataTagsIds.push(filteredBookmark.id);
     });
 
     // adding a bookmark(folder) if previously non-existing tag was added to a link / if new bookmark is being added
-    linksDataTagsTitles.forEach((el) => {
+    linksDataTagsIds.forEach((el) => {
       // no adding bookmark if it was just set up for deletion
 
-      if (bookmarksDataTitles.indexOf(el) === -1 && deletedBookmark !== el) {
+      if (bookmarksDataIds.indexOf(el) === -1 && deletedBookmark !== el) {
         setBookmarksData((previous) =>
           produce(previous, (updated) => {
             updated.push({
-              ...createBookmarkFolder(el, 1, 0),
+              ...createBookmarkFolder(bookmarksData.filter(obj => obj.id === el)[0].title, 1, 0),
             });
           })
         );
@@ -107,6 +106,7 @@ function Grid({}: Props): JSX.Element {
     });
 
     // deleting a bookmark if there is no tags with the same name in links
+
     bookmarksData.forEach((obj, i) => {
       if (linksDataTags.indexOf(obj.id) === -1 && obj.type === "folder") {
         setBookmarksData((previous) =>
@@ -117,6 +117,7 @@ function Grid({}: Props): JSX.Element {
       }
     });
 
+    
   }, [bookmarksData, setBookmarksData, linksData, deletedBookmark]);
 
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {

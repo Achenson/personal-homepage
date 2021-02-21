@@ -34,7 +34,7 @@ function SingleLink({
   let bookmarkIndex: number;
 
   linksData.forEach((obj, i) => {
-    if (obj.title === singleLinkData.title) {
+    if (obj.id === singleLinkData.id) {
       bookmarkIndex = i;
     }
   });
