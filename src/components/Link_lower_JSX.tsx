@@ -259,6 +259,7 @@ function Link_lower_JSX({
                     let newBookmark = createBookmarkFolder(el, 1, 0);
                     tagsInputArr_ToIds.push(newBookmark.id);
 
+                    // adding new folder in there was no folder with title as a tag befere
                     setBookmarksData((previous) =>
                       produce(previous, (updated) => {
                         updated.push(newBookmark);
@@ -278,6 +279,8 @@ function Link_lower_JSX({
                       updated[linkIndex].tags = [...tagsInputArr_ToIds];
                     })
                   );
+
+
                 } else {
                   setLinksData((previous) =>
                     produce(previous, (updated) => {
