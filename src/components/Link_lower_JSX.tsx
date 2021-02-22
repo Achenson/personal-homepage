@@ -11,6 +11,8 @@ import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
+import { bookmarksDataState } from "../state/bookmarksAndLinks";
+
 import { linksDataState } from "../state/bookmarksAndLinks";
 
 import { SingleLinkData } from "../utils/interfaces";
@@ -51,6 +53,8 @@ function Link_lower_JSX({
   currentLink,
 }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
+
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
@@ -244,11 +248,22 @@ function Link_lower_JSX({
                 // !!! diff in Link_upper_JSX
 
                 if (linkComponentType === "edit") {
+                  let tagsInputArr_ToIds: (string | number)[] = [];
+
+                  tagsInputArr.forEach((el) => {
+                    let filteredBookmark = bookmarksData.filter(
+                      (obj) => obj.title === el
+                    )[0];
+
+                    tagsInputArr_ToIds.push(filteredBookmark.id);
+                  });
+
                   setLinksData((previous) =>
                     produce(previous, (updated) => {
                       updated[linkIndex].title = titleInput;
                       updated[linkIndex].URL = urlInput;
-                      updated[linkIndex].tags = [...tagsInputArr];
+                      // updated[linkIndex].tags = [...tagsInputArr];
+                      updated[linkIndex].tags = [...tagsInputArr_ToIds];
                     })
                   );
                 } else {
