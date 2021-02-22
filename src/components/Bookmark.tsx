@@ -401,7 +401,7 @@ Props): JSX.Element {
       {singleLinkVisibility && bookmarkType === "folder" ? (
         <div>
           {linksData
-            .filter((el) => el.tags.indexOf(`${bookmarkTitle}`) > -1)
+            .filter((el) => el.tags.indexOf(bookmarkID) > -1)
             .map((el, i) => {
               return (
                 <SingleLink

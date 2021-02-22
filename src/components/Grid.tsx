@@ -83,27 +83,37 @@ function Grid({}: Props): JSX.Element {
       bookmarksDataIds.push(obj.id);
     });
 
-    let linksDataTagsIds: (string | number)[] = [];
 
-    linksDataTags.forEach((id) => {
-      let filteredBookmark = bookmarksData.filter((obj) => obj.id === id)[0];
-      linksDataTagsIds.push(filteredBookmark.id);
-    });
 
-    // adding a bookmark(folder) if previously non-existing tag was added to a link / if new bookmark is being added
-    linksDataTagsIds.forEach((el) => {
-      // no adding bookmark if it was just set up for deletion
 
-      if (bookmarksDataIds.indexOf(el) === -1 && deletedBookmark !== el) {
-        setBookmarksData((previous) =>
-          produce(previous, (updated) => {
-            updated.push({
-              ...createBookmarkFolder(bookmarksData.filter(obj => obj.id === el)[0].title, 1, 0),
-            });
-          })
-        );
-      }
-    });
+
+    // let linksDataTagsIds: (string | number)[] = [];
+
+    // linksDataTags.forEach((id) => {
+    //   let filteredBookmark = bookmarksData.filter((obj) => obj.id === id)[0];
+    //   linksDataTagsIds.push(filteredBookmark.id);
+    // });
+
+    // // adding a bookmark(folder) if previously non-existing tag was added to a link / if new bookmark is being added
+    // linksDataTagsIds.forEach((el) => {
+    //   // no adding bookmark if it was just set up for deletion
+
+    //   if (bookmarksDataIds.indexOf(el) === -1 && deletedBookmark !== el) {
+    //     setBookmarksData((previous) =>
+    //       produce(previous, (updated) => {
+    //         updated.push({
+    //           ...createBookmarkFolder(bookmarksData.filter(obj => obj.id === el)[0].title, 1, 0),
+    //         });
+    //       })
+    //     );
+    //   }
+    // });
+
+
+
+
+
+
 
     // deleting a bookmark if there is no tags with the same name in links
 

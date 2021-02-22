@@ -43,10 +43,23 @@ function Link_newAndEdit({
 
   //  !!! diff in editLink
   const [tagsInputStr, setTagsInputStr] = useState<string>(
-    linkComponentType === "edit"
-      ? (currentLink as SingleLinkData).tags.join(", ")
-      : ""
+    linkComponentType === "edit" ? generateTagNames() : ""
   );
+
+  //   ? (currentLink as SingleLinkData).tags.join(", ")
+
+  function generateTagNames() {
+    let arrOut: string[] = [];
+
+    bookmarksData.forEach((obj) => {
+      if ((currentLink as SingleLinkData).tags.indexOf(obj.id) > -1) {
+        arrOut.push(obj.title);
+      }
+    });
+
+    return arrOut.join(", ");
+  }
+
   // const [tagsInputArr, setTagsInputArr] = useState<string[]>([]);
 
   const [tagsListVis, setTagsListVis] = useState<boolean>(false);
