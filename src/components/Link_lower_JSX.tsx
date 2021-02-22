@@ -4,7 +4,7 @@ import { produce } from "immer";
 
 import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
 
-import { createLink } from "../utils/objCreators";
+import { createLink, createBookmarkFolder } from "../utils/objCreators";
 
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
@@ -247,17 +247,29 @@ function Link_lower_JSX({
 
                 // !!! diff in Link_upper_JSX
 
-                if (linkComponentType === "edit") {
-                  let tagsInputArr_ToIds: (string | number)[] = [];
+                let tagsInputArr_ToIds: (string | number)[] = [];
 
-                  tagsInputArr.forEach((el) => {
-                    let filteredBookmark = bookmarksData.filter(
-                      (obj) => obj.title === el
-                    )[0];
+                tagsInputArr.forEach((el) => {
+                  let filteredBookmark = bookmarksData.filter(
+                    (obj) => obj.title === el
+                  )[0];
 
+                  // if folder doesn't exist
+                  if (!filteredBookmark) {
+                    let newBookmark = createBookmarkFolder(el, 1, 0);
+                    tagsInputArr_ToIds.push(newBookmark.id);
+
+                    setBookmarksData((previous) =>
+                      produce(previous, (updated) => {
+                        updated.push(newBookmark);
+                      })
+                    );
+                  } else {
                     tagsInputArr_ToIds.push(filteredBookmark.id);
-                  });
+                  }
+                });
 
+                if (linkComponentType === "edit") {
                   setLinksData((previous) =>
                     produce(previous, (updated) => {
                       updated[linkIndex].title = titleInput;

@@ -117,15 +117,17 @@ function Grid({}: Props): JSX.Element {
 
     // deleting a bookmark if there is no tags with the same name in links
 
-    bookmarksData.forEach((obj, i) => {
-      if (linksDataTags.indexOf(obj.id) === -1 && obj.type === "folder") {
-        setBookmarksData((previous) =>
-          produce(previous, (updated) => {
-            updated.splice(i, 1);
-          })
-        );
-      }
-    });
+    // bookmarksData.forEach((obj, i) => {
+    //   if (linksDataTags.indexOf(obj.id) === -1 && obj.type === "folder") {
+    //     setBookmarksData((previous) =>
+    //       produce(previous, (updated) => {
+    //         updated.splice(i, 1);
+    //       })
+    //     );
+    //   }
+    // });
+
+
 
     
   }, [bookmarksData, setBookmarksData, linksData, deletedBookmark]);
