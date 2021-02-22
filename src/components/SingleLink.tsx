@@ -22,7 +22,8 @@ import {SingleLinkData} from "../utils/interfaces"
 interface Props {
   setEditLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
   singleLinkData: SingleLinkData;
-  setLinkId: React.Dispatch<React.SetStateAction<string | number | undefined>>
+  setLinkId: React.Dispatch<React.SetStateAction<string | number | undefined>>;
+  bookmarkID: string | number;
   // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleLinkData>>;
 }
 
@@ -30,7 +31,8 @@ function SingleLink({
   setEditLinkVis,
   singleLinkData,
   // setEditSingleLinkData,
-  setLinkId
+  setLinkId,
+  bookmarkID
 }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
   const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
@@ -88,9 +90,20 @@ function SingleLink({
           className="h-5 ml-1 hover:text-black cursor-pointer"
           onClick={() => {
 
+          
+
+
             setLinksAllTagsData((previous) =>
             produce(previous, (updated) => {
-              updated.splice(linksAllTagsData.indexOf(currentBookmarkTitle), 1);
+
+
+              updated.splice(linksAllTagsData.indexOf(bookmarkID), 1);
+
+
+
+
+
+
             })
           );
            

@@ -309,6 +309,13 @@ function Link_lower_JSX({
                     })
                   );
 
+                  // deleting empty folder
+
+
+                  let tagsIdsToDelete: (string|number)[] = [];
+
+                
+
                   initialTagsInputArr.forEach((el) => {
                     if (tagsInputArr_ToIds.indexOf(el) === -1) {
                       let filteredLinks = linksData.filter(
@@ -326,25 +333,41 @@ function Link_lower_JSX({
 
                       console.log(isElPresent);
 
-                      if (!isElPresent) {
-                        let folderIndex: number = 0;
+                      if (!isElPresent && el !== "1") {
 
-                        bookmarksData.forEach((obj, i) => {
-                          if (obj.id === el) {
-                            folderIndex = i;
-                          }
-                        });
+                        tagsIdsToDelete.push(el)
 
-                        setBookmarksData((previous) => {
-                          return produce(previous, (updated) => {
-                            updated.splice(folderIndex, 1);
-                          });
-                        });
+                        // let folderIndex: number = 0;
+
+                        // bookmarksData.forEach((obj, i) => {
+                        //   if (obj.id === el) {
+                        //     folderIndex = i;
+                        //   }
+                        // });
+
+                        // setBookmarksData((previous) => {
+                        //   return produce(previous, (updated) => {
+                        //     updated.splice(folderIndex, 1);
+                        //   });
+                        // });
+
                       }
+
+
                     }
                   });
 
-                  // setLinkVis((b) => !b);
+                  let linksAllTagsData_new: (string|number)[] = []
+
+                  linksAllTagsData.forEach(el => {
+                    if(tagsIdsToDelete.indexOf(el) === -1) {
+                      linksAllTagsData_new.push(el)
+                    }
+                  })
+
+                  setLinksAllTagsData([...linksAllTagsData_new])
+
+
                 } else {
                   setLinksData((previous) =>
                     produce(previous, (updated) => {

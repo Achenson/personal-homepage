@@ -410,6 +410,7 @@ Props): JSX.Element {
                   // setEditSingleLinkData={setEditSingleLinkData}
                   setLinkId={setLinkId}
                   key={i}
+                  bookmarkID={bookmarkID}
                 />
               );
             })}
