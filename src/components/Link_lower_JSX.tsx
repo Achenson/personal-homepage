@@ -11,9 +11,11 @@ import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
-import { bookmarksDataState } from "../state/bookmarksAndLinks";
-
-import { linksDataState } from "../state/bookmarksAndLinks";
+import {
+  bookmarksDataState,
+  linksDataState,
+  linksAllTagsState,
+} from "../state/bookmarksAndLinks";
 
 import { SingleLinkData } from "../utils/interfaces";
 
@@ -53,8 +55,29 @@ function Link_lower_JSX({
   currentLink,
 }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
+  const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+
+  const [initialTagsInputArr, setInitialTagsInputArr] = useState(() =>
+    // tagsInputStr.split(", ")
+    generateTagIds()
+  );
+
+  function generateTagIds() {
+    let arrOut: (string | number)[] = [];
+
+    tagsInputStr.split(", ").forEach((el) => {
+      // if ((currentLink as SingleLinkData).tags.indexOf(obj.id) > -1) {
+      //   arrOut.push(obj.id);
+      // }
+
+      let filteredBookmark = bookmarksData.filter((obj) => obj.title === el)[0];
+      arrOut.push(filteredBookmark.id);
+    });
+
+    return arrOut;
+  }
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
@@ -254,12 +277,18 @@ function Link_lower_JSX({
                     (obj) => obj.title === el
                   )[0];
 
-                  // if folder doesn't exist
+                  // if folder with title corresponding to tag doesn't exist
                   if (!filteredBookmark) {
                     let newBookmark = createBookmarkFolder(el, 1, 0);
                     tagsInputArr_ToIds.push(newBookmark.id);
 
                     // adding new folder in there was no folder with title as a tag befere
+
+                    let newLinksAllTagsData = [...linksAllTagsData];
+
+                    newLinksAllTagsData.push(newBookmark.id);
+
+                    setLinksAllTagsData([...newLinksAllTagsData]);
                     setBookmarksData((previous) =>
                       produce(previous, (updated) => {
                         updated.push(newBookmark);
@@ -280,7 +309,42 @@ function Link_lower_JSX({
                     })
                   );
 
+                  initialTagsInputArr.forEach((el) => {
+                    if (tagsInputArr_ToIds.indexOf(el) === -1) {
+                      let filteredLinks = linksData.filter(
+                        (obj) => obj.id !== (currentLink as SingleLinkData).id
+                      );
 
+                      let isElPresent: boolean = false;
+
+                      filteredLinks.forEach((obj) => {
+                        if (obj.tags.indexOf(el) > -1) {
+                          isElPresent = true;
+                          return;
+                        }
+                      });
+
+                      console.log(isElPresent);
+
+                      if (!isElPresent) {
+                        let folderIndex: number = 0;
+
+                        bookmarksData.forEach((obj, i) => {
+                          if (obj.id === el) {
+                            folderIndex = i;
+                          }
+                        });
+
+                        setBookmarksData((previous) => {
+                          return produce(previous, (updated) => {
+                            updated.splice(folderIndex, 1);
+                          });
+                        });
+                      }
+                    }
+                  });
+
+                  // setLinkVis((b) => !b);
                 } else {
                   setLinksData((previous) =>
                     produce(previous, (updated) => {

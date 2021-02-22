@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import { linksDataState, bookmarksDataState } from "../state/bookmarksAndLinks";
+import { linksDataState, bookmarksDataState, linksAllTagsState } from "../state/bookmarksAndLinks";
 
 import Link_upper_JSX from "./Link_upper_JSX";
 import Link_lower_JSX from "./Link_lower_JSX";
@@ -21,6 +21,7 @@ function Link_newAndEdit({
   linkId,
 }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
+  const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
 
   let currentLink: SingleLinkData | undefined;
 

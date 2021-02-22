@@ -247,6 +247,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 
 169. NewLink x2: tags should not be the same as rss tiles (already implemented for notes)
 170. adding new link to bookmark should have this bookmark title as a tag automatically
+171. log error about memory leakage eg. when editing links
 
 
 App structure:

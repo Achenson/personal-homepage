@@ -6,6 +6,10 @@ import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
 import { ReactComponent as PhotographSVG } from "../svgs/photograph.svg";
 
+import {
+  linksAllTagsState,
+} from "../state/bookmarksAndLinks";
+
 import {SingleLinkData} from "../utils/interfaces"
 
 // interface SingleLinkData {
@@ -29,15 +33,23 @@ function SingleLink({
   setLinkId
 }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
+  const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
+
+
+
   // let linkURL = new URL(singleLinkData.URL)
 
-  let bookmarkIndex: number;
+  let bookmarkIndex: number = 0;
 
   linksData.forEach((obj, i) => {
     if (obj.id === singleLinkData.id) {
       bookmarkIndex = i;
     }
   });
+
+  let currentBookmarkTitle = linksData[bookmarkIndex].title
+
+ 
 
   return (
     <div className="flex justify-between bg-gray-100 h-10 py-2 border-b">
@@ -75,6 +87,14 @@ function SingleLink({
         <TrashSmallSVG
           className="h-5 ml-1 hover:text-black cursor-pointer"
           onClick={() => {
+
+            setLinksAllTagsData((previous) =>
+            produce(previous, (updated) => {
+              updated.splice(linksAllTagsData.indexOf(currentBookmarkTitle), 1);
+            })
+          );
+           
+
             setLinksData((previous) =>
               produce(previous, (updated) => {
                 updated.splice(bookmarkIndex, 1);

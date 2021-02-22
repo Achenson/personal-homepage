@@ -6,7 +6,7 @@ import { SingleLinkData } from "../utils/interfaces";
 // this can be used everywhere in your application
 export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
   {
-    id: 1,
+    id: "1",
     title: "all",
     color: null,
     column: 1,
@@ -19,7 +19,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     // linksTitles: ["facebook", "tvn24", "gmail"],
   },
   {
-    id: 2,
+    id: "2",
     title: "main",
     color: "red-400",
     column: 1,
@@ -32,7 +32,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     // linksTitles: ["tvn24", "gmail"],
   },
   {
-    id: 3,
+    id: "3",
     title: "fun",
     color: null,
     column: 3,
@@ -45,7 +45,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     // linksTitles: ["facebook"],
   },
   {
-    id: 4,
+    id: "4",
     title: "note",
     color: null,
     column: 1,
@@ -53,12 +53,13 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     opened: false,
     deletable: true,
     type: "note",
-    noteInput: "someText moreText someText moreText someText moreText someText moreText someText moreText someText moreText",
+    noteInput:
+      "someText moreText someText moreText someText moreText someText moreText someText moreText someText moreText",
     // rssLink: null
     // linksTitles: ["facebook"],
   },
   {
-    id: 5,
+    id: "5",
     title: "sciam",
     color: null,
     column: 2,
@@ -75,13 +76,10 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     rssLink: "https://dailygalaxy.com/feed/",
     // rssLink: "https://feeds.feedburner.com/sciencealert-latestnews",
     // rssLink: "https://science.sciencemag.org/rss/twis.xml", <- works
-    items: []
+    items: [],
     // rssLink: "https://techbeacon.com/rss.xml"
     // linksTitles: ["facebook"],
   },
-
-
-
 ]);
 
 export const linksDataState = newRidgeState<SingleLinkData[]>([
@@ -90,25 +88,24 @@ export const linksDataState = newRidgeState<SingleLinkData[]>([
     title: "facebook",
     URL: "https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death",
     // tags: ["all", "fun"],
-    tags: [1, 3],
+    tags: ["1", "3"],
   },
   {
     id: 2,
     title: "tvn24",
     URL: "https://en.wikipedia.org/wiki/Webfoot_Technologies",
     // tags: ["all", "main"],
-    tags: [1, 2],
+    tags: ["1", "2"],
   },
   {
     id: 3,
     title: "gmail",
     URL: "https://en.wikipedia.org/wiki/Microsoft_Windows",
     // tags: ["all", "main"],
-    tags: [1, 2],
+    tags: ["1", "2"],
   },
 ]);
 
-export const deletedBookmarkState = newRidgeState<string | number>("")
+export const linksAllTagsState = newRidgeState<(string | number)[]>(["1", "2", "3"]);
 
-
-
+export const deletedBookmarkState = newRidgeState<string | number>("");

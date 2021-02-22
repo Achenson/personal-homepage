@@ -7,6 +7,7 @@ import {
   bookmarksDataState,
   linksDataState,
   deletedBookmarkState,
+  linksAllTagsState,
 } from "../state/bookmarksAndLinks";
 
 import { closeAllFoldersState } from "../state/defaultSettings";
@@ -27,6 +28,7 @@ interface Props {}
 function Grid({}: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [linksData, setLinksData] = linksDataState.use();
+  const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
   const [resetColorsData, setResetColorsData] = resetColorsState.use();
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
 
@@ -68,24 +70,20 @@ function Grid({}: Props): JSX.Element {
   }, [resetColorsData, setBookmarksData, setResetColorsData]);
 
   useEffect(() => {
-    let linksDataTags: (string | number)[] = [];
-    let bookmarksDataIds: (string | number)[] = [];
+    // let linksDataTagsData: (string | number)[] = [];
+    // let bookmarksDataIds: (string | number)[] = [];
 
-    linksData.forEach((obj) => {
-      obj.tags.forEach((el) => {
-        if (linksDataTags.indexOf(el) === -1) {
-          linksDataTags.push(el);
-        }
-      });
-    });
+    // linksData.forEach((obj) => {
+    //   obj.tags.forEach((el) => {
+    //     if (linksDataTags.indexOf(el) === -1) {
+    //       linksDataTags.push(el);
+    //     }
+    //   });
+    // });
 
-    bookmarksData.forEach((obj) => {
-      bookmarksDataIds.push(obj.id);
-    });
-
-
-
-
+    // bookmarksData.forEach((obj) => {
+    //   bookmarksDataIds.push(obj.id);
+    // });
 
     // let linksDataTagsIds: (string | number)[] = [];
 
@@ -109,11 +107,14 @@ function Grid({}: Props): JSX.Element {
     //   }
     // });
 
+    console.log(linksAllTagsData);
 
     // deleting a bookmark if there is no tags with the same name in links
 
     bookmarksData.forEach((obj, i) => {
-      if (linksDataTags.indexOf(obj.id) === -1 && obj.type === "folder") {
+      if (linksAllTagsData.indexOf(obj.id) === -1 && obj.type === "folder") {
+        console.log("cut");
+
         setBookmarksData((previous) =>
           produce(previous, (updated) => {
             updated.splice(i, 1);
@@ -121,11 +122,7 @@ function Grid({}: Props): JSX.Element {
         );
       }
     });
-
-
-
-    
-  }, [bookmarksData, setBookmarksData, linksData, deletedBookmark]);
+  }, [bookmarksData, setBookmarksData, linksAllTagsData]);
 
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
     switch (numberOfCols) {
