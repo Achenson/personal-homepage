@@ -88,7 +88,7 @@ export function createRSS(
   };
 }
 
-export function createLink(title: string, URL: string, tags: string[]) {
+export function createLink(title: string, URL: string, tags: (string|number)[]) {
   return {
     id: uuidv4(),
     title,

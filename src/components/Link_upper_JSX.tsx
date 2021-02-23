@@ -6,14 +6,14 @@ import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
 
 import { SingleLinkData } from "../utils/interfaces";
 
-import { createLink } from "../utils/objCreators";
+import { createLink, createBookmarkFolder } from "../utils/objCreators";
 
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
-import { linksDataState } from "../state/bookmarksAndLinks";
+import { linksDataState, bookmarksDataState, linksAllTagsState } from "../state/bookmarksAndLinks";
 
 interface Props {
   titleInput: string;
@@ -50,6 +50,8 @@ function Link_upper_JSX({
   setLinkVis,
 }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
@@ -238,10 +240,40 @@ function Link_upper_JSX({
 
                 // !!! diff in Link_lower_JSX
 
+                let tagsInputArr_ToIds: (string | number)[] = [];
+
+                tagsInputArr.forEach((el) => {
+                  let filteredBookmark = bookmarksData.filter(
+                    (obj) => obj.title === el
+                  )[0];
+
+                  // if folder with title corresponding to tag doesn't exist
+                  if (!filteredBookmark) {
+                    let newBookmark = createBookmarkFolder(el, 1, 0);
+                    tagsInputArr_ToIds.push(newBookmark.id);
+
+                    // adding new folder in there was no folder with title as a tag befere
+
+                    let newLinksAllTagsData = [...linksAllTagsData];
+
+                    newLinksAllTagsData.push(newBookmark.id);
+
+                    setLinksAllTagsData([...newLinksAllTagsData]);
+                    setBookmarksData((previous) =>
+                      produce(previous, (updated) => {
+                        updated.push(newBookmark);
+                      })
+                    );
+                  } else {
+                    tagsInputArr_ToIds.push(filteredBookmark.id);
+                  }
+                });
+
+
                 setLinksData((previous) =>
                   produce(previous, (updated) => {
                     updated.push(
-                      createLink(titleInput, urlInput, tagsInputArr)
+                      createLink(titleInput, urlInput, tagsInputArr_ToIds)
                     );
                   })
                 );

@@ -59,12 +59,19 @@ function Link_lower_JSX({
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
-  const [initialTagsInputArr, setInitialTagsInputArr] = useState(() =>
+  const [initialTagsInputArr, setInitialTagsInputArr] = useState( 
+    
+    () =>
     // tagsInputStr.split(", ")
     generateTagIds()
   );
 
   function generateTagIds() {
+
+    if (linkComponentType !== "edit") {
+      return []
+    }
+
     let arrOut: (string | number)[] = [];
 
     tagsInputStr.split(", ").forEach((el) => {
@@ -351,7 +358,7 @@ function Link_lower_JSX({
                   setLinksData((previous) =>
                     produce(previous, (updated) => {
                       updated.push(
-                        createLink(titleInput, urlInput, tagsInputArr)
+                        createLink(titleInput, urlInput, tagsInputArr_ToIds)
                       );
                     })
                   );
