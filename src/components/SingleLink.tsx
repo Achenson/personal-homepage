@@ -6,11 +6,9 @@ import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
 import { ReactComponent as PhotographSVG } from "../svgs/photograph.svg";
 
-import {
-  linksAllTagsState,
-} from "../state/bookmarksAndLinks";
+import { linksAllTagsState } from "../state/bookmarksAndLinks";
 
-import {SingleLinkData} from "../utils/interfaces"
+import { SingleLinkData } from "../utils/interfaces";
 
 // interface SingleLinkData {
 //   id: number | string;
@@ -22,6 +20,7 @@ import {SingleLinkData} from "../utils/interfaces"
 interface Props {
   setEditLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
   singleLinkData: SingleLinkData;
+
   setLinkId: React.Dispatch<React.SetStateAction<string | number | undefined>>;
   bookmarkID: string | number;
   // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleLinkData>>;
@@ -32,12 +31,10 @@ function SingleLink({
   singleLinkData,
   // setEditSingleLinkData,
   setLinkId,
-  bookmarkID
+  bookmarkID,
 }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
   const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
-
-
 
   // let linkURL = new URL(singleLinkData.URL)
 
@@ -49,9 +46,7 @@ function SingleLink({
     }
   });
 
-  let currentBookmarkTitle = linksData[bookmarkIndex].title
-
- 
+  let currentBookmarkTitle = linksData[bookmarkIndex].title;
 
   return (
     <div className="flex justify-between bg-gray-100 h-10 py-2 border-b">
@@ -76,37 +71,46 @@ function SingleLink({
           className="h-5 ml-1 hover:text-black cursor-pointer"
           onClick={() => {
             setEditLinkVis((b) => !b);
-            // setEditSingleLinkData({
-            //   title: singleLinkData.title,
-            //   URL: singleLinkData.URL,
-            //   tags: [...singleLinkData.tags],
-            // });
 
-            setLinkId(singleLinkData.id)
-
+            setLinkId(singleLinkData.id);
           }}
         />
         <TrashSmallSVG
           className="h-5 ml-1 hover:text-black cursor-pointer"
           onClick={() => {
+            // for deleting empty folder
 
-          
+            let tagsIdsToDelete: (string | number)[] = [];
 
+            singleLinkData.tags.forEach((el) => {
+              let filteredLinks = linksData.filter(
+                (obj) => obj.id !== singleLinkData.id
+              );
 
-            setLinksAllTagsData((previous) =>
-            produce(previous, (updated) => {
+              let isElPresent: boolean = false;
 
+              filteredLinks.forEach((obj) => {
+                if (obj.tags.indexOf(el) > -1) {
+                  isElPresent = true;
+                  return;
+                }
+              });
 
-              updated.splice(linksAllTagsData.indexOf(bookmarkID), 1);
+              if (!isElPresent && el !== "1") {
+                tagsIdsToDelete.push(el);
+              }
+            });
 
+            let linksAllTagsData_new: (string | number)[] = [];
 
+            linksAllTagsData.forEach((el) => {
+              if (tagsIdsToDelete.indexOf(el) === -1) {
+                linksAllTagsData_new.push(el);
+              }
+            });
 
+            setLinksAllTagsData([...linksAllTagsData_new]);
 
-
-
-            })
-          );
-           
 
             setLinksData((previous) =>
               produce(previous, (updated) => {

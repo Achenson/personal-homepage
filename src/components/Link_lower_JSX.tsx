@@ -309,12 +309,9 @@ function Link_lower_JSX({
                     })
                   );
 
-                  // deleting empty folder
+                  // for deleting empty folder
 
-
-                  let tagsIdsToDelete: (string|number)[] = [];
-
-                
+                  let tagsIdsToDelete: (string | number)[] = [];
 
                   initialTagsInputArr.forEach((el) => {
                     if (tagsInputArr_ToIds.indexOf(el) === -1) {
@@ -331,41 +328,23 @@ function Link_lower_JSX({
                         }
                       });
 
-                      console.log(isElPresent);
 
                       if (!isElPresent && el !== "1") {
-
-                        tagsIdsToDelete.push(el)
-
-                        // let folderIndex: number = 0;
-
-                        // bookmarksData.forEach((obj, i) => {
-                        //   if (obj.id === el) {
-                        //     folderIndex = i;
-                        //   }
-                        // });
-
-                        // setBookmarksData((previous) => {
-                        //   return produce(previous, (updated) => {
-                        //     updated.splice(folderIndex, 1);
-                        //   });
-                        // });
-
+                        tagsIdsToDelete.push(el);
                       }
-
-
                     }
                   });
 
-                  let linksAllTagsData_new: (string|number)[] = []
+                  let linksAllTagsData_new: (string | number)[] = [];
 
-                  linksAllTagsData.forEach(el => {
-                    if(tagsIdsToDelete.indexOf(el) === -1) {
-                      linksAllTagsData_new.push(el)
+                  linksAllTagsData.forEach((el) => {
+                    if (tagsIdsToDelete.indexOf(el) === -1) {
+                      linksAllTagsData_new.push(el);
                     }
-                  })
+                  });
 
-                  setLinksAllTagsData([...linksAllTagsData_new])
+                  setLinksAllTagsData([...linksAllTagsData_new]);
+
 
 
                 } else {
