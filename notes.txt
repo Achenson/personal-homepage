@@ -56,6 +56,9 @@ DONE 3. bookmark move icon - hide when moving? DONE
 DONE 5. ColorsToChoose -> better code DONE
 DONE 5. EditLink & NewLink -> unify DONE
 
+
+DONE 8. "all" bookmark should be non-deletable, non-editable? DONE
+
 DONE 12. components folders? DONE
 DONE 16. newLink & newLink_UpperUI -> tags not aligned DONE
 DONE 23. bg-color vs text color of folders DONE
@@ -77,9 +80,8 @@ DONE 3. how to properly set links !!! works on firefox DONE
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-8. "all" bookmark should be non-deletable, non-editable?
 
-8.5 "all" should be added as a tag automatically
+8.5 "all" should be added as a tag automatically & should not be visible
 9. auto-completing tags when adding links
 10.5 bookmark delete svg icon
 13. useEffect logic in grid -> move to lower components?
@@ -250,6 +252,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 171. log error about memory leakage eg. when editing links
 172. folder all: bookmark should not be editable
 173. newbookmark lower ui: choosing tags should not be possible (only this tag & all)
+174. check all links function useState in EditBookmarkTitle
 
 
 App structure:

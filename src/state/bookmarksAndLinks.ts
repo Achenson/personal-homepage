@@ -6,7 +6,7 @@ import { SingleLinkData } from "../utils/interfaces";
 // this can be used everywhere in your application
 export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
   {
-    id: "1",
+    id: "ALL_TAGS",
     title: "all",
     color: null,
     column: 1,
@@ -88,24 +88,24 @@ export const linksDataState = newRidgeState<SingleLinkData[]>([
     title: "facebook",
     URL: "https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death",
     // tags: ["all", "fun"],
-    tags: ["1", "3"],
+    tags: ["ALL_TAGS", "3"],
   },
   {
     id: 2,
     title: "tvn24",
     URL: "https://en.wikipedia.org/wiki/Webfoot_Technologies",
     // tags: ["all", "main"],
-    tags: ["1", "2"],
+    tags: ["ALL_TAGS", "2"],
   },
   {
     id: 3,
     title: "gmail",
     URL: "https://en.wikipedia.org/wiki/Microsoft_Windows",
     // tags: ["all", "main"],
-    tags: ["1", "2"],
+    tags: ["ALL_TAGS", "2"],
   },
 ]);
 
-export const linksAllTagsState = newRidgeState<(string | number)[]>(["1", "2", "3"]);
+export const linksAllTagsState = newRidgeState<(string | number)[]>(["ALL_TAGS", "2", "3"]);
 
 export const deletedBookmarkState = newRidgeState<string | number>("");

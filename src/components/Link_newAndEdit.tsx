@@ -53,7 +53,7 @@ function Link_newAndEdit({
     let arrOut: string[] = [];
 
     bookmarksData.forEach((obj) => {
-      if ((currentLink as SingleLinkData).tags.indexOf(obj.id) > -1) {
+      if ((currentLink as SingleLinkData).tags.indexOf(obj.id) > -1 && obj.id !== "ALL_TAGS") {
         arrOut.push(obj.title);
       }
     });
@@ -121,7 +121,10 @@ function Link_newAndEdit({
     let tags: string[] = [];
 
     bookmarkFolders.forEach((obj) => {
-      tags.push(obj.title);
+      if(obj.id !== "ALL_TAGS") {
+
+        tags.push(obj.title);
+      }
     });
 
     return tags;

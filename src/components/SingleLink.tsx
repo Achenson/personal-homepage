@@ -96,7 +96,7 @@ function SingleLink({
                 }
               });
 
-              if (!isElPresent && el !== "1") {
+              if (!isElPresent && el !== "ALL_TAGS") {
                 tagsIdsToDelete.push(el);
               }
             });

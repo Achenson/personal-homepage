@@ -208,6 +208,9 @@ function Link_upper_JSX({
 
                 let tagsInputArr = tagsInputStr.split(", ");
 
+                
+                
+
                 if (!regexForTitle.test(titleInput)) {
                   setTitleFormatErrorVis(true);
 
@@ -221,7 +224,7 @@ function Link_upper_JSX({
                   return;
                 }
 
-                if (!regexForTags.test(tagsInputArr.join(", "))) {
+                if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "") {
                   setTagErrorVis(true);
                   return;
                 }
@@ -240,7 +243,9 @@ function Link_upper_JSX({
 
                 // !!! diff in Link_lower_JSX
 
-                let tagsInputArr_ToIds: (string | number)[] = [];
+                // all tags always being added
+                let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
+                
 
                 tagsInputArr.forEach((el) => {
                   let filteredBookmark = bookmarksData.filter(
@@ -248,7 +253,8 @@ function Link_upper_JSX({
                   )[0];
 
                   // if folder with title corresponding to tag doesn't exist
-                  if (!filteredBookmark) {
+
+                  if (!filteredBookmark && tagsInputStr !== "") {
                     let newBookmark = createBookmarkFolder(el, 1, 0);
                     tagsInputArr_ToIds.push(newBookmark.id);
 
@@ -259,13 +265,22 @@ function Link_upper_JSX({
                     newLinksAllTagsData.push(newBookmark.id);
 
                     setLinksAllTagsData([...newLinksAllTagsData]);
+
+
+
                     setBookmarksData((previous) =>
                       produce(previous, (updated) => {
                         updated.push(newBookmark);
                       })
                     );
+
                   } else {
-                    tagsInputArr_ToIds.push(filteredBookmark.id);
+                    // if input is not empty
+                    if(tagsInputStr !== "") {
+
+                      tagsInputArr_ToIds.push(filteredBookmark.id);
+                    }
+                    
                   }
                 });
 

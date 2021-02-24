@@ -258,7 +258,7 @@ function Link_lower_JSX({
                   }
                 }
 
-                if (!regexForTags.test(tagsInputArr.join(", "))) {
+                if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "" ) {
                   setTagErrorVis(true);
                   return;
                 }
@@ -277,7 +277,7 @@ function Link_lower_JSX({
 
                 // !!! diff in Link_upper_JSX
 
-                let tagsInputArr_ToIds: (string | number)[] = [];
+                let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
 
                 tagsInputArr.forEach((el) => {
                   let filteredBookmark = bookmarksData.filter(
@@ -285,7 +285,7 @@ function Link_lower_JSX({
                   )[0];
 
                   // if folder with title corresponding to tag doesn't exist
-                  if (!filteredBookmark) {
+                  if (!filteredBookmark && tagsInputStr !== "") {
                     let newBookmark = createBookmarkFolder(el, 1, 0);
                     tagsInputArr_ToIds.push(newBookmark.id);
 
@@ -302,7 +302,12 @@ function Link_lower_JSX({
                       })
                     );
                   } else {
-                    tagsInputArr_ToIds.push(filteredBookmark.id);
+
+                    if(tagsInputStr !== "") {
+                      tagsInputArr_ToIds.push(filteredBookmark.id)
+
+                    }
+
                   }
                 });
 
@@ -336,7 +341,7 @@ function Link_lower_JSX({
                       });
 
 
-                      if (!isElPresent && el !== "1") {
+                      if (!isElPresent && el !== "ALL_TAGS") {
                         tagsIdsToDelete.push(el);
                       }
                     }
