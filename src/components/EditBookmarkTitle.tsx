@@ -14,9 +14,13 @@ import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
 
 import { produce } from "immer";
 
-import { bookmarksDataState } from "../state/bookmarksAndLinks";
-import { linksDataState } from "../state/bookmarksAndLinks";
-import { deletedBookmarkState } from "../state/bookmarksAndLinks";
+import {
+  bookmarksDataState,
+  linksDataState,
+  deletedBookmarkState,
+  linksAllTagsState,
+} from "../state/bookmarksAndLinks";
+
 import { rssSettingsState } from "../state/defaultSettings";
 
 interface Props {
@@ -37,6 +41,8 @@ Props): JSX.Element {
   const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
+
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
 
   let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
@@ -97,16 +103,24 @@ Props): JSX.Element {
 
   // const [tagsListVis, setTagsListVis] = useState<boolean>(false);
 
-  // filtered lknks
-  let filteredLinks = linksData.filter(
-    (obj) => obj.tags.indexOf(currentBookmark[0].id) > -1
-  );
-
-  let arrOfLinksNames: string[] = [];
-
-  filteredLinks.forEach((obj) => {
-    arrOfLinksNames.push(obj.title);
+  const [arrOfLinksNames, setArrayOfLinksNames] = useState<string[]>(() => {
+    return calcArrOfLinksNames();
   });
+
+  function calcArrOfLinksNames() {
+    // filtered lknks
+    let filteredLinks = linksData.filter(
+      (obj) => obj.tags.indexOf(currentBookmark[0].id) > -1
+    );
+
+    let arrOfLinksNames: string[] = [];
+
+    filteredLinks.forEach((obj) => {
+      arrOfLinksNames.push(obj.title);
+    });
+
+    return arrOfLinksNames;
+  }
 
   const [bookmarksInputStr, setBookmarksInputStr] = useState<string>(
     arrOfLinksNames.join(", ")
@@ -599,26 +613,32 @@ Props): JSX.Element {
                 setLinksData((previous) =>
                   produce(previous, (updated) => {
                     updated.forEach((obj) => {
-                      let indexOfBookmarkTitle: number = obj.tags.indexOf(
-                        // folder title
-                        bookmarkTitle
-                      );
-
-                      if (indexOfBookmarkTitle > -1) {
-                        obj.tags.splice(
-                          indexOfBookmarkTitle,
-                          1,
-                          bookmarkTitleInput
-                        );
-                      }
-
                       let bookmarksInputArr = bookmarksInputStr.split(", ");
 
-                      //  if link title is present in folder's input for bookmarks
-                      if (bookmarksInputArr.indexOf(obj.title) > -1) {
-                        // then push bookmark title (original or changed now) to the link's tags array
+                      // all initial links inside a folder
+                      // make array of missing links
+                      // if this links' title is inside missing links
+                      // cut out bookmarkID (current folder) from tags
 
-                        obj.tags.push(bookmarkTitleInput);
+                      let missingLinks: string[] = [];
+
+                      arrOfLinksNames.forEach((el, i) => {
+                        if (bookmarksInputArr.indexOf(el) === -1) {
+                          missingLinks.push(el);
+                        }
+                      });
+
+                      if (missingLinks.indexOf(obj.title) > -1) {
+                        obj.tags.splice(obj.tags.indexOf(bookmarkID), 1);
+                      }
+
+                      //  if link title is present in folder's new input for bookmarks & if folder title wasn't already in tags
+                      // add new tag
+                      if (
+                        bookmarksInputArr.indexOf(obj.title) > -1 &&
+                        obj.tags.indexOf(bookmarkID) === -1
+                      ) {
+                        obj.tags.push(bookmarkID);
                       }
                     });
                   })
