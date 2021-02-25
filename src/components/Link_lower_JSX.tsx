@@ -105,7 +105,7 @@ function Link_lower_JSX({
 
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
-      <div className="mb-2 mt-2">
+      <div className="mt-2">
         <div className="flex justify-around mb-2 mt-2">
           <p className="w-10">Title</p>
 
@@ -218,7 +218,7 @@ function Link_lower_JSX({
         ) : null}
 
         <div className="flex justify-start mt-6">
-          <p className="w-8"></p>
+          <p className="w-1"></p>
           <div className="w-full flex justify-center">
             <button
               onClick={(e) => {

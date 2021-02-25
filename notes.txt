@@ -75,17 +75,16 @@ XXX 7. one function for bookmark indexXXX will be deleted for backend?
 XXX 10. undo link XX
 
 DONE 3. how to properly set links !!! works on firefox DONE
+DONE 8.5 "all" should be added as a tag automatically & should not be visible DONE
+DONE 9. auto-completing tags when adding links DONE
+DONE 14. newLink -> save & cancel icons not perfectly in the middle DONE (but in a perfect way?)
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-8.5 "all" should be added as a tag automatically & should not be visible
-9. auto-completing tags when adding links
-10.5 bookmark delete svg icon
-13. useEffect logic in grid -> move to lower components?
-14. newLink -> save & cancel icons not perfectly in the middle
+
 15. UpperRightMenu on hover, boders for newLink & newBookmark -> default App color?
 17. link/bookmark -> consistent naming!
 18. newBookmark_upperUI -> menu with existing bookmarks to choose
@@ -253,6 +252,10 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 172. folder all: bookmark should not be editable
 173. newbookmark lower ui: choosing tags should not be possible (only this tag & all)
 174. check all links function useState in EditBookmarkTitle
+175. some info that new link will be also an all tag automatically (empty input possible)
+176. new link - autocomplete on focus, not on change
+177. autocomplete field in the grid moves out of divs
+178. autocomple chevronSVG should not be scaled down too much
 
 
 App structure:

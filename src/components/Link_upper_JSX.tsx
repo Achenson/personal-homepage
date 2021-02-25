@@ -192,7 +192,7 @@ function Link_upper_JSX({
         ) : null}
 
         <div className="flex justify-start mt-6">
-          <p className="w-8"></p>
+          <p className="w-1"></p>
           <div className="w-full flex justify-center">
             <button
               onClick={(e) => {
