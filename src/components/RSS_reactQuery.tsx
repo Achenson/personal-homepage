@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import SingleRssNews from "./SingleRssNews";
 
-import { bookmarksDataState } from "../state/bookmarksAndLinks";
+import { tabsDataState } from "../state/tabsAndLinks";
 import { rssSettingsState } from "../state/defaultSettings";
 
 import { ReactComponent as ArrowLeft } from "../svgs/arrowLeft.svg";
@@ -12,13 +12,13 @@ let Parser = require("rss-parser");
 let parser = new Parser();
 
 interface Props {
-  bookmarkID: string | number;
+  tabID: string | number;
 }
 
-function ReactQuery({ bookmarkID }: Props): JSX.Element {
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+function ReactQuery({ tabID }: Props): JSX.Element {
+  const [tabsData, setTabsData] = tabsDataState.use();
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
-  let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
+  let currentTab = tabsData.filter((obj) => obj.id === tabID);
 
   const [itemsPerPage, setItemsPerPage] = useState(calcItemsPerPage());
 
@@ -30,69 +30,69 @@ function ReactQuery({ bookmarkID }: Props): JSX.Element {
     // if currentBookmars itemsPerPage is set, return it, otherwise
     // return defaul option for RSS setting
     
-    if (typeof currentBookmark[0].itemsPerPage === "number") {
-      return currentBookmark[0].itemsPerPage;
+    if (typeof currentTab[0].itemsPerPage === "number") {
+      return currentTab[0].itemsPerPage;
     }
 
     return rssSettingsData.itemsPerPage;
   }
 
   function calcDescriptionVis() {
-    if (typeof currentBookmark[0].itemsPerPage === "boolean") {
-      return currentBookmark[0].description;
+    if (typeof currentTab[0].itemsPerPage === "boolean") {
+      return currentTab[0].description;
     }
 
     return rssSettingsData.description;
   }
 
   function calcDateVis() {
-    if (typeof currentBookmark[0].itemsPerPage === "boolean") {
-      return currentBookmark[0].date;
+    if (typeof currentTab[0].itemsPerPage === "boolean") {
+      return currentTab[0].date;
     }
 
     return rssSettingsData.date;
   }
 
   // const [itemsPerPage, setItemsPerPage] = useState(() => {
-  //   if (typeof currentBookmark[0].itemsPerPage === "number") {
-  //     return currentBookmark[0].itemsPerPage;
+  //   if (typeof currentTab[0].itemsPerPage === "number") {
+  //     return currentTab[0].itemsPerPage;
   //   }
   //   return rssSettingsData.itemsPerPage;
   // });
 
   useEffect(() => {
-    let bookmarkIndex: number = 0;
+    let tabIndex: number = 0;
 
-    bookmarksData.forEach((obj, i) => {
-      if (obj.id === bookmarkID) {
-        bookmarkIndex = i;
+    tabsData.forEach((obj, i) => {
+      if (obj.id === tabID) {
+        tabIndex = i;
       }
     });
 
     if (
-      bookmarksData[bookmarkIndex].itemsPerPage !== itemsPerPage &&
-      typeof bookmarksData[bookmarkIndex].itemsPerPage === "number"
+      tabsData[tabIndex].itemsPerPage !== itemsPerPage &&
+      typeof tabsData[tabIndex].itemsPerPage === "number"
     ) {
-      setItemsPerPage(bookmarksData[bookmarkIndex].itemsPerPage as number);
+      setItemsPerPage(tabsData[tabIndex].itemsPerPage as number);
     }
 
 
     if (
-      bookmarksData[bookmarkIndex].description !== descriptionVis &&
-      typeof bookmarksData[bookmarkIndex].description === "boolean"
+      tabsData[tabIndex].description !== descriptionVis &&
+      typeof tabsData[tabIndex].description === "boolean"
     ) {
-      setDescriptionVis(bookmarksData[bookmarkIndex].description as boolean);
+      setDescriptionVis(tabsData[tabIndex].description as boolean);
     }
 
 
     if (
-      bookmarksData[bookmarkIndex].date!== dateVis &&
-      typeof bookmarksData[bookmarkIndex].date === "boolean"
+      tabsData[tabIndex].date!== dateVis &&
+      typeof tabsData[tabIndex].date === "boolean"
     ) {
-      setDateVis(bookmarksData[bookmarkIndex].date as boolean);
+      setDateVis(tabsData[tabIndex].date as boolean);
     }
 
-  }, [bookmarksData, bookmarkID, dateVis, descriptionVis, itemsPerPage]);
+  }, [tabsData, tabID, dateVis, descriptionVis, itemsPerPage]);
 
   const [pageNumber, setPageNumber] = useState(0);
 
@@ -104,8 +104,8 @@ function ReactQuery({ bookmarkID }: Props): JSX.Element {
   console.log(data);
 
   async function fetchFeed() {
-    let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
-    const response = await parser.parseURL(currentBookmark[0].rssLink);
+    let currentTab = tabsData.filter((obj) => obj.id === tabID);
+    const response = await parser.parseURL(currentTab[0].rssLink);
 
     return response;
   }

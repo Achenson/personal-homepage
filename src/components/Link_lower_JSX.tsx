@@ -4,7 +4,7 @@ import { produce } from "immer";
 
 import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
 
-import { createLink, createBookmarkFolder } from "../utils/objCreators";
+import { createLink, createTabFolder } from "../utils/objCreators";
 
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
@@ -12,10 +12,10 @@ import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
 import {
-  bookmarksDataState,
+  tabsDataState,
   linksDataState,
   linksAllTagsState,
-} from "../state/bookmarksAndLinks";
+} from "../state/tabsAndLinks";
 
 import { SingleLinkData } from "../utils/interfaces";
 
@@ -57,7 +57,7 @@ function Link_lower_JSX({
   const [linksData, setLinksData] = linksDataState.use();
   const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
 
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [tabsData, setTabsData] = tabsDataState.use();
 
   const [initialTagsInputArr, setInitialTagsInputArr] = useState( 
     
@@ -79,8 +79,8 @@ function Link_lower_JSX({
       //   arrOut.push(obj.id);
       // }
 
-      let filteredBookmark = bookmarksData.filter((obj) => obj.title === el)[0];
-      arrOut.push(filteredBookmark.id);
+      let filteredTab = tabsData.filter((obj) => obj.title === el)[0];
+      arrOut.push(filteredTab.id);
     });
 
     return arrOut;
@@ -113,7 +113,7 @@ function Link_lower_JSX({
             type="text"
             className="w-full ml-2 border border-gray-500"
             value={titleInput}
-            placeholder={"new bookmark title"}
+            placeholder={"new tab title"}
             onChange={(e) => setTitleInput(e.target.value)}
           />
           <ChevronDownSVG className="h-6 invisible" />
@@ -280,31 +280,31 @@ function Link_lower_JSX({
                 let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
 
                 tagsInputArr.forEach((el) => {
-                  let filteredBookmark = bookmarksData.filter(
+                  let filteredTab = tabsData.filter(
                     (obj) => obj.title === el
                   )[0];
 
                   // if folder with title corresponding to tag doesn't exist
-                  if (!filteredBookmark && tagsInputStr !== "") {
-                    let newBookmark = createBookmarkFolder(el, 1, 0);
-                    tagsInputArr_ToIds.push(newBookmark.id);
+                  if (!filteredTab && tagsInputStr !== "") {
+                    let newTab = createTabFolder(el, 1, 0);
+                    tagsInputArr_ToIds.push(newTab.id);
 
                     // adding new folder in there was no folder with title as a tag befere
 
                     let newLinksAllTagsData = [...linksAllTagsData];
 
-                    newLinksAllTagsData.push(newBookmark.id);
+                    newLinksAllTagsData.push(newTab.id);
 
                     setLinksAllTagsData([...newLinksAllTagsData]);
-                    setBookmarksData((previous) =>
+                    setTabsData((previous) =>
                       produce(previous, (updated) => {
-                        updated.push(newBookmark);
+                        updated.push(newTab);
                       })
                     );
                   } else {
 
                     if(tagsInputStr !== "") {
-                      tagsInputArr_ToIds.push(filteredBookmark.id)
+                      tagsInputArr_ToIds.push(filteredTab.id)
 
                     }
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 
 
-import { bookmarksDataState } from "../../state/bookmarksAndLinks";
+import { tabsDataState } from "../../state/tabsAndLinks";
 
 interface Props {
   tagsInputStr: string;
@@ -19,7 +19,7 @@ function TagsList_UpperUI({
   width,
   marginLeft
 }: Props): JSX.Element {
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [tabsData, setTabsData] = tabsDataState.use();
 
   return (
     <div

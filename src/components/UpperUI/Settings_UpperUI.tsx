@@ -88,7 +88,7 @@ function Settings_UpperUI({ settingsVis, setSettingsVis }: Props): JSX.Element {
             ></div>
           </div>
           <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="">Hide folder containing all bookmarks</p>
+            <p className="">Hide folder containing all tabs</p>
             <div
               className={`h-4 w-4 cursor-pointer border-2 border-${uiColorData} ${
                 globalSettingsData.hideNonDeletable

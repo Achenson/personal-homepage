@@ -21,9 +21,9 @@ function SingeRssNews({
   // if (title === "loading data...") {
   //   return <div>{title}</div>;
   // }
-  // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  // const [tabsData, setTabsData] = tabsDataState.use();
 
-  // let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
+  // let currentTab = tabsData.filter((obj) => obj.id === tabID);
 
   function renderDescription(descripion: string) {
     let descriptionSplitted = descripion.split(" ");

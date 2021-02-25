@@ -4,15 +4,15 @@ import { ReactComponent as AddFolderSVG } from "../../svgs/addFolder.svg";
 import { ReactComponent as FolderSVG } from "../../svgs/folder.svg";
 import { ReactComponent as Folder2SVG } from "../../svgs/folder_flaticon.svg";
 import { ReactComponent as Folder3SVG } from "../../svgs/folder-open_flaticon.svg";
-import { ReactComponent as FolderForBookmarksSVG } from "../../svgs/folder-bookmark_UXwing.svg";
+import { ReactComponent as FolderForTabsSVG } from "../../svgs/folder-bookmark_UXwing.svg";
 import { ReactComponent as AddLinkSVG } from "../../svgs/addLink.svg";
 import { ReactComponent as LinkSVG } from "../../svgs/link.svg";
 import { ReactComponent as Link2SVG } from "../../svgs/link_UXwing.svg";
-import { ReactComponent as BookmarkSVG } from "../../svgs/bookmark.svg";
-import { ReactComponent as Bookmark2SVG } from "../../svgs/bookmark-saved_UXwing.svg";
-import { ReactComponent as Bookmark3SVG } from "../../svgs/bookmark_flaticon.svg";
-import { ReactComponent as Bookmark4SVG } from "../../svgs/bookmark-fancy_flaticon.svg";
-import { ReactComponent as BookmarkAltSVG } from "../../svgs/bookmarkAlt.svg";
+import { ReactComponent as TabSVG } from "../../svgs/bookmark.svg";
+import { ReactComponent as Tab2SVG } from "../../svgs/bookmark-saved_UXwing.svg";
+import { ReactComponent as Tab3SVG } from "../../svgs/bookmark_flaticon.svg";
+import { ReactComponent as Tab4SVG } from "../../svgs/bookmark-fancy_flaticon.svg";
+import { ReactComponent as TabAltSVG } from "../../svgs/bookmarkAlt.svg";
 // import { ReactComponent as AddNote } from "../../svgs/addNote.svg";
 import { ReactComponent as AddNote } from "../../svgs/text-document-add.svg";
 import { ReactComponent as Note } from "../../svgs/note_UXwing.svg";
@@ -27,22 +27,22 @@ import { uiColorState } from "../../state/colorsState";
 
 interface Props {
   setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
   setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
   setSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
   setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  setBookmarkType: React.Dispatch<
+  setTabType: React.Dispatch<
     React.SetStateAction<"folder" | "note" | "rss">
   >;
 }
 
 function UpperRightMenu({
   setNewLinkVis,
-  setNewBookmarkVis,
+  setNewTabVis,
   setBackgroundSettingsVis,
   setSettingsVis,
   setColorsVis,
-  setBookmarkType,
+  setTabType,
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
@@ -51,7 +51,7 @@ function UpperRightMenu({
     <div className="h-8 w-56 flex justify-between items-center bg-white bg-opacity-80 rounded-md">
       <div className="flex w-28 justify-around">
         {/* <AddLinkSVG */}
-        <BookmarkAltSVG
+        <TabAltSVG
           className={`h-7 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
             setNewLinkVis((b) => !b);
@@ -62,16 +62,16 @@ function UpperRightMenu({
         <FolderSVG
           className={`h-7 cursor-pointer hover:text-${uiColorData} mr-1`}
           onClick={() => {
-            setNewBookmarkVis((b) => !b);
-            setBookmarkType("folder");
+            setNewTabVis((b) => !b);
+            setTabType("folder");
           }}
         />
         {/* <AddNote */}
         <Note
           className={`h-6 cursor-pointer fill-current text-black hover:text-${uiColorData}`}
           onClick={() => {
-            setNewBookmarkVis((b) => !b);
-            setBookmarkType("note");
+            setNewTabVis((b) => !b);
+            setTabType("note");
           }}
         />
 
@@ -79,8 +79,8 @@ function UpperRightMenu({
         <AddRssSVG
           className={`h-7 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
-            setNewBookmarkVis((b) => !b);
-            setBookmarkType("rss");
+            setNewTabVis((b) => !b);
+            setTabType("rss");
           }}
         />
       </div>

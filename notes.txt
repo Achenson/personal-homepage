@@ -78,6 +78,7 @@ DONE 3. how to properly set links !!! works on firefox DONE
 DONE 8.5 "all" should be added as a tag automatically & should not be visible DONE
 DONE 9. auto-completing tags when adding links DONE
 DONE 14. newLink -> save & cancel icons not perfectly in the middle DONE (but in a perfect way?)
+DONE 15. UpperRightMenu on hover, boders for newLink & newBookmark -> default App color? DONE
 
 
 1. purgecss at the end of project?
@@ -85,8 +86,13 @@ DONE 14. newLink -> save & cancel icons not perfectly in the middle DONE (but in
 
 
 
-15. UpperRightMenu on hover, boders for newLink & newBookmark -> default App color?
-17. link/bookmark -> consistent naming!
+17. link/bookmark/folder -> consistent naming!
+
+
+
+
+
+
 18. newBookmark_upperUI -> menu with existing bookmarks to choose
 19. bookmark priorities
 20. note -> newLines not working

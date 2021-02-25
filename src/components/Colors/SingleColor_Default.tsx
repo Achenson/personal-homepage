@@ -10,7 +10,7 @@ import { produce } from "immer";
 
 interface Props {
   color: string;
-  // bookmarkTitle: string;
+  // tabTitle: string;
   defaultColorsFor:
     | "folders"
     | "notes"
@@ -23,13 +23,13 @@ interface Props {
 }
 
 function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
-  // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  // const [tabsData, setTabsData] = tabsDataState.use();
 
-  // let bookmarkIndex: number;
+  // let tabIndex: number;
 
-  // bookmarksData.forEach( (obj, i) => {
-  //   if (obj.title === bookmarkTitle) {
-  //     bookmarkIndex = i
+  // tabsData.forEach( (obj, i) => {
+  //   if (obj.title === tabTitle) {
+  //     tabIndex = i
   //   }
   // })
 
@@ -213,9 +213,9 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
           );
         }
 
-        // setBookmarksData((previous) =>
+        // setTabsData((previous) =>
         //   produce(previous, (updated) => {
-        //     updated[bookmarkIndex].color = `bg-${color}`;
+        //     updated[tabIndex].color = `bg-${color}`;
         //   })
         // );
       }}

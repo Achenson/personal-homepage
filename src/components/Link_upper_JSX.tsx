@@ -6,14 +6,14 @@ import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
 
 import { SingleLinkData } from "../utils/interfaces";
 
-import { createLink, createBookmarkFolder } from "../utils/objCreators";
+import { createLink, createTabFolder } from "../utils/objCreators";
 
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
-import { linksDataState, bookmarksDataState, linksAllTagsState } from "../state/bookmarksAndLinks";
+import { linksDataState, tabsDataState, linksAllTagsState } from "../state/tabsAndLinks";
 
 interface Props {
   titleInput: string;
@@ -50,7 +50,7 @@ function Link_upper_JSX({
   setLinkVis,
 }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [tabsData, setTabsData] = tabsDataState.use();
   const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
@@ -87,7 +87,7 @@ function Link_upper_JSX({
             type="text"
             className="w-full ml-2 border border-gray-500"
             value={titleInput}
-            placeholder={"new bookmark title"}
+            placeholder={"new tab title"}
             onChange={(e) => setTitleInput(e.target.value)}
           />
           <ChevronDownSVG className="h-6 invisible" />
@@ -248,29 +248,29 @@ function Link_upper_JSX({
                 
 
                 tagsInputArr.forEach((el) => {
-                  let filteredBookmark = bookmarksData.filter(
+                  let filteredTab = tabsData.filter(
                     (obj) => obj.title === el
                   )[0];
 
                   // if folder with title corresponding to tag doesn't exist
 
-                  if (!filteredBookmark && tagsInputStr !== "") {
-                    let newBookmark = createBookmarkFolder(el, 1, 0);
-                    tagsInputArr_ToIds.push(newBookmark.id);
+                  if (!filteredTab && tagsInputStr !== "") {
+                    let newTab = createTabFolder(el, 1, 0);
+                    tagsInputArr_ToIds.push(newTab.id);
 
                     // adding new folder in there was no folder with title as a tag befere
 
                     let newLinksAllTagsData = [...linksAllTagsData];
 
-                    newLinksAllTagsData.push(newBookmark.id);
+                    newLinksAllTagsData.push(newTab.id);
 
                     setLinksAllTagsData([...newLinksAllTagsData]);
 
 
 
-                    setBookmarksData((previous) =>
+                    setTabsData((previous) =>
                       produce(previous, (updated) => {
-                        updated.push(newBookmark);
+                        updated.push(newTab);
                       })
                     );
 
@@ -278,7 +278,7 @@ function Link_upper_JSX({
                     // if input is not empty
                     if(tagsInputStr !== "") {
 
-                      tagsInputArr_ToIds.push(filteredBookmark.id);
+                      tagsInputArr_ToIds.push(filteredTab.id);
                     }
                     
                   }

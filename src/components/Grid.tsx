@@ -1,18 +1,18 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Bookmark from "./Bookmark";
+import Tab from "./Tab";
 
 import {
-  bookmarksDataState,
+  tabsDataState,
   linksDataState,
-  deletedBookmarkState,
+  deletedTabState,
   linksAllTagsState,
-} from "../state/bookmarksAndLinks";
+} from "../state/tabsAndLinks";
 
-import { closeAllFoldersState } from "../state/defaultSettings";
+import { closeAllTabsState } from "../state/defaultSettings";
 
-import { createBookmarkFolder } from "../utils/objCreators";
+import { createTabFolder } from "../utils/objCreators";
 
 import { produce } from "immer";
 
@@ -26,19 +26,19 @@ import useSize from "@react-hook/size";
 interface Props {}
 
 function Grid({}: Props): JSX.Element {
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [tabsData, setTabsData] = tabsDataState.use();
   const [linksData, setLinksData] = linksDataState.use();
   const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
   const [resetColorsData, setResetColorsData] = resetColorsState.use();
-  const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
+  const [deletedTab, setDeletedTab] = deletedTabState.use();
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   const [closeAllFolders, setCloseAllFolders] = useState(false);
   const [
-    closeAllFoldersData,
-    setCloseAllFoldersData,
-  ] = closeAllFoldersState.use();
+    closeAllTabsData,
+    setCloseAllTabsData,
+  ] = closeAllTabsState.use();
 
   const target = React.useRef(null);
   const [width, height] = useSize(target);
@@ -48,16 +48,16 @@ function Grid({}: Props): JSX.Element {
   // })
 
   useEffect(() => {
-    if (closeAllFoldersData) {
-      setCloseAllFoldersData(false);
+    if (closeAllTabsData) {
+      setCloseAllTabsData(false);
     }
-  }, [closeAllFoldersData, setCloseAllFoldersData]);
+  }, [closeAllTabsData, setCloseAllTabsData]);
 
   useEffect(() => {
     if (resetColorsData) {
-      // bookmarksData.forEach((obj, i) => {});
+      // tabsData.forEach((obj, i) => {});
 
-      setBookmarksData((previous) =>
+      setTabsData((previous) =>
         produce(previous, (updated) => {
           updated.forEach((obj, i) => {
             obj.color = null;
@@ -67,11 +67,11 @@ function Grid({}: Props): JSX.Element {
 
       setResetColorsData(false);
     }
-  }, [resetColorsData, setBookmarksData, setResetColorsData]);
+  }, [resetColorsData, setTabsData, setResetColorsData]);
 
   useEffect(() => {
     // let linksDataTagsData: (string | number)[] = [];
-    // let bookmarksDataIds: (string | number)[] = [];
+    // let tabsDataIds: (string | number)[] = [];
 
     // linksData.forEach((obj) => {
     //   obj.tags.forEach((el) => {
@@ -81,26 +81,26 @@ function Grid({}: Props): JSX.Element {
     //   });
     // });
 
-    // bookmarksData.forEach((obj) => {
-    //   bookmarksDataIds.push(obj.id);
+    // tabsData.forEach((obj) => {
+    //   tabsDataIds.push(obj.id);
     // });
 
     // let linksDataTagsIds: (string | number)[] = [];
 
     // linksDataTags.forEach((id) => {
-    //   let filteredBookmark = bookmarksData.filter((obj) => obj.id === id)[0];
-    //   linksDataTagsIds.push(filteredBookmark.id);
+    //   let filteredTab = tabsData.filter((obj) => obj.id === id)[0];
+    //   linksDataTagsIds.push(filteredTab.id);
     // });
 
-    // // adding a bookmark(folder) if previously non-existing tag was added to a link / if new bookmark is being added
+    // // adding a tab(folder) if previously non-existing tag was added to a link / if new tab is being added
     // linksDataTagsIds.forEach((el) => {
-    //   // no adding bookmark if it was just set up for deletion
+    //   // no adding tab if it was just set up for deletion
 
-    //   if (bookmarksDataIds.indexOf(el) === -1 && deletedBookmark !== el) {
-    //     setBookmarksData((previous) =>
+    //   if (tabsDataIds.indexOf(el) === -1 && deletedTab !== el) {
+    //     setTabsData((previous) =>
     //       produce(previous, (updated) => {
     //         updated.push({
-    //           ...createBookmarkFolder(bookmarksData.filter(obj => obj.id === el)[0].title, 1, 0),
+    //           ...createTabFolder(tabsData.filter(obj => obj.id === el)[0].title, 1, 0),
     //         });
     //       })
     //     );
@@ -109,47 +109,47 @@ function Grid({}: Props): JSX.Element {
 
     console.log(linksAllTagsData);
 
-    // deleting a bookmark if there is no tags with the same name in links
+    // deleting a tab if there is no tags with the same name in links
 
-    bookmarksData.forEach((obj, i) => {
+    tabsData.forEach((obj, i) => {
       if (linksAllTagsData.indexOf(obj.id) === -1 && obj.type === "folder") {
         console.log("cut");
 
-        setBookmarksData((previous) =>
+        setTabsData((previous) =>
           produce(previous, (updated) => {
             updated.splice(i, 1);
           })
         );
       }
     });
-  }, [bookmarksData, setBookmarksData, linksAllTagsData]);
+  }, [tabsData, setTabsData, linksAllTagsData]);
 
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
     switch (numberOfCols) {
       case 1:
-        return <Column colNumber={1} closeAllFolders={closeAllFoldersData} />;
+        return <Column colNumber={1} closeAllTabs={closeAllTabsData} />;
       case 2:
         return (
           <>
-            <Column colNumber={1} closeAllFolders={closeAllFoldersData} />
-            <Column colNumber={2} closeAllFolders={closeAllFoldersData} />
+            <Column colNumber={1} closeAllTabs={closeAllTabsData} />
+            <Column colNumber={2} closeAllTabs={closeAllTabsData} />
           </>
         );
       case 3:
         return (
           <>
-            <Column colNumber={1} closeAllFolders={closeAllFoldersData} />
-            <Column colNumber={2} closeAllFolders={closeAllFoldersData} />
-            <Column colNumber={3} closeAllFolders={closeAllFoldersData} />
+            <Column colNumber={1} closeAllTabs={closeAllTabsData} />
+            <Column colNumber={2} closeAllTabs={closeAllTabsData} />
+            <Column colNumber={3} closeAllTabs={closeAllTabsData} />
           </>
         );
       case 4:
         return (
           <>
-            <Column colNumber={1} closeAllFolders={closeAllFoldersData} />
-            <Column colNumber={2} closeAllFolders={closeAllFoldersData} />
-            <Column colNumber={3} closeAllFolders={closeAllFoldersData} />
-            <Column colNumber={4} closeAllFolders={closeAllFoldersData} />
+            <Column colNumber={1} closeAllTabs={closeAllTabsData} />
+            <Column colNumber={2} closeAllTabs={closeAllTabsData} />
+            <Column colNumber={3} closeAllTabs={closeAllTabsData} />
+            <Column colNumber={4} closeAllTabs={closeAllTabsData} />
           </>
         );
     }
@@ -176,12 +176,7 @@ function Grid({}: Props): JSX.Element {
       // className={`grid gap-x-2 gap-y-6 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`}
       ref={target}
     >
-      {/* <>
-        <Column colNumber={1} closeAllFolders={closeAllFoldersData} />
-        <Column colNumber={2} closeAllFolders={closeAllFoldersData} />
-        <Column colNumber={3} closeAllFolders={closeAllFoldersData} />
-        <Column colNumber={4} closeAllFolders={closeAllFoldersData} />
-      </> */}
+    
 
       {renderColumns(globalSettingsData.numberOfCols)}
     </div>

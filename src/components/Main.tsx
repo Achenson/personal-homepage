@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Grid from "./Grid";
 import NewLink_UpperUI from "./Link_newAndEdit";
-import NewBookmark_UpperUI from "./UpperUI/NewBookmark_UpperUI";
+import NewTab_UpperUI from "./UpperUI/NewTab_UpperUI";
 import Colors_UpperUI from "./UpperUI/Colors_UpperUI";
 import UpperUI from "./UpperUI/UpperUI";
 
@@ -21,7 +21,7 @@ function Main({}: Props): JSX.Element {
   ] = backgroundColorState.use();
 
   const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
-  const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
+  const [newTabVis, setNewTabVis] = useState<boolean>(false);
 
   const [backgroundSettingsVis, setBackgroundSettingsVis] = useState<boolean>(
     false
@@ -30,7 +30,7 @@ function Main({}: Props): JSX.Element {
   const [settingsVis, setSettingsVis] = useState<boolean>(false);
 
   const [colorsVis, setColorsVis] = useState<boolean>(false);
-  const [bookmarkType, setBookmarkType] = useState<"folder" | "note" | "rss">(
+  const [tabType, setTabType] = useState<"folder" | "note" | "rss">(
     "folder"
   );
 
@@ -43,10 +43,10 @@ function Main({}: Props): JSX.Element {
           : `bg-${backgroundColorData}`
       } bg-cover`}
     >
-      {newBookmarkVis ? (
-        <NewBookmark_UpperUI
-          setNewBookmarkVis={setNewBookmarkVis}
-          bookmarkType={bookmarkType}
+      {newTabVis ? (
+        <NewTab_UpperUI
+          setNewTabVis={setNewTabVis}
+          tabType={tabType}
         />
       ) : null}
       {newLinkVis ? <NewLink_UpperUI setLinkVis={setNewLinkVis} linkComponentType={"new_upperUI"} /> : null}
@@ -68,11 +68,11 @@ function Main({}: Props): JSX.Element {
       ) : null}
       <UpperUI
         setNewLinkVis={setNewLinkVis}
-        setNewBookmarkVis={setNewBookmarkVis}
+        setNewTabVis={setNewTabVis}
         setBackgroundSettingsVis={setBackgroundSettingsVis}
         setSettingsVis={setSettingsVis}
         setColorsVis={setColorsVis}
-        setBookmarkType={setBookmarkType}
+        setTabType={setTabType}
       />
       <Grid />
     </div>

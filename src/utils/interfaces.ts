@@ -1,4 +1,4 @@
-export interface SingleBookmarkData {
+export interface SingleTabData {
   id: number | string;
   title: string;
   color: string | null;

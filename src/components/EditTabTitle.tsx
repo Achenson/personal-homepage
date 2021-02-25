@@ -15,68 +15,68 @@ import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
 import { produce } from "immer";
 
 import {
-  bookmarksDataState,
+  tabsDataState,
   linksDataState,
-  deletedBookmarkState,
+  deletedTabState,
   linksAllTagsState,
-} from "../state/bookmarksAndLinks";
+} from "../state/tabsAndLinks";
 
 import { rssSettingsState } from "../state/defaultSettings";
 
 interface Props {
-  // bookmarkTitle: string;
-  bookmarkType: "folder" | "note" | "rss";
-  setEditBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // tabTitle: string;
+  tabType: "folder" | "note" | "rss";
+  setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
   // noteInput: string | null;
-  bookmarkID: string | number;
+  tabID: string | number;
 }
 
-function EditBookmarkTitle({
-  bookmarkID,
+function EditTabTitle({
+  tabID,
 
-  bookmarkType,
-  setEditBookmarkVis,
+  tabType,
+  setEditTabVis,
 }: // noteInput,
 Props): JSX.Element {
-  const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
+  const [deletedTab, setDeletedTab] = deletedTabState.use();
 
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [tabsData, setTabsData] = tabsDataState.use();
   const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
 
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
 
-  let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
-  let bookmarkTitle = currentBookmark[0].title;
+  let currentTab = tabsData.filter((obj) => obj.id === tabID);
+  let tabTitle = currentTab[0].title;
 
   let rssLink: string | null | undefined = "no link";
   // let rssLink;
 
-  if (bookmarkType === "rss") {
-    rssLink = currentBookmark[0].rssLink;
+  if (tabType === "rss") {
+    rssLink = currentTab[0].rssLink;
   }
 
   const [linksData, setLinksData] = linksDataState.use();
   // for note only
   const [textAreaValue, setTextAreaValue] = useState<string | null>(
-    currentBookmark[0].noteInput as string | null
+    currentTab[0].noteInput as string | null
   );
 
-  const [bookmarkTitleInput, setBookmarkTitleInput] = useState<string>(
-    bookmarkTitle
+  const [tabTitleInput, setTabTitleInput] = useState<string>(
+    tabTitle
   );
 
   const [rssLinkInput, setRssLinkInput] = useState<string>(rssLink as string);
 
   const [descriptionCheckbox, setDescriptionCheckbox] = useState(() => {
-    if (typeof currentBookmark[0].description === "boolean") {
-      return currentBookmark[0].description;
+    if (typeof currentTab[0].description === "boolean") {
+      return currentTab[0].description;
     }
 
     return rssSettingsData.description;
   });
   const [dateCheckbox, setDateCheckbox] = useState(() => {
-    if (typeof currentBookmark[0].date === "boolean") {
-      return currentBookmark[0].date;
+    if (typeof currentTab[0].date === "boolean") {
+      return currentTab[0].date;
     }
     return rssSettingsData.date;
   });
@@ -85,8 +85,8 @@ Props): JSX.Element {
   const [wasCheckboxClicked, setWasCheckboxClicked] = useState(false);
 
   const [rssItemsPerPage, setRssItemsPerPage] = useState(() => {
-    if (typeof currentBookmark[0].itemsPerPage === "number") {
-      return currentBookmark[0].itemsPerPage;
+    if (typeof currentTab[0].itemsPerPage === "number") {
+      return currentTab[0].itemsPerPage;
     }
     return rssSettingsData.itemsPerPage;
   });
@@ -94,7 +94,7 @@ Props): JSX.Element {
   // items per page won't be saved on Save if there were not manipulated
   const [wasItemsPerPageClicked, setWasItemsPerPageClicked] = useState(false);
 
-  const [wasFolderOpenClicked, setWasFolderOpenClicked] = useState(false);
+  const [wasTabOpenClicked, setWasTabOpenClicked] = useState(false);
 
   // for disabling save btn
   const [wasAnythingClicked, setWasAnythingClicked] = useState(false);
@@ -110,7 +110,7 @@ Props): JSX.Element {
   function calcArrOfLinksNames() {
     // filtered lknks
     let filteredLinks = linksData.filter(
-      (obj) => obj.tags.indexOf(currentBookmark[0].id) > -1
+      (obj) => obj.tags.indexOf(currentTab[0].id) > -1
     );
 
     let arrOfLinksNames: string[] = [];
@@ -122,25 +122,25 @@ Props): JSX.Element {
     return arrOfLinksNames;
   }
 
-  const [bookmarksInputStr, setBookmarksInputStr] = useState<string>(
+  const [tabsInputStr, setTabsInputStr] = useState<string>(
     arrOfLinksNames.join(", ")
   );
 
-  const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(
-    makeInitialBookmarks()
+  const [visibleTabs, setVisibleTabs] = useState<string[]>(
+    makeInitialTabs()
   );
 
   useEffect(() => {
-    if (wasCheckboxClicked || wasFolderOpenClicked || wasItemsPerPageClicked) {
+    if (wasCheckboxClicked || wasTabOpenClicked || wasItemsPerPageClicked) {
       setWasAnythingClicked(true);
     }
-  }, [wasCheckboxClicked, wasFolderOpenClicked, wasItemsPerPageClicked]);
+  }, [wasCheckboxClicked, wasTabOpenClicked, wasItemsPerPageClicked]);
 
-  let bookmarkIndex: number;
+  let tabIndex: number;
 
-  bookmarksData.forEach((obj, i) => {
-    if (obj.id === bookmarkID) {
-      bookmarkIndex = i;
+  tabsData.forEach((obj, i) => {
+    if (obj.id === tabID) {
+      tabIndex = i;
     }
   });
 
@@ -148,80 +148,80 @@ Props): JSX.Element {
   const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
   const [noDeletionErrorVis, setNoDeletionErrorVis] = useState<boolean>(false);
 
-  const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
+  const [tabsErrorVis, setTabsErrorVis] = useState<boolean>(false);
   const [
-    bookmarksRepeatErrorVis,
-    setBookmarksRepeatErrorVis,
+    tabsRepeatErrorVis,
+    setTabsRepeatErrorVis,
   ] = useState<boolean>(false);
   const [
-    bookmarksExistenceErrorVis,
-    setBookmarksExistenceErrorVis,
+    tabsExistenceErrorVis,
+    setTabsExistenceErrorVis,
   ] = useState<boolean>(false);
 
   let regexForTitle = /^\w+$/;
 
-  const [folderOpen, setFolderOpen] = useState(currentBookmark[0].opened);
+  const [tabOpen, setTabOpen] = useState(currentTab[0].opened);
 
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
   const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
-  const [initialBookmarks, setInitialBookmarks] = useState(
-    makeInitialBookmarks()
+  const [initialTabs, setInitialTabs] = useState(
+    makeInitialTabs()
   );
 
-  const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
+  const [tabsListVis, setTabsListVis] = useState<boolean>(false);
 
   useEffect(() => {
     let newVisibleTags: string[] = [];
 
-    initialBookmarks.forEach((el) => {
+    initialTabs.forEach((el) => {
       // in new RegExp the \ needs to be escaped!
       let tagRegex = new RegExp(`\\b${el}\\b`);
 
-      if (!tagRegex.test(bookmarksInputStr)) {
+      if (!tagRegex.test(tabsInputStr)) {
         newVisibleTags.push(el);
       }
     });
 
-    setVisibleBookmarks([...newVisibleTags]);
+    setVisibleTabs([...newVisibleTags]);
 
     if (newVisibleTags.length === 0) {
-      setBookmarksListVis(false);
+      setTabsListVis(false);
     }
 
     if (newVisibleTags.length > 0 && !isThisTheFirstRender) {
-      setBookmarksListVis(true);
+      setTabsListVis(true);
     }
 
     setIsThisTheFirstRender(false);
   }, [
-    bookmarksInputStr,
-    initialBookmarks,
-    setVisibleBookmarks,
-    setBookmarksListVis,
+    tabsInputStr,
+    initialTabs,
+    setVisibleTabs,
+    setTabsListVis,
   ]);
 
-  function makeInitialBookmarks(): string[] {
-    let bookmarks: string[] = [];
+  function makeInitialTabs(): string[] {
+    let tabs: string[] = [];
 
     linksData.forEach((obj) => {
-      bookmarks.push(obj.title);
+      tabs.push(obj.title);
     });
 
-    return bookmarks;
+    return tabs;
   }
 
   // ^  and $ -> beginning and end of the text!
-  let regexForBookmarks = /^\w+(,\s\w+)*$/;
+  let regexForTabs = /^\w+(,\s\w+)*$/;
 
   return (
     <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-2">
       <div className="flex items-center mt-2 justify-between">
         <p
           className={
-            bookmarkType === "folder"
+            tabType === "folder"
               ? "mr-14"
-              : bookmarkType === "rss"
+              : tabType === "rss"
               ? "w-24"
               : "w-10"
           }
@@ -233,45 +233,45 @@ Props): JSX.Element {
           // min-w-0 !!
           // className="border w-full max-w-6xl min-w-0"
           className="border w-full min-w-0"
-          value={bookmarkTitleInput}
+          value={tabTitleInput}
           onChange={(e) => {
-            setBookmarkTitleInput(e.target.value);
+            setTabTitleInput(e.target.value);
             setWasAnythingClicked(true);
           }}
         />
         <ChevronDownSVG className="h-6 invisible" />
       </div>
-      {bookmarkType === "folder" && (
+      {tabType === "folder" && (
         <div className="flex items-center mt-2 justify-between">
-          <p className={`mr-2`}>Bookmarks</p>
+          <p className={`mr-2`}>Tabs</p>
           <input
             type="text"
             // min-w-0 !!
             // className="border w-full max-w-6xl min-w-0"
             className="border w-full min-w-0"
-            value={bookmarksInputStr}
+            value={tabsInputStr}
             onChange={(e) => {
-              // setBookmarkTitleInput(e.target.value);
+              // setTabTitleInput(e.target.value);
               setWasAnythingClicked(true);
 
               let target = e.target.value;
 
-              setBookmarksInputStr(target);
+              setTabsInputStr(target);
 
-              let bookmarksInputArr = target.split(", ");
+              let tabsInputArr = target.split(", ");
 
               // setTagsInputArr(tagsInputStr.split(" ,"))
 
               // let newVisibleTags = [...visibleTags];
-              let newVisibleBookmarks: string[] = [];
+              let newVisibleTabs: string[] = [];
 
-              visibleBookmarks.forEach((el) => {
-                if (bookmarksInputArr.indexOf(el) === -1) {
-                  newVisibleBookmarks.push(el);
+              visibleTabs.forEach((el) => {
+                if (tabsInputArr.indexOf(el) === -1) {
+                  newVisibleTabs.push(el);
                 }
               });
 
-              setVisibleBookmarks([...newVisibleBookmarks]);
+              setVisibleTabs([...newVisibleTabs]);
             }}
           />
           {chevronDown ? (
@@ -279,7 +279,7 @@ Props): JSX.Element {
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
                 setChevronDown((b) => !b);
-                setBookmarksListVis((b) => !b);
+                setTabsListVis((b) => !b);
               }}
             />
           ) : (
@@ -287,18 +287,18 @@ Props): JSX.Element {
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
                 setChevronDown((b) => !b);
-                setBookmarksListVis((b) => !b);
+                setTabsListVis((b) => !b);
               }}
             />
           )}
         </div>
       )}
 
-      {bookmarkType === "folder" && bookmarksListVis ? (
+      {tabType === "folder" && tabsListVis ? (
         <TagsList_UpperUI
-          setTagsInputStr={setBookmarksInputStr}
-          tagsInputStr={bookmarksInputStr}
-          visibleTags={visibleBookmarks}
+          setTagsInputStr={setTabsInputStr}
+          tagsInputStr={tabsInputStr}
+          visibleTags={visibleTabs}
           width="271px"
           marginLeft="42px"
         />
@@ -306,28 +306,28 @@ Props): JSX.Element {
 
       {tagErrorVis ? (
         <p className={`text-red-600`}>
-          Bookmark title should consist of a single word without special
+          Tab title should consist of a single word without special
           characters
         </p>
       ) : null}
 
-      {bookmarksErrorVis && bookmarkType === "folder" ? (
+      {tabsErrorVis && tabType === "folder" ? (
         <p className={`text-red-600`}>
-          Bookmarks should consist of words separated by coma and space
+          Tabs should consist of words separated by coma and space
         </p>
       ) : null}
 
-      {bookmarksExistenceErrorVis && bookmarkType === "folder" ? (
+      {tabsExistenceErrorVis && tabType === "folder" ? (
         <p className={`text-red-600`}>
-          You can choose from existing bookmarks only
+          You can choose from existing tabs only
         </p>
       ) : null}
 
-      {bookmarksRepeatErrorVis && bookmarkType === "folder" ? (
-        <p className={`text-red-600`}>Each bookmark should be unique</p>
+      {tabsRepeatErrorVis && tabType === "folder" ? (
+        <p className={`text-red-600`}>Each tab should be unique</p>
       ) : null}
 
-      {textAreaErrorVis && bookmarkType === "note" ? (
+      {textAreaErrorVis && tabType === "note" ? (
         <p className={`text-red-600`}>Note cannot be empty</p>
       ) : null}
 
@@ -338,12 +338,12 @@ Props): JSX.Element {
         </p>
       ) : null}
 
-      {bookmarkType === "note" ? (
+      {tabType === "note" ? (
         <div className="mt-2">
           <textarea
             value={textAreaValue as string}
             className="h-full w-full overflow-visible pl-1 pr-1 border font-mono"
-            rows={(currentBookmark[0].noteInput as string).length / 30}
+            rows={(currentTab[0].noteInput as string).length / 30}
             onChange={(e) => {
               setTextAreaValue(e.target.value);
               setWasAnythingClicked(true);
@@ -352,7 +352,7 @@ Props): JSX.Element {
         </div>
       ) : null}
 
-      {bookmarkType === "rss" ? (
+      {tabType === "rss" ? (
         <div>
           <div className="flex items-center mb-2 mt-2 justify-between">
             <p className="w-24 whitespace-nowrap">RSS link</p>
@@ -428,20 +428,20 @@ Props): JSX.Element {
         <div className="flex justify-between items-center">
           <p>Lock as always-open</p>
           <button>
-            {folderOpen ? (
+            {tabOpen ? (
               <LockClosedSVG
                 className="h-6 text-gray-700 hover:text-black cursor-pointer"
                 onClick={() => {
-                  setFolderOpen((b) => !b);
-                  setWasFolderOpenClicked(true);
+                  setTabOpen((b) => !b);
+                  setWasTabOpenClicked(true);
                 }}
               />
             ) : (
               <LockOpenSVG
                 className="h-6 text-gray-700 hover:text-black cursor-pointer"
                 onClick={() => {
-                  setFolderOpen((b) => !b);
-                  setWasFolderOpenClicked(true);
+                  setTabOpen((b) => !b);
+                  setWasTabOpenClicked(true);
                 }}
               />
             )}
@@ -454,27 +454,27 @@ Props): JSX.Element {
             <TrashSVG
               className="h-6 text-gray-500 hover:text-black cursor-pointer"
               onClick={() => {
-                if (!currentBookmark[0].deletable) {
+                if (!currentTab[0].deletable) {
                   setNoDeletionErrorVis(true);
                   return;
                 }
 
-                setDeletedBookmark(bookmarkID);
+                setDeletedTab(tabID);
 
-                setBookmarksData((previous) =>
+                setTabsData((previous) =>
                   produce(previous, (updated) => {
-                    updated.splice(bookmarkIndex, 1);
+                    updated.splice(tabIndex, 1);
                   })
                 );
 
-                setEditBookmarkVis((b) => !b);
-                // removing deleted bookmark(tag) for links
+                setEditTabVis((b) => !b);
+                // removing deleted tab(tag) for links
                 linksData.forEach((obj, i) => {
-                  if (obj.tags.indexOf(bookmarkTitle) > -1) {
+                  if (obj.tags.indexOf(tabTitle) > -1) {
                     setLinksData((previous) =>
                       produce(previous, (updated) => {
                         updated[i].tags.splice(
-                          obj.tags.indexOf(bookmarkTitle),
+                          obj.tags.indexOf(tabTitle),
                           1
                         );
                       })
@@ -497,11 +497,11 @@ Props): JSX.Element {
               setTagErrorVis(false);
               setTextAreaErrorVis(false);
               setNoDeletionErrorVis(false);
-              setBookmarksErrorVis(false);
-              setBookmarksRepeatErrorVis(false);
-              setBookmarksExistenceErrorVis(false);
+              setTabsErrorVis(false);
+              setTabsRepeatErrorVis(false);
+              setTabsExistenceErrorVis(false);
 
-              let bookmarksInputArr = bookmarksInputStr.split(", ");
+              let tabsInputArr = tabsInputStr.split(", ");
 
               if (!wasAnythingClicked) {
                 return;
@@ -510,12 +510,12 @@ Props): JSX.Element {
               setWasCheckboxClicked(false);
               setWasItemsPerPageClicked(false);
 
-              if (!regexForTitle.test(bookmarkTitleInput)) {
+              if (!regexForTitle.test(tabTitleInput)) {
                 setTagErrorVis(true);
                 return;
               }
 
-              if (bookmarkType === "note") {
+              if (tabType === "note") {
                 if ((textAreaValue as string).length === 0) {
                   setTextAreaErrorVis(true);
                   return;
@@ -525,36 +525,36 @@ Props): JSX.Element {
               // setTagErrorVis(false);
               // setTextAreaErrorVis(false);
               // setNoDeletionErrorVis(false);
-              // setBookmarksErrorVis(false);
-              //   setBookmarksRepeatErrorVis(false);
-              //   setBookmarksExistenceErrorVis(false);
+              // setTabsErrorVis(false);
+              //   setTabsRepeatErrorVis(false);
+              //   setTabsExistenceErrorVis(false);
 
-              if (bookmarkType === "folder") {
-                if (!regexForBookmarks.test(bookmarksInputStr)) {
-                  setBookmarksErrorVis(true);
+              if (tabType === "folder") {
+                if (!regexForTabs.test(tabsInputStr)) {
+                  setTabsErrorVis(true);
                   return;
                 }
 
-                if (!bookmarkExistenceCheck()) {
-                  setBookmarksExistenceErrorVis(true);
+                if (!tabExistenceCheck()) {
+                  setTabsExistenceErrorVis(true);
                   return;
                 }
 
                 if (!tagUniquenessCheck()) {
-                  setBookmarksRepeatErrorVis(true);
+                  setTabsRepeatErrorVis(true);
                   return;
                 }
               }
 
-              function bookmarkExistenceCheck() {
-                let bookmarksArr: string[] = [];
+              function tabExistenceCheck() {
+                let tabsArr: string[] = [];
 
                 linksData.forEach((obj) => {
-                  bookmarksArr.push(obj.title);
+                  tabsArr.push(obj.title);
                 });
 
-                for (let el of bookmarksInputArr) {
-                  if (bookmarksArr.indexOf(el) === -1) {
+                for (let el of tabsInputArr) {
+                  if (tabsArr.indexOf(el) === -1) {
                     return false;
                   }
                 }
@@ -565,8 +565,8 @@ Props): JSX.Element {
               function tagUniquenessCheck() {
                 let isUnique: boolean = true;
 
-                bookmarksInputArr.forEach((el, i) => {
-                  let tagsInputCopy = [...bookmarksInputArr];
+                tabsInputArr.forEach((el, i) => {
+                  let tagsInputCopy = [...tabsInputArr];
                   tagsInputCopy.splice(i, 1);
 
                   if (tagsInputCopy.indexOf(el) > -1) {
@@ -578,74 +578,74 @@ Props): JSX.Element {
                 return isUnique;
               }
 
-              setBookmarksData((previous) =>
+              setTabsData((previous) =>
                 produce(previous, (updated) => {
-                  updated[bookmarkIndex].title = bookmarkTitleInput;
-                  // updated[bookmarkIndex].deletable = currentBookmark[0].deletable
+                  updated[tabIndex].title = tabTitleInput;
+                  // updated[tabIndex].deletable = currentTab[0].deletable
 
-                  if (wasFolderOpenClicked) {
-                    updated[bookmarkIndex].opened = folderOpen;
+                  if (wasTabOpenClicked) {
+                    updated[tabIndex].opened = tabOpen;
                   }
 
-                  if (bookmarkType === "note") {
-                    updated[bookmarkIndex].noteInput = textAreaValue;
+                  if (tabType === "note") {
+                    updated[tabIndex].noteInput = textAreaValue;
                   }
-                  if (bookmarkType === "rss") {
-                    updated[bookmarkIndex].rssLink = rssLinkInput;
+                  if (tabType === "rss") {
+                    updated[tabIndex].rssLink = rssLinkInput;
 
                     if (wasCheckboxClicked) {
-                      updated[bookmarkIndex].date = dateCheckbox;
+                      updated[tabIndex].date = dateCheckbox;
                     }
 
                     if (wasCheckboxClicked) {
-                      updated[bookmarkIndex].description = descriptionCheckbox;
+                      updated[tabIndex].description = descriptionCheckbox;
                     }
 
                     if (wasItemsPerPageClicked) {
-                      updated[bookmarkIndex].itemsPerPage = rssItemsPerPage;
+                      updated[tabIndex].itemsPerPage = rssItemsPerPage;
                     }
                   }
                 })
               );
 
-              if (bookmarkType === "folder") {
+              if (tabType === "folder") {
                 // changing tags in links
                 setLinksData((previous) =>
                   produce(previous, (updated) => {
                     updated.forEach((obj) => {
-                      let bookmarksInputArr = bookmarksInputStr.split(", ");
+                      let tabsInputArr = tabsInputStr.split(", ");
 
                       // all initial links inside a folder
                       // make array of missing links
                       // if this links' title is inside missing links
-                      // cut out bookmarkID (current folder) from tags
+                      // cut out tabID (current folder) from tags
 
                       let missingLinks: string[] = [];
 
                       arrOfLinksNames.forEach((el, i) => {
-                        if (bookmarksInputArr.indexOf(el) === -1) {
+                        if (tabsInputArr.indexOf(el) === -1) {
                           missingLinks.push(el);
                         }
                       });
 
                       if (missingLinks.indexOf(obj.title) > -1) {
-                        obj.tags.splice(obj.tags.indexOf(bookmarkID), 1);
+                        obj.tags.splice(obj.tags.indexOf(tabID), 1);
                       }
 
-                      //  if link title is present in folder's new input for bookmarks & if folder title wasn't already in tags
+                      //  if link title is present in folder's new input for tabs & if folder title wasn't already in tags
                       // add new tag
                       if (
-                        bookmarksInputArr.indexOf(obj.title) > -1 &&
-                        obj.tags.indexOf(bookmarkID) === -1
+                        tabsInputArr.indexOf(obj.title) > -1 &&
+                        obj.tags.indexOf(tabID) === -1
                       ) {
-                        obj.tags.push(bookmarkID);
+                        obj.tags.push(tabID);
                       }
                     });
                   })
                 );
               }
 
-              setEditBookmarkVis((b) => !b);
+              setEditTabVis((b) => !b);
             }}
           >
             <SaveSVG
@@ -659,7 +659,7 @@ Props): JSX.Element {
           <button
             onClick={(e) => {
               e.preventDefault();
-              setEditBookmarkVis((b) => !b);
+              setEditTabVis((b) => !b);
             }}
           >
             <CancelSVG className="h-5 fill-current text-gray-900 ml-3 hover:text-red-600" />
@@ -671,4 +671,4 @@ Props): JSX.Element {
   );
 }
 
-export default EditBookmarkTitle;
+export default EditTabTitle;

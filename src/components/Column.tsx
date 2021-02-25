@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import { ItemTypes } from "../utils/itemsDnd";
 
-import { bookmarksDataState } from "../state/bookmarksAndLinks";
+import { tabsDataState } from "../state/tabsAndLinks";
 
 import {
   columnsColorsState,
@@ -12,42 +12,42 @@ import {
 } from "../state/colorsState";
 import {globalSettingsState } from "../state/defaultSettings";
 
-import Bookmark from "./Bookmark";
+import Tab from "./Tab";
 
 import { useDrop } from "react-dnd";
 import { produce } from "immer";
-import GapAfterBookmark from "./GapAfterBookmark";
+import GapAfterTab from "./GapAfterTab";
 
 interface Props {
   colNumber: number;
   // ref: React.MutableRefObject<number>
-  closeAllFolders: boolean;
+  closeAllTabs: boolean;
 }
 
-const Column = React.forwardRef(({ colNumber, closeAllFolders }: Props, ref) => {
+const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [
     columnsColorsImg_Data,
     setColumnsColorsImg_Data,
   ] = columnsColorsImg_State.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [tabsData, setTabsData] = tabsDataState.use();
 
 
-  function dragBookmark(itemID: number | string) {
-    setBookmarksData((previous) =>
+  function dragTab(itemID: number | string) {
+    setTabsData((previous) =>
       produce(previous, (updated) => {
-        let bookmarkIndex: number = 0;
+        let tabIndex: number = 0;
 
-        bookmarksData.forEach((obj, i) => {
+        tabsData.forEach((obj, i) => {
           if (obj.id === itemID) {
-            bookmarkIndex = i;
+            tabIndex = i;
           }
         });
-        // let currentBookmark = bookmarksData.filter( obj => obj.id === itemID )
+        // let currentTab = tabsData.filter( obj => obj.id === itemID )
 
-        updated[bookmarkIndex].column = colNumber;
-        //  updated[currentBookmark]
+        updated[tabIndex].column = colNumber;
+        //  updated[currentTab]
       })
     );
   }
@@ -127,28 +127,28 @@ const Column = React.forwardRef(({ colNumber, closeAllFolders }: Props, ref) => 
       }}
      
     >
-      {bookmarksData
+      {tabsData
         .filter((el) => el.column === colNumber)
         // lower priority, higher in the column
         .sort((a, b) => a.priority - b.priority)
         .map((el, i) => {
           return (
             <div key={i} className="">
-              <Bookmark
-                bookmarkID={el.id}
-                bookmarkTitle={el.title}
-                bookmarkColor={el.color}
-                bookmarkType={el.type}
+              <Tab
+                tabID={el.id}
+                tabTitle={el.title}
+                tabColor={el.color}
+                tabType={el.type}
                 colNumber={el.column}
-                closeAllFolders={closeAllFolders}
+                closeAllTabs={closeAllTabs}
                 
               />
-              <GapAfterBookmark colNumber={colNumber} bookmarkID={el.id} picBackground={globalSettingsData.picBackground} />
+              <GapAfterTab colNumber={colNumber} tabID={el.id} picBackground={globalSettingsData.picBackground} />
             </div>
           );
         })}
-      {bookmarksData.filter((el) => el.column === colNumber).length === 0 ? (
-        <GapAfterBookmark colNumber={colNumber} bookmarkID={null} picBackground={globalSettingsData.picBackground} />
+      {tabsData.filter((el) => el.column === colNumber).length === 0 ? (
+        <GapAfterTab colNumber={colNumber} tabID={null} picBackground={globalSettingsData.picBackground} />
       ) : null}
     </div>
   );

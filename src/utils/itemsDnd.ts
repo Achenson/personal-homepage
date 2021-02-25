@@ -1,3 +1,3 @@
 export const ItemTypes = {
-    BOOKMARK: "bookmark"
+    BOOKMARK: "tab"
 }

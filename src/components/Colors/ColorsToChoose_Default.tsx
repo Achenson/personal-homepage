@@ -3,7 +3,7 @@ import React from "react";
 import DefaultSingleColor from "./SingleColor_Default";
 import DefaultSingleColor_Img from "./SingleColor_Default_Img";
 
-import { folderColors } from "../../utils/folderColors";
+import { folderColors } from "../../utils/tabColors";
 import { columnColors, imageColumnColors } from "../../utils/columnColors";
 
 import { globalSettingsState } from "../../state/defaultSettings";
@@ -11,7 +11,7 @@ import { globalSettingsState } from "../../state/defaultSettings";
 interface Props {
   // setIconsVisibility: (value: React.SetStateAction<boolean>) => void;
 
-  // bookmarkTitle: string;
+  // tabTitle: string;
   defaultColorsFor:
     | "folders"
     | "notes"

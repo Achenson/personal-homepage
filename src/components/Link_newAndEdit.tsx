@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import { linksDataState, bookmarksDataState, linksAllTagsState } from "../state/bookmarksAndLinks";
+import { linksDataState, tabsDataState, linksAllTagsState } from "../state/tabsAndLinks";
 
 import Link_upper_JSX from "./Link_upper_JSX";
 import Link_lower_JSX from "./Link_lower_JSX";
@@ -29,9 +29,9 @@ function Link_newAndEdit({
     currentLink = linksData.filter((obj) => obj.id === linkId)[0];
   }
 
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [tabsData, setTabsData] = tabsDataState.use();
 
-  let bookmarkFolders = bookmarksData.filter((obj) => obj.type === "folder");
+  let tabFolders = tabsData.filter((obj) => obj.type === "folder");
 
   const [titleInput, setTitleInput] = useState<string>(
     linkComponentType === "edit" ? (currentLink as SingleLinkData).title : ""
@@ -52,7 +52,7 @@ function Link_newAndEdit({
   function generateTagNames() {
     let arrOut: string[] = [];
 
-    bookmarksData.forEach((obj) => {
+    tabsData.forEach((obj) => {
       if ((currentLink as SingleLinkData).tags.indexOf(obj.id) > -1 && obj.id !== "ALL_TAGS") {
         arrOut.push(obj.title);
       }
@@ -74,7 +74,7 @@ function Link_newAndEdit({
 
   let notesTitlesArr: string[] = [];
 
-  bookmarksData.forEach((obj) => {
+  tabsData.forEach((obj) => {
     if (obj.type === "note") {
       notesTitlesArr.push(obj.title);
     }
@@ -120,7 +120,7 @@ function Link_newAndEdit({
   function makeInitialTags(): string[] {
     let tags: string[] = [];
 
-    bookmarkFolders.forEach((obj) => {
+    tabFolders.forEach((obj) => {
       if(obj.id !== "ALL_TAGS") {
 
         tags.push(obj.title);

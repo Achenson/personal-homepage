@@ -1,27 +1,27 @@
 import React from "react";
 
-import { bookmarksDataState } from "../state/bookmarksAndLinks";
+import { tabsDataState } from "../state/tabsAndLinks";
 
 interface Props {
   //  noteInput: string | null;
-  bookmarkID: string | number;
-  setEditBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  tabID: string | number;
+  setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function NoteInput({ bookmarkID, setEditBookmarkVis }: Props): JSX.Element {
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+function NoteInput({ tabID, setEditTabVis }: Props): JSX.Element {
+  const [tabsData, setTabsData] = tabsDataState.use();
 
-  let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
+  let currentTab = tabsData.filter((obj) => obj.id === tabID);
 
   return (
     <div className="bg-gray-100 p-2">
       <div
         className="bg-yellow-300 p-2 rounded-md"
         onClick={() => {
-          setEditBookmarkVis(true);
+          setEditTabVis(true);
         }}
       >
-        {currentBookmark[0].noteInput}
+        {currentTab[0].noteInput}
       </div>
     </div>
   );

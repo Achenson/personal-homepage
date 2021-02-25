@@ -1,20 +1,20 @@
 import React from "react";
-import { bookmarksDataState } from "../../state/bookmarksAndLinks";
+import { tabsDataState } from "../../state/tabsAndLinks";
 import { produce } from "immer";
 
 interface Props {
   color: string;
-  bookmarkTitle: string;
+  tabTitle: string;
 }
 
-function SingleColor({ color, bookmarkTitle }: Props): JSX.Element {
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+function SingleColor({ color, tabTitle }: Props): JSX.Element {
+  const [tabsData, setTabsData] = tabsDataState.use();
 
-  let bookmarkIndex: number;
+  let tabIndex: number;
 
-  bookmarksData.forEach( (obj, i) => {
-    if (obj.title === bookmarkTitle) {
-      bookmarkIndex = i
+  tabsData.forEach( (obj, i) => {
+    if (obj.title === tabTitle) {
+      tabIndex = i
     }
   })
 
@@ -22,9 +22,9 @@ function SingleColor({ color, bookmarkTitle }: Props): JSX.Element {
     <div
       className={`h-4 w-8 bg-${color} cursor-pointer border border-black hover:border-gray-500`}
       onClick={() => {
-        setBookmarksData((previous) =>
+        setTabsData((previous) =>
           produce(previous, (updated) => {
-            updated[bookmarkIndex].color = `${color}`;
+            updated[tabIndex].color = `${color}`;
           })
         );
       }}

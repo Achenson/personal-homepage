@@ -1,4 +1,4 @@
-export const folderColors: string[][] = [
+export const tabColors: string[][] = [
   [
     "blueGray-303",
     // "gray-300",

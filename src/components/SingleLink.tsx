@@ -1,12 +1,12 @@
 import React from "react";
 import { produce } from "immer";
-import { linksDataState } from "../state/bookmarksAndLinks";
+import { linksDataState } from "../state/tabsAndLinks";
 
 import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
 import { ReactComponent as PhotographSVG } from "../svgs/photograph.svg";
 
-import { linksAllTagsState } from "../state/bookmarksAndLinks";
+import { linksAllTagsState } from "../state/tabsAndLinks";
 
 import { SingleLinkData } from "../utils/interfaces";
 
@@ -22,7 +22,7 @@ interface Props {
   singleLinkData: SingleLinkData;
 
   setLinkId: React.Dispatch<React.SetStateAction<string | number | undefined>>;
-  bookmarkID: string | number;
+  tabID: string | number;
   // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleLinkData>>;
 }
 
@@ -31,22 +31,22 @@ function SingleLink({
   singleLinkData,
   // setEditSingleLinkData,
   setLinkId,
-  bookmarkID,
+  tabID,
 }: Props): JSX.Element {
   const [linksData, setLinksData] = linksDataState.use();
   const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
 
   // let linkURL = new URL(singleLinkData.URL)
 
-  let bookmarkIndex: number = 0;
+  let tabIndex: number = 0;
 
   linksData.forEach((obj, i) => {
     if (obj.id === singleLinkData.id) {
-      bookmarkIndex = i;
+      tabIndex = i;
     }
   });
 
-  let currentBookmarkTitle = linksData[bookmarkIndex].title;
+  let currentTabTitle = linksData[tabIndex].title;
 
   return (
     <div className="flex justify-between bg-gray-100 h-10 py-2 border-b">
@@ -114,7 +114,7 @@ function SingleLink({
 
             setLinksData((previous) =>
               produce(previous, (updated) => {
-                updated.splice(bookmarkIndex, 1);
+                updated.splice(tabIndex, 1);
               })
             );
           }}

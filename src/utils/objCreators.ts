@@ -18,7 +18,7 @@ export function createBasicFolder(
   };
 }
 
-export function createBookmarkFolder_partial(
+export function createTabFolder_partial(
   type: "folder" | "note" | "rss" = "folder"
 ) {
   return {
@@ -53,14 +53,14 @@ export function createRSS_partial(
   };
 }
 
-export function createBookmarkFolder(
+export function createTabFolder(
   title: string,
   column: number,
   priority: number
 ) {
   return {
     ...createBasicFolder(title, column, priority),
-    ...createBookmarkFolder_partial(),
+    ...createTabFolder_partial(),
   };
 }
 

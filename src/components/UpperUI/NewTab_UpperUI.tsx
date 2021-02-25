@@ -11,43 +11,43 @@ import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 import TagsList_UpperUI from "./TagsList_UpperUI";
 
 import {
-  createBookmarkFolder,
+  createTabFolder,
   createNote,
   createRSS,
 } from "../../utils/objCreators";
 
 import { produce } from "immer";
 
-import { bookmarksDataState } from "../../state/bookmarksAndLinks";
-import { linksDataState } from "../../state/bookmarksAndLinks";
+import { tabsDataState } from "../../state/tabsAndLinks";
+import { linksDataState } from "../../state/tabsAndLinks";
 
 interface Props {
-  setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  bookmarkType: "folder" | "note" | "rss";
+  setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
+  tabType: "folder" | "note" | "rss";
 }
 
-function NewBookmark_UpperUI({
-  setNewBookmarkVis,
-  bookmarkType,
+function NewTab_UpperUI({
+  setNewTabVis,
+  tabType,
 }: Props): JSX.Element {
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [tabsData, setTabsData] = tabsDataState.use();
 
   const [linksData, setLinksData] = linksDataState.use();
 
-  const [bookmarkTitleInput, setBookmarkTitleInput] = useState<string>("");
+  const [tabTitleInput, setTabTitleInput] = useState<string>("");
   const [rssLinkInput, setRssLinkInput] = useState<string>("");
 
-  const [bookmarkColumnInput, setBookmarkColumnInput] = useState<number>(1);
-  // const [bookmarkLinksInput, setBookmarkLinksInput] = useState<string[]>([]);
+  const [tabColumnInput, setTabColumnInput] = useState<number>(1);
+  // const [tabLinksInput, setTabLinksInput] = useState<string[]>([]);
 
-  const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
+  const [tabsErrorVis, setTabsErrorVis] = useState<boolean>(false);
   const [
-    bookmarksRepeatErrorVis,
-    setBookmarksRepeatErrorVis,
+    tabsRepeatErrorVis,
+    setTabsRepeatErrorVis,
   ] = useState<boolean>(false);
   const [
-    bookmarksExistenceErrorVis,
-    setBookmarksExistenceErrorVis,
+    tabsExistenceErrorVis,
+    setTabsExistenceErrorVis,
   ] = useState<boolean>(false);
 
   const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
@@ -60,24 +60,24 @@ function NewBookmark_UpperUI({
   // for notes
   const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
 
-  const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
+  const [tabsListVis, setTabsListVis] = useState<boolean>(false);
 
-  const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(
-    makeInitialBookmarks()
+  const [visibleTabs, setVisibleTabs] = useState<string[]>(
+    makeInitialTabs()
   );
 
-  const [bookmarksInputStr, setBookmarksInputStr] = useState<string>("");
+  const [tabsInputStr, setTabsInputStr] = useState<string>("");
 
   // ^  and $ -> beginning and end of the text!
-  let regexForBookmarks = /^\w+(,\s\w+)*$/;
+  let regexForTabs = /^\w+(,\s\w+)*$/;
   let regexForTitle = /^\w+$/;
 
   const [textAreaValue, setTextAreaValue] = useState<string | null>("");
 
   const [chevronDown, setChevronDown] = useState(true);
 
-  const [initialBookmarks, setInitialBookmarks] = useState(
-    makeInitialBookmarks()
+  const [initialTabs, setInitialTabs] = useState(
+    makeInitialTabs()
   );
 
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
@@ -86,41 +86,41 @@ function NewBookmark_UpperUI({
   useEffect(() => {
     let newVisibleTags: string[] = [];
 
-    initialBookmarks.forEach((el) => {
+    initialTabs.forEach((el) => {
       // in new RegExp the \ needs to be escaped!
       let tagRegex = new RegExp(`\\b${el}\\b`);
 
-      if (!tagRegex.test(bookmarksInputStr)) {
+      if (!tagRegex.test(tabsInputStr)) {
         newVisibleTags.push(el);
       }
     });
 
-    setVisibleBookmarks([...newVisibleTags]);
+    setVisibleTabs([...newVisibleTags]);
 
     if (newVisibleTags.length === 0) {
-      setBookmarksListVis(false);
+      setTabsListVis(false);
     }
 
     if (newVisibleTags.length > 0 && !isThisTheFirstRender) {
-      setBookmarksListVis(true);
+      setTabsListVis(true);
     }
 
     setIsThisTheFirstRender(false);
   }, [
-    bookmarksInputStr,
-    initialBookmarks,
-    setVisibleBookmarks,
-    setBookmarksListVis,
+    tabsInputStr,
+    initialTabs,
+    setVisibleTabs,
+    setTabsListVis,
   ]);
 
-  function makeInitialBookmarks(): string[] {
-    let bookmarks: string[] = [];
+  function makeInitialTabs(): string[] {
+    let tabs: string[] = [];
 
     linksData.forEach((obj) => {
-      bookmarks.push(obj.title);
+      tabs.push(obj.title);
     });
 
-    return bookmarks;
+    return tabs;
   }
 
   return (
@@ -139,18 +139,18 @@ function NewBookmark_UpperUI({
           <input
             type="text"
             className="w-full border border-gray-500"
-            value={bookmarkTitleInput}
+            value={tabTitleInput}
             placeholder={
-              // bookmarkType === "folder"
+              // tabType === "folder"
               //   ? "new folder title"
               //   : "new note title"
-              bookmarkType === "folder"
+              tabType === "folder"
                 ? "new folder title"
-                : bookmarkType === "note"
+                : tabType === "note"
                 ? "new note title"
                 : "new RSS title"
             }
-            onChange={(e) => setBookmarkTitleInput(e.target.value)}
+            onChange={(e) => setTabTitleInput(e.target.value)}
           />
           {/* </div> */}
           <ChevronDownSVG className="h-6 invisible" />
@@ -163,46 +163,46 @@ function NewBookmark_UpperUI({
             min="1"
             max="4"
             className="w-full border border-gray-500"
-            value={bookmarkColumnInput}
-            onChange={(e) => setBookmarkColumnInput(parseInt(e.target.value))}
+            value={tabColumnInput}
+            onChange={(e) => setTabColumnInput(parseInt(e.target.value))}
             placeholder={"Enter number between 1 and 4"}
           />
           {/* </div> */}
           <ChevronDownSVG className="h-6 invisible" />
         </div>
 
-        {bookmarkType === "folder" ? (
+        {tabType === "folder" ? (
           <div className="flex justify-around mb-2 mt-2">
-            <p className="w-32">Bookmarks</p>
+            <p className="w-32">Tabs</p>
             {/* <div className="w-full pl-2"> */}
             <input
               type="text"
               className="w-full border border-gray-500"
-              // value={bookmarkLinksInput.join(", ")}
-              value={bookmarksInputStr}
+              // value={tabLinksInput.join(", ")}
+              value={tabsInputStr}
               // onChange={(e) =>
-              //   setBookmarkLinksInput([...e.target.value.split(", ")])
+              //   setTabLinksInput([...e.target.value.split(", ")])
               // }
 
               onChange={(e) => {
                 let target = e.target.value;
 
-                setBookmarksInputStr(target);
+                setTabsInputStr(target);
 
-                let bookmarksInputArr = target.split(", ");
+                let tabsInputArr = target.split(", ");
 
                 // setTagsInputArr(tagsInputStr.split(" ,"))
 
                 // let newVisibleTags = [...visibleTags];
-                let newVisibleBookmarks: string[] = [];
+                let newVisibleTabs: string[] = [];
 
-                visibleBookmarks.forEach((el) => {
-                  if (bookmarksInputArr.indexOf(el) === -1) {
-                    newVisibleBookmarks.push(el);
+                visibleTabs.forEach((el) => {
+                  if (tabsInputArr.indexOf(el) === -1) {
+                    newVisibleTabs.push(el);
                   }
                 });
 
-                setVisibleBookmarks([...newVisibleBookmarks]);
+                setVisibleTabs([...newVisibleTabs]);
               }}
               placeholder={"Choose at least one"}
             />
@@ -212,7 +212,7 @@ function NewBookmark_UpperUI({
                 className="h-6 cursor-pointer hover:text-blueGray-500"
                 onClick={() => {
                   setChevronDown((b) => !b);
-                  setBookmarksListVis((b) => !b);
+                  setTabsListVis((b) => !b);
                 }}
               />
             ) : (
@@ -220,14 +220,14 @@ function NewBookmark_UpperUI({
                 className="h-6 cursor-pointer hover:text-blueGray-500"
                 onClick={() => {
                   setChevronDown((b) => !b);
-                  setBookmarksListVis((b) => !b);
+                  setTabsListVis((b) => !b);
                 }}
               />
             )}
           </div>
         ) : null}
 
-        {bookmarkType === "note" ? (
+        {tabType === "note" ? (
           <div>
             <textarea
               value={textAreaValue as string}
@@ -240,7 +240,7 @@ function NewBookmark_UpperUI({
           </div>
         ) : null}
 
-        {bookmarkType === "rss" ? (
+        {tabType === "rss" ? (
           <div className="flex justify-around mb-2 mt-2">
             <p className="w-32">RSS link</p>
             <div className="w-full pl-2">
@@ -255,11 +255,11 @@ function NewBookmark_UpperUI({
           </div>
         ) : null}
 
-        {bookmarksListVis ? (
+        {tabsListVis ? (
           <TagsList_UpperUI
-            setTagsInputStr={setBookmarksInputStr}
-            tagsInputStr={bookmarksInputStr}
-            visibleTags={visibleBookmarks}
+            setTagsInputStr={setTabsInputStr}
+            tagsInputStr={tabsInputStr}
+            visibleTags={visibleTabs}
             width="228px"
             marginLeft="89px"
           />
@@ -277,23 +277,23 @@ function NewBookmark_UpperUI({
           </p>
         ) : null}
 
-        {bookmarksErrorVis && bookmarkType === "folder" ? (
+        {tabsErrorVis && tabType === "folder" ? (
           <p className={`text-red-600`}>
-            Bookmarks should consist of words separated by coma and space
+            Tabs should consist of words separated by coma and space
           </p>
         ) : null}
 
-        {bookmarksExistenceErrorVis && bookmarkType === "folder" ? (
+        {tabsExistenceErrorVis && tabType === "folder" ? (
           <p className={`text-red-600`}>
-            You can choose from existing bookmarks only
+            You can choose from existing tabs only
           </p>
         ) : null}
 
-        {bookmarksRepeatErrorVis && bookmarkType === "folder" ? (
-          <p className={`text-red-600`}>Each bookmark should be unique</p>
+        {tabsRepeatErrorVis && tabType === "folder" ? (
+          <p className={`text-red-600`}>Each tab should be unique</p>
         ) : null}
 
-        {textAreaErrorVis && bookmarkType === "note" ? (
+        {textAreaErrorVis && tabType === "note" ? (
           <p className={`text-red-600`}>Note cannot be empty</p>
         ) : null}
 
@@ -307,16 +307,16 @@ function NewBookmark_UpperUI({
 
                 // if(tagsInput.join(", "))
 
-                setBookmarksErrorVis(false);
-                setBookmarksRepeatErrorVis(false);
+                setTabsErrorVis(false);
+                setTabsRepeatErrorVis(false);
                 setTitleFormatErrorVis(false);
                 setTitleUniquenessErrorVis(false);
-                setBookmarksExistenceErrorVis(false);
+                setTabsExistenceErrorVis(false);
                 setTextAreaErrorVis(false);
 
-                let bookmarksInputArr = bookmarksInputStr.split(", ");
+                let tabsInputArr = tabsInputStr.split(", ");
 
-                if (!regexForTitle.test(bookmarkTitleInput)) {
+                if (!regexForTitle.test(tabTitleInput)) {
                   setTitleFormatErrorVis(true);
 
                   return;
@@ -327,40 +327,40 @@ function NewBookmark_UpperUI({
                   return;
                 }
 
-                if (bookmarkType === "folder") {
-                  // if (!regexForBookmarks.test(bookmarkLinksInput.join(", "))) {
-                  if (!regexForBookmarks.test(bookmarksInputArr.join(", "))) {
-                    setBookmarksErrorVis(true);
+                if (tabType === "folder") {
+                  // if (!regexForTabs.test(tabLinksInput.join(", "))) {
+                  if (!regexForTabs.test(tabsInputArr.join(", "))) {
+                    setTabsErrorVis(true);
                     return;
                   }
 
-                  if (!bookmarkExistenceCheck()) {
-                    setBookmarksExistenceErrorVis(true);
+                  if (!tabExistenceCheck()) {
+                    setTabsExistenceErrorVis(true);
                     return;
                   }
 
                   if (!tagUniquenessCheck()) {
-                    setBookmarksRepeatErrorVis(true);
+                    setTabsRepeatErrorVis(true);
                     return;
                   }
 
                   
                 }
 
-                if (bookmarkType === "note") {
+                if (tabType === "note") {
                   if ((textAreaValue as string).length === 0) {
                     setTextAreaErrorVis(true);
                     return;
                   }
                 }
 
-                if (bookmarkType === "note") {
-                  setBookmarksData((previous) =>
+                if (tabType === "note") {
+                  setTabsData((previous) =>
                     produce(previous, (updated) => {
                       updated.push({
                         ...createNote(
-                          bookmarkTitleInput,
-                          bookmarkColumnInput,
+                          tabTitleInput,
+                          tabColumnInput,
                           0,
                           textAreaValue
                         ),
@@ -369,13 +369,13 @@ function NewBookmark_UpperUI({
                   );
                 }
 
-                if (bookmarkType === "folder") {
-                  setBookmarksData((previous) =>
+                if (tabType === "folder") {
+                  setTabsData((previous) =>
                     produce(previous, (updated) => {
                       updated.push({
-                        ...createBookmarkFolder(
-                          bookmarkTitleInput,
-                          bookmarkColumnInput,
+                        ...createTabFolder(
+                          tabTitleInput,
+                          tabColumnInput,
                           0
                         ),
                       });
@@ -387,23 +387,23 @@ function NewBookmark_UpperUI({
                     produce(previous, (updated) => {
                       updated.forEach((obj) => {
                         if (
-                          bookmarksInputArr.indexOf(obj.title) > -1 &&
-                          obj.tags.indexOf(bookmarkTitleInput) === -1
+                          tabsInputArr.indexOf(obj.title) > -1 &&
+                          obj.tags.indexOf(tabTitleInput) === -1
                         ) {
-                          obj.tags.push(bookmarkTitleInput);
+                          obj.tags.push(tabTitleInput);
                         }
                       });
                     })
                   );
                 }
 
-                if (bookmarkType === "rss") {
-                  setBookmarksData((previous) =>
+                if (tabType === "rss") {
+                  setTabsData((previous) =>
                     produce(previous, (updated) => {
                       updated.push({
                         ...createRSS(
-                          bookmarkTitleInput,
-                          bookmarkColumnInput,
+                          tabTitleInput,
+                          tabColumnInput,
                           0,
                           rssLinkInput
                         ),
@@ -412,17 +412,17 @@ function NewBookmark_UpperUI({
                   );
                 }
 
-                setNewBookmarkVis((b) => !b);
+                setNewTabVis((b) => !b);
 
-                function bookmarkExistenceCheck() {
-                  let bookmarksArr: string[] = [];
+                function tabExistenceCheck() {
+                  let tabsArr: string[] = [];
 
                   linksData.forEach((obj) => {
-                    bookmarksArr.push(obj.title);
+                    tabsArr.push(obj.title);
                   });
 
-                  for (let el of bookmarksInputArr) {
-                    if (bookmarksArr.indexOf(el) === -1) {
+                  for (let el of tabsInputArr) {
+                    if (tabsArr.indexOf(el) === -1) {
                       return false;
                     }
                   }
@@ -433,8 +433,8 @@ function NewBookmark_UpperUI({
                 function tagUniquenessCheck() {
                   let isUnique: boolean = true;
 
-                  bookmarksInputArr.forEach((el, i) => {
-                    let tagsInputCopy = [...bookmarksInputArr];
+                  tabsInputArr.forEach((el, i) => {
+                    let tagsInputCopy = [...tabsInputArr];
                     tagsInputCopy.splice(i, 1);
 
                     if (tagsInputCopy.indexOf(el) > -1) {
@@ -449,8 +449,8 @@ function NewBookmark_UpperUI({
                 function titleUniquenessCheck() {
                   let isUnique: boolean = true;
 
-                  bookmarksData.forEach((obj, i) => {
-                    if (obj.title === bookmarkTitleInput) {
+                  tabsData.forEach((obj, i) => {
+                    if (obj.title === tabTitleInput) {
                       isUnique = false;
                     }
                   });
@@ -464,7 +464,7 @@ function NewBookmark_UpperUI({
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setNewBookmarkVis((b) => !b);
+                setNewTabVis((b) => !b);
               }}
             >
               <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
@@ -476,4 +476,4 @@ function NewBookmark_UpperUI({
   );
 }
 
-export default NewBookmark_UpperUI;
+export default NewTab_UpperUI;

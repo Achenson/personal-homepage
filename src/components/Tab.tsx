@@ -2,15 +2,15 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { produce } from "immer";
 
-import { bookmarksDataState } from "../state/bookmarksAndLinks";
-import { linksDataState } from "../state/bookmarksAndLinks";
-import { deletedBookmarkState } from "../state/bookmarksAndLinks";
+import { tabsDataState } from "../state/tabsAndLinks";
+import { linksDataState } from "../state/tabsAndLinks";
+import { deletedTabState } from "../state/tabsAndLinks";
 import {
   noteColorState,
   folderColorState,
   rssColorState,
   columnsColorsState,
-  bookmarkBeingDraggedColor_State,
+  tabBeingDraggedColor_State,
 } from "../state/colorsState";
 
 import { closeAllFoldersState } from "../state/defaultSettings";
@@ -26,7 +26,7 @@ import ColorsToChoose from "./Colors/ColorsToChoose";
 
 // import EditLink from "./EditLink";
 import Link_newAndEdit from "./Link_newAndEdit";
-import EditBookmarkTitle from "./EditBookmarkTitle";
+import EditTabTitle from "./EditTabTitle";
 import NoteInput from "./NoteInput";
 import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
@@ -39,21 +39,21 @@ interface SingleLinkData {
 }
 
 interface Props {
-  bookmarkID: string | number;
-  bookmarkTitle: string;
-  bookmarkColor: string | null;
-  bookmarkType: "folder" | "note" | "rss";
+  tabID: string | number;
+  tabTitle: string;
+  tabColor: string | null;
+  tabType: "folder" | "note" | "rss";
   colNumber: number;
   // noteInput: string | null;
   // rssLink: string | null;
   closeAllFolders: boolean;
 }
 
-function Bookmark({
-  bookmarkID,
-  bookmarkTitle,
-  bookmarkColor,
-  bookmarkType,
+function Tab({
+  tabID,
+  tabTitle,
+  tabColor,
+  tabType,
   colNumber,
   closeAllFolders
 }: // noteInput,
@@ -61,8 +61,8 @@ function Bookmark({
 Props): JSX.Element {
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-  const [deletedBookmark, setDeletedBookmark] = deletedBookmarkState.use();
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [deletedTab, setDeletedTab] = deletedTabState.use();
+  const [tabsData, setTabsData] = tabsDataState.use();
 
   const [linksData, setLinksData] = linksDataState.use();
 
@@ -71,7 +71,7 @@ Props): JSX.Element {
 
   const [editLinkVis, setEditLinkVis] = useState<boolean>(false);
   const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
-  const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
+  const [editTabVis, setEditTabVis] = useState<boolean>(false);
 
   // const [editSingleLinkData, setEditSingleLinkData] = useState<SingleLinkData>({
   //   title: "",
@@ -84,34 +84,34 @@ Props): JSX.Element {
   const [crossVis, setCrossVis] = useState<boolean>(true);
 
   // 0 to not show typescript errors
-  let bookmarkIndex: number = 0;
+  let tabIndex: number = 0;
 
-  let currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkID);
+  let currentTab = tabsData.filter((obj) => obj.id === tabID);
 
   // for conditional shadow rendering
-  let bookmarkColumn: number;
+  let tabColumn: number;
 
-  bookmarksData.forEach((obj, i) => {
-    if (obj.id === bookmarkID) {
-      bookmarkIndex = i;
-      bookmarkColumn = obj.column;
+  tabsData.forEach((obj, i) => {
+    if (obj.id === tabID) {
+      tabIndex = i;
+      tabColumn = obj.column;
     }
   });
 
-  // bookmark content
+  // tab content
   const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
-    bookmarksData[bookmarkIndex].opened
+    tabsData[tabIndex].opened
     // false
   );
   // rss content
   const [rssVisibility, setRssVisibility] = useState<boolean>(
-    bookmarksData[bookmarkIndex].opened
+    tabsData[tabIndex].opened
     // false
   );
 
   // for Note only / note content
   const [noteInputVisibility, setNoteInputVisibility] = useState<boolean>(
-    bookmarksData[bookmarkIndex].opened
+    tabsData[tabIndex].opened
     // false
   );
 
@@ -133,21 +133,21 @@ Props): JSX.Element {
   const [rssColorData, setRssColorData] = rssColorState.use();
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
 
-  let finalBookmarkColor: string = "";
+  let finalTabColor: string = "";
 
-  if (bookmarkColor) {
-    finalBookmarkColor = bookmarkColor;
+  if (tabColor) {
+    finalTabColor = tabColor;
   } else {
-    if (bookmarkType === "folder") {
-      finalBookmarkColor = folderColorData;
+    if (tabType === "folder") {
+      finalTabColor = folderColorData;
     }
 
-    if (bookmarkType === "note") {
-      finalBookmarkColor = noteColorData;
+    if (tabType === "note") {
+      finalTabColor = noteColorData;
     }
 
-    if (bookmarkType === "rss") {
-      finalBookmarkColor = rssColorData;
+    if (tabType === "rss") {
+      finalTabColor = rssColorData;
     }
   }
 
@@ -161,9 +161,9 @@ Props): JSX.Element {
     item: {
       // type is required
       type: ItemTypes.BOOKMARK,
-      bookmarkID: bookmarkID,
+      tabID: tabID,
       colNumber: colNumber,
-      bookmarkColor: finalBookmarkColor,
+      tabColor: finalTabColor,
     },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
@@ -171,19 +171,19 @@ Props): JSX.Element {
   });
 
   const [
-    bookmarkBeingDraggedColor_Data,
-    setBookmarkBeingDraggedColor_Data,
-  ] = bookmarkBeingDraggedColor_State.use();
+    tabBeingDraggedColor_Data,
+    setTabBeingDraggedColor_Data,
+  ] = tabBeingDraggedColor_State.use();
 
   useEffect( () => {
     if(isDragging) {
-      setBookmarkBeingDraggedColor_Data({bookmarkColor: finalBookmarkColor})
+      setTabBeingDraggedColor_Data({tabColor: finalTabColor})
     }
 
-  }, [isDragging, finalBookmarkColor, setBookmarkBeingDraggedColor_Data])
+  }, [isDragging, finalTabColor, setTabBeingDraggedColor_Data])
 
   function textOrIconColor(
-    finalBookmarkColor: string,
+    finalTabColor: string,
     textOrIcon: "text" | "icon"
   ) {
     // exceptions
@@ -203,20 +203,20 @@ Props): JSX.Element {
     ];
     let colorsForDarkText: string[] = ["yellow-600"];
 
-    if (colorsForLightText.indexOf(finalBookmarkColor) > -1) {
+    if (colorsForLightText.indexOf(finalTabColor) > -1) {
       // return textOrIcon === "text" ? "text-gray-200" : "text-gray-300";
       return textOrIcon === "text" ? "text-gray-100" : "text-gray-200";
       // return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
     }
 
-    if (colorsForDarkText.indexOf(finalBookmarkColor) > -1) {
+    if (colorsForDarkText.indexOf(finalTabColor) > -1) {
       return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
     }
 
     // "default" behaviour
     let regexForColors = /[6789]/;
 
-    if (regexForColors.test(finalBookmarkColor)) {
+    if (regexForColors.test(finalTabColor)) {
       // return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
       return textOrIcon === "text" ? "text-gray-100" : "text-gray-200";
     }
@@ -224,7 +224,7 @@ Props): JSX.Element {
     return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
   }
 
-  function hoverText(finalBookmarkColor: string) {
+  function hoverText(finalTabColor: string) {
     let colorsForLightHover: string[] = [
       "bg-black",
       "bg-gray-700",
@@ -247,11 +247,11 @@ Props): JSX.Element {
       "bg-red-800",
     ];
 
-    if (colorsForLightHoverAlt.indexOf(finalBookmarkColor) > -1) {
+    if (colorsForLightHoverAlt.indexOf(finalTabColor) > -1) {
       return "text-yellow-400";
     }
 
-    if (colorsForLightHover.indexOf(finalBookmarkColor) > -1) {
+    if (colorsForLightHover.indexOf(finalTabColor) > -1) {
       return "text-orange-500";
     }
 
@@ -259,13 +259,13 @@ Props): JSX.Element {
   }
 
   return (
-    <div className={`relative ${globalSettingsData.hideNonDeletable && !currentBookmark[0].deletable ? "hidden" : ""}`} ref={drag}>
+    <div className={`relative ${globalSettingsData.hideNonDeletable && !currentTab[0].deletable ? "hidden" : ""}`} ref={drag}>
       <div
         className={`pl-0 h-8 px-2 pt-px bg-${
-          // bookmarkColor ? bookmarkColor : finalBookmarkColor
-          finalBookmarkColor
+          // tabColor ? tabColor : finalTabColor
+          finalTabColor
         } ${textOrIconColor(
-          finalBookmarkColor,
+          finalTabColor,
           "text"
         )} border border-t-0 border-r-0 border-l-0 border-gray-700 border-opacity-25 flex justify-between`}
         style={{ boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)" }}
@@ -284,29 +284,29 @@ Props): JSX.Element {
         <div
           className="pl-1 w-full cursor-pointer"
           onClick={() => {
-            if (bookmarkType === "folder") {
+            if (tabType === "folder") {
               setSingleLinkVisibility((b) => !b);
             }
 
-            if (bookmarkType === "note") {
+            if (tabType === "note") {
               setNoteInputVisibility((b) => !b);
             }
 
-            if (bookmarkType === "rss") {
+            if (tabType === "rss") {
               setRssVisibility((b) => !b);
             }
           }}
         >
           <p className="">
             {" "}
-            {bookmarkTitle} {bookmarksData[bookmarkIndex].priority} {bookmarksData[bookmarkIndex].deletable.toString()}
+            {tabTitle} {tabsData[tabIndex].priority} {tabsData[tabIndex].deletable.toString()}
           </p>
         </div>
 
         <div
           className={`pt-1 flex ${
             iconsVisibility ? "visible" : "invisible"
-          } fill-current ${textOrIconColor(finalBookmarkColor, "icon")} `}
+          } fill-current ${textOrIconColor(finalTabColor, "icon")} `}
         >
           <div
             className="w-6 -mt-1 pt-1 cursor-move"
@@ -327,10 +327,10 @@ Props): JSX.Element {
             ) : null}
           </div>
 
-          {bookmarkType === "folder" ? (
+          {tabType === "folder" ? (
             <PlusSVG
               className={`h-8 hover:${hoverText(
-                finalBookmarkColor
+                finalTabColor
               )} cursor-pointer`}
               style={{ marginTop: "-6px" }}
               onClick={() => {
@@ -341,9 +341,9 @@ Props): JSX.Element {
 
           <ColorSmallSVG
             className={`h-5 mr-2 hover:${hoverText(
-              finalBookmarkColor
+              finalTabColor
             )} cursor-pointer ${
-              bookmarkType === "note" || bookmarkType === "rss" ? "ml-2" : ""
+              tabType === "note" || tabType === "rss" ? "ml-2" : ""
             }`}
             onClick={() => {
               setColorsVisibility((b) => !b);
@@ -352,10 +352,10 @@ Props): JSX.Element {
 
           <PencilSmallSVG
             className={`h-5 -ml-px hover:${hoverText(
-              finalBookmarkColor
+              finalTabColor
             )} cursor-pointer`}
             onClick={() => {
-              setEditBookmarkVis((b) => !b);
+              setEditTabVis((b) => !b);
             }}
           />
         </div>
@@ -364,7 +364,7 @@ Props): JSX.Element {
       {colorsVisibility ? (
         <ColorsToChoose
           setIconsVisibility={setIconsVisibility}
-          bookmarkTitle={bookmarkTitle}
+          tabTitle={tabTitle}
         />
       ) : null}
 
@@ -383,25 +383,25 @@ Props): JSX.Element {
       {newLinkVis ? (
 
 
-        // <NewLink setNewLinkVis={setNewLinkVis} bookmarkTitle={bookmarkTitle} />
+        // <NewLink setNewLinkVis={setNewLinkVis} tabTitle={tabTitle} />
 
         <Link_newAndEdit setLinkVis={setNewLinkVis} linkComponentType={"new_lowerUI"}/>
 
       ) : null}
 
-      {editBookmarkVis ? (
-        <EditBookmarkTitle
-          bookmarkID={bookmarkID}
-          bookmarkType={bookmarkType}
-          setEditBookmarkVis={setEditBookmarkVis}
+      {editTabVis ? (
+        <EditTabTitle
+        tabID={tabID}
+        tabType={tabType}
+          setEditTabVis={setEditTabVis}
           // noteInput={noteInput}
         />
       ) : null}
 
-      {singleLinkVisibility && bookmarkType === "folder" ? (
+      {singleLinkVisibility && tabType === "folder" ? (
         <div>
           {linksData
-            .filter((el) => el.tags.indexOf(bookmarkID) > -1)
+            .filter((el) => el.tags.indexOf(tabID) > -1)
             .map((el, i) => {
               return (
                 <SingleLink
@@ -410,7 +410,7 @@ Props): JSX.Element {
                   // setEditSingleLinkData={setEditSingleLinkData}
                   setLinkId={setLinkId}
                   key={i}
-                  bookmarkID={bookmarkID}
+                  tabID={tabID}
                 />
               );
             })}
@@ -419,22 +419,22 @@ Props): JSX.Element {
         </div>
       ) : null}
 
-      {noteInputVisibility && bookmarkType === "note" ? (
+      {noteInputVisibility && tabType === "note" ? (
         <NoteInput
           //  noteInput={noteInput}
-          bookmarkID={bookmarkID}
-          setEditBookmarkVis={setEditBookmarkVis}
+          tabID={tabID}
+          setEditTabVis={setEditTabVis}
         />
       ) : null}
 
-      {rssVisibility  && bookmarkType === "rss"? (
+      {rssVisibility  && tabType === "rss"? (
         // <RSS
         //   // rssLink={rssLink}
-        //   bookmarkID={bookmarkID}
-        //   bookmarkIndex={bookmarkIndex}
+        //   tabID={tabID}
+        //   tabIndex={tabIndex}
         // />
             <RSS_reactQuery
-          bookmarkID={bookmarkID}
+          tabID={tabID}
         />
 
         
@@ -443,4 +443,4 @@ Props): JSX.Element {
   );
 }
 
-export default Bookmark;
+export default Tab;

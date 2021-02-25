@@ -1,26 +1,26 @@
 import React from "react";
 import SingleColor from "./SingleColor";
 
-import {folderColors} from "../../utils/folderColors";
+import {tabColors} from "../../utils/tabColors";
 // import {columnColors} from "../../utils/columnColors";
 
 interface Props {
   setIconsVisibility: (value: React.SetStateAction<boolean>) => void;
-  bookmarkTitle: string;
+  tabTitle: string;
 }
 
 
 function ColorsToChoose({
   setIconsVisibility,
-  bookmarkTitle,
+  tabTitle,
 }: Props): JSX.Element {
   function mappingColors(colors: string[][]) {
-    return folderColors.map((row, i) => {
+    return tabColors.map((row, i) => {
       return (
         <div className="flex" key={i}>
           {row.map((el, j) => {
             return (
-              <SingleColor color={el} bookmarkTitle={bookmarkTitle} key={j} />
+              <SingleColor color={el} tabTitle={tabTitle} key={j} />
             );
           })}
         </div>
@@ -38,7 +38,7 @@ function ColorsToChoose({
       //   setIconsVisibility(false)
       // }}
     >
-      {mappingColors(folderColors)}
+      {mappingColors(tabColors)}
     </div>
   );
 }
