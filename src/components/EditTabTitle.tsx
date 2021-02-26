@@ -243,7 +243,7 @@ Props): JSX.Element {
       </div>
       {tabType === "folder" && (
         <div className="flex items-center mt-2 justify-between">
-          <p className={`mr-2`}>Tabs</p>
+          <p className={`mr-2`}>Bookmarks</p>
           <input
             type="text"
             // min-w-0 !!

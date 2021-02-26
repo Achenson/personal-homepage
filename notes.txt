@@ -61,6 +61,9 @@ DONE 8. "all" bookmark should be non-deletable, non-editable? DONE
 
 DONE 12. components folders? DONE
 DONE 16. newLink & newLink_UpperUI -> tags not aligned DONE
+
+
+
 DONE 23. bg-color vs text color of folders DONE
 DONE 24. bookmark: almost same function for icons & text color, unify DONE
 DONE 36. diff color for diff columns? DONE
@@ -68,6 +71,8 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 DONE 86. bigger draggable space in GapAfterBookmark if column is empty DONE
 DONR 70. make column component DONE
 DONE 71. Column -> make them stack when the screen is smaller DONE 
+
+
 
 XXX 11. move grid logic to Main? XXX
 XXX 6. edit bookmark & bookkmarks for color -> join? XXX
@@ -79,21 +84,14 @@ DONE 8.5 "all" should be added as a tag automatically & should not be visible DO
 DONE 9. auto-completing tags when adding links DONE
 DONE 14. newLink -> save & cancel icons not perfectly in the middle DONE (but in a perfect way?)
 DONE 15. UpperRightMenu on hover, boders for newLink & newBookmark -> default App color? DONE
+DONE 17. link/bookmark/folder -> consistent naming! DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-
-17. link/bookmark/folder -> consistent naming!
-
-
-
-
-
-
-18. newBookmark_upperUI -> menu with existing bookmarks to choose
+18. newTab_upperUI -> menu with existing bookmarks to choose
 19. bookmark priorities
 20. note -> newLines not working
 21. newBookmark -> better input for column

@@ -173,7 +173,7 @@ function NewTab_UpperUI({
 
         {tabType === "folder" ? (
           <div className="flex justify-around mb-2 mt-2">
-            <p className="w-32">Tabs</p>
+            <p className="w-32">Bookmarks</p>
             {/* <div className="w-full pl-2"> */}
             <input
               type="text"

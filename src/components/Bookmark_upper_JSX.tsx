@@ -93,7 +93,7 @@ function Bookmark_upper_JSX({
           <ChevronDownSVG className="h-6 invisible" />
         </div>
         <div className="flex justify-around mb-2">
-          <p className="w-10">Bookmark</p>
+          <p className="w-10">Link</p>
 
           <input
             type="text"
