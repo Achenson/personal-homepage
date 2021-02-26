@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Grid from "./Grid";
-import NewLink_UpperUI from "./Link_newAndEdit";
+import NewBookmark_UpperUI from "./Bookmark_newAndEdit";
 import NewTab_UpperUI from "./UpperUI/NewTab_UpperUI";
 import Colors_UpperUI from "./UpperUI/Colors_UpperUI";
 import UpperUI from "./UpperUI/UpperUI";
@@ -20,7 +20,7 @@ function Main({}: Props): JSX.Element {
     setBackgroundColorData,
   ] = backgroundColorState.use();
 
-  const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
+  const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
   const [newTabVis, setNewTabVis] = useState<boolean>(false);
 
   const [backgroundSettingsVis, setBackgroundSettingsVis] = useState<boolean>(
@@ -49,7 +49,7 @@ function Main({}: Props): JSX.Element {
           tabType={tabType}
         />
       ) : null}
-      {newLinkVis ? <NewLink_UpperUI setLinkVis={setNewLinkVis} linkComponentType={"new_upperUI"} /> : null}
+      {newBookmarkVis ? <NewBookmark_UpperUI setBookmarkVis={setNewBookmarkVis} bookmarkComponentType={"new_upperUI"} /> : null}
       {backgroundSettingsVis ? (
         <Background_UpperUI
           setBackgroundSettingsVis={setBackgroundSettingsVis}
@@ -67,7 +67,7 @@ function Main({}: Props): JSX.Element {
         <Colors_UpperUI colorsVis={colorsVis} setColorsVis={setColorsVis} />
       ) : null}
       <UpperUI
-        setNewLinkVis={setNewLinkVis}
+        setNewBookmarkVis={setNewBookmarkVis}
         setNewTabVis={setNewTabVis}
         setBackgroundSettingsVis={setBackgroundSettingsVis}
         setSettingsVis={setSettingsVis}

@@ -26,7 +26,7 @@ import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 import { uiColorState } from "../../state/colorsState";
 
 interface Props {
-  setNewLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
   setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
   setSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,7 +37,7 @@ interface Props {
 }
 
 function UpperRightMenu({
-  setNewLinkVis,
+  setNewBookmarkVis,
   setNewTabVis,
   setBackgroundSettingsVis,
   setSettingsVis,
@@ -54,7 +54,7 @@ function UpperRightMenu({
         <TabAltSVG
           className={`h-7 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
-            setNewLinkVis((b) => !b);
+            setNewBookmarkVis((b) => !b);
           }}
         />
 

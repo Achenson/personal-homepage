@@ -13,11 +13,11 @@ export interface SingleTabData {
   description?: boolean | null;
   itemsPerPage?: number | null;
   items?: [object] | never[] | [];
-  // linksTitles: string[];
+  // bookmarksTitles: string[];
 }
 
 
-export interface SingleLinkData {
+export interface SingleBookmarkData {
   id: number | string;
   title: string;
   URL: string;

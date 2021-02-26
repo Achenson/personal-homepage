@@ -1,14 +1,14 @@
 import React from "react";
 import { produce } from "immer";
-import { linksDataState } from "../state/tabsAndLinks";
+import { bookmarksDataState } from "../state/tabsAndBookmarks";
 
 import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
 import { ReactComponent as PhotographSVG } from "../svgs/photograph.svg";
 
-import { linksAllTagsState } from "../state/tabsAndLinks";
+import { bookmarksAllTagsState } from "../state/tabsAndBookmarks";
 
-import { SingleLinkData } from "../utils/interfaces";
+import { SingleBookmarkData } from "../utils/interfaces";
 
 // interface SingleLinkData {
 //   id: number | string;
@@ -18,35 +18,35 @@ import { SingleLinkData } from "../utils/interfaces";
 // }
 
 interface Props {
-  setEditLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  singleLinkData: SingleLinkData;
+  setEditBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  singleBookmarkData: SingleBookmarkData;
 
-  setLinkId: React.Dispatch<React.SetStateAction<string | number | undefined>>;
+  setBookmarkId: React.Dispatch<React.SetStateAction<string | number | undefined>>;
   tabID: string | number;
-  // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleLinkData>>;
+  // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleBookmarkData>>;
 }
 
-function SingleLink({
-  setEditLinkVis,
-  singleLinkData,
+function SingleBookmark({
+  setEditBookmarkVis,
+  singleBookmarkData,
   // setEditSingleLinkData,
-  setLinkId,
+  setBookmarkId,
   tabID,
 }: Props): JSX.Element {
-  const [linksData, setLinksData] = linksDataState.use();
-  const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
 
-  // let linkURL = new URL(singleLinkData.URL)
+  // let linkURL = new URL(singleBookmarkData.URL)
 
   let tabIndex: number = 0;
 
-  linksData.forEach((obj, i) => {
-    if (obj.id === singleLinkData.id) {
+  bookmarksData.forEach((obj, i) => {
+    if (obj.id === singleBookmarkData.id) {
       tabIndex = i;
     }
   });
 
-  let currentTabTitle = linksData[tabIndex].title;
+  let currentTabTitle = bookmarksData[tabIndex].title;
 
   return (
     <div className="flex justify-between bg-gray-100 h-10 py-2 border-b">
@@ -54,13 +54,13 @@ function SingleLink({
         <PhotographSVG className="h-6 mr-px" />
         <div>
           <a
-            href={singleLinkData.URL}
+            href={singleBookmarkData.URL}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {singleLinkData.title}
+            {singleBookmarkData.title}
           </a>
-          {/* <a href="https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death" target="_blank" rel="noopener noreferrer">{singleLinkData.title}</a> */}
+          {/* <a href="https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death" target="_blank" rel="noopener noreferrer">{singleBookmarkData.title}</a> */}
         </div>
       </div>
       <div
@@ -70,9 +70,9 @@ function SingleLink({
         <PencilSmallSVG
           className="h-5 ml-1 hover:text-black cursor-pointer"
           onClick={() => {
-            setEditLinkVis((b) => !b);
+            setEditBookmarkVis((b) => !b);
 
-            setLinkId(singleLinkData.id);
+            setBookmarkId(singleBookmarkData.id);
           }}
         />
         <TrashSmallSVG
@@ -82,14 +82,14 @@ function SingleLink({
 
             let tagsIdsToDelete: (string | number)[] = [];
 
-            singleLinkData.tags.forEach((el) => {
-              let filteredLinks = linksData.filter(
-                (obj) => obj.id !== singleLinkData.id
+            singleBookmarkData.tags.forEach((el) => {
+              let filteredBookmarks = bookmarksData.filter(
+                (obj) => obj.id !== singleBookmarkData.id
               );
 
               let isElPresent: boolean = false;
 
-              filteredLinks.forEach((obj) => {
+              filteredBookmarks.forEach((obj) => {
                 if (obj.tags.indexOf(el) > -1) {
                   isElPresent = true;
                   return;
@@ -101,18 +101,18 @@ function SingleLink({
               }
             });
 
-            let linksAllTagsData_new: (string | number)[] = [];
+            let bookmarksAllTagsData_new: (string | number)[] = [];
 
-            linksAllTagsData.forEach((el) => {
+            bookmarksAllTagsData.forEach((el) => {
               if (tagsIdsToDelete.indexOf(el) === -1) {
-                linksAllTagsData_new.push(el);
+                bookmarksAllTagsData_new.push(el);
               }
             });
 
-            setLinksAllTagsData([...linksAllTagsData_new]);
+            setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
 
 
-            setLinksData((previous) =>
+            setBookmarksData((previous) =>
               produce(previous, (updated) => {
                 updated.splice(tabIndex, 1);
               })
@@ -124,4 +124,4 @@ function SingleLink({
   );
 }
 
-export default SingleLink;
+export default SingleBookmark;

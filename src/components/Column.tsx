@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import { ItemTypes } from "../utils/itemsDnd";
 
-import { tabsDataState } from "../state/tabsAndLinks";
+import { tabsDataState } from "../state/tabsAndBookmarks";
 
 import {
   columnsColorsState,

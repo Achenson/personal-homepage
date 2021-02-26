@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { produce } from "immer";
 
-import { tabsDataState } from "../state/tabsAndLinks";
-import { linksDataState } from "../state/tabsAndLinks";
-import { deletedTabState } from "../state/tabsAndLinks";
+import { tabsDataState } from "../state/tabsAndBookmarks";
+import { bookmarksDataState } from "../state/tabsAndBookmarks";
+import { deletedTabState } from "../state/tabsAndBookmarks";
 import {
   noteColorState,
   folderColorState,
@@ -21,18 +21,18 @@ import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
 import { ReactComponent as CrossArrowsSVG } from "../svgs/cross-arrows.svg";
 import { ReactComponent as PlusSVG } from "../svgs/plus.svg";
-import SingleLink from "./SingleLink";
+import SingleBookmark from "./SingleBookmark";
 import ColorsToChoose from "./Colors/ColorsToChoose";
 
-// import EditLink from "./EditLink";
-import Link_newAndEdit from "./Link_newAndEdit";
+// import EditLink from "./EditBookmark";
+import Bookmark_newAndEdit from "./Bookmark_newAndEdit";
 import EditTabTitle from "./EditTabTitle";
 import NoteInput from "./NoteInput";
 import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "../utils/itemsDnd";
 
-interface SingleLinkData {
+interface SingleBookmarkData {
   title: string;
   URL: string;
   tags: string[];
@@ -64,22 +64,22 @@ Props): JSX.Element {
   const [deletedTab, setDeletedTab] = deletedTabState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
 
-  const [linksData, setLinksData] = linksDataState.use();
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
   const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
 
-  const [editLinkVis, setEditLinkVis] = useState<boolean>(false);
-  const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
+  const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
+  const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
   const [editTabVis, setEditTabVis] = useState<boolean>(false);
 
-  // const [editSingleLinkData, setEditSingleLinkData] = useState<SingleLinkData>({
+  // const [editSingleLinkData, setEditSingleBookmarkData] = useState<SingleBookmarkData>({
   //   title: "",
   //   URL: "",
   //   tags: [],
   // });
 
-  const [linkId, setLinkId] = useState<number|string>()
+  const [bookmarkId, setBookmarkId] = useState<number|string>()
 
   const [crossVis, setCrossVis] = useState<boolean>(true);
 
@@ -99,7 +99,7 @@ Props): JSX.Element {
   });
 
   // tab content
-  const [singleLinkVisibility, setSingleLinkVisibility] = useState<boolean>(
+  const [singleBookmarkVisibility, setSingleBookmarkVisibility] = useState<boolean>(
     tabsData[tabIndex].opened
     // false
   );
@@ -120,7 +120,7 @@ Props): JSX.Element {
   useEffect( () => {
 
     if(closeAllTabs) {
-      setSingleLinkVisibility(false)
+      setSingleBookmarkVisibility(false)
       setRssVisibility(false)
       setNoteInputVisibility(false)
     }
@@ -285,7 +285,7 @@ Props): JSX.Element {
           className="pl-1 w-full cursor-pointer"
           onClick={() => {
             if (tabType === "folder") {
-              setSingleLinkVisibility((b) => !b);
+              setSingleBookmarkVisibility((b) => !b);
             }
 
             if (tabType === "note") {
@@ -334,7 +334,7 @@ Props): JSX.Element {
               )} cursor-pointer`}
               style={{ marginTop: "-6px" }}
               onClick={() => {
-                setNewLinkVis((b) => !b);
+                setNewBookmarkVis((b) => !b);
               }}
             />
           ) : null}
@@ -368,24 +368,24 @@ Props): JSX.Element {
         />
       ) : null}
 
-      {editLinkVis ? (
+      {editBookmarkVis ? (
 
         // <EditLink
         //   setEditLinkVis={setEditLinkVis}
-        //   // editSingleLinkData={editSingleLinkData}
-        //   linkId={linkId}
+        //   // editSingleLinkData={editSingleBookmarkData}
+        //   bookmarkId={bookmarkId}
         // />
 
-        <Link_newAndEdit setLinkVis={setEditLinkVis} linkComponentType={"edit"} linkId={linkId}/>
+        <Bookmark_newAndEdit setBookmarkVis={setEditBookmarkVis} bookmarkComponentType={"edit"} bookmarkId={bookmarkId}/>
 
       ) : null}
 
-      {newLinkVis ? (
+      {newBookmarkVis ? (
 
 
-        // <NewLink setNewLinkVis={setNewLinkVis} tabTitle={tabTitle} />
+        // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
 
-        <Link_newAndEdit setLinkVis={setNewLinkVis} linkComponentType={"new_lowerUI"}/>
+        <Bookmark_newAndEdit setBookmarkVis={setNewBookmarkVis} bookmarkComponentType={"new_lowerUI"}/>
 
       ) : null}
 
@@ -398,24 +398,24 @@ Props): JSX.Element {
         />
       ) : null}
 
-      {singleLinkVisibility && tabType === "folder" ? (
+      {singleBookmarkVisibility && tabType === "folder" ? (
         <div>
-          {linksData
+          {bookmarksData
             .filter((el) => el.tags.indexOf(tabID) > -1)
             .map((el, i) => {
               return (
-                <SingleLink
-                  setEditLinkVis={setEditLinkVis}
-                  singleLinkData={el}
-                  // setEditSingleLinkData={setEditSingleLinkData}
-                  setLinkId={setLinkId}
+                <SingleBookmark
+                  setEditBookmarkVis={setEditBookmarkVis}
+                  singleBookmarkData={el}
+                  // setEditSingleLinkData={setEditSingleBookmarkData}
+                  setBookmarkId={setBookmarkId}
                   key={i}
                   tabID={tabID}
                 />
               );
             })}
 
-          {/* <SingleLink setEditLinkVis={setEditLinkVis} /> */}
+          {/* <SingleLink setEditLinkVis={setEditBookmarkVis} /> */}
         </div>
       ) : null}
 

@@ -1,7 +1,7 @@
 import { newRidgeState } from "react-ridge-state";
 
 import { SingleTabData } from "../utils/interfaces";
-import { SingleLinkData } from "../utils/interfaces";
+import { SingleBookmarkData } from "../utils/interfaces";
 
 // this can be used everywhere in your application
 export const tabsDataState = newRidgeState<SingleTabData[]>([
@@ -82,7 +82,7 @@ export const tabsDataState = newRidgeState<SingleTabData[]>([
   },
 ]);
 
-export const linksDataState = newRidgeState<SingleLinkData[]>([
+export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
   {
     id: 1,
     title: "facebook",
@@ -106,6 +106,6 @@ export const linksDataState = newRidgeState<SingleLinkData[]>([
   },
 ]);
 
-export const linksAllTagsState = newRidgeState<(string | number)[]>(["ALL_TAGS", "2", "3"]);
+export const bookmarksAllTagsState = newRidgeState<(string | number)[]>(["ALL_TAGS", "2", "3"]);
 
 export const deletedTabState = newRidgeState<string | number>("");

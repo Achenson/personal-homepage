@@ -4,20 +4,16 @@ import { produce } from "immer";
 
 import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
 
-import { createLink, createFolderTab } from "../utils/objCreators";
+import { SingleBookmarkData } from "../utils/interfaces";
+
+import { createBookmark, createFolderTab } from "../utils/objCreators";
 
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
-import {
-  tabsDataState,
-  linksDataState,
-  linksAllTagsState,
-} from "../state/tabsAndLinks";
-
-import { SingleLinkData } from "../utils/interfaces";
+import { bookmarksDataState, tabsDataState, bookmarksAllTagsState } from "../state/tabsAndBookmarks";
 
 interface Props {
   titleInput: string;
@@ -31,13 +27,13 @@ interface Props {
   tagsListVis: boolean;
   setTagsListVis: React.Dispatch<React.SetStateAction<boolean>>;
   notesTitlesArr: string[];
-  linkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
-  linkIndex: number;
-  setLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  currentLink: SingleLinkData | undefined;
+  bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
+  bookmarkIndex: number;
+  setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // currentLink: SingleLinkData | undefined
 }
 
-function Link_lower_JSX({
+function Bookmark_upper_JSX({
   titleInput,
   setTitleInput,
   urlInput,
@@ -49,42 +45,13 @@ function Link_lower_JSX({
   tagsListVis,
   setTagsListVis,
   notesTitlesArr,
-  linkComponentType,
-  linkIndex,
-  setLinkVis,
-  currentLink,
+  bookmarkComponentType,
+  bookmarkIndex,
+  setBookmarkVis,
 }: Props): JSX.Element {
-  const [linksData, setLinksData] = linksDataState.use();
-  const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
-
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
-
-  const [initialTagsInputArr, setInitialTagsInputArr] = useState( 
-    
-    () =>
-    // tagsInputStr.split(", ")
-    generateTagIds()
-  );
-
-  function generateTagIds() {
-
-    if (linkComponentType !== "edit") {
-      return []
-    }
-
-    let arrOut: (string | number)[] = [];
-
-    tagsInputStr.split(", ").forEach((el) => {
-      // if ((currentLink as SingleLinkData).tags.indexOf(obj.id) > -1) {
-      //   arrOut.push(obj.id);
-      // }
-
-      let filteredTab = tabsData.filter((obj) => obj.title === el)[0];
-      arrOut.push(filteredTab.id);
-    });
-
-    return arrOut;
-  }
+  const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
@@ -104,8 +71,15 @@ function Link_lower_JSX({
   let regexForTitle = /^\w+$/;
 
   return (
-    <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
-      <div className="mt-2">
+    // opacity cannot be used, because children will inherit it and the text won't be readable
+    <div
+      className="flex z-50 absolute h-screen w-screen items-center justify-center"
+      style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
+    >
+      <div
+        className="bg-gray-200 pb-3 pt-6 pl-2 pr-1 border-2 border-teal-500 rounded-sm md:mb-48"
+        style={{ width: "350px" }}
+      >
         <div className="flex justify-around mb-2 mt-2">
           <p className="w-10">Title</p>
 
@@ -119,7 +93,7 @@ function Link_lower_JSX({
           <ChevronDownSVG className="h-6 invisible" />
         </div>
         <div className="flex justify-around mb-2">
-          <p className="w-10">Link</p>
+          <p className="w-10">Bookmark</p>
 
           <input
             type="text"
@@ -193,12 +167,12 @@ function Link_lower_JSX({
 
         {titleFormatErrorVis ? (
           <p className={`text-red-600`}>
-            Link title can contain letters, numbers or underscore
+            Bookmark title can contain letters, numbers or underscore
           </p>
         ) : null}
 
         {titleUniquenessErrorVis ? (
-          <p className={`text-red-600`}>Link with that title already exists</p>
+          <p className={`text-red-600`}>Bookmark with that title already exists</p>
         ) : null}
 
         {tagErrorVis ? (
@@ -234,31 +208,23 @@ function Link_lower_JSX({
 
                 let tagsInputArr = tagsInputStr.split(", ");
 
+                
+                
+
                 if (!regexForTitle.test(titleInput)) {
                   setTitleFormatErrorVis(true);
 
                   return;
                 }
 
-                // !!! difference in Link_upper_JSX
+                // !!! difference in Link_lower_JSX for edit type
 
-                if (linkComponentType === "edit") {
-                  if (
-                    !titleUniquenessCheck() &&
-                    // for editing it is permitted to have same title as before
-                    titleInput !== (currentLink as SingleLinkData).title
-                  ) {
-                    setTitleUniquenessErrorVis(true);
-                    return;
-                  }
-                } else {
-                  if (!titleUniquenessCheck()) {
-                    setTitleUniquenessErrorVis(true);
-                    return;
-                  }
+                if (!titleUniquenessCheck()) {
+                  setTitleUniquenessErrorVis(true);
+                  return;
                 }
 
-                if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "" ) {
+                if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "") {
                   setTagErrorVis(true);
                   return;
                 }
@@ -275,9 +241,11 @@ function Link_lower_JSX({
                   return;
                 }
 
-                // !!! diff in Link_upper_JSX
+                // !!! diff in Link_lower_JSX
 
+                // all tags always being added
                 let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
+                
 
                 tagsInputArr.forEach((el) => {
                   let filteredTab = tabsData.filter(
@@ -285,91 +253,47 @@ function Link_lower_JSX({
                   )[0];
 
                   // if folder with title corresponding to tag doesn't exist
+
                   if (!filteredTab && tagsInputStr !== "") {
                     let newTab = createFolderTab(el, 1, 0);
                     tagsInputArr_ToIds.push(newTab.id);
 
                     // adding new folder in there was no folder with title as a tag befere
 
-                    let newLinksAllTagsData = [...linksAllTagsData];
+                    let newBookmarksAllTagsData = [...bookmarksAllTagsData];
 
-                    newLinksAllTagsData.push(newTab.id);
+                    newBookmarksAllTagsData.push(newTab.id);
 
-                    setLinksAllTagsData([...newLinksAllTagsData]);
+                    setBookmarksAllTagsData([...newBookmarksAllTagsData]);
+
+
+
                     setTabsData((previous) =>
                       produce(previous, (updated) => {
                         updated.push(newTab);
                       })
                     );
+
                   } else {
-
+                    // if input is not empty
                     if(tagsInputStr !== "") {
-                      tagsInputArr_ToIds.push(filteredTab.id)
 
+                      tagsInputArr_ToIds.push(filteredTab.id);
                     }
-
+                    
                   }
                 });
 
-                if (linkComponentType === "edit") {
-                  setLinksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated[linkIndex].title = titleInput;
-                      updated[linkIndex].URL = urlInput;
-                      // updated[linkIndex].tags = [...tagsInputArr];
-                      updated[linkIndex].tags = [...tagsInputArr_ToIds];
-                    })
-                  );
 
-                  // for deleting empty folder
+                setBookmarksData((previous) =>
+                  produce(previous, (updated) => {
+                    updated.push(
+                      createBookmark(titleInput, urlInput, tagsInputArr_ToIds)
+                    );
+                  })
+                );
 
-                  let tagsIdsToDelete: (string | number)[] = [];
-
-                  initialTagsInputArr.forEach((el) => {
-                    if (tagsInputArr_ToIds.indexOf(el) === -1) {
-                      let filteredLinks = linksData.filter(
-                        (obj) => obj.id !== (currentLink as SingleLinkData).id
-                      );
-
-                      let isElPresent: boolean = false;
-
-                      filteredLinks.forEach((obj) => {
-                        if (obj.tags.indexOf(el) > -1) {
-                          isElPresent = true;
-                          return;
-                        }
-                      });
-
-
-                      if (!isElPresent && el !== "ALL_TAGS") {
-                        tagsIdsToDelete.push(el);
-                      }
-                    }
-                  });
-
-                  let linksAllTagsData_new: (string | number)[] = [];
-
-                  linksAllTagsData.forEach((el) => {
-                    if (tagsIdsToDelete.indexOf(el) === -1) {
-                      linksAllTagsData_new.push(el);
-                    }
-                  });
-
-                  setLinksAllTagsData([...linksAllTagsData_new]);
-
-
-
-                } else {
-                  setLinksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated.push(
-                        createLink(titleInput, urlInput, tagsInputArr_ToIds)
-                      );
-                    })
-                  );
-                }
-
-                setLinkVis((b) => !b);
+                setBookmarkVis((b) => !b);
 
                 function tagUniquenessCheck() {
                   let isUnique: boolean = true;
@@ -390,7 +314,7 @@ function Link_lower_JSX({
                 function titleUniquenessCheck() {
                   let isUnique: boolean = true;
 
-                  linksData.forEach((obj, i) => {
+                  bookmarksData.forEach((obj, i) => {
                     if (obj.title === titleInput) {
                       isUnique = false;
                     }
@@ -405,7 +329,7 @@ function Link_lower_JSX({
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setLinkVis((b) => !b);
+                setBookmarkVis((b) => !b);
               }}
             >
               <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
@@ -417,4 +341,4 @@ function Link_lower_JSX({
   );
 }
 
-export default Link_lower_JSX;
+export default Bookmark_upper_JSX;

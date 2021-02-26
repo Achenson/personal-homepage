@@ -5,10 +5,10 @@ import Tab from "./Tab";
 
 import {
   tabsDataState,
-  linksDataState,
+  bookmarksDataState,
   deletedTabState,
-  linksAllTagsState,
-} from "../state/tabsAndLinks";
+  bookmarksAllTagsState,
+} from "../state/tabsAndBookmarks";
 
 import { closeAllTabsState } from "../state/defaultSettings";
 
@@ -27,8 +27,8 @@ interface Props {}
 
 function Grid({}: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
-  const [linksData, setLinksData] = linksDataState.use();
-  const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
   const [resetColorsData, setResetColorsData] = resetColorsState.use();
   const [deletedTab, setDeletedTab] = deletedTabState.use();
 
@@ -92,7 +92,7 @@ function Grid({}: Props): JSX.Element {
     //   linksDataTagsIds.push(filteredTab.id);
     // });
 
-    // // adding a tab(folder) if previously non-existing tag was added to a link / if new tab is being added
+    // // adding a tab(folder) if previously non-existing tag was added to a bookmark / if new tab is being added
     // linksDataTagsIds.forEach((el) => {
     //   // no adding tab if it was just set up for deletion
 
@@ -107,12 +107,12 @@ function Grid({}: Props): JSX.Element {
     //   }
     // });
 
-    console.log(linksAllTagsData);
+    console.log(bookmarksAllTagsData);
 
-    // deleting a tab if there is no tags with the same name in links
+    // deleting a tab if there is no tags with the same name in bookmarks
 
     tabsData.forEach((obj, i) => {
-      if (linksAllTagsData.indexOf(obj.id) === -1 && obj.type === "folder") {
+      if (bookmarksAllTagsData.indexOf(obj.id) === -1 && obj.type === "folder") {
         console.log("cut");
 
         setTabsData((previous) =>
@@ -122,7 +122,7 @@ function Grid({}: Props): JSX.Element {
         );
       }
     });
-  }, [tabsData, setTabsData, linksAllTagsData]);
+  }, [tabsData, setTabsData, bookmarksAllTagsData]);
 
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
     switch (numberOfCols) {

@@ -16,10 +16,10 @@ import { produce } from "immer";
 
 import {
   tabsDataState,
-  linksDataState,
+  bookmarksDataState,
   deletedTabState,
-  linksAllTagsState,
-} from "../state/tabsAndLinks";
+  bookmarksAllTagsState,
+} from "../state/tabsAndBookmarks";
 
 import { rssSettingsState } from "../state/defaultSettings";
 
@@ -41,21 +41,21 @@ Props): JSX.Element {
   const [deletedTab, setDeletedTab] = deletedTabState.use();
 
   const [tabsData, setTabsData] = tabsDataState.use();
-  const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
+  const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
 
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
 
   let currentTab = tabsData.filter((obj) => obj.id === tabID);
   let tabTitle = currentTab[0].title;
 
-  let rssLink: string | null | undefined = "no link";
+  let rssLink: string | null | undefined = "no bookmark";
   // let rssLink;
 
   if (tabType === "rss") {
     rssLink = currentTab[0].rssLink;
   }
 
-  const [linksData, setLinksData] = linksDataState.use();
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   // for note only
   const [textAreaValue, setTextAreaValue] = useState<string | null>(
     currentTab[0].noteInput as string | null
@@ -103,27 +103,27 @@ Props): JSX.Element {
 
   // const [tagsListVis, setTagsListVis] = useState<boolean>(false);
 
-  const [arrOfLinksNames, setArrayOfLinksNames] = useState<string[]>(() => {
-    return calcArrOfLinksNames();
+  const [arrOfBookmarksNames, setArrayOfBookmarksNames] = useState<string[]>(() => {
+    return calcArrOfBookmarksNames();
   });
 
-  function calcArrOfLinksNames() {
+  function calcArrOfBookmarksNames() {
     // filtered lknks
-    let filteredLinks = linksData.filter(
+    let filteredBookmarks = bookmarksData.filter(
       (obj) => obj.tags.indexOf(currentTab[0].id) > -1
     );
 
-    let arrOfLinksNames: string[] = [];
+    let arrOfBookmarksNames: string[] = [];
 
-    filteredLinks.forEach((obj) => {
-      arrOfLinksNames.push(obj.title);
+    filteredBookmarks.forEach((obj) => {
+      arrOfBookmarksNames.push(obj.title);
     });
 
-    return arrOfLinksNames;
+    return arrOfBookmarksNames;
   }
 
   const [tabsInputStr, setTabsInputStr] = useState<string>(
-    arrOfLinksNames.join(", ")
+    arrOfBookmarksNames.join(", ")
   );
 
   const [visibleTabs, setVisibleTabs] = useState<string[]>(
@@ -204,7 +204,7 @@ Props): JSX.Element {
   function makeInitialTabs(): string[] {
     let tabs: string[] = [];
 
-    linksData.forEach((obj) => {
+    bookmarksData.forEach((obj) => {
       tabs.push(obj.title);
     });
 
@@ -355,7 +355,7 @@ Props): JSX.Element {
       {tabType === "rss" ? (
         <div>
           <div className="flex items-center mb-2 mt-2 justify-between">
-            <p className="w-24 whitespace-nowrap">RSS link</p>
+            <p className="w-24 whitespace-nowrap">RSS bookmark</p>
             <input
               type="text"
               // min-w-0 !!
@@ -468,10 +468,10 @@ Props): JSX.Element {
                 );
 
                 setEditTabVis((b) => !b);
-                // removing deleted tab(tag) for links
-                linksData.forEach((obj, i) => {
+                // removing deleted tab(tag) for bookmarks
+                bookmarksData.forEach((obj, i) => {
                   if (obj.tags.indexOf(tabTitle) > -1) {
-                    setLinksData((previous) =>
+                    setBookmarksData((previous) =>
                       produce(previous, (updated) => {
                         updated[i].tags.splice(
                           obj.tags.indexOf(tabTitle),
@@ -549,7 +549,7 @@ Props): JSX.Element {
               function tabExistenceCheck() {
                 let tabsArr: string[] = [];
 
-                linksData.forEach((obj) => {
+                bookmarksData.forEach((obj) => {
                   tabsArr.push(obj.title);
                 });
 
@@ -610,25 +610,25 @@ Props): JSX.Element {
 
               if (tabType === "folder") {
                 // changing tags in links
-                setLinksData((previous) =>
+                setBookmarksData((previous) =>
                   produce(previous, (updated) => {
                     updated.forEach((obj) => {
                       let tabsInputArr = tabsInputStr.split(", ");
 
                       // all initial links inside a folder
                       // make array of missing links
-                      // if this links' title is inside missing links
+                      // if this links' title is inside missing bookmarks
                       // cut out tabID (current folder) from tags
 
-                      let missingLinks: string[] = [];
+                      let missingBookmarks: string[] = [];
 
-                      arrOfLinksNames.forEach((el, i) => {
+                      arrOfBookmarksNames.forEach((el, i) => {
                         if (tabsInputArr.indexOf(el) === -1) {
-                          missingLinks.push(el);
+                          missingBookmarks.push(el);
                         }
                       });
 
-                      if (missingLinks.indexOf(obj.title) > -1) {
+                      if (missingBookmarks.indexOf(obj.title) > -1) {
                         obj.tags.splice(obj.tags.indexOf(tabID), 1);
                       }
 

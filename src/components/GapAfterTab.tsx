@@ -5,7 +5,7 @@ import { produce } from "immer";
 
 import { ItemTypes } from "../utils/itemsDnd";
 
-import { tabsDataState } from "../state/tabsAndLinks";
+import { tabsDataState } from "../state/tabsAndBookmarks";
 
 import {
   tabBeingDraggedColor_State,

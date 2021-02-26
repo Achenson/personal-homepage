@@ -4,7 +4,7 @@ interface Props {
     
 }
 
-function RssSingleLink({}: Props): JSX.Element{
+function RssSingleBookmark({}: Props): JSX.Element{
     return (
         <div>
             null
@@ -12,4 +12,4 @@ function RssSingleLink({}: Props): JSX.Element{
     )
 }
 
-export default RssSingleLink;
+export default RssSingleBookmark;

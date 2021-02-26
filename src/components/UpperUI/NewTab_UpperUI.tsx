@@ -18,8 +18,8 @@ import {
 
 import { produce } from "immer";
 
-import { tabsDataState } from "../../state/tabsAndLinks";
-import { linksDataState } from "../../state/tabsAndLinks";
+import { tabsDataState } from "../../state/tabsAndBookmarks";
+import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 
 interface Props {
   setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,13 +32,13 @@ function NewTab_UpperUI({
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
-  const [linksData, setLinksData] = linksDataState.use();
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const [tabTitleInput, setTabTitleInput] = useState<string>("");
   const [rssLinkInput, setRssLinkInput] = useState<string>("");
 
   const [tabColumnInput, setTabColumnInput] = useState<number>(1);
-  // const [tabLinksInput, setTabLinksInput] = useState<string[]>([]);
+  // const [tabLinksInput, setTabBookmarksInput] = useState<string[]>([]);
 
   const [tabsErrorVis, setTabsErrorVis] = useState<boolean>(false);
   const [
@@ -116,7 +116,7 @@ function NewTab_UpperUI({
   function makeInitialTabs(): string[] {
     let tabs: string[] = [];
 
-    linksData.forEach((obj) => {
+    bookmarksData.forEach((obj) => {
       tabs.push(obj.title);
     });
 
@@ -328,7 +328,7 @@ function NewTab_UpperUI({
                 }
 
                 if (tabType === "folder") {
-                  // if (!regexForTabs.test(tabLinksInput.join(", "))) {
+                  // if (!regexForTabs.test(tabBookmarksInput.join(", "))) {
                   if (!regexForTabs.test(tabsInputArr.join(", "))) {
                     setTabsErrorVis(true);
                     return;
@@ -383,7 +383,7 @@ function NewTab_UpperUI({
                   );
 
                   // updating links data (tags array)
-                  setLinksData((previous) =>
+                  setBookmarksData((previous) =>
                     produce(previous, (updated) => {
                       updated.forEach((obj) => {
                         if (
@@ -417,7 +417,7 @@ function NewTab_UpperUI({
                 function tabExistenceCheck() {
                   let tabsArr: string[] = [];
 
-                  linksData.forEach((obj) => {
+                  bookmarksData.forEach((obj) => {
                     tabsArr.push(obj.title);
                   });
 

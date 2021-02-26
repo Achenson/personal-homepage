@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 
 
-import { tabsDataState } from "../../state/tabsAndLinks";
+import { tabsDataState } from "../../state/tabsAndBookmarks";
 
 interface Props {
   tagsInputStr: string;

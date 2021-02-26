@@ -1,6 +1,6 @@
 import React from "react";
 
-import { tabsDataState } from "../state/tabsAndLinks";
+import { tabsDataState } from "../state/tabsAndBookmarks";
 
 interface Props {
   //  noteInput: string | null;

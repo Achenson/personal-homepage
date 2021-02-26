@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import SingleRssNews from "./SingleRssNews";
 
-import { tabsDataState } from "../state/tabsAndLinks";
+import { tabsDataState } from "../state/tabsAndBookmarks";
 import { rssSettingsState } from "../state/defaultSettings";
 
 import { ReactComponent as ArrowLeft } from "../svgs/arrowLeft.svg";

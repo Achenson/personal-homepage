@@ -1,32 +1,32 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import { linksDataState, tabsDataState, linksAllTagsState } from "../state/tabsAndLinks";
+import { bookmarksDataState, tabsDataState, bookmarksAllTagsState } from "../state/tabsAndBookmarks";
 
-import Link_upper_JSX from "./Link_upper_JSX";
-import Link_lower_JSX from "./Link_lower_JSX";
+import Bookmark_upper_JSX from "./Bookmark_upper_JSX";
+import Bookmark_lower_JSX from "./Bookmark_lower_JSX";
 
-import { SingleLinkData } from "../utils/interfaces";
+import { SingleBookmarkData } from "../utils/interfaces";
 
 interface Props {
-  setLinkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  linkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
+  setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   // for "edit" type only
-  linkId?: string | number | undefined;
+  bookmarkId?: string | number | undefined;
 }
 
-function Link_newAndEdit({
-  setLinkVis,
-  linkComponentType,
-  linkId,
+function Bookmark_newAndEdit({
+  setBookmarkVis,
+  bookmarkComponentType,
+  bookmarkId,
 }: Props): JSX.Element {
-  const [linksData, setLinksData] = linksDataState.use();
-  const [linksAllTagsData, setLinksAllTagsData] = linksAllTagsState.use();
+  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
 
-  let currentLink: SingleLinkData | undefined;
+  let currentBookmark: SingleBookmarkData | undefined;
 
-  if (linkComponentType === "edit") {
-    currentLink = linksData.filter((obj) => obj.id === linkId)[0];
+  if (bookmarkComponentType === "edit") {
+    currentBookmark = bookmarksData.filter((obj) => obj.id === bookmarkId)[0];
   }
 
   const [tabsData, setTabsData] = tabsDataState.use();
@@ -34,17 +34,17 @@ function Link_newAndEdit({
   let foldersTab = tabsData.filter((obj) => obj.type === "folder");
 
   const [titleInput, setTitleInput] = useState<string>(
-    linkComponentType === "edit" ? (currentLink as SingleLinkData).title : ""
+    bookmarkComponentType === "edit" ? (currentBookmark as SingleBookmarkData).title : ""
   );
 
   //  !!! diff in editLink
   const [urlInput, setUrlInput] = useState<string>(
-    linkComponentType === "edit" ? (currentLink as SingleLinkData).URL : ""
+    bookmarkComponentType === "edit" ? (currentBookmark as SingleBookmarkData).URL : ""
   );
 
   //  !!! diff in editLink
   const [tagsInputStr, setTagsInputStr] = useState<string>(
-    linkComponentType === "edit" ? generateTagNames() : ""
+    bookmarkComponentType === "edit" ? generateTagNames() : ""
   );
 
   //   ? (currentLink as SingleLinkData).tags.join(", ")
@@ -53,7 +53,7 @@ function Link_newAndEdit({
     let arrOut: string[] = [];
 
     tabsData.forEach((obj) => {
-      if ((currentLink as SingleLinkData).tags.indexOf(obj.id) > -1 && obj.id !== "ALL_TAGS") {
+      if ((currentBookmark as SingleBookmarkData).tags.indexOf(obj.id) > -1 && obj.id !== "ALL_TAGS") {
         arrOut.push(obj.title);
       }
     });
@@ -82,12 +82,12 @@ function Link_newAndEdit({
 
   // for editingLink only !!!
   //  shouldn't be 0, but got error otherwise
-  let linkIndex: number = 0;
+  let bookmarkIndex: number = 0;
 
-  if (linkComponentType === "edit") {
-    linksData.forEach((obj, i) => {
-      if (obj.title === (currentLink as SingleLinkData).title) {
-        linkIndex = i;
+  if (bookmarkComponentType === "edit") {
+    bookmarksData.forEach((obj, i) => {
+      if (obj.title === (currentBookmark as SingleBookmarkData).title) {
+        bookmarkIndex = i;
       }
     });
   }
@@ -130,7 +130,7 @@ function Link_newAndEdit({
     return tags;
   }
 
-  const linkJSX_props = {
+  const bookmarkJSX_props = {
     titleInput,
     setTitleInput,
     urlInput,
@@ -142,22 +142,22 @@ function Link_newAndEdit({
     tagsListVis,
     setTagsListVis,
     notesTitlesArr,
-    linkComponentType,
-    linkIndex,
-    setLinkVis,
+    bookmarkComponentType,
+    bookmarkIndex,
+    setBookmarkVis,
     // !!! for lower JSX only, change?
     // currentLink: currentLink,
   };
 
   return (
     <>
-      {linkComponentType === "new_upperUI" ? (
-        <Link_upper_JSX {...linkJSX_props} />
+      {bookmarkComponentType === "new_upperUI" ? (
+        <Bookmark_upper_JSX {...bookmarkJSX_props} />
       ) : (
-        <Link_lower_JSX {...linkJSX_props} currentLink={currentLink} />
+        <Bookmark_lower_JSX {...bookmarkJSX_props} currentBookmark={currentBookmark} />
       )}
     </>
   );
 }
 
-export default Link_newAndEdit;
+export default Bookmark_newAndEdit;
