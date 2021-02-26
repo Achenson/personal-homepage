@@ -11,7 +11,7 @@ import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 import TagsList_UpperUI from "./TagsList_UpperUI";
 
 import {
-  createTabFolder,
+  createFolderTab,
   createNote,
   createRSS,
 } from "../../utils/objCreators";
@@ -373,7 +373,7 @@ function NewTab_UpperUI({
                   setTabsData((previous) =>
                     produce(previous, (updated) => {
                       updated.push({
-                        ...createTabFolder(
+                        ...createFolderTab(
                           tabTitleInput,
                           tabColumnInput,
                           0

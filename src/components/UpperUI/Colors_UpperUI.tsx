@@ -33,7 +33,7 @@ function Colors_UpperUI({ setColorsVis, colorsVis }: Props): JSX.Element {
 
   const [colorsToChooseVis, setColorsToChooseVis] = useState<boolean>(false);
 
-  const [foldersSelected, setFoldersSelected] = useState<boolean>(false);
+  const [tabsSelected, setTabsSelected] = useState<boolean>(false);
   const [notesSelected, setNotesSelected] = useState<boolean>(false);
   const [rssSelected, setRssSelected] = useState<boolean>(false);
   // const [columnsSelected, setColumnsSelected] = useState<boolean>(false);
@@ -104,10 +104,10 @@ function Colors_UpperUI({ setColorsVis, colorsVis }: Props): JSX.Element {
                 setRssSelected(false);
                 // setColumnSelected(null);
 
-                setFoldersSelected((b) => !b);
+                setTabsSelected((b) => !b);
               }}
               className={`h-4 w-8 bg-${folderColorData} cursor-pointer ${
-                foldersSelected ? "border-2" : "border"
+                tabsSelected ? "border-2" : "border"
               } border-black hover:border-gray-500`}
             ></div>
           </div>
@@ -123,7 +123,7 @@ function Colors_UpperUI({ setColorsVis, colorsVis }: Props): JSX.Element {
                   setColorsToChooseVis(true);
                 }
 
-                setFoldersSelected(false);
+                setTabsSelected(false);
                 setRssSelected(false);
                 // setColumnSelected(null);
 
@@ -146,7 +146,7 @@ function Colors_UpperUI({ setColorsVis, colorsVis }: Props): JSX.Element {
                   setColorsToChooseVis(true);
                 }
 
-                setFoldersSelected(false);
+                setTabsSelected(false);
                 setNotesSelected(false);
 
                 // setColumnSelected(null);

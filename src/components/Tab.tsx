@@ -13,7 +13,7 @@ import {
   tabBeingDraggedColor_State,
 } from "../state/colorsState";
 
-import { closeAllFoldersState } from "../state/defaultSettings";
+import { closeAllTabsState } from "../state/defaultSettings";
 import { globalSettingsState } from "../state/defaultSettings";
 
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
@@ -46,7 +46,7 @@ interface Props {
   colNumber: number;
   // noteInput: string | null;
   // rssLink: string | null;
-  closeAllFolders: boolean;
+  closeAllTabs: boolean;
 }
 
 function Tab({
@@ -55,7 +55,7 @@ function Tab({
   tabColor,
   tabType,
   colNumber,
-  closeAllFolders
+  closeAllTabs
 }: // noteInput,
 // rssLink
 Props): JSX.Element {
@@ -115,18 +115,18 @@ Props): JSX.Element {
     // false
   );
 
-  const [closeAllFoldersData, setCloseAllFoldersData] = closeAllFoldersState.use()
+  const [closeAllTabssData, setCloseAllTabsData] = closeAllTabsState.use()
 
   useEffect( () => {
 
-    if(closeAllFolders) {
+    if(closeAllTabs) {
       setSingleLinkVisibility(false)
       setRssVisibility(false)
       setNoteInputVisibility(false)
     }
    
 
-  }, [closeAllFolders])
+  }, [closeAllTabs])
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();

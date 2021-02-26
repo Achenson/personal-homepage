@@ -3,7 +3,7 @@ import React from "react";
 import DefaultSingleColor from "./SingleColor_Default";
 import DefaultSingleColor_Img from "./SingleColor_Default_Img";
 
-import { folderColors } from "../../utils/tabColors";
+import { tabColors } from "../../utils/tabColors";
 import { columnColors, imageColumnColors } from "../../utils/columnColors";
 
 import { globalSettingsState } from "../../state/defaultSettings";
@@ -26,8 +26,8 @@ interface Props {
 function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  function mapFolderColors() {
-    return folderColors.map((row, i) => {
+  function mapTabColors() {
+    return tabColors.map((row, i) => {
       return (
         <div className="flex" key={i}>
           {row.map((el, j) => {
@@ -91,7 +91,7 @@ function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
         defaultColorsFor === "column_3" ||
         defaultColorsFor === "column_4"
           ? mapColumnColors()
-          : mapFolderColors()}
+          : mapTabColors()}
       </div>
     </div>
   );

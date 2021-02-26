@@ -32,7 +32,7 @@ interface Props {
 function SingleColumnsColor({
   colNumber,
   // setNotesSelected,
-  // setFoldersSelected,
+  // setTabsSelected,
   defaultColorsFor,
   setDefaultColorsFor,
   setColorsToChooseVis,
@@ -69,7 +69,7 @@ function SingleColumnsColor({
 
         }
 
-        // setFoldersSelected(false);
+        // setTabsSelected(false);
         // setNotesSelected(false);
 
         // setColumnsSelected((b) => !b);

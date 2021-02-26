@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-export function createBasicFolder(
+export function createBasicTab(
   title: string,
   column: number,
   priority: number,
@@ -18,7 +18,7 @@ export function createBasicFolder(
   };
 }
 
-export function createTabFolder_partial(
+export function createFolderTab_partial(
   type: "folder" | "note" | "rss" = "folder"
 ) {
   return {
@@ -53,14 +53,14 @@ export function createRSS_partial(
   };
 }
 
-export function createTabFolder(
+export function createFolderTab(
   title: string,
   column: number,
   priority: number
 ) {
   return {
-    ...createBasicFolder(title, column, priority),
-    ...createTabFolder_partial(),
+    ...createBasicTab(title, column, priority),
+    ...createFolderTab_partial(),
   };
 }
 
@@ -71,7 +71,7 @@ export function createNote(
   noteInput: string | null
 ) {
   return {
-    ...createBasicFolder(title, column, priority),
+    ...createBasicTab(title, column, priority),
     ...createNote_partial(noteInput),
   };
 }
@@ -83,7 +83,7 @@ export function createRSS(
   rssLink: string
 ) {
   return {
-    ...createBasicFolder(title, column, priority),
+    ...createBasicTab(title, column, priority),
     ...createRSS_partial(rssLink),
   };
 }

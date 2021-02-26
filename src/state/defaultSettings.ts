@@ -17,4 +17,4 @@ export const globalSettingsState = newRidgeState<GlobalSettingsState>({
     numberOfCols: 4
 })
 
-export const closeAllFoldersState = newRidgeState(false);
+export const closeAllTabsState = newRidgeState(false);

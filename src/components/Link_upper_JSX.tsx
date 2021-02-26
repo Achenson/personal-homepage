@@ -6,7 +6,7 @@ import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
 
 import { SingleLinkData } from "../utils/interfaces";
 
-import { createLink, createTabFolder } from "../utils/objCreators";
+import { createLink, createFolderTab } from "../utils/objCreators";
 
 import { ReactComponent as SaveSVG } from "../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
@@ -255,7 +255,7 @@ function Link_upper_JSX({
                   // if folder with title corresponding to tag doesn't exist
 
                   if (!filteredTab && tagsInputStr !== "") {
-                    let newTab = createTabFolder(el, 1, 0);
+                    let newTab = createFolderTab(el, 1, 0);
                     tagsInputArr_ToIds.push(newTab.id);
 
                     // adding new folder in there was no folder with title as a tag befere

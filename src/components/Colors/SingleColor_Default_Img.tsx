@@ -1,5 +1,5 @@
 import React from "react";
-import { folderColorState } from "../../state/colorsState";
+import {folderColorState } from "../../state/colorsState";
 import { noteColorState } from "../../state/colorsState";
 import { rssColorState } from "../../state/colorsState";
 // import { uiColorState } from "../../state/colorsState";
@@ -22,9 +22,7 @@ interface Props {
 }
 
 function DefaultSingleColor_Img({ color, defaultColorsFor }: Props): JSX.Element {
-  //   const [folderColorData, setFolderColorData] = folderColorState.use();
-  //   const [noteColorData, setNoteColorData] = noteColorState.use();
-  //   const [rssColorData, setRssColorData] = rssColorState.use();
+  
   const [
     columnsColorsImg_Data,
     setColumnsColorsImg_Data,

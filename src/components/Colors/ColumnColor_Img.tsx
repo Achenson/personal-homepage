@@ -5,7 +5,7 @@ import { columnsColorsImg_State } from "../../state/colorsState";
 interface Props {
   colNumber: number;
   // setNotesSelected: React.Dispatch<React.SetStateAction<boolean>>;
-  // setFoldersSelected: React.Dispatch<React.SetStateAction<boolean>>;
+  // setTabsSelected: React.Dispatch<React.SetStateAction<boolean>>;
   defaultColorsFor:
     // | "folders"
     // | "notes"
@@ -33,7 +33,7 @@ interface Props {
 function SingleColumnsColor_Img({
   colNumber,
   // setNotesSelected,
-  // setFoldersSelected,
+  // setTabsSelected,
   defaultColorsFor,
   setDefaultColorsFor,
   setColorsToChooseVis,
@@ -71,7 +71,7 @@ function SingleColumnsColor_Img({
 
         }
 
-        // setFoldersSelected(false);
+        // setTabsSelected(false);
         // setNotesSelected(false);
 
         // setColumnsSelected((b) => !b);

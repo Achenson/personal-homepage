@@ -31,7 +31,7 @@ function Link_newAndEdit({
 
   const [tabsData, setTabsData] = tabsDataState.use();
 
-  let tabFolders = tabsData.filter((obj) => obj.type === "folder");
+  let foldersTab = tabsData.filter((obj) => obj.type === "folder");
 
   const [titleInput, setTitleInput] = useState<string>(
     linkComponentType === "edit" ? (currentLink as SingleLinkData).title : ""
@@ -120,7 +120,7 @@ function Link_newAndEdit({
   function makeInitialTags(): string[] {
     let tags: string[] = [];
 
-    tabFolders.forEach((obj) => {
+    foldersTab.forEach((obj) => {
       if(obj.id !== "ALL_TAGS") {
 
         tags.push(obj.title);

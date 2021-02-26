@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { backgroundColorState } from "../../state/colorsState";
-import { closeAllFoldersState } from "../../state/defaultSettings";
+import { closeAllTabsState } from "../../state/defaultSettings";
 
 
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
@@ -20,7 +20,7 @@ function EyeOff({
 
   const [selected, setSelected] = useState(false);
 
-  const [closeAllFoldersData, setCloseAllFoldersData] = closeAllFoldersState.use()
+  const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use()
 
   function calcIconBackground(pageBackgroundColor: string) {
     if (pageBackgroundColor === "white") {
@@ -51,7 +51,7 @@ function EyeOff({
       onClick={() => {
         // setSelected((b) => !b);
         // setBackgroundColorsToChooseVis((b) => !b);
-        setCloseAllFoldersData(true);
+        setCloseAllTabsData(true);
         
       }}
     />

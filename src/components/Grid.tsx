@@ -12,7 +12,7 @@ import {
 
 import { closeAllTabsState } from "../state/defaultSettings";
 
-import { createTabFolder } from "../utils/objCreators";
+import { createFolderTab } from "../utils/objCreators";
 
 import { produce } from "immer";
 
@@ -34,7 +34,7 @@ function Grid({}: Props): JSX.Element {
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  const [closeAllFolders, setCloseAllFolders] = useState(false);
+  const [closeAllTabs, setCloseAllTabs] = useState(false);
   const [
     closeAllTabsData,
     setCloseAllTabsData,
@@ -100,7 +100,7 @@ function Grid({}: Props): JSX.Element {
     //     setTabsData((previous) =>
     //       produce(previous, (updated) => {
     //         updated.push({
-    //           ...createTabFolder(tabsData.filter(obj => obj.id === el)[0].title, 1, 0),
+    //           ...createFolderTab(tabsData.filter(obj => obj.id === el)[0].title, 1, 0),
     //         });
     //       })
     //     );
