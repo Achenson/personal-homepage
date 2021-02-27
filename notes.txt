@@ -85,15 +85,15 @@ DONE 9. auto-completing tags when adding links DONE
 DONE 14. newLink -> save & cancel icons not perfectly in the middle DONE (but in a perfect way?)
 DONE 15. UpperRightMenu on hover, boders for newLink & newBookmark -> default App color? DONE
 DONE 17. link/bookmark/folder -> consistent naming! DONE
+DONE 18. newTab_upperUI -> menu with existing bookmarks to choose DONE
+DONE 19. bookmark priorities DONE
+DONE 20. note -> newLines not working DONE !!! white-spase css
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-18. newTab_upperUI -> menu with existing bookmarks to choose
-19. bookmark priorities
-20. note -> newLines not working
 21. newBookmark -> better input for column
 22. bookmark title -> spaces should be permitted too
 25. Bookmark better css (more like button)

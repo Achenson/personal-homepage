@@ -17,11 +17,12 @@ function NoteInput({ tabID, setEditTabVis }: Props): JSX.Element {
     <div className="bg-gray-100 p-2">
       <div
         className="bg-yellow-300 p-2 rounded-md"
+        style={{whiteSpace: "pre-wrap"}}
         onClick={() => {
           setEditTabVis(true);
         }}
       >
-        {currentTab[0].noteInput}
+       <p  style={{whiteSpace: "-moz-pre-wrap"}}>{currentTab[0].noteInput}</p> 
       </div>
     </div>
   );

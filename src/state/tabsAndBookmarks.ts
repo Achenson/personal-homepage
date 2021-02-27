@@ -54,7 +54,7 @@ export const tabsDataState = newRidgeState<SingleTabData[]>([
     deletable: true,
     type: "note",
     noteInput:
-      "someText moreText someText moreText someText moreText someText moreText someText moreText someText moreText",
+      "someText moreText",
     // rssLink: null
     // linksTitles: ["facebook"],
   },
