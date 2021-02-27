@@ -95,6 +95,9 @@ DONE 20. note -> newLines not working DONE !!! white-spase css
 
 
 21. newBookmark -> better input for column
+
+
+
 22. bookmark title -> spaces should be permitted too
 25. Bookmark better css (more like button)
 26. black icont -> not contrastive enough on hover?

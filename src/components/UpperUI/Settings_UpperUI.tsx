@@ -17,7 +17,8 @@ function Settings_UpperUI({ settingsVis, setSettingsVis }: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function renderColsNumberControls() {
-    let arrOfColsNumbers: (1|2|3|4)[] = [1, 2, 3, 4];
+
+    const arrOfColsNumbers: (1|2|3|4)[] = [1, 2, 3, 4];
 
     let colsNumbering = {
       1: "I",

@@ -2,6 +2,8 @@ import React from "react";
 
 import { useState, useEffect } from "react";
 
+import { uiColorState } from "../../state/colorsState";
+
 import { v4 as uuidv4 } from "uuid";
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
@@ -26,13 +28,12 @@ interface Props {
   tabType: "folder" | "note" | "rss";
 }
 
-function NewTab_UpperUI({
-  setNewTabVis,
-  tabType,
-}: Props): JSX.Element {
+function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+
+  const [uiColorData, setUiColorData] = uiColorState.use();
 
   const [tabTitleInput, setTabTitleInput] = useState<string>("");
   const [rssLinkInput, setRssLinkInput] = useState<string>("");
@@ -41,14 +42,10 @@ function NewTab_UpperUI({
   // const [tabLinksInput, setTabBookmarksInput] = useState<string[]>([]);
 
   const [tabsErrorVis, setTabsErrorVis] = useState<boolean>(false);
-  const [
-    tabsRepeatErrorVis,
-    setTabsRepeatErrorVis,
-  ] = useState<boolean>(false);
-  const [
-    tabsExistenceErrorVis,
-    setTabsExistenceErrorVis,
-  ] = useState<boolean>(false);
+  const [tabsRepeatErrorVis, setTabsRepeatErrorVis] = useState<boolean>(false);
+  const [tabsExistenceErrorVis, setTabsExistenceErrorVis] = useState<boolean>(
+    false
+  );
 
   const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
     false
@@ -62,9 +59,7 @@ function NewTab_UpperUI({
 
   const [tabsListVis, setTabsListVis] = useState<boolean>(false);
 
-  const [visibleTabs, setVisibleTabs] = useState<string[]>(
-    makeInitialTabs()
-  );
+  const [visibleTabs, setVisibleTabs] = useState<string[]>(makeInitialTabs());
 
   const [tabsInputStr, setTabsInputStr] = useState<string>("");
 
@@ -76,9 +71,9 @@ function NewTab_UpperUI({
 
   const [chevronDown, setChevronDown] = useState(true);
 
-  const [initialTabs, setInitialTabs] = useState(
-    makeInitialTabs()
-  );
+  const [initialTabs, setInitialTabs] = useState(makeInitialTabs());
+
+  // const [currentColNumSelected, setCurrentColNumSelected] = useState<number>(1)
 
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
   const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
@@ -106,12 +101,7 @@ function NewTab_UpperUI({
     }
 
     setIsThisTheFirstRender(false);
-  }, [
-    tabsInputStr,
-    initialTabs,
-    setVisibleTabs,
-    setTabsListVis,
-  ]);
+  }, [tabsInputStr, initialTabs, setVisibleTabs, setTabsListVis]);
 
   function makeInitialTabs(): string[] {
     let tabs: string[] = [];
@@ -121,6 +111,36 @@ function NewTab_UpperUI({
     });
 
     return tabs;
+  }
+
+  function renderColsNumberControls() {
+    const arrOfColsNumbers: (1 | 2 | 3 | 4)[] = [1, 2, 3, 4];
+
+    let colsNumbering = {
+      1: "I",
+      2: "II",
+      3: "III",
+      4: "IV",
+    };
+
+    return arrOfColsNumbers.map((el, i) => {
+      return (
+        <div className="flex items-center ml-2">
+          <p className="mr-px">{colsNumbering[el]}</p>
+          <div
+            className={`h-4 w-4 ml-px mt-px cursor-pointer border-2 border-${uiColorData} ${
+              tabColumnInput === el
+                ? `bg-${uiColorData} hover:bg-opacity-50`
+                : `hover:bg-${uiColorData} hover:bg-opacity-50`
+            } `}
+            onClick={() => {
+            
+              setTabColumnInput(el);
+            }}
+          ></div>
+        </div>
+      );
+    });
   }
 
   return (
@@ -151,21 +171,6 @@ function NewTab_UpperUI({
                 : "new RSS title"
             }
             onChange={(e) => setTabTitleInput(e.target.value)}
-          />
-          {/* </div> */}
-          <ChevronDownSVG className="h-6 invisible" />
-        </div>
-        <div className="flex justify-around mb-2 mt-2">
-          <p className="w-32">Column</p>
-          {/* <div className="w-full pl-2"> */}
-          <input
-            type="number"
-            min="1"
-            max="4"
-            className="w-full border border-gray-500"
-            value={tabColumnInput}
-            onChange={(e) => setTabColumnInput(parseInt(e.target.value))}
-            placeholder={"Enter number between 1 and 4"}
           />
           {/* </div> */}
           <ChevronDownSVG className="h-6 invisible" />
@@ -226,6 +231,25 @@ function NewTab_UpperUI({
             )}
           </div>
         ) : null}
+
+        <div className="flex justify-around mb-2 mt-2">
+          <p className="w-32">Column</p>
+          {/* <div className="w-full pl-2"> */}
+
+          {/* <input
+            type="number"
+            min="1"
+            max="4"
+            className="w-full border border-gray-500"
+            value={tabColumnInput}
+            onChange={(e) => setTabColumnInput(parseInt(e.target.value))}
+            placeholder={"Enter number between 1 and 4"}
+          /> */}
+          {renderColsNumberControls()}
+
+          {/* </div> */}
+          <ChevronDownSVG className="h-6 invisible" />
+        </div>
 
         {tabType === "note" ? (
           <div>
@@ -343,8 +367,6 @@ function NewTab_UpperUI({
                     setTabsRepeatErrorVis(true);
                     return;
                   }
-
-                  
                 }
 
                 if (tabType === "note") {
@@ -373,11 +395,7 @@ function NewTab_UpperUI({
                   setTabsData((previous) =>
                     produce(previous, (updated) => {
                       updated.push({
-                        ...createFolderTab(
-                          tabTitleInput,
-                          tabColumnInput,
-                          0
-                        ),
+                        ...createFolderTab(tabTitleInput, tabColumnInput, 0),
                       });
                     })
                   );
