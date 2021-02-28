@@ -264,6 +264,8 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 177. autocomplete field in the grid moves out of divs
 178. autocomple chevronSVG should not be scaled down too much
 
+179. change placeholder names: link/bookmark/folder
+
 
 App structure:
 Main

@@ -73,8 +73,6 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
 
   const [initialTabs, setInitialTabs] = useState(makeInitialTabs());
 
-  // const [currentColNumSelected, setCurrentColNumSelected] = useState<number>(1)
-
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
   const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
@@ -125,7 +123,7 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
 
     return arrOfColsNumbers.map((el, i) => {
       return (
-        <div className="flex items-center ml-2">
+        <div className="flex items-center ml-2 justify-end w-full">
           <p className="mr-px">{colsNumbering[el]}</p>
           <div
             className={`h-4 w-4 ml-px mt-px cursor-pointer border-2 border-${uiColorData} ${
@@ -134,7 +132,6 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
                 : `hover:bg-${uiColorData} hover:bg-opacity-50`
             } `}
             onClick={() => {
-            
               setTabColumnInput(el);
             }}
           ></div>
@@ -173,7 +170,10 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
             onChange={(e) => setTabTitleInput(e.target.value)}
           />
           {/* </div> */}
-          <ChevronDownSVG className="h-6 invisible" />
+          <div className="w-5 h-5">
+            <ChevronDownSVG className="h-full invisible" />
+          </div>
+          {/* <ChevronDownSVG className="h-6 invisible" /> */}
         </div>
 
         {tabType === "folder" ? (
@@ -213,26 +213,45 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
             />
             {/* </div> */}
             {chevronDown ? (
-              <ChevronDownSVG
-                className="h-6 cursor-pointer hover:text-blueGray-500"
-                onClick={() => {
-                  setChevronDown((b) => !b);
-                  setTabsListVis((b) => !b);
-                }}
-              />
+              <div className="w-5 h-5 mt-1">
+                <ChevronDownSVG
+                  className="h-full cursor-pointer hover:text-blueGray-500"
+                  onClick={() => {
+                    setChevronDown((b) => !b);
+                    setTabsListVis((b) => !b);
+                  }}
+                />
+              </div>
             ) : (
-              <ChevronUpSVG
-                className="h-6 cursor-pointer hover:text-blueGray-500"
-                onClick={() => {
-                  setChevronDown((b) => !b);
-                  setTabsListVis((b) => !b);
-                }}
-              />
+              // <ChevronDownSVG
+              //   className="h-6 cursor-pointer hover:text-blueGray-500"
+              //   onClick={() => {
+              //     setChevronDown((b) => !b);
+              //     setTabsListVis((b) => !b);
+              //   }}
+              // />
+              <div className="w-5 h-5 mt-1">
+                <ChevronUpSVG
+                  className="h-full cursor-pointer hover:text-blueGray-500"
+                  onClick={() => {
+                    setChevronDown((b) => !b);
+                    setTabsListVis((b) => !b);
+                  }}
+                />
+              </div>
+
+              // <ChevronUpSVG
+              //   className="h-6 cursor-pointer hover:text-blueGray-500"
+              //   onClick={() => {
+              //     setChevronDown((b) => !b);
+              //     setTabsListVis((b) => !b);
+              //   }}
+              // />
             )}
           </div>
         ) : null}
 
-        <div className="flex justify-around mb-2 mt-2">
+        <div className="flex justify-between mb-2 mt-2">
           <p className="w-32">Column</p>
           {/* <div className="w-full pl-2"> */}
 
@@ -245,10 +264,14 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
             onChange={(e) => setTabColumnInput(parseInt(e.target.value))}
             placeholder={"Enter number between 1 and 4"}
           /> */}
-          {renderColsNumberControls()}
+          <div className="flex">
+            {renderColsNumberControls()}
+            <div className="w-5 h-5">
+              <ChevronDownSVG className="h-full invisible" />
+            </div>
+          </div>
 
           {/* </div> */}
-          <ChevronDownSVG className="h-6 invisible" />
         </div>
 
         {tabType === "note" ? (
