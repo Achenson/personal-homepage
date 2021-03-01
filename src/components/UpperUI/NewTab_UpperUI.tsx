@@ -223,13 +223,6 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
                 />
               </div>
             ) : (
-              // <ChevronDownSVG
-              //   className="h-6 cursor-pointer hover:text-blueGray-500"
-              //   onClick={() => {
-              //     setChevronDown((b) => !b);
-              //     setTabsListVis((b) => !b);
-              //   }}
-              // />
               <div className="w-5 h-5 mt-1">
                 <ChevronUpSVG
                   className="h-full cursor-pointer hover:text-blueGray-500"
@@ -239,15 +232,25 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
                   }}
                 />
               </div>
-
-              // <ChevronUpSVG
-              //   className="h-6 cursor-pointer hover:text-blueGray-500"
-              //   onClick={() => {
-              //     setChevronDown((b) => !b);
-              //     setTabsListVis((b) => !b);
-              //   }}
-              // />
             )}
+          </div>
+        ) : null}
+
+        {tabType === "rss" ? (
+          <div className="flex justify-around mb-2 mt-2">
+            <p className="w-32">RSS link</p>
+            <div className="w-full">
+              <input
+                type="text"
+                className="w-full border border-gray-500"
+                value={rssLinkInput}
+                placeholder="enter RSS link"
+                onChange={(e) => setRssLinkInput(e.target.value)}
+              />
+            </div>
+            <div className="w-5 h-5 mt-1">
+              <ChevronDownSVG className="h-full invisible" />
+            </div>
           </div>
         ) : null}
 
@@ -255,15 +258,6 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
           <p className="w-32">Column</p>
           {/* <div className="w-full pl-2"> */}
 
-          {/* <input
-            type="number"
-            min="1"
-            max="4"
-            className="w-full border border-gray-500"
-            value={tabColumnInput}
-            onChange={(e) => setTabColumnInput(parseInt(e.target.value))}
-            placeholder={"Enter number between 1 and 4"}
-          /> */}
           <div className="flex">
             {renderColsNumberControls()}
             <div className="w-5 h-5">
@@ -284,21 +278,6 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
                 setTextAreaValue(e.target.value);
               }}
             ></textarea>
-          </div>
-        ) : null}
-
-        {tabType === "rss" ? (
-          <div className="flex justify-around mb-2 mt-2">
-            <p className="w-32">RSS link</p>
-            <div className="w-full pl-2">
-              <input
-                type="text"
-                className="w-full border border-gray-500"
-                value={rssLinkInput}
-                placeholder="enter RSS link"
-                onChange={(e) => setRssLinkInput(e.target.value)}
-              />
-            </div>
           </div>
         ) : null}
 
