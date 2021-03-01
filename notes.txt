@@ -88,13 +88,13 @@ DONE 17. link/bookmark/folder -> consistent naming! DONE
 DONE 18. newTab_upperUI -> menu with existing bookmarks to choose DONE
 DONE 19. bookmark priorities DONE
 DONE 20. note -> newLines not working DONE !!! white-spase css
+DONE 21. newBookmark -> better input for column DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-21. newBookmark -> better input for column
 
 
 

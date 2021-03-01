@@ -21,7 +21,7 @@ import {
 import { produce } from "immer";
 
 import { tabsDataState } from "../../state/tabsAndBookmarks";
-import { bookmarksDataState } from "../../state/tabsAndBookmarks";
+import { bookmarksDataState, bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
 
 interface Props {
   setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,6 +32,8 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+
+  const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
 
   const [uiColorData, setUiColorData] = uiColorState.use();
 
@@ -394,11 +396,21 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
                 }
 
                 if (tabType === "folder") {
+
+                  let newFolderTab = createFolderTab(tabTitleInput, tabColumnInput, 0)
+
+                  let newBookmarksAllTagsData = [...bookmarksAllTagsData];
+                  newBookmarksAllTagsData.push(newFolderTab.id)
+                  setBookmarksAllTagsData([...newBookmarksAllTagsData])
+
                   setTabsData((previous) =>
                     produce(previous, (updated) => {
-                      updated.push({
-                        ...createFolderTab(tabTitleInput, tabColumnInput, 0),
-                      });
+
+
+                      updated.push(
+                        // ...createFolderTab(tabTitleInput, tabColumnInput, 0),
+                        newFolderTab
+                      );
                     })
                   );
 
@@ -408,14 +420,23 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
                       updated.forEach((obj) => {
                         if (
                           tabsInputArr.indexOf(obj.title) > -1 &&
-                          obj.tags.indexOf(tabTitleInput) === -1
+                          obj.tags.indexOf(newFolderTab.id) === -1
                         ) {
-                          obj.tags.push(tabTitleInput);
+                          obj.tags.push(newFolderTab.id);
                         }
                       });
                     })
                   );
+
+                    
+                 
+                  
                 }
+
+                
+
+
+
 
                 if (tabType === "rss") {
                   setTabsData((previous) =>

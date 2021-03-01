@@ -109,6 +109,7 @@ function Grid({}: Props): JSX.Element {
 
     console.log(bookmarksAllTagsData);
 
+    // deleting an empty folderTab
     // deleting a tab if there is no tags with the same name in bookmarks
 
     tabsData.forEach((obj, i) => {
@@ -122,6 +123,8 @@ function Grid({}: Props): JSX.Element {
         );
       }
     });
+
+
   }, [tabsData, setTabsData, bookmarksAllTagsData]);
 
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
