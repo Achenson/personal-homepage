@@ -67,8 +67,10 @@ function Bookmark_upper_JSX({
   const [chevronDown, setChevronDown] = useState(true);
 
   // ^  and $ -> beginning and end of the text!
-  let regexForTags = /^\w+(,\s\w+)*$/;
-  let regexForTitle = /^\w+$/;
+  // let regexForTags = /^\w+(,\s\w+)*$/;
+  // let regexForTitle = /^\w+$/;
+  let regexForTags = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/
+  let regexForTitle = /^\w(\s?\w+)*$/;
 
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable

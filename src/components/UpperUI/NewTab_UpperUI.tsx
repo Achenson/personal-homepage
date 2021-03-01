@@ -66,8 +66,10 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
   const [tabsInputStr, setTabsInputStr] = useState<string>("");
 
   // ^  and $ -> beginning and end of the text!
-  let regexForTabs = /^\w+(,\s\w+)*$/;
-  let regexForTitle = /^\w+$/;
+  // let regexForBookmarks = /^\w+(,\s\w+)*$/;
+  let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
+  // let regexForTitle = /^\w+$/;
+  let regexForTitle = /^\w(\s?\w+)*$/;
 
   const [textAreaValue, setTextAreaValue] = useState<string | null>("");
 
@@ -357,7 +359,7 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
 
                 if (tabType === "folder") {
                   // if (!regexForTabs.test(tabBookmarksInput.join(", "))) {
-                  if (!regexForTabs.test(tabsInputArr.join(", "))) {
+                  if (!regexForBookmarks.test(tabsInputArr.join(", "))) {
                     setTabsErrorVis(true);
                     return;
                   }

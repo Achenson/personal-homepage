@@ -158,7 +158,8 @@ Props): JSX.Element {
     setTabsExistenceErrorVis,
   ] = useState<boolean>(false);
 
-  let regexForTitle = /^\w+$/;
+  // let regexForTitle = /^\w+$/;
+  let regexForTitle = /^\w(\s?\w+)*$/;
 
   const [tabOpen, setTabOpen] = useState(currentTab[0].opened);
 
@@ -212,8 +213,8 @@ Props): JSX.Element {
   }
 
   // ^  and $ -> beginning and end of the text!
-  let regexForTabs = /^\w+(,\s\w+)*$/;
-
+  // let regexForTabs = /^\w+(,\s\w+)*$/;
+  let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
   return (
     <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-2">
       <div className="flex items-center mt-2 justify-between">
@@ -530,7 +531,7 @@ Props): JSX.Element {
               //   setTabsExistenceErrorVis(false);
 
               if (tabType === "folder") {
-                if (!regexForTabs.test(tabsInputStr)) {
+                if (!regexForBookmarks.test(tabsInputStr)) {
                   setTabsErrorVis(true);
                   return;
                 }

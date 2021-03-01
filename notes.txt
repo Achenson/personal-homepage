@@ -88,7 +88,9 @@ DONE 17. link/bookmark/folder -> consistent naming! DONE
 DONE 18. newTab_upperUI -> menu with existing bookmarks to choose DONE
 DONE 19. bookmark priorities DONE
 DONE 20. note -> newLines not working DONE !!! white-spase css
-DONE 21. newBookmark -> better input for column DONE
+DONE 21. newTab -> better input for column DONE
+DONE 22. bookmark/tab title, tags -> spaces should be permitted too DONE
+DONE 25. Tab better css (more like button) DONE
 
 
 1. purgecss at the end of project?
@@ -98,8 +100,6 @@ DONE 21. newBookmark -> better input for column DONE
 
 
 
-22. bookmark title -> spaces should be permitted too
-25. Bookmark better css (more like button)
 26. black icont -> not contrastive enough on hover?
 27. auto close bookmark menus when clicking sth else
 28. diff between iGoogle folders and mine
@@ -264,7 +264,8 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 177. autocomplete field in the grid moves out of divs
 178. autocomple chevronSVG should not be scaled down too much
 
-179. change placeholder names: link/bookmark/folder
+179. change placeholder/error names: link/bookmark/folder
+180. include single spaces in error names
 
 
 App structure:

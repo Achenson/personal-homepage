@@ -100,8 +100,10 @@ function Bookmark_lower_JSX({
   const [chevronDown, setChevronDown] = useState(true);
 
   // ^  and $ -> beginning and end of the text!
-  let regexForTags = /^\w+(,\s\w+)*$/;
-  let regexForTitle = /^\w+$/;
+  // let regexForTags = /^\w+(,\s\w+)*$/;
+  let regexForTags = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/
+  // let regexForTitle = /^\w+$/;
+  let regexForTitle = /^\w(\s?\w+)*$/;
 
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
