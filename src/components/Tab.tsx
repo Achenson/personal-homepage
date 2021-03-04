@@ -13,7 +13,7 @@ import {
   tabBeingDraggedColor_State,
 } from "../state/colorsState";
 
-import { closeAllTabsState, tabColorOpenedState, globalSettingsState } from "../state/defaultSettings";
+import { closeAllTabsState, tabColorOpenedState, globalSettingsState, tabEditOpenedState } from "../state/defaultSettings";
 
 
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
@@ -65,12 +65,22 @@ Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   
   const [tabColorOpenedData, setTabColorOpenedData] = tabColorOpenedState.use();
+  const [tabEditOpenedData, setTabEditOpenedData] = tabColorOpenedState.use();
+
+
 
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
   const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
+
+
+
+
+  const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
+  const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
+  const [editTabVis, setEditTabVis] = useState<boolean>(false);
 
 
   useEffect( () => {
@@ -81,9 +91,18 @@ Props): JSX.Element {
 
   }, [tabColorOpenedData])
 
-  const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
-  const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
-  const [editTabVis, setEditTabVis] = useState<boolean>(false);
+  useEffect( () => {
+
+    // if(tabColorOpenedData) {
+    //   setEditTabVis(false)
+    // }
+
+
+    if (tabEditOpenedData !== tabID) {
+      setEditTabVis(false);
+    }
+
+  }, [tabEditOpenedData])
 
   // const [editSingleLinkData, setEditSingleBookmarkData] = useState<SingleBookmarkData>({
   //   title: "",
@@ -296,6 +315,10 @@ Props): JSX.Element {
         <div
           className="pl-1 w-full cursor-pointer"
           onClick={() => {
+
+            setTabColorOpenedData(null);
+            setTabEditOpenedData(null);
+
             if (tabType === "folder") {
               setSingleBookmarkVisibility((b) => !b);
             }
@@ -347,6 +370,18 @@ Props): JSX.Element {
               style={{ marginTop: "-6px" }}
               onClick={() => {
                 setNewBookmarkVis((b) => !b);
+
+                if(editTabVis) {
+                  setEditTabVis(false)
+                }
+
+                if(colorsVisibility) {
+                  setColorsVisibility(false)
+                }
+  
+
+                setTabEditOpenedData(null);
+                setTabColorOpenedData(null);
               }}
             />
           ) : null}
@@ -358,6 +393,12 @@ Props): JSX.Element {
               tabType === "note" || tabType === "rss" ? "ml-2" : ""
             }`}
             onClick={() => {
+
+              if(editTabVis) {
+                setEditTabVis(false)
+              }
+
+              setTabEditOpenedData(null);
               setColorsVisibility((b) => !b);
 
               if(colorsVisibility) {
@@ -377,7 +418,23 @@ Props): JSX.Element {
               finalTabColor
             )} cursor-pointer`}
             onClick={() => {
+
+              if(colorsVisibility) {
+                setColorsVisibility(false)
+              }
+
               setEditTabVis((b) => !b);
+              setTabColorOpenedData(null);
+
+              if(editTabVis) {
+                setTabEditOpenedData(null);
+              }
+
+              if(!editTabVis) {
+                setTabEditOpenedData(tabID);
+              }
+
+
             }}
           />
         </div>

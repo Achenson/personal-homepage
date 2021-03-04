@@ -94,7 +94,7 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
 
     setVisibleTabs([...newVisibleTags]);
 
-    if (newVisibleTags.length === 0) {
+    if (newVisibleTags.length === 0 && isThisTheFirstRender) {
       setTabsListVis(false);
     }
 
