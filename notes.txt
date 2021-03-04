@@ -91,6 +91,11 @@ DONE 20. note -> newLines not working DONE !!! white-spase css
 DONE 21. newTab -> better input for column DONE
 DONE 22. bookmark/tab title, tags -> spaces should be permitted too DONE
 DONE 25. Tab better css (more like button) DONE
+XX 26. black icont -> not contrastive enough on hover? XX
+
+XX 28. diff between iGoogle folders and mineXX
+DONE 30. colors for UI dep on folder color DONE
+
 
 
 1. purgecss at the end of project?
@@ -100,10 +105,11 @@ DONE 25. Tab better css (more like button) DONE
 
 
 
-26. black icont -> not contrastive enough on hover?
-27. auto close bookmark menus when clicking sth else
-28. diff between iGoogle folders and mine
-30. colors for UI dep on folder color
+27. auto close bookmark menus when clicking sth else 
+/ only allow colors and edit at the same time when
+/ close when opening a Tab
+/ closeAllTabs should also close edit colors & tab edits
+
 31. margin for new item -> always on?
 32. colors placement in default color settings
 33. change light gray to white on some background in Folders
@@ -266,6 +272,10 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 
 179. change placeholder/error names: link/bookmark/folder
 180. include single spaces in error names
+181. white icons on Tabs not contrastive enough on hover
+182. tab editing -> should resize up the place for tab, increase columns size also as a side effect?
+183. Column forwardRef??
+184. newTab isThisFirstRender not working
 
 
 App structure:

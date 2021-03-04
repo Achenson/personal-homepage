@@ -13,8 +13,8 @@ import {
   tabBeingDraggedColor_State,
 } from "../state/colorsState";
 
-import { closeAllTabsState } from "../state/defaultSettings";
-import { globalSettingsState } from "../state/defaultSettings";
+import { closeAllTabsState, tabColorOpenedState, globalSettingsState } from "../state/defaultSettings";
+
 
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
 import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
@@ -63,11 +63,23 @@ Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [deletedTab, setDeletedTab] = deletedTabState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
+  
+  const [tabColorOpenedData, setTabColorOpenedData] = tabColorOpenedState.use();
+
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
   const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
+
+
+  useEffect( () => {
+
+    if (tabColorOpenedData !== tabID) {
+      setColorsVisibility(false);
+    }
+
+  }, [tabColorOpenedData])
 
   const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
   const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
@@ -347,6 +359,16 @@ Props): JSX.Element {
             }`}
             onClick={() => {
               setColorsVisibility((b) => !b);
+
+              if(colorsVisibility) {
+                setTabColorOpenedData(null);
+              }
+
+              if(!colorsVisibility) {
+                setTabColorOpenedData(tabID)
+              }
+
+
             }}
           />
 

@@ -103,7 +103,7 @@ function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
     }
 
     setIsThisTheFirstRender(false);
-  }, [tabsInputStr, initialTabs, setVisibleTabs, setTabsListVis]);
+  }, [tabsInputStr, initialTabs, setVisibleTabs, setTabsListVis, isThisTheFirstRender]);
 
   function makeInitialTabs(): string[] {
     let tabs: string[] = [];

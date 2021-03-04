@@ -18,3 +18,6 @@ export const globalSettingsState = newRidgeState<GlobalSettingsState>({
 })
 
 export const closeAllTabsState = newRidgeState(false);
+
+export const tabColorOpenedState = newRidgeState<null | (string | number)>(null)
+
