@@ -11,7 +11,7 @@ import {
   tabBeingDraggedColor_State,
 } from "../state/colorsState";
 
-import { closeAllTabsState, tabColorOpenedState, globalSettingsState } from "../state/defaultSettings";
+import { closeAllTabsState, tabColorOpenedState, tabEditOpenedState, globalSettingsState } from "../state/defaultSettings";
 
 
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
@@ -72,7 +72,7 @@ const initVisState = {
  // @ts-ignore: Unreachable code error
 function visReducer(state, action: object) {
 
-  let stateAllInitial = {...state}
+  let stateAllInitial = {...initVisState}
   // stateAllInitial.resetToFalse();
 
  // @ts-ignore: Unreachable code error
@@ -83,6 +83,12 @@ function visReducer(state, action: object) {
       return {...stateAllInitial, colorsVisibility: !state.colorsVisibility}
       case "COLORS_CLOSE":   
       return {...stateAllInitial, colorsVisibility: false}
+      case "EDIT_TOGGLE":   
+      return {...stateAllInitial, editTabVis: !state.editTabVis}
+      case "EDIT_OPEN":   
+      return {...stateAllInitial, editTabVis: true}
+      case "EDIT_CLOSE":   
+      return {...stateAllInitial, editTabVis: false}
     default:
       return state
 
@@ -106,7 +112,7 @@ Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   
   const [tabColorOpenedData, setTabColorOpenedData] = tabColorOpenedState.use();
-  const [tabEditOpenedData, setTabEditOpenedData] = tabColorOpenedState.use();
+  const [tabEditOpenedData, setTabEditOpenedData] = tabEditOpenedState.use();
 
 
 
@@ -128,7 +134,7 @@ Props): JSX.Element {
 
   const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
   const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
-  const [editTabVis, setEditTabVis] = useState<boolean>(false);
+  // const [editTabVis, setEditTabVis] = useState<boolean>(false);
 
 
   useEffect( () => {
@@ -404,8 +410,10 @@ Props): JSX.Element {
               onClick={() => {
                 setNewBookmarkVis((b) => !b);
 
-                if(editTabVis) {
-                  setEditTabVis(false)
+                
+                if(visState.editTabVis) {
+                  // setEditTabVis(false)
+                  visDispatch({type: "EDIT_CLOSE"})
                 }
 
                 if(visState.colorsVisibility) {
@@ -450,6 +458,7 @@ Props): JSX.Element {
             )} cursor-pointer`}
             onClick={() => {
               // setEditTabVis((b) => !b);
+              visDispatch({type: "EDIT_TOGGLE"})
             }}
           />
         </div>
