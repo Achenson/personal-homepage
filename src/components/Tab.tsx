@@ -106,6 +106,9 @@ Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   
   const [tabColorOpenedData, setTabColorOpenedData] = tabColorOpenedState.use();
+  const [tabEditOpenedData, setTabEditOpenedData] = tabColorOpenedState.use();
+
+
 
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
@@ -116,10 +119,16 @@ Props): JSX.Element {
   // const [editTabVis, setEditTabVis] = useState<boolean>(false);
 
   
-  const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
-  const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
+ 
 
   const [visState, visDispatch] = useReducer(visReducer, initVisState);
+
+
+
+
+  const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
+  const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
+  const [editTabVis, setEditTabVis] = useState<boolean>(false);
 
 
   useEffect( () => {
@@ -339,6 +348,10 @@ Props): JSX.Element {
         <div
           className="pl-1 w-full cursor-pointer"
           onClick={() => {
+
+            setTabColorOpenedData(null);
+            setTabEditOpenedData(null);
+
             if (tabType === "folder") {
               setSingleBookmarkVisibility((b) => !b);
             }
@@ -390,6 +403,19 @@ Props): JSX.Element {
               style={{ marginTop: "-6px" }}
               onClick={() => {
                 setNewBookmarkVis((b) => !b);
+
+                if(editTabVis) {
+                  setEditTabVis(false)
+                }
+
+                if(visState.colorsVisibility) {
+                  // setColorsVisibility(false)
+                  visDispatch({type: "COLORS_CLOSE"})
+                }
+  
+
+                setTabEditOpenedData(null);
+                setTabColorOpenedData(null);
               }}
             />
           ) : null}
