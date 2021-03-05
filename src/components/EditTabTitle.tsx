@@ -26,16 +26,17 @@ import { rssSettingsState } from "../state/defaultSettings";
 interface Props {
   // tabTitle: string;
   tabType: "folder" | "note" | "rss";
-  setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
+  visDispatch: React.Dispatch<object>;
   // noteInput: string | null;
   tabID: string | number;
 }
 
 function EditTabTitle({
   tabID,
-
+  visDispatch,
   tabType,
-  setEditTabVis,
+  // setEditTabVis,
 }: // noteInput,
 Props): JSX.Element {
   const [deletedTab, setDeletedTab] = deletedTabState.use();
@@ -468,7 +469,8 @@ Props): JSX.Element {
                   })
                 );
 
-                setEditTabVis((b) => !b);
+                // setEditTabVis((b) => !b);
+                visDispatch({type: "EDIT_TOGGLE"})
                 // removing deleted tab(tag) for bookmarks
                 bookmarksData.forEach((obj, i) => {
                   if (obj.tags.indexOf(tabTitle) > -1) {
@@ -646,7 +648,8 @@ Props): JSX.Element {
                 );
               }
 
-              setEditTabVis((b) => !b);
+              // setEditTabVis((b) => !b);
+              visDispatch({type: "EDIT_TOGGLE"})
             }}
           >
             <SaveSVG
@@ -660,7 +663,8 @@ Props): JSX.Element {
           <button
             onClick={(e) => {
               e.preventDefault();
-              setEditTabVis((b) => !b);
+              // setEditTabVis((b) => !b);
+              visDispatch({type: "EDIT_TOGGLE"})
             }}
           >
             <CancelSVG className="h-5 fill-current text-gray-900 ml-3 hover:text-red-600" />

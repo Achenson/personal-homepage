@@ -5,10 +5,11 @@ import { tabsDataState } from "../state/tabsAndBookmarks";
 interface Props {
   //  noteInput: string | null;
   tabID: string | number;
-  setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
+  visDispatch: React.Dispatch<object>;
 }
 
-function NoteInput({ tabID, setEditTabVis }: Props): JSX.Element {
+function NoteInput({ tabID, visDispatch }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
   let currentTab = tabsData.filter((obj) => obj.id === tabID);
@@ -19,7 +20,8 @@ function NoteInput({ tabID, setEditTabVis }: Props): JSX.Element {
         className="bg-yellow-300 p-2 rounded-md"
         style={{whiteSpace: "pre-wrap"}}
         onClick={() => {
-          setEditTabVis(true);
+          // setEditTabVis(true);
+          visDispatch({type: "EDIT_OPEN"})
         }}
       >
        <p  style={{whiteSpace: "-moz-pre-wrap"}}>{currentTab[0].noteInput}</p> 

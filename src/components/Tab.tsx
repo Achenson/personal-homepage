@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { produce } from "immer";
+import React, { useEffect, useState, useReducer } from "react";
 
 import { tabsDataState } from "../state/tabsAndBookmarks";
 import { bookmarksDataState } from "../state/tabsAndBookmarks";
@@ -49,6 +47,49 @@ interface Props {
   closeAllTabs: boolean;
 }
 
+
+
+const initVisState = {
+  newBookmarkVis: false,
+  editTabVis: false,
+  colorsVisibility: false,
+
+  singleBookmarkVisibility: false,
+  editBookmarkVis: false,
+
+  rssVisibility: false,
+  noteInputVisibility: false,
+
+  // resetToFalse() {
+  //   for (let key in this) {
+  //     // @ts-ignore: Unreachable code error
+  //   this[key] = false;
+  //   } 
+  // }
+
+
+}
+ // @ts-ignore: Unreachable code error
+function visReducer(state, action: object) {
+
+  let stateAllInitial = {...state}
+  // stateAllInitial.resetToFalse();
+
+ // @ts-ignore: Unreachable code error
+  switch(action.type) {
+
+
+    case "COLORS_TOGGLE":
+      return {...stateAllInitial, colorsVisibility: !state.colorsVisibility}
+      case "COLORS_CLOSE":   
+      return {...stateAllInitial, colorsVisibility: false}
+    default:
+      return state
+
+  }
+}
+
+
 function Tab({
   tabID,
   tabTitle,
@@ -70,26 +111,28 @@ Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
-  const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
+
+  // const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
+  // const [editTabVis, setEditTabVis] = useState<boolean>(false);
+
+  
+  const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
+  const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
+
+  const [visState, visDispatch] = useReducer(visReducer, initVisState);
 
 
   useEffect( () => {
 
     if (tabColorOpenedData !== tabID) {
-      setColorsVisibility(false);
+      // setColorsVisibility(false);
+      visDispatch({type: "COLORS_CLOSE"})
     }
 
   }, [tabColorOpenedData])
 
-  const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
-  const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
-  const [editTabVis, setEditTabVis] = useState<boolean>(false);
 
-  // const [editSingleLinkData, setEditSingleBookmarkData] = useState<SingleBookmarkData>({
-  //   title: "",
-  //   URL: "",
-  //   tags: [],
-  // });
+
 
   const [bookmarkId, setBookmarkId] = useState<number|string>()
 
@@ -358,13 +401,16 @@ Props): JSX.Element {
               tabType === "note" || tabType === "rss" ? "ml-2" : ""
             }`}
             onClick={() => {
-              setColorsVisibility((b) => !b);
 
-              if(colorsVisibility) {
+              // setColorsVisibility((b) => !b);
+
+              visDispatch({type: "COLORS_TOGGLE"})
+
+              if(visState.colorsVisibility) {
                 setTabColorOpenedData(null);
               }
 
-              if(!colorsVisibility) {
+              if(!visState.colorsVisibility) {
                 setTabColorOpenedData(tabID)
               }
 
@@ -377,13 +423,13 @@ Props): JSX.Element {
               finalTabColor
             )} cursor-pointer`}
             onClick={() => {
-              setEditTabVis((b) => !b);
+              // setEditTabVis((b) => !b);
             }}
           />
         </div>
       </div>
 
-      {colorsVisibility ? (
+      {visState.colorsVisibility ? (
         <ColorsToChoose
           setIconsVisibility={setIconsVisibility}
           tabTitle={tabTitle}
@@ -411,11 +457,12 @@ Props): JSX.Element {
 
       ) : null}
 
-      {editTabVis ? (
+      {visState.editTabVis ? (
         <EditTabTitle
         tabID={tabID}
         tabType={tabType}
-          setEditTabVis={setEditTabVis}
+        // setEditTabVis={setEditTabVis}
+        visDispatch={visDispatch}
           // noteInput={noteInput}
         />
       ) : null}
@@ -445,7 +492,8 @@ Props): JSX.Element {
         <NoteInput
           //  noteInput={noteInput}
           tabID={tabID}
-          setEditTabVis={setEditTabVis}
+          // setEditTabVis={setEditTabVis}
+          visDispatch={visDispatch}
         />
       ) : null}
 
