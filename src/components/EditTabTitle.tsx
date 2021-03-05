@@ -23,14 +23,20 @@ import {
 
 import { rssSettingsState } from "../state/defaultSettings";
 
+interface Action {
+  type: string;
+  payload?: string | number
+}
+
 interface Props {
   // tabTitle: string;
   tabType: "folder" | "note" | "rss";
   // setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
-  visDispatch: React.Dispatch<object>;
+  visDispatch: React.Dispatch<Action>;
   // noteInput: string | null;
   tabID: string | number;
 }
+
 
 function EditTabTitle({
   tabID,
@@ -201,6 +207,7 @@ Props): JSX.Element {
     initialTabs,
     setVisibleTabs,
     setTabsListVis,
+    isThisTheFirstRender
   ]);
 
   function makeInitialTabs(): string[] {

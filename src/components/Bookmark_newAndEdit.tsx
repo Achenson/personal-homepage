@@ -115,7 +115,7 @@ function Bookmark_newAndEdit({
     }
 
     setIsThisTheFirstRender(false);
-  }, [tagsInputStr, initialTags, setVisibleTags, setTagsListVis]);
+  }, [tagsInputStr, initialTags, setVisibleTags, setTagsListVis, isThisTheFirstRender]);
 
   function makeInitialTags(): string[] {
     let tags: string[] = [];

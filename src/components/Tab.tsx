@@ -11,8 +11,12 @@ import {
   tabBeingDraggedColor_State,
 } from "../state/colorsState";
 
-import { closeAllTabsState, tabColorOpenedState, tabEditOpenedState, globalSettingsState } from "../state/defaultSettings";
-
+import {
+  closeAllTabsState,
+  tabColorOpenedState,
+  tabEditOpenedState,
+  globalSettingsState,
+} from "../state/defaultSettings";
 
 import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
 import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
@@ -36,6 +40,11 @@ interface SingleBookmarkData {
   tags: string[];
 }
 
+interface Action {
+  type: string;
+  payload?: string | number;
+}
+
 interface Props {
   tabID: string | number;
   tabTitle: string;
@@ -47,7 +56,15 @@ interface Props {
   closeAllTabs: boolean;
 }
 
-
+interface VisState {
+  newBookmarkVis: boolean;
+  editTabVis: boolean;
+  colorsVisibility: boolean;
+  singleBookmarkVisibility: boolean;
+  editBookmarkVis: boolean;
+  rssVisibility: boolean;
+  noteInputVisibility: boolean;
+}
 
 const initVisState = {
   newBookmarkVis: false,
@@ -64,36 +81,10 @@ const initVisState = {
   //   for (let key in this) {
   //     // @ts-ignore: Unreachable code error
   //   this[key] = false;
-  //   } 
+  //   }
   // }
+};
 
-
-}
- // @ts-ignore: Unreachable code error
-function visReducer(state, action: object) {
-
-  let stateAllInitial = {...initVisState}
-  // stateAllInitial.resetToFalse();
-
- // @ts-ignore: Unreachable code error
-  switch(action.type) {
-
-
-    case "COLORS_TOGGLE":
-      return {...stateAllInitial, colorsVisibility: !state.colorsVisibility}
-      case "COLORS_CLOSE":   
-      return {...stateAllInitial, colorsVisibility: false}
-      case "EDIT_TOGGLE":   
-      return {...stateAllInitial, editTabVis: !state.editTabVis}
-      case "EDIT_OPEN":   
-      return {...stateAllInitial, editTabVis: true}
-      case "EDIT_CLOSE":   
-      return {...stateAllInitial, editTabVis: false}
-    default:
-      return state
-
-  }
-}
 
 
 function Tab({
@@ -102,20 +93,50 @@ function Tab({
   tabColor,
   tabType,
   colNumber,
-  closeAllTabs
+  closeAllTabs,
 }: // noteInput,
 // rssLink
 Props): JSX.Element {
-
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [deletedTab, setDeletedTab] = deletedTabState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
-  
+
   const [tabColorOpenedData, setTabColorOpenedData] = tabColorOpenedState.use();
   const [tabEditOpenedData, setTabEditOpenedData] = tabEditOpenedState.use();
 
-
-
+  function visReducer(state: VisState, action: Action) {
+    let stateAllInitial: VisState = { ...initVisState };
+    // stateAllInitial.resetToFalse();
+  
+    switch (action.type) {
+      case "COLORS_TOGGLE":
+        if (state.colorsVisibility) {
+          setTabColorOpenedData(null);
+        }
+        if (!state.colorsVisibility) {
+          setTabColorOpenedData(action.payload as (string | null));
+        }
+        return { ...stateAllInitial, colorsVisibility: !state.colorsVisibility };
+      case "COLORS_CLOSE":
+        // setTabColorOpenedData(null);
+        return { ...stateAllInitial, colorsVisibility: false };
+      case "EDIT_TOGGLE":
+        if (state.editTabVis) {
+          setTabEditOpenedData(null);
+        }
+        if (!state.editTabVis) {
+          setTabEditOpenedData(action.payload as (string | null));
+        }
+        return { ...stateAllInitial, editTabVis: !state.editTabVis };
+      // case "EDIT_OPEN":
+      //   return { ...stateAllInitial, editTabVis: true };
+      case "EDIT_CLOSE":
+        // setTabEditOpenedData(null);
+        return { ...stateAllInitial, editTabVis: false };
+      default:
+        return state;
+    }
+  }
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
@@ -124,32 +145,33 @@ Props): JSX.Element {
   // const [colorsVisibility, setColorsVisibility] = useState<boolean>(false);
   // const [editTabVis, setEditTabVis] = useState<boolean>(false);
 
-  
- 
-
   const [visState, visDispatch] = useReducer(visReducer, initVisState);
-
-
-
 
   const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
   const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
   // const [editTabVis, setEditTabVis] = useState<boolean>(false);
 
-
-  useEffect( () => {
-
+  useEffect(() => {
     if (tabColorOpenedData !== tabID) {
       // setColorsVisibility(false);
-      visDispatch({type: "COLORS_CLOSE"})
+      visDispatch({ type: "COLORS_CLOSE" });
+      // visDispatch({ type: "EDIT_CLOSE" });
     }
 
-  }, [tabColorOpenedData])
+    console.log("color " + tabColorOpenedData);
+  }, [tabColorOpenedData, tabID]);
 
+  useEffect(() => {
+    if (tabEditOpenedData !== tabID) {
+      // setColorsVisibility(false);
+      visDispatch({ type: "EDIT_CLOSE" });
+      // visDispatch({ type: "COLORS_CLOSE" });
+    }
 
+    console.log("edit " + tabEditOpenedData);
+  }, [tabEditOpenedData, tabID]);
 
-
-  const [bookmarkId, setBookmarkId] = useState<number|string>()
+  const [bookmarkId, setBookmarkId] = useState<number | string>();
 
   const [crossVis, setCrossVis] = useState<boolean>(true);
 
@@ -169,7 +191,10 @@ Props): JSX.Element {
   });
 
   // tab content
-  const [singleBookmarkVisibility, setSingleBookmarkVisibility] = useState<boolean>(
+  const [
+    singleBookmarkVisibility,
+    setSingleBookmarkVisibility,
+  ] = useState<boolean>(
     tabsData[tabIndex].opened
     // false
   );
@@ -185,18 +210,15 @@ Props): JSX.Element {
     // false
   );
 
-  const [closeAllTabssData, setCloseAllTabsData] = closeAllTabsState.use()
+  const [closeAllTabssData, setCloseAllTabsData] = closeAllTabsState.use();
 
-  useEffect( () => {
-
-    if(closeAllTabs) {
-      setSingleBookmarkVisibility(false)
-      setRssVisibility(false)
-      setNoteInputVisibility(false)
+  useEffect(() => {
+    if (closeAllTabs) {
+      setSingleBookmarkVisibility(false);
+      setRssVisibility(false);
+      setNoteInputVisibility(false);
     }
-   
-
-  }, [closeAllTabs])
+  }, [closeAllTabs]);
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
@@ -245,17 +267,13 @@ Props): JSX.Element {
     setTabBeingDraggedColor_Data,
   ] = tabBeingDraggedColor_State.use();
 
-  useEffect( () => {
-    if(isDragging) {
-      setTabBeingDraggedColor_Data({tabColor: finalTabColor})
+  useEffect(() => {
+    if (isDragging) {
+      setTabBeingDraggedColor_Data({ tabColor: finalTabColor });
     }
+  }, [isDragging, finalTabColor, setTabBeingDraggedColor_Data]);
 
-  }, [isDragging, finalTabColor, setTabBeingDraggedColor_Data])
-
-  function textOrIconColor(
-    finalTabColor: string,
-    textOrIcon: "text" | "icon"
-  ) {
+  function textOrIconColor(finalTabColor: string, textOrIcon: "text" | "icon") {
     // exceptions
     let colorsForLightText: string[] = [
       // "orange-500",
@@ -329,7 +347,14 @@ Props): JSX.Element {
   }
 
   return (
-    <div className={`relative ${globalSettingsData.hideNonDeletable && !currentTab[0].deletable ? "hidden" : ""}`} ref={drag}>
+    <div
+      className={`relative ${
+        globalSettingsData.hideNonDeletable && !currentTab[0].deletable
+          ? "hidden"
+          : ""
+      }`}
+      ref={drag}
+    >
       <div
         className={`pl-0 h-8 px-2 pt-px bg-${
           // tabColor ? tabColor : finalTabColor
@@ -354,7 +379,6 @@ Props): JSX.Element {
         <div
           className="pl-1 w-full cursor-pointer"
           onClick={() => {
-
             setTabColorOpenedData(null);
             setTabEditOpenedData(null);
 
@@ -373,7 +397,8 @@ Props): JSX.Element {
         >
           <p className="">
             {" "}
-            {tabTitle} {tabsData[tabIndex].priority} {tabsData[tabIndex].deletable.toString()}
+            {tabTitle} {tabsData[tabIndex].priority}{" "}
+            {tabsData[tabIndex].deletable.toString()}
           </p>
         </div>
 
@@ -403,24 +428,21 @@ Props): JSX.Element {
 
           {tabType === "folder" ? (
             <PlusSVG
-              className={`h-8 hover:${hoverText(
-                finalTabColor
-              )} cursor-pointer`}
+              className={`h-8 hover:${hoverText(finalTabColor)} cursor-pointer`}
               style={{ marginTop: "-6px" }}
               onClick={() => {
                 setNewBookmarkVis((b) => !b);
+                // visDispatch({type: "NEW_BOOKMARK_TOGGLE"})
 
-                
-                if(visState.editTabVis) {
+                if (visState.editTabVis) {
                   // setEditTabVis(false)
-                  visDispatch({type: "EDIT_CLOSE"})
+                  visDispatch({ type: "EDIT_CLOSE" });
                 }
 
-                if(visState.colorsVisibility) {
+                if (visState.colorsVisibility) {
                   // setColorsVisibility(false)
-                  visDispatch({type: "COLORS_CLOSE"})
+                  visDispatch({ type: "COLORS_CLOSE" });
                 }
-  
 
                 setTabEditOpenedData(null);
                 setTabColorOpenedData(null);
@@ -435,18 +457,19 @@ Props): JSX.Element {
               tabType === "note" || tabType === "rss" ? "ml-2" : ""
             }`}
             onClick={() => {
-
               // setColorsVisibility((b) => !b);
 
-              visDispatch({type: "COLORS_TOGGLE"})
+              visDispatch({ type: "COLORS_TOGGLE", payload: tabID });
 
-              if(visState.colorsVisibility) {
-                setTabColorOpenedData(null);
-              }
+              // if (visState.colorsVisibility) {
+              //   setTabColorOpenedData(null);
+              //   return;
+              // }
 
-              if(!visState.colorsVisibility) {
-                setTabColorOpenedData(tabID)
-              }
+              // if (!visState.colorsVisibility) {
+              //   setTabColorOpenedData(tabID);
+              //   return;
+              // }
 
 
             }}
@@ -458,8 +481,22 @@ Props): JSX.Element {
             )} cursor-pointer`}
             onClick={() => {
               // setEditTabVis((b) => !b);
-              visDispatch({type: "EDIT_TOGGLE"})
+              visDispatch({ type: "EDIT_TOGGLE", payload: tabID });
+
+              // if (visState.editTabVis) {
+              //   setTabEditOpenedData(null);
+              //   return;
+              // }
+
+              // if (!visState.editTabVis) {
+              //   setTabEditOpenedData(tabID);
+              //   return;
+              // }
+
+
             }}
+
+            // }}
           />
         </div>
       </div>
@@ -472,32 +509,34 @@ Props): JSX.Element {
       ) : null}
 
       {editBookmarkVis ? (
-
         // <EditLink
         //   setEditLinkVis={setEditLinkVis}
         //   // editSingleLinkData={editSingleBookmarkData}
         //   bookmarkId={bookmarkId}
         // />
 
-        <Bookmark_newAndEdit setBookmarkVis={setEditBookmarkVis} bookmarkComponentType={"edit"} bookmarkId={bookmarkId}/>
-
+        <Bookmark_newAndEdit
+          setBookmarkVis={setEditBookmarkVis}
+          bookmarkComponentType={"edit"}
+          bookmarkId={bookmarkId}
+        />
       ) : null}
 
       {newBookmarkVis ? (
-
-
         // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
 
-        <Bookmark_newAndEdit setBookmarkVis={setNewBookmarkVis} bookmarkComponentType={"new_lowerUI"}/>
-
+        <Bookmark_newAndEdit
+          setBookmarkVis={setNewBookmarkVis}
+          bookmarkComponentType={"new_lowerUI"}
+        />
       ) : null}
 
       {visState.editTabVis ? (
         <EditTabTitle
-        tabID={tabID}
-        tabType={tabType}
-        // setEditTabVis={setEditTabVis}
-        visDispatch={visDispatch}
+          tabID={tabID}
+          tabType={tabType}
+          // setEditTabVis={setEditTabVis}
+          visDispatch={visDispatch}
           // noteInput={noteInput}
         />
       ) : null}
@@ -532,17 +571,13 @@ Props): JSX.Element {
         />
       ) : null}
 
-      {rssVisibility  && tabType === "rss"? (
+      {rssVisibility && tabType === "rss" ? (
         // <RSS
         //   // rssLink={rssLink}
         //   tabID={tabID}
         //   tabIndex={tabIndex}
         // />
-            <RSS_reactQuery
-          tabID={tabID}
-        />
-
-        
+        <RSS_reactQuery tabID={tabID} />
       ) : null}
     </div>
   );

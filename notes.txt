@@ -275,7 +275,8 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 181. white icons on Tabs not contrastive enough on hover
 182. tab editing -> should resize up the place for tab, increase columns size also as a side effect?
 183. Column forwardRef??
-184. newTab isThisFirstRender not working
+184. newTab isThisFirstRender not working.
+185. react ridge state: non subscribed to changes if uses outside a component: problem in Tab? move reducer inside the component?
 
 
 App structure:

@@ -6,7 +6,12 @@ interface Props {
   //  noteInput: string | null;
   tabID: string | number;
   // setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
-  visDispatch: React.Dispatch<object>;
+  visDispatch: React.Dispatch<Action>;
+}
+
+interface Action {
+  type: string;
+  payload?: string | number
 }
 
 function NoteInput({ tabID, visDispatch }: Props): JSX.Element {
