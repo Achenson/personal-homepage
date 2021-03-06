@@ -60,31 +60,12 @@ interface VisState {
   // newBookmarkVis: boolean;
   editTabVis: boolean;
   colorsVisibility: boolean;
+  tabContentVis: boolean;
   // editBookmarkVis: boolean;
-  // singleBookmarkVisibility: boolean;
-  // rssVisibility: boolean;
-  // noteInputVisibility: boolean;
+
 }
 
-const initVisState = {
-  // newBookmarkVis: false,
-  editTabVis: false,
-  colorsVisibility: false,
 
-
-  // singleBookmarkVisibility: false,
-  // editBookmarkVis: false,
-
-  // rssVisibility: false,
-  // noteInputVisibility: false,
-
-  // resetToFalse() {
-  //   for (let key in this) {
-  //     // @ts-ignore: Unreachable code error
-  //   this[key] = false;
-  //   }
-  // }
-};
 
 function Tab({
   tabID,
@@ -99,6 +80,35 @@ Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [deletedTab, setDeletedTab] = deletedTabState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
+
+   // 0 to not show typescript errors
+   let tabIndex: number = 0;
+
+   let currentTab = tabsData.filter((obj) => obj.id === tabID);
+ 
+   // for conditional shadow rendering
+   let tabColumn: number;
+ 
+   tabsData.forEach((obj, i) => {
+     if (obj.id === tabID) {
+       tabIndex = i;
+       tabColumn = obj.column;
+     }
+   });
+
+  const initVisState: VisState = {
+    // newBookmarkVis: false,
+    editTabVis: false,
+    colorsVisibility: false,
+    tabContentVis: tabsData[tabIndex].opened,
+  
+    // resetToFalse() {
+    //   for (let key in this) {
+    //     // @ts-ignore: Unreachable code error
+    //   this[key] = false;
+    //   }
+    // }
+  };
 
   const [tabColorOpenedData, setTabColorOpenedData] = tabColorOpenedState.use();
   const [tabEditOpenedData, setTabEditOpenedData] = tabEditOpenedState.use();
@@ -115,7 +125,7 @@ Props): JSX.Element {
         if (!state.colorsVisibility) {
           setTabColorOpenedData(tabID);
         }
-        // !!! crucial: tabEditOpenedData won't affect this instance of a component 
+        // !!! crucial: tabEditOpenedData won't affect this instance of a component
         setTabEditOpenedData(tabID);
         return {
           ...state,
@@ -138,12 +148,28 @@ Props): JSX.Element {
         return {
           ...state,
           colorsVisibility: false,
+
           editTabVis: !state.editTabVis,
         };
 
       case "EDIT_CLOSE":
         // setTabEditOpenedData(null);
         return { ...state, editTabVis: false, colorsVisibility: false };
+      case "TAB_CONTENT_TOGGLE":
+        return {
+          ...state,
+          colorsVisibility: false,
+          editTabVis: false,
+          tabContentVis: !state.tabContentVis
+        };
+        case "TAB_CONTENT_CLOSE":
+        return {
+          ...state,
+          colorsVisibility: false,
+          editTabVis: false,
+          tabContentVis: false
+        };
+    
       default:
         return state;
     }
@@ -186,48 +212,37 @@ Props): JSX.Element {
 
   const [crossVis, setCrossVis] = useState<boolean>(true);
 
-  // 0 to not show typescript errors
-  let tabIndex: number = 0;
-
-  let currentTab = tabsData.filter((obj) => obj.id === tabID);
-
-  // for conditional shadow rendering
-  let tabColumn: number;
-
-  tabsData.forEach((obj, i) => {
-    if (obj.id === tabID) {
-      tabIndex = i;
-      tabColumn = obj.column;
-    }
-  });
+ 
 
   // tab content
-  const [
-    singleBookmarkVisibility,
-    setSingleBookmarkVisibility,
-  ] = useState<boolean>(
-    tabsData[tabIndex].opened
-    // false
-  );
+  // const [
+  //   singleBookmarkVisibility,
+  //   setSingleBookmarkVisibility,
+  // ] = useState<boolean>(
+  //   tabsData[tabIndex].opened
+  //   // false
+  // );
   // rss content
-  const [rssVisibility, setRssVisibility] = useState<boolean>(
-    tabsData[tabIndex].opened
-    // false
-  );
+  // const [rssVisibility, setRssVisibility] = useState<boolean>(
+  //   tabsData[tabIndex].opened
+  //   // false
+  // );
 
   // for Note only / note content
-  const [noteInputVisibility, setNoteInputVisibility] = useState<boolean>(
-    tabsData[tabIndex].opened
-    // false
-  );
+  // const [noteInputVisibility, setNoteInputVisibility] = useState<boolean>(
+  //   tabsData[tabIndex].opened
+  //   // false
+  // );
 
   const [closeAllTabssData, setCloseAllTabsData] = closeAllTabsState.use();
 
   useEffect(() => {
     if (closeAllTabs) {
-      setSingleBookmarkVisibility(false);
-      setRssVisibility(false);
-      setNoteInputVisibility(false);
+  
+      // setSingleBookmarkVisibility(false);
+      // setRssVisibility(false);
+      // setNoteInputVisibility(false);
+      visDispatch({type: "TAB_CONTENT_CLOSE"})
     }
   }, [closeAllTabs]);
 
@@ -393,17 +408,21 @@ Props): JSX.Element {
             setTabColorOpenedData(null);
             setTabEditOpenedData(null);
 
-            if (tabType === "folder") {
-              setSingleBookmarkVisibility((b) => !b);
-            }
+            visDispatch({type: "TAB_CONTENT_TOGGLE"})
 
-            if (tabType === "note") {
-              setNoteInputVisibility((b) => !b);
-            }
+            // if (tabType === "folder") {
+            //   // setSingleBookmarkVisibility((b) => !b);
+            //   // visDispatch({type: "TAB_CONTENT_TOGGLE"})
+            // }
 
-            if (tabType === "rss") {
-              setRssVisibility((b) => !b);
-            }
+            // if (tabType === "note") {
+            //   // setNoteInputVisibility((b) => !b);
+            // }
+
+            // if (tabType === "rss") {
+            //   // setRssVisibility((b) => !b);
+            // }
+
           }}
         >
           <p className="">
@@ -529,7 +548,7 @@ Props): JSX.Element {
         />
       ) : null}
 
-      {singleBookmarkVisibility && tabType === "folder" ? (
+      {visState.tabContentVis && tabType === "folder" ? (
         <div>
           {bookmarksData
             .filter((el) => el.tags.indexOf(tabID) > -1)
@@ -550,7 +569,7 @@ Props): JSX.Element {
         </div>
       ) : null}
 
-      {noteInputVisibility && tabType === "note" ? (
+      {visState.tabContentVis && tabType === "note" ? (
         <NoteInput
           //  noteInput={noteInput}
           tabID={tabID}
@@ -559,12 +578,8 @@ Props): JSX.Element {
         />
       ) : null}
 
-      {rssVisibility && tabType === "rss" ? (
-        // <RSS
-        //   // rssLink={rssLink}
-        //   tabID={tabID}
-        //   tabIndex={tabIndex}
-        // />
+      {visState.tabContentVis && tabType === "rss" ? (
+   
         <RSS_reactQuery tabID={tabID} />
       ) : null}
     </div>

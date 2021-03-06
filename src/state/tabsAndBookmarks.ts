@@ -24,7 +24,7 @@ export const tabsDataState = newRidgeState<SingleTabData[]>([
     color: "red-400",
     column: 1,
     priority: 1,
-    opened: false,
+    opened: true,
     deletable: true,
     type: "folder",
     // noteInput: null,
