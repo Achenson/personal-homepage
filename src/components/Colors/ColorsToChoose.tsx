@@ -5,13 +5,13 @@ import {tabColors} from "../../utils/tabColors";
 // import {columnColors} from "../../utils/columnColors";
 
 interface Props {
-  setIconsVisibility: (value: React.SetStateAction<boolean>) => void;
+  setIconsVis: (value: React.SetStateAction<boolean>) => void;
   tabTitle: string;
 }
 
 
 function ColorsToChoose({
-  setIconsVisibility,
+  setIconsVis,
   tabTitle,
 }: Props): JSX.Element {
   function mappingColors(colors: string[][]) {
@@ -32,7 +32,7 @@ function ColorsToChoose({
     <div
       className="bg-gray-100 absolute right-0 z-50"
       onMouseEnter={() => {
-        setIconsVisibility(true);
+        setIconsVis(true);
       }}
       // onMouseLeave={() => {
       //   setIconsVisibility(false)

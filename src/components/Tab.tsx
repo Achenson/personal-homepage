@@ -59,7 +59,7 @@ interface Props {
 interface VisState {
   // newBookmarkVis: boolean;
   editTabVis: boolean;
-  colorsVisibility: boolean;
+  colorsVis: boolean;
   tabContentVis: boolean;
   // editBookmarkVis: boolean;
 }
@@ -96,7 +96,7 @@ Props): JSX.Element {
   const initVisState: VisState = {
     // newBookmarkVis: false,
     editTabVis: false,
-    colorsVisibility: false,
+    colorsVis: false,
     tabContentVis: tabsData[tabIndex].opened,
   };
 
@@ -106,10 +106,10 @@ Props): JSX.Element {
   function visReducer(state: VisState, action: Action) {
     switch (action.type) {
       case "COLORS_TOGGLE":
-        if (state.colorsVisibility) {
+        if (state.colorsVis) {
           setTabColorOpenedData(null);
         }
-        if (!state.colorsVisibility) {
+        if (!state.colorsVis) {
           setTabColorOpenedData(tabID);
         }
         // !!! crucial: tabEditOpenedData won't affect this instance of a component
@@ -117,10 +117,10 @@ Props): JSX.Element {
         return {
           ...state,
           editTabVis: false,
-          colorsVisibility: !state.colorsVisibility,
+          colorsVis: !state.colorsVis,
         };
       case "COLORS_CLOSE":
-        return { ...state, colorsVisibility: false, editTabVis: false };
+        return { ...state, colorsVis: false, editTabVis: false };
       case "EDIT_TOGGLE":
         if (state.editTabVis) {
           setTabEditOpenedData(null);
@@ -133,24 +133,24 @@ Props): JSX.Element {
         setTabColorOpenedData(tabID);
         return {
           ...state,
-          colorsVisibility: false,
+          colorsVis: false,
 
           editTabVis: !state.editTabVis,
         };
 
       case "EDIT_CLOSE":
-        return { ...state, editTabVis: false, colorsVisibility: false };
+        return { ...state, editTabVis: false, colorsVis: false };
       case "TAB_CONTENT_TOGGLE":
         return {
           ...state,
-          colorsVisibility: false,
+          colorsVis: false,
           editTabVis: false,
           tabContentVis: !state.tabContentVis,
         };
       case "TAB_CONTENT_CLOSE":
         return {
           ...state,
-          colorsVisibility: false,
+          colorsVis: false,
           editTabVis: false,
           tabContentVis: false,
         };
@@ -162,7 +162,7 @@ Props): JSX.Element {
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
-  const [iconsVisibility, setIconsVisibility] = useState<boolean>(false);
+  const [iconsVis, setIconsVis] = useState<boolean>(false);
 
   const [visState, visDispatch] = useReducer(visReducer, initVisState);
 
@@ -342,10 +342,10 @@ Props): JSX.Element {
         // style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)"}}
 
         onMouseEnter={() => {
-          setIconsVisibility(true);
+          setIconsVis(true);
         }}
         onMouseLeave={() => {
-          setIconsVisibility(false);
+          setIconsVis(false);
         }}
       >
         <div
@@ -366,7 +366,7 @@ Props): JSX.Element {
 
         <div
           className={`pt-1 flex ${
-            iconsVisibility ? "visible" : "invisible"
+            iconsVis ? "visible" : "invisible"
           } fill-current ${textOrIconColor(finalTabColor, "icon")} `}
         >
           <div
@@ -401,8 +401,8 @@ Props): JSX.Element {
                   visDispatch({ type: "EDIT_CLOSE" });
                 }
 
-                if (visState.colorsVisibility) {
-                  // setColorsVisibility(false)
+                if (visState.colorsVis) {
+                  // setColorsVis(false)
                   visDispatch({ type: "COLORS_CLOSE" });
                 }
 
@@ -419,7 +419,7 @@ Props): JSX.Element {
               tabType === "note" || tabType === "rss" ? "ml-2" : ""
             }`}
             onClick={() => {
-              // setColorsVisibility((b) => !b);
+              // setColorsVis((b) => !b);
 
               visDispatch({ type: "COLORS_TOGGLE" });
             }}
@@ -440,9 +440,9 @@ Props): JSX.Element {
         </div>
       </div>
 
-      {visState.colorsVisibility ? (
+      {visState.colorsVis ? (
         <ColorsToChoose
-          setIconsVisibility={setIconsVisibility}
+          setIconsVis={setIconsVis}
           tabTitle={tabTitle}
         />
       ) : null}
