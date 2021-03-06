@@ -57,25 +57,25 @@ interface Props {
 }
 
 interface VisState {
-  newBookmarkVis: boolean;
+  // newBookmarkVis: boolean;
   editTabVis: boolean;
   colorsVisibility: boolean;
-  singleBookmarkVisibility: boolean;
-  editBookmarkVis: boolean;
-  rssVisibility: boolean;
-  noteInputVisibility: boolean;
+  // singleBookmarkVisibility: boolean;
+  // editBookmarkVis: boolean;
+  // rssVisibility: boolean;
+  // noteInputVisibility: boolean;
 }
 
 const initVisState = {
-  newBookmarkVis: false,
+  // newBookmarkVis: false,
   editTabVis: false,
   colorsVisibility: false,
 
-  singleBookmarkVisibility: false,
-  editBookmarkVis: false,
+  // singleBookmarkVisibility: false,
+  // editBookmarkVis: false,
 
-  rssVisibility: false,
-  noteInputVisibility: false,
+  // rssVisibility: false,
+  // noteInputVisibility: false,
 
   // resetToFalse() {
   //   for (let key in this) {
@@ -84,8 +84,6 @@ const initVisState = {
   //   }
   // }
 };
-
-
 
 function Tab({
   tabID,
@@ -105,34 +103,29 @@ Props): JSX.Element {
   const [tabEditOpenedData, setTabEditOpenedData] = tabEditOpenedState.use();
 
   function visReducer(state: VisState, action: Action) {
-    let stateAllInitial: VisState = { ...initVisState };
+    // let stateAllInitial: VisState = { ...initVisState };
     // stateAllInitial.resetToFalse();
-  
+
     switch (action.type) {
       case "COLORS_TOGGLE":
-        if (state.colorsVisibility) {
-          setTabColorOpenedData(null);
-        }
-        if (!state.colorsVisibility) {
-          setTabColorOpenedData(action.payload as (string | null));
-        }
-        return { ...stateAllInitial, colorsVisibility: !state.colorsVisibility };
+        return {
+          ...state,
+          editTabVis: false,
+          colorsVisibility: !state.colorsVisibility,
+        };
       case "COLORS_CLOSE":
         // setTabColorOpenedData(null);
-        return { ...stateAllInitial, colorsVisibility: false };
+        return { ...state, colorsVisibility: false, editTabVis: false };
       case "EDIT_TOGGLE":
-        if (state.editTabVis) {
-          setTabEditOpenedData(null);
-        }
-        if (!state.editTabVis) {
-          setTabEditOpenedData(action.payload as (string | null));
-        }
-        return { ...stateAllInitial, editTabVis: !state.editTabVis };
-      // case "EDIT_OPEN":
-      //   return { ...stateAllInitial, editTabVis: true };
+        return {
+          ...state,
+          colorsVisibility: false,
+          editTabVis: !state.editTabVis,
+        };
+
       case "EDIT_CLOSE":
         // setTabEditOpenedData(null);
-        return { ...stateAllInitial, editTabVis: false };
+        return { ...state, editTabVis: false, colorsVisibility: false };
       default:
         return state;
     }
@@ -459,17 +452,18 @@ Props): JSX.Element {
             onClick={() => {
               // setColorsVisibility((b) => !b);
 
-              visDispatch({ type: "COLORS_TOGGLE", payload: tabID });
+              if (visState.colorsVisibility) {
+                setTabColorOpenedData(null);
+              }
 
-              // if (visState.colorsVisibility) {
-              //   setTabColorOpenedData(null);
-              //   return;
-              // }
+              if (!visState.colorsVisibility) {
+                setTabColorOpenedData(tabID);
+              }
 
-              // if (!visState.colorsVisibility) {
-              //   setTabColorOpenedData(tabID);
-              //   return;
-              // }
+              setTabEditOpenedData(null);
+              
+
+              visDispatch({ type: "COLORS_TOGGLE" });
 
 
             }}
@@ -481,19 +475,19 @@ Props): JSX.Element {
             )} cursor-pointer`}
             onClick={() => {
               // setEditTabVis((b) => !b);
-              visDispatch({ type: "EDIT_TOGGLE", payload: tabID });
 
-              // if (visState.editTabVis) {
-              //   setTabEditOpenedData(null);
-              //   return;
-              // }
+              if (visState.editTabVis) {
+                setTabEditOpenedData(null);
+              }
 
-              // if (!visState.editTabVis) {
-              //   setTabEditOpenedData(tabID);
-              //   return;
-              // }
+              if (!visState.editTabVis) {
+                setTabEditOpenedData(tabID);
+              }
 
+            
+              setTabColorOpenedData(null);
 
+              visDispatch({ type: "EDIT_TOGGLE" });
             }}
 
             // }}
