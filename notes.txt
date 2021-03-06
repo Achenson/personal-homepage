@@ -281,7 +281,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 183. Column forwardRef??
 184. newTab isThisFirstRender not working.
 185. react ridge state: non subscribed to changes if uses outside a component: problem in Tab? move reducer inside the component?
-
+186. move color function out of Tab
 
 App structure:
 Main
