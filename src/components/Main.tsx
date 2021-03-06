@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import Grid from "./Grid";
 import NewBookmark_UpperUI from "./Bookmark_newAndEdit";
 import NewTab_UpperUI from "./UpperUI/NewTab_UpperUI";
@@ -13,12 +13,78 @@ import Settings_UpperUI from "./UpperUI/Settings_UpperUI";
 
 interface Props {}
 
+interface InitUpperVisState {
+  newBookmarkVis: boolean;
+  newTabVis: boolean;
+  backgroundSettingsVis: boolean;
+  settingsVis: boolean;
+  colorsVis: boolean;
+}
+
+let initUpperVisState: InitUpperVisState = {
+  newBookmarkVis: false,
+  newTabVis: false,
+  backgroundSettingsVis: false,
+  settingsVis: false,
+  colorsVis: false,
+};
+
+const upperVisStateAllFalse = {
+  ...initUpperVisState,
+};
+
+interface UpperVisAction {
+  type:
+    | "NEW_BOOKMARK_TOGGLE"
+    | "NEW_TAB_TOGGLE"
+    | "BACKGROUNG_SETTINGS_TOGGLE"
+    | "SETTINGS_TOGGLE"
+    | "COLORS_TOGGLE";
+  payload?: string | number;
+}
+
+function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
+  switch (action.type) {
+    case "BACKGROUNG_SETTINGS_TOGGLE":
+      return {
+        ...upperVisStateAllFalse,
+        backgroundSettingsVis: !state.backgroundSettingsVis,
+      };
+    case "COLORS_TOGGLE":
+      return {
+        ...upperVisStateAllFalse,
+        colorsVis: !state.colorsVis,
+      };
+    case "NEW_BOOKMARK_TOGGLE":
+      return {
+        ...upperVisStateAllFalse,
+      newBookmarkVis  : !state.newBookmarkVis,
+      };
+    case "NEW_TAB_TOGGLE":
+      return {
+        ...upperVisStateAllFalse,
+        newTabVis: !state.newTabVis,
+      };
+    case "SETTINGS_TOGGLE":
+      return {
+        ...upperVisStateAllFalse,
+        settingsVis: !state.settingsVis,
+      };
+  }
+}
+
 function Main({}: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
   const [
     backgroundColorData,
     setBackgroundColorData,
   ] = backgroundColorState.use();
+
+  const [upperVisState, upperVisDispatch] = useReducer(
+    upperVisReducer,
+    initUpperVisState
+  );
 
   const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
   const [newTabVis, setNewTabVis] = useState<boolean>(false);
@@ -30,9 +96,8 @@ function Main({}: Props): JSX.Element {
   const [settingsVis, setSettingsVis] = useState<boolean>(false);
 
   const [colorsVis, setColorsVis] = useState<boolean>(false);
-  const [tabType, setTabType] = useState<"folder" | "note" | "rss">(
-    "folder"
-  );
+
+  const [tabType, setTabType] = useState<"folder" | "note" | "rss">("folder");
 
   return (
     // <div className="relative h-screen bg-testBackground bg-cover">
@@ -44,12 +109,14 @@ function Main({}: Props): JSX.Element {
       } bg-cover`}
     >
       {newTabVis ? (
-        <NewTab_UpperUI
-          setNewTabVis={setNewTabVis}
-          tabType={tabType}
+        <NewTab_UpperUI setNewTabVis={setNewTabVis} tabType={tabType} />
+      ) : null}
+      {newBookmarkVis ? (
+        <NewBookmark_UpperUI
+          setBookmarkVis={setNewBookmarkVis}
+          bookmarkComponentType={"new_upperUI"}
         />
       ) : null}
-      {newBookmarkVis ? <NewBookmark_UpperUI setBookmarkVis={setNewBookmarkVis} bookmarkComponentType={"new_upperUI"} /> : null}
       {backgroundSettingsVis ? (
         <Background_UpperUI
           setBackgroundSettingsVis={setBackgroundSettingsVis}

@@ -283,6 +283,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 185. react ridge state: non subscribed to changes if uses outside a component: problem in Tab? move reducer inside the component?
 186. move color function out of Tab
 187. new Rss, new Note - get rid of bookmarks
+188. Action interface improve (type values)
 
 App structure:
 Main
