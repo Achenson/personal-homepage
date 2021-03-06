@@ -50,7 +50,7 @@ module.exports = {
 13. purgecss when finished with the project?
 
 
-NOTES: Tab logic
+NOTES: Tab logic setTabEditOpenedData(tabID) & setTabColorOpenedData(tabID) crucial;
 
 
 TO DO:

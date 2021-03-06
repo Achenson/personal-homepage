@@ -60,8 +60,8 @@ interface VisState {
   // newBookmarkVis: boolean;
   editTabVis: boolean;
   colorsVisibility: boolean;
-  // singleBookmarkVisibility: boolean;
   // editBookmarkVis: boolean;
+  // singleBookmarkVisibility: boolean;
   // rssVisibility: boolean;
   // noteInputVisibility: boolean;
 }
@@ -70,6 +70,7 @@ const initVisState = {
   // newBookmarkVis: false,
   editTabVis: false,
   colorsVisibility: false,
+
 
   // singleBookmarkVisibility: false,
   // editBookmarkVis: false,
@@ -108,6 +109,14 @@ Props): JSX.Element {
 
     switch (action.type) {
       case "COLORS_TOGGLE":
+        if (state.colorsVisibility) {
+          setTabColorOpenedData(null);
+        }
+        if (!state.colorsVisibility) {
+          setTabColorOpenedData(tabID);
+        }
+        // !!! crucial: tabEditOpenedData won't affect this instance of a component 
+        setTabEditOpenedData(tabID);
         return {
           ...state,
           editTabVis: false,
@@ -117,6 +126,15 @@ Props): JSX.Element {
         // setTabColorOpenedData(null);
         return { ...state, colorsVisibility: false, editTabVis: false };
       case "EDIT_TOGGLE":
+        if (state.editTabVis) {
+          setTabEditOpenedData(null);
+        }
+
+        if (!state.editTabVis) {
+          setTabEditOpenedData(tabID);
+        }
+
+        setTabColorOpenedData(tabID);
         return {
           ...state,
           colorsVisibility: false,
@@ -452,17 +470,6 @@ Props): JSX.Element {
             onClick={() => {
               // setColorsVisibility((b) => !b);
 
-              if (visState.colorsVisibility) {
-                setTabColorOpenedData(null);
-              }
-
-              if (!visState.colorsVisibility) {
-                setTabColorOpenedData(tabID);
-              }
-
-              // !!! crucial
-              setTabEditOpenedData(tabID);
-
               visDispatch({ type: "COLORS_TOGGLE" });
             }}
           />
@@ -473,16 +480,6 @@ Props): JSX.Element {
             )} cursor-pointer`}
             onClick={() => {
               // setEditTabVis((b) => !b);
-
-              if (visState.editTabVis) {
-                setTabEditOpenedData(null);
-              }
-
-              if (!visState.editTabVis) {
-                setTabEditOpenedData(tabID);
-              }
-
-              setTabColorOpenedData(tabID);
 
               visDispatch({ type: "EDIT_TOGGLE" });
             }}
