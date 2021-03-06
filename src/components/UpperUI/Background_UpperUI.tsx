@@ -5,12 +5,7 @@ import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 import { globalSettingsState } from "../../state/defaultSettings";
 
 import {
-  noteColorState,
-  folderColorState,
-  rssColorState,
   uiColorState,
-  columnsColorsState,
-  resetColorsState,
 } from "../../state/colorsState";
 
 interface Props {

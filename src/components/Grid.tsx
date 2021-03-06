@@ -1,22 +1,17 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { v4 as uuidv4 } from "uuid";
-import Tab from "./Tab";
+
 
 import {
   tabsDataState,
-  bookmarksDataState,
-  deletedTabState,
   bookmarksAllTagsState,
 } from "../state/tabsAndBookmarks";
 
 import { closeAllTabsState } from "../state/defaultSettings";
 
-import { createFolderTab } from "../utils/objCreators";
-
 import { produce } from "immer";
 
-import { columnsColorsState, resetColorsState } from "../state/colorsState";
+import {resetColorsState } from "../state/colorsState";
 
 import { globalSettingsState } from "../state/defaultSettings";
 import Column from "./Column";
@@ -27,14 +22,10 @@ interface Props {}
 
 function Grid({}: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
   const [resetColorsData, setResetColorsData] = resetColorsState.use();
-  const [deletedTab, setDeletedTab] = deletedTabState.use();
-
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  const [closeAllTabs, setCloseAllTabs] = useState(false);
   const [
     closeAllTabsData,
     setCloseAllTabsData,
@@ -70,42 +61,6 @@ function Grid({}: Props): JSX.Element {
   }, [resetColorsData, setTabsData, setResetColorsData]);
 
   useEffect(() => {
-    // let linksDataTagsData: (string | number)[] = [];
-    // let tabsDataIds: (string | number)[] = [];
-
-    // linksData.forEach((obj) => {
-    //   obj.tags.forEach((el) => {
-    //     if (linksDataTags.indexOf(el) === -1) {
-    //       linksDataTags.push(el);
-    //     }
-    //   });
-    // });
-
-    // tabsData.forEach((obj) => {
-    //   tabsDataIds.push(obj.id);
-    // });
-
-    // let linksDataTagsIds: (string | number)[] = [];
-
-    // linksDataTags.forEach((id) => {
-    //   let filteredTab = tabsData.filter((obj) => obj.id === id)[0];
-    //   linksDataTagsIds.push(filteredTab.id);
-    // });
-
-    // // adding a tab(folder) if previously non-existing tag was added to a bookmark / if new tab is being added
-    // linksDataTagsIds.forEach((el) => {
-    //   // no adding tab if it was just set up for deletion
-
-    //   if (tabsDataIds.indexOf(el) === -1 && deletedTab !== el) {
-    //     setTabsData((previous) =>
-    //       produce(previous, (updated) => {
-    //         updated.push({
-    //           ...createFolderTab(tabsData.filter(obj => obj.id === el)[0].title, 1, 0),
-    //         });
-    //       })
-    //     );
-    //   }
-    // });
 
     console.log(bookmarksAllTagsData);
 

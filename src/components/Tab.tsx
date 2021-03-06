@@ -7,7 +7,6 @@ import {
   noteColorState,
   folderColorState,
   rssColorState,
-  columnsColorsState,
   tabBeingDraggedColor_State,
 } from "../state/colorsState";
 
@@ -75,7 +74,6 @@ function Tab({
 // rssLink
 Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-  const [deletedTab, setDeletedTab] = deletedTabState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
 
   // 0 to not show typescript errors
@@ -184,8 +182,6 @@ Props): JSX.Element {
   const [bookmarkId, setBookmarkId] = useState<number | string>();
 
   const [crossVis, setCrossVis] = useState<boolean>(true);
-
-  const [closeAllTabssData, setCloseAllTabsData] = closeAllTabsState.use();
 
   useEffect(() => {
     if (closeAllTabs) {
@@ -394,15 +390,15 @@ Props): JSX.Element {
               style={{ marginTop: "-6px" }}
               onClick={() => {
                 setNewBookmarkVis((b) => !b);
-                // visDispatch({type: "NEW_BOOKMARK_TOGGLE"})
+               
 
                 if (visState.editTabVis) {
-                  // setEditTabVis(false)
+                
                   visDispatch({ type: "EDIT_CLOSE" });
                 }
 
                 if (visState.colorsVis) {
-                  // setColorsVis(false)
+                 
                   visDispatch({ type: "COLORS_CLOSE" });
                 }
 
@@ -419,7 +415,7 @@ Props): JSX.Element {
               tabType === "note" || tabType === "rss" ? "ml-2" : ""
             }`}
             onClick={() => {
-              // setColorsVis((b) => !b);
+             
 
               visDispatch({ type: "COLORS_TOGGLE" });
             }}
@@ -430,7 +426,7 @@ Props): JSX.Element {
               finalTabColor
             )} cursor-pointer`}
             onClick={() => {
-              // setEditTabVis((b) => !b);
+           
 
               visDispatch({ type: "EDIT_TOGGLE" });
             }}
@@ -441,10 +437,7 @@ Props): JSX.Element {
       </div>
 
       {visState.colorsVis ? (
-        <ColorsToChoose
-          setIconsVis={setIconsVis}
-          tabTitle={tabTitle}
-        />
+        <ColorsToChoose setIconsVis={setIconsVis} tabTitle={tabTitle} />
       ) : null}
 
       {editBookmarkVis ? (

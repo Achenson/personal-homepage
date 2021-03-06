@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 
 import DefaultColorsToChoose from "../Colors/ColorsToChoose_Default";
-import SingleColumnsColor from "../Colors/ColumnColor";
 
 import {
   noteColorState,
   folderColorState,
   rssColorState,
   uiColorState,
-  columnsColorsState,
   resetColorsState,
 } from "../../state/colorsState";
 

@@ -1,20 +1,15 @@
 import React, { Fragment } from "react";
 
-import { useState, useEffect } from "react";
-import { ItemTypes } from "../utils/itemsDnd";
-
 import { tabsDataState } from "../state/tabsAndBookmarks";
 
 import {
   columnsColorsState,
-  resetColorsState,
   columnsColorsImg_State,
 } from "../state/colorsState";
 import {globalSettingsState } from "../state/defaultSettings";
 
 import Tab from "./Tab";
 
-import { useDrop } from "react-dnd";
 import { produce } from "immer";
 import GapAfterTab from "./GapAfterTab";
 
@@ -34,23 +29,23 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
   const [tabsData, setTabsData] = tabsDataState.use();
 
 
-  function dragTab(itemID: number | string) {
-    setTabsData((previous) =>
-      produce(previous, (updated) => {
-        let tabIndex: number = 0;
+  // function dragTab(itemID: number | string) {
+  //   setTabsData((previous) =>
+  //     produce(previous, (updated) => {
+  //       let tabIndex: number = 0;
 
-        tabsData.forEach((obj, i) => {
-          if (obj.id === itemID) {
-            tabIndex = i;
-          }
-        });
-        // let currentTab = tabsData.filter( obj => obj.id === itemID )
+  //       tabsData.forEach((obj, i) => {
+  //         if (obj.id === itemID) {
+  //           tabIndex = i;
+  //         }
+  //       });
+  //       // let currentTab = tabsData.filter( obj => obj.id === itemID )
 
-        updated[tabIndex].column = colNumber;
-        //  updated[currentTab]
-      })
-    );
-  }
+  //       updated[tabIndex].column = colNumber;
+  //       //  updated[currentTab]
+  //     })
+  //   );
+  // }
 
   function calcColumnColor(colNumber: number, picBackground: boolean, oneColorForAllColumns: boolean) {
     if (!picBackground) {

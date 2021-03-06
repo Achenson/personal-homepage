@@ -2,16 +2,7 @@ import React from "react";
 
 import { ReactComponent as AddFolderSVG } from "../../svgs/addFolder.svg";
 import { ReactComponent as FolderSVG } from "../../svgs/folder.svg";
-import { ReactComponent as Folder2SVG } from "../../svgs/folder_flaticon.svg";
-import { ReactComponent as Folder3SVG } from "../../svgs/folder-open_flaticon.svg";
-import { ReactComponent as FolderForTabsSVG } from "../../svgs/folder-bookmark_UXwing.svg";
-import { ReactComponent as AddLinkSVG } from "../../svgs/addLink.svg";
-import { ReactComponent as LinkSVG } from "../../svgs/link.svg";
-import { ReactComponent as Link2SVG } from "../../svgs/link_UXwing.svg";
-import { ReactComponent as TabSVG } from "../../svgs/bookmark.svg";
-import { ReactComponent as Tab2SVG } from "../../svgs/bookmark-saved_UXwing.svg";
-import { ReactComponent as Tab3SVG } from "../../svgs/bookmark_flaticon.svg";
-import { ReactComponent as Tab4SVG } from "../../svgs/bookmark-fancy_flaticon.svg";
+
 import { ReactComponent as TabAltSVG } from "../../svgs/bookmarkAlt.svg";
 // import { ReactComponent as AddNote } from "../../svgs/addNote.svg";
 import { ReactComponent as AddNote } from "../../svgs/text-document-add.svg";

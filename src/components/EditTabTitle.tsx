@@ -18,7 +18,6 @@ import {
   tabsDataState,
   bookmarksDataState,
   deletedTabState,
-  bookmarksAllTagsState,
 } from "../state/tabsAndBookmarks";
 
 import { rssSettingsState } from "../state/defaultSettings";
@@ -48,7 +47,6 @@ Props): JSX.Element {
   const [deletedTab, setDeletedTab] = deletedTabState.use();
 
   const [tabsData, setTabsData] = tabsDataState.use();
-  const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
 
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
 
