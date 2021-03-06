@@ -49,6 +49,10 @@ module.exports = {
 
 13. purgecss when finished with the project?
 
+
+NOTES: Tab logic
+
+
 TO DO:
 
 DONE 3. bookmark move icon - hide when moving? DONE

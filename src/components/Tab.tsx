@@ -460,12 +460,10 @@ Props): JSX.Element {
                 setTabColorOpenedData(tabID);
               }
 
-              setTabEditOpenedData(null);
-              
+              // !!! crucial
+              setTabEditOpenedData(tabID);
 
               visDispatch({ type: "COLORS_TOGGLE" });
-
-
             }}
           />
 
@@ -484,8 +482,7 @@ Props): JSX.Element {
                 setTabEditOpenedData(tabID);
               }
 
-            
-              setTabColorOpenedData(null);
+              setTabColorOpenedData(tabID);
 
               visDispatch({ type: "EDIT_TOGGLE" });
             }}
