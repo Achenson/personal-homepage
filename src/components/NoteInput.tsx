@@ -23,7 +23,7 @@ function NoteInput({ tabID, visDispatch }: Props): JSX.Element {
         style={{whiteSpace: "pre-wrap"}}
         onClick={() => {
           // setEditTabVis(true);
-          visDispatch({type: "EDIT_OPEN"})
+          visDispatch({type: "EDIT_TOGGLE"})
         }}
       >
        <p  style={{whiteSpace: "-moz-pre-wrap"}}>{currentTab[0].noteInput}</p> 

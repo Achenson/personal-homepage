@@ -32,7 +32,11 @@ let initUpperVisState: InitUpperVisState = {
 };
 
 const upperVisStateAllFalse = {
-  ...initUpperVisState,
+  newBookmarkVis: false,
+  newTabVis: false,
+  backgroundSettingsVis: false,
+  settingsVis: false,
+  colorsVis: false,
 };
 
 

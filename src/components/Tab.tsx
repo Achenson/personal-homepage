@@ -56,8 +56,8 @@ interface VisState {
   editTabVis: boolean;
   colorsVis: boolean;
   tabContentVis: boolean;
-  // newBookmarkVis: boolean;
-  // editBookmarkVis: boolean;
+  newBookmarkVis: boolean;
+  editBookmarkVis: boolean;
 }
 
 function Tab({
@@ -93,6 +93,8 @@ Props): JSX.Element {
     editTabVis: false,
     colorsVis: false,
     tabContentVis: tabsData[tabIndex].opened,
+    newBookmarkVis: false,
+    editBookmarkVis: false,
   };
 
   const [tabColorOpenedData, setTabColorOpenedData] = tabColorOpenedState.use();
@@ -112,10 +114,16 @@ Props): JSX.Element {
         return {
           ...state,
           editTabVis: false,
+          newBookmarkVis: false,
           colorsVis: !state.colorsVis,
         };
       case "COLORS_CLOSE":
-        return { ...state, colorsVis: false, editTabVis: false };
+        return {
+          ...state,
+          colorsVis: false,
+          editTabVis: false,
+          newBookmarkVis: false,
+        };
       case "EDIT_TOGGLE":
         if (state.editTabVis) {
           setTabEditOpenedData(null);
@@ -129,17 +137,23 @@ Props): JSX.Element {
         return {
           ...state,
           colorsVis: false,
-
+          newBookmarkVis: false,
           editTabVis: !state.editTabVis,
         };
 
       case "EDIT_CLOSE":
-        return { ...state, editTabVis: false, colorsVis: false };
+        return {
+          ...state,
+          editTabVis: false,
+          colorsVis: false,
+          newBookmarkVis: false,
+        };
       case "TAB_CONTENT_TOGGLE":
         return {
           ...state,
           colorsVis: false,
           editTabVis: false,
+          newBookmarkVis: false,
           tabContentVis: !state.tabContentVis,
         };
       case "TAB_CONTENT_CLOSE":
@@ -147,7 +161,15 @@ Props): JSX.Element {
           ...state,
           colorsVis: false,
           editTabVis: false,
+          newBookmarkVis: false,
           tabContentVis: false,
+        };
+      case "NEW_BOOKMARK_TOOGLE":
+        return {
+          ...state,
+          colorsVis: false,
+          editTabVis: false,
+          newBookmarkVis: !state.newBookmarkVis,
         };
 
       default:
@@ -162,7 +184,7 @@ Props): JSX.Element {
   const [visState, visDispatch] = useReducer(visReducer, initVisState);
 
   const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
-  const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
+  // const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
 
   useEffect(() => {
     if (tabColorOpenedData !== tabID) {
@@ -386,18 +408,20 @@ Props): JSX.Element {
               className={`h-8 hover:${hoverText(finalTabColor)} cursor-pointer`}
               style={{ marginTop: "-6px" }}
               onClick={() => {
-                setNewBookmarkVis((b) => !b);
+                // setNewBookmarkVis((b) => !b);
 
-                if (visState.editTabVis) {
-                  visDispatch({ type: "EDIT_CLOSE" });
-                }
+                // if (visState.editTabVis) {
+                //   visDispatch({ type: "EDIT_CLOSE" });
+                // }
 
-                if (visState.colorsVis) {
-                  visDispatch({ type: "COLORS_CLOSE" });
-                }
+                // if (visState.colorsVis) {
+                //   visDispatch({ type: "COLORS_CLOSE" });
+                // }
 
-                setTabEditOpenedData(null);
-                setTabColorOpenedData(null);
+                // setTabEditOpenedData(null);
+                // setTabColorOpenedData(null);
+
+                visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
               }}
             />
           ) : null}
@@ -430,7 +454,7 @@ Props): JSX.Element {
         <ColorsToChoose setIconsVis={setIconsVis} tabTitle={tabTitle} />
       ) : null}
 
-      {editBookmarkVis ? (
+      {visState.editBookmarkVis ? (
         <Bookmark_newAndEdit
           // setBookmarkVis={setEditBookmarkVis}
           bookmarkComponentType={"edit"}
@@ -438,7 +462,7 @@ Props): JSX.Element {
         />
       ) : null}
 
-      {newBookmarkVis ? (
+      {visState.newBookmarkVis ? (
         // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
 
         <Bookmark_newAndEdit
@@ -465,6 +489,7 @@ Props): JSX.Element {
               return (
                 <SingleBookmark
                   setEditBookmarkVis={setEditBookmarkVis}
+                  
                   singleBookmarkData={el}
                   // setEditSingleLinkData={setEditSingleBookmarkData}
                   setBookmarkId={setBookmarkId}

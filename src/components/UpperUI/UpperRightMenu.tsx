@@ -37,6 +37,7 @@ function UpperRightMenu({
   // setSettingsVis,
   // setColorsVis,
   setTabType,
+  upperVisDispatch
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
@@ -48,7 +49,8 @@ function UpperRightMenu({
         <TabAltSVG
           className={`h-7 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
-            setNewBookmarkVis((b) => !b);
+            // setNewBookmarkVis((b) => !b);
+            upperVisDispatch({type: "NEW_TAB_TOGGLE"})
           }}
         />
 
@@ -56,7 +58,8 @@ function UpperRightMenu({
         <FolderSVG
           className={`h-7 cursor-pointer hover:text-${uiColorData} mr-1`}
           onClick={() => {
-            setNewTabVis((b) => !b);
+            // setNewTabVis((b) => !b);
+            upperVisDispatch({type: "NEW_TAB_TOGGLE"})
             setTabType("folder");
           }}
         />
@@ -64,7 +67,8 @@ function UpperRightMenu({
         <Note
           className={`h-6 cursor-pointer fill-current text-black hover:text-${uiColorData}`}
           onClick={() => {
-            setNewTabVis((b) => !b);
+            // setNewTabVis((b) => !b);
+            upperVisDispatch({type: "NEW_TAB_TOGGLE"})
             setTabType("note");
           }}
         />
@@ -73,7 +77,8 @@ function UpperRightMenu({
         <AddRssSVG
           className={`h-7 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
-            setNewTabVis((b) => !b);
+            // setNewTabVis((b) => !b);
+            upperVisDispatch({type: "NEW_TAB_TOGGLE"})
             setTabType("rss");
           }}
         />
@@ -83,19 +88,22 @@ function UpperRightMenu({
         <PhotographSVG
           className={`h-6 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
-            setBackgroundSettingsVis((b) => !b);
+            // setBackgroundSettingsVis((b) => !b);
+            upperVisDispatch({type: "BACKGROUNG_SETTINGS_TOGGLE"})
           }}
         />
         <ColorSVG
           className={`h-6 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
-            setColorsVis((b) => !b);
+            upperVisDispatch({type: "COLORS_TOGGLE"})
+            // setColorsVis((b) => !b);
           }}
         />
         <SettingsSVG
           className={`h-6 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
-            setSettingsVis((b) => !b);
+            // setSettingsVis((b) => !b);
+            upperVisDispatch({type: "SETTINGS_TOGGLE"})
           }}
         />
         <UserSVG className="h-6" />

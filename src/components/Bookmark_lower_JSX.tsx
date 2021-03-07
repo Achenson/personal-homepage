@@ -375,7 +375,7 @@ function Bookmark_lower_JSX({
                 }
 
                 // setBookmarkVis((b) => !b);
-                visDispatch({})
+                visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
 
                 function tagUniquenessCheck() {
                   let isUnique: boolean = true;
@@ -412,7 +412,7 @@ function Bookmark_lower_JSX({
               onClick={(e) => {
                 e.preventDefault();
                 // setBookmarkVis((b) => !b);
-                visDispatch({})
+                visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
               }}
             >
               <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />

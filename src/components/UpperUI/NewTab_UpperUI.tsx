@@ -25,6 +25,8 @@ import { produce } from "immer";
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 import { bookmarksDataState, bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
 
+import {UpperVisAction} from "../../utils/interfaces"
+
 interface Props {
   // setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
   upperVisDispatch: React.Dispatch<UpperVisAction>
@@ -458,7 +460,8 @@ function NewTab_UpperUI({  tabType, upperVisDispatch }: Props): JSX.Element {
                   );
                 }
 
-                setNewTabVis((b) => !b);
+                // setNewTabVis((b) => !b);
+                upperVisDispatch({type: "NEW_TAB_TOGGLE"})
 
                 function tabExistenceCheck() {
                   let tabsArr: string[] = [];
@@ -510,7 +513,8 @@ function NewTab_UpperUI({  tabType, upperVisDispatch }: Props): JSX.Element {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setNewTabVis((b) => !b);
+                // setNewTabVis((b) => !b);
+                upperVisDispatch({type: "NEW_TAB_TOGGLE"})
               }}
             >
               <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />

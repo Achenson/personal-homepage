@@ -48,7 +48,9 @@ export interface TabVisAction {
   "COLORS_TOGGLE" |
   "EDIT_TOGGLE"| 
   "TAB_CONTENT_TOGGLE"|
-  "TAB_CONTENT_CLOSE";
+  "TAB_CONTENT_CLOSE"|
+  "NEW_BOOKMARK_TOOGLE" |
+  "EDIT_BOOKMARK_TOOGLE";
 
     payload?: string | number;
 }
