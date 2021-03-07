@@ -8,7 +8,7 @@ import { ReactComponent as PhotographSVG } from "../svgs/photograph.svg";
 
 import { bookmarksAllTagsState } from "../state/tabsAndBookmarks";
 
-import { SingleBookmarkData } from "../utils/interfaces";
+import { SingleBookmarkData, TabVisAction } from "../utils/interfaces";
 
 // interface SingleLinkData {
 //   id: number | string;
@@ -18,19 +18,21 @@ import { SingleBookmarkData } from "../utils/interfaces";
 // }
 
 interface Props {
-  setEditBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setEditBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   singleBookmarkData: SingleBookmarkData;
 
   setBookmarkId: React.Dispatch<React.SetStateAction<string | number | undefined>>;
   tabID: string | number;
+  visDispatch: React.Dispatch<TabVisAction>;
   // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleBookmarkData>>;
 }
 
 function SingleBookmark({
-  setEditBookmarkVis,
+  // setEditBookmarkVis,
   singleBookmarkData,
   // setEditSingleLinkData,
   setBookmarkId,
+  visDispatch,
   tabID,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
@@ -70,7 +72,8 @@ function SingleBookmark({
         <PencilSmallSVG
           className="h-5 ml-1 hover:text-black cursor-pointer"
           onClick={() => {
-            setEditBookmarkVis((b) => !b);
+            // setEditBookmarkVis((b) => !b);
+            visDispatch({type: "EDIT_BOOKMARK_TOOGLE"})
 
             setBookmarkId(singleBookmarkData.id);
           }}

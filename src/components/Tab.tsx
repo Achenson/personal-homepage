@@ -115,6 +115,7 @@ Props): JSX.Element {
           ...state,
           editTabVis: false,
           newBookmarkVis: false,
+          editBookmarkVis: false,
           colorsVis: !state.colorsVis,
         };
       case "COLORS_CLOSE":
@@ -123,6 +124,7 @@ Props): JSX.Element {
           colorsVis: false,
           editTabVis: false,
           newBookmarkVis: false,
+          editBookmarkVis: false,
         };
       case "EDIT_TOGGLE":
         if (state.editTabVis) {
@@ -138,6 +140,7 @@ Props): JSX.Element {
           ...state,
           colorsVis: false,
           newBookmarkVis: false,
+          editBookmarkVis: false,
           editTabVis: !state.editTabVis,
         };
 
@@ -147,6 +150,7 @@ Props): JSX.Element {
           editTabVis: false,
           colorsVis: false,
           newBookmarkVis: false,
+          editBookmarkVis: false,
         };
       case "TAB_CONTENT_TOGGLE":
         return {
@@ -154,6 +158,7 @@ Props): JSX.Element {
           colorsVis: false,
           editTabVis: false,
           newBookmarkVis: false,
+          editBookmarkVis: false,
           tabContentVis: !state.tabContentVis,
         };
       case "TAB_CONTENT_CLOSE":
@@ -163,15 +168,24 @@ Props): JSX.Element {
           editTabVis: false,
           newBookmarkVis: false,
           tabContentVis: false,
+          editBookmarkVis: false,
         };
       case "NEW_BOOKMARK_TOOGLE":
         return {
           ...state,
           colorsVis: false,
           editTabVis: false,
+          editBookmarkVis: false,
           newBookmarkVis: !state.newBookmarkVis,
         };
-
+        case "EDIT_BOOKMARK_TOOGLE":
+          return {
+            ...state,
+            colorsVis: false,
+            editTabVis: false,
+            newBookmarkVis: false,
+            editBookmarkVis: !state.editBookmarkVis,
+          };
       default:
         return state;
     }
@@ -183,7 +197,7 @@ Props): JSX.Element {
 
   const [visState, visDispatch] = useReducer(visReducer, initVisState);
 
-  const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
+  // const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
   // const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
 
   useEffect(() => {
@@ -488,8 +502,8 @@ Props): JSX.Element {
             .map((el, i) => {
               return (
                 <SingleBookmark
-                  setEditBookmarkVis={setEditBookmarkVis}
-                  
+                  // setEditBookmarkVis={setEditBookmarkVis}
+                  visDispatch={visDispatch}
                   singleBookmarkData={el}
                   // setEditSingleLinkData={setEditSingleBookmarkData}
                   setBookmarkId={setBookmarkId}
