@@ -12,12 +12,15 @@ import {
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
+import {UpperVisAction} from "../../utils/interfaces"
+
 interface Props {
-  colorsVis: boolean;
-  setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // colorsVis: boolean;
+  // setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
+  upperVisDispatch: React.Dispatch<UpperVisAction>
 }
 
-function Colors_UpperUI({ setColorsVis, colorsVis }: Props): JSX.Element {
+function Colors_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   const [defaultColorsFor, setDefaultColorsFor] = useState<
     | "folders"
     | "notes"
@@ -78,9 +81,10 @@ function Colors_UpperUI({ setColorsVis, colorsVis }: Props): JSX.Element {
             <CancelSVG
               className="h-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"
               onClick={() => {
-                if (colorsVis) {
-                  setColorsVis(false);
-                }
+                // if (colorsVis) {
+                //   setColorsVis(false);
+                // }
+                upperVisDispatch({type: "COLORS_TOGGLE"})
               }}
             />
           </div>

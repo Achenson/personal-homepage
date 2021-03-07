@@ -16,23 +16,26 @@ import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 import { uiColorState } from "../../state/colorsState";
 
+import {UpperVisAction} from "../../utils/interfaces"
+
 interface Props {
-  setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
-  setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  setSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
   setTabType: React.Dispatch<
     React.SetStateAction<"folder" | "note" | "rss">
   >;
+  upperVisDispatch: React.Dispatch<UpperVisAction>
 }
 
 function UpperRightMenu({
-  setNewBookmarkVis,
-  setNewTabVis,
-  setBackgroundSettingsVis,
-  setSettingsVis,
-  setColorsVis,
+  // setNewBookmarkVis,
+  // setNewTabVis,
+  // setBackgroundSettingsVis,
+  // setSettingsVis,
+  // setColorsVis,
   setTabType,
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();

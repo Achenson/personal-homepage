@@ -30,3 +30,26 @@ export interface GlobalSettingsState {
     hideNonDeletable: boolean,
     numberOfCols: 1 | 2 | 3 | 4
 }
+
+export interface UpperVisAction {
+  type:
+    | "NEW_BOOKMARK_TOGGLE"
+    | "NEW_TAB_TOGGLE"
+    | "BACKGROUNG_SETTINGS_TOGGLE"
+    | "SETTINGS_TOGGLE"
+    | "COLORS_TOGGLE";
+  payload?: string | number;
+}
+
+export interface TabVisAction {
+  type:
+  "COLORS_CLOSE" |
+  "EDIT_CLOSE" |
+  "COLORS_TOGGLE" |
+  "EDIT_TOGGLE"| 
+  "TAB_CONTENT_TOGGLE"|
+  "TAB_CONTENT_CLOSE";
+
+    payload?: string | number;
+}
+

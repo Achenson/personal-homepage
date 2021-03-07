@@ -8,17 +8,26 @@ import Bookmark_lower_JSX from "./Bookmark_lower_JSX";
 
 import { SingleBookmarkData } from "../utils/interfaces";
 
+import {UpperVisAction, TabVisAction} from "../utils/interfaces"
+
+
+
 interface Props {
-  setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   // for "edit" type only
   bookmarkId?: string | number | undefined;
+  upperVisDispatch?: React.Dispatch<UpperVisAction>
+  visDispatch?: React.Dispatch<TabVisAction>
 }
 
 function Bookmark_newAndEdit({
-  setBookmarkVis,
+  // setBookmarkVis,
   bookmarkComponentType,
   bookmarkId,
+  visDispatch,
+  upperVisDispatch
+  
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
@@ -144,7 +153,8 @@ function Bookmark_newAndEdit({
     notesTitlesArr,
     bookmarkComponentType,
     bookmarkIndex,
-    setBookmarkVis,
+    // setBookmarkVis,
+    
     // !!! for lower JSX only, change?
     // currentLink: currentLink,
   };
@@ -152,9 +162,11 @@ function Bookmark_newAndEdit({
   return (
     <>
       {bookmarkComponentType === "new_upperUI" ? (
-        <Bookmark_upper_JSX {...bookmarkJSX_props} />
+        // @ts-ignore: Unreachable code error
+        <Bookmark_upper_JSX {...bookmarkJSX_props} upperVisDispatch={upperVisDispatch}/>
       ) : (
-        <Bookmark_lower_JSX {...bookmarkJSX_props} currentBookmark={currentBookmark} />
+        // @ts-ignore: Unreachable code error
+        <Bookmark_lower_JSX {...bookmarkJSX_props} currentBookmark={currentBookmark} visDispatch={visDispatch} />
       )}
     </>
   );

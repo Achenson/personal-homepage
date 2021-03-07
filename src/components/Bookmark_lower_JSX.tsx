@@ -19,6 +19,8 @@ import {
 
 import { SingleBookmarkData } from "../utils/interfaces";
 
+import {TabVisAction} from "../utils/interfaces"
+
 interface Props {
   titleInput: string;
   setTitleInput: React.Dispatch<React.SetStateAction<string>>;
@@ -33,8 +35,9 @@ interface Props {
   notesTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   bookmarkIndex: number;
-  setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   currentBookmark: SingleBookmarkData | undefined;
+  visDispatch: React.Dispatch<TabVisAction>;
 }
 
 function Bookmark_lower_JSX({
@@ -51,8 +54,8 @@ function Bookmark_lower_JSX({
   notesTitlesArr,
   bookmarkComponentType,
   bookmarkIndex,
-  setBookmarkVis,
   currentBookmark,
+  visDispatch
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
@@ -371,7 +374,8 @@ function Bookmark_lower_JSX({
                   );
                 }
 
-                setBookmarkVis((b) => !b);
+                // setBookmarkVis((b) => !b);
+                visDispatch({})
 
                 function tagUniquenessCheck() {
                   let isUnique: boolean = true;
@@ -407,7 +411,8 @@ function Bookmark_lower_JSX({
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setBookmarkVis((b) => !b);
+                // setBookmarkVis((b) => !b);
+                visDispatch({})
               }}
             >
               <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />

@@ -33,15 +33,12 @@ import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "../utils/itemsDnd";
 
+import { TabVisAction } from "../utils/interfaces";
+
 interface SingleBookmarkData {
   title: string;
   URL: string;
   tags: string[];
-}
-
-interface Action {
-  type: string;
-  payload?: string | number;
 }
 
 interface Props {
@@ -56,10 +53,10 @@ interface Props {
 }
 
 interface VisState {
-  // newBookmarkVis: boolean;
   editTabVis: boolean;
   colorsVis: boolean;
   tabContentVis: boolean;
+  // newBookmarkVis: boolean;
   // editBookmarkVis: boolean;
 }
 
@@ -101,7 +98,7 @@ Props): JSX.Element {
   const [tabColorOpenedData, setTabColorOpenedData] = tabColorOpenedState.use();
   const [tabEditOpenedData, setTabEditOpenedData] = tabEditOpenedState.use();
 
-  function visReducer(state: VisState, action: Action) {
+  function visReducer(state: VisState, action: TabVisAction) {
     switch (action.type) {
       case "COLORS_TOGGLE":
         if (state.colorsVis) {
@@ -390,15 +387,12 @@ Props): JSX.Element {
               style={{ marginTop: "-6px" }}
               onClick={() => {
                 setNewBookmarkVis((b) => !b);
-               
 
                 if (visState.editTabVis) {
-                
                   visDispatch({ type: "EDIT_CLOSE" });
                 }
 
                 if (visState.colorsVis) {
-                 
                   visDispatch({ type: "COLORS_CLOSE" });
                 }
 
@@ -415,8 +409,6 @@ Props): JSX.Element {
               tabType === "note" || tabType === "rss" ? "ml-2" : ""
             }`}
             onClick={() => {
-             
-
               visDispatch({ type: "COLORS_TOGGLE" });
             }}
           />
@@ -426,8 +418,6 @@ Props): JSX.Element {
               finalTabColor
             )} cursor-pointer`}
             onClick={() => {
-           
-
               visDispatch({ type: "EDIT_TOGGLE" });
             }}
 
@@ -442,7 +432,7 @@ Props): JSX.Element {
 
       {editBookmarkVis ? (
         <Bookmark_newAndEdit
-          setBookmarkVis={setEditBookmarkVis}
+          // setBookmarkVis={setEditBookmarkVis}
           bookmarkComponentType={"edit"}
           bookmarkId={bookmarkId}
         />
@@ -452,7 +442,7 @@ Props): JSX.Element {
         // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
 
         <Bookmark_newAndEdit
-          setBookmarkVis={setNewBookmarkVis}
+          // setBookmarkVis={setNewBookmarkVis}
           bookmarkComponentType={"new_lowerUI"}
         />
       ) : null}

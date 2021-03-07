@@ -21,17 +21,15 @@ import {
 } from "../state/tabsAndBookmarks";
 
 import { rssSettingsState } from "../state/defaultSettings";
+import { TabVisAction } from "../utils/interfaces";
 
-interface Action {
-  type: string;
-  payload?: string | number
-}
+
 
 interface Props {
   // tabTitle: string;
   tabType: "folder" | "note" | "rss";
   // setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
-  visDispatch: React.Dispatch<Action>;
+  visDispatch: React.Dispatch<TabVisAction>;
   // noteInput: string | null;
   tabID: string | number;
 }

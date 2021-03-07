@@ -10,6 +10,8 @@ import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
+
+
 import TagsList_UpperUI from "./TagsList_UpperUI";
 
 import {
@@ -24,11 +26,12 @@ import { tabsDataState } from "../../state/tabsAndBookmarks";
 import { bookmarksDataState, bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
 
 interface Props {
-  setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
+  upperVisDispatch: React.Dispatch<UpperVisAction>
   tabType: "folder" | "note" | "rss";
 }
 
-function NewTab_UpperUI({ setNewTabVis, tabType }: Props): JSX.Element {
+function NewTab_UpperUI({  tabType, upperVisDispatch }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();

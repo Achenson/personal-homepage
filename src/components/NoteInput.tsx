@@ -1,18 +1,15 @@
 import React from "react";
 
 import { tabsDataState } from "../state/tabsAndBookmarks";
+import { TabVisAction } from "../utils/interfaces";
 
 interface Props {
   //  noteInput: string | null;
   tabID: string | number;
   // setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
-  visDispatch: React.Dispatch<Action>;
+  visDispatch: React.Dispatch<TabVisAction>;
 }
 
-interface Action {
-  type: string;
-  payload?: string | number
-}
 
 function NoteInput({ tabID, visDispatch }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();

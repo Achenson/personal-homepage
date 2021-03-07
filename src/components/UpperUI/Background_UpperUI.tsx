@@ -8,14 +8,16 @@ import {
   uiColorState,
 } from "../../state/colorsState";
 
+import {UpperVisAction} from "../../utils/interfaces"
+
 interface Props {
-  backgroundSettingsVis: boolean;
-  setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // backgroundSettingsVis: boolean;
+  // setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
+  upperVisDispatch: React.Dispatch<UpperVisAction>
 }
 
 function Background_UpperUI({
-  backgroundSettingsVis,
-  setBackgroundSettingsVis,
+  upperVisDispatch
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
@@ -46,9 +48,11 @@ function Background_UpperUI({
             <CancelSVG
               className="h-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"
               onClick={() => {
-                if (backgroundSettingsVis) {
-                  setBackgroundSettingsVis(false);
-                }
+                // if (backgroundSettingsVis) {
+                //   setBackgroundSettingsVis(false);
+                // }
+                upperVisDispatch({type: "BACKGROUNG_SETTINGS_TOGGLE"})
+
               }}
             />
           </div>

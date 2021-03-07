@@ -6,12 +6,15 @@ import { uiColorState } from "../../state/colorsState";
 
 import { globalSettingsState } from "../../state/defaultSettings";
 
+import {UpperVisAction} from "../../utils/interfaces"
+
 interface Props {
-  settingsVis: boolean;
-  setSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // settingsVis: boolean;
+  // setSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
+  upperVisDispatch: React.Dispatch<UpperVisAction>
 }
 
-function Settings_UpperUI({ settingsVis, setSettingsVis }: Props): JSX.Element {
+function Settings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
@@ -64,9 +67,10 @@ function Settings_UpperUI({ settingsVis, setSettingsVis }: Props): JSX.Element {
             <CancelSVG
               className="h-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"
               onClick={() => {
-                if (settingsVis) {
-                  setSettingsVis(false);
-                }
+                // if (settingsVis) {
+                //   setSettingsVis(false);
+                // }
+                upperVisDispatch({type: "SETTINGS_TOGGLE"})
               }}
             />
           </div>

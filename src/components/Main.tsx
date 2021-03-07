@@ -1,6 +1,6 @@
 import React, { useState, useReducer } from "react";
 import Grid from "./Grid";
-import NewBookmark_UpperUI from "./Bookmark_newAndEdit";
+import Bookmark_newAndEdit from "./Bookmark_newAndEdit";
 import NewTab_UpperUI from "./UpperUI/NewTab_UpperUI";
 import Colors_UpperUI from "./UpperUI/Colors_UpperUI";
 import UpperUI from "./UpperUI/UpperUI";
@@ -10,6 +10,8 @@ import { globalSettingsState } from "../state/defaultSettings";
 import { backgroundColorState } from "../state/colorsState";
 import Background_UpperUI from "./UpperUI/Background_UpperUI";
 import Settings_UpperUI from "./UpperUI/Settings_UpperUI";
+
+import {UpperVisAction} from "../utils/interfaces"
 
 interface Props {}
 
@@ -33,15 +35,6 @@ const upperVisStateAllFalse = {
   ...initUpperVisState,
 };
 
-interface UpperVisAction {
-  type:
-    | "NEW_BOOKMARK_TOGGLE"
-    | "NEW_TAB_TOGGLE"
-    | "BACKGROUNG_SETTINGS_TOGGLE"
-    | "SETTINGS_TOGGLE"
-    | "COLORS_TOGGLE";
-  payload?: string | number;
-}
 
 function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
   switch (action.type) {
@@ -86,16 +79,16 @@ function Main({}: Props): JSX.Element {
     initUpperVisState
   );
 
-  const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
-  const [newTabVis, setNewTabVis] = useState<boolean>(false);
+  // const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
+  // const [newTabVis, setNewTabVis] = useState<boolean>(false);
 
-  const [backgroundSettingsVis, setBackgroundSettingsVis] = useState<boolean>(
-    false
-  );
+  // const [backgroundSettingsVis, setBackgroundSettingsVis] = useState<boolean>(
+  //   false
+  // );
 
-  const [settingsVis, setSettingsVis] = useState<boolean>(false);
+  // const [settingsVis, setSettingsVis] = useState<boolean>(false);
 
-  const [colorsVis, setColorsVis] = useState<boolean>(false);
+  // const [colorsVis, setColorsVis] = useState<boolean>(false);
 
   const [tabType, setTabType] = useState<"folder" | "note" | "rss">("folder");
 
@@ -108,37 +101,48 @@ function Main({}: Props): JSX.Element {
           : `bg-${backgroundColorData}`
       } bg-cover`}
     >
-      {newTabVis ? (
-        <NewTab_UpperUI setNewTabVis={setNewTabVis} tabType={tabType} />
+      {upperVisState.newTabVis ? (
+        <NewTab_UpperUI 
+        // setNewTabVis={setNewTabVis}
+          upperVisDispatch={upperVisDispatch}
+         tabType={tabType} />
       ) : null}
-      {newBookmarkVis ? (
-        <NewBookmark_UpperUI
-          setBookmarkVis={setNewBookmarkVis}
+      {upperVisState.newBookmarkVis ? (
+        <Bookmark_newAndEdit
+        upperVisDispatch={upperVisDispatch}
+          // setBookmarkVis={setNewBookmarkVis}
           bookmarkComponentType={"new_upperUI"}
         />
       ) : null}
-      {backgroundSettingsVis ? (
+      {upperVisState.backgroundSettingsVis ? (
         <Background_UpperUI
-          setBackgroundSettingsVis={setBackgroundSettingsVis}
-          backgroundSettingsVis={backgroundSettingsVis}
+        upperVisDispatch={upperVisDispatch}
+          // setBackgroundSettingsVis={setBackgroundSettingsVis}
+          // backgroundSettingsVis={backgroundSettingsVis}
         />
       ) : null}
-      {settingsVis ? (
+      {upperVisState.settingsVis ? (
         <Settings_UpperUI
-          setSettingsVis={setSettingsVis}
-          settingsVis={settingsVis}
+        upperVisDispatch={upperVisDispatch}
+          // setSettingsVis={setSettingsVis}
+          // settingsVis={settingsVis}
         />
       ) : null}
 
-      {colorsVis ? (
-        <Colors_UpperUI colorsVis={colorsVis} setColorsVis={setColorsVis} />
+      {upperVisState.colorsVis ? (
+        <Colors_UpperUI 
+        upperVisDispatch={upperVisDispatch}
+        // colorsVis={colorsVis}
+        // setColorsVis={setColorsVis}
+         />
       ) : null}
       <UpperUI
-        setNewBookmarkVis={setNewBookmarkVis}
-        setNewTabVis={setNewTabVis}
-        setBackgroundSettingsVis={setBackgroundSettingsVis}
-        setSettingsVis={setSettingsVis}
-        setColorsVis={setColorsVis}
+        // setNewBookmarkVis={setNewBookmarkVis}
+        // setNewTabVis={setNewTabVis}
+        // setBackgroundSettingsVis={setBackgroundSettingsVis}
+        // setSettingsVis={setSettingsVis}
+        // setColorsVis={setColorsVis}
+        upperVisDispatch={upperVisDispatch}
         setTabType={setTabType}
       />
       <Grid />

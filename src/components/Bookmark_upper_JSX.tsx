@@ -15,6 +15,8 @@ import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
 
 import { bookmarksDataState, tabsDataState, bookmarksAllTagsState } from "../state/tabsAndBookmarks";
 
+import {UpperVisAction} from "../utils/interfaces"
+
 interface Props {
   titleInput: string;
   setTitleInput: React.Dispatch<React.SetStateAction<string>>;
@@ -29,7 +31,8 @@ interface Props {
   notesTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   bookmarkIndex: number;
-  setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   // currentLink: SingleLinkData | undefined
 }
 
@@ -45,9 +48,10 @@ function Bookmark_upper_JSX({
   tagsListVis,
   setTagsListVis,
   notesTitlesArr,
+  upperVisDispatch,
   bookmarkComponentType,
   bookmarkIndex,
-  setBookmarkVis,
+  // setBookmarkVis,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
@@ -295,7 +299,8 @@ function Bookmark_upper_JSX({
                   })
                 );
 
-                setBookmarkVis((b) => !b);
+                // setBookmarkVis((b) => !b);
+                upperVisDispatch({type: "NEW_BOOKMARK_TOGGLE"})
 
                 function tagUniquenessCheck() {
                   let isUnique: boolean = true;
@@ -331,7 +336,8 @@ function Bookmark_upper_JSX({
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setBookmarkVis((b) => !b);
+                // setBookmarkVis((b) => !b);
+                upperVisDispatch({type: "NEW_BOOKMARK_TOGGLE"})
               }}
             >
               <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
