@@ -473,6 +473,7 @@ Props): JSX.Element {
           // setBookmarkVis={setEditBookmarkVis}
           bookmarkComponentType={"edit"}
           bookmarkId={bookmarkId}
+          visDispatch={visDispatch}
         />
       ) : null}
 
@@ -482,6 +483,7 @@ Props): JSX.Element {
         <Bookmark_newAndEdit
           // setBookmarkVis={setNewBookmarkVis}
           bookmarkComponentType={"new_lowerUI"}
+          visDispatch={visDispatch}
         />
       ) : null}
 

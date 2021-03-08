@@ -375,7 +375,14 @@ function Bookmark_lower_JSX({
                 }
 
                 // setBookmarkVis((b) => !b);
-                visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
+                if(bookmarkComponentType === "edit") {
+                  visDispatch({type: "EDIT_BOOKMARK_TOOGLE"})
+                }
+
+                if(bookmarkComponentType === "new_lowerUI") {
+                  visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
+                }
+
 
                 function tagUniquenessCheck() {
                   let isUnique: boolean = true;
@@ -412,7 +419,14 @@ function Bookmark_lower_JSX({
               onClick={(e) => {
                 e.preventDefault();
                 // setBookmarkVis((b) => !b);
-                visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
+                // visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
+                if(bookmarkComponentType === "edit") {
+                  visDispatch({type: "EDIT_BOOKMARK_TOOGLE"})
+                }
+
+                if(bookmarkComponentType === "new_lowerUI") {
+                  visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
+                }
               }}
             >
               <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
