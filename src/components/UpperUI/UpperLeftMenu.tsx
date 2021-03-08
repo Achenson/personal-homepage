@@ -16,12 +16,16 @@ interface Props {}
 
 function UpperLeftMenu({}: Props): JSX.Element {
   const [columnSelected, setColumnSelected] = useState<number | null>(null);
+  
 
   const [colorsToChooseVis, setColorsToChooseVis] = useState<boolean>(false);
   const [
     backgroundColorsToChooseVis,
     setBackgroundColorsToChooseVis,
   ] = useState<boolean>(false);
+
+
+
 
   const [defaultColorsFor, setDefaultColorsFor] = useState<
     "column_1" | "column_2" | "column_3" | "column_4" | "unselected"

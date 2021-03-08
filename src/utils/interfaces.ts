@@ -37,7 +37,9 @@ export interface UpperVisAction {
     | "NEW_TAB_TOGGLE"
     | "BACKGROUNG_SETTINGS_TOGGLE"
     | "SETTINGS_TOGGLE"
-    | "COLORS_TOGGLE";
+    | "COLORS_SETTINGS_TOGGLE"
+    | "COLORS_BACKGROUND_TOGGLE"
+    | "COLORS_COLUMN_TOGGLE";
   payload?: string | number;
 }
 
@@ -45,7 +47,7 @@ export interface TabVisAction {
   type:
   "COLORS_CLOSE" |
   "EDIT_CLOSE" |
-  "COLORS_TOGGLE" |
+  "COLORS_SETTINGS_TOGGLE" |
   "EDIT_TOGGLE"| 
   "TAB_CONTENT_TOGGLE"|
   "TAB_CONTENT_CLOSE"|

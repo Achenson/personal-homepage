@@ -20,7 +20,9 @@ interface InitUpperVisState {
   newTabVis: boolean;
   backgroundSettingsVis: boolean;
   settingsVis: boolean;
-  colorsVis: boolean;
+  colorsSettingsVis: boolean;
+  colorsBackgroundVis: boolean;
+  colorsColumnVis: boolean;
 }
 
 let initUpperVisState: InitUpperVisState = {
@@ -28,7 +30,9 @@ let initUpperVisState: InitUpperVisState = {
   newTabVis: false,
   backgroundSettingsVis: false,
   settingsVis: false,
-  colorsVis: false,
+  colorsSettingsVis: false,
+  colorsBackgroundVis: false,
+  colorsColumnVis: false
 };
 
 const upperVisStateAllFalse = {
@@ -36,7 +40,9 @@ const upperVisStateAllFalse = {
   newTabVis: false,
   backgroundSettingsVis: false,
   settingsVis: false,
-  colorsVis: false,
+  colorsSettingsVis: false,
+  colorsBackgroundVis: false,
+  colorsColumnVis: false
 };
 
 
@@ -47,10 +53,10 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
         ...upperVisStateAllFalse,
         backgroundSettingsVis: !state.backgroundSettingsVis,
       };
-    case "COLORS_TOGGLE":
+    case "COLORS_SETTINGS_TOGGLE":
       return {
         ...upperVisStateAllFalse,
-        colorsVis: !state.colorsVis,
+        colorsSettingsVis: !state.colorsSettingsVis,
       };
     case "NEW_BOOKMARK_TOGGLE":
       return {
@@ -67,6 +73,19 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
         ...upperVisStateAllFalse,
         settingsVis: !state.settingsVis,
       };
+      case "COLORS_BACKGROUND_TOGGLE":
+        return {
+          ...upperVisStateAllFalse,
+          colorsSettingsVis: !state.colorsBackgroundVis,
+        };
+        case "COLORS_COLUMN_TOGGLE":
+      return {
+        ...upperVisStateAllFalse,
+        colorsColumnVis: !state.colorsColumnVis,
+      }; 
+    default:
+      return {...upperVisStateAllFalse}
+    
   }
 }
 
@@ -133,7 +152,7 @@ function Main({}: Props): JSX.Element {
         />
       ) : null}
 
-      {upperVisState.colorsVis ? (
+      {upperVisState.colorsSettingsVis ? (
         <Colors_UpperUI 
         upperVisDispatch={upperVisDispatch}
         // colorsVis={colorsVis}

@@ -84,7 +84,7 @@ function Colors_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 // if (colorsVis) {
                 //   setColorsVis(false);
                 // }
-                upperVisDispatch({type: "COLORS_TOGGLE"})
+                upperVisDispatch({type: "COLORS_SETTINGS_TOGGLE"})
               }}
             />
           </div>

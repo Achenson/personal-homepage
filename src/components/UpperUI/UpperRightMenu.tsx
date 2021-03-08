@@ -95,7 +95,7 @@ function UpperRightMenu({
         <ColorSVG
           className={`h-6 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
-            upperVisDispatch({type: "COLORS_TOGGLE"})
+            upperVisDispatch({type: "COLORS_SETTINGS_TOGGLE"})
             // setColorsVis((b) => !b);
           }}
         />

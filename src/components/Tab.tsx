@@ -102,7 +102,7 @@ Props): JSX.Element {
 
   function visReducer(state: VisState, action: TabVisAction) {
     switch (action.type) {
-      case "COLORS_TOGGLE":
+      case "COLORS_SETTINGS_TOGGLE":
         if (state.colorsVis) {
           setTabColorOpenedData(null);
         }
@@ -447,7 +447,7 @@ Props): JSX.Element {
               tabType === "note" || tabType === "rss" ? "ml-2" : ""
             }`}
             onClick={() => {
-              visDispatch({ type: "COLORS_TOGGLE" });
+              visDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
             }}
           />
 
