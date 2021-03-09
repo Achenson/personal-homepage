@@ -39,13 +39,14 @@ let initUpperVisState: InitUpperVisState = {
 };
 
 const upperVisStateAllFalse: InitUpperVisState = {
-  newBookmarkVis: false,
-  newTabVis: false,
-  backgroundSettingsVis: false,
-  settingsVis: false,
-  colorsSettingsVis: false,
-  colorsBackgroundVis: false,
-  colorsColumnVis: false
+  // newBookmarkVis: false,
+  // newTabVis: false,
+  // backgroundSettingsVis: false,
+  // settingsVis: false,
+  // colorsSettingsVis: false,
+  // colorsBackgroundVis: false,
+  // colorsColumnVis: false
+  ...initUpperVisState
 };
 
 

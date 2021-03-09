@@ -284,6 +284,10 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 186. move color function out of Tab
 187. new Rss, new Note - get rid of bookmarks
 188. Action interface improve (type values)
+189. convert all bookmark/tab indexes to find() / filter() methods !!
+190. delay problem for closing Tab content by useEffect
+191. upperVisState should be joined with tabVisState
+
 
 App structure:
 Main

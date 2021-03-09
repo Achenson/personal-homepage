@@ -12,8 +12,9 @@ import {
 
 import {
   closeAllTabsState,
-  tabColorOpenedState,
-  tabEditOpenedState,
+  // tabColorOpenedState,
+  // tabEditOpenedState,
+  tabOpenedState,
   globalSettingsState,
 } from "../state/defaultSettings";
 
@@ -97,20 +98,24 @@ Props): JSX.Element {
     editBookmarkVis: false,
   };
 
-  const [tabColorOpenedData, setTabColorOpenedData] = tabColorOpenedState.use();
-  const [tabEditOpenedData, setTabEditOpenedData] = tabEditOpenedState.use();
+  // const [tabColorOpenedData, setTabColorOpenedData] = tabColorOpenedState.use();
+  // const [tabEditOpenedData, setTabEditOpenedData] = tabEditOpenedState.use();
+  const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   function visReducer(state: VisState, action: TabVisAction) {
     switch (action.type) {
       case "COLORS_SETTINGS_TOGGLE":
-        if (state.colorsVis) {
-          setTabColorOpenedData(null);
-        }
+        // if (state.colorsVis) {
+        //   setTabColorOpenedData(null);
+        // }
         if (!state.colorsVis) {
-          setTabColorOpenedData(tabID);
+          // setTabColorOpenedData(tabID);
+          setTabOpenedData(tabID);
         }
         // !!! crucial: tabEditOpenedData won't affect this instance of a component
-        setTabEditOpenedData(tabID);
+        // setTabEditOpenedData(tabID);
+
+
         return {
           ...state,
           editTabVis: false,
@@ -127,15 +132,17 @@ Props): JSX.Element {
           editBookmarkVis: false,
         };
       case "EDIT_TOGGLE":
-        if (state.editTabVis) {
-          setTabEditOpenedData(null);
-        }
+        // if (state.editTabVis) {
+        //   setTabEditOpenedData(null);
+        // }
 
         if (!state.editTabVis) {
-          setTabEditOpenedData(tabID);
+          // setTabEditOpenedData(tabID);
+          setTabOpenedData(tabID);
+
         }
 
-        setTabColorOpenedData(tabID);
+        // setTabColorOpenedData(tabID);
         return {
           ...state,
           colorsVis: false,
@@ -170,6 +177,16 @@ Props): JSX.Element {
           tabContentVis: false,
           editBookmarkVis: false,
         };
+        // similar to tab_content_close, but tabContentVis is not touched (for useEffect)
+        case "TAB_EDITABLES_CLOSE":
+        return {
+          ...state,
+          colorsVis: false,
+          editTabVis: false,
+          newBookmarkVis: false,
+          // tabContentVis: false,
+          editBookmarkVis: false,
+        };
       case "NEW_BOOKMARK_TOOGLE":
         return {
           ...state,
@@ -201,16 +218,23 @@ Props): JSX.Element {
   // const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
 
   useEffect(() => {
-    if (tabColorOpenedData !== tabID) {
-      visDispatch({ type: "COLORS_CLOSE" });
+    if (tabOpenedData !== tabID) {
+      visDispatch({ type: "TAB_EDITABLES_CLOSE" });
     }
-  }, [tabColorOpenedData, tabID]);
+  }, [tabOpenedData, tabID]);
 
-  useEffect(() => {
-    if (tabEditOpenedData !== tabID) {
-      visDispatch({ type: "EDIT_CLOSE" });
-    }
-  }, [tabEditOpenedData, tabID]);
+  // useEffect(() => {
+  //   if (tabColorOpenedData !== tabID) {
+  //     visDispatch({ type: "COLORS_CLOSE" });
+  //   }
+  // }, [tabColorOpenedData, tabID]);
+
+
+  // useEffect(() => {
+  //   if (tabEditOpenedData !== tabID) {
+  //     visDispatch({ type: "EDIT_CLOSE" });
+  //   }
+  // }, [tabEditOpenedData, tabID]);
 
   const [bookmarkId, setBookmarkId] = useState<number | string>();
 
@@ -218,7 +242,7 @@ Props): JSX.Element {
 
   useEffect(() => {
     if (closeAllTabs) {
-      visDispatch({ type: "TAB_CONTENT_CLOSE" });
+      visDispatch({ type: "TAB_EDITABLES_CLOSE" });
     }
   }, [closeAllTabs]);
 
@@ -380,8 +404,9 @@ Props): JSX.Element {
         <div
           className="pl-1 w-full cursor-pointer"
           onClick={() => {
-            setTabColorOpenedData(null);
-            setTabEditOpenedData(null);
+
+            // setTabColorOpenedData(null);
+            // setTabEditOpenedData(null);
 
             visDispatch({ type: "TAB_CONTENT_TOGGLE" });
           }}
