@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import UpperRightMenu from "./UpperRightMenu";
 import UpperLeftMenu from "./UpperLeftMenu";
 
-import { UpperVisAction } from "../../utils/interfaces";
+import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
 
 interface Props {
   // setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,14 +14,23 @@ interface Props {
   // setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
+  upperVisState: InitUpperVisState;
 }
 
-function UpperUI({ setTabType, upperVisDispatch }: Props): JSX.Element {
+function UpperUI({ setTabType, upperVisDispatch, upperVisState }: Props): JSX.Element {
   // const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
 
   return (
     <div className="h-36 relative mx-4 flex justify-between items-end">
-      <UpperLeftMenu />
+      <UpperLeftMenu 
+       upperVisDispatch={upperVisDispatch}
+       
+       upperVisState={upperVisState}
+       />
+
+
+
+
       <UpperRightMenu
         // setSettingsVis={setSettingsVis}
         // setNewBookmarkVis={setNewBookmarkVis}

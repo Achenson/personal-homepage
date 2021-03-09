@@ -1,28 +1,32 @@
 import React, { useState } from "react";
 
-import SingleColumnsColor from "../Colors/ColumnColor";
+import ColumnColor from "../Colors/ColumnColor";
 import DefaultColorsToChoose from "../Colors/ColorsToChoose_Default";
 
 import { globalSettingsState } from "../../state/defaultSettings";
-import SingleColumnsColor_Img from "../Colors/ColumnColor_Img";
+import ColumnColor_Img from "../Colors/ColumnColor_Img";
 import BackgroundColor from "../Colors/BackgroundColor";
 import EyeOff from "../Colors/EyeOff";
 import BackgroundColorsToChoose from "../Colors/ColorsToChoose_Background";
-import { DndProvider } from "react-dnd";
 
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
 
-interface Props {}
+import {UpperVisAction, InitUpperVisState} from "../../utils/interfaces"
 
-function UpperLeftMenu({}: Props): JSX.Element {
+interface Props {
+  upperVisState: InitUpperVisState;
+  upperVisDispatch: React.Dispatch<UpperVisAction>
+}
+
+function UpperLeftMenu({upperVisDispatch, upperVisState}: Props): JSX.Element {
   const [columnSelected, setColumnSelected] = useState<number | null>(null);
-  
 
-  const [colorsToChooseVis, setColorsToChooseVis] = useState<boolean>(false);
-  const [
-    backgroundColorsToChooseVis,
-    setBackgroundColorsToChooseVis,
-  ] = useState<boolean>(false);
+
+  // const [colorsToChooseVis, setColorsToChooseVis] = useState<boolean>(false);
+  // const [
+  //   backgroundColorsToChooseVis,
+  //   setBackgroundColorsToChooseVis,
+  // ] = useState<boolean>(false);
 
 
 
@@ -44,30 +48,37 @@ function UpperLeftMenu({}: Props): JSX.Element {
 
     return arrOfColumns.map((el, index) => {
       return globalSettingsData.picBackground ? (
-        <SingleColumnsColor_Img
+        <ColumnColor_Img
           colNumber={oneColorForAllCols ? 1 : el}
           // colSelected={false}
+
           defaultColorsFor={defaultColorsFor}
-          setColorsToChooseVis={setColorsToChooseVis}
+          setDefaultColorsFor={setDefaultColorsFor}
+
+          // setColorsToChooseVis={setColorsToChooseVis}
+
           columnSelected={columnSelected}
           setColumnSelected={setColumnSelected}
-          setDefaultColorsFor={setDefaultColorsFor}
           // setFoldersSelected={setFoldersSelected}
           // setNotesSelected={setNotesSelected}
           key={index}
+          upperVisDispatch={upperVisDispatch}
         />
       ) : (
-        <SingleColumnsColor
+        <ColumnColor
           colNumber={oneColorForAllCols ? 1 : el}
           // colSelected={false}
           defaultColorsFor={defaultColorsFor}
-          setColorsToChooseVis={setColorsToChooseVis}
+
+          // setColorsToChooseVis={setColorsToChooseVis}
+
           columnSelected={columnSelected}
           setColumnSelected={setColumnSelected}
           setDefaultColorsFor={setDefaultColorsFor}
           // setFoldersSelected={setFoldersSelected}
           // setNotesSelected={setNotesSelected}
           key={index}
+          upperVisDispatch={upperVisDispatch}
         />
       );
     });
@@ -82,17 +93,18 @@ function UpperLeftMenu({}: Props): JSX.Element {
       </div>
       {globalSettingsData.picBackground ? null : (
         <BackgroundColor
-          setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
+          // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
+          upperVisDispatch={upperVisDispatch}
         />
       )}
       <EyeOff />
 
       {/* <div className="absolute left-0" style={{ bottom: "104px" }}> */}
       <div className="absolute left-0 top-3">
-        {colorsToChooseVis ? (
+        {upperVisState.colorsColumnVis? (
           <DefaultColorsToChoose defaultColorsFor={defaultColorsFor} />
         ) : null}
-        {backgroundColorsToChooseVis ? (
+        {upperVisState.colorsBackgroundVis ? (
           <div className="absolute left-60 top-7">
             <BackgroundColorsToChoose />
           </div>

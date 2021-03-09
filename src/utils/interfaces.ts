@@ -35,11 +35,12 @@ export interface UpperVisAction {
   type:
     | "NEW_BOOKMARK_TOGGLE"
     | "NEW_TAB_TOGGLE"
-    | "BACKGROUNG_SETTINGS_TOGGLE"
+    | "BACKGROUND_SETTINGS_TOGGLE"
     | "SETTINGS_TOGGLE"
     | "COLORS_SETTINGS_TOGGLE"
     | "COLORS_BACKGROUND_TOGGLE"
-    | "COLORS_COLUMN_TOGGLE";
+    | "COLORS_COLUMN_TOGGLE"
+    | "COLORS_COLUMN_OPEN";
   payload?: string | number;
 }
 
@@ -57,3 +58,12 @@ export interface TabVisAction {
     payload?: string | number;
 }
 
+export interface InitUpperVisState {
+  newBookmarkVis: boolean;
+  newTabVis: boolean;
+  backgroundSettingsVis: boolean;
+  settingsVis: boolean;
+  colorsSettingsVis: boolean;
+  colorsBackgroundVis: boolean;
+  colorsColumnVis: boolean;
+}

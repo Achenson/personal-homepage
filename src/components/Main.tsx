@@ -13,17 +13,20 @@ import Settings_UpperUI from "./UpperUI/Settings_UpperUI";
 
 import {UpperVisAction} from "../utils/interfaces"
 
+import {InitUpperVisState} from "../utils/interfaces"
+
 interface Props {}
 
-interface InitUpperVisState {
-  newBookmarkVis: boolean;
-  newTabVis: boolean;
-  backgroundSettingsVis: boolean;
-  settingsVis: boolean;
-  colorsSettingsVis: boolean;
-  colorsBackgroundVis: boolean;
-  colorsColumnVis: boolean;
-}
+
+// interface InitUpperVisState {
+//   newBookmarkVis: boolean;
+//   newTabVis: boolean;
+//   backgroundSettingsVis: boolean;
+//   settingsVis: boolean;
+//   colorsSettingsVis: boolean;
+//   colorsBackgroundVis: boolean;
+//   colorsColumnVis: boolean;
+// }
 
 let initUpperVisState: InitUpperVisState = {
   newBookmarkVis: false,
@@ -35,7 +38,7 @@ let initUpperVisState: InitUpperVisState = {
   colorsColumnVis: false
 };
 
-const upperVisStateAllFalse = {
+const upperVisStateAllFalse: InitUpperVisState = {
   newBookmarkVis: false,
   newTabVis: false,
   backgroundSettingsVis: false,
@@ -48,7 +51,7 @@ const upperVisStateAllFalse = {
 
 function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
   switch (action.type) {
-    case "BACKGROUNG_SETTINGS_TOGGLE":
+    case "BACKGROUND_SETTINGS_TOGGLE":
       return {
         ...upperVisStateAllFalse,
         backgroundSettingsVis: !state.backgroundSettingsVis,
@@ -76,13 +79,18 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
       case "COLORS_BACKGROUND_TOGGLE":
         return {
           ...upperVisStateAllFalse,
-          colorsSettingsVis: !state.colorsBackgroundVis,
+          colorsBackgroundVis: !state.colorsBackgroundVis,
         };
         case "COLORS_COLUMN_TOGGLE":
       return {
         ...upperVisStateAllFalse,
         colorsColumnVis: !state.colorsColumnVis,
       }; 
+      case "COLORS_COLUMN_OPEN":
+        return {
+          ...upperVisStateAllFalse,
+          colorsColumnVis: true,
+        }; 
     default:
       return {...upperVisStateAllFalse}
     
@@ -165,6 +173,7 @@ function Main({}: Props): JSX.Element {
         // setBackgroundSettingsVis={setBackgroundSettingsVis}
         // setSettingsVis={setSettingsVis}
         // setColorsVis={setColorsVis}
+        upperVisState={upperVisState}
         upperVisDispatch={upperVisDispatch}
         setTabType={setTabType}
       />

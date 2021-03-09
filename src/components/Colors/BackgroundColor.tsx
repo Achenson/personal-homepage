@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 
 import { backgroundColorState } from "../../state/colorsState";
+import {UpperVisAction} from "../../utils/interfaces"
 
 import { ReactComponent as DocumentSVG } from "../../svgs/document.svg";
 
 interface Props {
-  setBackgroundColorsToChooseVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setBackgroundColorsToChooseVis: React.Dispatch<React.SetStateAction<boolean>>;
+  upperVisDispatch: React.Dispatch<UpperVisAction>
 }
 
 function BackgroundColor({
-  setBackgroundColorsToChooseVis,
+  // setBackgroundColorsToChooseVis,
+  upperVisDispatch
 }: Props): JSX.Element {
+
   const [
     backgroundColorData,
     setBackgroundColorState,
@@ -46,7 +50,10 @@ function BackgroundColor({
       )} opacity-80 border border-black rounded-lg cursor-pointer  hover:border-gray-500`}
       onClick={() => {
         setSelected((b) => !b);
-        setBackgroundColorsToChooseVis((b) => !b);
+        // setBackgroundColorsToChooseVis((b) => !b);
+        
+        
+        upperVisDispatch({type: "COLORS_BACKGROUND_TOGGLE"})
       }}
     />
   );

@@ -19,11 +19,7 @@ import { uiColorState } from "../../state/colorsState";
 import {UpperVisAction} from "../../utils/interfaces"
 
 interface Props {
-  // setNewBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  // setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
-  // setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  // setSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  // setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
+  
   setTabType: React.Dispatch<
     React.SetStateAction<"folder" | "note" | "rss">
   >;
@@ -89,7 +85,7 @@ function UpperRightMenu({
           className={`h-6 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
             // setBackgroundSettingsVis((b) => !b);
-            upperVisDispatch({type: "BACKGROUNG_SETTINGS_TOGGLE"})
+            upperVisDispatch({type: "BACKGROUND_SETTINGS_TOGGLE"})
           }}
         />
         <ColorSVG

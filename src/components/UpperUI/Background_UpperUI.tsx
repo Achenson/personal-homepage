@@ -51,7 +51,7 @@ function Background_UpperUI({
                 // if (backgroundSettingsVis) {
                 //   setBackgroundSettingsVis(false);
                 // }
-                upperVisDispatch({type: "BACKGROUNG_SETTINGS_TOGGLE"})
+                upperVisDispatch({type: "BACKGROUND_SETTINGS_TOGGLE"})
 
               }}
             />

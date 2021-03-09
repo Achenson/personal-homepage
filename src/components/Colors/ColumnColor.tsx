@@ -1,6 +1,8 @@
 import React from "react";
 import { columnsColorsState } from "../../state/colorsState";
 
+import {UpperVisAction} from "../../utils/interfaces"
+
 interface Props {
   colNumber: number;
   // setNotesSelected: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,20 +26,22 @@ interface Props {
       | "unselected"
     >
   >;
-  setColorsToChooseVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // setColorsToChooseVis: React.Dispatch<React.SetStateAction<boolean>>;
   columnSelected: number | null;
   setColumnSelected: React.Dispatch<React.SetStateAction<number | null>>;
+  upperVisDispatch: React.Dispatch<UpperVisAction>
 }
 
-function SingleColumnsColor({
+function ColumnColor({
   colNumber,
   // setNotesSelected,
   // setTabsSelected,
   defaultColorsFor,
   setDefaultColorsFor,
-  setColorsToChooseVis,
+  // setColorsToChooseVis,
   columnSelected,
   setColumnSelected,
+  upperVisDispatch
 }: Props): JSX.Element {
   const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
@@ -61,10 +65,12 @@ function SingleColumnsColor({
         setDefaultColorsFor(`column_${colNumber}` as any);
 
         if (defaultColorsFor === `column_${colNumber}`) {
-          setColorsToChooseVis((b) => !b);
+          // setColorsToChooseVis((b) => !b);
+          upperVisDispatch({type: "COLORS_COLUMN_TOGGLE"})
           setColumnSelected(null);
         } else {
-          setColorsToChooseVis(true);
+          // setColorsToChooseVis(true);
+          upperVisDispatch({type: "COLORS_COLUMN_OPEN"})
           setColumnSelected(colNumber);
 
         }
@@ -83,4 +89,4 @@ function SingleColumnsColor({
   );
 }
 
-export default SingleColumnsColor;
+export default ColumnColor;
