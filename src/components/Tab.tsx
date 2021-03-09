@@ -114,8 +114,6 @@ Props): JSX.Element {
         }
         // !!! crucial: tabEditOpenedData won't affect this instance of a component
         // setTabEditOpenedData(tabID);
-
-
         return {
           ...state,
           editTabVis: false,
@@ -139,7 +137,6 @@ Props): JSX.Element {
         if (!state.editTabVis) {
           // setTabEditOpenedData(tabID);
           setTabOpenedData(tabID);
-
         }
 
         // setTabColorOpenedData(tabID);
@@ -177,8 +174,8 @@ Props): JSX.Element {
           tabContentVis: false,
           editBookmarkVis: false,
         };
-        // similar to tab_content_close, but tabContentVis is not touched (for useEffect)
-        case "TAB_EDITABLES_CLOSE":
+      // similar to tab_content_close, but tabContentVis is not touched (for useEffect)
+      case "TAB_EDITABLES_CLOSE":
         return {
           ...state,
           colorsVis: false,
@@ -188,6 +185,11 @@ Props): JSX.Element {
           editBookmarkVis: false,
         };
       case "NEW_BOOKMARK_TOOGLE":
+        if (!state.newBookmarkVis) {
+          // setTabEditOpenedData(tabID);
+          setTabOpenedData(tabID);
+        }
+
         return {
           ...state,
           colorsVis: false,
@@ -195,14 +197,19 @@ Props): JSX.Element {
           editBookmarkVis: false,
           newBookmarkVis: !state.newBookmarkVis,
         };
-        case "EDIT_BOOKMARK_TOOGLE":
-          return {
-            ...state,
-            colorsVis: false,
-            editTabVis: false,
-            newBookmarkVis: false,
-            editBookmarkVis: !state.editBookmarkVis,
-          };
+      case "EDIT_BOOKMARK_TOOGLE":
+        if (!state.editBookmarkVis) {
+          // setTabEditOpenedData(tabID);
+          setTabOpenedData(tabID);
+        }
+
+        return {
+          ...state,
+          colorsVis: false,
+          editTabVis: false,
+          newBookmarkVis: false,
+          editBookmarkVis: !state.editBookmarkVis,
+        };
       default:
         return state;
     }
@@ -228,7 +235,6 @@ Props): JSX.Element {
   //     visDispatch({ type: "COLORS_CLOSE" });
   //   }
   // }, [tabColorOpenedData, tabID]);
-
 
   // useEffect(() => {
   //   if (tabEditOpenedData !== tabID) {
@@ -404,7 +410,6 @@ Props): JSX.Element {
         <div
           className="pl-1 w-full cursor-pointer"
           onClick={() => {
-
             // setTabColorOpenedData(null);
             // setTabEditOpenedData(null);
 
