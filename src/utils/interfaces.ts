@@ -40,7 +40,8 @@ export interface UpperVisAction {
     | "COLORS_SETTINGS_TOGGLE"
     | "COLORS_BACKGROUND_TOGGLE"
     | "COLORS_COLUMN_TOGGLE"
-    | "COLORS_COLUMN_OPEN";
+    | "COLORS_COLUMN_OPEN"
+    | "CLOSE_ALL";
   payload?: string | number;
 }
 

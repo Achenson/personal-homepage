@@ -22,15 +22,6 @@ function UpperLeftMenu({upperVisDispatch, upperVisState}: Props): JSX.Element {
   const [columnSelected, setColumnSelected] = useState<number | null>(null);
 
 
-  // const [colorsToChooseVis, setColorsToChooseVis] = useState<boolean>(false);
-  // const [
-  //   backgroundColorsToChooseVis,
-  //   setBackgroundColorsToChooseVis,
-  // ] = useState<boolean>(false);
-
-
-
-
   const [defaultColorsFor, setDefaultColorsFor] = useState<
     "column_1" | "column_2" | "column_3" | "column_4" | "unselected"
   >("unselected");
@@ -97,7 +88,9 @@ function UpperLeftMenu({upperVisDispatch, upperVisState}: Props): JSX.Element {
           upperVisDispatch={upperVisDispatch}
         />
       )}
-      <EyeOff />
+      <EyeOff
+        upperVisDispatch={upperVisDispatch}
+      />
 
       {/* <div className="absolute left-0" style={{ bottom: "104px" }}> */}
       <div className="absolute left-0 top-3">

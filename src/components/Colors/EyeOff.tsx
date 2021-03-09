@@ -6,12 +6,14 @@ import { closeAllTabsState } from "../../state/defaultSettings";
 
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
 
+import {UpperVisAction} from "../../utils/interfaces"
+
 interface Props {
-  
+  upperVisDispatch: React.Dispatch<UpperVisAction>
 }
 
 function EyeOff({
- 
+ upperVisDispatch
 }: Props): JSX.Element {
   const [
     backgroundColorData,
@@ -51,6 +53,7 @@ function EyeOff({
       onClick={() => {
         // setSelected((b) => !b);
         // setBackgroundColorsToChooseVis((b) => !b);
+        upperVisDispatch({type: "CLOSE_ALL"})
         setCloseAllTabsData(true);
         
       }}

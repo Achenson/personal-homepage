@@ -91,6 +91,12 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
           ...upperVisStateAllFalse,
           colorsColumnVis: true,
         }; 
+        case "CLOSE_ALL":
+          return {
+            ...upperVisStateAllFalse,
+          }; 
+
+
     default:
       return {...upperVisStateAllFalse}
     

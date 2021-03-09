@@ -10,8 +10,6 @@ import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
-
-
 import TagsList_UpperUI from "./TagsList_UpperUI";
 
 import {
@@ -23,22 +21,28 @@ import {
 import { produce } from "immer";
 
 import { tabsDataState } from "../../state/tabsAndBookmarks";
-import { bookmarksDataState, bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
+import {
+  bookmarksDataState,
+  bookmarksAllTagsState,
+} from "../../state/tabsAndBookmarks";
 
-import {UpperVisAction} from "../../utils/interfaces"
+import { UpperVisAction } from "../../utils/interfaces";
 
 interface Props {
   // setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
   tabType: "folder" | "note" | "rss";
 }
 
-function NewTab_UpperUI({  tabType, upperVisDispatch }: Props): JSX.Element {
+function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
-  const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
+  const [
+    bookmarksAllTagsData,
+    setBookmarksAllTagsData,
+  ] = bookmarksAllTagsState.use();
 
   const [uiColorData, setUiColorData] = uiColorState.use();
 
@@ -108,7 +112,13 @@ function NewTab_UpperUI({  tabType, upperVisDispatch }: Props): JSX.Element {
     }
 
     setIsThisTheFirstRender(false);
-  }, [tabsInputStr, initialTabs, setVisibleTabs, setTabsListVis, isThisTheFirstRender]);
+  }, [
+    tabsInputStr,
+    initialTabs,
+    setVisibleTabs,
+    setTabsListVis,
+    isThisTheFirstRender,
+  ]);
 
   function makeInitialTabs(): string[] {
     let tabs: string[] = [];
@@ -403,17 +413,18 @@ function NewTab_UpperUI({  tabType, upperVisDispatch }: Props): JSX.Element {
                 }
 
                 if (tabType === "folder") {
-
-                  let newFolderTab = createFolderTab(tabTitleInput, tabColumnInput, 0)
+                  let newFolderTab = createFolderTab(
+                    tabTitleInput,
+                    tabColumnInput,
+                    0
+                  );
 
                   let newBookmarksAllTagsData = [...bookmarksAllTagsData];
-                  newBookmarksAllTagsData.push(newFolderTab.id)
-                  setBookmarksAllTagsData([...newBookmarksAllTagsData])
+                  newBookmarksAllTagsData.push(newFolderTab.id);
+                  setBookmarksAllTagsData([...newBookmarksAllTagsData]);
 
                   setTabsData((previous) =>
                     produce(previous, (updated) => {
-
-
                       updated.push(
                         // ...createFolderTab(tabTitleInput, tabColumnInput, 0),
                         newFolderTab
@@ -434,16 +445,7 @@ function NewTab_UpperUI({  tabType, upperVisDispatch }: Props): JSX.Element {
                       });
                     })
                   );
-
-                    
-                 
-                  
                 }
-
-                
-
-
-
 
                 if (tabType === "rss") {
                   setTabsData((previous) =>
@@ -461,7 +463,7 @@ function NewTab_UpperUI({  tabType, upperVisDispatch }: Props): JSX.Element {
                 }
 
                 // setNewTabVis((b) => !b);
-                upperVisDispatch({type: "NEW_TAB_TOGGLE"})
+                upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
 
                 function tabExistenceCheck() {
                   let tabsArr: string[] = [];
@@ -514,7 +516,7 @@ function NewTab_UpperUI({  tabType, upperVisDispatch }: Props): JSX.Element {
               onClick={(e) => {
                 e.preventDefault();
                 // setNewTabVis((b) => !b);
-                upperVisDispatch({type: "NEW_TAB_TOGGLE"})
+                upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               }}
             >
               <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
