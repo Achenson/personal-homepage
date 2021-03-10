@@ -3,7 +3,7 @@ import React from "react";
 import { ReactComponent as AddFolderSVG } from "../../svgs/addFolder.svg";
 import { ReactComponent as FolderSVG } from "../../svgs/folder.svg";
 
-import { ReactComponent as TabAltSVG } from "../../svgs/bookmarkAlt.svg";
+import { ReactComponent as BookmarkSVG } from "../../svgs/bookmarkAlt.svg";
 // import { ReactComponent as AddNote } from "../../svgs/addNote.svg";
 import { ReactComponent as AddNote } from "../../svgs/text-document-add.svg";
 import { ReactComponent as Note } from "../../svgs/note_UXwing.svg";
@@ -42,11 +42,11 @@ function UpperRightMenu({
     <div className="h-8 w-56 flex justify-between items-center bg-white bg-opacity-80 rounded-md">
       <div className="flex w-28 justify-around">
         {/* <AddLinkSVG */}
-        <TabAltSVG
+        <BookmarkSVG
           className={`h-7 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
             // setNewBookmarkVis((b) => !b);
-            upperVisDispatch({type: "NEW_TAB_TOGGLE"})
+            upperVisDispatch({type: "NEW_BOOKMARK_TOGGLE"})
           }}
         />
 

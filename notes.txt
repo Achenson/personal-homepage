@@ -59,15 +59,9 @@ DONE 3. bookmark move icon - hide when moving? DONE
  DONE 4. icon colors on darkBackground DONE but 1 purple & 1 pink not perfect? DONE 
 DONE 5. ColorsToChoose -> better code DONE
 DONE 5. EditLink & NewLink -> unify DONE
-
-
 DONE 8. "all" bookmark should be non-deletable, non-editable? DONE
-
 DONE 12. components folders? DONE
 DONE 16. newLink & newLink_UpperUI -> tags not aligned DONE
-
-
-
 DONE 23. bg-color vs text color of folders DONE
 DONE 24. bookmark: almost same function for icons & text color, unify DONE
 DONE 36. diff color for diff columns? DONE
@@ -110,22 +104,22 @@ XXX 35. default color settings should be working only if new folder/note is bein
 DONE 37. add background color/header column color  DONE
 XXX 38. Folders: not wide enough relative to columns?XXX 
 DONE 40. Tab darkBackground hover DONE
+XXX 41. better cancel btn in Colors_UpperUIXXX
+XXX 42. changing notes color? XXX
+XXX 43. upperUI changing colors -> lower, do not dim the background XXX
+XXX 44. upperUI changing colors -> white, semiTransparent, transparent XXX
+DONE 45. bug: nothing shortest width: no other columns? DONE
+DONE 47. clean tailwind.js -> color naming DONE [eg. 300, 303, 330, 333 for variants, so it goes well with regex]
+XXX 48. white color select border to change? XXX
+DONE 49. UpperRightMenu icons change to icon without pluses DONE
+DONE 50. "all" is not being updated with new links DONE
 
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-41. better cancel btn in Colors_UpperUI
-42. changing notes color?
-43. upperUI changing colors -> lower, do not dim the background
-44. upperUI changing colors -> white, semiTransparent, transparent
-45. bug: nothing shortest width: no other columns?
-46. "Test" wrong naming
-47. clean tailwind.js -> color naming
-48. white color select border to change?
-49. UpperRightMenu icons change to icon without pluses
-50. "all" is not being updated with new links
+
 51. Double nested string problem in classes - uiColorState on Hover in RSS?
 52. make SingleRssNews same height always
 53. RSS -> proxy server or fetching from backend
@@ -283,6 +277,10 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 191. upperVisState should be joined with tabVisState
 192. "reset all tab colors to default" of make it realy change all colors in the app
 193. less Colors for columns if less columns are displayed
+194. Not - text overflow if a string contains many letters with no space?
+195. upperUi colors settings -> change positioning of colors grid on small screen sizes
+196. restrict naming size for tabs, boomarks etc.
+197. select border color for Tab (whitish?)
 
 App structure:
 Main
