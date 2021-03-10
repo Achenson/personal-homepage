@@ -96,32 +96,26 @@ DONE 21. newTab -> better input for column DONE
 DONE 22. bookmark/tab title, tags -> spaces should be permitted too DONE
 DONE 25. Tab better css (more like button) DONE
 XX 26. black icont -> not contrastive enough on hover? XX
-
+DONE 27. auto close bookmark menus when clicking sth else 
+/ only allow colors and edit at the same time when
+/ close when opening a Tab
+/ closeAllTabs should also close edit colors & tab edits DONE
 XX 28. diff between iGoogle folders and mineXX
 DONE 30. colors for UI dep on folder color DONE
+??? 31. margin for new item -> always on? ???
+DONE 32. colors placement in default color settings DONE
+DONe 33. change light gray to white on some background in Folders Done ?
+XXX 34. change folders/notes shadows on darker backgrounds XXX
+XXX 35. default color settings should be working only if new folder/note is being added? XXX
+DONE 37. add background color/header column color  DONE
+XXX 38. Folders: not wide enough relative to columns?XXX 
+DONE 40. Tab darkBackground hover DONE
 
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-
-
-
-
-27. auto close bookmark menus when clicking sth else 
-/ only allow colors and edit at the same time when
-/ close when opening a Tab
-/ closeAllTabs should also close edit colors & tab edits
-
-31. margin for new item -> always on?
-32. colors placement in default color settings
-33. change light gray to white on some background in Folders
-XXX 34. change folders/notes shadows on darker backgrounds XXX
-35. default color settings should be working only if new folder/note is being added?
-37. add background color/header column color 
-38. Folders: not wide enough relative to columns?
-40. Bookmark darkBackground hover
 41. better cancel btn in Colors_UpperUI
 42. changing notes color?
 43. upperUI changing colors -> lower, do not dim the background
@@ -287,7 +281,8 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 189. convert all bookmark/tab indexes to find() / filter() methods !!
 190. delay problem for closing Tab content by useEffect
 191. upperVisState should be joined with tabVisState
-
+192. "reset all tab colors to default" of make it realy change all colors in the app
+193. less Colors for columns if less columns are displayed
 
 App structure:
 Main

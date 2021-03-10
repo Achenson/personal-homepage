@@ -304,23 +304,27 @@ Props): JSX.Element {
     }
   }, [isDragging, finalTabColor, setTabBeingDraggedColor_Data]);
 
+  const colorsForLightText: string[] = [
+    // "orange-500",
+    // "teal-500",
+    "blueGray-500",
+    "gray-500",
+    "black",
+    "green-505",
+    // "warmGray-404",
+    "blue-500",
+
+    "red-500",
+    "violet-500",
+    "purple-500",
+  ];
+  const colorsForDarkText: string[] = ["yellow-600"];
+
+  // "default" behaviour
+  const regexForColors = /[6789]/;
+
   function textOrIconColor(finalTabColor: string, textOrIcon: "text" | "icon") {
     // exceptions
-    let colorsForLightText: string[] = [
-      // "orange-500",
-      // "teal-500",
-      "blueGray-500",
-      "gray-500",
-      "black",
-      "green-505",
-      // "warmGray-404",
-      "blue-500",
-
-      "red-500",
-      "violet-500",
-      "purple-500",
-    ];
-    let colorsForDarkText: string[] = ["yellow-600"];
 
     if (colorsForLightText.indexOf(finalTabColor) > -1) {
       // return textOrIcon === "text" ? "text-gray-200" : "text-gray-300";
@@ -332,9 +336,6 @@ Props): JSX.Element {
       return textOrIcon === "text" ? "text-gray-900" : "text-gray-700";
     }
 
-    // "default" behaviour
-    let regexForColors = /[6789]/;
-
     if (regexForColors.test(finalTabColor)) {
       // return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
       return textOrIcon === "text" ? "text-gray-100" : "text-gray-200";
@@ -344,34 +345,16 @@ Props): JSX.Element {
   }
 
   function hoverText(finalTabColor: string) {
-    let colorsForLightHover: string[] = [
-      "bg-black",
-      "bg-gray-700",
-      "bg-green-800",
-      "bg-teal-800",
-      "bg-blue-800",
-      "bg-indigo-800",
-      "bg-purple-800",
-      "bg-indigo-700",
-      "bg-indigo-600",
-      "bg-blue-700",
-      "bg-teal-700",
-      "bg-green-700",
-    ];
-
-    let colorsForLightHoverAlt: string[] = [
-      "bg-pink-800",
-      "bg-purple-700",
-      "bg-orange-800",
-      "bg-red-800",
-    ];
-
-    if (colorsForLightHoverAlt.indexOf(finalTabColor) > -1) {
-      return "text-yellow-400";
+    if (colorsForLightText.indexOf(finalTabColor) > -1) {
+      return "text-gray-100";
     }
 
-    if (colorsForLightHover.indexOf(finalTabColor) > -1) {
-      return "text-orange-500";
+    if (colorsForDarkText.indexOf(finalTabColor) > -1) {
+      return "text-black";
+    }
+
+    if (regexForColors.test(finalTabColor)) {
+      return "text-gray-100";
     }
 
     return "text-black";
