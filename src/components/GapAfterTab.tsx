@@ -7,9 +7,14 @@ import { ItemTypes } from "../utils/itemsDnd";
 
 import { tabsDataState } from "../state/tabsAndBookmarks";
 
-import {
-  tabBeingDraggedColor_State,
-} from "../state/colorsState";
+import { tabBeingDraggedColor_State } from "../state/colorsState";
+
+interface Item {
+  type: string;
+  tabID: string | number;
+  colNumber: number;
+  tabColor: string;
+}
 
 interface Props {
   colNumber: number;
@@ -17,13 +22,9 @@ interface Props {
   picBackground: boolean;
 }
 
-function GapAfterTab({
-  colNumber,
-  tabID,
-  picBackground,
-}: Props): JSX.Element {
+function GapAfterTab({ colNumber, tabID, picBackground }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
-  
+
   const [
     tabBeingDraggedColor_Data,
     setTabBeingDraggedColor_Data,
@@ -32,19 +33,14 @@ function GapAfterTab({
   const [{ isOver }, drop] = useDrop({
     //    required property
     accept: ItemTypes.BOOKMARK,
-    drop: (item, monitor) =>
-    // @ts-ignore: Unreachable code error
+    drop: (item: Item, monitor) =>
       dragTab(item.tabID, item.colNumber, item.tabColor),
     // drop: (item, monitor) => console.log(item.tabID),
 
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
-
-   
   });
-
-
 
   function dragTab(
     itemID: number | string,
@@ -128,8 +124,6 @@ function GapAfterTab({
     // console.log(draggedTabColor);
 
     return `bg-${tabBeingDraggedColor_Data.tabColor} opacity-60`;
-    
-
   }
 
   return (

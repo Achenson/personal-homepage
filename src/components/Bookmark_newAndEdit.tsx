@@ -162,11 +162,11 @@ function Bookmark_newAndEdit({
   return (
     <>
       {bookmarkComponentType === "new_upperUI" ? (
-        // @ts-ignore: Unreachable code error
-        <Bookmark_upper_JSX {...bookmarkJSX_props} upperVisDispatch={upperVisDispatch}/>
+        
+        <Bookmark_upper_JSX {...bookmarkJSX_props} upperVisDispatch={upperVisDispatch as React.Dispatch<UpperVisAction>}/>
       ) : (
-        // @ts-ignore: Unreachable code error
-        <Bookmark_lower_JSX {...bookmarkJSX_props} currentBookmark={currentBookmark} visDispatch={visDispatch} />
+      
+        <Bookmark_lower_JSX {...bookmarkJSX_props} currentBookmark={currentBookmark} visDispatch={visDispatch as React.Dispatch<TabVisAction>} />
       )}
     </>
   );
