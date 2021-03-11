@@ -1,7 +1,7 @@
 import React from "react";
 
-import DefaultSingleColor from "./SingleColor_Default";
-import DefaultSingleColor_Img from "./SingleColor_Default_Img";
+import SingleColor_Default from "./SingleColor_Default";
+import SingleColor_Default_Img from "./SingleColor_Default_Img";
 
 import { tabColors } from "../../utils/tabColors";
 import { columnColors, imageColumnColors } from "../../utils/columnColors";
@@ -23,7 +23,7 @@ interface Props {
     | "unselected";
 }
 
-function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
+function ColorsToChoose_Default({ defaultColorsFor }: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function mapTabColors() {
@@ -32,7 +32,7 @@ function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
         <div className="flex" key={i}>
           {row.map((el, j) => {
             return (
-              <DefaultSingleColor
+              <SingleColor_Default
                 color={el}
                 defaultColorsFor={defaultColorsFor}
                 key={j}
@@ -51,7 +51,7 @@ function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
           <div className="flex" key={i}>
             {row.map((el, j) => {
               return (
-                <DefaultSingleColor
+                <SingleColor_Default
                   color={el}
                   defaultColorsFor={defaultColorsFor}
                   key={j}
@@ -70,7 +70,7 @@ function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
         <div className="flex" key={i}>
           {row.map((el, j) => {
             return (
-              <DefaultSingleColor_Img
+              <SingleColor_Default_Img
                 color={el}
                 defaultColorsFor={defaultColorsFor}
                 key={j}
@@ -97,4 +97,4 @@ function DefaultColorsToChoose({ defaultColorsFor }: Props): JSX.Element {
   );
 }
 
-export default DefaultColorsToChoose;
+export default ColorsToChoose_Default;

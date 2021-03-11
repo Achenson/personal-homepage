@@ -22,7 +22,7 @@ interface Props {
     | "unselected";
 }
 
-function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
+function SingleColor_Default({ color, defaultColorsFor }: Props): JSX.Element {
   // const [tabsData, setTabsData] = tabsDataState.use();
 
   // let tabIndex: number;
@@ -223,4 +223,4 @@ function DefaultSingleColor({ color, defaultColorsFor }: Props): JSX.Element {
   );
 }
 
-export default DefaultSingleColor;
+export default SingleColor_Default;

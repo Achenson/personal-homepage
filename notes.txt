@@ -48,6 +48,7 @@ module.exports = {
 !!!!!
 
 13. purgecss when finished with the project?
+53. RSS -> proxy server or fetching from backend
 
 
 NOTES: Tab logic setTabEditOpenedData(tabID) & setTabColorOpenedData(tabID) crucial;
@@ -113,19 +114,15 @@ DONE 47. clean tailwind.js -> color naming DONE [eg. 300, 303, 330, 333 for vari
 XXX 48. white color select border to change? XXX
 DONE 49. UpperRightMenu icons change to icon without pluses DONE
 DONE 50. "all" is not being updated with new links DONE
+X 51. Double nested string problem in classes - XXX uiColorState on Hover in RSS?XXX  Setting_Upper_UI X
+XXX 52. make SingleRssNews same height alwaysXXX
+DONE 54. notes default colors: initial colors not selected DONE
 
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-
-51. Double nested string problem in classes - uiColorState on Hover in RSS?
-52. make SingleRssNews same height always
-53. RSS -> proxy server or fetching from backend
-54. notes default colors: initial colors not selected
-55. change svg to version whitout plus sign
-56. convert
 57. get rid of its ignore lines
 58. change all bookmark index logic to bookmark ID
 59. EditBookmarkTitle errors

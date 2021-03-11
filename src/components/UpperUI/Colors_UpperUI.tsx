@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import DefaultColorsToChoose from "../Colors/ColorsToChoose_Default";
+import ColorsToChoose_Default from "../Colors/ColorsToChoose_Default";
 
 import {
   noteColorState,
@@ -202,7 +202,7 @@ function Colors_UpperUI({ upperVisDispatch }: Props): JSX.Element {
         >
           {colorsToChooseVis ? (
             <div className="absolute" style={{left: "67px"}}>
-              <DefaultColorsToChoose defaultColorsFor={defaultColorsFor} />
+              <ColorsToChoose_Default defaultColorsFor={defaultColorsFor} />
             </div>
           ) : null}
         </div>
