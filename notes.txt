@@ -124,7 +124,7 @@ DONE 57. get rid of ts ignore lines DONE
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-58. change all bookmark index logic to bookmark ID
+58. change all bookmark index/ tab index logic to bookmark ID
 59. EditBookmarkTitle errors
 60. EditBookmarkTitle: RSS Title & RRS Link not aligned
 61. styling numerical inputs

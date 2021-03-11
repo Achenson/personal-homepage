@@ -19,7 +19,7 @@ import {
 
 import { SingleBookmarkData } from "../utils/interfaces";
 
-import {TabVisAction} from "../utils/interfaces"
+import { TabVisAction } from "../utils/interfaces";
 
 interface Props {
   titleInput: string;
@@ -34,7 +34,7 @@ interface Props {
   setTagsListVis: React.Dispatch<React.SetStateAction<boolean>>;
   notesTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
-  bookmarkIndex: number;
+  bookmarkId: string | number;
   // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   currentBookmark: SingleBookmarkData | undefined;
   visDispatch: React.Dispatch<TabVisAction>;
@@ -53,26 +53,26 @@ function Bookmark_lower_JSX({
   setTagsListVis,
   notesTitlesArr,
   bookmarkComponentType,
-  bookmarkIndex,
+  bookmarkId,
   currentBookmark,
-  visDispatch
+  visDispatch,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-  const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
+  const [
+    bookmarksAllTagsData,
+    setBookmarksAllTagsData,
+  ] = bookmarksAllTagsState.use();
 
   const [tabsData, setTabsData] = tabsDataState.use();
 
-  const [initialTagsInputArr, setInitialTagsInputArr] = useState( 
-    
-    () =>
+  const [initialTagsInputArr, setInitialTagsInputArr] = useState(() =>
     // tagsInputStr.split(", ")
     generateTagIds()
   );
 
   function generateTagIds() {
-
     if (bookmarkComponentType !== "edit") {
-      return []
+      return [];
     }
 
     let arrOut: (string | number)[] = [];
@@ -104,7 +104,7 @@ function Bookmark_lower_JSX({
 
   // ^  and $ -> beginning and end of the text!
   // let regexForTags = /^\w+(,\s\w+)*$/;
-  let regexForTags = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/
+  let regexForTags = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
   // let regexForTitle = /^\w+$/;
   let regexForTitle = /^\w(\s?\w+)*$/;
 
@@ -203,7 +203,9 @@ function Bookmark_lower_JSX({
         ) : null}
 
         {titleUniquenessErrorVis ? (
-          <p className={`text-red-600`}>Bookmark with that title already exists</p>
+          <p className={`text-red-600`}>
+            Bookmark with that title already exists
+          </p>
         ) : null}
 
         {tagErrorVis ? (
@@ -263,7 +265,10 @@ function Bookmark_lower_JSX({
                   }
                 }
 
-                if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "" ) {
+                if (
+                  !regexForTags.test(tagsInputArr.join(", ")) &&
+                  tagsInputStr !== ""
+                ) {
                   setTagErrorVis(true);
                   return;
                 }
@@ -307,22 +312,25 @@ function Bookmark_lower_JSX({
                       })
                     );
                   } else {
-
-                    if(tagsInputStr !== "") {
-                      tagsInputArr_ToIds.push(filteredTab.id)
-
+                    if (tagsInputStr !== "") {
+                      tagsInputArr_ToIds.push(filteredTab.id);
                     }
-
                   }
                 });
 
                 if (bookmarkComponentType === "edit") {
                   setBookmarksData((previous) =>
                     produce(previous, (updated) => {
-                      updated[bookmarkIndex].title = titleInput;
-                      updated[bookmarkIndex].URL = urlInput;
-                      // updated[linkIndex].tags = [...tagsInputArr];
-                      updated[bookmarkIndex].tags = [...tagsInputArr_ToIds];
+                      let bookmarkToUpdate = updated.find(
+                        (obj) => obj.id === bookmarkId
+                      );
+                        //"if" to get rid of ts error
+                      if (bookmarkToUpdate) {
+                        bookmarkToUpdate.title = titleInput;
+                        bookmarkToUpdate.URL = urlInput;
+                        bookmarkToUpdate.tags = [...tagsInputArr_ToIds];
+                      }
+
                     })
                   );
 
@@ -333,7 +341,8 @@ function Bookmark_lower_JSX({
                   initialTagsInputArr.forEach((el) => {
                     if (tagsInputArr_ToIds.indexOf(el) === -1) {
                       let filteredBookmarks = bookmarksData.filter(
-                        (obj) => obj.id !== (currentBookmark as SingleBookmarkData).id
+                        (obj) =>
+                          obj.id !== (currentBookmark as SingleBookmarkData).id
                       );
 
                       let isElPresent: boolean = false;
@@ -344,7 +353,6 @@ function Bookmark_lower_JSX({
                           return;
                         }
                       });
-
 
                       if (!isElPresent && el !== "ALL_TAGS") {
                         tagsIdsToDelete.push(el);
@@ -361,9 +369,6 @@ function Bookmark_lower_JSX({
                   });
 
                   setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
-
-
-
                 } else {
                   setBookmarksData((previous) =>
                     produce(previous, (updated) => {
@@ -375,14 +380,13 @@ function Bookmark_lower_JSX({
                 }
 
                 // setBookmarkVis((b) => !b);
-                if(bookmarkComponentType === "edit") {
-                  visDispatch({type: "EDIT_BOOKMARK_TOOGLE"})
+                if (bookmarkComponentType === "edit") {
+                  visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
                 }
 
-                if(bookmarkComponentType === "new_lowerUI") {
-                  visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
+                if (bookmarkComponentType === "new_lowerUI") {
+                  visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
                 }
-
 
                 function tagUniquenessCheck() {
                   let isUnique: boolean = true;
@@ -420,12 +424,12 @@ function Bookmark_lower_JSX({
                 e.preventDefault();
                 // setBookmarkVis((b) => !b);
                 // visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
-                if(bookmarkComponentType === "edit") {
-                  visDispatch({type: "EDIT_BOOKMARK_TOOGLE"})
+                if (bookmarkComponentType === "edit") {
+                  visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
                 }
 
-                if(bookmarkComponentType === "new_lowerUI") {
-                  visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
+                if (bookmarkComponentType === "new_lowerUI") {
+                  visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
                 }
               }}
             >

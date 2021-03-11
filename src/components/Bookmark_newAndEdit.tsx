@@ -89,18 +89,7 @@ function Bookmark_newAndEdit({
     }
   });
 
-  // for editingLink only !!!
-  //  shouldn't be 0, but got error otherwise
-  let bookmarkIndex: number = 0;
-
-  if (bookmarkComponentType === "edit") {
-    bookmarksData.forEach((obj, i) => {
-      if (obj.title === (currentBookmark as SingleBookmarkData).title) {
-        bookmarkIndex = i;
-      }
-    });
-  }
-
+  
   useEffect(() => {
     let newVisibleTags: string[] = [];
 
@@ -152,7 +141,7 @@ function Bookmark_newAndEdit({
     setTagsListVis,
     notesTitlesArr,
     bookmarkComponentType,
-    bookmarkIndex,
+
     // setBookmarkVis,
     
     // !!! for lower JSX only, change?
@@ -166,7 +155,7 @@ function Bookmark_newAndEdit({
         <Bookmark_upper_JSX {...bookmarkJSX_props} upperVisDispatch={upperVisDispatch as React.Dispatch<UpperVisAction>}/>
       ) : (
       
-        <Bookmark_lower_JSX {...bookmarkJSX_props} currentBookmark={currentBookmark} visDispatch={visDispatch as React.Dispatch<TabVisAction>} />
+        <Bookmark_lower_JSX {...bookmarkJSX_props} currentBookmark={currentBookmark} bookmarkId={bookmarkId as string | number} visDispatch={visDispatch as React.Dispatch<TabVisAction>} />
       )}
     </>
   );

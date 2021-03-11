@@ -29,23 +29,7 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
   const [tabsData, setTabsData] = tabsDataState.use();
 
 
-  // function dragTab(itemID: number | string) {
-  //   setTabsData((previous) =>
-  //     produce(previous, (updated) => {
-  //       let tabIndex: number = 0;
-
-  //       tabsData.forEach((obj, i) => {
-  //         if (obj.id === itemID) {
-  //           tabIndex = i;
-  //         }
-  //       });
-  //       // let currentTab = tabsData.filter( obj => obj.id === itemID )
-
-  //       updated[tabIndex].column = colNumber;
-  //       //  updated[currentTab]
-  //     })
-  //   );
-  // }
+  
 
   function calcColumnColor(colNumber: number, picBackground: boolean, oneColorForAllColumns: boolean) {
     if (!picBackground) {

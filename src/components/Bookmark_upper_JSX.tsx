@@ -30,7 +30,6 @@ interface Props {
   setTagsListVis: React.Dispatch<React.SetStateAction<boolean>>;
   notesTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
-  bookmarkIndex: number;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   // currentLink: SingleLinkData | undefined
@@ -50,7 +49,6 @@ function Bookmark_upper_JSX({
   notesTitlesArr,
   upperVisDispatch,
   bookmarkComponentType,
-  bookmarkIndex,
   // setBookmarkVis,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
