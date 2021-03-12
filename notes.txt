@@ -120,13 +120,13 @@ DONE 54. notes default colors: initial colors not selected DONE
 DONE 57. get rid of ts ignore lines DONE
 DONE 58. change all bookmark index/ tab index logic to bookmark ID DONE
 DONE 59. EditTabTitle errors naming DONE
+DONE 60. EditTabTitle: RSS & note title input right margin get rid off DONE
 
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-60. EditTabTitle: RSS Title & RRS Link not aligned
 61. styling numerical inputs
 62. input htmlFor
 63. rss edit -> reset to default settings
@@ -280,6 +280,8 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 197. select border color for Tab (whitish?)
 198. errors reducers?
 199. consitent errors! external error file
+200. input paddings
+201. rss title & link not exactly aligned
 
 
 

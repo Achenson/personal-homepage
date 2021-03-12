@@ -200,11 +200,11 @@ Props): JSX.Element {
   // let regexForTabs = /^\w+(,\s\w+)*$/;
   let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
   return (
-    <div className="absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-2">
+    <div className={`absolute z-40 bg-gray-100 pb-3 border w-full pl-2 pr-2`}>
       <div className="flex items-center mt-2 justify-between">
         <p
           className={
-            tabType === "folder" ? "mr-14" : tabType === "rss" ? "w-24" : "w-10"
+            tabType === "folder" ? "mr-14" : tabType === "rss" ? "mr-12" : "mr-2"
           }
         >
           Title
@@ -213,14 +213,14 @@ Props): JSX.Element {
           type="text"
           // min-w-0 !!
           // className="border w-full max-w-6xl min-w-0"
-          className="border w-full min-w-0"
+          className="border w-full max-w-6xl min-w-0"
           value={tabTitleInput}
           onChange={(e) => {
             setTabTitleInput(e.target.value);
             setWasAnythingClicked(true);
           }}
         />
-        <ChevronDownSVG className="h-6 invisible" />
+      {tabType === "folder" ? <ChevronDownSVG className="h-6 invisible" /> : null }  
       </div>
       {tabType === "folder" && (
         <div className="flex items-center mt-2 justify-between">
@@ -333,7 +333,7 @@ Props): JSX.Element {
       {tabType === "rss" ? (
         <div>
           <div className="flex items-center mb-2 mt-2 justify-between">
-            <p className="w-24 whitespace-nowrap">RSS bookmark</p>
+            <p className="w-24 whitespace-nowrap mr-px">RSS link</p>
             <input
               type="text"
               // min-w-0 !!
