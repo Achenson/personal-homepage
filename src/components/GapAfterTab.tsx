@@ -33,8 +33,7 @@ function GapAfterTab({ colNumber, tabID, picBackground }: Props): JSX.Element {
   const [{ isOver }, drop] = useDrop({
     //    required property
     accept: ItemTypes.BOOKMARK,
-    drop: (item: Item, monitor) =>
-      dragTab(item.tabID, item.colNumber, item.tabColor),
+    drop: (item: Item, monitor) => dragTab(item.tabID, item.colNumber),
     // drop: (item, monitor) => console.log(item.tabID),
 
     collect: (monitor) => ({
@@ -42,47 +41,37 @@ function GapAfterTab({ colNumber, tabID, picBackground }: Props): JSX.Element {
     }),
   });
 
-  function dragTab(
-    itemID: number | string,
-    itemColNumber: number,
-    tabColor: string
-  ) {
+  function dragTab(itemID: number | string, itemColNumber: number) {
     setTabsData((previous) =>
       produce(previous, (updated) => {
-        let tabIndex: number = 0;
+        let itemToUpdate = updated.find((obj) => obj.id === itemID);
 
-        tabsData.forEach((obj, i) => {
-          if (obj.id === itemID) {
-            tabIndex = i;
-          }
-        });
-
-        // changing item column number
-        updated[tabIndex].column = colNumber;
+        if (itemToUpdate) {
+          itemToUpdate.column = colNumber;
+        }
 
         // reseting priority numbers in column that was item origin
-
         if (itemColNumber !== colNumber) {
           tabsData
-            .filter((obj, i) => obj.column === itemColNumber)
-            .filter((obj, i) => obj.id !== itemID)
+            .filter((obj) => obj.column === itemColNumber)
+            .filter((obj) => obj.id !== itemID)
             .sort((a, b) => a.priority - b.priority)
-            .forEach((obj, i) => {
-              let currentTabIndex: number = 0;
-
-              tabsData.forEach((obj2, j) => {
-                if (obj2.id === obj.id) {
-                  currentTabIndex = j;
-                }
-              });
-
-              updated[currentTabIndex].priority = i;
+            .forEach((filteredTab, i) => {
+              let tabToUpdate = updated.find(
+                (tab) => tab.id === filteredTab.id
+              );
+              if (tabToUpdate) {
+                tabToUpdate.priority = i;
+              }
             });
         }
 
         // when column is empty
         if (!tabID) {
-          updated[tabIndex].priority = 0;
+          // updated[tabIndex].priority = 0;
+          if (itemToUpdate) {
+            itemToUpdate.priority = 0;
+          }
           return;
         }
 
