@@ -21,7 +21,9 @@ interface Props {
   // setEditBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   singleBookmarkData: SingleBookmarkData;
 
-  setBookmarkId: React.Dispatch<React.SetStateAction<string | number | undefined>>;
+  setBookmarkId: React.Dispatch<
+    React.SetStateAction<string | number | undefined>
+  >;
   tabID: string | number;
   visDispatch: React.Dispatch<TabVisAction>;
   // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleBookmarkData>>;
@@ -36,19 +38,13 @@ function SingleBookmark({
   tabID,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-  const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
+  const [
+    bookmarksAllTagsData,
+    setBookmarksAllTagsData,
+  ] = bookmarksAllTagsState.use();
 
   // let linkURL = new URL(singleBookmarkData.URL)
 
-  let tabIndex: number = 0;
-
-  bookmarksData.forEach((obj, i) => {
-    if (obj.id === singleBookmarkData.id) {
-      tabIndex = i;
-    }
-  });
-
-  let currentTabTitle = bookmarksData[tabIndex].title;
 
   return (
     <div className="flex justify-between bg-gray-100 h-10 py-2 border-b">
@@ -73,7 +69,7 @@ function SingleBookmark({
           className="h-5 ml-1 hover:text-black cursor-pointer"
           onClick={() => {
             // setEditBookmarkVis((b) => !b);
-            visDispatch({type: "EDIT_BOOKMARK_TOOGLE"})
+            visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
 
             setBookmarkId(singleBookmarkData.id);
           }}
@@ -114,10 +110,15 @@ function SingleBookmark({
 
             setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
 
-
             setBookmarksData((previous) =>
               produce(previous, (updated) => {
-                updated.splice(tabIndex, 1);
+                let bookmarkToDelete = updated.find(
+                  (obj) => obj.id === singleBookmarkData.id
+                );
+                if (bookmarkToDelete) {
+                  let tabIndex = updated.indexOf(bookmarkToDelete);
+                  updated.splice(tabIndex, 1);
+                }
               })
             );
           }}
