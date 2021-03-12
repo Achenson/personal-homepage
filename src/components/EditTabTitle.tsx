@@ -17,13 +17,10 @@ import { produce } from "immer";
 import {
   tabsDataState,
   bookmarksDataState,
-  deletedTabState,
 } from "../state/tabsAndBookmarks";
 
 import { rssSettingsState } from "../state/defaultSettings";
 import { TabVisAction } from "../utils/interfaces";
-
-
 
 interface Props {
   // tabTitle: string;
@@ -34,15 +31,14 @@ interface Props {
   tabID: string | number;
 }
 
-
 function EditTabTitle({
   tabID,
   visDispatch,
   tabType,
-  // setEditTabVis,
-}: // noteInput,
+}: // setEditTabVis,
+// noteInput,
 Props): JSX.Element {
-  const [deletedTab, setDeletedTab] = deletedTabState.use();
+  // const [deletedTab, setDeletedTab] = deletedTabState.use();
 
   const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -64,9 +60,7 @@ Props): JSX.Element {
     currentTab[0].noteInput as string | null
   );
 
-  const [tabTitleInput, setTabTitleInput] = useState<string>(
-    tabTitle
-  );
+  const [tabTitleInput, setTabTitleInput] = useState<string>(tabTitle);
 
   const [rssLinkInput, setRssLinkInput] = useState<string>(rssLink as string);
 
@@ -106,9 +100,11 @@ Props): JSX.Element {
 
   // const [tagsListVis, setTagsListVis] = useState<boolean>(false);
 
-  const [arrOfBookmarksNames, setArrayOfBookmarksNames] = useState<string[]>(() => {
-    return calcArrOfBookmarksNames();
-  });
+  const [arrOfBookmarksNames, setArrayOfBookmarksNames] = useState<string[]>(
+    () => {
+      return calcArrOfBookmarksNames();
+    }
+  );
 
   function calcArrOfBookmarksNames() {
     // filtered lknks
@@ -129,9 +125,7 @@ Props): JSX.Element {
     arrOfBookmarksNames.join(", ")
   );
 
-  const [visibleTabs, setVisibleTabs] = useState<string[]>(
-    makeInitialTabs()
-  );
+  const [visibleTabs, setVisibleTabs] = useState<string[]>(makeInitialTabs());
 
   useEffect(() => {
     if (wasCheckboxClicked || wasTabOpenClicked || wasItemsPerPageClicked) {
@@ -139,27 +133,15 @@ Props): JSX.Element {
     }
   }, [wasCheckboxClicked, wasTabOpenClicked, wasItemsPerPageClicked]);
 
-  let tabIndex: number;
-
-  tabsData.forEach((obj, i) => {
-    if (obj.id === tabID) {
-      tabIndex = i;
-    }
-  });
-
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
   const [noDeletionErrorVis, setNoDeletionErrorVis] = useState<boolean>(false);
 
   const [tabsErrorVis, setTabsErrorVis] = useState<boolean>(false);
-  const [
-    tabsRepeatErrorVis,
-    setTabsRepeatErrorVis,
-  ] = useState<boolean>(false);
-  const [
-    tabsExistenceErrorVis,
-    setTabsExistenceErrorVis,
-  ] = useState<boolean>(false);
+  const [tabsRepeatErrorVis, setTabsRepeatErrorVis] = useState<boolean>(false);
+  const [tabsExistenceErrorVis, setTabsExistenceErrorVis] = useState<boolean>(
+    false
+  );
 
   // let regexForTitle = /^\w+$/;
   let regexForTitle = /^\w(\s?\w+)*$/;
@@ -169,9 +151,7 @@ Props): JSX.Element {
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
   const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
-  const [initialTabs, setInitialTabs] = useState(
-    makeInitialTabs()
-  );
+  const [initialTabs, setInitialTabs] = useState(makeInitialTabs());
 
   const [tabsListVis, setTabsListVis] = useState<boolean>(false);
 
@@ -203,7 +183,7 @@ Props): JSX.Element {
     initialTabs,
     setVisibleTabs,
     setTabsListVis,
-    isThisTheFirstRender
+    isThisTheFirstRender,
   ]);
 
   function makeInitialTabs(): string[] {
@@ -224,11 +204,7 @@ Props): JSX.Element {
       <div className="flex items-center mt-2 justify-between">
         <p
           className={
-            tabType === "folder"
-              ? "mr-14"
-              : tabType === "rss"
-              ? "w-24"
-              : "w-10"
+            tabType === "folder" ? "mr-14" : tabType === "rss" ? "w-24" : "w-10"
           }
         >
           Title
@@ -311,8 +287,7 @@ Props): JSX.Element {
 
       {tagErrorVis ? (
         <p className={`text-red-600`}>
-          Tab title should consist of a single word without special
-          characters
+          Tab title should consist of a single word without special characters
         </p>
       ) : null}
 
@@ -323,9 +298,7 @@ Props): JSX.Element {
       ) : null}
 
       {tabsExistenceErrorVis && tabType === "folder" ? (
-        <p className={`text-red-600`}>
-          You can choose from existing tabs only
-        </p>
+        <p className={`text-red-600`}>You can choose from existing tabs only</p>
       ) : null}
 
       {tabsRepeatErrorVis && tabType === "folder" ? (
@@ -464,25 +437,26 @@ Props): JSX.Element {
                   return;
                 }
 
-                setDeletedTab(tabID);
+                // setDeletedTab(tabID);
 
                 setTabsData((previous) =>
                   produce(previous, (updated) => {
-                    updated.splice(tabIndex, 1);
+                    let tabToDelete = updated.find((obj) => obj.id == tabID);
+                    if (tabToDelete) {
+                      let tabIndex = updated.indexOf(tabToDelete);
+                      updated.splice(tabIndex, 1);
+                    }
                   })
                 );
 
                 // setEditTabVis((b) => !b);
-                visDispatch({type: "EDIT_TOGGLE"})
+                visDispatch({ type: "EDIT_TOGGLE" });
                 // removing deleted tab(tag) for bookmarks
                 bookmarksData.forEach((obj, i) => {
                   if (obj.tags.indexOf(tabTitle) > -1) {
                     setBookmarksData((previous) =>
                       produce(previous, (updated) => {
-                        updated[i].tags.splice(
-                          obj.tags.indexOf(tabTitle),
-                          1
-                        );
+                        updated[i].tags.splice(obj.tags.indexOf(tabTitle), 1);
                       })
                     );
                   }
@@ -586,29 +560,32 @@ Props): JSX.Element {
 
               setTabsData((previous) =>
                 produce(previous, (updated) => {
-                  updated[tabIndex].title = tabTitleInput;
-                  // updated[tabIndex].deletable = currentTab[0].deletable
+                  let tabToUpdate = updated.find((obj) => obj.id === tabID);
 
-                  if (wasTabOpenClicked) {
-                    updated[tabIndex].opened = tabOpen;
-                  }
-
-                  if (tabType === "note") {
-                    updated[tabIndex].noteInput = textAreaValue;
-                  }
-                  if (tabType === "rss") {
-                    updated[tabIndex].rssLink = rssLinkInput;
-
-                    if (wasCheckboxClicked) {
-                      updated[tabIndex].date = dateCheckbox;
+                  if (tabToUpdate) {
+                    tabToUpdate.title = tabTitleInput;
+                    // updated[tabIndex].deletable = currentTab[0].deletable
+                    if (wasTabOpenClicked) {
+                      tabToUpdate.opened = tabOpen;
                     }
 
-                    if (wasCheckboxClicked) {
-                      updated[tabIndex].description = descriptionCheckbox;
+                    if (tabType === "note") {
+                      tabToUpdate.noteInput = textAreaValue;
                     }
+                    if (tabType === "rss") {
+                      tabToUpdate.rssLink = rssLinkInput;
 
-                    if (wasItemsPerPageClicked) {
-                      updated[tabIndex].itemsPerPage = rssItemsPerPage;
+                      if (wasCheckboxClicked) {
+                        tabToUpdate.date = dateCheckbox;
+                      }
+
+                      if (wasCheckboxClicked) {
+                        tabToUpdate.description = descriptionCheckbox;
+                      }
+
+                      if (wasItemsPerPageClicked) {
+                        tabToUpdate.itemsPerPage = rssItemsPerPage;
+                      }
                     }
                   }
                 })
@@ -652,7 +629,7 @@ Props): JSX.Element {
               }
 
               // setEditTabVis((b) => !b);
-              visDispatch({type: "EDIT_TOGGLE"})
+              visDispatch({ type: "EDIT_TOGGLE" });
             }}
           >
             <SaveSVG
@@ -667,7 +644,7 @@ Props): JSX.Element {
             onClick={(e) => {
               e.preventDefault();
               // setEditTabVis((b) => !b);
-              visDispatch({type: "EDIT_TOGGLE"})
+              visDispatch({ type: "EDIT_TOGGLE" });
             }}
           >
             <CancelSVG className="h-5 fill-current text-gray-900 ml-3 hover:text-red-600" />

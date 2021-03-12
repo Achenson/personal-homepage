@@ -25,13 +25,7 @@ interface Props {
 function SingleColor_Default({ color, defaultColorsFor }: Props): JSX.Element {
   // const [tabsData, setTabsData] = tabsDataState.use();
 
-  // let tabIndex: number;
 
-  // tabsData.forEach( (obj, i) => {
-  //   if (obj.title === tabTitle) {
-  //     tabIndex = i
-  //   }
-  // })
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
@@ -213,11 +207,7 @@ function SingleColor_Default({ color, defaultColorsFor }: Props): JSX.Element {
           );
         }
 
-        // setTabsData((previous) =>
-        //   produce(previous, (updated) => {
-        //     updated[tabIndex].color = `bg-${color}`;
-        //   })
-        // );
+     
       }}
     ></div>
   );
