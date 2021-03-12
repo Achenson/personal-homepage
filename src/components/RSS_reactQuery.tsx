@@ -25,11 +25,10 @@ function ReactQuery({ tabID }: Props): JSX.Element {
   const [descriptionVis, setDescriptionVis] = useState(calcDescriptionVis());
   const [dateVis, setDateVis] = useState(calcDateVis());
 
-  
   function calcItemsPerPage() {
     // if currentBookmars itemsPerPage is set, return it, otherwise
     // return defaul option for RSS setting
-    
+
     if (typeof currentTab[0].itemsPerPage === "number") {
       return currentTab[0].itemsPerPage;
     }
@@ -53,45 +52,33 @@ function ReactQuery({ tabID }: Props): JSX.Element {
     return rssSettingsData.date;
   }
 
-  // const [itemsPerPage, setItemsPerPage] = useState(() => {
-  //   if (typeof currentTab[0].itemsPerPage === "number") {
-  //     return currentTab[0].itemsPerPage;
-  //   }
-  //   return rssSettingsData.itemsPerPage;
-  // });
-
   useEffect(() => {
-    let tabIndex: number = 0;
+    let tabToUpdate = tabsData.find((obj) => obj.id === tabID);
 
-    tabsData.forEach((obj, i) => {
-      if (obj.id === tabID) {
-        tabIndex = i;
+    if (tabToUpdate) {
+      let tabIndex = tabsData.indexOf(tabToUpdate);
+
+      if (
+        tabsData[tabIndex].itemsPerPage !== itemsPerPage &&
+        typeof tabsData[tabIndex].itemsPerPage === "number"
+      ) {
+        setItemsPerPage(tabsData[tabIndex].itemsPerPage as number);
       }
-    });
 
-    if (
-      tabsData[tabIndex].itemsPerPage !== itemsPerPage &&
-      typeof tabsData[tabIndex].itemsPerPage === "number"
-    ) {
-      setItemsPerPage(tabsData[tabIndex].itemsPerPage as number);
+      if (
+        tabsData[tabIndex].description !== descriptionVis &&
+        typeof tabsData[tabIndex].description === "boolean"
+      ) {
+        setDescriptionVis(tabsData[tabIndex].description as boolean);
+      }
+
+      if (
+        tabsData[tabIndex].date !== dateVis &&
+        typeof tabsData[tabIndex].date === "boolean"
+      ) {
+        setDateVis(tabsData[tabIndex].date as boolean);
+      }
     }
-
-
-    if (
-      tabsData[tabIndex].description !== descriptionVis &&
-      typeof tabsData[tabIndex].description === "boolean"
-    ) {
-      setDescriptionVis(tabsData[tabIndex].description as boolean);
-    }
-
-
-    if (
-      tabsData[tabIndex].date!== dateVis &&
-      typeof tabsData[tabIndex].date === "boolean"
-    ) {
-      setDateVis(tabsData[tabIndex].date as boolean);
-    }
-
   }, [tabsData, tabID, dateVis, descriptionVis, itemsPerPage]);
 
   const [pageNumber, setPageNumber] = useState(0);

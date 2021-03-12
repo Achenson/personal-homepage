@@ -68,7 +68,7 @@ function GapAfterTab({ colNumber, tabID, picBackground }: Props): JSX.Element {
 
         // when column is empty
         if (!tabID) {
-          // updated[tabIndex].priority = 0;
+          
           if (itemToUpdate) {
             itemToUpdate.priority = 0;
           }
