@@ -137,9 +137,9 @@ Props): JSX.Element {
   const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
   const [noDeletionErrorVis, setNoDeletionErrorVis] = useState<boolean>(false);
 
-  const [tabsErrorVis, setTabsErrorVis] = useState<boolean>(false);
+  const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
   const [tabsRepeatErrorVis, setTabsRepeatErrorVis] = useState<boolean>(false);
-  const [tabsExistenceErrorVis, setTabsExistenceErrorVis] = useState<boolean>(
+  const [bookmarksExistenceErrorVis, setBookmarksExistenceErrorVis] = useState<boolean>(
     false
   );
 
@@ -287,18 +287,18 @@ Props): JSX.Element {
 
       {tagErrorVis ? (
         <p className={`text-red-600`}>
-          Tab title should consist of a single word without special characters
+          Tab title should consist of single or multiple words without special characters
         </p>
       ) : null}
 
-      {tabsErrorVis && tabType === "folder" ? (
+      {bookmarksErrorVis && tabType === "folder" ? (
         <p className={`text-red-600`}>
-          Tabs should consist of words separated by coma and space
+          Bookmarks should consist of single or multiple words (without special characters) separated by coma and space
         </p>
       ) : null}
 
-      {tabsExistenceErrorVis && tabType === "folder" ? (
-        <p className={`text-red-600`}>You can choose from existing tabs only</p>
+      {bookmarksExistenceErrorVis && tabType === "folder" ? (
+        <p className={`text-red-600`}>You can choose from existing bookmarks only</p>
       ) : null}
 
       {tabsRepeatErrorVis && tabType === "folder" ? (
@@ -477,9 +477,9 @@ Props): JSX.Element {
               setTagErrorVis(false);
               setTextAreaErrorVis(false);
               setNoDeletionErrorVis(false);
-              setTabsErrorVis(false);
+              setBookmarksErrorVis(false);
               setTabsRepeatErrorVis(false);
-              setTabsExistenceErrorVis(false);
+              setBookmarksExistenceErrorVis(false);
 
               let tabsInputArr = tabsInputStr.split(", ");
 
@@ -502,21 +502,16 @@ Props): JSX.Element {
                 }
               }
 
-              // setTagErrorVis(false);
-              // setTextAreaErrorVis(false);
-              // setNoDeletionErrorVis(false);
-              // setTabsErrorVis(false);
-              //   setTabsRepeatErrorVis(false);
-              //   setTabsExistenceErrorVis(false);
+      
 
               if (tabType === "folder") {
                 if (!regexForBookmarks.test(tabsInputStr)) {
-                  setTabsErrorVis(true);
+                  setBookmarksErrorVis(true);
                   return;
                 }
 
                 if (!tabExistenceCheck()) {
-                  setTabsExistenceErrorVis(true);
+                  setBookmarksExistenceErrorVis(true);
                   return;
                 }
 
