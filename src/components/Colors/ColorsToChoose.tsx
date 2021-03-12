@@ -6,13 +6,13 @@ import {tabColors} from "../../utils/tabColors";
 
 interface Props {
   setIconsVis: (value: React.SetStateAction<boolean>) => void;
-  tabTitle: string;
+  tabID: string | number
 }
 
 
 function ColorsToChoose({
   setIconsVis,
-  tabTitle,
+  tabID
 }: Props): JSX.Element {
   function mappingColors(colors: string[][]) {
     return tabColors.map((row, i) => {
@@ -20,7 +20,7 @@ function ColorsToChoose({
         <div className="flex" key={i}>
           {row.map((el, j) => {
             return (
-              <SingleColor color={el} tabTitle={tabTitle} key={j} />
+              <SingleColor color={el} tabID={tabID} key={j} />
             );
           })}
         </div>

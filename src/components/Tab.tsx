@@ -34,7 +34,7 @@ import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "../utils/itemsDnd";
 
-import { TabVisAction } from "../utils/interfaces";
+import { TabVisAction, SingleTabData } from "../utils/interfaces";
 
 interface SingleBookmarkData {
   title: string;
@@ -74,20 +74,14 @@ Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
 
-  // 0 to not show typescript errors
+  let currentTab = tabsData.find((obj) => obj.id === tabID);
+
+  // 0s to not show typescript errors
   let tabIndex: number = 0;
 
-  let currentTab = tabsData.filter((obj) => obj.id === tabID);
-
-  // for conditional shadow rendering
-  let tabColumn: number;
-
-  tabsData.forEach((obj, i) => {
-    if (obj.id === tabID) {
-      tabIndex = i;
-      tabColumn = obj.column;
-    }
-  });
+  if (currentTab) {
+    tabIndex = tabsData.indexOf(currentTab);
+  }
 
   const initVisState: VisState = {
     // newBookmarkVis: false,
@@ -98,22 +92,15 @@ Props): JSX.Element {
     editBookmarkVis: false,
   };
 
-  // const [tabColorOpenedData, setTabColorOpenedData] = tabColorOpenedState.use();
-  // const [tabEditOpenedData, setTabEditOpenedData] = tabEditOpenedState.use();
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   function visReducer(state: VisState, action: TabVisAction) {
     switch (action.type) {
       case "COLORS_SETTINGS_TOGGLE":
-        // if (state.colorsVis) {
-        //   setTabColorOpenedData(null);
-        // }
         if (!state.colorsVis) {
-          // setTabColorOpenedData(tabID);
           setTabOpenedData(tabID);
         }
-        // !!! crucial: tabEditOpenedData won't affect this instance of a component
-        // setTabEditOpenedData(tabID);
+
         return {
           ...state,
           editTabVis: false,
@@ -130,16 +117,10 @@ Props): JSX.Element {
           editBookmarkVis: false,
         };
       case "EDIT_TOGGLE":
-        // if (state.editTabVis) {
-        //   setTabEditOpenedData(null);
-        // }
-
         if (!state.editTabVis) {
-          // setTabEditOpenedData(tabID);
           setTabOpenedData(tabID);
         }
 
-        // setTabColorOpenedData(tabID);
         return {
           ...state,
           colorsVis: false,
@@ -221,26 +202,11 @@ Props): JSX.Element {
 
   const [visState, visDispatch] = useReducer(visReducer, initVisState);
 
-  // const [editBookmarkVis, setEditBookmarkVis] = useState<boolean>(false);
-  // const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
-
   useEffect(() => {
     if (tabOpenedData !== tabID) {
       visDispatch({ type: "TAB_EDITABLES_CLOSE" });
     }
   }, [tabOpenedData, tabID]);
-
-  // useEffect(() => {
-  //   if (tabColorOpenedData !== tabID) {
-  //     visDispatch({ type: "COLORS_CLOSE" });
-  //   }
-  // }, [tabColorOpenedData, tabID]);
-
-  // useEffect(() => {
-  //   if (tabEditOpenedData !== tabID) {
-  //     visDispatch({ type: "EDIT_CLOSE" });
-  //   }
-  // }, [tabEditOpenedData, tabID]);
 
   const [bookmarkId, setBookmarkId] = useState<number | string>();
 
@@ -363,7 +329,8 @@ Props): JSX.Element {
   return (
     <div
       className={`relative ${
-        globalSettingsData.hideNonDeletable && !currentTab[0].deletable
+        globalSettingsData.hideNonDeletable &&
+        (!(currentTab as SingleTabData).deletable as boolean)
           ? "hidden"
           : ""
       }`}
@@ -478,7 +445,7 @@ Props): JSX.Element {
       </div>
 
       {visState.colorsVis ? (
-        <ColorsToChoose setIconsVis={setIconsVis} tabTitle={tabTitle} />
+        <ColorsToChoose setIconsVis={setIconsVis} tabID={tabID} />
       ) : null}
 
       {visState.editBookmarkVis ? (

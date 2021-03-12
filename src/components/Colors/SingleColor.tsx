@@ -4,19 +4,13 @@ import { produce } from "immer";
 
 interface Props {
   color: string;
-  tabTitle: string;
+  // tabTitle: string;
+  tabID: number | string;
 }
 
-function SingleColor({ color, tabTitle }: Props): JSX.Element {
+function SingleColor({ color, tabID }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
-  let tabIndex: number;
-
-  tabsData.forEach( (obj, i) => {
-    if (obj.title === tabTitle) {
-      tabIndex = i
-    }
-  })
 
   return (
     <div
@@ -24,7 +18,11 @@ function SingleColor({ color, tabTitle }: Props): JSX.Element {
       onClick={() => {
         setTabsData((previous) =>
           produce(previous, (updated) => {
-            updated[tabIndex].color = `${color}`;
+            let tabToChange = updated.find(obj => obj.id === tabID)
+
+            if (tabToChange) {
+              tabToChange.color = `${color}`;
+            }
           })
         );
       }}
