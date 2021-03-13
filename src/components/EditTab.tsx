@@ -31,7 +31,7 @@ interface Props {
   tabID: string | number;
 }
 
-function EditTabTitle({
+function EditTab({
   tabID,
   visDispatch,
   tabType,
@@ -651,4 +651,4 @@ Props): JSX.Element {
   );
 }
 
-export default EditTabTitle;
+export default EditTab;

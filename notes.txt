@@ -119,16 +119,16 @@ XXX 52. make SingleRssNews same height alwaysXXX
 DONE 54. notes default colors: initial colors not selected DONE
 DONE 57. get rid of ts ignore lines DONE
 DONE 58. change all bookmark index/ tab index logic to bookmark ID DONE
-DONE 59. EditTabTitle errors naming DONE
-DONE 60. EditTabTitle: RSS & note title input right margin get rid off DONE
+DONE 59. EditTab errors naming DONE
+DONE 60. EditTab: RSS & note title input right margin get rid off DONE
 DONE 61. styling numerical inputs DONE
+?? 62. input htmlFor ??
 
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-62. input htmlFor
 63. rss edit -> reset to default settings
 64. rss description
 65. rss linksPerPage

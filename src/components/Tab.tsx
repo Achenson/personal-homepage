@@ -28,7 +28,7 @@ import ColorsToChoose from "./Colors/ColorsToChoose";
 
 // import EditLink from "./EditBookmark";
 import Bookmark_newAndEdit from "./Bookmark_newAndEdit";
-import EditTabTitle from "./EditTabTitle";
+import EditTab from "./EditTab";
 import NoteInput from "./NoteInput";
 import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
@@ -468,7 +468,7 @@ Props): JSX.Element {
       ) : null}
 
       {visState.editTabVis ? (
-        <EditTabTitle
+        <EditTab
           tabID={tabID}
           tabType={tabType}
           // setEditTabVis={setEditTabVis}
