@@ -223,7 +223,7 @@ Props): JSX.Element {
       {tabType === "folder" ? <ChevronDownSVG className="h-6 invisible" /> : null }  
       </div>
       {tabType === "folder" && (
-        <div className="flex items-center mt-2 justify-between">
+        <div className="flex items-center mt-2 mb-3 justify-between">
           <p className={`mr-2`}>Bookmarks</p>
           <input
             type="text"
@@ -317,7 +317,7 @@ Props): JSX.Element {
       ) : null}
 
       {tabType === "note" ? (
-        <div className="mt-2">
+        <div className="mt-2 mb-3">
           <textarea
             value={textAreaValue as string}
             className="h-full w-full overflow-visible pl-1 pr-1 border font-mono"
@@ -331,8 +331,8 @@ Props): JSX.Element {
       ) : null}
 
       {tabType === "rss" ? (
-        <div>
-          <div className="flex items-center mb-2 mt-2 justify-between">
+        <div className="mb-1">
+          <div className="flex items-center mt-2 justify-between">
             <p className="w-24 whitespace-nowrap mr-px">RSS link</p>
             <input
               type="text"
@@ -399,10 +399,23 @@ Props): JSX.Element {
               // placeholder={"5-15"}
             />
           </div>
+          {/* <p className="text-center">RESET to default</p> */}
+          <p className="text-center">
+            {" "}
+            <span
+              className="text-red-600 hover:underline cursor-pointer"
+              onClick={() => {
+              // setResetColorsData(true);
+              }}
+            >
+              RESET
+            </span>{" "}
+            to default
+          </p>
         </div>
       ) : null}
 
-      <div className={`mt-3 pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
+      <div className={`pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
         <div className="flex justify-between items-center">
           <p>Lock as always-open</p>
           <button>
