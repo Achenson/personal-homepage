@@ -6,12 +6,12 @@ import { uiColorState } from "../../state/colorsState";
 
 import { globalSettingsState } from "../../state/defaultSettings";
 
-import {UpperVisAction} from "../../utils/interfaces"
+import { UpperVisAction } from "../../utils/interfaces";
 
 interface Props {
   // settingsVis: boolean;
   // setSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
 function Settings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
@@ -20,35 +20,35 @@ function Settings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function renderColsNumberControls() {
-
-    const arrOfColsNumbers: (1|2|3|4)[] = [1, 2, 3, 4];
+    const arrOfColsNumbers: (1 | 2 | 3 | 4)[] = [1, 2, 3, 4];
 
     let colsNumbering = {
-      1: "I",
-      2: "II",
-      3: "III",
-      4: "IV",
-    }
+      1: "one",
+      2: "two",
+      3: "three",
+      4: "four",
+    };
 
     return arrOfColsNumbers.map((el, i) => {
       return (
         <div className="flex items-center ml-2">
-          <p className="mr-px">{colsNumbering[el]}</p>
-          <div
-            className={`h-4 w-4 ml-px mt-px cursor-pointer border-2 border-${uiColorData} ${
+          <p
+            className={` ${
               globalSettingsData.numberOfCols === el
-                ? `bg-${uiColorData} hover:bg-opacity-50`
-                : `hover:bg-${uiColorData} hover:bg-opacity-50`
-            } `}
+                ? `text-${uiColorData} underline cursor-default`
+                : `text-black cursor-pointer hover:text-${uiColorData} hover:text-opacity-70`
+            } 
+              
+              `}
             onClick={() => {
-              setGlobalSettingsData(
-                {
-                  ...globalSettingsData,
-                  numberOfCols: el
-                }
-              )
+              setGlobalSettingsData({
+                ...globalSettingsData,
+                numberOfCols: el,
+              });
             }}
-          ></div>
+          >
+            {colsNumbering[el]}
+          </p>
         </div>
       );
     });
@@ -70,7 +70,7 @@ function Settings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 // if (settingsVis) {
                 //   setSettingsVis(false);
                 // }
-                upperVisDispatch({type: "SETTINGS_TOGGLE"})
+                upperVisDispatch({ type: "SETTINGS_TOGGLE" });
               }}
             />
           </div>
@@ -113,35 +113,6 @@ function Settings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
             <div className="flex">{renderColsNumberControls()}</div>
           </div>
-
-          {/* <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="w-32">Folder default</p>
-            <div
-            
-            >null</div>
-          </div>
-          <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="w-32">Notes default</p>
-            <div
-              
-            >null </div>
-          </div>
-          <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="w-32">RSS default</p>
-            <div
-             
-            >null</div>
-          </div> */}
-
-          {/* <p className="text-center mt-5">
-            {" "}
-            <span
-           
-            >
-              RESET
-            </span>{" "}
-            all colours to default
-          </p> */}
         </div>
       </div>
     </div>
