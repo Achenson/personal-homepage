@@ -70,16 +70,26 @@ export const tabsDataState = newRidgeState<SingleTabData[]>([
     date: null,
     description: null,
     itemsPerPage: null,
-    // noteInput: null,
+    items: [],
+    rssLink: "https://dailygalaxy.com/feed/",
     // rssLink: "http://rss.sciam.com/basic-science"
     // rssLink: "https://tvn24.pl/najwazniejsze.xml",
-    rssLink: "https://dailygalaxy.com/feed/",
-    // rssLink: "https://feeds.feedburner.com/sciencealert-latestnews",
+    // rssLink: "https://feeds.feedburner.com/sciencealert-latestnews"
     // rssLink: "https://science.sciencemag.org/rss/twis.xml", <- works
-    items: [],
     // rssLink: "https://techbeacon.com/rss.xml"
-    // linksTitles: ["facebook"],
+  // rssLink:  "https://feeds.theguardian.com/theguardian/uk-news/rss"
+  // rssLink: "http://rss.cnn.com/rss/edition.rss"
+  // rssLink: https://feeds.feedburner.com/sciencealert-latestnews
+
   },
+
+
+
+
+
+
+
+  
 ]);
 
 export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
