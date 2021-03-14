@@ -123,13 +123,13 @@ DONE 59. EditTab errors naming DONE
 DONE 60. EditTab: RSS & note title input right margin get rid off DONE
 DONE 61. styling numerical inputs DONE
 ?? 62. input htmlFor ??
+DONE 63. rss edit -> reset to default settings DONE
 
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-63. rss edit -> reset to default settings
 64. rss description
 65. rss linksPerPage
 66. createObj should calc priority so new folder land last in a given column
@@ -282,6 +282,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 199. consitent errors! external error file
 200. input paddings
 201. rss title & link not exactly aligned
+202. rss globalSetting!
 
 
 

@@ -406,6 +406,29 @@ Props): JSX.Element {
               className="text-red-600 hover:underline cursor-pointer"
               onClick={() => {
               // setResetColorsData(true);
+              setDescriptionCheckbox(rssSettingsData.description)
+              setDateCheckbox(rssSettingsData.date)
+              setRssItemsPerPage(rssSettingsData.itemsPerPage)
+              setWasAnythingClicked(false)
+              setWasCheckboxClicked(false)
+              setWasItemsPerPageClicked(false)
+              setWasTabOpenClicked(false)
+
+              setTabsData((previous) =>
+              produce(previous, (updated) => {
+                let currentTab = updated.find((obj) => obj.id == tabID);
+                if (currentTab) {
+                  // let tabIndex = updated.indexOf(tabToDelete);
+                  // updated.splice(tabIndex, 1);
+                  currentTab.date = null;
+                  currentTab.description = null;
+                  currentTab.itemsPerPage = null;
+                }
+              })
+            );
+
+
+              
               }}
             >
               RESET
