@@ -402,18 +402,7 @@ Props): JSX.Element {
               className={`h-8 hover:${hoverText(finalTabColor)} cursor-pointer`}
               style={{ marginTop: "-6px" }}
               onClick={() => {
-                // setNewBookmarkVis((b) => !b);
-
-                // if (visState.editTabVis) {
-                //   visDispatch({ type: "EDIT_CLOSE" });
-                // }
-
-                // if (visState.colorsVis) {
-                //   visDispatch({ type: "COLORS_CLOSE" });
-                // }
-
-                // setTabEditOpenedData(null);
-                // setTabColorOpenedData(null);
+          
 
                 visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
               }}
@@ -423,9 +412,12 @@ Props): JSX.Element {
           <ColorSmallSVG
             className={`h-5 mr-2 hover:${hoverText(
               finalTabColor
-            )} cursor-pointer ${
-              tabType === "note" || tabType === "rss" ? "ml-2" : ""
-            }`}
+            )} cursor-pointer `}
+            // ${
+            //   tabType === "note" || tabType === "rss" ? "ml-1" : ""
+            // }
+            // `}
+            style={{marginLeft: `${tabType === "note" || tabType === "rss" ? "7px" : ""}`}}
             onClick={() => {
               visDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
             }}

@@ -127,14 +127,14 @@ DONE 63. rss edit -> reset to default settings DONE
 DONE 64. rss description DONE
 DONE 65. rss linksPerPage DONE
 DONE 66. createObj should calc priority so new folder land last in a given column DONE
+xxx 67. RSS refresh button xx reactQuery is taking care of this
+DONE 68. note & RSS improve SVG icon placement DONE
 
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-xxx 67. RSS refresh button xx reactQuery is taking care of this
-68. note & RSS improve SVG icon placement
 69. EditBookmark -> improve checkboxes -> add initial checks, compare vs later
 72. Column & Grid -> clean code between them
 73. Main bg picture is moving a little when opening a column
