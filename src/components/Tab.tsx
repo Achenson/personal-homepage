@@ -464,6 +464,7 @@ Props): JSX.Element {
           // setBookmarkVis={setNewBookmarkVis}
           bookmarkComponentType={"new_lowerUI"}
           visDispatch={visDispatch}
+          colNumber={colNumber}
         />
       ) : null}
 

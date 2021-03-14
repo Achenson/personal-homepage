@@ -397,6 +397,13 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   }
                 }
 
+                let sortedTabsInCol = tabsData
+                  .filter((obj) => obj.column === tabColumnInput)
+                  .sort((a, b) => a.priority - b.priority);
+
+                let newTabPriority =
+                  sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
+
                 if (tabType === "note") {
                   setTabsData((previous) =>
                     produce(previous, (updated) => {
@@ -404,7 +411,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                         ...createNote(
                           tabTitleInput,
                           tabColumnInput,
-                          0,
+                          newTabPriority,
                           textAreaValue
                         ),
                       });
@@ -416,7 +423,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   let newFolderTab = createFolderTab(
                     tabTitleInput,
                     tabColumnInput,
-                    0
+                    newTabPriority
                   );
 
                   let newBookmarksAllTagsData = [...bookmarksAllTagsData];
@@ -454,7 +461,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                         ...createRSS(
                           tabTitleInput,
                           tabColumnInput,
-                          0,
+                          newTabPriority,
                           rssLinkInput
                         ),
                       });

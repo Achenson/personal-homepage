@@ -19,6 +19,7 @@ interface Props {
   bookmarkId?: string | number | undefined;
   upperVisDispatch?: React.Dispatch<UpperVisAction>
   visDispatch?: React.Dispatch<TabVisAction>
+  colNumber?: number
 }
 
 function Bookmark_newAndEdit({
@@ -26,7 +27,9 @@ function Bookmark_newAndEdit({
   bookmarkComponentType,
   bookmarkId,
   visDispatch,
-  upperVisDispatch
+  upperVisDispatch,
+  colNumber
+
   
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
@@ -155,7 +158,7 @@ function Bookmark_newAndEdit({
         <Bookmark_upper_JSX {...bookmarkJSX_props} upperVisDispatch={upperVisDispatch as React.Dispatch<UpperVisAction>}/>
       ) : (
       
-        <Bookmark_lower_JSX {...bookmarkJSX_props} currentBookmark={currentBookmark} bookmarkId={bookmarkId as string | number} visDispatch={visDispatch as React.Dispatch<TabVisAction>} />
+        <Bookmark_lower_JSX {...bookmarkJSX_props} currentBookmark={currentBookmark} bookmarkId={bookmarkId as string | number} visDispatch={visDispatch as React.Dispatch<TabVisAction>} colNumber={colNumber as number} />
       )}
     </>
   );

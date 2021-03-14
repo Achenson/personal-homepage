@@ -124,15 +124,15 @@ DONE 60. EditTab: RSS & note title input right margin get rid off DONE
 DONE 61. styling numerical inputs DONE
 ?? 62. input htmlFor ??
 DONE 63. rss edit -> reset to default settings DONE
+DONE 64. rss description DONE
+DONE 65. rss linksPerPage DONE
+DONE 66. createObj should calc priority so new folder land last in a given column DONE
 
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-64. rss description
-65. rss linksPerPage
-66. createObj should calc priority so new folder land last in a given column
 xxx 67. RSS refresh button xx reactQuery is taking care of this
 68. note & RSS improve SVG icon placement
 69. EditBookmark -> improve checkboxes -> add initial checks, compare vs later

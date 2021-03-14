@@ -256,10 +256,17 @@ function Bookmark_upper_JSX({
                     (obj) => obj.title === el
                   )[0];
 
-                  // if folder with title corresponding to tag doesn't exist
 
+                  let sortedTabsInCol = tabsData
+                  .filter((obj) => obj.column === 1)
+                  .sort((a, b) => a.priority - b.priority);
+
+                let newTabPriority =
+                  sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
+
+                  // if folder with title corresponding to tag doesn't exist
                   if (!filteredTab && tagsInputStr !== "") {
-                    let newTab = createFolderTab(el, 1, 0);
+                    let newTab = createFolderTab(el, 1, newTabPriority);
                     tagsInputArr_ToIds.push(newTab.id);
 
                     // adding new folder in there was no folder with title as a tag befere

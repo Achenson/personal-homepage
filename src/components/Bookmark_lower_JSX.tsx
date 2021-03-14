@@ -38,6 +38,7 @@ interface Props {
   // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   currentBookmark: SingleBookmarkData | undefined;
   visDispatch: React.Dispatch<TabVisAction>;
+  colNumber: number;
 }
 
 function Bookmark_lower_JSX({
@@ -56,6 +57,7 @@ function Bookmark_lower_JSX({
   bookmarkId,
   currentBookmark,
   visDispatch,
+  colNumber
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [
@@ -294,9 +296,17 @@ function Bookmark_lower_JSX({
                     (obj) => obj.title === el
                   )[0];
 
+                  let sortedTabsInCol = tabsData
+                  .filter((obj) => obj.column === colNumber)
+                  .sort((a, b) => a.priority - b.priority);
+
+                let newTabPriority =
+                  sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
+
                   // if folder with title corresponding to tag doesn't exist
                   if (!filteredTab && tagsInputStr !== "") {
-                    let newTab = createFolderTab(el, 1, 0);
+                    // let newTab = createFolderTab(el, 1, 0);
+                    let newTab = createFolderTab(el, colNumber, newTabPriority);
                     tagsInputArr_ToIds.push(newTab.id);
 
                     // adding new folder in there was no folder with title as a tag befere
