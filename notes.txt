@@ -283,6 +283,8 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 200. input paddings
 201. rss title & link not exactly aligned
 202. rss globalSetting!
+203. rss -> displays only one feed even if two rss tabs are open
+204. rss -> non https feeds not working, non xml rss feeds not working (science alert)
 
 
 

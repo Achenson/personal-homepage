@@ -60,7 +60,7 @@ export const tabsDataState = newRidgeState<SingleTabData[]>([
   },
   {
     id: "5",
-    title: "sciam",
+    title: "dailygalaxy",
     color: null,
     column: 2,
     priority: 1,
@@ -79,9 +79,84 @@ export const tabsDataState = newRidgeState<SingleTabData[]>([
     // rssLink: "https://techbeacon.com/rss.xml"
   // rssLink:  "https://feeds.theguardian.com/theguardian/uk-news/rss"
   // rssLink: "http://rss.cnn.com/rss/edition.rss"
-  // rssLink: https://feeds.feedburner.com/sciencealert-latestnews
+  
 
   },
+  // {
+  //   id: "6",
+  //   title: "sciam",
+  //   color: null,
+  //   column: 2,
+  //   priority: 1,
+  //   opened: false,
+  //   deletable: true,
+  //   type: "rss",
+  //   date: null,
+  //   description: null,
+  //   itemsPerPage: null,
+  //   items: [],
+  //   rssLink: "http://rss.sciam.com/basic-science",
+  // },
+  {
+    id: "7",
+    title: "tvn24",
+    color: null,
+    column: 2,
+    priority: 1,
+    opened: false,
+    deletable: true,
+    type: "rss",
+    date: null,
+    description: null,
+    itemsPerPage: null,
+    items: [],
+    rssLink: "https://tvn24.pl/najwazniejsze.xml",
+  },
+  // {
+  //   id: "8",
+  //   title: "science alert",
+  //   color: null,
+  //   column: 2,
+  //   priority: 1,
+  //   opened: false,
+  //   deletable: true,
+  //   type: "rss",
+  //   date: null,
+  //   description: null,
+  //   itemsPerPage: null,
+  //   items: [],
+  //   rssLink: "https://feeds.feedburner.com/sciencealert-latestnews",
+  // },
+  {
+    id: "9",
+    title: "guardian",
+    color: null,
+    column: 2,
+    priority: 1,
+    opened: false,
+    deletable: true,
+    type: "rss",
+    date: null,
+    description: null,
+    itemsPerPage: null,
+    items: [],
+    rssLink: "https://feeds.theguardian.com/theguardian/uk-news/rss",
+  },
+  // {
+  //   id: "10",
+  //   title: "cnn",
+  //   color: null,
+  //   column: 2,
+  //   priority: 1,
+  //   opened: false,
+  //   deletable: true,
+  //   type: "rss",
+  //   date: null,
+  //   description: null,
+  //   itemsPerPage: null,
+  //   items: [],
+  //   rssLink: "http://rss.cnn.com/rss/edition.rss",
+  // },
 
 
 
@@ -89,7 +164,7 @@ export const tabsDataState = newRidgeState<SingleTabData[]>([
 
 
 
-  
+
 ]);
 
 export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
