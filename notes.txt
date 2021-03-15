@@ -129,14 +129,13 @@ DONE 65. rss linksPerPage DONE
 DONE 66. createObj should calc priority so new folder land last in a given column DONE
 xxx 67. RSS refresh button xx reactQuery is taking care of this
 DONE 68. note & RSS improve SVG icon placement DONE
+DONE 72. Column & Grid -> clean code between them DONE
 
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-69. EditBookmark -> improve checkboxes -> add initial checks, compare vs later
-72. Column & Grid -> clean code between them
 73. Main bg picture is moving a little when opening a column
 74. forms -> consistency in aligning
 75. Column & Column_img -> less code needed
@@ -285,7 +284,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 202. rss globalSetting!
 203. rss -> displays only one feed even if two rss tabs are open
 204. rss -> non https feeds not working, non xml rss feeds not working (science alert)
-
+205. Column forwardRef - is it needed still?
 
 
 App structure:

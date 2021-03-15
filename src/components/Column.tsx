@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 import { tabsDataState } from "../state/tabsAndBookmarks";
 
@@ -6,11 +6,10 @@ import {
   columnsColorsState,
   columnsColorsImg_State,
 } from "../state/colorsState";
-import {globalSettingsState } from "../state/defaultSettings";
+import { globalSettingsState } from "../state/defaultSettings";
 
 import Tab from "./Tab";
 
-import { produce } from "immer";
 import GapAfterTab from "./GapAfterTab";
 
 interface Props {
@@ -28,21 +27,12 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
 
-
-  
-
-  function calcColumnColor(colNumber: number, picBackground: boolean, oneColorForAllColumns: boolean) {
+  function calcColumnColor(
+    colNumber: number,
+    picBackground: boolean,
+    oneColorForAllColumns: boolean
+  ) {
     if (!picBackground) {
-      // switch (colNumber) {
-      //   case 1:
-      //     return columnsColorsData.column_1;
-      //   case 2:
-      //     return columnsColorsData.column_2;
-      //   case 3:
-      //     return columnsColorsData.column_3;
-      //   case 4:
-      //     return columnsColorsData.column_4;
-      // }
       return "";
     }
 
@@ -87,16 +77,15 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
     }
   }
 
-  //   return <div className={`bg-${columnsColorsData.column_1}`}>
 
   return (
     <div
       className={`
        ${calcColumnColor_picBackground(
-        colNumber,
-        globalSettingsData.picBackground,
-        globalSettingsData.oneColorForAllCols
-      )}`}
+         colNumber,
+         globalSettingsData.picBackground,
+         globalSettingsData.oneColorForAllCols
+       )}`}
       style={{
         backgroundColor: calcColumnColor(
           colNumber,
@@ -104,7 +93,6 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
           globalSettingsData.oneColorForAllCols
         ),
       }}
-     
     >
       {tabsData
         .filter((el) => el.column === colNumber)
@@ -120,14 +108,21 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
                 tabType={el.type}
                 colNumber={el.column}
                 closeAllTabs={closeAllTabs}
-                
               />
-              <GapAfterTab colNumber={colNumber} tabID={el.id} picBackground={globalSettingsData.picBackground} />
+              <GapAfterTab
+                colNumber={colNumber}
+                tabID={el.id}
+                picBackground={globalSettingsData.picBackground}
+              />
             </div>
           );
         })}
       {tabsData.filter((el) => el.column === colNumber).length === 0 ? (
-        <GapAfterTab colNumber={colNumber} tabID={null} picBackground={globalSettingsData.picBackground} />
+        <GapAfterTab
+          colNumber={colNumber}
+          tabID={null}
+          picBackground={globalSettingsData.picBackground}
+        />
       ) : null}
     </div>
   );

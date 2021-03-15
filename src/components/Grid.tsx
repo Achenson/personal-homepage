@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 
-
 import {
   tabsDataState,
   bookmarksAllTagsState,
@@ -11,7 +10,7 @@ import { closeAllTabsState } from "../state/defaultSettings";
 
 import { produce } from "immer";
 
-import {resetColorsState } from "../state/colorsState";
+import { resetColorsState } from "../state/colorsState";
 
 import { globalSettingsState } from "../state/defaultSettings";
 import Column from "./Column";
@@ -22,21 +21,17 @@ interface Props {}
 
 function Grid({}: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
-  const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
+  const [
+    bookmarksAllTagsData,
+    setBookmarksAllTagsData,
+  ] = bookmarksAllTagsState.use();
   const [resetColorsData, setResetColorsData] = resetColorsState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  const [
-    closeAllTabsData,
-    setCloseAllTabsData,
-  ] = closeAllTabsState.use();
+  const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
 
   const target = React.useRef(null);
   const [width, height] = useSize(target);
-
-  // const [{addedProps}, drop] = useDrop({
-
-  // })
 
   useEffect(() => {
     if (closeAllTabsData) {
@@ -61,14 +56,16 @@ function Grid({}: Props): JSX.Element {
   }, [resetColorsData, setTabsData, setResetColorsData]);
 
   useEffect(() => {
-
     console.log(bookmarksAllTagsData);
 
     // deleting an empty folderTab
     // deleting a tab if there is no tags with the same name in bookmarks
 
     tabsData.forEach((obj, i) => {
-      if (bookmarksAllTagsData.indexOf(obj.id) === -1 && obj.type === "folder") {
+      if (
+        bookmarksAllTagsData.indexOf(obj.id) === -1 &&
+        obj.type === "folder"
+      ) {
         console.log("cut");
 
         setTabsData((previous) =>
@@ -78,8 +75,6 @@ function Grid({}: Props): JSX.Element {
         );
       }
     });
-
-
   }, [tabsData, setTabsData, bookmarksAllTagsData]);
 
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
@@ -134,8 +129,6 @@ function Grid({}: Props): JSX.Element {
       // className={`grid gap-x-2 gap-y-6 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`}
       ref={target}
     >
-    
-
       {renderColumns(globalSettingsData.numberOfCols)}
     </div>
   );
