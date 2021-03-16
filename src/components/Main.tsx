@@ -11,22 +11,11 @@ import { backgroundColorState } from "../state/colorsState";
 import Background_UpperUI from "./UpperUI/Background_UpperUI";
 import Settings_UpperUI from "./UpperUI/Settings_UpperUI";
 
-import {UpperVisAction} from "../utils/interfaces"
+import { UpperVisAction } from "../utils/interfaces";
 
-import {InitUpperVisState} from "../utils/interfaces"
+import { InitUpperVisState } from "../utils/interfaces";
 
 interface Props {}
-
-
-// interface InitUpperVisState {
-//   newBookmarkVis: boolean;
-//   newTabVis: boolean;
-//   backgroundSettingsVis: boolean;
-//   settingsVis: boolean;
-//   colorsSettingsVis: boolean;
-//   colorsBackgroundVis: boolean;
-//   colorsColumnVis: boolean;
-// }
 
 let initUpperVisState: InitUpperVisState = {
   newBookmarkVis: false,
@@ -35,20 +24,12 @@ let initUpperVisState: InitUpperVisState = {
   settingsVis: false,
   colorsSettingsVis: false,
   colorsBackgroundVis: false,
-  colorsColumnVis: false
+  colorsColumnVis: false,
 };
 
 const upperVisStateAllFalse: InitUpperVisState = {
-  // newBookmarkVis: false,
-  // newTabVis: false,
-  // backgroundSettingsVis: false,
-  // settingsVis: false,
-  // colorsSettingsVis: false,
-  // colorsBackgroundVis: false,
-  // colorsColumnVis: false
-  ...initUpperVisState
+  ...initUpperVisState,
 };
-
 
 function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
   switch (action.type) {
@@ -65,7 +46,7 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
     case "NEW_BOOKMARK_TOGGLE":
       return {
         ...upperVisStateAllFalse,
-      newBookmarkVis  : !state.newBookmarkVis,
+        newBookmarkVis: !state.newBookmarkVis,
       };
     case "NEW_TAB_TOGGLE":
       return {
@@ -77,30 +58,28 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
         ...upperVisStateAllFalse,
         settingsVis: !state.settingsVis,
       };
-      case "COLORS_BACKGROUND_TOGGLE":
-        return {
-          ...upperVisStateAllFalse,
-          colorsBackgroundVis: !state.colorsBackgroundVis,
-        };
-        case "COLORS_COLUMN_TOGGLE":
+    case "COLORS_BACKGROUND_TOGGLE":
+      return {
+        ...upperVisStateAllFalse,
+        colorsBackgroundVis: !state.colorsBackgroundVis,
+      };
+    case "COLORS_COLUMN_TOGGLE":
       return {
         ...upperVisStateAllFalse,
         colorsColumnVis: !state.colorsColumnVis,
-      }; 
-      case "COLORS_COLUMN_OPEN":
-        return {
-          ...upperVisStateAllFalse,
-          colorsColumnVis: true,
-        }; 
-        case "CLOSE_ALL":
-          return {
-            ...upperVisStateAllFalse,
-          }; 
-
+      };
+    case "COLORS_COLUMN_OPEN":
+      return {
+        ...upperVisStateAllFalse,
+        colorsColumnVis: true,
+      };
+    case "CLOSE_ALL":
+      return {
+        ...upperVisStateAllFalse,
+      };
 
     default:
-      return {...upperVisStateAllFalse}
-    
+      return { ...upperVisStateAllFalse };
   }
 }
 
@@ -117,69 +96,37 @@ function Main({}: Props): JSX.Element {
     initUpperVisState
   );
 
-  // const [newBookmarkVis, setNewBookmarkVis] = useState<boolean>(false);
-  // const [newTabVis, setNewTabVis] = useState<boolean>(false);
-
-  // const [backgroundSettingsVis, setBackgroundSettingsVis] = useState<boolean>(
-  //   false
-  // );
-
-  // const [settingsVis, setSettingsVis] = useState<boolean>(false);
-
-  // const [colorsVis, setColorsVis] = useState<boolean>(false);
-
   const [tabType, setTabType] = useState<"folder" | "note" | "rss">("folder");
 
   return (
     // <div className="relative h-screen bg-testBackground bg-cover">
     <div
-      className={`relative h-full min-h-screen ${
+      className={`relative min-h-screen ${
         globalSettingsData.picBackground
           ? "bg-testBackground"
           : `bg-${backgroundColorData}`
-      } bg-cover`}
+      } bg-cover bg-fixed`}
     >
       {upperVisState.newTabVis ? (
-        <NewTab_UpperUI 
-        // setNewTabVis={setNewTabVis}
-          upperVisDispatch={upperVisDispatch}
-         tabType={tabType} />
+        <NewTab_UpperUI upperVisDispatch={upperVisDispatch} tabType={tabType} />
       ) : null}
       {upperVisState.newBookmarkVis ? (
         <Bookmark_newAndEdit
-        upperVisDispatch={upperVisDispatch}
-          // setBookmarkVis={setNewBookmarkVis}
+          upperVisDispatch={upperVisDispatch}
           bookmarkComponentType={"new_upperUI"}
         />
       ) : null}
       {upperVisState.backgroundSettingsVis ? (
-        <Background_UpperUI
-        upperVisDispatch={upperVisDispatch}
-          // setBackgroundSettingsVis={setBackgroundSettingsVis}
-          // backgroundSettingsVis={backgroundSettingsVis}
-        />
+        <Background_UpperUI upperVisDispatch={upperVisDispatch} />
       ) : null}
       {upperVisState.settingsVis ? (
-        <Settings_UpperUI
-        upperVisDispatch={upperVisDispatch}
-          // setSettingsVis={setSettingsVis}
-          // settingsVis={settingsVis}
-        />
+        <Settings_UpperUI upperVisDispatch={upperVisDispatch} />
       ) : null}
 
       {upperVisState.colorsSettingsVis ? (
-        <Colors_UpperUI 
-        upperVisDispatch={upperVisDispatch}
-        // colorsVis={colorsVis}
-        // setColorsVis={setColorsVis}
-         />
+        <Colors_UpperUI upperVisDispatch={upperVisDispatch} />
       ) : null}
       <UpperUI
-        // setNewBookmarkVis={setNewBookmarkVis}
-        // setNewTabVis={setNewTabVis}
-        // setBackgroundSettingsVis={setBackgroundSettingsVis}
-        // setSettingsVis={setSettingsVis}
-        // setColorsVis={setColorsVis}
         upperVisState={upperVisState}
         upperVisDispatch={upperVisDispatch}
         setTabType={setTabType}

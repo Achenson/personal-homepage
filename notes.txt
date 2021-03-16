@@ -51,7 +51,12 @@ module.exports = {
 53. RSS -> proxy server or fetching from backend
 
 
-NOTES: Tab logic setTabEditOpenedData(tabID) & setTabColorOpenedData(tabID) crucial;
+NOTES: 
+1. Tab logic setTabEditOpenedData(tabID) & setTabColorOpenedData(tabID) crucial;
+2. make background extend with the content: min-h-screen! (min-height: 100vh;)
+  for image: bg-cover bg-fixed(so the image doesn't scale with contene, )
+
+
 
 
 TO DO:
@@ -130,13 +135,13 @@ DONE 66. createObj should calc priority so new folder land last in a given colum
 xxx 67. RSS refresh button xx reactQuery is taking care of this
 DONE 68. note & RSS improve SVG icon placement DONE
 DONE 72. Column & Grid -> clean code between them DONE
+DONE 73. Main bg is not covering everything if content is too large DONE
 
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-73. Main bg picture is moving a little when opening a column
 74. forms -> consistency in aligning
 75. Column & Column_img -> less code needed
 76. transparent colors for color control if background img is on issue
