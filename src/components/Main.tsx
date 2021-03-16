@@ -133,7 +133,7 @@ function Main({}: Props): JSX.Element {
   return (
     // <div className="relative h-screen bg-testBackground bg-cover">
     <div
-      className={`relative h-screen ${
+      className={`relative h-full min-h-screen ${
         globalSettingsData.picBackground
           ? "bg-testBackground"
           : `bg-${backgroundColorData}`

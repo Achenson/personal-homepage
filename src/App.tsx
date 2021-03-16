@@ -10,7 +10,7 @@ const queryClient = new QueryClient()
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-        <div className="App">
+        <div className="App h-full">
         <DndProvider backend={HTML5Backend}>
           <Main />
         </DndProvider>
