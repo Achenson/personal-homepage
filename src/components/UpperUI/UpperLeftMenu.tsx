@@ -80,7 +80,7 @@ function UpperLeftMenu({upperVisDispatch, upperVisState}: Props): JSX.Element {
       {/* <div className="absolute left-0 bottom-0"> */}
       <div className="flex justify-between items-center mb-2 mt-2">
         {/* <p className="w-32">Columns</p> */}
-        <div className="flex">{columnsRendering(4, globalSettingsData.oneColorForAllCols)}</div>
+        <div className="flex bg-white bg-opacity-80">{columnsRendering(4, globalSettingsData.oneColorForAllCols)}</div>
       </div>
       {globalSettingsData.picBackground ? null : (
         <BackgroundColor

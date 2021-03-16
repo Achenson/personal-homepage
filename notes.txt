@@ -136,15 +136,15 @@ xxx 67. RSS refresh button xx reactQuery is taking care of this
 DONE 68. note & RSS improve SVG icon placement DONE
 DONE 72. Column & Grid -> clean code between them DONE
 DONE 73. Main bg is not covering everything if content is too large DONE
+DONE ? 74. forms -> consistency in aligning ? DONE
+DONE 75. Column & Column_img -> less code needed -> one Column DONE
+DONE 76. transparent colors for color control (UpperLeftMenu) if background img is on issue DONE
 
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-74. forms -> consistency in aligning
-75. Column & Column_img -> less code needed
-76. transparent colors for color control if background img is on issue
 77. GapAfterBookmark background color vs Column background color: make last Gap height longer?
 78. UpperLeftMenu weakly visible if image in the background -> larger borders?
 79. note background -> gray?
@@ -290,6 +290,11 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 203. rss -> displays only one feed even if two rss tabs are open
 204. rss -> non https feeds not working, non xml rss feeds not working (science alert)
 205. Column forwardRef - is it needed still?
+206. newBookmark, editBookmark left paddings
+207. should Tab also have upper border ?
+208. closeAll not working
+209. closeAll not visible on background
+210. test different background Img
 
 
 App structure:
