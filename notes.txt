@@ -295,6 +295,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 208. closeAll not working
 209. closeAll not visible on background
 210. test different background Img
+211. change ALL index logic to find filter etc. (GapAfterTab)
 
 
 App structure:

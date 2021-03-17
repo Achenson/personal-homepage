@@ -14,15 +14,17 @@ interface Item {
   tabID: string | number;
   colNumber: number;
   tabColor: string;
+
 }
 
 interface Props {
   colNumber: number;
   tabID: number | string | null;
   picBackground: boolean;
+  isThisLastGap: boolean;
 }
 
-function GapAfterTab({ colNumber, tabID, picBackground }: Props): JSX.Element {
+function GapAfterTab({ colNumber, tabID, picBackground, isThisLastGap }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [
@@ -117,9 +119,12 @@ function GapAfterTab({ colNumber, tabID, picBackground }: Props): JSX.Element {
 
   return (
     <div
-      className={`${tabID ? "h-6" : "h-14"} ${
+      className={`h-6 ${
         isOver ? calcOpacityOnDrop(picBackground) : ""
-      }`}
+      }
+      ${isThisLastGap ? "h-full" : ""}
+      
+      `}
       // style={{ backgroundColor: singleColumnColor }}
       ref={drop}
     ></div>

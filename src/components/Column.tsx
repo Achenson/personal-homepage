@@ -9,6 +9,7 @@ import {
 import { globalSettingsState } from "../state/defaultSettings";
 
 import Tab from "./Tab";
+import GapLast from "./GapLast"
 
 import GapAfterTab from "./GapAfterTab";
 
@@ -77,6 +78,17 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
     }
   }
 
+  let sortedTabs = tabsData
+  .filter((el) => el.column === colNumber)
+  .sort((a, b) => a.priority - b.priority)
+
+  let lastTabId: number | string | null;
+  // let lastTabId: number | string | null = sortedTabs[sortedTabs.length-1].id
+  if(sortedTabs.length>0) {
+    lastTabId = sortedTabs[sortedTabs.length-1].id
+  } else {
+    lastTabId = null
+  }
 
   return (
     <div
@@ -113,22 +125,27 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
                 colNumber={colNumber}
                 tabID={el.id}
                 picBackground={globalSettingsData.picBackground}
+                isThisLastGap={false}
               />
             </div>
           );
         })}
-      {tabsData.filter((el) => el.column === colNumber).length === 0 ? (
+      {/* {tabsData.filter((el) => el.column === colNumber).length === 0 ? (
         <GapAfterTab
           colNumber={colNumber}
           tabID={null}
           picBackground={globalSettingsData.picBackground}
         />
-      ) : null}
-      <div className="bg-blue-200"
-      style={{height: "calc(100% - 56px)"}}
-      >
-        test
-      </div>
+      ) : null} */}
+  
+        <GapAfterTab
+        colNumber={colNumber}
+        picBackground={globalSettingsData.picBackground}
+        tabID={lastTabId}
+        isThisLastGap={true}
+        />
+
+
     </div>
 
   );
