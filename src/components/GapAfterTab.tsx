@@ -8,13 +8,13 @@ import { ItemTypes } from "../utils/itemsDnd";
 import { tabsDataState } from "../state/tabsAndBookmarks";
 
 import { tabBeingDraggedColor_State } from "../state/colorsState";
+import { is } from "immer/dist/internal";
 
 interface Item {
   type: string;
   tabID: string | number;
   colNumber: number;
   tabColor: string;
-
 }
 
 interface Props {
@@ -24,7 +24,12 @@ interface Props {
   isThisLastGap: boolean;
 }
 
-function GapAfterTab({ colNumber, tabID, picBackground, isThisLastGap }: Props): JSX.Element {
+function GapAfterTab({
+  colNumber,
+  tabID,
+  picBackground,
+  isThisLastGap,
+}: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [
@@ -70,7 +75,6 @@ function GapAfterTab({ colNumber, tabID, picBackground, isThisLastGap }: Props):
 
         // when column is empty
         if (!tabID) {
-          
           if (itemToUpdate) {
             itemToUpdate.priority = 0;
           }
@@ -108,20 +112,25 @@ function GapAfterTab({ colNumber, tabID, picBackground, isThisLastGap }: Props):
   }
 
   function calcOpacityOnDrop(picBackground: boolean) {
-    if (picBackground) {
-      return "bg-black opacity-50";
+    if (isThisLastGap) {
+      if (picBackground) {
+        return "bg-black opacity-20";
+      } else {
+        return "bg-black opacity-10";
+      }
     }
 
-    // console.log(draggedTabColor);
+    if (picBackground) {
+      return "bg-black opacity-50";
+    } else {
+      return `bg-${tabBeingDraggedColor_Data.tabColor} opacity-60`;
+    }
 
-    return `bg-${tabBeingDraggedColor_Data.tabColor} opacity-60`;
   }
 
   return (
     <div
-      className={`h-6 ${
-        isOver ? calcOpacityOnDrop(picBackground) : ""
-      }
+      className={`h-6 ${isOver ? calcOpacityOnDrop(picBackground) : ""}
       ${isThisLastGap ? "h-full" : ""}
       
       `}

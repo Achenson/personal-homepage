@@ -55,6 +55,9 @@ NOTES:
 1. Tab logic setTabEditOpenedData(tabID) & setTabColorOpenedData(tabID) crucial;
 2. make background extend with the content: min-h-screen! (min-height: 100vh;)
   for image: bg-cover bg-fixed(so the image doesn't scale with contene, )
+3. Last Gap in a Column - how to make it stretch for the remaining height of the column:
+ Column: overflow-hidden, 
+  Gap: h-full (height: 100%) 
 
 
 
@@ -139,13 +142,13 @@ DONE 73. Main bg is not covering everything if content is too large DONE
 DONE ? 74. forms -> consistency in aligning ? DONE
 DONE 75. Column & Column_img -> less code needed -> one Column DONE
 DONE 76. transparent colors for color control (UpperLeftMenu) if background img is on issue DONE
+DONE 77. GapAfterTab background color vs Column background color: make last Gap height longer? DONE
 
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-77. GapAfterBookmark background color vs Column background color: make last Gap height longer?
 78. UpperLeftMenu weakly visible if image in the background -> larger borders?
 79. note background -> gray?
 80. warning: two childer with the same key
@@ -296,6 +299,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 209. closeAll not visible on background
 210. test different background Img
 211. change ALL index logic to find filter etc. (GapAfterTab)
+212. less confusing drop? now are different colors right after the Tab and below
 
 
 App structure:
