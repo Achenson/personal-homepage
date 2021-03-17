@@ -80,7 +80,7 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
 
   return (
     <div
-      className={`
+      className={`overflow-hidden
        ${calcColumnColor_picBackground(
          colNumber,
          globalSettingsData.picBackground,
@@ -124,7 +124,13 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
           picBackground={globalSettingsData.picBackground}
         />
       ) : null}
+      <div className="bg-blue-200"
+      style={{height: "calc(100% - 56px)"}}
+      >
+        test
+      </div>
     </div>
+
   );
 });
 
