@@ -9,7 +9,6 @@ import {
 import { globalSettingsState } from "../state/defaultSettings";
 
 import Tab from "./Tab";
-import GapLast from "./GapLast"
 
 import GapAfterTab from "./GapAfterTab";
 
@@ -27,6 +26,14 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
   ] = columnsColorsImg_State.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
+
+
+
+
+
+
+
+  
 
   function calcColumnColor(
     colNumber: number,
@@ -79,20 +86,20 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
   }
 
   let sortedTabs = tabsData
-  .filter((el) => el.column === colNumber)
-  .sort((a, b) => a.priority - b.priority)
+    .filter((el) => el.column === colNumber)
+    .sort((a, b) => a.priority - b.priority);
 
   let lastTabId: number | string | null;
   // let lastTabId: number | string | null = sortedTabs[sortedTabs.length-1].id
-  if(sortedTabs.length>0) {
-    lastTabId = sortedTabs[sortedTabs.length-1].id
+  if (sortedTabs.length > 0) {
+    lastTabId = sortedTabs[sortedTabs.length - 1].id;
   } else {
-    lastTabId = null
+    lastTabId = null;
   }
 
   return (
     <div
-      className={`overflow-hidden
+      className={`
        ${calcColumnColor_picBackground(
          colNumber,
          globalSettingsData.picBackground,
@@ -130,24 +137,23 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
             </div>
           );
         })}
-      {/* {tabsData.filter((el) => el.column === colNumber).length === 0 ? (
+
+      {tabsData.filter((el) => el.column === colNumber).length === 0 ? (
         <GapAfterTab
           colNumber={colNumber}
           tabID={null}
           picBackground={globalSettingsData.picBackground}
+          isThisLastGap={false}
         />
-      ) : null} */}
-  
-        <GapAfterTab
+      ) : null}
+
+      <GapAfterTab
         colNumber={colNumber}
         picBackground={globalSettingsData.picBackground}
         tabID={lastTabId}
         isThisLastGap={true}
-        />
-
-
+      />
     </div>
-
   );
 });
 
