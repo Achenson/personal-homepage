@@ -95,6 +95,21 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
     lastTabId = sortedTabs[sortedTabs.length - 1].id;
   } else {
     lastTabId = null;
+
+  }
+
+  function isThisLastGap(lastTabId: number | string | null, tabID: string|number) {
+
+  
+    
+    if (lastTabId === tabID) {
+      console.log("true");
+      
+      return true;
+    }
+    console.log("false");
+    
+    return false;
   }
 
   return (
@@ -132,7 +147,11 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
                 colNumber={colNumber}
                 tabID={el.id}
                 picBackground={globalSettingsData.picBackground}
-                isThisLastGap={false}
+                isThisLastGap={
+
+               isThisLastGap(lastTabId, el.id)
+
+                }
               />
             </div>
           );
@@ -143,16 +162,18 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
           colNumber={colNumber}
           tabID={null}
           picBackground={globalSettingsData.picBackground}
-          isThisLastGap={false}
+          isThisLastGap={true}
         />
       ) : null}
 
-      <GapAfterTab
+      {/* <GapAfterTab
         colNumber={colNumber}
         picBackground={globalSettingsData.picBackground}
         tabID={lastTabId}
         isThisLastGap={true}
-      />
+      /> */}
+
+
     </div>
   );
 });

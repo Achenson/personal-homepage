@@ -55,13 +55,10 @@ NOTES:
 1. Tab logic setTabEditOpenedData(tabID) & setTabColorOpenedData(tabID) crucial;
 2. make background extend with the content: min-h-screen! (min-height: 100vh;)
   for image: bg-cover bg-fixed(so the image doesn't scale with contene, )
-3. Last Gap in a Column - how to make it stretch for the remaining height of the column:
- Column: overflow-hidden, 
-  Gap: h-full (height: 100%) 
-
-
-
-
+3. Last Gap in a Column - 
+ Column: overflow-hidden & Gap: h-full (height: 100%) not working because EditTab
+ and edit bookmakr need overflow
+ solution: absolute invisible last gap stretching screen height
 TO DO:
 
 DONE 3. bookmark move icon - hide when moving? DONE
@@ -142,8 +139,8 @@ DONE 73. Main bg is not covering everything if content is too large DONE
 DONE ? 74. forms -> consistency in aligning ? DONE
 DONE 75. Column & Column_img -> less code needed -> one Column DONE
 DONE 76. transparent colors for color control (UpperLeftMenu) if background img is on issue DONE
-DONE 77. GapAfterTab background color vs Column background color: make last Gap height longer? DONE
-DONE 78. UpperLeftMenu weakly visible if image in the background -> larger borders? DONE (non transparent colors)
+DONE 77. GapAfterTab background color vs Column background color: make last Gap height longer? DONE (see notes)
+DONE78. UpperLeftMenu weakly visible if image in the background -> larger borders? DONE (non transparent colors)
 
 
 
@@ -302,7 +299,8 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 211. change ALL index logic to find filter etc. (GapAfterTab)
 212. less confusing drop? now are different colors right after the Tab and below
 213. not obvious how to close note if opened by clicking on text
-
+214. closing all windows also when dragging
+215. background color does not stretch all the way down!
 
 App structure:
 Main
