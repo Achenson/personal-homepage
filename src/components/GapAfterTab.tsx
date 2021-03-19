@@ -8,7 +8,8 @@ import { ItemTypes } from "../utils/itemsDnd";
 import { tabsDataState } from "../state/tabsAndBookmarks";
 
 import { tabBeingDraggedColor_State } from "../state/colorsState";
-import { is } from "immer/dist/internal";
+import { is, objectTraps } from "immer/dist/internal";
+import { ObjectFlags } from "typescript";
 
 interface Item {
   type: string;
@@ -81,7 +82,7 @@ function GapAfterTab({
           return;
         }
 
-        //index of tab before the gap the tab is dragged into
+        // index of tab before the gap the tab is dragged into
         let draggedIntoIndex: number = 0;
 
         tabsData.forEach((obj, i) => {
@@ -92,21 +93,60 @@ function GapAfterTab({
 
         let draggedIntoPriority = tabsData[draggedIntoIndex].priority;
 
-        tabsData.forEach((obj, i) => {
-          let currentTabIndex: number = i;
+        if (
+          itemID !== tabID &&
+          (draggedIntoPriority + 1 !== itemToUpdate?.priority ||
+            colNumber !== itemColNumber)
+        ) {
+          if (itemToUpdate) {
+            if (
+              colNumber === itemColNumber &&
+              draggedIntoPriority > itemToUpdate.priority
 
-          // setting item priority to 1 higher than the tab placed right before the gap
-          if (obj.id === itemID) {
-            updated[currentTabIndex].priority = draggedIntoPriority + 1;
-          }
 
-          // incrementing by 1 priorities of Tabs positioned after the place where the item is being dragged to
-          if (obj.column === colNumber && obj.id !== itemID) {
-            if (obj.priority > draggedIntoPriority) {
-              updated[currentTabIndex].priority += 1;
+            ) {
+              itemToUpdate.priority = draggedIntoPriority;
+            } else {
+              itemToUpdate.priority = draggedIntoPriority + 1;
             }
           }
-        });
+
+          tabsData
+            .filter((obj) => obj.column === colNumber)
+            .filter((obj) => obj.id !== itemID)
+            .sort((a, b) => a.priority - b.priority)
+            .forEach((filteredTab, i) => {
+              let tabToUpdate = updated.find(
+                (tab) => tab.id === filteredTab.id
+              );
+
+              if (tabToUpdate) {
+                if (tabToUpdate.priority <= draggedIntoPriority) {
+                  tabToUpdate.priority = i;
+                } else {
+                  tabToUpdate.priority += 1;
+                }
+              }
+            });
+
+            
+        }
+
+        // tabsData.forEach((obj, i) => {
+        //   let currentTabIndex: number = i;
+
+        //   // setting item priority to 1 higher than the tab placed right before the gap
+        //   if (obj.id === itemID) {
+        //     updated[currentTabIndex].priority = draggedIntoPriority + 1;
+        //   }
+
+        //   // incrementing by 1 priorities of Tabs positioned after the place where the item is being dragged to
+        //   if (obj.column === colNumber && obj.id !== itemID) {
+        //     if (obj.priority > draggedIntoPriority) {
+        //       updated[currentTabIndex].priority += 1;
+        //     }
+        //   }
+        // });
       })
     );
   }

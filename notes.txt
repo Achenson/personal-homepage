@@ -141,6 +141,8 @@ DONE 75. Column & Column_img -> less code needed -> one Column DONE
 DONE 76. transparent colors for color control (UpperLeftMenu) if background img is on issue DONE
 DONE 77. GapAfterTab background color vs Column background color: make last Gap height longer? DONE (see notes)
 DONE78. UpperLeftMenu weakly visible if image in the background -> larger borders? DONE (non transparent colors)
+DONE 79. note background -> gray? DONE
+DONE 80. warning: two childer with the same key DONE
 
 
 
@@ -148,8 +150,6 @@ DONE78. UpperLeftMenu weakly visible if image in the background -> larger border
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-79. note background -> gray?
-80. warning: two childer with the same key
 81. potential problem: if changing bookmarks within column only, the priority nrs can reach v.high numbers
 82. background img problem is opening long RSS
 83. get rid of useSize/dimensions hook?
@@ -301,6 +301,10 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 213. not obvious how to close note if opened by clicking on text
 214. closing all windows also when dragging
 215. background color does not stretch all the way down!
+216. Note does not look good?
+217. unmounted component error
+218. rss, bookmark & notes color: choose one for all
+
 
 App structure:
 Main
@@ -333,3 +337,20 @@ Main
       
       
       ${isOver ? "opacity-50" : ""}`
+
+
+
+
+   // tabsData
+        //   .filter((obj) => obj.column === itemColNumber)
+        //   // ignoring the tab being dragged
+        //   .filter((obj) => obj.id !== itemID)
+        //   .sort((a, b) => a.priority - b.priority)
+        //   // @ts-ignore
+        //   .filter((obj) => obj.priority > dropTargetTab.priority)
+        //   .forEach((filteredTab, i) => {
+        //     let tabToUpdate = updated.find((tab) => tab.id === filteredTab.id);
+        //     if (tabToUpdate) {
+        //       tabToUpdate.priority++;
+        //     }
+        //   });
