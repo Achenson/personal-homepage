@@ -95,19 +95,21 @@ function GapAfterTab({
 
         if (
           itemID !== tabID &&
+          // if draggetItem do not belongs to the column OR draggedIntoTab is not the previous tab
           (draggedIntoPriority + 1 !== itemToUpdate?.priority ||
             colNumber !== itemColNumber)
         ) {
           if (itemToUpdate) {
-            if (
-              colNumber === itemColNumber &&
-              draggedIntoPriority > itemToUpdate.priority
-
-
-            ) {
-              itemToUpdate.priority = draggedIntoPriority;
-            } else {
+            if (colNumber !== itemColNumber) {
               itemToUpdate.priority = draggedIntoPriority + 1;
+            } else {
+              // if dragging to a Tab further down
+              if (draggedIntoPriority > itemToUpdate.priority) {
+                itemToUpdate.priority = draggedIntoPriority;
+                //  if dragging to a Tab further up
+              } else {
+                itemToUpdate.priority = draggedIntoPriority + 1;
+              }
             }
           }
 
@@ -123,13 +125,37 @@ function GapAfterTab({
               if (tabToUpdate) {
                 if (tabToUpdate.priority <= draggedIntoPriority) {
                   tabToUpdate.priority = i;
+                  // if tab being updated is further down that the tab being dragged INTO
                 } else {
-                  tabToUpdate.priority += 1;
+                  // updating priorities further down
+
+                  if (colNumber !== itemColNumber) {
+                    tabToUpdate.priority += 1;
+                  } else {
+
+
+                    // DO NOT UPDATE TABS further down then tab being dragged if tab is being dragged up
+// @ts-ignore
+                    if(draggedIntoPriority<itemToUpdate.priority && tabToUpdate.priority > itemToUpdate.priority) {
+                     console.log("up");
+                     return;
+                    }
+
+                    // DO NOT UPDATE TABS further down then tab being dragged INTO if tab is being dragged down
+// @ts-ignore
+                    if(draggedIntoPriority>itemToUpdate.priority && tabToUpdate.priority > draggedIntoPriority) {
+                      console.log("down");
+                      
+                      return;
+                    }
+
+                    tabToUpdate.priority += 1;
+
+
+                  }
                 }
               }
             });
-
-            
         }
 
         // tabsData.forEach((obj, i) => {

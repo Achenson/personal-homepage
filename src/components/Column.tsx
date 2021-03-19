@@ -103,11 +103,11 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
   
     
     if (lastTabId === tabID) {
-      console.log("true");
+      // console.log("true");
       
       return true;
     }
-    console.log("false");
+    // console.log("false");
     
     return false;
   }
