@@ -144,6 +144,10 @@ DONE78. UpperLeftMenu weakly visible if image in the background -> larger border
 DONE 79. note background -> gray? DONE
 DONE 80. warning: two childer with the same key DONE
 DONE 81. potential problem: if changing bookmarks within column only, the priority nrs can reach v.high numbers DONE
+DONE 84. always open property on folder DONE
+DONE 85. get rid of bookmark priorities being displayed in the end DONE
+XXX 87. rss reader cannot be initially always opened XXX can be
+DONE 88. columnImg -> make color cntrls more visible DONE
 
 
 
@@ -151,12 +155,7 @@ DONE 81. potential problem: if changing bookmarks within column only, the priori
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-82. background img problem is opening long RSS
-83. get rid of useSize/dimensions hook?
-84. always open property on folder 
-85. get rid of bookmark priorities being displayed in the end
-87. rss reader cannot be initially always opened
-88. columnImg -> make color cntrls more visible
+
 89. add second image for the background
 90. rss error handling
 91. && operators instead of ?
@@ -304,6 +303,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 216. Note does not look good?
 217. unmounted component error
 218. rss, bookmark & notes color: choose one for all
+219. get rid of useSize/dimensions hook?
 
 
 App structure:

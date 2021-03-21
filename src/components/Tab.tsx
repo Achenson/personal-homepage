@@ -368,8 +368,9 @@ Props): JSX.Element {
         >
           <p className="">
             {" "}
-            {tabTitle} {tabsData[tabIndex].priority}{" "}
-            {tabsData[tabIndex].deletable.toString()}
+            {tabTitle}
+             {/* {tabsData[tabIndex].priority}{" "} */}
+            {/* {tabsData[tabIndex].deletable.toString()} */}
           </p>
         </div>
 
