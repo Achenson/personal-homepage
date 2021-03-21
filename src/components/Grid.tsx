@@ -56,7 +56,7 @@ function Grid({}: Props): JSX.Element {
   }, [resetColorsData, setTabsData, setResetColorsData]);
 
   useEffect(() => {
-    console.log(bookmarksAllTagsData);
+    // console.log(bookmarksAllTagsData);
 
     // deleting an empty folderTab
     // deleting a tab if there is no tags with the same name in bookmarks

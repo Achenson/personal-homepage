@@ -143,6 +143,7 @@ DONE 77. GapAfterTab background color vs Column background color: make last Gap 
 DONE78. UpperLeftMenu weakly visible if image in the background -> larger borders? DONE (non transparent colors)
 DONE 79. note background -> gray? DONE
 DONE 80. warning: two childer with the same key DONE
+DONE 81. potential problem: if changing bookmarks within column only, the priority nrs can reach v.high numbers DONE
 
 
 
@@ -150,7 +151,6 @@ DONE 80. warning: two childer with the same key DONE
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-81. potential problem: if changing bookmarks within column only, the priority nrs can reach v.high numbers
 82. background img problem is opening long RSS
 83. get rid of useSize/dimensions hook?
 84. always open property on folder 
