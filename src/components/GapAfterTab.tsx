@@ -162,19 +162,17 @@ function GapAfterTab({
   }
 
   function calcOpacityOnDrop(picBackground: boolean) {
-    // if (isThisLastGap) {
-    //   if (picBackground) {
-    //     return "bg-black opacity-20";
-    //   } else {
-    //     return "bg-black opacity-10";
-    //   }
+   
+
+    // if (picBackground) {
+    //   return "bg-black opacity-50";
+    // } else {
+    //   return `bg-${tabBeingDraggedColor_Data.tabColor} opacity-60`;
     // }
 
-    if (picBackground) {
-      return "bg-black opacity-50";
-    } else {
+   
       return `bg-${tabBeingDraggedColor_Data.tabColor} opacity-60`;
-    }
+  
   }
 
   return (
