@@ -159,7 +159,7 @@ function Bookmark_upper_JSX({
           )}
         </div>
 
-        {tagsListVis ? (
+        {tagsListVis && (
           <TagsList_UpperUI
             setTagsInputStr={setTagsInputStr}
             tagsInputStr={tagsInputStr}
@@ -167,33 +167,33 @@ function Bookmark_upper_JSX({
             width="271px"
             marginLeft="42px"
           />
-        ) : null}
+        )}
 
-        {titleFormatErrorVis ? (
+        {titleFormatErrorVis && (
           <p className={`text-red-600`}>
             Bookmark title can contain letters, numbers or underscore
           </p>
-        ) : null}
+        )}
 
-        {titleUniquenessErrorVis ? (
+        {titleUniquenessErrorVis && (
           <p className={`text-red-600`}>Bookmark with that title already exists</p>
-        ) : null}
+        )}
 
-        {tagErrorVis ? (
+        {tagErrorVis && (
           <p className={`text-red-600`}>
             Tags should consist of words separated by coma and single space
           </p>
-        ) : null}
+        )}
 
-        {noteErrorVis ? (
+        {noteErrorVis && (
           <p className={`text-red-600`}>
             Names for tags cannot be the same as Notes titles
           </p>
-        ) : null}
+        )}
 
-        {tagRepeatErrorVis ? (
+        {tagRepeatErrorVis && (
           <p className={`text-red-600`}>Each tag should be unique</p>
-        ) : null}
+        )}
 
         <div className="flex justify-start mt-6">
           <p className="w-1"></p>

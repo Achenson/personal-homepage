@@ -149,6 +149,7 @@ DONE 85. get rid of bookmark priorities being displayed in the end DONE
 XXX 87. rss reader cannot be initially always opened XXX can be
 DONE 88. columnImg -> make color cntrls more visible DONE
 DONE 89. add second image for the background DONE (2 addition img added)
+DONE 91. && operators instead of ? DONE (&& return first falsy value or last value)
 
 
 
@@ -157,8 +158,6 @@ DONE 89. add second image for the background DONE (2 addition img added)
 
 
 
-90. rss error handling
-91. && operators instead of ?
 92. two !! at the begining GapAfterBookmark
 93. GapAfterBookmark: decide isOver color (bookmark being dragged dependend, or column dependend)
 94. no x gaps between columns?
@@ -306,6 +305,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 219. get rid of useSize/dimensions hook?
 220. eye to close on small screen
 221. upper right interface background doesn't look good with light image bg/ inconsisten with upper left interface?
+222. rss error handling
 
 
 App structure:

@@ -195,7 +195,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           {/* <ChevronDownSVG className="h-6 invisible" /> */}
         </div>
 
-        {tabType === "folder" ? (
+        {tabType === "folder" && (
           <div className="flex justify-around mb-2 mt-2">
             <p className="w-32">Bookmarks</p>
             {/* <div className="w-full pl-2"> */}
@@ -253,9 +253,9 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               </div>
             )}
           </div>
-        ) : null}
+        )}
 
-        {tabType === "rss" ? (
+        {tabType === "rss" && (
           <div className="flex justify-around mb-2 mt-2">
             <p className="w-32">RSS link</p>
             <div className="w-full">
@@ -271,7 +271,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               <ChevronDownSVG className="h-full invisible" />
             </div>
           </div>
-        ) : null}
+        )}
 
         <div className="flex justify-between mb-2 mt-2">
           <p className="w-32">Column</p>
@@ -287,7 +287,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           {/* </div> */}
         </div>
 
-        {tabType === "note" ? (
+        {tabType === "note" && (
           <div>
             <textarea
               value={textAreaValue as string}
@@ -298,9 +298,9 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               }}
             ></textarea>
           </div>
-        ) : null}
+        )}
 
-        {tabsListVis ? (
+        {tabsListVis && (
           <TagsList_UpperUI
             setTagsInputStr={setTabsInputStr}
             tagsInputStr={tabsInputStr}
@@ -308,39 +308,39 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             width="228px"
             marginLeft="89px"
           />
-        ) : null}
+        )}
 
-        {titleFormatErrorVis ? (
+        {titleFormatErrorVis && (
           <p className={`text-red-600`}>
             Folder title can contain letters, numbers or underscore
           </p>
-        ) : null}
+        )}
 
-        {titleUniquenessErrorVis ? (
+        {titleUniquenessErrorVis && (
           <p className={`text-red-600`}>
             Folder with that title already exists
           </p>
-        ) : null}
+        )}
 
-        {tabsErrorVis && tabType === "folder" ? (
+        {tabsErrorVis && tabType === "folder" && (
           <p className={`text-red-600`}>
             Tabs should consist of words separated by coma and space
           </p>
-        ) : null}
+        )}
 
-        {tabsExistenceErrorVis && tabType === "folder" ? (
+        {tabsExistenceErrorVis && tabType === "folder" && (
           <p className={`text-red-600`}>
             You can choose from existing tabs only
           </p>
-        ) : null}
+        )}
 
-        {tabsRepeatErrorVis && tabType === "folder" ? (
+        {tabsRepeatErrorVis && tabType === "folder" && (
           <p className={`text-red-600`}>Each tab should be unique</p>
-        ) : null}
+        )}
 
-        {textAreaErrorVis && tabType === "note" ? (
+        {textAreaErrorVis && tabType === "note" && (
           <p className={`text-red-600`}>Note cannot be empty</p>
-        ) : null}
+        )}
 
         <div className="flex justify-start mt-6">
           <p className="w-8"></p>

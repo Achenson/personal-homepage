@@ -200,11 +200,11 @@ function Colors_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             // "157px"
           }}
         >
-          {colorsToChooseVis ? (
+          {colorsToChooseVis && (
             <div className="absolute" style={{left: "67px"}}>
               <ColorsToChoose_Default defaultColorsFor={defaultColorsFor} />
             </div>
-          ) : null}
+          )}
         </div>
       </div>
     </div>

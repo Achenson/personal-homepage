@@ -57,7 +57,7 @@ function Bookmark_lower_JSX({
   bookmarkId,
   currentBookmark,
   visDispatch,
-  colNumber
+  colNumber,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [
@@ -188,7 +188,7 @@ function Bookmark_lower_JSX({
           )}
         </div>
 
-        {tagsListVis ? (
+        {tagsListVis && (
           <TagsList_UpperUI
             setTagsInputStr={setTagsInputStr}
             tagsInputStr={tagsInputStr}
@@ -196,35 +196,35 @@ function Bookmark_lower_JSX({
             width="271px"
             marginLeft="42px"
           />
-        ) : null}
+        )}
 
-        {titleFormatErrorVis ? (
+        {titleFormatErrorVis && (
           <p className={`text-red-600`}>
             Bookmark title can contain letters, numbers or underscore
           </p>
-        ) : null}
+        )}
 
-        {titleUniquenessErrorVis ? (
+        {titleUniquenessErrorVis && (
           <p className={`text-red-600`}>
             Bookmark with that title already exists
           </p>
-        ) : null}
+        )}
 
-        {tagErrorVis ? (
+        {tagErrorVis && (
           <p className={`text-red-600`}>
             Tags should consist of words separated by coma and single space
           </p>
-        ) : null}
+        )}
 
-        {noteErrorVis ? (
+        {noteErrorVis && (
           <p className={`text-red-600`}>
             Names for tags cannot be the same as Notes titles
           </p>
-        ) : null}
+        )}
 
-        {tagRepeatErrorVis ? (
+        {tagRepeatErrorVis && (
           <p className={`text-red-600`}>Each tag should be unique</p>
-        ) : null}
+        )}
 
         <div className="flex justify-start mt-6">
           <p className="w-1"></p>
@@ -297,11 +297,11 @@ function Bookmark_lower_JSX({
                   )[0];
 
                   let sortedTabsInCol = tabsData
-                  .filter((obj) => obj.column === colNumber)
-                  .sort((a, b) => a.priority - b.priority);
+                    .filter((obj) => obj.column === colNumber)
+                    .sort((a, b) => a.priority - b.priority);
 
-                let newTabPriority =
-                  sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
+                  let newTabPriority =
+                    sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
 
                   // if folder with title corresponding to tag doesn't exist
                   if (!filteredTab && tagsInputStr !== "") {
@@ -334,13 +334,12 @@ function Bookmark_lower_JSX({
                       let bookmarkToUpdate = updated.find(
                         (obj) => obj.id === bookmarkId
                       );
-                        //"if" to get rid of ts error
+                      //"if" to get rid of ts error
                       if (bookmarkToUpdate) {
                         bookmarkToUpdate.title = titleInput;
                         bookmarkToUpdate.URL = urlInput;
                         bookmarkToUpdate.tags = [...tagsInputArr_ToIds];
                       }
-
                     })
                   );
 

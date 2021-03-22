@@ -11,16 +11,18 @@ import BackgroundColorsToChoose from "../Colors/ColorsToChoose_Background";
 
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
 
-import {UpperVisAction, InitUpperVisState} from "../../utils/interfaces"
+import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
 
 interface Props {
   upperVisState: InitUpperVisState;
-  upperVisDispatch: React.Dispatch<UpperVisAction>
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
-function UpperLeftMenu({upperVisDispatch, upperVisState}: Props): JSX.Element {
+function UpperLeftMenu({
+  upperVisDispatch,
+  upperVisState,
+}: Props): JSX.Element {
   const [columnSelected, setColumnSelected] = useState<number | null>(null);
-
 
   const [defaultColorsFor, setDefaultColorsFor] = useState<
     "column_1" | "column_2" | "column_3" | "column_4" | "unselected"
@@ -29,13 +31,10 @@ function UpperLeftMenu({upperVisDispatch, upperVisState}: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function columnsRendering(howMany: number, oneColorForAllCols: boolean) {
-  
-
     let arrOfColumns = [];
     for (let i = 1; i <= howMany; i++) {
       arrOfColumns.push(i);
     }
-
 
     return arrOfColumns.map((el, index) => {
       return globalSettingsData.picBackground ? (
@@ -45,7 +44,6 @@ function UpperLeftMenu({upperVisDispatch, upperVisState}: Props): JSX.Element {
 
           defaultColorsFor={defaultColorsFor}
           setDefaultColorsFor={setDefaultColorsFor}
-
           // setColorsToChooseVis={setColorsToChooseVis}
 
           columnSelected={columnSelected}
@@ -60,7 +58,6 @@ function UpperLeftMenu({upperVisDispatch, upperVisState}: Props): JSX.Element {
           colNumber={oneColorForAllCols ? 1 : el}
           // colSelected={false}
           defaultColorsFor={defaultColorsFor}
-
           // setColorsToChooseVis={setColorsToChooseVis}
 
           columnSelected={columnSelected}
@@ -80,7 +77,9 @@ function UpperLeftMenu({upperVisDispatch, upperVisState}: Props): JSX.Element {
       {/* <div className="absolute left-0 bottom-0"> */}
       <div className="flex justify-between items-center mb-2 mt-2">
         {/* <p className="w-32">Columns</p> */}
-        <div className="flex bg-white bg-opacity-80">{columnsRendering(4, globalSettingsData.oneColorForAllCols)}</div>
+        <div className="flex bg-white bg-opacity-80">
+          {columnsRendering(4, globalSettingsData.oneColorForAllCols)}
+        </div>
       </div>
       {globalSettingsData.picBackground ? null : (
         <BackgroundColor
@@ -88,20 +87,18 @@ function UpperLeftMenu({upperVisDispatch, upperVisState}: Props): JSX.Element {
           upperVisDispatch={upperVisDispatch}
         />
       )}
-      <EyeOff
-        upperVisDispatch={upperVisDispatch}
-      />
+      <EyeOff upperVisDispatch={upperVisDispatch} />
 
       {/* <div className="absolute left-0" style={{ bottom: "104px" }}> */}
       <div className="absolute left-0 top-3">
-        {upperVisState.colorsColumnVis? (
+        {upperVisState.colorsColumnVis && (
           <DefaultColorsToChoose defaultColorsFor={defaultColorsFor} />
-        ) : null}
-        {upperVisState.colorsBackgroundVis ? (
+        )}
+        {upperVisState.colorsBackgroundVis && (
           <div className="absolute left-60 top-7">
             <BackgroundColorsToChoose />
           </div>
-        ) : null}
+        )}
       </div>
     </div>
   );

@@ -107,25 +107,25 @@ function Main({}: Props): JSX.Element {
           : `bg-${backgroundColorData}`
       } bg-cover bg-fixed`}
     >
-      {upperVisState.newTabVis ? (
+      {upperVisState.newTabVis && (
         <NewTab_UpperUI upperVisDispatch={upperVisDispatch} tabType={tabType} />
-      ) : null}
-      {upperVisState.newBookmarkVis ? (
+      )}
+      {upperVisState.newBookmarkVis && (
         <Bookmark_newAndEdit
           upperVisDispatch={upperVisDispatch}
           bookmarkComponentType={"new_upperUI"}
         />
-      ) : null}
-      {upperVisState.backgroundSettingsVis ? (
+      )}
+      {upperVisState.backgroundSettingsVis && (
         <Background_UpperUI upperVisDispatch={upperVisDispatch} />
-      ) : null}
-      {upperVisState.settingsVis ? (
+      )}
+      {upperVisState.settingsVis && (
         <Settings_UpperUI upperVisDispatch={upperVisDispatch} />
-      ) : null}
+      )}
 
-      {upperVisState.colorsSettingsVis ? (
+      {upperVisState.colorsSettingsVis && (
         <Colors_UpperUI upperVisDispatch={upperVisDispatch} />
-      ) : null}
+      )}
       <UpperUI
         upperVisState={upperVisState}
         upperVisDispatch={upperVisDispatch}

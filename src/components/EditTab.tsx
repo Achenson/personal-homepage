@@ -220,7 +220,7 @@ Props): JSX.Element {
             setWasAnythingClicked(true);
           }}
         />
-      {tabType === "folder" ? <ChevronDownSVG className="h-6 invisible" /> : null }  
+      {tabType === "folder" && <ChevronDownSVG className="h-6 invisible" />}  
       </div>
       {tabType === "folder" && (
         <div className="flex items-center mt-2 mb-3 justify-between">
@@ -275,7 +275,7 @@ Props): JSX.Element {
         </div>
       )}
 
-      {tabType === "folder" && tabsListVis ? (
+      {tabType === "folder" && tabsListVis && (
         <TagsList_UpperUI
           setTagsInputStr={setTabsInputStr}
           tagsInputStr={tabsInputStr}
@@ -283,40 +283,40 @@ Props): JSX.Element {
           width="271px"
           marginLeft="42px"
         />
-      ) : null}
+      )}
 
-      {tagErrorVis ? (
+      {tagErrorVis && (
         <p className={`text-red-600`}>
           Tab title should consist of single or multiple words without special characters
         </p>
-      ) : null}
+      )}
 
-      {bookmarksErrorVis && tabType === "folder" ? (
+      {bookmarksErrorVis && tabType === "folder" && (
         <p className={`text-red-600`}>
           Bookmarks should consist of single or multiple words (without special characters) separated by coma and space
         </p>
-      ) : null}
+      )}
 
-      {bookmarksExistenceErrorVis && tabType === "folder" ? (
+      {bookmarksExistenceErrorVis && tabType === "folder" && (
         <p className={`text-red-600`}>You can choose from existing bookmarks only</p>
-      ) : null}
+      )}
 
-      {tabsRepeatErrorVis && tabType === "folder" ? (
+      {tabsRepeatErrorVis && tabType === "folder" && (
         <p className={`text-red-600`}>Each tab should be unique</p>
-      ) : null}
+      )}
 
-      {textAreaErrorVis && tabType === "note" ? (
+      {textAreaErrorVis && tabType === "note" && (
         <p className={`text-red-600`}>Note cannot be empty</p>
-      ) : null}
+      )}
 
-      {noDeletionErrorVis ? (
+      {noDeletionErrorVis && (
         <p className={`text-red-600`}>
           Folder with all bookmarks cannot be deleted. You can hide it in the
           global settings instead
         </p>
-      ) : null}
+      )}
 
-      {tabType === "note" ? (
+      {tabType === "note" && (
         <div className="mt-2 mb-3">
           <textarea
             value={textAreaValue as string}
@@ -328,9 +328,9 @@ Props): JSX.Element {
             }}
           ></textarea>
         </div>
-      ) : null}
+      )}
 
-      {tabType === "rss" ? (
+      {tabType === "rss" && (
         <div className="mb-1">
           <div className="flex items-center mt-2 justify-between">
             <p className="w-24 whitespace-nowrap mr-px">RSS link</p>
@@ -436,7 +436,7 @@ Props): JSX.Element {
             to default
           </p>
         </div>
-      ) : null}
+      )}
 
       <div className={`pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
         <div className="flex justify-between items-center">

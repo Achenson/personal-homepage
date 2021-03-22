@@ -389,16 +389,16 @@ Props): JSX.Element {
               setCrossVis(true);
             }}
           >
-            {crossVis ? (
+            {crossVis && (
               <CrossArrowsSVG
                 // className="h-6  hover:text-black hover:invisible"
                 className="h-6"
                 style={{ marginTop: "-2px" }}
               />
-            ) : null}
+            )}
           </div>
 
-          {tabType === "folder" ? (
+          {tabType === "folder" && (
             <PlusSVG
               className={`h-8 hover:${hoverText(finalTabColor)} cursor-pointer`}
               style={{ marginTop: "-6px" }}
@@ -408,7 +408,7 @@ Props): JSX.Element {
                 visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
               }}
             />
-          ) : null}
+          )}
 
           <ColorSmallSVG
             className={`h-5 mr-2 hover:${hoverText(
@@ -437,20 +437,20 @@ Props): JSX.Element {
         </div>
       </div>
 
-      {visState.colorsVis ? (
+      {visState.colorsVis && (
         <ColorsToChoose setIconsVis={setIconsVis} tabID={tabID} />
-      ) : null}
+      )}
 
-      {visState.editBookmarkVis ? (
+      {visState.editBookmarkVis && (
         <Bookmark_newAndEdit
           // setBookmarkVis={setEditBookmarkVis}
           bookmarkComponentType={"edit"}
           bookmarkId={bookmarkId}
           visDispatch={visDispatch}
         />
-      ) : null}
+      )}
 
-      {visState.newBookmarkVis ? (
+      {visState.newBookmarkVis && (
         // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
 
         <Bookmark_newAndEdit
@@ -459,9 +459,9 @@ Props): JSX.Element {
           visDispatch={visDispatch}
           colNumber={colNumber}
         />
-      ) : null}
+      )}
 
-      {visState.editTabVis ? (
+      {visState.editTabVis && (
         <EditTab
           tabID={tabID}
           tabType={tabType}
@@ -469,9 +469,9 @@ Props): JSX.Element {
           visDispatch={visDispatch}
           // noteInput={noteInput}
         />
-      ) : null}
+      )}
 
-      {visState.tabContentVis && tabType === "folder" ? (
+      {visState.tabContentVis && tabType === "folder" && (
         <div>
           {bookmarksData
             .filter((el) => el.tags.indexOf(tabID) > -1)
@@ -491,20 +491,20 @@ Props): JSX.Element {
 
           {/* <SingleLink setEditLinkVis={setEditBookmarkVis} /> */}
         </div>
-      ) : null}
+      )}
 
-      {visState.tabContentVis && tabType === "note" ? (
+      {visState.tabContentVis && tabType === "note" && (
         <NoteInput
           //  noteInput={noteInput}
           tabID={tabID}
           // setEditTabVis={setEditTabVis}
           visDispatch={visDispatch}
         />
-      ) : null}
+      )}
 
-      {visState.tabContentVis && tabType === "rss" ? (
+      {visState.tabContentVis && tabType === "rss" && (
         <RSS_reactQuery tabID={tabID} />
-      ) : null}
+      )}
     </div>
   );
 }
