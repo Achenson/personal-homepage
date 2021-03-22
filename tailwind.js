@@ -63,6 +63,9 @@ module.exports = {
       },
       backgroundImage: (theme) => ({
         testBackground: "url('../images/unsplash.jpg')",
+        testBackground_2: "url('../images/pexels-a-pasaric-small.jpg')",
+        testBackground_3: "url('../images/pexels-j-novacek-small.jpg')",
+
       }),
     },
   },

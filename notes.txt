@@ -148,6 +148,7 @@ DONE 84. always open property on folder DONE
 DONE 85. get rid of bookmark priorities being displayed in the end DONE
 XXX 87. rss reader cannot be initially always opened XXX can be
 DONE 88. columnImg -> make color cntrls more visible DONE
+DONE 89. add second image for the background DONE (2 addition img added)
 
 
 
@@ -156,7 +157,6 @@ DONE 88. columnImg -> make color cntrls more visible DONE
 
 
 
-89. add second image for the background
 90. rss error handling
 91. && operators instead of ?
 92. two !! at the begining GapAfterBookmark
@@ -304,6 +304,8 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 217. unmounted component error
 218. rss, bookmark & notes color: choose one for all
 219. get rid of useSize/dimensions hook?
+220. eye to close on small screen
+221. upper right interface background doesn't look good with light image bg/ inconsisten with upper left interface?
 
 
 App structure:
