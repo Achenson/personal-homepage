@@ -34,6 +34,11 @@ function BackgroundSettings_UpperUI({
   const imgDescription = "Upload custom background image or use default. Custom transparent color columns"
   
   const noImgDescription = "Custom full color background and columns"
+
+  function btnHover() {
+    return `hover:bg-${uiColorData} hover:bg-opacity-50 hover:`
+  }
+
   return (
     <div
       className="flex flex-col z-50 absolute h-screen w-screen justify-center items-center"
@@ -113,38 +118,11 @@ function BackgroundSettings_UpperUI({
           
             <div className={`flex justify-between items-center ${imgBackgroundMode ? "" : "hidden"}`}>
                <div className="bg-white h-6 w-60"></div>
-               <button className={`border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData}`}>Upload image</button>
+               <button className={`border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150`}>Upload image</button>
             </div>
 
           </div>
-          {/* <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="w-32">Folder default</p>
-            <div
-            
-            >null</div>
-          </div>
-          <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="w-32">Notes default</p>
-            <div
-              
-            >null </div>
-          </div>
-          <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="w-32">RSS default</p>
-            <div
-             
-            >null</div>
-          </div> */}
-
-          {/* <p className="text-center mt-5">
-            {" "}
-            <span
-           
-            >
-              RESET
-            </span>{" "}
-            all colours to default
-          </p> */}
+   
         </div>
       </div>
     </div>

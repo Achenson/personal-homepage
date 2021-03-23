@@ -162,13 +162,13 @@ DONE 102. tab get dragged when trying to edit sth in EditBookmark DoNE
 XXX 103 RSS make control arrows smaller? XXX
 ??? 105. gap-y doesn't look good in case of single column size ??? 
 DONE 106. change Upper_UI components naming? DONE
+XXX 107. Background_UpperUI: proper contidion inside conditional in className - check with some other components XXX
+DONE 108. btn animation, better Background settings btn DONE (transition-colors duration-150)
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-107. Background_UpperUI: proper contidion inside conditional in className - check with some other components 
-108. btn animation, better Background settings btn?
 109. bug: note default color not selected by border
 110. UpperRightUI does not look good in imgBackgroud mode, should be higher?
 111. bigger droppable areas!
