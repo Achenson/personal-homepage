@@ -6,7 +6,7 @@ import DefaultColorsToChoose from "../Colors/ColorsToChoose_DefaultAndColumns";
 import { globalSettingsState } from "../../state/defaultSettings";
 import ColumnColor_Img from "./ColumnColor_Img_UpperUI";
 import BackgroundColor from "./BackgroundColor_UpperUI";
-import EyeOff from "./EyeOff";
+import EyeOff from "./EyeOff_UpperUI";
 import BackgroundColorsToChoose from "../Colors/ColorsToChoose_Background";
 
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";

@@ -12,7 +12,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>
 }
 
-function EyeOff({
+function EyeOff_UpperUI({
  upperVisDispatch
 }: Props): JSX.Element {
   const [
@@ -61,4 +61,4 @@ function EyeOff({
   );
 }
 
-export default EyeOff;
+export default EyeOff_UpperUI;

@@ -159,16 +159,14 @@ DONE 96. colors components -> make them more consistent! SingleColor_Default(col
 DONE  97. change positioning of colors to choose for columns DONE
 DONE 101. update itemsPerPage immediately when itemsPerPage is changed DONE
 DONE 102. tab get dragged when trying to edit sth in EditBookmark DoNE
+XXX 103 RSS make control arrows smaller? XXX
+??? 105. gap-y doesn't look good in case of single column size ??? 
+DONE 106. change Upper_UI components naming? DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-
-103 RSS make control arrows smaller? 
-104. RSS description -> potential problems if there is none?
-105. gap-y doesn't look good in case of single column size?
-106. change Upper_UI components naming?
 107. Background_UpperUI: proper contidion inside conditional in className - check with some other components 
 108. btn animation, better Background settings btn?
 109. bug: note default color not selected by border
@@ -309,6 +307,8 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 228. change upperUI items positioning on sm -> not fitting on small screens
 229. react query devtools not working
 230. check is lazy state initialization is needed somewhere (for heavy computations)
+231. test rss description on all working rsss
+232. ColumnColor selection doesn't work properly if "one color for all columns" option is set
 
 App structure:
 Main
