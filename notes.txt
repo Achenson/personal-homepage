@@ -153,6 +153,7 @@ DONE 91. && operators instead of ? DONE (&& return first falsy value or last val
 DONE 92. two !! at the begining GapAfterTab (converting value to boolean type) DONE
 DONE 93. GapAfterBookmark: decide isOver color (bookmark being dragged dependend, or column dependend) DONE
 XXX 94. no x gaps between columns? XXX
+DONE 95. UpperLeftMenu: inner border too wide? DONE
 
 
 
@@ -161,7 +162,6 @@ XXX 94. no x gaps between columns? XXX
 
 
 
-95. UpperLeftMenu: inner border too wide?
 96. colors components -> make them more consistent! SingleColor_Default(columns & defaults) vs SingleColor_Default_Img (columns only)
   ColorsToChooseDefault used both for columns and Defaults vs ColorsToChoose
 97. change positioning of colors to choose for columns
@@ -309,6 +309,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 223. column color cntrl don't work properly if bg img is on
 224. reducing nr of columns should put all tabs in lower ammount of columns?
 225. bigger x gap on columns on sm only?
+226. better borders in color selecting (more similar to ColumnColor)
 
 App structure:
 Main

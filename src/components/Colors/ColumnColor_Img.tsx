@@ -20,6 +20,7 @@ interface Props {
   columnSelected: number | null;
   setColumnSelected: React.Dispatch<React.SetStateAction<number | null>>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
+  arrIndex: number;
 }
 
 function SingleColumnsColor_Img({
@@ -32,6 +33,7 @@ function SingleColumnsColor_Img({
   columnSelected,
   setColumnSelected,
   upperVisDispatch,
+  arrIndex
 }: Props): JSX.Element {
   const [
     columnsColorImg_Data,
@@ -48,6 +50,22 @@ function SingleColumnsColor_Img({
         return columnsColorImg_Data.column_3;
       case 4:
         return columnsColorImg_Data.column_4;
+    }
+  }
+
+  function borderStyle() {
+    if (columnSelected !== colNumber) {
+      if (arrIndex > 0) {
+        return "border border-l-0";
+      } else {
+        return "border";
+      }
+    } else {
+      if (arrIndex > 0) {
+        return "border border-t-2 border-b-2 border-r-2";
+      } else {
+        return "border-2";
+      }
     }
   }
 
@@ -73,7 +91,7 @@ function SingleColumnsColor_Img({
         // setColumnsSelected((b) => !b);
       }}
       className={`h-4 w-8 cursor-pointer ${
-        columnSelected === colNumber ? "border-2" : "border"
+        borderStyle()
       } border-black hover:border-gray-500`}
       style={{ backgroundColor: columnsColor(colNumber) }}
     ></div>

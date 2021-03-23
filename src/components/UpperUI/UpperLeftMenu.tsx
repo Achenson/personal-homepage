@@ -51,6 +51,7 @@ function UpperLeftMenu({
           // setFoldersSelected={setFoldersSelected}
           // setNotesSelected={setNotesSelected}
           key={index}
+          arrIndex={index}
           upperVisDispatch={upperVisDispatch}
         />
       ) : (
@@ -66,6 +67,7 @@ function UpperLeftMenu({
           // setFoldersSelected={setFoldersSelected}
           // setNotesSelected={setNotesSelected}
           key={index}
+          arrIndex={index}
           upperVisDispatch={upperVisDispatch}
         />
       );
