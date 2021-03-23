@@ -156,20 +156,15 @@ XXX 94. no x gaps between columns? XXX
 DONE 95. UpperLeftMenu: inner border too wide? DONE
 DONE 96. colors components -> make them more consistent! SingleColor_Default(columns & defaults) vs SingleColor_Default_Img (columns only)
   ColorsToChooseDefault used both for columns and Defaults vs ColorsToChoose DONE
+DONE  97. change positioning of colors to choose for columns DONE
+DONE 101. update itemsPerPage immediately when itemsPerPage is changed DONE
+DONE 102. tab get dragged when trying to edit sth in EditBookmark DoNE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-
-
-97. change positioning of colors to choose for columns
-98. change top level (Colors, Settings) positioning
-99. react query devtools not working
-100. useState usual vs function !!! check
-101. update itemsPerPage immediately when itemsPerPage is changed
-102. bookmark get dragged when trying to edit sth in EditBookmark
 103 RSS make control arrows smaller? 
 104. RSS description -> potential problems if there is none?
 105. gap-y doesn't look good in case of single column size?
@@ -310,6 +305,10 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 224. reducing nr of columns should put all tabs in lower ammount of columns?
 225. bigger x gap on columns on sm only?
 226. better borders in color selecting (more similar to ColumnColor)
+227. perfomance problems when dragging
+228. change upperUI items positioning on sm -> not fitting on small screens
+229. react query devtools not working
+230. check is lazy state initialization is needed somewhere (for heavy computations)
 
 App structure:
 Main

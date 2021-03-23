@@ -334,9 +334,9 @@ Props): JSX.Element {
           ? "hidden"
           : ""
       }`}
-      ref={drag}
-    >
+      >
       <div
+        ref={drag}
         className={`pl-0 h-8 px-2 pt-px bg-${
           // tabColor ? tabColor : finalTabColor
           finalTabColor

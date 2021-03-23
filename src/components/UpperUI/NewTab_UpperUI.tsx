@@ -143,7 +143,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
     return arrOfColsNumbers.map((el, i) => {
       return (
-        <div className="flex items-center ml-2 justify-end w-full">
+        <div className="flex items-center ml-2 justify-end w-full" key={i}>
           <p className="mr-px">{colsNumbering[el]}</p>
           <div
             className={`h-4 w-4 ml-px mt-px cursor-pointer border-2 border-${uiColorData} ${
