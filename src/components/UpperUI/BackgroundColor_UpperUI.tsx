@@ -10,7 +10,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>
 }
 
-function BackgroundColor({
+function BackgroundColor_upperUI({
   // setBackgroundColorsToChooseVis,
   upperVisDispatch
 }: Props): JSX.Element {
@@ -59,4 +59,4 @@ function BackgroundColor({
   );
 }
 
-export default BackgroundColor;
+export default BackgroundColor_upperUI;

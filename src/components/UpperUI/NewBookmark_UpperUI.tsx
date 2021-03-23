@@ -2,24 +2,20 @@ import React, { useState } from "react";
 
 import { produce } from "immer";
 
-import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
+import TagsList_UpperUI from "../Shared/SelectableList";
 
-import { createBookmark, createFolderTab } from "../utils/objCreators";
+import { SingleBookmarkData } from "../../utils/interfaces";
 
-import { ReactComponent as SaveSVG } from "../svgs/save.svg";
-import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
-import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
-import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
+import { createBookmark, createFolderTab } from "../../utils/objCreators";
 
-import {
-  tabsDataState,
-  bookmarksDataState,
-  bookmarksAllTagsState,
-} from "../state/tabsAndBookmarks";
+import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
+import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
+import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
+import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
-import { SingleBookmarkData } from "../utils/interfaces";
+import { bookmarksDataState, tabsDataState, bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
 
-import { TabVisAction } from "../utils/interfaces";
+import {UpperVisAction} from "../../utils/interfaces"
 
 interface Props {
   titleInput: string;
@@ -34,14 +30,12 @@ interface Props {
   setTagsListVis: React.Dispatch<React.SetStateAction<boolean>>;
   notesTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
-  bookmarkId: string | number;
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
   // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  currentBookmark: SingleBookmarkData | undefined;
-  visDispatch: React.Dispatch<TabVisAction>;
-  colNumber: number;
+  // currentLink: SingleLinkData | undefined
 }
 
-function Bookmark_lower_JSX({
+function NewBookmark_UpperUI({
   titleInput,
   setTitleInput,
   urlInput,
@@ -53,43 +47,13 @@ function Bookmark_lower_JSX({
   tagsListVis,
   setTagsListVis,
   notesTitlesArr,
+  upperVisDispatch,
   bookmarkComponentType,
-  bookmarkId,
-  currentBookmark,
-  visDispatch,
-  colNumber,
+  // setBookmarkVis,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-  const [
-    bookmarksAllTagsData,
-    setBookmarksAllTagsData,
-  ] = bookmarksAllTagsState.use();
-
   const [tabsData, setTabsData] = tabsDataState.use();
-
-  const [initialTagsInputArr, setInitialTagsInputArr] = useState(() =>
-    // tagsInputStr.split(", ")
-    generateTagIds()
-  );
-
-  function generateTagIds() {
-    if (bookmarkComponentType !== "edit") {
-      return [];
-    }
-
-    let arrOut: (string | number)[] = [];
-
-    tagsInputStr.split(", ").forEach((el) => {
-      // if ((currentBookmark as SingleBookmarkData).tags.indexOf(obj.id) > -1) {
-      //   arrOut.push(obj.id);
-      // }
-
-      let filteredTab = tabsData.filter((obj) => obj.title === el)[0];
-      arrOut.push(filteredTab.id);
-    });
-
-    return arrOut;
-  }
+  const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
@@ -106,13 +70,20 @@ function Bookmark_lower_JSX({
 
   // ^  and $ -> beginning and end of the text!
   // let regexForTags = /^\w+(,\s\w+)*$/;
-  let regexForTags = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
   // let regexForTitle = /^\w+$/;
+  let regexForTags = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/
   let regexForTitle = /^\w(\s?\w+)*$/;
 
   return (
-    <div className="absolute z-40 bg-gray-100 w-full pb-3 border">
-      <div className="mt-2">
+    // opacity cannot be used, because children will inherit it and the text won't be readable
+    <div
+      className="flex z-50 absolute h-screen w-screen items-center justify-center"
+      style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
+    >
+      <div
+        className="bg-gray-200 pb-3 pt-6 pl-2 pr-1 border-2 border-teal-500 rounded-sm md:mb-48"
+        style={{ width: "350px" }}
+      >
         <div className="flex justify-around mb-2 mt-2">
           <p className="w-10">Title</p>
 
@@ -205,9 +176,7 @@ function Bookmark_lower_JSX({
         )}
 
         {titleUniquenessErrorVis && (
-          <p className={`text-red-600`}>
-            Bookmark with that title already exists
-          </p>
+          <p className={`text-red-600`}>Bookmark with that title already exists</p>
         )}
 
         {tagErrorVis && (
@@ -243,34 +212,23 @@ function Bookmark_lower_JSX({
 
                 let tagsInputArr = tagsInputStr.split(", ");
 
+                
+                
+
                 if (!regexForTitle.test(titleInput)) {
                   setTitleFormatErrorVis(true);
 
                   return;
                 }
 
-                // !!! difference in Bookmark_upper_JSX
+                // !!! difference in Link_lower_JSX for edit type
 
-                if (bookmarkComponentType === "edit") {
-                  if (
-                    !titleUniquenessCheck() &&
-                    // for editing it is permitted to have same title as before
-                    titleInput !== (currentBookmark as SingleBookmarkData).title
-                  ) {
-                    setTitleUniquenessErrorVis(true);
-                    return;
-                  }
-                } else {
-                  if (!titleUniquenessCheck()) {
-                    setTitleUniquenessErrorVis(true);
-                    return;
-                  }
+                if (!titleUniquenessCheck()) {
+                  setTitleUniquenessErrorVis(true);
+                  return;
                 }
 
-                if (
-                  !regexForTags.test(tagsInputArr.join(", ")) &&
-                  tagsInputStr !== ""
-                ) {
+                if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "") {
                   setTagErrorVis(true);
                   return;
                 }
@@ -287,26 +245,28 @@ function Bookmark_lower_JSX({
                   return;
                 }
 
-                // !!! diff in Bookmark_upper_JSX
+                // !!! diff in Link_lower_JSX
 
+                // all tags always being added
                 let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
+                
 
                 tagsInputArr.forEach((el) => {
                   let filteredTab = tabsData.filter(
                     (obj) => obj.title === el
                   )[0];
 
-                  let sortedTabsInCol = tabsData
-                    .filter((obj) => obj.column === colNumber)
-                    .sort((a, b) => a.priority - b.priority);
 
-                  let newTabPriority =
-                    sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
+                  let sortedTabsInCol = tabsData
+                  .filter((obj) => obj.column === 1)
+                  .sort((a, b) => a.priority - b.priority);
+
+                let newTabPriority =
+                  sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
 
                   // if folder with title corresponding to tag doesn't exist
                   if (!filteredTab && tagsInputStr !== "") {
-                    // let newTab = createFolderTab(el, 1, 0);
-                    let newTab = createFolderTab(el, colNumber, newTabPriority);
+                    let newTab = createFolderTab(el, 1, newTabPriority);
                     tagsInputArr_ToIds.push(newTab.id);
 
                     // adding new folder in there was no folder with title as a tag befere
@@ -316,86 +276,36 @@ function Bookmark_lower_JSX({
                     newBookmarksAllTagsData.push(newTab.id);
 
                     setBookmarksAllTagsData([...newBookmarksAllTagsData]);
+
+
+
                     setTabsData((previous) =>
                       produce(previous, (updated) => {
                         updated.push(newTab);
                       })
                     );
+
                   } else {
-                    if (tagsInputStr !== "") {
+                    // if input is not empty
+                    if(tagsInputStr !== "") {
+
                       tagsInputArr_ToIds.push(filteredTab.id);
                     }
+                    
                   }
                 });
 
-                if (bookmarkComponentType === "edit") {
-                  setBookmarksData((previous) =>
-                    produce(previous, (updated) => {
-                      let bookmarkToUpdate = updated.find(
-                        (obj) => obj.id === bookmarkId
-                      );
-                      //"if" to get rid of ts error
-                      if (bookmarkToUpdate) {
-                        bookmarkToUpdate.title = titleInput;
-                        bookmarkToUpdate.URL = urlInput;
-                        bookmarkToUpdate.tags = [...tagsInputArr_ToIds];
-                      }
-                    })
-                  );
 
-                  // for deleting empty folder
-
-                  let tagsIdsToDelete: (string | number)[] = [];
-
-                  initialTagsInputArr.forEach((el) => {
-                    if (tagsInputArr_ToIds.indexOf(el) === -1) {
-                      let filteredBookmarks = bookmarksData.filter(
-                        (obj) =>
-                          obj.id !== (currentBookmark as SingleBookmarkData).id
-                      );
-
-                      let isElPresent: boolean = false;
-
-                      filteredBookmarks.forEach((obj) => {
-                        if (obj.tags.indexOf(el) > -1) {
-                          isElPresent = true;
-                          return;
-                        }
-                      });
-
-                      if (!isElPresent && el !== "ALL_TAGS") {
-                        tagsIdsToDelete.push(el);
-                      }
-                    }
-                  });
-
-                  let bookmarksAllTagsData_new: (string | number)[] = [];
-
-                  bookmarksAllTagsData.forEach((el) => {
-                    if (tagsIdsToDelete.indexOf(el) === -1) {
-                      bookmarksAllTagsData_new.push(el);
-                    }
-                  });
-
-                  setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
-                } else {
-                  setBookmarksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated.push(
-                        createBookmark(titleInput, urlInput, tagsInputArr_ToIds)
-                      );
-                    })
-                  );
-                }
+                setBookmarksData((previous) =>
+                  produce(previous, (updated) => {
+                    updated.push(
+                      createBookmark(titleInput, urlInput, tagsInputArr_ToIds)
+                    );
+                  })
+                );
 
                 // setBookmarkVis((b) => !b);
-                if (bookmarkComponentType === "edit") {
-                  visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
-                }
-
-                if (bookmarkComponentType === "new_lowerUI") {
-                  visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
-                }
+                upperVisDispatch({type: "NEW_BOOKMARK_TOGGLE"})
 
                 function tagUniquenessCheck() {
                   let isUnique: boolean = true;
@@ -432,14 +342,7 @@ function Bookmark_lower_JSX({
               onClick={(e) => {
                 e.preventDefault();
                 // setBookmarkVis((b) => !b);
-                // visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
-                if (bookmarkComponentType === "edit") {
-                  visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
-                }
-
-                if (bookmarkComponentType === "new_lowerUI") {
-                  visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
-                }
+                upperVisDispatch({type: "NEW_BOOKMARK_TOGGLE"})
               }}
             >
               <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
@@ -451,4 +354,4 @@ function Bookmark_lower_JSX({
   );
 }
 
-export default Bookmark_lower_JSX;
+export default NewBookmark_UpperUI;

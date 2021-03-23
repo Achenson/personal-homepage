@@ -23,7 +23,7 @@ interface Props {
   arrIndex: number;
 }
 
-function SingleColumnsColor_Img({
+function SingleColumnsColor_Img_UpperUI({
   colNumber,
   // setNotesSelected,
   // setTabsSelected,
@@ -98,4 +98,4 @@ function SingleColumnsColor_Img({
   );
 }
 
-export default SingleColumnsColor_Img;
+export default SingleColumnsColor_Img_UpperUI;

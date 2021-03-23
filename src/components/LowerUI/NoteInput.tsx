@@ -1,7 +1,7 @@
 import React from "react";
 
-import { tabsDataState } from "../state/tabsAndBookmarks";
-import { TabVisAction } from "../utils/interfaces";
+import { tabsDataState } from "../../state/tabsAndBookmarks";
+import { TabVisAction } from "../../utils/interfaces";
 
 interface Props {
   //  noteInput: string | null;

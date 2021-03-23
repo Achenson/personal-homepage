@@ -21,7 +21,7 @@ interface Props {
   | "unselected";
 }
 
-function DefaultSingleColor_Img({ color, defaultColorsFor }: Props): JSX.Element {
+function SingleColor_Column_Img({ color, defaultColorsFor }: Props): JSX.Element {
   
   const [
     columnsColorsImg_Data,
@@ -110,4 +110,4 @@ function DefaultSingleColor_Img({ color, defaultColorsFor }: Props): JSX.Element
   );
 }
 
-export default DefaultSingleColor_Img;
+export default SingleColor_Column_Img;

@@ -1,26 +1,27 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-import { ReactComponent as SaveSVG } from "../svgs/save.svg";
-import { ReactComponent as CancelSVG } from "../svgs/alphabet-x.svg";
+import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
+import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
-import { ReactComponent as TrashSVG } from "../svgs/trash.svg";
-import { ReactComponent as LockClosedSVG } from "../svgs/lock-closed.svg";
-import { ReactComponent as LockOpenSVG } from "../svgs/lock-open.svg";
-import { ReactComponent as ChevronDownSVG } from "../svgs/chevron-down.svg";
-import { ReactComponent as ChevronUpSVG } from "../svgs/chevron-up.svg";
+import { ReactComponent as TrashSVG } from "../../svgs/trash.svg";
+import { ReactComponent as LockClosedSVG } from "../../svgs/lock-closed.svg";
+import { ReactComponent as LockOpenSVG } from "../../svgs/lock-open.svg";
+import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
+import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
-import TagsList_UpperUI from "./UpperUI/TagsList_UpperUI";
+
+import TagsList_UpperUI from "../Shared/SelectableList";
 
 import { produce } from "immer";
 
 import {
   tabsDataState,
   bookmarksDataState,
-} from "../state/tabsAndBookmarks";
+} from "../../state/tabsAndBookmarks";
 
-import { rssSettingsState } from "../state/defaultSettings";
-import { TabVisAction } from "../utils/interfaces";
+import { rssSettingsState } from "../../state/defaultSettings";
+import { TabVisAction } from "../../utils/interfaces";
 
 interface Props {
   // tabTitle: string;

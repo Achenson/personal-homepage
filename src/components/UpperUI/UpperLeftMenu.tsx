@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-import ColumnColor from "../Colors/ColumnColor";
-import DefaultColorsToChoose from "../Colors/ColorsToChoose_Default";
+import ColumnColor from "./ColumnColor_UpperUI";
+import DefaultColorsToChoose from "../Colors/ColorsToChoose_DefaultAndColumns";
 
 import { globalSettingsState } from "../../state/defaultSettings";
-import ColumnColor_Img from "../Colors/ColumnColor_Img";
-import BackgroundColor from "../Colors/BackgroundColor";
-import EyeOff from "../Colors/EyeOff";
+import ColumnColor_Img from "./ColumnColor_Img_UpperUI";
+import BackgroundColor from "./BackgroundColor_UpperUI";
+import EyeOff from "./EyeOff";
 import BackgroundColorsToChoose from "../Colors/ColorsToChoose_Background";
 
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";

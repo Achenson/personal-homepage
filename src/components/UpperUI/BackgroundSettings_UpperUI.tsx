@@ -16,7 +16,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>
 }
 
-function Background_UpperUI({
+function BackgroundSettings_UpperUI({
   upperVisDispatch
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
@@ -151,4 +151,4 @@ function Background_UpperUI({
   );
 }
 
-export default Background_UpperUI;
+export default BackgroundSettings_UpperUI;

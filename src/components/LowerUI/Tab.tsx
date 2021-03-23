@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useReducer } from "react";
 
-import { tabsDataState } from "../state/tabsAndBookmarks";
-import { bookmarksDataState } from "../state/tabsAndBookmarks";
-import { deletedTabState } from "../state/tabsAndBookmarks";
+import { tabsDataState } from "../../state/tabsAndBookmarks";
+import { bookmarksDataState } from "../../state/tabsAndBookmarks";
+import { deletedTabState } from "../../state/tabsAndBookmarks";
 import {
   noteColorState,
   folderColorState,
   rssColorState,
   tabBeingDraggedColor_State,
-} from "../state/colorsState";
+} from "../../state/colorsState";
 
 import {
   closeAllTabsState,
@@ -16,25 +16,25 @@ import {
   // tabEditOpenedState,
   tabOpenedState,
   globalSettingsState,
-} from "../state/defaultSettings";
+} from "../../state/defaultSettings";
 
-import { ReactComponent as ColorSmallSVG } from "../svgs/beakerSmall.svg";
-import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
+import { ReactComponent as ColorSmallSVG } from "../../svgs/beakerSmall.svg";
+import { ReactComponent as PencilSmallSVG } from "../../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
-import { ReactComponent as CrossArrowsSVG } from "../svgs/cross-arrows.svg";
-import { ReactComponent as PlusSVG } from "../svgs/plus.svg";
+import { ReactComponent as CrossArrowsSVG } from "../../svgs/cross-arrows.svg";
+import { ReactComponent as PlusSVG } from "../../svgs/plus.svg";
 import SingleBookmark from "./SingleBookmark";
-import ColorsToChoose from "./Colors/ColorsToChoose";
+import ColorsToChoose from "../Colors/ColorsToChoose_Tab";
 
 // import EditLink from "./EditBookmark";
-import Bookmark_newAndEdit from "./Bookmark_newAndEdit";
+import Bookmark_newAndEdit from "../Shared/Bookmark_newAndEdit";
 import EditTab from "./EditTab";
 import NoteInput from "./NoteInput";
 import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
-import { ItemTypes } from "../utils/itemsDnd";
+import { ItemTypes } from "../../utils/itemsDnd";
 
-import { TabVisAction, SingleTabData } from "../utils/interfaces";
+import { TabVisAction, SingleTabData } from "../../utils/interfaces";
 
 interface SingleBookmarkData {
   title: string;

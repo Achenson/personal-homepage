@@ -1,7 +1,7 @@
 import React from "react";
 
-import SingleColor_Default from "./SingleColor_Default";
-import SingleColor_Default_Img from "./SingleColor_Default_Img";
+import SingleColor_Default from "./SingleColor_DefaultAndColumn";
+import SingleColor_Default_Img from "./SingleColor_Column_Img";
 
 import { tabColors } from "../../utils/tabColors";
 import { columnColors, imageColumnColors } from "../../utils/columnColors";
@@ -23,7 +23,7 @@ interface Props {
     | "unselected";
 }
 
-function ColorsToChoose_Default({ defaultColorsFor }: Props): JSX.Element {
+function ColorsToChoose_DefaultAndColumns({ defaultColorsFor }: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function mapTabColors() {
@@ -97,4 +97,4 @@ function ColorsToChoose_Default({ defaultColorsFor }: Props): JSX.Element {
   );
 }
 
-export default ColorsToChoose_Default;
+export default ColorsToChoose_DefaultAndColumns;

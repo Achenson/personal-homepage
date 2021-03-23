@@ -12,7 +12,7 @@ interface Props {
   marginLeft: string;
 }
 
-function TagsList_UpperUI({
+function SelectableList({
   setTagsInputStr,
   tagsInputStr,
   visibleTags,
@@ -55,4 +55,4 @@ function TagsList_UpperUI({
   );
 }
 
-export default TagsList_UpperUI;
+export default SelectableList;

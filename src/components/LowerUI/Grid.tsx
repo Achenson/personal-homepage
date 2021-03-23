@@ -4,15 +4,15 @@ import { useState, useEffect, useRef } from "react";
 import {
   tabsDataState,
   bookmarksAllTagsState,
-} from "../state/tabsAndBookmarks";
+} from "../../state/tabsAndBookmarks";
 
-import { closeAllTabsState } from "../state/defaultSettings";
+import { closeAllTabsState } from "../../state/defaultSettings";
 
 import { produce } from "immer";
 
-import { resetColorsState } from "../state/colorsState";
+import { resetColorsState } from "../../state/colorsState";
 
-import { globalSettingsState } from "../state/defaultSettings";
+import { globalSettingsState } from "../../state/defaultSettings";
 import Column from "./Column";
 
 import useSize from "@react-hook/size";

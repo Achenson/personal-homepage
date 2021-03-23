@@ -1,15 +1,15 @@
 import React, { useState, useReducer } from "react";
-import Grid from "./Grid";
-import Bookmark_newAndEdit from "./Bookmark_newAndEdit";
+import Grid from "./LowerUI/Grid";
+import Bookmark_newAndEdit from "./Shared/Bookmark_newAndEdit";
 import NewTab_UpperUI from "./UpperUI/NewTab_UpperUI";
-import Colors_UpperUI from "./UpperUI/Colors_UpperUI";
+import Colors_UpperUI from "./UpperUI/ColorsSettings_UpperUI";
 import UpperUI from "./UpperUI/UpperUI";
 
 import { globalSettingsState } from "../state/defaultSettings";
 
 import { backgroundColorState } from "../state/colorsState";
-import Background_UpperUI from "./UpperUI/Background_UpperUI";
-import Settings_UpperUI from "./UpperUI/Settings_UpperUI";
+import Background_UpperUI from "./UpperUI/BackgroundSettings_UpperUI";
+import Settings_UpperUI from "./UpperUI/GlobalSettings_UpperUI";
 
 import { UpperVisAction } from "../utils/interfaces";
 

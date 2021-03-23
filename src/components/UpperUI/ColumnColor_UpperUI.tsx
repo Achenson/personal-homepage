@@ -24,7 +24,7 @@ interface Props {
   arrIndex: number;
 }
 
-function ColumnColor({
+function ColumnColor_UpperUI({
   colNumber,
   // setNotesSelected,
   // setTabsSelected,
@@ -94,4 +94,4 @@ function ColumnColor({
   );
 }
 
-export default ColumnColor;
+export default ColumnColor_UpperUI;

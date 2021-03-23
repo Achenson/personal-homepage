@@ -8,7 +8,7 @@ interface Props {
   tabID: number | string;
 }
 
-function SingleColor({ color, tabID }: Props): JSX.Element {
+function SingleColor_Tab({ color, tabID }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
 
@@ -30,4 +30,4 @@ function SingleColor({ color, tabID }: Props): JSX.Element {
   );
 }
 
-export default SingleColor;
+export default SingleColor_Tab;

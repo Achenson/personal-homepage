@@ -9,7 +9,7 @@ interface Props {
 
 }
 
-function BackgroundColorsToChoose({}: Props): JSX.Element{
+function ColorsToChoose_Background({}: Props): JSX.Element{
    
   
   
@@ -41,4 +41,4 @@ function BackgroundColorsToChoose({}: Props): JSX.Element{
     )
 };
 
-export default BackgroundColorsToChoose;
+export default ColorsToChoose_Background;

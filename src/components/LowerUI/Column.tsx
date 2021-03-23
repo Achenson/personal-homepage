@@ -1,12 +1,12 @@
 import React from "react";
 
-import { tabsDataState } from "../state/tabsAndBookmarks";
+import { tabsDataState } from "../../state/tabsAndBookmarks";
 
 import {
   columnsColorsState,
   columnsColorsImg_State,
-} from "../state/colorsState";
-import { globalSettingsState } from "../state/defaultSettings";
+} from "../../state/colorsState";
+import { globalSettingsState } from "../../state/defaultSettings";
 
 import Tab from "./Tab";
 

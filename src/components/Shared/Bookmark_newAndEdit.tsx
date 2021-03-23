@@ -1,14 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import { bookmarksDataState, tabsDataState, bookmarksAllTagsState } from "../state/tabsAndBookmarks";
+import { bookmarksDataState, tabsDataState, bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
 
-import Bookmark_upper_JSX from "./Bookmark_upper_JSX";
-import Bookmark_lower_JSX from "./Bookmark_lower_JSX";
+import Bookmark_upper_JSX from "../UpperUI/NewBookmark_UpperUI";
+import Bookmark_lower_JSX from "../LowerUI/Bookmark_lowerUI";
 
-import { SingleBookmarkData } from "../utils/interfaces";
+import { SingleBookmarkData } from "../../utils/interfaces";
 
-import {UpperVisAction, TabVisAction} from "../utils/interfaces"
+import {UpperVisAction, TabVisAction} from "../../utils/interfaces"
 
 
 

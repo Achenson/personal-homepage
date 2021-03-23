@@ -1,5 +1,5 @@
 import React from "react";
-import SingleColor from "./SingleColor";
+import SingleColor from "./SingleColor_Tab";
 
 import {tabColors} from "../../utils/tabColors";
 // import {columnColors} from "../../utils/columnColors";
@@ -10,7 +10,7 @@ interface Props {
 }
 
 
-function ColorsToChoose({
+function ColorsToChoose_Tab({
   setIconsVis,
   tabID
 }: Props): JSX.Element {
@@ -43,4 +43,4 @@ function ColorsToChoose({
   );
 }
 
-export default ColorsToChoose;
+export default ColorsToChoose_Tab;

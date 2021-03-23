@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import ColorsToChoose_Default from "../Colors/ColorsToChoose_Default";
+import ColorsToChoose_Default from "../Colors/ColorsToChoose_DefaultAndColumns";
 
 import {
   noteColorState,
@@ -20,7 +20,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>
 }
 
-function Colors_UpperUI({ upperVisDispatch }: Props): JSX.Element {
+function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   const [defaultColorsFor, setDefaultColorsFor] = useState<
     | "folders"
     | "notes"
@@ -211,4 +211,4 @@ function Colors_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   );
 }
 
-export default Colors_UpperUI;
+export default ColorsSettings_UpperUI;

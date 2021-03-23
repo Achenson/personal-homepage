@@ -10,7 +10,7 @@ import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
-import TagsList_UpperUI from "./TagsList_UpperUI";
+import TagsList_UpperUI from "../Shared/SelectableList";
 
 import {
   createFolderTab,

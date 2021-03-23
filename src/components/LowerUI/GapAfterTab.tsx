@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import { produce } from "immer";
 
-import { ItemTypes } from "../utils/itemsDnd";
+import { ItemTypes } from "../../utils/itemsDnd";
 
-import { tabsDataState } from "../state/tabsAndBookmarks";
+import { tabsDataState } from "../../state/tabsAndBookmarks";
 
-import { tabBeingDraggedColor_State } from "../state/colorsState";
+import { tabBeingDraggedColor_State } from "../../state/colorsState";
 
 
 interface Item {

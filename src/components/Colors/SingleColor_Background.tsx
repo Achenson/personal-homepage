@@ -10,7 +10,7 @@ interface Props {
   color: string;
 }
 
-function SingleBackgroundColor({ color }: Props): JSX.Element {
+function SingleColor_Background({ color }: Props): JSX.Element {
   const [
     backgroundColorData,
     setBackgroundColorData,
@@ -36,4 +36,4 @@ function SingleBackgroundColor({ color }: Props): JSX.Element {
   );
 }
 
-export default SingleBackgroundColor;
+export default SingleColor_Background;

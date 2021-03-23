@@ -14,7 +14,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
-function Settings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
+function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
@@ -119,4 +119,4 @@ function Settings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   );
 }
 
-export default Settings_UpperUI;
+export default GlobalSettings_UpperUI;

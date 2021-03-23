@@ -1,14 +1,14 @@
 import React from "react";
 import { produce } from "immer";
-import { bookmarksDataState } from "../state/tabsAndBookmarks";
+import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 
-import { ReactComponent as PencilSmallSVG } from "../svgs/pencilSmall.svg";
-import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
-import { ReactComponent as PhotographSVG } from "../svgs/photograph.svg";
+import { ReactComponent as PencilSmallSVG } from "../../svgs/pencilSmall.svg";
+import { ReactComponent as TrashSmallSVG } from "../../svgs/trashSmall.svg";
+import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
-import { bookmarksAllTagsState } from "../state/tabsAndBookmarks";
+import { bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
 
-import { SingleBookmarkData, TabVisAction } from "../utils/interfaces";
+import { SingleBookmarkData, TabVisAction } from "../../utils/interfaces";
 
 // interface SingleLinkData {
 //   id: number | string;
