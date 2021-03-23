@@ -6,7 +6,7 @@ import { ReactComponent as FolderSVG } from "../../svgs/folder.svg";
 import { ReactComponent as BookmarkSVG } from "../../svgs/bookmarkAlt.svg";
 // import { ReactComponent as AddNote } from "../../svgs/addNote.svg";
 import { ReactComponent as AddNote } from "../../svgs/text-document-add.svg";
-import { ReactComponent as Note } from "../../svgs/note_UXwing.svg";
+import { ReactComponent as NoteSVG } from "../../svgs/note_UXwing.svg";
 import { ReactComponent as SettingsSVG } from "../../svgs/settingsAlt.svg";
 import { ReactComponent as UserSVG } from "../../svgs/user.svg";
 import { ReactComponent as ColorSVG } from "../../svgs/beaker.svg";
@@ -39,7 +39,9 @@ function UpperRightMenu({
 
   return (
     // <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
-    <div className="h-8 w-56 flex justify-between items-center bg-white bg-opacity-80 rounded-md">
+    <div className="h-7 w-56 flex justify-between items-center bg-white bg-opacity-80 rounded-md border border-gray-600"
+    style={{marginBottom: "2px"}}
+    >
       <div className="flex w-28 justify-around">
         {/* <AddLinkSVG */}
         <BookmarkSVG
@@ -60,8 +62,9 @@ function UpperRightMenu({
           }}
         />
         {/* <AddNote */}
-        <Note
+        <NoteSVG
           className={`h-6 cursor-pointer fill-current text-black hover:text-${uiColorData}`}
+          style={{marginTop: "2px"}}
           onClick={() => {
             // setNewTabVis((b) => !b);
             upperVisDispatch({type: "NEW_TAB_TOGGLE"})
