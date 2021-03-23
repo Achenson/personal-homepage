@@ -11,7 +11,7 @@ import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
 
-import TagsList_UpperUI from "../Shared/SelectableList";
+import SelectableList from "../Shared/SelectableList";
 
 import { produce } from "immer";
 
@@ -122,11 +122,11 @@ Props): JSX.Element {
     return arrOfBookmarksNames;
   }
 
-  const [tabsInputStr, setTabsInputStr] = useState<string>(
+  const [bookmarksInputStr, setBookmarksInputStr] = useState<string>(
     arrOfBookmarksNames.join(", ")
   );
 
-  const [visibleTabs, setVisibleTabs] = useState<string[]>(makeInitialTabs());
+  const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(makeInitialBookmarks());
 
   useEffect(() => {
     if (wasCheckboxClicked || wasTabOpenClicked || wasItemsPerPageClicked) {
@@ -152,42 +152,42 @@ Props): JSX.Element {
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
   const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
-  const [initialTabs, setInitialTabs] = useState(makeInitialTabs());
+  const [initialBookmarks, setInitialBookmarks] = useState(makeInitialBookmarks());
 
-  const [tabsListVis, setTabsListVis] = useState<boolean>(false);
+  const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
 
   useEffect(() => {
-    let newVisibleTags: string[] = [];
+    let newVisibleBookmarks: string[] = [];
 
-    initialTabs.forEach((el) => {
+    initialBookmarks.forEach((el) => {
       // in new RegExp the \ needs to be escaped!
       let tagRegex = new RegExp(`\\b${el}\\b`);
 
-      if (!tagRegex.test(tabsInputStr)) {
-        newVisibleTags.push(el);
+      if (!tagRegex.test(bookmarksInputStr)) {
+        newVisibleBookmarks.push(el);
       }
     });
 
-    setVisibleTabs([...newVisibleTags]);
+    setVisibleBookmarks([...newVisibleBookmarks]);
 
-    if (newVisibleTags.length === 0) {
-      setTabsListVis(false);
+    if (newVisibleBookmarks.length === 0) {
+      setBookmarksListVis(false);
     }
 
-    if (newVisibleTags.length > 0 && !isThisTheFirstRender) {
-      setTabsListVis(true);
+    if (newVisibleBookmarks.length > 0 && !isThisTheFirstRender) {
+      setBookmarksListVis(true);
     }
 
     setIsThisTheFirstRender(false);
   }, [
-    tabsInputStr,
-    initialTabs,
-    setVisibleTabs,
-    setTabsListVis,
+    bookmarksInputStr,
+    initialBookmarks,
+    setVisibleBookmarks,
+    setBookmarksListVis,
     isThisTheFirstRender,
   ]);
 
-  function makeInitialTabs(): string[] {
+  function makeInitialBookmarks(): string[] {
     let tabs: string[] = [];
 
     bookmarksData.forEach((obj) => {
@@ -231,29 +231,29 @@ Props): JSX.Element {
             // min-w-0 !!
             // className="border w-full max-w-6xl min-w-0"
             className="border w-full min-w-0"
-            value={tabsInputStr}
+            value={bookmarksInputStr}
             onChange={(e) => {
               // setTabTitleInput(e.target.value);
               setWasAnythingClicked(true);
 
               let target = e.target.value;
 
-              setTabsInputStr(target);
+              setBookmarksInputStr(target);
 
               let tabsInputArr = target.split(", ");
 
               // setTagsInputArr(tagsInputStr.split(" ,"))
 
               // let newVisibleTags = [...visibleTags];
-              let newVisibleTabs: string[] = [];
+              let newVisibleBookmarks: string[] = [];
 
-              visibleTabs.forEach((el) => {
+              visibleBookmarks.forEach((el) => {
                 if (tabsInputArr.indexOf(el) === -1) {
-                  newVisibleTabs.push(el);
+                  newVisibleBookmarks.push(el);
                 }
               });
 
-              setVisibleTabs([...newVisibleTabs]);
+              setVisibleBookmarks([...newVisibleBookmarks]);
             }}
           />
           {chevronDown ? (
@@ -261,7 +261,7 @@ Props): JSX.Element {
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
                 setChevronDown((b) => !b);
-                setTabsListVis((b) => !b);
+                setBookmarksListVis((b) => !b);
               }}
             />
           ) : (
@@ -269,18 +269,18 @@ Props): JSX.Element {
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
                 setChevronDown((b) => !b);
-                setTabsListVis((b) => !b);
+                setBookmarksListVis((b) => !b);
               }}
             />
           )}
         </div>
       )}
 
-      {tabType === "folder" && tabsListVis && (
-        <TagsList_UpperUI
-          setTagsInputStr={setTabsInputStr}
-          tagsInputStr={tabsInputStr}
-          visibleTags={visibleTabs}
+      {tabType === "folder" && bookmarksListVis && (
+        <SelectableList
+          setSelectablesInputStr={setBookmarksInputStr}
+          selectablesInputStr={bookmarksInputStr}
+          visibleSelectables={visibleBookmarks}
           width="271px"
           marginLeft="42px"
         />
@@ -518,7 +518,7 @@ Props): JSX.Element {
               setTabsRepeatErrorVis(false);
               setBookmarksExistenceErrorVis(false);
 
-              let tabsInputArr = tabsInputStr.split(", ");
+              let tabsInputArr = bookmarksInputStr.split(", ");
 
               if (!wasAnythingClicked) {
                 return;
@@ -542,7 +542,7 @@ Props): JSX.Element {
       
 
               if (tabType === "folder") {
-                if (!regexForBookmarks.test(tabsInputStr)) {
+                if (!regexForBookmarks.test(bookmarksInputStr)) {
                   setBookmarksErrorVis(true);
                   return;
                 }
@@ -628,7 +628,7 @@ Props): JSX.Element {
                 setBookmarksData((previous) =>
                   produce(previous, (updated) => {
                     updated.forEach((obj) => {
-                      let tabsInputArr = tabsInputStr.split(", ");
+                      let bookmarksInputArr = bookmarksInputStr.split(", ");
 
                       // all initial links inside a folder
                       // make array of missing links
@@ -638,7 +638,7 @@ Props): JSX.Element {
                       let missingBookmarks: string[] = [];
 
                       arrOfBookmarksNames.forEach((el, i) => {
-                        if (tabsInputArr.indexOf(el) === -1) {
+                        if (bookmarksInputArr.indexOf(el) === -1) {
                           missingBookmarks.push(el);
                         }
                       });
@@ -650,7 +650,7 @@ Props): JSX.Element {
                       //  if link title is present in folder's new input for tabs & if folder title wasn't already in tags
                       // add new tag
                       if (
-                        tabsInputArr.indexOf(obj.title) > -1 &&
+                        bookmarksInputArr.indexOf(obj.title) > -1 &&
                         obj.tags.indexOf(tabID) === -1
                       ) {
                         obj.tags.push(tabID);

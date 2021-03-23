@@ -2,24 +2,24 @@ import React, { useState, useEffect } from "react";
 
 
 
-import { tabsDataState } from "../../state/tabsAndBookmarks";
+
 
 interface Props {
-  tagsInputStr: string;
-  setTagsInputStr: React.Dispatch<React.SetStateAction<string>>;
-  visibleTags: string[];
+  selectablesInputStr: string;
+  setSelectablesInputStr: React.Dispatch<React.SetStateAction<string>>;
+  visibleSelectables: string[];
   width: string;
   marginLeft: string;
 }
 
 function SelectableList({
-  setTagsInputStr,
-  tagsInputStr,
-  visibleTags,
+  setSelectablesInputStr,
+  selectablesInputStr,
+  visibleSelectables,
   width,
   marginLeft
 }: Props): JSX.Element {
-  const [tabsData, setTabsData] = tabsDataState.use();
+  
 
   return (
     <div
@@ -27,20 +27,20 @@ function SelectableList({
       // style={{ width: "271px", marginLeft: "42px" }}
       style={{ width: width, marginLeft: marginLeft }}
     >
-      {visibleTags.length === 0 ? (
+      {visibleSelectables.length === 0 ? (
         <p className="invisible">[empty]</p>
       ) : (
-        visibleTags.map((el, i) => {
+        visibleSelectables.map((el, i) => {
           return (
             <p
               className="cursor-pointer hover:bg-blueGray-200 pl-px"
               onClick={() => {
-                if (tagsInputStr.length === 0) {
-                  setTagsInputStr(el);
+                if (selectablesInputStr.length === 0) {
+                  setSelectablesInputStr(el);
                   return;
                 }
 
-                setTagsInputStr(tagsInputStr.concat(", " + el));
+                setSelectablesInputStr(selectablesInputStr.concat(", " + el));
               }}
               key={i}
             >

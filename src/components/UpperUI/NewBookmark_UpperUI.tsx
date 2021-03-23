@@ -2,8 +2,6 @@ import React, { useState } from "react";
 
 import { produce } from "immer";
 
-import TagsList_UpperUI from "../Shared/SelectableList";
-
 import { SingleBookmarkData } from "../../utils/interfaces";
 
 import { createBookmark, createFolderTab } from "../../utils/objCreators";
@@ -13,9 +11,14 @@ import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
-import { bookmarksDataState, tabsDataState, bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
+import {
+  bookmarksDataState,
+  tabsDataState,
+  bookmarksAllTagsState,
+} from "../../state/tabsAndBookmarks";
 
-import {UpperVisAction} from "../../utils/interfaces"
+import { UpperVisAction } from "../../utils/interfaces";
+import SelectableList from "../Shared/SelectableList";
 
 interface Props {
   titleInput: string;
@@ -49,11 +52,14 @@ function NewBookmark_UpperUI({
   notesTitlesArr,
   upperVisDispatch,
   bookmarkComponentType,
-  // setBookmarkVis,
-}: Props): JSX.Element {
+}: // setBookmarkVis,
+Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
-  const [bookmarksAllTagsData, setBookmarksAllTagsData] = bookmarksAllTagsState.use();
+  const [
+    bookmarksAllTagsData,
+    setBookmarksAllTagsData,
+  ] = bookmarksAllTagsState.use();
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
@@ -71,7 +77,7 @@ function NewBookmark_UpperUI({
   // ^  and $ -> beginning and end of the text!
   // let regexForTags = /^\w+(,\s\w+)*$/;
   // let regexForTitle = /^\w+$/;
-  let regexForTags = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/
+  let regexForTags = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
   let regexForTitle = /^\w(\s?\w+)*$/;
 
   return (
@@ -160,10 +166,10 @@ function NewBookmark_UpperUI({
         </div>
 
         {tagsListVis && (
-          <TagsList_UpperUI
-            setTagsInputStr={setTagsInputStr}
-            tagsInputStr={tagsInputStr}
-            visibleTags={visibleTags}
+          <SelectableList
+            setSelectablesInputStr={setTagsInputStr}
+            selectablesInputStr={tagsInputStr}
+            visibleSelectables={visibleTags}
             width="271px"
             marginLeft="42px"
           />
@@ -176,7 +182,9 @@ function NewBookmark_UpperUI({
         )}
 
         {titleUniquenessErrorVis && (
-          <p className={`text-red-600`}>Bookmark with that title already exists</p>
+          <p className={`text-red-600`}>
+            Bookmark with that title already exists
+          </p>
         )}
 
         {tagErrorVis && (
@@ -212,9 +220,6 @@ function NewBookmark_UpperUI({
 
                 let tagsInputArr = tagsInputStr.split(", ");
 
-                
-                
-
                 if (!regexForTitle.test(titleInput)) {
                   setTitleFormatErrorVis(true);
 
@@ -228,7 +233,10 @@ function NewBookmark_UpperUI({
                   return;
                 }
 
-                if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "") {
+                if (
+                  !regexForTags.test(tagsInputArr.join(", ")) &&
+                  tagsInputStr !== ""
+                ) {
                   setTagErrorVis(true);
                   return;
                 }
@@ -249,20 +257,18 @@ function NewBookmark_UpperUI({
 
                 // all tags always being added
                 let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
-                
 
                 tagsInputArr.forEach((el) => {
                   let filteredTab = tabsData.filter(
                     (obj) => obj.title === el
                   )[0];
 
-
                   let sortedTabsInCol = tabsData
-                  .filter((obj) => obj.column === 1)
-                  .sort((a, b) => a.priority - b.priority);
+                    .filter((obj) => obj.column === 1)
+                    .sort((a, b) => a.priority - b.priority);
 
-                let newTabPriority =
-                  sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
+                  let newTabPriority =
+                    sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
 
                   // if folder with title corresponding to tag doesn't exist
                   if (!filteredTab && tagsInputStr !== "") {
@@ -277,24 +283,18 @@ function NewBookmark_UpperUI({
 
                     setBookmarksAllTagsData([...newBookmarksAllTagsData]);
 
-
-
                     setTabsData((previous) =>
                       produce(previous, (updated) => {
                         updated.push(newTab);
                       })
                     );
-
                   } else {
                     // if input is not empty
-                    if(tagsInputStr !== "") {
-
+                    if (tagsInputStr !== "") {
                       tagsInputArr_ToIds.push(filteredTab.id);
                     }
-                    
                   }
                 });
-
 
                 setBookmarksData((previous) =>
                   produce(previous, (updated) => {
@@ -305,7 +305,7 @@ function NewBookmark_UpperUI({
                 );
 
                 // setBookmarkVis((b) => !b);
-                upperVisDispatch({type: "NEW_BOOKMARK_TOGGLE"})
+                upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
 
                 function tagUniquenessCheck() {
                   let isUnique: boolean = true;
@@ -342,7 +342,7 @@ function NewBookmark_UpperUI({
               onClick={(e) => {
                 e.preventDefault();
                 // setBookmarkVis((b) => !b);
-                upperVisDispatch({type: "NEW_BOOKMARK_TOGGLE"})
+                upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
               }}
             >
               <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { produce } from "immer";
 
-import TagsList_UpperUI from "../Shared/SelectableList";
+
 
 import { createBookmark, createFolderTab } from "../../utils/objCreators";
 
@@ -20,6 +20,7 @@ import {
 import { SingleBookmarkData } from "../../utils/interfaces";
 
 import { TabVisAction } from "../../utils/interfaces";
+import SelectableList from "../Shared/SelectableList";
 
 interface Props {
   titleInput: string;
@@ -189,10 +190,10 @@ function Bookmark_lowerUI({
         </div>
 
         {tagsListVis && (
-          <TagsList_UpperUI
-            setTagsInputStr={setTagsInputStr}
-            tagsInputStr={tagsInputStr}
-            visibleTags={visibleTags}
+          <SelectableList
+            setSelectablesInputStr={setTagsInputStr}
+            selectablesInputStr={tagsInputStr}
+            visibleSelectables={visibleTags}
             width="271px"
             marginLeft="42px"
           />

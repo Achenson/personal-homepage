@@ -154,7 +154,8 @@ DONE 92. two !! at the begining GapAfterTab (converting value to boolean type) D
 DONE 93. GapAfterBookmark: decide isOver color (bookmark being dragged dependend, or column dependend) DONE
 XXX 94. no x gaps between columns? XXX
 DONE 95. UpperLeftMenu: inner border too wide? DONE
-
+DONE 96. colors components -> make them more consistent! SingleColor_Default(columns & defaults) vs SingleColor_Default_Img (columns only)
+  ColorsToChooseDefault used both for columns and Defaults vs ColorsToChoose DONE
 
 
 1. purgecss at the end of project?
@@ -162,8 +163,7 @@ DONE 95. UpperLeftMenu: inner border too wide? DONE
 
 
 
-96. colors components -> make them more consistent! SingleColor_Default(columns & defaults) vs SingleColor_Default_Img (columns only)
-  ColorsToChooseDefault used both for columns and Defaults vs ColorsToChoose
+
 97. change positioning of colors to choose for columns
 98. change top level (Colors, Settings) positioning
 99. react query devtools not working

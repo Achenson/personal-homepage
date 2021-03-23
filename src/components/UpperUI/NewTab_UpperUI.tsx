@@ -10,7 +10,7 @@ import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
-import TagsList_UpperUI from "../Shared/SelectableList";
+
 
 import {
   createFolderTab,
@@ -27,6 +27,7 @@ import {
 } from "../../state/tabsAndBookmarks";
 
 import { UpperVisAction } from "../../utils/interfaces";
+import SelectableList from "../Shared/SelectableList";
 
 interface Props {
   // setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
@@ -68,11 +69,11 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   // for notes
   const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
 
-  const [tabsListVis, setTabsListVis] = useState<boolean>(false);
+  const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
 
-  const [visibleTabs, setVisibleTabs] = useState<string[]>(makeInitialTabs());
+  const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(makeInitialBookmarks());
 
-  const [tabsInputStr, setTabsInputStr] = useState<string>("");
+  const [bookmarksInputStr, setBookmarksInputStr] = useState<string>("");
 
   // ^  and $ -> beginning and end of the text!
   // let regexForBookmarks = /^\w+(,\s\w+)*$/;
@@ -84,43 +85,43 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
   const [chevronDown, setChevronDown] = useState(true);
 
-  const [initialTabs, setInitialTabs] = useState(makeInitialTabs());
+  const [initialBookmarks, setInitialBookmarks] = useState(makeInitialBookmarks());
 
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
   const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
   useEffect(() => {
-    let newVisibleTags: string[] = [];
+    let newVisibleBookmarks: string[] = [];
 
-    initialTabs.forEach((el) => {
+    initialBookmarks.forEach((el) => {
       // in new RegExp the \ needs to be escaped!
       let tagRegex = new RegExp(`\\b${el}\\b`);
 
-      if (!tagRegex.test(tabsInputStr)) {
-        newVisibleTags.push(el);
+      if (!tagRegex.test(bookmarksInputStr)) {
+        newVisibleBookmarks.push(el);
       }
     });
 
-    setVisibleTabs([...newVisibleTags]);
+    setVisibleBookmarks([...newVisibleBookmarks]);
 
-    if (newVisibleTags.length === 0) {
-      setTabsListVis(false);
+    if (newVisibleBookmarks.length === 0) {
+      setBookmarksListVis(false);
     }
 
-    if (newVisibleTags.length > 0 && !isThisTheFirstRender) {
-      setTabsListVis(true);
+    if (newVisibleBookmarks.length > 0 && !isThisTheFirstRender) {
+      setBookmarksListVis(true);
     }
 
     setIsThisTheFirstRender(false);
   }, [
-    tabsInputStr,
-    initialTabs,
-    setVisibleTabs,
-    setTabsListVis,
+    bookmarksInputStr,
+    initialBookmarks,
+    setVisibleBookmarks,
+    setBookmarksListVis,
     isThisTheFirstRender,
   ]);
 
-  function makeInitialTabs(): string[] {
+  function makeInitialBookmarks(): string[] {
     let tabs: string[] = [];
 
     bookmarksData.forEach((obj) => {
@@ -203,7 +204,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               type="text"
               className="w-full border border-gray-500"
               // value={tabLinksInput.join(", ")}
-              value={tabsInputStr}
+              value={bookmarksInputStr}
               // onChange={(e) =>
               //   setTabLinksInput([...e.target.value.split(", ")])
               // }
@@ -211,7 +212,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               onChange={(e) => {
                 let target = e.target.value;
 
-                setTabsInputStr(target);
+                setBookmarksInputStr(target);
 
                 let tabsInputArr = target.split(", ");
 
@@ -220,13 +221,13 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 // let newVisibleTags = [...visibleTags];
                 let newVisibleTabs: string[] = [];
 
-                visibleTabs.forEach((el) => {
+                visibleBookmarks.forEach((el) => {
                   if (tabsInputArr.indexOf(el) === -1) {
                     newVisibleTabs.push(el);
                   }
                 });
 
-                setVisibleTabs([...newVisibleTabs]);
+                setVisibleBookmarks([...newVisibleTabs]);
               }}
               placeholder={"Choose at least one"}
             />
@@ -237,7 +238,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   className="h-full cursor-pointer hover:text-blueGray-500"
                   onClick={() => {
                     setChevronDown((b) => !b);
-                    setTabsListVis((b) => !b);
+                    setBookmarksListVis((b) => !b);
                   }}
                 />
               </div>
@@ -247,7 +248,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   className="h-full cursor-pointer hover:text-blueGray-500"
                   onClick={() => {
                     setChevronDown((b) => !b);
-                    setTabsListVis((b) => !b);
+                    setBookmarksListVis((b) => !b);
                   }}
                 />
               </div>
@@ -300,11 +301,11 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           </div>
         )}
 
-        {tabsListVis && (
-          <TagsList_UpperUI
-            setTagsInputStr={setTabsInputStr}
-            tagsInputStr={tabsInputStr}
-            visibleTags={visibleTabs}
+        {bookmarksListVis && (
+          <SelectableList
+            setSelectablesInputStr={setBookmarksInputStr}
+            selectablesInputStr={bookmarksInputStr}
+            visibleSelectables={visibleBookmarks}
             width="228px"
             marginLeft="89px"
           />
@@ -359,7 +360,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 setTabsExistenceErrorVis(false);
                 setTextAreaErrorVis(false);
 
-                let tabsInputArr = tabsInputStr.split(", ");
+                let bookmarksInputArr = bookmarksInputStr.split(", ");
 
                 if (!regexForTitle.test(tabTitleInput)) {
                   setTitleFormatErrorVis(true);
@@ -374,7 +375,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
                 if (tabType === "folder") {
                   // if (!regexForTabs.test(tabBookmarksInput.join(", "))) {
-                  if (!regexForBookmarks.test(tabsInputArr.join(", "))) {
+                  if (!regexForBookmarks.test(bookmarksInputArr.join(", "))) {
                     setTabsErrorVis(true);
                     return;
                   }
@@ -444,7 +445,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                     produce(previous, (updated) => {
                       updated.forEach((obj) => {
                         if (
-                          tabsInputArr.indexOf(obj.title) > -1 &&
+                          bookmarksInputArr.indexOf(obj.title) > -1 &&
                           obj.tags.indexOf(newFolderTab.id) === -1
                         ) {
                           obj.tags.push(newFolderTab.id);
@@ -479,7 +480,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                     tabsArr.push(obj.title);
                   });
 
-                  for (let el of tabsInputArr) {
+                  for (let el of bookmarksInputArr) {
                     if (tabsArr.indexOf(el) === -1) {
                       return false;
                     }
@@ -491,8 +492,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 function tagUniquenessCheck() {
                   let isUnique: boolean = true;
 
-                  tabsInputArr.forEach((el, i) => {
-                    let tagsInputCopy = [...tabsInputArr];
+                  bookmarksInputArr.forEach((el, i) => {
+                    let tagsInputCopy = [...bookmarksInputArr];
                     tagsInputCopy.splice(i, 1);
 
                     if (tagsInputCopy.indexOf(el) > -1) {
