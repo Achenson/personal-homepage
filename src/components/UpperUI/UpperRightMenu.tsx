@@ -39,7 +39,7 @@ function UpperRightMenu({
 
   return (
     // <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
-    <div className="h-7 w-56 flex justify-between items-center bg-white bg-opacity-80 rounded-md border border-gray-600"
+    <div className="h-7 w-56 flex justify-between items-center bg-white bg-opacity-80 rounded-md border border-gray-700 "
     style={{marginBottom: "2px"}}
     >
       <div className="flex w-28 justify-around">
