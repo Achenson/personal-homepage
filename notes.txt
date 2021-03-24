@@ -316,6 +316,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 229. bug: selection border sometimes doesn't work on UpperLeftMenu colors
 230. longer "title" in "note" Tab? 
 231. make gray border for NoteInput etc. (similar to to EditTab) ?
+232. bookmark_lowerUI saveSVG should be inactive
 
 App structure:
 Main
