@@ -167,12 +167,12 @@ DONE 108. btn animation, better Background settings btn DONE (transition-colors 
 DONE 109. bug: note default color not selected by border DONE
 DONE 110. UpperRightUI does not look good in imgBackgroud mode, should be higher? DONE (higher + border)
 DONE 111. bigger droppable areas! DONE
+DONE 112. backgroundSettings how to choose default img DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-112. backgroundSettings how to choose default img
 113. test more RSS channels
 114. persist open state of bookmark (if is closed by default) if it is being dragged?
 DONE 115. rss cannot be always open? bug DONE

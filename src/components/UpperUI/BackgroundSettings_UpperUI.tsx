@@ -115,6 +115,14 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                   {imgDescription_2}
                   <span
                     className={`text-${uiColorData} cursor-pointer hover:underline`}
+                    onClick={() => {
+                      setGlobalSettingsData({
+                        ...globalSettingsData,
+                        defaultImage: "defaultBackground"
+                      })
+                    }
+                    
+                    }
                   >
                     use default
                   </span>

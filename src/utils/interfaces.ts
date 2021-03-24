@@ -26,6 +26,7 @@ export interface SingleBookmarkData {
 
 export interface GlobalSettingsState {
   picBackground: boolean,
+  defaultImage: string,
     oneColorForAllCols: boolean,
     hideNonDeletable: boolean,
     numberOfCols: 1 | 2 | 3 | 4

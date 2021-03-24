@@ -97,13 +97,14 @@ function Main({}: Props): JSX.Element {
   );
 
   const [tabType, setTabType] = useState<"folder" | "note" | "rss">("folder");
+  
 
   return (
     // <div className="relative h-screen bg-testBackground bg-cover">
     <div
       className={`relative min-h-screen ${
         globalSettingsData.picBackground
-          ? "bg-defaultBackground"
+          ? `bg-${globalSettingsData.defaultImage}`
           : `bg-${backgroundColorData}`
       } bg-cover bg-fixed`}
     >
