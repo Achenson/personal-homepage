@@ -166,12 +166,12 @@ XXX 107. Background_UpperUI: proper contidion inside conditional in className - 
 DONE 108. btn animation, better Background settings btn DONE (transition-colors duration-150) sdsd
 DONE 109. bug: note default color not selected by border DONE
 DONE 110. UpperRightUI does not look good in imgBackgroud mode, should be higher? DONE (higher + border)
+DONE 111. bigger droppable areas! DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-111. bigger droppable areas!
 112. backgroundSettings how to choose default img
 113. test more RSS channels
 114. persist open state of bookmark (if is closed by default) if it is being dragged?
@@ -313,6 +313,8 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 234. optional/conditional getting rid of border on UpperRightMenu?
 225. why most right icons on UpperRightUI are bold?
 226. UpperRightUI borderGray vs UpperLeftMenu opacity-80 consistency
+227. clean tailwind files in the end
+228. bg settings- underline selected to be consistent?
 
 App structure:
 Main

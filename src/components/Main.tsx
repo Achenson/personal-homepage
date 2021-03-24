@@ -103,7 +103,7 @@ function Main({}: Props): JSX.Element {
     <div
       className={`relative min-h-screen ${
         globalSettingsData.picBackground
-          ? "bg-testBackground_2"
+          ? "bg-defaultBackground"
           : `bg-${backgroundColorData}`
       } bg-cover bg-fixed`}
     >

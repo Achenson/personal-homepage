@@ -62,9 +62,9 @@ module.exports = {
         rose: colors.rose,
       },
       backgroundImage: (theme) => ({
-        testBackground: "url('../images/unsplash.jpg')",
-        testBackground_2: "url('../images/pexels-a-pasaric-small.jpg')",
-        testBackground_3: "url('../images/pexels-j-novacek-small.jpg')",
+        defaultBackground: "url('../images/unsplash.jpg')",
+        defaultBackground_2: "url('../images/pexels-a-pasaric-small.jpg')",
+        defaultBackground_3: "url('../images/pexels-j-novacek-small.jpg')",
 
       }),
     },

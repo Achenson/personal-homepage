@@ -4,21 +4,17 @@ import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
 import { globalSettingsState } from "../../state/defaultSettings";
 
-import {
-  uiColorState,
-} from "../../state/colorsState";
+import { uiColorState } from "../../state/colorsState";
 
-import {UpperVisAction} from "../../utils/interfaces"
+import { UpperVisAction } from "../../utils/interfaces";
 
 interface Props {
   // backgroundSettingsVis: boolean;
   // setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
-function BackgroundSettings_UpperUI({
-  upperVisDispatch
-}: Props): JSX.Element {
+function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   const [imgBackgroundMode, setImgBackgroundMode] = useState(true);
@@ -31,12 +27,13 @@ function BackgroundSettings_UpperUI({
     finalColorForImgBackgroundMode = "blueGray-700";
   }
 
-  const imgDescription = "Upload custom background image or use default. Custom transparent color columns"
-  
-  const noImgDescription = "Custom full color background and columns"
+  const imgDescription_1 = "Custom transparent colors for columns";
+  const imgDescription_2 = "Upload background image or ";
+
+  const noImgDescription = "Custom full colors for background and columns";
 
   function btnHover() {
-    return `hover:bg-${uiColorData} hover:bg-opacity-50 hover:`
+    return `hover:bg-${uiColorData} hover:bg-opacity-50 hover:`;
   }
 
   return (
@@ -56,8 +53,7 @@ function BackgroundSettings_UpperUI({
                 // if (backgroundSettingsVis) {
                 //   setBackgroundSettingsVis(false);
                 // }
-                upperVisDispatch({type: "BACKGROUND_SETTINGS_TOGGLE"})
-
+                upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
               }}
             />
           </div>
@@ -78,10 +74,10 @@ function BackgroundSettings_UpperUI({
                 onClick={() => {
                   if (!imgBackgroundMode) {
                     setImgBackgroundMode(true);
-                    setGlobalSettingsData( {
+                    setGlobalSettingsData({
                       ...globalSettingsData,
-                      picBackground: true
-                    })
+                      picBackground: true,
+                    });
                   }
                 }}
               >
@@ -100,29 +96,47 @@ function BackgroundSettings_UpperUI({
                 } text-lg`}
                 onClick={() => {
                   if (imgBackgroundMode) {
-                    setImgBackgroundMode(false)
-                   setGlobalSettingsData( {
+                    setImgBackgroundMode(false);
+                    setGlobalSettingsData({
                       ...globalSettingsData,
-                      picBackground: false
-                    })
+                      picBackground: false,
+                    });
                   }
                 }}
               >
                 No background image
               </p>
-
-            
             </div>
 
-            <p className="text-justify mb-3">{imgBackgroundMode ? imgDescription : noImgDescription}</p>
-          
-            <div className={`flex justify-between items-center ${imgBackgroundMode ? "" : "hidden"}`}>
-               <div className="bg-white h-6 w-60"></div>
-               <button className={`border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150`}>Upload image</button>
-            </div>
+            {imgBackgroundMode ? (
+              <div className="text-center">
+                <p className="">{imgDescription_1}</p>
+                <p className="mb-3">
+                  {imgDescription_2}
+                  <span
+                    className={`text-${uiColorData} cursor-pointer hover:underline`}
+                  >
+                    use default
+                  </span>
+                </p>
+              </div>
+            ) : (
+              <p className="text-center mb-3">{noImgDescription}</p>
+            )}
 
+            <div
+              className={`flex justify-between items-center ${
+                imgBackgroundMode ? "" : "hidden"
+              }`}
+            >
+              <div className="bg-white h-6 w-60"></div>
+              <button
+                className={`border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150`}
+              >
+                Upload image
+              </button>
+            </div>
           </div>
-   
         </div>
       </div>
     </div>
