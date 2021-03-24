@@ -168,24 +168,22 @@ DONE 109. bug: note default color not selected by border DONE
 DONE 110. UpperRightUI does not look good in imgBackgroud mode, should be higher? DONE (higher + border)
 DONE 111. bigger droppable areas! DONE
 DONE 112. backgroundSettings how to choose default img DONE
+XXX 114. persist open state of bookmark (if is closed by default) if it is being dragged? XXX
+DONE 115. rss cannot be always open? bug DONE
+DONE 116. BUG: rss cannot be properly moved when opened! DONE
+XXX 115. change icon for bookmark settings? XXX
+XXX 116. separate line for deleting bookmark XXX
+DONE 117. rename EditBookmarkTitle DONE
+??? 118. 1st column bug on color change ???
+XXX 19. confirmation for folder delete XXX
+??? 121. opened -> open??
+??? 122. is save btn needed in edit bookmark ???
+XXX 123 EditBookmarkTitle gray border test diff options XXX
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-113. test more RSS channels
-114. persist open state of bookmark (if is closed by default) if it is being dragged?
-DONE 115. rss cannot be always open? bug DONE
-DONE 116. BUG: rss cannot be properly moved when opened! DONE
-115. change icon for bookmark settings?
-116. separate line for deleting bookmark
-117. rename EditBookmarkTitle
-118. 1st column bug on color change
-119. confirmation for folder delete
-120. shorter "title" in EditBookmarkTitle for Note & Folder
-121. opened -> open
-122. is save btn needed in edit bookmark
-123 EditBookmarkTitle gray border test diff options
 124. React snippets!
 125. button inside svgs -> not a good idea, just make svgs clickable?
 126. bug: wrong background settings on start
@@ -315,6 +313,9 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 226. UpperRightUI borderGray vs UpperLeftMenu opacity-80 consistency
 227. clean tailwind files in the end
 228. bg settings- underline selected to be consistent?
+229. bug: selection border sometimes doesn't work on UpperLeftMenu colors
+230. longer "title" in "note" Tab? 
+231. make gray border for NoteInput etc. (similar to to EditTab) ?
 
 App structure:
 Main
