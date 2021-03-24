@@ -184,7 +184,6 @@ XXX 123 EditBookmarkTitle gray border test diff options XXX
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-124. React snippets!
 125. button inside svgs -> not a good idea, just make svgs clickable?
 126. bug: wrong background settings on start
 127. move BackgroudColor and EyeOff to upperUI components
@@ -197,6 +196,9 @@ DONE 133. EyeOff does not work on RSS and all? DONE
 134. EyeOff should also close all BookmarkEdits
 DONE 125: Bug: EyeOff DONE
 126. make a note about Grid's logic for setting closeAllFolders !!!
+
+125.5 React snippets!
+
 127. better hover effect on UpperLeftMenu's columns color contro
 128. colums color control - problem with border width when clicked in some case (oneColorForAllCols also)
 129. change components to container styles divs instead of mx margins everywhere
@@ -317,6 +319,10 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 230. longer "title" in "note" Tab? 
 231. make gray border for NoteInput etc. (similar to to EditTab) ?
 232. bookmark_lowerUI saveSVG should be inactive
+233. search component for bookmarks?
+234. bug: editing bookmark -> not posiible to add new tag -> the folder dissapears
+
+
 
 App structure:
 Main

@@ -447,6 +447,7 @@ Props): JSX.Element {
           bookmarkComponentType={"edit"}
           bookmarkId={bookmarkId}
           visDispatch={visDispatch}
+          colNumber={colNumber}
         />
       )}
 
@@ -458,6 +459,7 @@ Props): JSX.Element {
           bookmarkComponentType={"new_lowerUI"}
           visDispatch={visDispatch}
           colNumber={colNumber}
+          
         />
       )}
 
