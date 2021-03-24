@@ -10,8 +10,6 @@ import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
-
-
 import {
   createFolderTab,
   createNote,
@@ -71,7 +69,9 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
   const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
 
-  const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(makeInitialBookmarks());
+  const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(
+    makeInitialBookmarks()
+  );
 
   const [bookmarksInputStr, setBookmarksInputStr] = useState<string>("");
 
@@ -85,7 +85,9 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
   const [chevronDown, setChevronDown] = useState(true);
 
-  const [initialBookmarks, setInitialBookmarks] = useState(makeInitialBookmarks());
+  const [initialBookmarks, setInitialBookmarks] = useState(
+    makeInitialBookmarks()
+  );
 
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
   const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
@@ -347,7 +349,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           <p className="w-8"></p>
           {/* !!! pl-4 in NewLink */}
           <div className="w-full flex justify-center">
-            <button
+            <SaveSVG
+              className="h-5 fill-current text-black mr-3 hover:text-green-600 cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
 
@@ -517,18 +520,16 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   return isUnique;
                 }
               }}
-            >
-              <SaveSVG className="h-5 fill-current text-black mr-3 hover:text-green-600" />
-            </button>
-            <button
+            />
+
+            <CancelSVG
+              className="h-5 fill-current text-black ml-3 hover:text-red-600 cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 // setNewTabVis((b) => !b);
                 upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               }}
-            >
-              <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
-            </button>
+            />
           </div>
         </div>
       </div>

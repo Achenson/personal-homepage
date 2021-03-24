@@ -206,7 +206,8 @@ Props): JSX.Element {
         <div className="flex justify-start mt-6">
           <p className="w-1"></p>
           <div className="w-full flex justify-center">
-            <button
+            <SaveSVG
+              className="h-5 fill-current text-black mr-3 hover:text-green-600 cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
 
@@ -335,18 +336,16 @@ Props): JSX.Element {
                   return isUnique;
                 }
               }}
-            >
-              <SaveSVG className="h-5 fill-current text-black mr-3 hover:text-green-600" />
-            </button>
-            <button
+            />
+
+            <CancelSVG
+              className="h-5 fill-current text-black ml-3 hover:text-red-600 cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 // setBookmarkVis((b) => !b);
                 upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
               }}
-            >
-              <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
-            </button>
+            />
           </div>
         </div>
       </div>

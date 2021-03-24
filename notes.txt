@@ -179,12 +179,12 @@ XXX 19. confirmation for folder delete XXX
 ??? 121. opened -> open??
 ??? 122. is save btn needed in edit bookmark ???
 XXX 123 EditBookmarkTitle gray border test diff options XXX
+DONE 125. button inside svgs -> not a good idea, just make svgs clickable? DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-125. button inside svgs -> not a good idea, just make svgs clickable?
 126. bug: wrong background settings on start
 127. move BackgroudColor and EyeOff to upperUI components
 128. Bookmark: merge 3 visibilities (from different folders types) into one?
@@ -321,7 +321,10 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 232. bookmark_lowerUI saveSVG should be inactive
 233. search component for bookmarks?
 234. bug: editing bookmark -> not posiible to add new tag -> the folder dissapears
-
+235. editTab: changing bookmarks alone doesn't enable saveSVG
+236. editTab: center Save & Cancel
+237. make animations for save & cancel SVGs? or on all svgs?
+238. newTab vs newBookmark save & cancel centering?
 
 
 App structure:

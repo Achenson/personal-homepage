@@ -2,8 +2,6 @@ import React, { useState } from "react";
 
 import { produce } from "immer";
 
-
-
 import { createBookmark, createFolderTab } from "../../utils/objCreators";
 
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
@@ -230,7 +228,8 @@ function Bookmark_lowerUI({
         <div className="flex justify-start mt-6">
           <p className="w-1"></p>
           <div className="w-full flex justify-center">
-            <button
+            <SaveSVG
+              className="h-5 fill-current text-black mr-3 hover:text-green-600 cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
 
@@ -426,10 +425,10 @@ function Bookmark_lowerUI({
                   return isUnique;
                 }
               }}
-            >
-              <SaveSVG className="h-5 fill-current text-black mr-3 hover:text-green-600" />
-            </button>
-            <button
+            />
+
+            <CancelSVG
+              className="h-5 fill-current text-black ml-3 hover:text-red-600 cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 // setBookmarkVis((b) => !b);
@@ -442,9 +441,7 @@ function Bookmark_lowerUI({
                   visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
                 }
               }}
-            >
-              <CancelSVG className="h-5 fill-current text-black ml-3 hover:text-red-600" />
-            </button>
+            />
           </div>
         </div>
       </div>

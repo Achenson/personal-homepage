@@ -10,7 +10,6 @@ import { ReactComponent as LockOpenSVG } from "../../svgs/lock-open.svg";
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
-
 import SelectableList from "../Shared/SelectableList";
 
 import { produce } from "immer";
@@ -126,7 +125,9 @@ Props): JSX.Element {
     arrOfBookmarksNames.join(", ")
   );
 
-  const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(makeInitialBookmarks());
+  const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(
+    makeInitialBookmarks()
+  );
 
   useEffect(() => {
     if (wasCheckboxClicked || wasTabOpenClicked || wasItemsPerPageClicked) {
@@ -140,9 +141,10 @@ Props): JSX.Element {
 
   const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
   const [tabsRepeatErrorVis, setTabsRepeatErrorVis] = useState<boolean>(false);
-  const [bookmarksExistenceErrorVis, setBookmarksExistenceErrorVis] = useState<boolean>(
-    false
-  );
+  const [
+    bookmarksExistenceErrorVis,
+    setBookmarksExistenceErrorVis,
+  ] = useState<boolean>(false);
 
   // let regexForTitle = /^\w+$/;
   let regexForTitle = /^\w(\s?\w+)*$/;
@@ -152,7 +154,9 @@ Props): JSX.Element {
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
   const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
-  const [initialBookmarks, setInitialBookmarks] = useState(makeInitialBookmarks());
+  const [initialBookmarks, setInitialBookmarks] = useState(
+    makeInitialBookmarks()
+  );
 
   const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
 
@@ -205,7 +209,11 @@ Props): JSX.Element {
       <div className="flex items-center mt-2 justify-between">
         <p
           className={
-            tabType === "folder" ? "mr-14" : tabType === "rss" ? "mr-12" : "mr-2"
+            tabType === "folder"
+              ? "mr-14"
+              : tabType === "rss"
+              ? "mr-12"
+              : "mr-2"
           }
         >
           Title
@@ -221,7 +229,7 @@ Props): JSX.Element {
             setWasAnythingClicked(true);
           }}
         />
-      {tabType === "folder" && <ChevronDownSVG className="h-6 invisible" />}  
+        {tabType === "folder" && <ChevronDownSVG className="h-6 invisible" />}
       </div>
       {tabType === "folder" && (
         <div className="flex items-center mt-2 mb-3 justify-between">
@@ -288,18 +296,22 @@ Props): JSX.Element {
 
       {tagErrorVis && (
         <p className={`text-red-600`}>
-          Tab title should consist of single or multiple words without special characters
+          Tab title should consist of single or multiple words without special
+          characters
         </p>
       )}
 
       {bookmarksErrorVis && tabType === "folder" && (
         <p className={`text-red-600`}>
-          Bookmarks should consist of single or multiple words (without special characters) separated by coma and space
+          Bookmarks should consist of single or multiple words (without special
+          characters) separated by coma and space
         </p>
       )}
 
       {bookmarksExistenceErrorVis && tabType === "folder" && (
-        <p className={`text-red-600`}>You can choose from existing bookmarks only</p>
+        <p className={`text-red-600`}>
+          You can choose from existing bookmarks only
+        </p>
       )}
 
       {tabsRepeatErrorVis && tabType === "folder" && (
@@ -406,30 +418,27 @@ Props): JSX.Element {
             <span
               className="text-red-600 hover:underline cursor-pointer"
               onClick={() => {
-              // setResetColorsData(true);
-              setDescriptionCheckbox(rssSettingsData.description)
-              setDateCheckbox(rssSettingsData.date)
-              setRssItemsPerPage(rssSettingsData.itemsPerPage)
-              setWasAnythingClicked(false)
-              setWasCheckboxClicked(false)
-              setWasItemsPerPageClicked(false)
-              setWasTabOpenClicked(false)
+                // setResetColorsData(true);
+                setDescriptionCheckbox(rssSettingsData.description);
+                setDateCheckbox(rssSettingsData.date);
+                setRssItemsPerPage(rssSettingsData.itemsPerPage);
+                setWasAnythingClicked(false);
+                setWasCheckboxClicked(false);
+                setWasItemsPerPageClicked(false);
+                setWasTabOpenClicked(false);
 
-              setTabsData((previous) =>
-              produce(previous, (updated) => {
-                let currentTab = updated.find((obj) => obj.id == tabID);
-                if (currentTab) {
-                  // let tabIndex = updated.indexOf(tabToDelete);
-                  // updated.splice(tabIndex, 1);
-                  currentTab.date = null;
-                  currentTab.description = null;
-                  currentTab.itemsPerPage = null;
-                }
-              })
-            );
-
-
-              
+                setTabsData((previous) =>
+                  produce(previous, (updated) => {
+                    let currentTab = updated.find((obj) => obj.id == tabID);
+                    if (currentTab) {
+                      // let tabIndex = updated.indexOf(tabToDelete);
+                      // updated.splice(tabIndex, 1);
+                      currentTab.date = null;
+                      currentTab.description = null;
+                      currentTab.itemsPerPage = null;
+                    }
+                  })
+                );
               }}
             >
               RESET
@@ -442,72 +451,75 @@ Props): JSX.Element {
       <div className={`pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
         <div className="flex justify-between items-center">
           <p>Lock as always-open</p>
-          <button>
-            {tabOpen ? (
-              <LockClosedSVG
-                className="h-6 text-gray-700 hover:text-black cursor-pointer"
-                onClick={() => {
-                  setTabOpen((b) => !b);
-                  setWasTabOpenClicked(true);
-                }}
-              />
-            ) : (
-              <LockOpenSVG
-                className="h-6 text-gray-700 hover:text-black cursor-pointer"
-                onClick={() => {
-                  setTabOpen((b) => !b);
-                  setWasTabOpenClicked(true);
-                }}
-              />
-            )}
-          </button>
+
+          {tabOpen ? (
+            <LockClosedSVG
+              className="h-6 text-gray-700 hover:text-black cursor-pointer"
+              onClick={() => {
+                setTabOpen((b) => !b);
+                setWasTabOpenClicked(true);
+              }}
+            />
+          ) : (
+            <LockOpenSVG
+              className="h-6 text-gray-700 hover:text-black cursor-pointer"
+              onClick={() => {
+                setTabOpen((b) => !b);
+                setWasTabOpenClicked(true);
+              }}
+            />
+          )}
         </div>
 
         <div className="flex justify-between items-center mt-2">
           <p>Delete</p>
-          <button>
-            <TrashSVG
-              className="h-6 text-gray-500 hover:text-black cursor-pointer"
-              onClick={() => {
-                if (!currentTab[0].deletable) {
-                  setNoDeletionErrorVis(true);
-                  return;
-                }
 
-                // setDeletedTab(tabID);
+          <TrashSVG
+            className="h-6 text-gray-500 hover:text-black cursor-pointer"
+            onClick={() => {
+              if (!currentTab[0].deletable) {
+                setNoDeletionErrorVis(true);
+                return;
+              }
 
-                setTabsData((previous) =>
-                  produce(previous, (updated) => {
-                    let tabToDelete = updated.find((obj) => obj.id == tabID);
-                    if (tabToDelete) {
-                      let tabIndex = updated.indexOf(tabToDelete);
-                      updated.splice(tabIndex, 1);
-                    }
-                  })
-                );
+              // setDeletedTab(tabID);
 
-                // setEditTabVis((b) => !b);
-                visDispatch({ type: "EDIT_TOGGLE" });
-                // removing deleted tab(tag) for bookmarks
-                bookmarksData.forEach((obj, i) => {
-                  if (obj.tags.indexOf(tabTitle) > -1) {
-                    setBookmarksData((previous) =>
-                      produce(previous, (updated) => {
-                        updated[i].tags.splice(obj.tags.indexOf(tabTitle), 1);
-                      })
-                    );
+              setTabsData((previous) =>
+                produce(previous, (updated) => {
+                  let tabToDelete = updated.find((obj) => obj.id == tabID);
+                  if (tabToDelete) {
+                    let tabIndex = updated.indexOf(tabToDelete);
+                    updated.splice(tabIndex, 1);
                   }
-                });
-              }}
-            />
-          </button>
+                })
+              );
+
+              // setEditTabVis((b) => !b);
+              visDispatch({ type: "EDIT_TOGGLE" });
+              // removing deleted tab(tag) for bookmarks
+              bookmarksData.forEach((obj, i) => {
+                if (obj.tags.indexOf(tabTitle) > -1) {
+                  setBookmarksData((previous) =>
+                    produce(previous, (updated) => {
+                      updated[i].tags.splice(obj.tags.indexOf(tabTitle), 1);
+                    })
+                  );
+                }
+              });
+            }}
+          />
         </div>
       </div>
 
       <div className="flex justify-start mt-2">
         <p className="w-8"></p>
         <div className="w-full pl-4 flex justify-center">
-          <button
+          <SaveSVG
+            className={`h-5 fill-current mr-3 ${
+              wasAnythingClicked
+                ? "text-gray-900 hover:text-green-600 cursor-pointer"
+                : "text-blueGray-400 cursor-default"
+            }`}
             onClick={(e) => {
               e.preventDefault();
 
@@ -538,8 +550,6 @@ Props): JSX.Element {
                   return;
                 }
               }
-
-      
 
               if (tabType === "folder") {
                 if (!regexForBookmarks.test(bookmarksInputStr)) {
@@ -663,24 +673,16 @@ Props): JSX.Element {
               // setEditTabVis((b) => !b);
               visDispatch({ type: "EDIT_TOGGLE" });
             }}
-          >
-            <SaveSVG
-              className={`h-5 fill-current mr-3 ${
-                wasAnythingClicked
-                  ? "text-gray-900 hover:text-green-600"
-                  : "text-blueGray-400 cursor-default"
-              }`}
-            />
-          </button>
-          <button
+          />
+
+          <CancelSVG
+            className="h-5 fill-current text-gray-900 ml-3 hover:text-red-600 cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
               // setEditTabVis((b) => !b);
               visDispatch({ type: "EDIT_TOGGLE" });
             }}
-          >
-            <CancelSVG className="h-5 fill-current text-gray-900 ml-3 hover:text-red-600" />
-          </button>
+          />
         </div>
       </div>
       {/* </form> */}
