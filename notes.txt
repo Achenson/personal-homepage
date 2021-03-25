@@ -180,12 +180,12 @@ XXX 19. confirmation for folder delete XXX
 ??? 122. is save btn needed in edit bookmark ???
 XXX 123 EditBookmarkTitle gray border test diff options XXX
 DONE 125. button inside svgs -> not a good idea, just make svgs clickable? DONE
+DONE 126. bug: wrong background settings on start DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-126. bug: wrong background settings on start
 127. move BackgroudColor and EyeOff to upperUI components
 128. Bookmark: merge 3 visibilities (from different folders types) into one?
 129. EyeOff: version for background image on
@@ -325,6 +325,8 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 236. editTab: center Save & Cancel
 237. make animations for save & cancel SVGs? or on all svgs?
 238. newTab vs newBookmark save & cancel centering?
+239. get rid of most "else" statements
+
 
 
 App structure:

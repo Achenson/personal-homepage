@@ -17,7 +17,7 @@ interface Props {
 function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
-  const [imgBackgroundMode, setImgBackgroundMode] = useState(true);
+  // const [imgBackgroundMode, setImgBackgroundMode] = useState(true);
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
@@ -63,17 +63,17 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             <div className="flex justify-between mb-3">
               <p
                 className={`${
-                  imgBackgroundMode
+                  globalSettingsData.picBackground
                     ? "cursor-default"
                     : "hover:text-opacity-50 cursor-pointer"
                 } ${
-                  imgBackgroundMode
+                  globalSettingsData.picBackground
                     ? "text-" + finalColorForImgBackgroundMode
                     : "text-gray-400"
                 } text-lg`}
                 onClick={() => {
-                  if (!imgBackgroundMode) {
-                    setImgBackgroundMode(true);
+                  if (!globalSettingsData.picBackground) {
+                    // setImgBackgroundMode(true);
                     setGlobalSettingsData({
                       ...globalSettingsData,
                       picBackground: true,
@@ -86,17 +86,17 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               {/* <p>|</p> */}
               <p
                 className={`${
-                  imgBackgroundMode
+                  globalSettingsData.picBackground
                     ? "hover:text-opacity-50 cursor-pointer"
                     : "cursor-default"
                 } ${
-                  imgBackgroundMode
+                  globalSettingsData.picBackground
                     ? "text-gray-400"
                     : "text-" + finalColorForImgBackgroundMode
                 } text-lg`}
                 onClick={() => {
-                  if (imgBackgroundMode) {
-                    setImgBackgroundMode(false);
+                  if (globalSettingsData.picBackground) {
+                    // setImgBackgroundMode(false);
                     setGlobalSettingsData({
                       ...globalSettingsData,
                       picBackground: false,
@@ -108,7 +108,7 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               </p>
             </div>
 
-            {imgBackgroundMode ? (
+            {globalSettingsData.picBackground ? (
               <div className="text-center">
                 <p className="">{imgDescription_1}</p>
                 <p className="mb-3">
@@ -134,7 +134,7 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
             <div
               className={`flex justify-between items-center ${
-                imgBackgroundMode ? "" : "hidden"
+                globalSettingsData.picBackground ? "" : "hidden"
               }`}
             >
               <div className="bg-white h-6 w-60"></div>
