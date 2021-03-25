@@ -289,6 +289,30 @@ Props): JSX.Element {
   // "default" behaviour
   const regexForColors = /[6789]/;
 
+  const [mouseOverTab, setMouseOverTab] = useState(false);
+
+  useEffect(() => {
+    // @ts-ignore
+    let iconsTimeout;
+
+    if (mouseOverTab) {
+      iconsTimeout = setTimeout(() => {
+        setIconsVis(true);
+      }, 50);
+    }
+
+    if (!mouseOverTab) {
+      setIconsVis(false);
+      // if (iconsTimeout) {
+      //   clearTimeout(iconsTimeout);
+      // }
+    }
+    return () => {
+      // @ts-ignore
+      clearTimeout(iconsTimeout);
+    };
+  }, [mouseOverTab]);
+
   function textOrIconColor(finalTabColor: string, textOrIcon: "text" | "icon") {
     // exceptions
 
@@ -334,7 +358,7 @@ Props): JSX.Element {
           ? "hidden"
           : ""
       }`}
-      >
+    >
       <div
         ref={drag}
         className={`pl-0 h-8 px-2 pt-px bg-${
@@ -351,10 +375,14 @@ Props): JSX.Element {
         // style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)"}}
 
         onMouseEnter={() => {
-          setIconsVis(true);
+          // setTimeout( () => {
+          //   setIconsVis(true);
+          // }, 1000)
+          setMouseOverTab(true);
         }}
         onMouseLeave={() => {
-          setIconsVis(false);
+          // setIconsVis(false);
+          setMouseOverTab(false);
         }}
       >
         <div
@@ -369,7 +397,7 @@ Props): JSX.Element {
           <p className="">
             {" "}
             {tabTitle}
-             {/* {tabsData[tabIndex].priority}{" "} */}
+            {/* {tabsData[tabIndex].priority}{" "} */}
             {/* {tabsData[tabIndex].deletable.toString()} */}
           </p>
         </div>
@@ -403,8 +431,6 @@ Props): JSX.Element {
               className={`h-8 hover:${hoverText(finalTabColor)} cursor-pointer`}
               style={{ marginTop: "-6px" }}
               onClick={() => {
-          
-
                 visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
               }}
             />
@@ -418,7 +444,11 @@ Props): JSX.Element {
             //   tabType === "note" || tabType === "rss" ? "ml-1" : ""
             // }
             // `}
-            style={{marginLeft: `${tabType === "note" || tabType === "rss" ? "7px" : ""}`}}
+            style={{
+              marginLeft: `${
+                tabType === "note" || tabType === "rss" ? "7px" : ""
+              }`,
+            }}
             onClick={() => {
               visDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
             }}
@@ -459,7 +489,6 @@ Props): JSX.Element {
           bookmarkComponentType={"new_lowerUI"}
           visDispatch={visDispatch}
           colNumber={colNumber}
-          
         />
       )}
 

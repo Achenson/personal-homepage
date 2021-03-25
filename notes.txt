@@ -184,13 +184,12 @@ DONE 126. bug: wrong background settings on start DONE
 DONE 127. move BackgroudColor and EyeOff to upperUI components DONE
 DONE 128. Tab: merge 3 visibilities (from different folders types) into one? DONE (useReducer used)
 DONE 129. EyeOff: version for background image on DONE
+DONE 131. to make delayed Icons Appearence on Folders DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-130. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen?
-131. to make delayed Icons Appearence on Folders
 DONE 132. Bookmark missing hooks DONE
 DONE 133. EyeOff does not work on RSS and all? DONE
 134. EyeOff should also close all BookmarkEdits
@@ -327,6 +326,7 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 238. newTab vs newBookmark save & cancel centering?
 239. get rid of most "else" statements
 240. EyeOff should be positioned more to the left if image bg is on
+241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
 
 
 
