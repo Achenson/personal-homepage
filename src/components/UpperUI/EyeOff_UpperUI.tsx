@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import { backgroundColorState } from "../../state/colorsState";
-import { closeAllTabsState } from "../../state/defaultSettings";
+
+import { closeAllTabsState, globalSettingsState } from "../../state/defaultSettings";
 
 
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
@@ -20,9 +21,9 @@ function EyeOff_UpperUI({
     setBackgroundColorState,
   ] = backgroundColorState.use();
 
-  const [selected, setSelected] = useState(false);
 
   const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use()
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use()
 
   function calcIconBackground(pageBackgroundColor: string) {
     if (pageBackgroundColor === "white") {
@@ -34,6 +35,10 @@ function EyeOff_UpperUI({
     }
 
     let whiteRegex = /[3456789]00$/;
+
+    if (globalSettingsData.picBackground) {
+      return "bg-white text-black"
+    }
 
     if (whiteRegex.test(pageBackgroundColor)) {
       return `bg-white text-${backgroundColorData}`;
