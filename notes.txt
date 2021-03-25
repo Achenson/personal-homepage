@@ -59,6 +59,8 @@ NOTES:
  Column: overflow-hidden & Gap: h-full (height: 100%) not working because EditTab
  and edit bookmakr need overflow
  solution: absolute invisible last gap stretching screen height
+ 4. (to do - setTimout logic in Tab)
+ 5. Gris closeAllTabs is being set to false on the next render after it is being set to true
 TO DO:
 
 DONE 3. bookmark move icon - hide when moving? DONE
@@ -185,18 +187,17 @@ DONE 127. move BackgroudColor and EyeOff to upperUI components DONE
 DONE 128. Tab: merge 3 visibilities (from different folders types) into one? DONE (useReducer used)
 DONE 129. EyeOff: version for background image on DONE
 DONE 131. to make delayed Icons Appearence on Folders DONE
+DONE 132. Bookmark missing hooks DONE
+DONE 133. EyeOff does not work on RSS and all? DONE
+DONE 134. EyeOff should also close all BookmarkEdits DONE
+DONE 125: Bug: EyeOff DONE
+DONE 126. make a note about Grid's logic for setting closeAllFolders !!! DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-DONE 132. Bookmark missing hooks DONE
-DONE 133. EyeOff does not work on RSS and all? DONE
-134. EyeOff should also close all BookmarkEdits
-DONE 125: Bug: EyeOff DONE
-126. make a note about Grid's logic for setting closeAllFolders !!!
 
-125.5 React snippets!
 
 127. better hover effect on UpperLeftMenu's columns color contro
 128. colums color control - problem with border width when clicked in some case (oneColorForAllCols also)
@@ -206,6 +207,10 @@ DONE 125: Bug: EyeOff DONE
 132. bug: unwanted gap when dragging folder to empty column nr 1
 133. hide Left UI btn?
 134. logo
+
+134.5 React snippets!
+
+
 135. column numbers: change bookmarks colNumber & priority if changed down?
 136. css method to get rid of input numbers' arrows
 137. input's left padding
@@ -327,7 +332,9 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 239. get rid of most "else" statements
 240. EyeOff should be positioned more to the left if image bg is on
 241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
-
+242. make note about setTimout in Tab
+243. column colors two components - redundant?
+244. border selection invisible on ColumnColor_UpperUI & Img
 
 
 App structure:
