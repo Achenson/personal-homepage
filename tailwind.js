@@ -67,6 +67,11 @@ module.exports = {
         defaultBackground_3: "url('../images/pexels-j-novacek-small.jpg')",
 
       }),
+      boxShadow: {
+        inner_md: "inset 0 2px 10px 0 rgba(0, 0, 0, 0.06)",
+        inner_lg: "inset 0 2px 15px 0 rgba(0, 0, 0, 0.06)",
+        inner_xl: "inset 0 2px 20px 0 rgba(0, 0, 0, 0.06)",
+      },
     },
   },
   variants: {

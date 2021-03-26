@@ -89,7 +89,7 @@ function ColumnColor_UpperUI({
       }}
       className={`h-4 w-8 bg-${columnsColor(
         colNumber
-      )} cursor-pointer ${borderStyle()} border-black hover:border-gray-500`}
+      )} cursor-pointer ${borderStyle()} border-black hover:shadow-inner_xl`}
     ></div>
   );
 }
