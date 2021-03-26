@@ -201,6 +201,7 @@ DONE 131. BUG: after saving after changin title, Folders with type "folder" can 
 DONE 134.5 React snippets! DONE
 ??? 135. column numbers: change bookmarks colNumber & priority if changed down ???
 DONE 137. input's left padding DONE (pl-px)
+DONE 138. new bookmark: not entering any tag should be optional DONE
 
 
 1. purgecss at the end of project?
@@ -211,14 +212,13 @@ DONE 137. input's left padding DONE (pl-px)
 
 
 
-138. new bookmark: not entering any tag should be optional
-139. make a note about fixed too many renders in newLink_UpperUI ! initialTags could have not been a var in component:\
+139. make a note about fixed too many renders in newBookmark_UpperUI ! initialTags could have not been a var in component:\
 in that case the value would be calc on each render which would cause useEffect to crash the app (too many renders)
 instead: initialTags in useState. Or could have been outside funcion component(global scope)
 140. make notes about useState, useEffect life cycle
 141. make note about resolving conflict when going back one commit: 
-142. select prev commit in git history 2. git pull 3. resolving conflicts (accept current chagne) 4. git add * 5. git commit
-143. make NewLink_UpperUI save and cance little lower
+select prev commit in git history 2. git pull 3. resolving conflicts (accept current chagne) 4. git add * 5. git commit
+143. make NewBookmark_UpperUI save and cance little lower
 144. NOTE Regex: word boundary & the need to escape different character in new RegEx! ( / vs \)
 145. closing tags when tags are empty is not needed? as Save & cancel are visible anyway
 146. tag regex works also if there is more than one space: to change or not?
