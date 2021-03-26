@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
+
+
 
 import { uiColorState } from "../../state/colorsState";
 
@@ -15,6 +17,8 @@ interface Props {
 }
 
 function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
+
+
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();

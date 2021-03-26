@@ -1,0 +1,19 @@
+  "React Function Component": {
+    "prefix": "rc",
+    "body": [
+      "import React from 'react';",
+      "",
+      "interface Props {",
+      "",
+      "}",
+      "",
+      "function $1({}: Props): JSX.Element{",
+      "    return (",
+      "        $0",
+      "    )",
+      "};",
+      "",
+      "export default $1;"
+    ],
+    "description": "Create a React Function Component"
+  },
