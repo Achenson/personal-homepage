@@ -193,6 +193,7 @@ DONE 134. EyeOff should also close all BookmarkEdits DONE
 DONE 125: Bug: EyeOff DONE
 DONE 126. make a note about Grid's logic for setting closeAllFolders !!! DONE
 DONE 127. better hover effect on UpperLeftMenu's columns color contro DONE
+DONE 128. colums color control - problem with border width when clicked in some case (oneColorForAllCols also) DONE
 
 
 1. purgecss at the end of project?
@@ -200,7 +201,6 @@ DONE 127. better hover effect on UpperLeftMenu's columns color contro DONE
 
 
 
-128. colums color control - problem with border width when clicked in some case (oneColorForAllCols also)
 129. change components to container styles divs instead of mx margins everywhere
 130. useEffect -> some should be unmounted? check in the end
 131. BUG: after saving after changin title, Folders with type "folder" can be deleted even if deletable set to false, +problems with priority render
@@ -335,9 +335,10 @@ instead: initialTags in useState. Or could have been outside funcion component(g
 242. make note about setTimout in Tab
 243. column colors two components - redundant?
 244. border selection invisible on ColumnColor_UpperUI & Img
-245. change all selections to shadow (like in UpperLeftMenu)
+245. change all selections to shadow (experiment more?)(like in UpperLeftMenu)
 246. change all border for colors to thinner
-
+247. redundant code in SingleColor_DefaultAndColumn / setDefaultColorsFor(change/simplify)
+248. different hover effect if one color for all columns is set
 
 App structure:
 Main

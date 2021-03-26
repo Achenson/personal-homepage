@@ -72,20 +72,14 @@ function ColumnColor_UpperUI({
       onClick={() => {
         setDefaultColorsFor(`column_${colNumber}` as any);
 
-        if (defaultColorsFor === `column_${colNumber}`) {
-          // setColorsToChooseVis((b) => !b);
+        if (columnSelected === colNumber) {
           upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
           setColumnSelected(null);
         } else {
-          // setColorsToChooseVis(true);
           upperVisDispatch({ type: "COLORS_COLUMN_OPEN" });
           setColumnSelected(colNumber);
         }
-
-        // setTabsSelected(false);
-        // setNotesSelected(false);
-
-        // setColumnsSelected((b) => !b);
+        
       }}
       className={`h-4 w-8 bg-${columnsColor(
         colNumber

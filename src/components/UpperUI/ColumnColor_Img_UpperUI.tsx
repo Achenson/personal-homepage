@@ -33,7 +33,7 @@ function SingleColumnsColor_Img_UpperUI({
   columnSelected,
   setColumnSelected,
   upperVisDispatch,
-  arrIndex
+  arrIndex,
 }: Props): JSX.Element {
   const [
     columnsColorImg_Data,
@@ -74,25 +74,15 @@ function SingleColumnsColor_Img_UpperUI({
       onClick={() => {
         setDefaultColorsFor(`column_${colNumber}` as any);
 
-        if (defaultColorsFor === `column_${colNumber}`) {
-          // setColorsToChooseVis((b) => !b);
+        if (columnSelected === colNumber) {
           upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
           setColumnSelected(null);
         } else {
-          // setColorsToChooseVis(true);
-          upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
-
+          upperVisDispatch({ type: "COLORS_COLUMN_OPEN" });
           setColumnSelected(colNumber);
         }
-
-        // setTabsSelected(false);
-        // setNotesSelected(false);
-
-        // setColumnsSelected((b) => !b);
       }}
-      className={`h-4 w-8 cursor-pointer ${
-        borderStyle()
-      } border-black hover:border-gray-500`}
+      className={`h-4 w-8 cursor-pointer ${borderStyle()} border-black hover:shadow-inner_xl`}
       style={{ backgroundColor: columnsColor(colNumber) }}
     ></div>
   );
