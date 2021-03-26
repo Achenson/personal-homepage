@@ -61,6 +61,15 @@ NOTES:
  solution: absolute invisible last gap stretching screen height
  4. (to do - setTimout logic in Tab)
  5. Gris closeAllTabs is being set to false on the next render after it is being set to true
+6. fixed too many renders in newTab_UpperUI: initialTags could have not been a var in component:
+in that case the value would be calc on each render which would cause useEffect to crash the app (too many renders)
+instead: initialTags in useState.
+7. hooks lifeCycle: useEffect is called when everything is rendered. Just before that, previous cleanup effect is calleed
+child component is called after everything is done in parent component
+Anytime something is changed, the code for component runs from the begining. But lazy state initialization is omitten
+UseEffect does not wait for any change - instead it wait until some state changes
+8. going back one commit: select prev commit in git history 2. git pull 3. resolving conflicts (accept current chagne) 4. git add * 5. git commit
+
 TO DO:
 
 DONE 3. bookmark move icon - hide when moving? DONE
@@ -202,6 +211,9 @@ DONE 134.5 React snippets! DONE
 ??? 135. column numbers: change bookmarks colNumber & priority if changed down ???
 DONE 137. input's left padding DONE (pl-px)
 DONE 138. new bookmark: not entering any tag should be optional DONE
+DONE 139. make a note about fixed too many renders in NewTab_UpperUI ! initialTags could have not been a var in component DONE
+DONE 140. make notes about useState, useEffect life cycle DONE
+DONE 141. make note about resolving conflict when going back one commit:  DONE
 
 
 1. purgecss at the end of project?
@@ -212,13 +224,8 @@ DONE 138. new bookmark: not entering any tag should be optional DONE
 
 
 
-139. make a note about fixed too many renders in newBookmark_UpperUI ! initialTags could have not been a var in component:\
-in that case the value would be calc on each render which would cause useEffect to crash the app (too many renders)
-instead: initialTags in useState. Or could have been outside funcion component(global scope)
-140. make notes about useState, useEffect life cycle
-141. make note about resolving conflict when going back one commit: 
-select prev commit in git history 2. git pull 3. resolving conflicts (accept current chagne) 4. git add * 5. git commit
-143. make NewBookmark_UpperUI save and cance little lower
+
+143. make NewBookmark_UpperUI save and cancel little lower
 144. NOTE Regex: word boundary & the need to escape different character in new RegEx! ( / vs \)
 145. closing tags when tags are empty is not needed? as Save & cancel are visible anyway
 146. tag regex works also if there is more than one space: to change or not?

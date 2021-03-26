@@ -82,7 +82,7 @@ function SingleColumnsColor_Img_UpperUI({
           setColumnSelected(colNumber);
         }
       }}
-      className={`h-4 w-8 cursor-pointer ${borderStyle()} border-black hover:shadow-inner_xl`}
+      className={`h-4 w-8 cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
       style={{ backgroundColor: columnsColor(colNumber) }}
     ></div>
   );
