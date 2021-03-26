@@ -222,7 +222,7 @@ Props): JSX.Element {
           type="text"
           // min-w-0 !!
           // className="border w-full max-w-6xl min-w-0"
-          className="border w-full max-w-6xl min-w-0"
+          className="border w-full max-w-6xl min-w-0 pl-px"
           value={tabTitleInput}
           onChange={(e) => {
             setTabTitleInput(e.target.value);
@@ -238,7 +238,7 @@ Props): JSX.Element {
             type="text"
             // min-w-0 !!
             // className="border w-full max-w-6xl min-w-0"
-            className="border w-full min-w-0"
+            className="border w-full min-w-0 pl-px"
             value={bookmarksInputStr}
             onChange={(e) => {
               // setTabTitleInput(e.target.value);
@@ -350,7 +350,7 @@ Props): JSX.Element {
             <input
               type="text"
               // min-w-0 !!
-              className="border w-full max-w-6xl min-w-0"
+              className="border w-full max-w-6xl min-w-0 pl-px"
               value={rssLinkInput}
               onChange={(e) => {
                 setRssLinkInput(e.target.value);

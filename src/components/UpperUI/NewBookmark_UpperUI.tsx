@@ -95,7 +95,7 @@ Props): JSX.Element {
 
           <input
             type="text"
-            className="w-full ml-2 border border-gray-500"
+            className="w-full ml-2 border border-gray-500 pl-px"
             value={titleInput}
             placeholder={"new tab title"}
             onChange={(e) => setTitleInput(e.target.value)}
@@ -107,7 +107,7 @@ Props): JSX.Element {
 
           <input
             type="text"
-            className="w-full ml-2 border border-gray-500"
+            className="w-full ml-2 border border-gray-500 pl-px"
             value={urlInput}
             placeholder={"enter proper URL address"}
             onChange={(e) => setUrlInput(e.target.value)}
@@ -119,7 +119,7 @@ Props): JSX.Element {
 
           <input
             type="text"
-            className="w-full ml-2 border border-gray-500  "
+            className="w-full ml-2 border border-gray-500 pl-px"
             // value={tagsInput.join(", ")}
             value={tagsInputStr}
             placeholder={"[tag1], [tag2]..."}

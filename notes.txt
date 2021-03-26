@@ -200,6 +200,7 @@ DONE 131. BUG: after saving after changin title, Folders with type "folder" can 
 ??? 133. hide Left UI btn ???
 DONE 134.5 React snippets! DONE
 ??? 135. column numbers: change bookmarks colNumber & priority if changed down ???
+DONE 137. input's left padding DONE (pl-px)
 
 
 1. purgecss at the end of project?
@@ -210,7 +211,6 @@ DONE 134.5 React snippets! DONE
 
 
 
-137. input's left padding
 138. new bookmark: not entering any tag should be optional
 139. make a note about fixed too many renders in newLink_UpperUI ! initialTags could have not been a var in component:\
 in that case the value would be calc on each render which would cause useEffect to crash the app (too many renders)
