@@ -18,6 +18,7 @@ import {
 import { SingleBookmarkData } from "../../utils/interfaces";
 
 import { TabVisAction } from "../../utils/interfaces";
+import { bookmarkErrors } from "../../utils/errors";
 import SelectableList from "../Shared/SelectableList";
 
 interface Props {
@@ -38,6 +39,23 @@ interface Props {
   currentBookmark: SingleBookmarkData | undefined;
   visDispatch: React.Dispatch<TabVisAction>;
   colNumber: number;
+
+  tagErrorVis: boolean;
+  setTagErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+
+  tagRepeatErrorVis: boolean;
+  setTagRepeatErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+
+  titleFormatErrorVis: boolean;
+  setTitleFormatErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+
+  titleUniquenessErrorVis: boolean;
+  setTitleUniquenessErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+
+  noteErrorVis: boolean;
+  setNoteErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+  regexForTags: RegExp;
+  regexForTitle: RegExp;
 }
 
 function Bookmark_lowerUI({
@@ -57,6 +75,22 @@ function Bookmark_lowerUI({
   currentBookmark,
   visDispatch,
   colNumber,
+  tagErrorVis,
+  setTagErrorVis,
+
+  tagRepeatErrorVis,
+  setTagRepeatErrorVis,
+
+  titleFormatErrorVis,
+  setTitleFormatErrorVis,
+
+  titleUniquenessErrorVis,
+  setTitleUniquenessErrorVis,
+
+  noteErrorVis,
+  setNoteErrorVis,
+  regexForTags,
+  regexForTitle,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [
@@ -90,24 +124,7 @@ function Bookmark_lowerUI({
     return arrOut;
   }
 
-  const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
-  const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
-  const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
-    false
-  );
-  const [
-    titleUniquenessErrorVis,
-    setTitleUniquenessErrorVis,
-  ] = useState<boolean>(false);
-  const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
-
   const [chevronDown, setChevronDown] = useState(true);
-
-  // ^  and $ -> beginning and end of the text!
-  // let regexForTags = /^\w+(,\s\w+)*$/;
-  let regexForTags = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
-  // let regexForTitle = /^\w+$/;
-  let regexForTitle = /^\w(\s?\w+)*$/;
 
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-2 border">
@@ -198,31 +215,23 @@ function Bookmark_lowerUI({
         )}
 
         {titleFormatErrorVis && (
-          <p className={`text-red-600`}>
-            Bookmark title can contain letters, numbers or underscore
-          </p>
+          <p className={`text-red-600`}>{bookmarkErrors.titleFormat}</p>
         )}
 
         {titleUniquenessErrorVis && (
-          <p className={`text-red-600`}>
-            Bookmark with that title already exists
-          </p>
+          <p className={`text-red-600`}>{bookmarkErrors.titleUniqueness}</p>
         )}
 
         {tagErrorVis && (
-          <p className={`text-red-600`}>
-            Tags should consist of words separated by coma and single space
-          </p>
+          <p className={`text-red-600`}>{bookmarkErrors.tagFormat}</p>
         )}
 
         {noteErrorVis && (
-          <p className={`text-red-600`}>
-            Names for tags cannot be the same as Notes titles
-          </p>
+          <p className={`text-red-600`}>{bookmarkErrors.noteError}</p>
         )}
 
         {tagRepeatErrorVis && (
-          <p className={`text-red-600`}>Each tag should be unique</p>
+          <p className={`text-red-600`}>{bookmarkErrors.tagRepeat}</p>
         )}
 
         <div className="flex justify-start mt-6">
