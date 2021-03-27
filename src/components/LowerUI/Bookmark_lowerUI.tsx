@@ -127,7 +127,7 @@ function Bookmark_lowerUI({
   const [chevronDown, setChevronDown] = useState(true);
 
   return (
-    <div className="absolute z-40 bg-gray-100 w-full pb-2 border">
+    <div className="absolute z-40 bg-gray-100 w-full pb-2 pl-1 border">
       <div className="mt-2">
         <div className="flex justify-around mb-2 mt-2">
           <p className="w-10">Title</p>

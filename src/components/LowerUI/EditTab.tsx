@@ -205,7 +205,7 @@ Props): JSX.Element {
   // let regexForTabs = /^\w+(,\s\w+)*$/;
   let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
   return (
-    <div className={`absolute z-40 bg-gray-100 pb-2 border w-full pl-2 pr-2`}>
+    <div className={`absolute z-40 bg-gray-100 pb-2 border w-full pl-1 pr-1`}>
       <div className="flex items-center mt-2 justify-between">
         <p
           className={
