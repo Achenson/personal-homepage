@@ -155,6 +155,16 @@ Props): JSX.Element {
           tabContentVis: false,
           editBookmarkVis: false,
         };
+      case "TAB_CONTENT_OPEN_AFTER_LOCKING":
+        return {
+          ...state,
+          colorsVis: false,
+          editTabVis: false,
+          newBookmarkVis: false,
+          tabContentVis: true,
+          editBookmarkVis: false,
+        };
+
       // similar to tab_content_close, but tabContentVis is not touched (for useEffect)
       case "TAB_EDITABLES_CLOSE":
         return {

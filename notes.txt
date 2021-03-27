@@ -222,6 +222,14 @@ XXX 145. closing tags when tags are empty is not needed? as Save & cancel are vi
 XXX ? 146. selectables regex works also if there is more than one space: to change or not? ?XXX 
 DONE147. unify EditBookmark and NewBookmark_UpperUI & NewBookmark DONE
 DONE 148. EditBookmark paddings DONE
+DONE 149. make EyeOff hide also edits DONE
+DONE 150. Tabs: only 1 edit should be opened at the same time DONE
+DONE 151. In Folder Edit: it should be possible to choose existing bookmarks similar to new Tab DONE
+DONE 152. move SelectableList from UpperUI DONE
+??? 153. globalSetting - change number of columns to sth else ???
+XXX 154. input width problem for tags in NewBookmark & EditBookmark & new?_upperUI XXX
+DONE 155. different name for TagsList: this is also being used for Bookmarks DONE
+DONE 156. always open lock should open folder immediately DONE
 
 
 1. purgecss at the end of project?
@@ -229,14 +237,6 @@ DONE 148. EditBookmark paddings DONE
 
 
 
-149. make EyeOff hide also edits
-150. Folders: only 1 edit should be opened at the same time
-151. In Folder Edit: it should be possible to choose existing bookmarks similar to new Bookmark
-152. move TagsList from UpperUI
-153. globalSetting - change number of columns to sth else
-154. input width problem for tags in NewLink & EditLink & newBookmark_upperUI
-155. different name for TagsList: this is also being used for Bookmarks
-156. always open lock should open folder immediately
 157. clicking on folder should close edit
 158. Links' tags are opened on first render (NewLink is OK)
 159. tags suggestions width and marginLeft should not be hardcoded
@@ -347,6 +347,9 @@ DONE 148. EditBookmark paddings DONE
 252. chevrons for selectables are sometimes in wrong state?
 253. bookmark: add rssError (similar to noteError?)
 254. bookmark: add link errors!
+255. closing of previously opened colors/edits from the other column should be first (not a moment when they are both visible)
+256. tab & editTab errors move out
+257. "always opened" -> opened by default
 
 App structure:
 Main

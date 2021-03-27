@@ -671,7 +671,12 @@ Props): JSX.Element {
               }
 
               // setEditTabVis((b) => !b);
-              visDispatch({ type: "EDIT_TOGGLE" });
+              if(tabOpen) {
+                visDispatch({type: "TAB_CONTENT_OPEN_AFTER_LOCKING"})
+              } else {
+                visDispatch({ type: "EDIT_TOGGLE" });
+              }
+              
             }}
           />
 
