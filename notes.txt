@@ -349,6 +349,8 @@ XXX ? 146. selectables regex works also if there is more than one space: to chan
 250. logo?
 251. css method to get rid of input numbers' arrows
 252. chevrons for selectables are sometimes in wrong state?
+253. bookmark: add rssError (similar to noteError?)
+254. bookmark: add link errors!
 
 App structure:
 Main

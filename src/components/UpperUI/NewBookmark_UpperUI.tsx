@@ -2,8 +2,6 @@ import React, { useState } from "react";
 
 import { produce } from "immer";
 
-import { SingleBookmarkData } from "../../utils/interfaces";
-
 import { createBookmark, createFolderTab } from "../../utils/objCreators";
 
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
@@ -18,6 +16,7 @@ import {
 } from "../../state/tabsAndBookmarks";
 
 import { UpperVisAction } from "../../utils/interfaces";
+import { bookmarkErrors } from "../../utils/errors";
 import SelectableList from "../Shared/SelectableList";
 
 interface Props {
@@ -36,6 +35,22 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   // currentLink: SingleLinkData | undefined
+  tagErrorVis: boolean;
+  setTagErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+
+  tagRepeatErrorVis: boolean;
+  setTagRepeatErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+
+  titleFormatErrorVis: boolean;
+  setTitleFormatErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+
+  titleUniquenessErrorVis: boolean;
+  setTitleUniquenessErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+
+  noteErrorVis: boolean;
+  setNoteErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+  regexForTags: RegExp;
+  regexForTitle: RegExp;
 }
 
 function NewBookmark_UpperUI({
@@ -52,6 +67,22 @@ function NewBookmark_UpperUI({
   notesTitlesArr,
   upperVisDispatch,
   bookmarkComponentType,
+  tagErrorVis,
+  setTagErrorVis,
+
+  tagRepeatErrorVis,
+  setTagRepeatErrorVis,
+
+  titleFormatErrorVis,
+  setTitleFormatErrorVis,
+
+  titleUniquenessErrorVis,
+  setTitleUniquenessErrorVis,
+
+  noteErrorVis,
+  setNoteErrorVis,
+  regexForTags,
+  regexForTitle,
 }: // setBookmarkVis,
 Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
@@ -61,24 +92,7 @@ Props): JSX.Element {
     setBookmarksAllTagsData,
   ] = bookmarksAllTagsState.use();
 
-  const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
-  const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
-  const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
-    false
-  );
-  const [
-    titleUniquenessErrorVis,
-    setTitleUniquenessErrorVis,
-  ] = useState<boolean>(false);
-  const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
-
   const [chevronDown, setChevronDown] = useState(true);
-
-  // ^  and $ -> beginning and end of the text!
-  // let regexForTags = /^\w+(,\s\w+)*$/;
-  // let regexForTitle = /^\w+$/;
-  let regexForTags = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
-  let regexForTitle = /^\w(\s?\w+)*$/;
 
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable
@@ -176,31 +190,23 @@ Props): JSX.Element {
         )}
 
         {titleFormatErrorVis && (
-          <p className={`text-red-600`}>
-            Bookmark title can contain letters, numbers or underscore
-          </p>
+          <p className={`text-red-600`}>{bookmarkErrors.titleFormat}</p>
         )}
 
         {titleUniquenessErrorVis && (
-          <p className={`text-red-600`}>
-            Bookmark with that title already exists
-          </p>
+          <p className={`text-red-600`}>{bookmarkErrors.titleUniqueness}</p>
         )}
 
         {tagErrorVis && (
-          <p className={`text-red-600`}>
-            Tags should consist of words separated by coma and single space
-          </p>
+          <p className={`text-red-600`}>{bookmarkErrors.tagFormat}</p>
         )}
 
         {noteErrorVis && (
-          <p className={`text-red-600`}>
-            Names for tags cannot be the same as Notes titles
-          </p>
+          <p className={`text-red-600`}>{bookmarkErrors.noteError}</p>
         )}
 
         {tagRepeatErrorVis && (
-          <p className={`text-red-600`}>Each tag should be unique</p>
+          <p className={`text-red-600`}>{bookmarkErrors.tagRepeat}</p>
         )}
 
         <div className="flex justify-start mt-6">
