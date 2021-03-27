@@ -69,6 +69,8 @@ child component is called after everything is done in parent component
 Anytime something is changed, the code for component runs from the begining. But lazy state initialization is omitten
 UseEffect does not wait for any change - instead it wait until some state changes
 8. going back one commit: select prev commit in git history 2. git pull 3. resolving conflicts (accept current chagne) 4. git add * 5. git commit
+9. Regex: word boundaries! (^ & &). in newRegex \ needs to be escaped (because it has special meaning in stringe. eg. \n)! but / dont (but it has to be ecspaped in normal
+regex becaus / / are used to open/close regex) 
 
 TO DO:
 
@@ -214,6 +216,10 @@ DONE 138. new bookmark: not entering any tag should be optional DONE
 DONE 139. make a note about fixed too many renders in NewTab_UpperUI ! initialTags could have not been a var in component DONE
 DONE 140. make notes about useState, useEffect life cycle DONE
 DONE 141. make note about resolving conflict when going back one commit:  DONE
+DONE 143. make NewBookmark_UpperUI save and cancel little lower DONE
+DONE 144. NOTE Regex: word boundary & the need to escape different character in new RegEx! ( / vs \) DONE
+XXX 145. closing tags when tags are empty is not needed? as Save & cancel are visible anyway XXX
+XXX ? 146. selectables regex works also if there is more than one space: to change or not? ?XXX 
 
 
 1. purgecss at the end of project?
@@ -225,11 +231,7 @@ DONE 141. make note about resolving conflict when going back one commit:  DONE
 
 
 
-143. make NewBookmark_UpperUI save and cancel little lower
-144. NOTE Regex: word boundary & the need to escape different character in new RegEx! ( / vs \)
-145. closing tags when tags are empty is not needed? as Save & cancel are visible anyway
-146. tag regex works also if there is more than one space: to change or not?
-147. unify EditLink and NewLink_UpperUI & NewLink
+147. unify EditBookmark and NewBookmark_UpperUI & NewBookmark
 148. EditLink paddings
 149. make EyeOff hide also edits
 150. Folders: only 1 edit should be opened at the same time
@@ -346,6 +348,7 @@ DONE 141. make note about resolving conflict when going back one commit:  DONE
 249. useEffect -> some should be unmounted? check in the end
 250. logo?
 251. css method to get rid of input numbers' arrows
+252. chevrons for selectables are sometimes in wrong state?
 
 App structure:
 Main
