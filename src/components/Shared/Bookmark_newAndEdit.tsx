@@ -202,6 +202,8 @@ function Bookmark_newAndEdit({
     setNoteErrorVis,
     regexForTags,
     regexForTitle,
+    chevronDown,
+    setChevronDown
   };
 
   return (
@@ -218,8 +220,7 @@ function Bookmark_newAndEdit({
           bookmarkId={bookmarkId as string | number}
           visDispatch={visDispatch as React.Dispatch<TabVisAction>}
           colNumber={colNumber as number}
-          chevronDown={chevronDown}
-          setChevronDown={setChevronDown}
+          
         />
       )}
     </>

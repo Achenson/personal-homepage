@@ -51,6 +51,8 @@ interface Props {
   setNoteErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
   regexForTags: RegExp;
   regexForTitle: RegExp;
+  chevronDown: boolean;
+  setChevronDown: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function NewBookmark_UpperUI({
@@ -83,6 +85,8 @@ function NewBookmark_UpperUI({
   setNoteErrorVis,
   regexForTags,
   regexForTitle,
+  chevronDown,
+  setChevronDown
 }: // setBookmarkVis,
 Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
@@ -92,7 +96,7 @@ Props): JSX.Element {
     setBookmarksAllTagsData,
   ] = bookmarksAllTagsState.use();
 
-  const [chevronDown, setChevronDown] = useState(true);
+  // const [chevronDown, setChevronDown] = useState(true);
 
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable
@@ -113,6 +117,13 @@ Props): JSX.Element {
             value={titleInput}
             placeholder={"new tab title"}
             onChange={(e) => setTitleInput(e.target.value)}
+            onFocus={
+              (e) => {
+               setTagsListVis(false)
+               setChevronDown(true);
+              }
+            }
+
           />
           <ChevronDownSVG className="h-6 invisible" />
         </div>
@@ -125,6 +136,12 @@ Props): JSX.Element {
             value={urlInput}
             placeholder={"enter proper URL address"}
             onChange={(e) => setUrlInput(e.target.value)}
+            onFocus={
+              (e) => {
+               setTagsListVis(false)
+               setChevronDown(true);
+              }
+            }
           />
           <ChevronDownSVG className="h-6 invisible" />
         </div>
@@ -157,6 +174,12 @@ Props): JSX.Element {
 
               setVisibleTags([...newVisibleTags]);
             }}
+            onFocus={
+              (e) => {
+               setTagsListVis(true)
+               setChevronDown(false);
+              }
+            }
 
             // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
           />
