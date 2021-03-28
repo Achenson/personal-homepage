@@ -152,7 +152,7 @@ Props): JSX.Element {
   const [tabOpen, setTabOpen] = useState(currentTab[0].opened);
 
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
-  const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
+  // const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
   const [initialBookmarks, setInitialBookmarks] = useState(
     makeInitialBookmarks()
@@ -176,19 +176,20 @@ Props): JSX.Element {
 
     if (newVisibleBookmarks.length === 0) {
       setBookmarksListVis(false);
+      setChevronDown(true);
     }
 
-    if (newVisibleBookmarks.length > 0 && !isThisTheFirstRender) {
-      setBookmarksListVis(true);
-    }
+    // if (newVisibleBookmarks.length > 0 && !isThisTheFirstRender) {
+    //   setBookmarksListVis(true);
+    // }
 
-    setIsThisTheFirstRender(false);
+    // setIsThisTheFirstRender(false);
   }, [
     bookmarksInputStr,
     initialBookmarks,
     setVisibleBookmarks,
     setBookmarksListVis,
-    isThisTheFirstRender,
+    // isThisTheFirstRender,
   ]);
 
   function makeInitialBookmarks(): string[] {
@@ -228,6 +229,13 @@ Props): JSX.Element {
             setTabTitleInput(e.target.value);
             setWasAnythingClicked(true);
           }}
+          onFocus={
+            (e) => {
+             setBookmarksListVis(false)
+             setChevronDown(true);
+            }
+          }
+
         />
         {tabType === "folder" && <ChevronDownSVG className="h-6 invisible" />}
       </div>
@@ -263,6 +271,12 @@ Props): JSX.Element {
 
               setVisibleBookmarks([...newVisibleBookmarks]);
             }}
+            onFocus={
+              (e) => {
+               setBookmarksListVis(true)
+               setChevronDown(false);
+              }
+            }
           />
           {chevronDown ? (
             <ChevronDownSVG
@@ -458,6 +472,8 @@ Props): JSX.Element {
               onClick={() => {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
+                setBookmarksListVis(false)
+                setChevronDown(true);
               }}
             />
           ) : (
@@ -466,6 +482,8 @@ Props): JSX.Element {
               onClick={() => {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
+                setBookmarksListVis(false)
+                setChevronDown(true);
               }}
             />
           )}
