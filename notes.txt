@@ -230,6 +230,7 @@ DONE 152. move SelectableList from UpperUI DONE
 XXX 154. input width problem for tags in NewBookmark & EditBookmark & new?_upperUI XXX
 DONE 155. different name for TagsList: this is also being used for Bookmarks DONE
 DONE 156. always open lock should open folder immediately DONE
+??? 157. clicking on tab should close edit ?? (yet, but for the same Tab for now)
 
 
 1. purgecss at the end of project?
@@ -237,8 +238,7 @@ DONE 156. always open lock should open folder immediately DONE
 
 
 
-157. clicking on folder should close edit
-158. Links' tags are opened on first render (NewLink is OK)
+158. Links' tags are opened on first render (NewLink is OK) - should be opened on focus!?
 159. tags suggestions width and marginLeft should not be hardcoded
 160. unify paddings etc between EditBookmarkTitle & EditLink
 161. use {...params} is props somewhere if there is repetition?
@@ -350,6 +350,8 @@ DONE 156. always open lock should open folder immediately DONE
 255. closing of previously opened colors/edits from the other column should be first (not a moment when they are both visible)
 256. tab & editTab errors move out
 257. "always opened" -> opened by default
+258. adding net bookmark without tag when all bookmarks is hidden problem?
+259. highlight in red non existing boookmarks in newTab?
 
 App structure:
 Main

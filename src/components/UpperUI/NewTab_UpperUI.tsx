@@ -89,8 +89,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     makeInitialBookmarks()
   );
 
-  // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
-  const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
+  // XX tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
+  // XX
 
   useEffect(() => {
     let newVisibleBookmarks: string[] = [];
@@ -108,19 +108,20 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
     if (newVisibleBookmarks.length === 0) {
       setBookmarksListVis(false);
+      setChevronDown(true);
     }
 
-    if (newVisibleBookmarks.length > 0 && !isThisTheFirstRender) {
-      setBookmarksListVis(true);
-    }
+    // if (newVisibleBookmarks.length > 0 && !isThisTheFirstRender) {
+    //   setBookmarksListVis(true);
+    // }
 
-    setIsThisTheFirstRender(false);
+    // setIsThisTheFirstRender(false);
   }, [
     bookmarksInputStr,
     initialBookmarks,
     setVisibleBookmarks,
     setBookmarksListVis,
-    isThisTheFirstRender,
+    // isThisTheFirstRender,
   ]);
 
   function makeInitialBookmarks(): string[] {
@@ -155,7 +156,10 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             } `}
             onClick={() => {
               setTabColumnInput(el);
+              setBookmarksListVis(false);
+              setChevronDown(true);
             }}
+        
           ></div>
         </div>
       );
@@ -190,6 +194,12 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 : "new RSS title"
             }
             onChange={(e) => setTabTitleInput(e.target.value)}
+            onFocus={
+              (e) => {
+               setBookmarksListVis(false)
+               setChevronDown(true);
+              }
+            }
           />
           {/* </div> */}
           <div className="w-5 h-5">
@@ -231,6 +241,18 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
                 setVisibleBookmarks([...newVisibleTabs]);
               }}
+
+              onFocus={
+                (e) => {
+                 setBookmarksListVis(true)
+                 setChevronDown(false);
+                }
+              }
+
+            
+
+              // onBlur={}
+
               placeholder={"Choose at least one"}
             />
             {/* </div> */}
