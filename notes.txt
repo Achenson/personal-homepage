@@ -230,7 +230,7 @@ DONE 152. move SelectableList from UpperUI DONE
 XXX 154. input width problem for tags in NewBookmark & EditBookmark & new?_upperUI XXX
 DONE 155. different name for TagsList: this is also being used for Bookmarks DONE
 DONE 156. always open lock should open folder immediately DONE
-??? 157. clicking on tab should close edit ?? (yet, but for the same Tab for now)
+DONE 157. clicking on tab should close edit DONE
 DONE 158. Links' tags are opened on first render (NewLink is OK) - should be opened on focus!? DONE
 
 

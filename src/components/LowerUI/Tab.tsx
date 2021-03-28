@@ -138,6 +138,9 @@ Props): JSX.Element {
           editBookmarkVis: false,
         };
       case "TAB_CONTENT_TOGGLE":
+
+        setTabOpenedData(tabID);
+
         return {
           ...state,
           colorsVis: false,
@@ -146,15 +149,15 @@ Props): JSX.Element {
           editBookmarkVis: false,
           tabContentVis: !state.tabContentVis,
         };
-      case "TAB_CONTENT_CLOSE":
-        return {
-          ...state,
-          colorsVis: false,
-          editTabVis: false,
-          newBookmarkVis: false,
-          tabContentVis: false,
-          editBookmarkVis: false,
-        };
+      // case "TAB_CONTENT_CLOSE":
+      //   return {
+      //     ...state,
+      //     colorsVis: false,
+      //     editTabVis: false,
+      //     newBookmarkVis: false,
+      //     tabContentVis: false,
+      //     editBookmarkVis: false,
+      //   };
       case "TAB_CONTENT_OPEN_AFTER_LOCKING":
         return {
           ...state,
