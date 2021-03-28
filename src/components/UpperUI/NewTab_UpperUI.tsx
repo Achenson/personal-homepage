@@ -330,8 +330,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             setSelectablesInputStr={setBookmarksInputStr}
             selectablesInputStr={bookmarksInputStr}
             visibleSelectables={visibleBookmarks}
-            width="228px"
             marginLeft="89px"
+            marginTop="0px"
           />
         )}
 

@@ -8,24 +8,24 @@ interface Props {
   selectablesInputStr: string;
   setSelectablesInputStr: React.Dispatch<React.SetStateAction<string>>;
   visibleSelectables: string[];
-  width: string;
   marginLeft: string;
+  marginTop: string;
 }
 
 function SelectableList({
   setSelectablesInputStr,
   selectablesInputStr,
   visibleSelectables,
-  width,
-  marginLeft
+  marginLeft,
+  marginTop
 }: Props): JSX.Element {
   
 
   return (
     <div
-      className="absolute z-50 bg-white -mt-2"
+      className="absolute z-50 bg-white w-full border border-t-0"
       // style={{ width: "271px", marginLeft: "42px" }}
-      style={{ width: width, marginLeft: marginLeft }}
+      style={{ marginLeft: marginLeft, marginTop: marginTop }}
     >
       {visibleSelectables.length === 0 ? (
         <p className="invisible">[empty]</p>

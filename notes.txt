@@ -71,6 +71,7 @@ UseEffect does not wait for any change - instead it wait until some state change
 8. going back one commit: select prev commit in git history 2. git pull 3. resolving conflicts (accept current chagne) 4. git add * 5. git commit
 9. Regex: word boundaries! (^ & &). in newRegex \ needs to be escaped (because it has special meaning in stringe. eg. \n)! but / dont (but it has to be ecspaped in normal
 regex becaus / / are used to open/close regex) 
+10. absulute positioning with width taken form other element eg. input: wrap them with div with same style as input (but leave styles on input also!)
 
 TO DO:
 
@@ -352,6 +353,7 @@ DONE 158. Links' tags are opened on first render (NewLink is OK) - should be ope
 257. "always opened" -> opened by default
 258. adding net bookmark without tag when all bookmarks is hidden problem?
 259. highlight in red non existing boookmarks in newTab?
+260. editTab etc. lower border style well selectable are on
 
 App structure:
 Main

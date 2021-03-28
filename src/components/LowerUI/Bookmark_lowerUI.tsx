@@ -233,8 +233,9 @@ function Bookmark_lowerUI({
             setSelectablesInputStr={setTagsInputStr}
             selectablesInputStr={tagsInputStr}
             visibleSelectables={visibleTags}
-            width="271px"
+          
             marginLeft="42px"
+            marginTop="-10px"
           />
         )}
 

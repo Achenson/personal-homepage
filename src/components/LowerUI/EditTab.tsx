@@ -229,55 +229,63 @@ Props): JSX.Element {
             setTabTitleInput(e.target.value);
             setWasAnythingClicked(true);
           }}
-          onFocus={
-            (e) => {
-             setBookmarksListVis(false)
-             setChevronDown(true);
-            }
-          }
-
+          onFocus={(e) => {
+            setBookmarksListVis(false);
+            setChevronDown(true);
+          }}
         />
         {tabType === "folder" && <ChevronDownSVG className="h-6 invisible" />}
       </div>
       {tabType === "folder" && (
         <div className="flex items-center mt-2 mb-3 justify-between">
           <p className={`mr-2`}>Bookmarks</p>
-          <input
-            type="text"
-            // min-w-0 !!
-            // className="border w-full max-w-6xl min-w-0"
-            className="border w-full min-w-0 pl-px"
-            value={bookmarksInputStr}
-            onChange={(e) => {
-              // setTabTitleInput(e.target.value);
-              setWasAnythingClicked(true);
+          <div className="relative w-full min-w-0">
+            <input
+              type="text"
+              // min-w-0 !!
+              // className="border w-full max-w-6xl min-w-0"
+              className="border pl-px w-full min-w-0"
+              value={bookmarksInputStr}
+              onChange={(e) => {
+                // setTabTitleInput(e.target.value);
+                setWasAnythingClicked(true);
 
-              let target = e.target.value;
+                let target = e.target.value;
 
-              setBookmarksInputStr(target);
+                setBookmarksInputStr(target);
 
-              let tabsInputArr = target.split(", ");
+                let tabsInputArr = target.split(", ");
 
-              // setTagsInputArr(tagsInputStr.split(" ,"))
+                // setTagsInputArr(tagsInputStr.split(" ,"))
 
-              // let newVisibleTags = [...visibleTags];
-              let newVisibleBookmarks: string[] = [];
+                // let newVisibleTags = [...visibleTags];
+                let newVisibleBookmarks: string[] = [];
 
-              visibleBookmarks.forEach((el) => {
-                if (tabsInputArr.indexOf(el) === -1) {
-                  newVisibleBookmarks.push(el);
-                }
-              });
+                visibleBookmarks.forEach((el) => {
+                  if (tabsInputArr.indexOf(el) === -1) {
+                    newVisibleBookmarks.push(el);
+                  }
+                });
 
-              setVisibleBookmarks([...newVisibleBookmarks]);
-            }}
-            onFocus={
-              (e) => {
-               setBookmarksListVis(true)
-               setChevronDown(false);
-              }
-            }
-          />
+                setVisibleBookmarks([...newVisibleBookmarks]);
+              }}
+              onFocus={(e) => {
+                setBookmarksListVis(true);
+                setChevronDown(false);
+              }}
+            />
+
+            {tabType === "folder" && bookmarksListVis && (
+              <SelectableList
+                setSelectablesInputStr={setBookmarksInputStr}
+                selectablesInputStr={bookmarksInputStr}
+                visibleSelectables={visibleBookmarks}
+                marginLeft="0px"
+                marginTop="0px"
+              />
+            )}
+          </div>
+
           {chevronDown ? (
             <ChevronDownSVG
               className="h-6 cursor-pointer hover:text-blueGray-500"
@@ -296,16 +304,6 @@ Props): JSX.Element {
             />
           )}
         </div>
-      )}
-
-      {tabType === "folder" && bookmarksListVis && (
-        <SelectableList
-          setSelectablesInputStr={setBookmarksInputStr}
-          selectablesInputStr={bookmarksInputStr}
-          visibleSelectables={visibleBookmarks}
-          width="271px"
-          marginLeft="42px"
-        />
       )}
 
       {tagErrorVis && (
@@ -472,7 +470,7 @@ Props): JSX.Element {
               onClick={() => {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
-                setBookmarksListVis(false)
+                setBookmarksListVis(false);
                 setChevronDown(true);
               }}
             />
@@ -482,7 +480,7 @@ Props): JSX.Element {
               onClick={() => {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
-                setBookmarksListVis(false)
+                setBookmarksListVis(false);
                 setChevronDown(true);
               }}
             />
@@ -689,12 +687,11 @@ Props): JSX.Element {
               }
 
               // setEditTabVis((b) => !b);
-              if(tabOpen) {
-                visDispatch({type: "TAB_CONTENT_OPEN_AFTER_LOCKING"})
+              if (tabOpen) {
+                visDispatch({ type: "TAB_CONTENT_OPEN_AFTER_LOCKING" });
               } else {
                 visDispatch({ type: "EDIT_TOGGLE" });
               }
-              
             }}
           />
 
