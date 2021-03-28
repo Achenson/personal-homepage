@@ -94,7 +94,7 @@ function Bookmark_lowerUI({
   regexForTags,
   regexForTitle,
   chevronDown,
-  setChevronDown
+  setChevronDown,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [
@@ -138,17 +138,14 @@ function Bookmark_lowerUI({
 
           <input
             type="text"
-            className="w-full ml-2 border border-gray-500 pl-px"
+            className="w-full ml-2 border pl-px"
             value={titleInput}
             placeholder={"new tab title"}
             onChange={(e) => setTitleInput(e.target.value)}
-            onFocus={
-              (e) => {
-               setTagsListVis(false)
-               setChevronDown(true);
-              }
-            }
-
+            onFocus={(e) => {
+              setTagsListVis(false);
+              setChevronDown(true);
+            }}
           />
           <ChevronDownSVG className="h-6 invisible" />
         </div>
@@ -157,58 +154,66 @@ function Bookmark_lowerUI({
 
           <input
             type="text"
-            className="w-full ml-2 border border-gray-500 pl-px"
+            className="w-full ml-2 border pl-px"
             value={urlInput}
             placeholder={"enter proper URL address"}
             onChange={(e) => setUrlInput(e.target.value)}
-            onFocus={
-              (e) => {
-               setTagsListVis(false)
-               setChevronDown(true);
-              }
-            }
+            onFocus={(e) => {
+              setTagsListVis(false);
+              setChevronDown(true);
+            }}
           />
           <ChevronDownSVG className="h-6 invisible" />
         </div>
         <div className="flex justify-start mb-2">
           <p className="w-10">Tags</p>
 
-          <input
-            type="text"
-            className="w-full ml-2 border border-gray-500 pl-px"
-            // value={tagsInput.join(", ")}
-            value={tagsInputStr}
-            placeholder={"[tag1], [tag2]..."}
-            onChange={(e) => {
-              let target = e.target.value;
+          <div className="ml-2 relative w-full min-w-0">
+            <input
+              type="text"
+              className="w-full border pl-px min-w-0"
+              // value={tagsInput.join(", ")}
+              value={tagsInputStr}
+              placeholder={"[tag1], [tag2]..."}
+              onChange={(e) => {
+                let target = e.target.value;
 
-              setTagsInputStr(target);
+                setTagsInputStr(target);
 
-              let tagsInputArr = target.split(", ");
+                let tagsInputArr = target.split(", ");
 
-              // setTagsInputArr(tagsInputStr.split(" ,"))
+                // setTagsInputArr(tagsInputStr.split(" ,"))
 
-              // let newVisibleTags = [...visibleTags];
-              let newVisibleTags: string[] = [];
+                // let newVisibleTags = [...visibleTags];
+                let newVisibleTags: string[] = [];
 
-              visibleTags.forEach((el) => {
-                if (tagsInputArr.indexOf(el) === -1) {
-                  newVisibleTags.push(el);
-                }
-              });
+                visibleTags.forEach((el) => {
+                  if (tagsInputArr.indexOf(el) === -1) {
+                    newVisibleTags.push(el);
+                  }
+                });
 
-              setVisibleTags([...newVisibleTags]);
-            }}
+                setVisibleTags([...newVisibleTags]);
+              }}
+              onFocus={(e) => {
+                setTagsListVis(true);
+                setChevronDown(false);
+              }}
 
-            onFocus={
-              (e) => {
-               setTagsListVis(true)
-               setChevronDown(false);
-              }
-            }
+              // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
+            />
 
-            // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
-          />
+            {tagsListVis && (
+              <SelectableList
+                setSelectablesInputStr={setTagsInputStr}
+                selectablesInputStr={tagsInputStr}
+                visibleSelectables={visibleTags}
+                marginLeft="0px"
+                marginTop="0px"
+              />
+            )}
+          </div>
+
           {chevronDown ? (
             <ChevronDownSVG
               className="h-6 cursor-pointer hover:text-blueGray-500"
@@ -227,17 +232,6 @@ function Bookmark_lowerUI({
             />
           )}
         </div>
-
-        {tagsListVis && (
-          <SelectableList
-            setSelectablesInputStr={setTagsInputStr}
-            selectablesInputStr={tagsInputStr}
-            visibleSelectables={visibleTags}
-          
-            marginLeft="42px"
-            marginTop="-10px"
-          />
-        )}
 
         {titleFormatErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.titleFormat}</p>

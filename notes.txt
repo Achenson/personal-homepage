@@ -71,7 +71,7 @@ UseEffect does not wait for any change - instead it wait until some state change
 8. going back one commit: select prev commit in git history 2. git pull 3. resolving conflicts (accept current chagne) 4. git add * 5. git commit
 9. Regex: word boundaries! (^ & &). in newRegex \ needs to be escaped (because it has special meaning in stringe. eg. \n)! but / dont (but it has to be ecspaped in normal
 regex becaus / / are used to open/close regex) 
-10. absulute positioning with width taken form other element eg. input: wrap them with div with same style as input (but leave styles on input also!)
+10. absulute positioning with width taken form other element eg. input: wrap them with div (relative pos) with same style as input (but leave styles on input also!)
 
 TO DO:
 
