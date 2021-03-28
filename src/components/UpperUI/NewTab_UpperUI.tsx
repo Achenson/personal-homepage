@@ -159,7 +159,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               setBookmarksListVis(false);
               setChevronDown(true);
             }}
-        
           ></div>
         </div>
       );
@@ -181,7 +180,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           {/* <div className="w-full pl-2"> */}
           <input
             type="text"
-            className="w-full border border-gray-500 pl-px"
+            className="w-full border pl-px"
             value={tabTitleInput}
             placeholder={
               // tabType === "folder"
@@ -194,12 +193,10 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 : "new RSS title"
             }
             onChange={(e) => setTabTitleInput(e.target.value)}
-            onFocus={
-              (e) => {
-               setBookmarksListVis(false)
-               setChevronDown(true);
-              }
-            }
+            onFocus={(e) => {
+              setBookmarksListVis(false);
+              setChevronDown(true);
+            }}
           />
           {/* </div> */}
           <div className="w-5 h-5">
@@ -212,49 +209,57 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           <div className="flex justify-around mb-2 mt-2">
             <p className="w-32">Bookmarks</p>
             {/* <div className="w-full pl-2"> */}
-            <input
-              type="text"
-              className="w-full border border-gray-500 pl-px"
-              // value={tabLinksInput.join(", ")}
-              value={bookmarksInputStr}
-              // onChange={(e) =>
-              //   setTabLinksInput([...e.target.value.split(", ")])
-              // }
 
-              onChange={(e) => {
-                let target = e.target.value;
+            <div className="relative w-full">
+              <input
+                type="text"
+                className="w-full border pl-px"
+                // value={tabLinksInput.join(", ")}
+                value={bookmarksInputStr}
+                // onChange={(e) =>
+                //   setTabLinksInput([...e.target.value.split(", ")])
+                // }
 
-                setBookmarksInputStr(target);
+                onChange={(e) => {
+                  let target = e.target.value;
 
-                let tabsInputArr = target.split(", ");
+                  setBookmarksInputStr(target);
 
-                // setTagsInputArr(tagsInputStr.split(" ,"))
+                  let tabsInputArr = target.split(", ");
 
-                // let newVisibleTags = [...visibleTags];
-                let newVisibleTabs: string[] = [];
+                  // setTagsInputArr(tagsInputStr.split(" ,"))
 
-                visibleBookmarks.forEach((el) => {
-                  if (tabsInputArr.indexOf(el) === -1) {
-                    newVisibleTabs.push(el);
-                  }
-                });
+                  // let newVisibleTags = [...visibleTags];
+                  let newVisibleTabs: string[] = [];
 
-                setVisibleBookmarks([...newVisibleTabs]);
-              }}
+                  visibleBookmarks.forEach((el) => {
+                    if (tabsInputArr.indexOf(el) === -1) {
+                      newVisibleTabs.push(el);
+                    }
+                  });
 
-              onFocus={
-                (e) => {
-                 setBookmarksListVis(true)
-                 setChevronDown(false);
-                }
-              }
+                  setVisibleBookmarks([...newVisibleTabs]);
+                }}
+                onFocus={(e) => {
+                  setBookmarksListVis(true);
+                  setChevronDown(false);
+                }}
+                // onBlur={}
 
-            
+                placeholder={"Choose at least one"}
+              />
 
-              // onBlur={}
+              {bookmarksListVis && (
+                <SelectableList
+                  setSelectablesInputStr={setBookmarksInputStr}
+                  selectablesInputStr={bookmarksInputStr}
+                  visibleSelectables={visibleBookmarks}
+                  marginLeft="0px"
+                  marginTop="0px"
+                />
+              )}
+            </div>
 
-              placeholder={"Choose at least one"}
-            />
             {/* </div> */}
             {chevronDown ? (
               <div className="w-5 h-5 mt-1">
@@ -286,7 +291,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             <div className="w-full">
               <input
                 type="text"
-                className="w-full border border-gray-500 pl-px"
+                className="w-full border pl-px"
                 value={rssLinkInput}
                 placeholder="enter RSS link"
                 onChange={(e) => setRssLinkInput(e.target.value)}
@@ -323,16 +328,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               }}
             ></textarea>
           </div>
-        )}
-
-        {bookmarksListVis && (
-          <SelectableList
-            setSelectablesInputStr={setBookmarksInputStr}
-            selectablesInputStr={bookmarksInputStr}
-            visibleSelectables={visibleBookmarks}
-            marginLeft="89px"
-            marginTop="0px"
-          />
         )}
 
         {titleFormatErrorVis && (
