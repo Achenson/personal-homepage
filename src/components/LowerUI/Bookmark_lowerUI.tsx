@@ -56,6 +56,8 @@ interface Props {
   setNoteErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
   regexForTags: RegExp;
   regexForTitle: RegExp;
+  chevronDown: boolean;
+  setChevronDown: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function Bookmark_lowerUI({
@@ -91,6 +93,8 @@ function Bookmark_lowerUI({
   setNoteErrorVis,
   regexForTags,
   regexForTitle,
+  chevronDown,
+  setChevronDown
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [
@@ -124,7 +128,7 @@ function Bookmark_lowerUI({
     return arrOut;
   }
 
-  const [chevronDown, setChevronDown] = useState(true);
+  // const [chevronDown, setChevronDown] = useState(true);
 
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-2 pl-1 border">
@@ -138,6 +142,13 @@ function Bookmark_lowerUI({
             value={titleInput}
             placeholder={"new tab title"}
             onChange={(e) => setTitleInput(e.target.value)}
+            onFocus={
+              (e) => {
+               setTagsListVis(false)
+               setChevronDown(true);
+              }
+            }
+
           />
           <ChevronDownSVG className="h-6 invisible" />
         </div>
@@ -150,6 +161,12 @@ function Bookmark_lowerUI({
             value={urlInput}
             placeholder={"enter proper URL address"}
             onChange={(e) => setUrlInput(e.target.value)}
+            onFocus={
+              (e) => {
+               setTagsListVis(false)
+               setChevronDown(true);
+              }
+            }
           />
           <ChevronDownSVG className="h-6 invisible" />
         </div>
@@ -182,6 +199,13 @@ function Bookmark_lowerUI({
 
               setVisibleTags([...newVisibleTags]);
             }}
+
+            onFocus={
+              (e) => {
+               setTagsListVis(true)
+               setChevronDown(false);
+              }
+            }
 
             // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
           />

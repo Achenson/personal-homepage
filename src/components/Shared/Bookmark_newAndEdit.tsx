@@ -92,7 +92,7 @@ function Bookmark_newAndEdit({
   const [initialTags, setInitialTags] = useState(makeInitialTags());
 
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
-  const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
+  // xx const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
   const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
   const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
@@ -104,6 +104,8 @@ function Bookmark_newAndEdit({
     setTitleUniquenessErrorVis,
   ] = useState<boolean>(false);
   const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
+
+  const [chevronDown, setChevronDown] = useState(true);
 
   // ^  and $ -> beginning and end of the text!
   // let regexForTags = /^\w+(,\s\w+)*$/;
@@ -135,19 +137,20 @@ function Bookmark_newAndEdit({
 
     if (newVisibleTags.length === 0) {
       setTagsListVis(false);
+      setChevronDown(true);
     }
 
-    if (newVisibleTags.length > 0 && !isThisTheFirstRender) {
-      setTagsListVis(true);
-    }
+    // if (newVisibleTags.length > 0 && !isThisTheFirstRender) {
+    //   setTagsListVis(true);
+    // }
 
-    setIsThisTheFirstRender(false);
+    // setIsThisTheFirstRender(false);
   }, [
     tagsInputStr,
     initialTags,
     setVisibleTags,
     setTagsListVis,
-    isThisTheFirstRender,
+    // isThisTheFirstRender,
   ]);
 
 
@@ -215,6 +218,8 @@ function Bookmark_newAndEdit({
           bookmarkId={bookmarkId as string | number}
           visDispatch={visDispatch as React.Dispatch<TabVisAction>}
           colNumber={colNumber as number}
+          chevronDown={chevronDown}
+          setChevronDown={setChevronDown}
         />
       )}
     </>
