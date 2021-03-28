@@ -113,7 +113,7 @@ Props): JSX.Element {
 
           <input
             type="text"
-            className="w-full ml-2 border border-gray-500 pl-px"
+            className="w-full ml-2 border pl-px"
             value={titleInput}
             placeholder={"new tab title"}
             onChange={(e) => setTitleInput(e.target.value)}
@@ -132,7 +132,7 @@ Props): JSX.Element {
 
           <input
             type="text"
-            className="w-full ml-2 border border-gray-500 pl-px"
+            className="w-full ml-2 border pl-px"
             value={urlInput}
             placeholder={"enter proper URL address"}
             onChange={(e) => setUrlInput(e.target.value)}
@@ -148,15 +148,19 @@ Props): JSX.Element {
         <div className="flex justify-start mb-2">
           <p className="w-10">Tags</p>
 
+          <div className="ml-2 relative w-full">
+
+
+
           <input
             type="text"
-            className="w-full ml-2 border border-gray-500 pl-px"
+            className="w-full border pl-px"
             // value={tagsInput.join(", ")}
             value={tagsInputStr}
             placeholder={"[tag1], [tag2]..."}
             onChange={(e) => {
               let target = e.target.value;
-
+              
               setTagsInputStr(target);
 
               let tagsInputArr = target.split(", ");
@@ -180,9 +184,26 @@ Props): JSX.Element {
                setChevronDown(false);
               }
             }
-
+            
             // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
+            />
+
+{tagsListVis && (
+          <SelectableList
+            setSelectablesInputStr={setTagsInputStr}
+            selectablesInputStr={tagsInputStr}
+            visibleSelectables={visibleTags}
+            
+            marginLeft="0px"
+            marginTop="0px"
           />
+        )}
+
+
+            </div>
+
+
+
           {chevronDown ? (
             <ChevronDownSVG
               className="h-6 cursor-pointer hover:text-blueGray-500"
@@ -202,16 +223,7 @@ Props): JSX.Element {
           )}
         </div>
 
-        {tagsListVis && (
-          <SelectableList
-            setSelectablesInputStr={setTagsInputStr}
-            selectablesInputStr={tagsInputStr}
-            visibleSelectables={visibleTags}
-            
-            marginLeft="42px"
-            marginTop="-10px"
-          />
-        )}
+    
 
         {titleFormatErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.titleFormat}</p>

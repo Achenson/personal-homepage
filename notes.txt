@@ -354,6 +354,7 @@ DONE 158. Links' tags are opened on first render (NewLink is OK) - should be ope
 258. adding net bookmark without tag when all bookmarks is hidden problem?
 259. highlight in red non existing boookmarks in newTab?
 260. editTab etc. lower border style well selectable are on
+261. input borders more visible?
 
 App structure:
 Main
