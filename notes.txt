@@ -233,6 +233,7 @@ DONE 155. different name for TagsList: this is also being used for Bookmarks DON
 DONE 156. always open lock should open folder immediately DONE
 DONE 157. clicking on tab should close edit DONE
 DONE 158. Links' tags are opened on first render (NewLink is OK) - should be opened on focus!? DONE
+DONE 159. tags suggestions width and marginLeft should not be hardcoded DONE
 
 
 1. purgecss at the end of project?
@@ -240,7 +241,6 @@ DONE 158. Links' tags are opened on first render (NewLink is OK) - should be ope
 
 
 
-159. tags suggestions width and marginLeft should not be hardcoded
 160. unify paddings etc between EditBookmarkTitle & EditLink
 161. use {...params} is props somewhere if there is repetition?
 162. RSS links inputs margin problem

@@ -280,7 +280,6 @@ Props): JSX.Element {
                 setSelectablesInputStr={setBookmarksInputStr}
                 selectablesInputStr={bookmarksInputStr}
                 visibleSelectables={visibleBookmarks}
-                marginLeft="0px"
                 marginTop="0px"
               />
             )}

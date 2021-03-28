@@ -193,8 +193,6 @@ Props): JSX.Element {
             setSelectablesInputStr={setTagsInputStr}
             selectablesInputStr={tagsInputStr}
             visibleSelectables={visibleTags}
-            
-            marginLeft="0px"
             marginTop="0px"
           />
         )}
