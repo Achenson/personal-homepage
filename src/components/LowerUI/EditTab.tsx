@@ -357,7 +357,7 @@ Props): JSX.Element {
       {tabType === "rss" && (
         <div className="mb-1">
           <div className="flex items-center mt-2 justify-between">
-            <p className="w-24 whitespace-nowrap mr-px">RSS link</p>
+            <p className="w-24 whitespace-nowrap" style={{marginRight: "2px"}}>RSS link</p>
             <input
               type="text"
               // min-w-0 !!

@@ -234,6 +234,9 @@ DONE 156. always open lock should open folder immediately DONE
 DONE 157. clicking on tab should close edit DONE
 DONE 158. Links' tags are opened on first render (NewLink is OK) - should be opened on focus!? DONE
 DONE 159. tags suggestions width and marginLeft should not be hardcoded DONE
+DONE 160. unify paddings etc between EditTab & EditBookmark DONE
+DONE 161. use {...params} is props somewhere if there is repetition? DONE
+DONE 162. RSS links inputs margin problem DONE
 
 
 1. purgecss at the end of project?
@@ -241,9 +244,6 @@ DONE 159. tags suggestions width and marginLeft should not be hardcoded DONE
 
 
 
-160. unify paddings etc between EditBookmarkTitle & EditLink
-161. use {...params} is props somewhere if there is repetition?
-162. RSS links inputs margin problem
 163. unify css logic between diff folder type in edit bookmarks
 164. note: min-w crucial for proper display in EditBookmarkTitle!
 165. edit link input border shouldn't be black

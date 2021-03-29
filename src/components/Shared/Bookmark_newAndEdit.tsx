@@ -7,8 +7,8 @@ import {
   bookmarksAllTagsState,
 } from "../../state/tabsAndBookmarks";
 
-import Bookmark_upper_JSX from "../UpperUI/NewBookmark_UpperUI";
-import Bookmark_lower_JSX from "../LowerUI/Bookmark_lowerUI";
+import NewBookmark_UpperUI from "../UpperUI/NewBookmark_UpperUI";
+import Bookmark_lowerUI from "../LowerUI/Bookmark_lowerUI";
 
 import { SingleBookmarkData } from "../../utils/interfaces";
 
@@ -168,7 +168,7 @@ function Bookmark_newAndEdit({
     return tags;
   }
 
-  const bookmarkJSX_props = {
+  const bookmark_props = {
     titleInput,
     setTitleInput,
     urlInput,
@@ -181,25 +181,18 @@ function Bookmark_newAndEdit({
     setTagsListVis,
     notesTitlesArr,
     bookmarkComponentType,
-    // setBookmarkVis,
-
-    // !!! for lower JSX only, change?
-    // currentLink: currentLink,
-
+   
     tagErrorVis,
     setTagErrorVis,
-
     tagRepeatErrorVis,
     setTagRepeatErrorVis,
-
     titleFormatErrorVis,
     setTitleFormatErrorVis,
-
     titleUniquenessErrorVis,
     setTitleUniquenessErrorVis,
-
     noteErrorVis,
     setNoteErrorVis,
+    
     regexForTags,
     regexForTitle,
     chevronDown,
@@ -209,13 +202,13 @@ function Bookmark_newAndEdit({
   return (
     <>
       {bookmarkComponentType === "new_upperUI" ? (
-        <Bookmark_upper_JSX
-          {...bookmarkJSX_props}
+        <NewBookmark_UpperUI
+          {...bookmark_props}
           upperVisDispatch={upperVisDispatch as React.Dispatch<UpperVisAction>}
         />
       ) : (
-        <Bookmark_lower_JSX
-          {...bookmarkJSX_props}
+        <Bookmark_lowerUI
+          {...bookmark_props}
           currentBookmark={currentBookmark}
           bookmarkId={bookmarkId as string | number}
           visDispatch={visDispatch as React.Dispatch<TabVisAction>}
