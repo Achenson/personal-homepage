@@ -104,6 +104,7 @@ function Bookmark_newAndEdit({
     setTitleUniquenessErrorVis,
   ] = useState<boolean>(false);
   const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
+  const [rssErrorVis, setRssErrorVis] = useState<boolean>(false);
 
   const [chevronDown, setChevronDown] = useState(true);
 
@@ -114,12 +115,23 @@ function Bookmark_newAndEdit({
   let regexForTitle = /^\w(\s?\w+)*$/;
 
   let notesTitlesArr: string[] = [];
+  let rssTitlesArr: string[] = [];
+  
 
   tabsData.forEach((obj) => {
     if (obj.type === "note") {
       notesTitlesArr.push(obj.title);
     }
+
+    if (obj.type === "rss") {
+      rssTitlesArr.push(obj.title);
+    }
+
+
   });
+
+
+
 
   useEffect(() => {
     let newVisibleTags: string[] = [];
@@ -180,6 +192,7 @@ function Bookmark_newAndEdit({
     tagsListVis,
     setTagsListVis,
     notesTitlesArr,
+    rssTitlesArr,
     bookmarkComponentType,
    
     tagErrorVis,
@@ -192,7 +205,8 @@ function Bookmark_newAndEdit({
     setTitleUniquenessErrorVis,
     noteErrorVis,
     setNoteErrorVis,
-    
+    rssErrorVis,
+    setRssErrorVis,
     regexForTags,
     regexForTitle,
     chevronDown,

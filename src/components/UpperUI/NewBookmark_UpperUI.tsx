@@ -31,6 +31,7 @@ interface Props {
   tagsListVis: boolean;
   setTagsListVis: React.Dispatch<React.SetStateAction<boolean>>;
   notesTitlesArr: string[];
+  rssTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
@@ -49,6 +50,8 @@ interface Props {
 
   noteErrorVis: boolean;
   setNoteErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+  rssErrorVis: boolean;
+  setRssErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
   regexForTags: RegExp;
   regexForTitle: RegExp;
   chevronDown: boolean;
@@ -67,6 +70,7 @@ function NewBookmark_UpperUI({
   tagsListVis,
   setTagsListVis,
   notesTitlesArr,
+  rssTitlesArr,
   upperVisDispatch,
   bookmarkComponentType,
   tagErrorVis,
@@ -83,10 +87,12 @@ function NewBookmark_UpperUI({
 
   noteErrorVis,
   setNoteErrorVis,
+  rssErrorVis,
+  setRssErrorVis,
   regexForTags,
   regexForTitle,
   chevronDown,
-  setChevronDown
+  setChevronDown,
 }: // setBookmarkVis,
 Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
@@ -117,13 +123,10 @@ Props): JSX.Element {
             value={titleInput}
             placeholder={"new tab title"}
             onChange={(e) => setTitleInput(e.target.value)}
-            onFocus={
-              (e) => {
-               setTagsListVis(false)
-               setChevronDown(true);
-              }
-            }
-
+            onFocus={(e) => {
+              setTagsListVis(false);
+              setChevronDown(true);
+            }}
           />
           <ChevronDownSVG className="h-6 invisible" />
         </div>
@@ -136,12 +139,10 @@ Props): JSX.Element {
             value={urlInput}
             placeholder={"enter proper URL address"}
             onChange={(e) => setUrlInput(e.target.value)}
-            onFocus={
-              (e) => {
-               setTagsListVis(false)
-               setChevronDown(true);
-              }
-            }
+            onFocus={(e) => {
+              setTagsListVis(false);
+              setChevronDown(true);
+            }}
           />
           <ChevronDownSVG className="h-6 invisible" />
         </div>
@@ -149,58 +150,49 @@ Props): JSX.Element {
           <p className="w-10">Tags</p>
 
           <div className="ml-2 relative w-full">
+            <input
+              type="text"
+              className="w-full border pl-px"
+              // value={tagsInput.join(", ")}
+              value={tagsInputStr}
+              placeholder={"[tag1], [tag2]..."}
+              onChange={(e) => {
+                let target = e.target.value;
 
+                setTagsInputStr(target);
 
+                let tagsInputArr = target.split(", ");
 
-          <input
-            type="text"
-            className="w-full border pl-px"
-            // value={tagsInput.join(", ")}
-            value={tagsInputStr}
-            placeholder={"[tag1], [tag2]..."}
-            onChange={(e) => {
-              let target = e.target.value;
-              
-              setTagsInputStr(target);
+                // setTagsInputArr(tagsInputStr.split(" ,"))
 
-              let tagsInputArr = target.split(", ");
+                // let newVisibleTags = [...visibleTags];
+                let newVisibleTags: string[] = [];
 
-              // setTagsInputArr(tagsInputStr.split(" ,"))
+                visibleTags.forEach((el) => {
+                  if (tagsInputArr.indexOf(el) === -1) {
+                    newVisibleTags.push(el);
+                  }
+                });
 
-              // let newVisibleTags = [...visibleTags];
-              let newVisibleTags: string[] = [];
+                setVisibleTags([...newVisibleTags]);
+              }}
+              onFocus={(e) => {
+                setTagsListVis(true);
+                setChevronDown(false);
+              }}
 
-              visibleTags.forEach((el) => {
-                if (tagsInputArr.indexOf(el) === -1) {
-                  newVisibleTags.push(el);
-                }
-              });
-
-              setVisibleTags([...newVisibleTags]);
-            }}
-            onFocus={
-              (e) => {
-               setTagsListVis(true)
-               setChevronDown(false);
-              }
-            }
-            
-            // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
+              // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
             />
 
-{tagsListVis && (
-          <SelectableList
-            setSelectablesInputStr={setTagsInputStr}
-            selectablesInputStr={tagsInputStr}
-            visibleSelectables={visibleTags}
-            marginTop="0px"
-          />
-        )}
-
-
-            </div>
-
-
+            {tagsListVis && (
+              <SelectableList
+                setSelectablesInputStr={setTagsInputStr}
+                selectablesInputStr={tagsInputStr}
+                visibleSelectables={visibleTags}
+                marginTop="0px"
+              />
+            )}
+          </div>
 
           {chevronDown ? (
             <ChevronDownSVG
@@ -221,8 +213,6 @@ Props): JSX.Element {
           )}
         </div>
 
-    
-
         {titleFormatErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.titleFormat}</p>
         )}
@@ -237,6 +227,11 @@ Props): JSX.Element {
 
         {noteErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.noteError}</p>
+        )}
+
+        
+{rssErrorVis && (
+          <p className={`text-red-600`}>{bookmarkErrors.rssError}</p>
         )}
 
         {tagRepeatErrorVis && (
@@ -258,6 +253,7 @@ Props): JSX.Element {
                 setTitleFormatErrorVis(false);
                 setTitleUniquenessErrorVis(false);
                 setNoteErrorVis(false);
+                setRssErrorVis(false);
 
                 let tagsInputArr = tagsInputStr.split(", ");
 
@@ -288,6 +284,16 @@ Props): JSX.Element {
                     return;
                   }
                 }
+
+
+                for (let el of tagsInputArr) {
+                  if (rssTitlesArr.indexOf(el) > -1) {
+                    setRssErrorVis(true);
+                    return;
+                  }
+                }
+
+                
 
                 if (!tagUniquenessCheck()) {
                   setTagRepeatErrorVis(true);
