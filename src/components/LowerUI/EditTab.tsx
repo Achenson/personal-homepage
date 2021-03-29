@@ -242,7 +242,7 @@ Props): JSX.Element {
           <div className="relative w-full min-w-0">
             <input
               type="text"
-              // min-w-0 !!
+              // min-w-0 !! ??
               // className="border w-full max-w-6xl min-w-0"
               className="border pl-px w-full min-w-0"
               value={bookmarksInputStr}
@@ -255,10 +255,6 @@ Props): JSX.Element {
                 setBookmarksInputStr(target);
 
                 let tabsInputArr = target.split(", ");
-
-                // setTagsInputArr(tagsInputStr.split(" ,"))
-
-                // let newVisibleTags = [...visibleTags];
                 let newVisibleBookmarks: string[] = [];
 
                 visibleBookmarks.forEach((el) => {
@@ -344,7 +340,7 @@ Props): JSX.Element {
         <div className="mt-2 mb-3">
           <textarea
             value={textAreaValue as string}
-            className="h-full w-full overflow-visible pl-1 pr-1 border font-mono"
+            className="h-full w-full overflow-visible pl-px pr-px border font-mono"
             rows={(currentTab[0].noteInput as string).length / 30}
             onChange={(e) => {
               setTextAreaValue(e.target.value);
@@ -357,7 +353,12 @@ Props): JSX.Element {
       {tabType === "rss" && (
         <div className="mb-1">
           <div className="flex items-center mt-2 justify-between">
-            <p className="w-24 whitespace-nowrap" style={{marginRight: "2px"}}>RSS link</p>
+            <p
+              className="w-24 whitespace-nowrap"
+              style={{ marginRight: "2px" }}
+            >
+              RSS link
+            </p>
             <input
               type="text"
               // min-w-0 !!
