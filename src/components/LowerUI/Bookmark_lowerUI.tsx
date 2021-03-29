@@ -127,8 +127,10 @@ function Bookmark_lowerUI({
       //   arrOut.push(obj.id);
       // }
 
-      let filteredTab = tabsData.filter((obj) => obj.title === el)[0];
-      arrOut.push(filteredTab.id);
+      let currentTab = tabsData.find((obj) => obj.title === el);
+      if (currentTab) {
+        arrOut.push(currentTab.id);
+      }
     });
 
     return arrOut;
@@ -214,7 +216,6 @@ function Bookmark_lowerUI({
                 setSelectablesInputStr={setTagsInputStr}
                 selectablesInputStr={tagsInputStr}
                 visibleSelectables={visibleTags}
-                
                 marginTop="0px"
               />
             )}
@@ -320,7 +321,6 @@ function Bookmark_lowerUI({
                     return;
                   }
                 }
-
 
                 for (let el of tagsInputArr) {
                   if (rssTitlesArr.indexOf(el) > -1) {
