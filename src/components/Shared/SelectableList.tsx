@@ -10,6 +10,7 @@ interface Props {
   visibleSelectables: string[];
   
   marginTop: string;
+  setWasAnythingClicked?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function SelectableList({
@@ -17,7 +18,8 @@ function SelectableList({
   selectablesInputStr,
   visibleSelectables,
   
-  marginTop
+  marginTop,
+  setWasAnythingClicked
 }: Props): JSX.Element {
   
 
@@ -39,6 +41,8 @@ function SelectableList({
                   setSelectablesInputStr(el);
                   return;
                 }
+
+                (setWasAnythingClicked as React.Dispatch<React.SetStateAction<boolean>>)(true);
 
                 setSelectablesInputStr(selectablesInputStr.concat(", " + el));
               }}

@@ -238,14 +238,14 @@ DONE 160. unify paddings etc between EditTab & EditBookmark DONE
 DONE 161. use {...params} is props somewhere if there is repetition? DONE
 DONE 162. RSS links inputs margin problem DONE
 DONE 163. unify css logic between diff folder type in editTab DONE
+?? 166. data: bookmarks should have IDs (done), tabsshould have ids of links in an array ( change when backend available)?? 
+DONE 167. EditTab - not possible to save if changing links with mouse DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-166. data: links should have IDs, folders should have ids of links in an array, change EdidTab properly
-167. EditBookmarkTitle - not possible to save if changing links with mouse
 168. setting thumbnail on links
 
 169. NewLink x2: tags should not be the same as rss tiles (already implemented for notes)
@@ -353,6 +353,7 @@ DONE 163. unify css logic between diff folder type in editTab DONE
 260. editTab etc. lower border style well selectable are on
 261. input borders more visible?
 262. min-w-0 needed or not?
+263. keyboard controls (arrows and enter) for Selectables!
 
 App structure:
 Main

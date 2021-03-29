@@ -277,6 +277,8 @@ Props): JSX.Element {
                 selectablesInputStr={bookmarksInputStr}
                 visibleSelectables={visibleBookmarks}
                 marginTop="0px"
+                // setWasAnythingClicked
+                setWasAnythingClicked={setWasAnythingClicked}
               />
             )}
           </div>
