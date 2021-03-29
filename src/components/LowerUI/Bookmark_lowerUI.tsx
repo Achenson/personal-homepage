@@ -33,6 +33,7 @@ interface Props {
   tagsListVis: boolean;
   setTagsListVis: React.Dispatch<React.SetStateAction<boolean>>;
   notesTitlesArr: string[];
+  rssTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   bookmarkId: string | number;
   // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
@@ -54,6 +55,8 @@ interface Props {
 
   noteErrorVis: boolean;
   setNoteErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+  rssErrorVis: boolean;
+  setRssErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
   regexForTags: RegExp;
   regexForTitle: RegExp;
   chevronDown: boolean;
@@ -72,6 +75,7 @@ function Bookmark_lowerUI({
   tagsListVis,
   setTagsListVis,
   notesTitlesArr,
+  rssTitlesArr,
   bookmarkComponentType,
   bookmarkId,
   currentBookmark,
@@ -95,6 +99,8 @@ function Bookmark_lowerUI({
   regexForTitle,
   chevronDown,
   setChevronDown,
+  rssErrorVis,
+  setRssErrorVis,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [
@@ -249,6 +255,10 @@ function Bookmark_lowerUI({
           <p className={`text-red-600`}>{bookmarkErrors.noteError}</p>
         )}
 
+        {rssErrorVis && (
+          <p className={`text-red-600`}>{bookmarkErrors.rssError}</p>
+        )}
+
         {tagRepeatErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.tagRepeat}</p>
         )}
@@ -268,6 +278,7 @@ function Bookmark_lowerUI({
                 setTitleFormatErrorVis(false);
                 setTitleUniquenessErrorVis(false);
                 setNoteErrorVis(false);
+                setRssErrorVis(false);
 
                 let tagsInputArr = tagsInputStr.split(", ");
 
@@ -306,6 +317,14 @@ function Bookmark_lowerUI({
                 for (let el of tagsInputArr) {
                   if (notesTitlesArr.indexOf(el) > -1) {
                     setNoteErrorVis(true);
+                    return;
+                  }
+                }
+
+
+                for (let el of tagsInputArr) {
+                  if (rssTitlesArr.indexOf(el) > -1) {
+                    setRssErrorVis(true);
                     return;
                   }
                 }

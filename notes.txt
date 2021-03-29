@@ -241,6 +241,7 @@ DONE 163. unify css logic between diff folder type in editTab DONE
 ?? 166. data: bookmarks should have IDs (done), tabsshould have ids of links in an array ( change when backend available)?? 
 DONE 167. EditTab - not possible to save if changing links with mouse DONE
 DONE 168. setting thumbnail on links - choose library DONE -> to implement on backend: working npm package to use: scrap-favicon
+DONE 169. NewBookmark x2: tags should not be the same as rss tiles (already implemented for notes) DONE
 
 
 1. purgecss at the end of project?
@@ -248,7 +249,6 @@ DONE 168. setting thumbnail on links - choose library DONE -> to implement on ba
 
 
 
-169. NewBookmark x2: tags should not be the same as rss tiles (already implemented for notes)
 170. adding new link to bookmark should have this bookmark title as a tag automatically
 171. log error about memory leakage eg. when editing links
 172. folder all: bookmark should not be editable
@@ -354,7 +354,7 @@ DONE 168. setting thumbnail on links - choose library DONE -> to implement on ba
 261. input borders more visible?
 262. min-w-0 needed or not?
 263. keyboard controls (arrows and enter) for Selectables!
-264. bug: wasAnythingClicked on NewBookmark !!!! when choosing tags by clicking
+264. bug: wasAnythingClicked on NewBookmark and lower bookmark!!!! when choosing tags by clicking
 265. closing selectables on error (eg. title format error)
 
 App structure:
