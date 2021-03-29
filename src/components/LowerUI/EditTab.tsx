@@ -207,14 +207,14 @@ Props): JSX.Element {
   let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
   return (
     <div className={`absolute z-40 bg-gray-100 pb-2 border w-full pl-1 pr-1`}>
-      <div className="flex items-center mt-2 justify-between">
+      <div className={`flex items-center mt-2 justify-between ${tabID === "ALL_TAGS" ? "mb-3" : ""}`}>
         <p
           className={
-            tabType === "folder"
+            (tabType === "folder" && tabID !== "ALL_TAGS")
               ? "mr-14"
-              : tabType === "rss"
-              ? "mr-12"
-              : "mr-2"
+              : (tabType === "note" || tabID === "ALL_TAGS" )
+              ? "mr-2"
+              : "mr-12"
           }
         >
           Title
@@ -236,7 +236,7 @@ Props): JSX.Element {
         />
         {tabType === "folder" && <ChevronDownSVG className="h-6 invisible" />}
       </div>
-      {tabType === "folder" && (
+      {(tabType === "folder" && tabID !=="ALL_TAGS") ? (
         <div className="flex items-center mt-2 mb-3 justify-between">
           <p className={`mr-2`}>Bookmarks</p>
           <div className="relative w-full min-w-0">
@@ -301,7 +301,7 @@ Props): JSX.Element {
             />
           )}
         </div>
-      )}
+      ) : null}
 
       {tagErrorVis && (
         <p className={`text-red-600`}>

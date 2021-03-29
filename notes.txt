@@ -249,8 +249,6 @@ DONE 170. adding new bookmark to tab should have this tab title as a tag automat
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-
-171. log error about memory leakage eg. when editing links
 172. folder all: bookmark should not be editable
 173. newbookmark lower ui: choosing tags should not be possible (only this tag & all)
 174. check all links function useState in EditBookmarkTitle
@@ -325,6 +323,7 @@ DONE 170. adding new bookmark to tab should have this tab title as a tag automat
 232. bookmark_lowerUI saveSVG should be inactive
 233. search component for bookmarks?
 234. bug: editing bookmark -> not posiible to add new tag -> the folder dissapears
++  log error about memory leakage eg. when editing links (only in this case)
 235. editTab: changing bookmarks alone doesn't enable saveSVG
 236. editTab: center Save & Cancel
 237. make animations for save & cancel SVGs? or on all svgs?
@@ -359,6 +358,7 @@ DONE 170. adding new bookmark to tab should have this tab title as a tag automat
 266. ? before dot, new syntax being automatically added sometimes?
 267. bookmark_newAndEdit -> render 3 versions of a component instead of 2?? with different props
 268. tagsInputStr are not being sorted alphabetically after adding new tag
+269. editTab: error "for existing bookmarks only" gets covered by Selectables (add hide on focus?)
 
 App structure:
 Main
