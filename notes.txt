@@ -236,20 +236,21 @@ DONE 158. Links' tags are opened on first render (NewLink is OK) - should be ope
 DONE 159. tags suggestions width and marginLeft should not be hardcoded DONE
 DONE 160. unify paddings etc between EditTab & EditBookmark DONE
 DONE 161. use {...params} is props somewhere if there is repetition? DONE
-DONE 162. RSS links inputs margin problem DONE
 DONE 163. unify css logic between diff folder type in editTab DONE
 ?? 166. data: bookmarks should have IDs (done), tabsshould have ids of links in an array ( change when backend available)?? 
 DONE 167. EditTab - not possible to save if changing links with mouse DONE
 DONE 168. setting thumbnail on links - choose library DONE -> to implement on backend: working npm package to use: scrap-favicon
 DONE 169. NewBookmark x2: tags should not be the same as rss tiles (already implemented for notes) DONE
 DONE 170. adding new bookmark to tab should have this tab title as a tag automatically DONE
+DONE 172. folder all: bookmark should not be editable DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-172. folder all: bookmark should not be editable
+XXX 162. RSS links inputs margin problem XXX
+
 173. newbookmark lower ui: choosing tags should not be possible (only this tag & all)
 174. check all links function useState in EditBookmarkTitle
 175. some info that new link will be also an all tag automatically (empty input possible)
@@ -359,6 +360,8 @@ DONE 170. adding new bookmark to tab should have this tab title as a tag automat
 267. bookmark_newAndEdit -> render 3 versions of a component instead of 2?? with different props
 268. tagsInputStr are not being sorted alphabetically after adding new tag
 269. editTab: error "for existing bookmarks only" gets covered by Selectables (add hide on focus?)
+270. all tags error right margin
+271. all tags id naming change
 
 App structure:
 Main

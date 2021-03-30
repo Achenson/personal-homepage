@@ -205,138 +205,143 @@ Props): JSX.Element {
   // ^  and $ -> beginning and end of the text!
   // let regexForTabs = /^\w+(,\s\w+)*$/;
   let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
+
+  function titleMarginRight() {
+    if (tabType === "note" || tabID === "ALL_TAGS") {
+      return "mr-2";
+    }
+    if (tabType === "rss") return "mr-11";
+    if (tabType === "folder") return "mr-14";
+  }
+
   return (
     <div className={`absolute z-40 bg-gray-100 pb-2 border w-full pl-1 pr-1`}>
-      <div className={`flex items-center mt-2 justify-between ${tabID === "ALL_TAGS" ? "mb-3" : ""}`}>
-        <p
-          className={
-            (tabType === "folder" && tabID !== "ALL_TAGS")
-              ? "mr-14"
-              : (tabType === "note" || tabID === "ALL_TAGS" )
-              ? "mr-2"
-              : "mr-12"
-          }
-        >
-          Title
-        </p>
-        <input
-          type="text"
-          // min-w-0 !!
-          // className="border w-full max-w-6xl min-w-0"
-          className="border w-full max-w-6xl min-w-0 pl-px"
-          value={tabTitleInput}
-          onChange={(e) => {
-            setTabTitleInput(e.target.value);
-            setWasAnythingClicked(true);
-          }}
-          onFocus={(e) => {
-            setBookmarksListVis(false);
-            setChevronDown(true);
-          }}
-        />
-        {tabType === "folder" && <ChevronDownSVG className="h-6 invisible" />}
-      </div>
-      {(tabType === "folder" && tabID !=="ALL_TAGS") ? (
-        <div className="flex items-center mt-2 mb-3 justify-between">
-          <p className={`mr-2`}>Bookmarks</p>
-          <div className="relative w-full min-w-0">
-            <input
-              type="text"
-              // min-w-0 !! ??
-              // className="border w-full max-w-6xl min-w-0"
-              className="border pl-px w-full min-w-0"
-              value={bookmarksInputStr}
-              onChange={(e) => {
-                // setTabTitleInput(e.target.value);
-                setWasAnythingClicked(true);
+      <div className="mb-3">
+        <div className={`flex items-center mt-2 justify-between`}>
+          <p
+            className={`
+              ${titleMarginRight()}
+            `}
+          >
+            Title
+          </p>
+          <input
+            type="text"
+            // min-w-0 !!
+            // className="border w-full max-w-6xl min-w-0"
+            className="border w-full max-w-6xl min-w-0 pl-px"
+            value={tabTitleInput}
+            onChange={(e) => {
+              setTabTitleInput(e.target.value);
+              setWasAnythingClicked(true);
+            }}
+            onFocus={(e) => {
+              setBookmarksListVis(false);
+              setChevronDown(true);
+            }}
+          />
+          {tabType === "folder" && <ChevronDownSVG className="h-6 invisible" />}
+        </div>
 
-                let target = e.target.value;
+        {/* bookmarks not visible for tab with ALL Bookmarks */}
+        {tabType === "folder" && tabID !== "ALL_TAGS" ? (
+          <div className="flex items-center mt-2 justify-between">
+            <p className={`mr-2`}>Bookmarks</p>
+            <div className="relative w-full min-w-0">
+              <input
+                type="text"
+                // min-w-0 !! ??
+                // className="border w-full max-w-6xl min-w-0"
+                className="border pl-px w-full min-w-0"
+                value={bookmarksInputStr}
+                onChange={(e) => {
+                  // setTabTitleInput(e.target.value);
+                  setWasAnythingClicked(true);
 
-                setBookmarksInputStr(target);
+                  let target = e.target.value;
 
-                let tabsInputArr = target.split(", ");
-                let newVisibleBookmarks: string[] = [];
+                  setBookmarksInputStr(target);
 
-                visibleBookmarks.forEach((el) => {
-                  if (tabsInputArr.indexOf(el) === -1) {
-                    newVisibleBookmarks.push(el);
-                  }
-                });
+                  let tabsInputArr = target.split(", ");
+                  let newVisibleBookmarks: string[] = [];
 
-                setVisibleBookmarks([...newVisibleBookmarks]);
-              }}
-              onFocus={(e) => {
-                setBookmarksListVis(true);
-                setChevronDown(false);
-              }}
-            />
+                  visibleBookmarks.forEach((el) => {
+                    if (tabsInputArr.indexOf(el) === -1) {
+                      newVisibleBookmarks.push(el);
+                    }
+                  });
 
-            {tabType === "folder" && bookmarksListVis && (
-              <SelectableList
-                setSelectablesInputStr={setBookmarksInputStr}
-                selectablesInputStr={bookmarksInputStr}
-                visibleSelectables={visibleBookmarks}
-                marginTop="0px"
-                // setWasAnythingClicked
-                setWasAnythingClicked={setWasAnythingClicked}
+                  setVisibleBookmarks([...newVisibleBookmarks]);
+                }}
+                onFocus={(e) => {
+                  setBookmarksListVis(true);
+                  setChevronDown(false);
+                }}
+              />
+
+              {tabType === "folder" && bookmarksListVis && (
+                <SelectableList
+                  setSelectablesInputStr={setBookmarksInputStr}
+                  selectablesInputStr={bookmarksInputStr}
+                  visibleSelectables={visibleBookmarks}
+                  marginTop="0px"
+                  // setWasAnythingClicked
+                  setWasAnythingClicked={setWasAnythingClicked}
+                />
+              )}
+            </div>
+
+            {chevronDown ? (
+              <ChevronDownSVG
+                className="h-6 cursor-pointer hover:text-blueGray-500"
+                onClick={() => {
+                  setChevronDown((b) => !b);
+                  setBookmarksListVis((b) => !b);
+                }}
+              />
+            ) : (
+              <ChevronUpSVG
+                className="h-6 cursor-pointer hover:text-blueGray-500"
+                onClick={() => {
+                  setChevronDown((b) => !b);
+                  setBookmarksListVis((b) => !b);
+                }}
               />
             )}
           </div>
+        ) : null}
 
-          {chevronDown ? (
-            <ChevronDownSVG
-              className="h-6 cursor-pointer hover:text-blueGray-500"
-              onClick={() => {
-                setChevronDown((b) => !b);
-                setBookmarksListVis((b) => !b);
-              }}
-            />
-          ) : (
-            <ChevronUpSVG
-              className="h-6 cursor-pointer hover:text-blueGray-500"
-              onClick={() => {
-                setChevronDown((b) => !b);
-                setBookmarksListVis((b) => !b);
-              }}
-            />
-          )}
-        </div>
-      ) : null}
+        {tagErrorVis && (
+          <p className={`text-red-600 mt-1 -mb-2`}>
+            Tab title should consist of single or multiple words without special
+            characters
+          </p>
+        )}
 
-      {tagErrorVis && (
-        <p className={`text-red-600`}>
-          Tab title should consist of single or multiple words without special
-          characters
-        </p>
-      )}
+        {bookmarksErrorVis && tabType === "folder" && (
+          <p className={`text-red-600 mt-1 -mb-2`}>
+            Bookmarks should consist of single or multiple words (without
+            special characters) separated by coma and space
+          </p>
+        )}
 
-      {bookmarksErrorVis && tabType === "folder" && (
-        <p className={`text-red-600`}>
-          Bookmarks should consist of single or multiple words (without special
-          characters) separated by coma and space
-        </p>
-      )}
+        {bookmarksExistenceErrorVis && tabType === "folder" && (
+          <p className={`text-red-600 mt-1 -mb-2`}>
+            You can choose from existing bookmarks only
+          </p>
+        )}
 
-      {bookmarksExistenceErrorVis && tabType === "folder" && (
-        <p className={`text-red-600`}>
-          You can choose from existing bookmarks only
-        </p>
-      )}
+        {tabsRepeatErrorVis && tabType === "folder" && (
+          <p className={`text-red-600 mt-1 -mb-2`}>Each tab should be unique</p>
+        )}
 
-      {tabsRepeatErrorVis && tabType === "folder" && (
-        <p className={`text-red-600`}>Each tab should be unique</p>
-      )}
-
-      {textAreaErrorVis && tabType === "note" && (
-        <p className={`text-red-600`}>Note cannot be empty</p>
-      )}
-
-      {noDeletionErrorVis && (
-        <p className={`text-red-600`}>
-          Folder with all bookmarks cannot be deleted. You can hide it in the
-          global settings instead
-        </p>
-      )}
+        {noDeletionErrorVis && (
+          <p className={`text-red-600 mt-1 -mb-2`}>
+            Folder with all bookmarks cannot be deleted. You can hide it in the
+            global settings instead
+          </p>
+        )}
+      </div>
 
       {tabType === "note" && (
         <div className="mt-2 mb-3">
@@ -350,6 +355,10 @@ Props): JSX.Element {
             }}
           ></textarea>
         </div>
+      )}
+
+      {textAreaErrorVis && tabType === "note" && (
+        <p className={`text-red-600 -mt-2 mb-1`}>Note cannot be empty</p>
       )}
 
       {tabType === "rss" && (
