@@ -365,8 +365,8 @@ Props): JSX.Element {
         <div className="mb-1">
           <div className="flex items-center mt-2 justify-between">
             <p
-              className="w-24 whitespace-nowrap"
-              style={{ marginRight: "2px" }}
+              className="whitespace-nowrap "
+              style={{ marginRight: "18px" }}
             >
               RSS link
             </p>

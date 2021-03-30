@@ -236,6 +236,8 @@ DONE 158. Links' tags are opened on first render (NewLink is OK) - should be ope
 DONE 159. tags suggestions width and marginLeft should not be hardcoded DONE
 DONE 160. unify paddings etc between EditTab & EditBookmark DONE
 DONE 161. use {...params} is props somewhere if there is repetition? DONE
+DONE 162. RSS links inputs margin problem DONE again
+
 DONE 163. unify css logic between diff folder type in editTab DONE
 ?? 166. data: bookmarks should have IDs (done), tabsshould have ids of links in an array ( change when backend available)?? 
 DONE 167. EditTab - not possible to save if changing links with mouse DONE
@@ -249,7 +251,6 @@ DONE 172. folder all: bookmark should not be editable DONE
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-XXX 162. RSS links inputs margin problem XXX
 
 173. newbookmark lower ui: choosing tags should not be possible (only this tag & all)
 174. check all links function useState in EditBookmarkTitle
