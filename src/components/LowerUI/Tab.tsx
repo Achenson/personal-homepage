@@ -489,7 +489,6 @@ Props): JSX.Element {
           // setBookmarkVis={setEditBookmarkVis}
           bookmarkComponentType={"edit"}
           bookmarkId={bookmarkId}
-          tabId={tabID}
           visDispatch={visDispatch}
           colNumber={colNumber}
         />
@@ -503,6 +502,7 @@ Props): JSX.Element {
           bookmarkComponentType={"new_lowerUI"}
           visDispatch={visDispatch}
           colNumber={colNumber}
+          tabTitle={tabTitle as string}
         />
       )}
 

@@ -25,7 +25,7 @@ interface Props {
   // for "edit" type only
   bookmarkId?: string | number | undefined;
   // for lowerUI newBookmark only
-  tabId?: string | number | undefined;
+  tabTitle?: string;
   
 }
 
@@ -33,7 +33,7 @@ function Bookmark_newAndEdit({
   // setBookmarkVis,
   bookmarkComponentType,
   bookmarkId,
-  tabId,
+  tabTitle,
   visDispatch,
   upperVisDispatch,
   colNumber,
@@ -69,12 +69,22 @@ function Bookmark_newAndEdit({
 
   //  !!! diff in editLink
   const [tagsInputStr, setTagsInputStr] = useState<string>(
-    bookmarkComponentType === "edit" ? generateTagNames() : ""
+    // bookmarkComponentType === "edit" ? generateTagNames() : ""
+    generateTagNames()
   );
 
   //   ? (currentLink as SingleLinkData).tags.join(", ")
 
   function generateTagNames() {
+
+    if(bookmarkComponentType === "new_upperUI") {
+      return ""
+    }
+
+    if(bookmarkComponentType === "new_lowerUI") {
+      return (tabTitle as string)
+    }
+
     let arrOut: string[] = [];
 
     tabsData.forEach((obj) => {
@@ -233,7 +243,7 @@ function Bookmark_newAndEdit({
           bookmarkId={bookmarkId as string | number}
           visDispatch={visDispatch as React.Dispatch<TabVisAction>}
           colNumber={colNumber as number}
-          tabId={tabId as number|string}
+          
           
         />
       )}

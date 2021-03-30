@@ -242,6 +242,8 @@ DONE 163. unify css logic between diff folder type in editTab DONE
 DONE 167. EditTab - not possible to save if changing links with mouse DONE
 DONE 168. setting thumbnail on links - choose library DONE -> to implement on backend: working npm package to use: scrap-favicon
 DONE 169. NewBookmark x2: tags should not be the same as rss tiles (already implemented for notes) DONE
+DONE 170. adding new bookmark to tab should have this tab title as a tag automatically DONE
+
 DONE 172. folder all: bookmark should not be editable DONE
 XXX 173. newbookmark lower ui: choosing tags should not be possible (only this tag & all) XXX
 
@@ -250,7 +252,6 @@ XXX 173. newbookmark lower ui: choosing tags should not be possible (only this t
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-170. adding new bookmark to tab should have this tab title as a tag automatically
 
 174. check all links function useState in EditBookmarkTitle
 175. some info that new link will be also an all tag automatically (empty input possible)

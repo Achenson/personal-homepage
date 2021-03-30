@@ -36,7 +36,7 @@ interface Props {
   rssTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   bookmarkId: string | number;
-  tabId: string | number;
+  
   // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   currentBookmark: SingleBookmarkData | undefined;
   visDispatch: React.Dispatch<TabVisAction>;
@@ -102,7 +102,7 @@ function Bookmark_lowerUI({
   setChevronDown,
   rssErrorVis,
   setRssErrorVis,
-  tabId
+ 
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [
