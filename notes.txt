@@ -243,21 +243,18 @@ DONE 167. EditTab - not possible to save if changing links with mouse DONE
 DONE 168. setting thumbnail on links - choose library DONE -> to implement on backend: working npm package to use: scrap-favicon
 DONE 169. NewBookmark x2: tags should not be the same as rss tiles (already implemented for notes) DONE
 DONE 170. adding new bookmark to tab should have this tab title as a tag automatically DONE
-
 DONE 172. folder all: bookmark should not be editable DONE
 XXX 173. newbookmark lower ui: choosing tags should not be possible (only this tag & all) XXX
+DONE 174. check all bookmarks function useState in EditTab DONE
+DONE 176. new link - autocomplete on focus, not on change DONE
+DONE 177. autocomplete field in the grid moves out of divs DONE
+DONE 178. autocomple chevronSVG should not be scaled down too much DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-
-174. check all links function useState in EditBookmarkTitle
-175. some info that new link will be also an all tag automatically (empty input possible)
-176. new link - autocomplete on focus, not on change
-177. autocomplete field in the grid moves out of divs
-178. autocomple chevronSVG should not be scaled down too much
 
 179. change placeholder/error names: link/bookmark/folder
 180. include single spaces in error names
@@ -363,6 +360,9 @@ XXX 173. newbookmark lower ui: choosing tags should not be possible (only this t
 269. editTab: error "for existing bookmarks only" gets covered by Selectables (add hide on focus?)
 270. all tags error right margin
 271. all tags id naming change
+272. check is lazy initialization is neede somewhere else (like in EditTab!)
+273. xx info that new link will be an all tag (empty input)xx -> open tab for which bookmark is added automatically
+274. title & RSS link: smaller right margin!
 
 App structure:
 Main

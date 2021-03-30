@@ -240,7 +240,11 @@ Props): JSX.Element {
               setChevronDown(true);
             }}
           />
-          {tabType === "folder" && <ChevronDownSVG className="h-6 invisible" />}
+          {tabType === "folder" && (
+            <div style={{ height: "18px" }} className="-mr-1">
+              <ChevronDownSVG className="h-full invisible" />
+            </div>
+          )}
         </div>
 
         {/* bookmarks not visible for tab with ALL Bookmarks */}
@@ -291,23 +295,25 @@ Props): JSX.Element {
               )}
             </div>
 
-            {chevronDown ? (
-              <ChevronDownSVG
-                className="h-6 cursor-pointer hover:text-blueGray-500"
-                onClick={() => {
-                  setChevronDown((b) => !b);
-                  setBookmarksListVis((b) => !b);
-                }}
-              />
-            ) : (
-              <ChevronUpSVG
-                className="h-6 cursor-pointer hover:text-blueGray-500"
-                onClick={() => {
-                  setChevronDown((b) => !b);
-                  setBookmarksListVis((b) => !b);
-                }}
-              />
-            )}
+            <div style={{ height: "18px" }} className="-mr-1">
+              {chevronDown ? (
+                <ChevronDownSVG
+                  className="h-full cursor-pointer hover:text-blueGray-500"
+                  onClick={() => {
+                    setChevronDown((b) => !b);
+                    setBookmarksListVis((b) => !b);
+                  }}
+                />
+              ) : (
+                <ChevronUpSVG
+                  className="h-full cursor-pointer hover:text-blueGray-500"
+                  onClick={() => {
+                    setChevronDown((b) => !b);
+                    setBookmarksListVis((b) => !b);
+                  }}
+                />
+              )}
+            </div>
           </div>
         ) : null}
 
@@ -364,10 +370,7 @@ Props): JSX.Element {
       {tabType === "rss" && (
         <div className="mb-1">
           <div className="flex items-center mt-2 justify-between">
-            <p
-              className="whitespace-nowrap "
-              style={{ marginRight: "18px" }}
-            >
+            <p className="whitespace-nowrap " style={{ marginRight: "18px" }}>
               RSS link
             </p>
             <input
