@@ -489,6 +489,7 @@ Props): JSX.Element {
           // setBookmarkVis={setEditBookmarkVis}
           bookmarkComponentType={"edit"}
           bookmarkId={bookmarkId}
+          tabId={tabID}
           visDispatch={visDispatch}
           colNumber={colNumber}
         />

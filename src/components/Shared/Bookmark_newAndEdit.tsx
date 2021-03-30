@@ -17,17 +17,23 @@ import { UpperVisAction, TabVisAction } from "../../utils/interfaces";
 interface Props {
   // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
-  // for "edit" type only
-  bookmarkId?: string | number | undefined;
+  
   upperVisDispatch?: React.Dispatch<UpperVisAction>;
   visDispatch?: React.Dispatch<TabVisAction>;
   colNumber?: number;
+
+  // for "edit" type only
+  bookmarkId?: string | number | undefined;
+  // for lowerUI newBookmark only
+  tabId?: string | number | undefined;
+  
 }
 
 function Bookmark_newAndEdit({
   // setBookmarkVis,
   bookmarkComponentType,
   bookmarkId,
+  tabId,
   visDispatch,
   upperVisDispatch,
   colNumber,
@@ -227,6 +233,7 @@ function Bookmark_newAndEdit({
           bookmarkId={bookmarkId as string | number}
           visDispatch={visDispatch as React.Dispatch<TabVisAction>}
           colNumber={colNumber as number}
+          tabId={tabId as number|string}
           
         />
       )}
