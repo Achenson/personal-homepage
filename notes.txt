@@ -256,7 +256,7 @@ DONE 178. autocomple chevronSVG should not be scaled down too much DONE
 
 
 
-179. change placeholder/error names: link/bookmark/folder
+179. change placeholder/error names: bookmark/tab
 180. include single spaces in error names
 181. white icons on Tabs not contrastive enough on hover
 182. tab editing -> should resize up the place for tab, increase columns size also as a side effect?

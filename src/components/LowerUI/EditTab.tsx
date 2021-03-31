@@ -281,6 +281,7 @@ Props): JSX.Element {
                   setBookmarksListVis(true);
                   setChevronDown(false);
                 }}
+                placeholder={"Choose at least one"}
               />
 
               {tabType === "folder" && bookmarksListVis && (

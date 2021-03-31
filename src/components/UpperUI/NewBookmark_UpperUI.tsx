@@ -121,7 +121,7 @@ Props): JSX.Element {
             type="text"
             className="w-full ml-2 border pl-px"
             value={titleInput}
-            placeholder={"new tab title"}
+            placeholder={"new bookmark title"}
             onChange={(e) => setTitleInput(e.target.value)}
             onFocus={(e) => {
               setTagsListVis(false);
@@ -155,7 +155,7 @@ Props): JSX.Element {
               className="w-full border pl-px"
               // value={tagsInput.join(", ")}
               value={tagsInputStr}
-              placeholder={"[tag1], [tag2]..."}
+              placeholder={"tag1, tag2..."}
               onChange={(e) => {
                 let target = e.target.value;
 

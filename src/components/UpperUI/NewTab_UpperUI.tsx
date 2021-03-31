@@ -183,9 +183,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             className="w-full border pl-px"
             value={tabTitleInput}
             placeholder={
-              // tabType === "folder"
-              //   ? "new folder title"
-              //   : "new note title"
               tabType === "folder"
                 ? "new folder title"
                 : tabType === "note"
