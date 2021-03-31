@@ -8,11 +8,11 @@ export const bookmarkErrors = {
 };
 
 export const tabErrors = {
-  titleFormat: "",
-  titleUniqueness: "",
-  bookmarksFormat: "",
-  bookmarksExistence: "",
-  bookmarksRepeat: "",
+  titleFormat: "Tab title can contain letters, numbers or underscore",
+  titleUniqueness: "Tab with that title already exists",
+  bookmarksFormat: "Bookmarks should consist of words separated by coma and space",
+  bookmarksExistence: "You can choose from existing bookmarks only",
+  bookmarksRepeat: "Each bookmark should be unique",
   // note only
-  textArea: "",
+  textArea: "Note cannot be empty",
 };

@@ -25,6 +25,8 @@ import {
 } from "../../state/tabsAndBookmarks";
 
 import { UpperVisAction } from "../../utils/interfaces";
+import {tabErrors} from "../../utils/errors";
+
 import SelectableList from "../Shared/SelectableList";
 
 interface Props {
@@ -125,13 +127,13 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   ]);
 
   function makeInitialBookmarks(): string[] {
-    let tabs: string[] = [];
+    let bookmarks: string[] = [];
 
     bookmarksData.forEach((obj) => {
-      tabs.push(obj.title);
+      bookmarks.push(obj.title);
     });
 
-    return tabs;
+    return bookmarks;
   }
 
   function renderColsNumberControls() {
@@ -222,20 +224,20 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
                   setBookmarksInputStr(target);
 
-                  let tabsInputArr = target.split(", ");
+                  let bookmarksInputArr = target.split(", ");
 
                   // setTagsInputArr(tagsInputStr.split(" ,"))
 
                   // let newVisibleTags = [...visibleTags];
-                  let newVisibleTabs: string[] = [];
+                  let newVisibleBookmarks: string[] = [];
 
                   visibleBookmarks.forEach((el) => {
-                    if (tabsInputArr.indexOf(el) === -1) {
-                      newVisibleTabs.push(el);
+                    if (bookmarksInputArr.indexOf(el) === -1) {
+                      newVisibleBookmarks.push(el);
                     }
                   });
 
-                  setVisibleBookmarks([...newVisibleTabs]);
+                  setVisibleBookmarks([...newVisibleBookmarks]);
                 }}
                 onFocus={(e) => {
                   setBookmarksListVis(true);
@@ -329,34 +331,34 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
         {titleFormatErrorVis && (
           <p className={`text-red-600`}>
-            Folder title can contain letters, numbers or underscore
+            {tabErrors.titleFormat}
           </p>
         )}
 
         {titleUniquenessErrorVis && (
           <p className={`text-red-600`}>
-            Folder with that title already exists
+            {tabErrors.titleUniqueness}
           </p>
         )}
 
         {bookmarksErrorVis && tabType === "folder" && (
           <p className={`text-red-600`}>
-            Bookmarks should consist of words separated by coma and space
+            {tabErrors.bookmarksFormat}
           </p>
         )}
 
         {bookmarksExistenceErrorVis && tabType === "folder" && (
           <p className={`text-red-600`}>
-            You can choose from existing bookmarks only
+            {tabErrors.bookmarksExistence}
           </p>
         )}
 
         {bookmarksRepeatErrorVis && tabType === "folder" && (
-          <p className={`text-red-600`}>Each bookmark should be unique</p>
+          <p className={`text-red-600`}>{tabErrors.bookmarksRepeat}</p>
         )}
 
         {textAreaErrorVis && tabType === "note" && (
-          <p className={`text-red-600`}>Note cannot be empty</p>
+          <p className={`text-red-600`}>{tabErrors.textArea}</p>
         )}
 
         <div className="flex justify-start mt-6">
@@ -391,18 +393,17 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 }
 
                 if (tabType === "folder") {
-                  // if (!regexForTabs.test(tabBookmarksInput.join(", "))) {
-                  if (!regexForBookmarks.test(bookmarksInputArr.join(", "))) {
+                      if (!regexForBookmarks.test(bookmarksInputArr.join(", "))) {
                     setBookmarksErrorVis(true);
                     return;
                   }
 
-                  if (!tabExistenceCheck()) {
+                  if (!bookmarksExistenceCheck()) {
                     setBookmarksExistenceErrorVis(true);
                     return;
                   }
 
-                  if (!tagUniquenessCheck()) {
+                  if (!bookmarksUniquenessCheck()) {
                     setBookmarksRepeatErrorVis(true);
                     return;
                   }
@@ -490,15 +491,15 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 // setNewTabVis((b) => !b);
                 upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
 
-                function tabExistenceCheck() {
-                  let tabsArr: string[] = [];
+                function bookmarksExistenceCheck() {
+                  let bookmarksArr: string[] = [];
 
                   bookmarksData.forEach((obj) => {
-                    tabsArr.push(obj.title);
+                    bookmarksArr.push(obj.title);
                   });
 
                   for (let el of bookmarksInputArr) {
-                    if (tabsArr.indexOf(el) === -1) {
+                    if (bookmarksArr.indexOf(el) === -1) {
                       return false;
                     }
                   }
@@ -506,14 +507,14 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   return true;
                 }
 
-                function tagUniquenessCheck() {
+                function bookmarksUniquenessCheck() {
                   let isUnique: boolean = true;
 
                   bookmarksInputArr.forEach((el, i) => {
-                    let tagsInputCopy = [...bookmarksInputArr];
-                    tagsInputCopy.splice(i, 1);
+                    let bookmarksInputCopy = [...bookmarksInputArr];
+                    bookmarksInputCopy.splice(i, 1);
 
-                    if (tagsInputCopy.indexOf(el) > -1) {
+                    if (bookmarksInputCopy.indexOf(el) > -1) {
                       isUnique = false;
                       return;
                     }
