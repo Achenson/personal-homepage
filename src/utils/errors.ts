@@ -8,11 +8,19 @@ export const bookmarkErrors = {
 };
 
 export const tabErrors = {
-  titleFormat: "Tab title can contain letters, numbers or underscore",
+  // titleFormat: "Tab title can contain letters, numbers or underscore",
+  titleFormat:
+    "Tab title should consist of words without special characters",
+  // not used in edit tab
   titleUniqueness: "Tab with that title already exists",
-  bookmarksFormat: "Bookmarks should consist of words separated by coma and space",
-  bookmarksExistence: "You can choose from existing bookmarks only",
+  // bookmarksFormat: "Bookmarks should consist of words separated by coma and space",
+  bookmarksFormat:
+    "Bookmarks should consist of words (without special characters) separated by coma and space",
+  bookmarkExistence: "You can choose from existing bookmarks only",
   bookmarksRepeat: "Each bookmark should be unique",
   // note only
   textArea: "Note cannot be empty",
+  // not deletabe folder only
+  noDeletion:
+    "Folder with all bookmarks cannot be deleted. You can hide it in the global settings instead",
 };

@@ -55,7 +55,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
   const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
   const [bookmarksRepeatErrorVis, setBookmarksRepeatErrorVis] = useState<boolean>(false);
-  const [bookmarksExistenceErrorVis, setBookmarksExistenceErrorVis] = useState<boolean>(
+  const [bookmarkExistenceErrorVis, setBookmarkExistenceErrorVis] = useState<boolean>(
     false
   );
 
@@ -347,9 +347,9 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           </p>
         )}
 
-        {bookmarksExistenceErrorVis && tabType === "folder" && (
+        {bookmarkExistenceErrorVis && tabType === "folder" && (
           <p className={`text-red-600`}>
-            {tabErrors.bookmarksExistence}
+            {tabErrors.bookmarkExistence}
           </p>
         )}
 
@@ -376,7 +376,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 setBookmarksRepeatErrorVis(false);
                 setTitleFormatErrorVis(false);
                 setTitleUniquenessErrorVis(false);
-                setBookmarksExistenceErrorVis(false);
+                setBookmarkExistenceErrorVis(false);
                 setTextAreaErrorVis(false);
 
                 let bookmarksInputArr = bookmarksInputStr.split(", ");
@@ -398,8 +398,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                     return;
                   }
 
-                  if (!bookmarksExistenceCheck()) {
-                    setBookmarksExistenceErrorVis(true);
+                  if (!bookmarkExistenceCheck()) {
+                    setBookmarkExistenceErrorVis(true);
                     return;
                   }
 
@@ -491,7 +491,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 // setNewTabVis((b) => !b);
                 upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
 
-                function bookmarksExistenceCheck() {
+                function bookmarkExistenceCheck() {
                   let bookmarksArr: string[] = [];
 
                   bookmarksData.forEach((obj) => {

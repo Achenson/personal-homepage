@@ -21,6 +21,7 @@ import {
 
 import { rssSettingsState } from "../../state/defaultSettings";
 import { TabVisAction } from "../../utils/interfaces";
+import { tabErrors } from "../../utils/errors";
 
 interface Props {
   // tabTitle: string;
@@ -135,12 +136,17 @@ Props): JSX.Element {
     }
   }, [wasCheckboxClicked, wasTabOpenClicked, wasItemsPerPageClicked]);
 
-  const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
+  const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
+    false
+  );
   const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
   const [noDeletionErrorVis, setNoDeletionErrorVis] = useState<boolean>(false);
 
   const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
-  const [tabsRepeatErrorVis, setTabsRepeatErrorVis] = useState<boolean>(false);
+  const [
+    bookmarksRepeatErrorVis,
+    setBookmarksRepeatErrorVis,
+  ] = useState<boolean>(false);
   const [
     bookmarksExistenceErrorVis,
     setBookmarksExistenceErrorVis,
@@ -193,13 +199,13 @@ Props): JSX.Element {
   ]);
 
   function makeInitialBookmarks(): string[] {
-    let tabs: string[] = [];
+    let bookmarks: string[] = [];
 
     bookmarksData.forEach((obj) => {
-      tabs.push(obj.title);
+      bookmarks.push(obj.title);
     });
 
-    return tabs;
+    return bookmarks;
   }
 
   // ^  and $ -> beginning and end of the text!
@@ -266,11 +272,11 @@ Props): JSX.Element {
 
                   setBookmarksInputStr(target);
 
-                  let tabsInputArr = target.split(", ");
+                  let bookmarksInputArr = target.split(", ");
                   let newVisibleBookmarks: string[] = [];
 
                   visibleBookmarks.forEach((el) => {
-                    if (tabsInputArr.indexOf(el) === -1) {
+                    if (bookmarksInputArr.indexOf(el) === -1) {
                       newVisibleBookmarks.push(el);
                     }
                   });
@@ -318,35 +324,30 @@ Props): JSX.Element {
           </div>
         ) : null}
 
-        {tagErrorVis && (
-          <p className={`text-red-600 mt-1 -mb-2`}>
-            Tab title should consist of single or multiple words without special
-            characters
-          </p>
+        {titleFormatErrorVis && (
+          <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.titleFormat}</p>
         )}
 
         {bookmarksErrorVis && tabType === "folder" && (
           <p className={`text-red-600 mt-1 -mb-2`}>
-            Bookmarks should consist of single or multiple words (without
-            special characters) separated by coma and space
+            {tabErrors.bookmarksFormat}
           </p>
         )}
 
         {bookmarksExistenceErrorVis && tabType === "folder" && (
           <p className={`text-red-600 mt-1 -mb-2`}>
-            You can choose from existing bookmarks only
+            {tabErrors.bookmarkExistence}
           </p>
         )}
 
-        {tabsRepeatErrorVis && tabType === "folder" && (
-          <p className={`text-red-600 mt-1 -mb-2`}>Each tab should be unique</p>
+        {bookmarksRepeatErrorVis && tabType === "folder" && (
+          <p className={`text-red-600 mt-1 -mb-2`}>
+            {tabErrors.bookmarksRepeat}
+          </p>
         )}
 
         {noDeletionErrorVis && (
-          <p className={`text-red-600 mt-1 -mb-2`}>
-            Folder with all bookmarks cannot be deleted. You can hide it in the
-            global settings instead
-          </p>
+          <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.noDeletion}</p>
         )}
       </div>
 
@@ -365,7 +366,7 @@ Props): JSX.Element {
       )}
 
       {textAreaErrorVis && tabType === "note" && (
-        <p className={`text-red-600 -mt-2 mb-1`}>Note cannot be empty</p>
+        <p className={`text-red-600 -mt-2 mb-1`}>{tabErrors.textArea}</p>
       )}
 
       {tabType === "rss" && (
@@ -554,14 +555,14 @@ Props): JSX.Element {
             onClick={(e) => {
               e.preventDefault();
 
-              setTagErrorVis(false);
+              setTitleFormatErrorVis(false);
               setTextAreaErrorVis(false);
               setNoDeletionErrorVis(false);
               setBookmarksErrorVis(false);
-              setTabsRepeatErrorVis(false);
+              setBookmarksRepeatErrorVis(false);
               setBookmarksExistenceErrorVis(false);
 
-              let tabsInputArr = bookmarksInputStr.split(", ");
+              let bookmarksInputArr = bookmarksInputStr.split(", ");
 
               if (!wasAnythingClicked) {
                 return;
@@ -571,7 +572,7 @@ Props): JSX.Element {
               setWasItemsPerPageClicked(false);
 
               if (!regexForTitle.test(tabTitleInput)) {
-                setTagErrorVis(true);
+                setTitleFormatErrorVis(true);
                 return;
               }
 
@@ -588,26 +589,26 @@ Props): JSX.Element {
                   return;
                 }
 
-                if (!tabExistenceCheck()) {
+                if (!bookmarkExistenceCheck()) {
                   setBookmarksExistenceErrorVis(true);
                   return;
                 }
 
-                if (!tagUniquenessCheck()) {
-                  setTabsRepeatErrorVis(true);
+                if (!bookmarksUniquenessCheck()) {
+                  setBookmarksRepeatErrorVis(true);
                   return;
                 }
               }
 
-              function tabExistenceCheck() {
-                let tabsArr: string[] = [];
+              function bookmarkExistenceCheck() {
+                let bookmarksArr: string[] = [];
 
                 bookmarksData.forEach((obj) => {
-                  tabsArr.push(obj.title);
+                  bookmarksArr.push(obj.title);
                 });
 
-                for (let el of tabsInputArr) {
-                  if (tabsArr.indexOf(el) === -1) {
+                for (let el of bookmarksInputArr) {
+                  if (bookmarksArr.indexOf(el) === -1) {
                     return false;
                   }
                 }
@@ -615,14 +616,14 @@ Props): JSX.Element {
                 return true;
               }
 
-              function tagUniquenessCheck() {
+              function bookmarksUniquenessCheck() {
                 let isUnique: boolean = true;
 
-                tabsInputArr.forEach((el, i) => {
-                  let tagsInputCopy = [...tabsInputArr];
-                  tagsInputCopy.splice(i, 1);
+                bookmarksInputArr.forEach((el, i) => {
+                  let bookmarksInputCopy = [...bookmarksInputArr];
+                  bookmarksInputCopy.splice(i, 1);
 
-                  if (tagsInputCopy.indexOf(el) > -1) {
+                  if (bookmarksInputCopy.indexOf(el) > -1) {
                     isUnique = false;
                     return;
                   }

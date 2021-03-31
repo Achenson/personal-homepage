@@ -249,6 +249,7 @@ DONE 174. check all bookmarks function useState in EditTab DONE
 DONE 176. new link - autocomplete on focus, not on change DONE
 DONE 177. autocomplete field in the grid moves out of divs DONE
 DONE 178. autocomple chevronSVG should not be scaled down too much DONE
+DONE 179. change placeholder/error names: bookmark/tab DONE
 
 
 1. purgecss at the end of project?
@@ -256,7 +257,6 @@ DONE 178. autocomple chevronSVG should not be scaled down too much DONE
 
 
 
-179. change placeholder/error names: bookmark/tab
 180. include single spaces in error names
 181. white icons on Tabs not contrastive enough on hover
 182. tab editing -> should resize up the place for tab, increase columns size also as a side effect?
@@ -363,6 +363,7 @@ DONE 178. autocomple chevronSVG should not be scaled down too much DONE
 272. check is lazy initialization is neede somewhere else (like in EditTab!)
 273. xx info that new link will be an all tag (empty input)xx -> open tab for which bookmark is added automatically
 274. title & RSS link: smaller right margin!
+275. newTab & newBookmark upperUI margin above btns is too big
 
 App structure:
 Main
