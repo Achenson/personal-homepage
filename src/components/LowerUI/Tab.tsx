@@ -138,7 +138,6 @@ Props): JSX.Element {
           editBookmarkVis: false,
         };
       case "TAB_CONTENT_TOGGLE":
-
         setTabOpenedData(tabID);
 
         return {
@@ -328,11 +327,8 @@ Props): JSX.Element {
 
   function textOrIconColor(finalTabColor: string, textOrIcon: "text" | "icon") {
     // exceptions
-
     if (colorsForLightText.indexOf(finalTabColor) > -1) {
-      // return textOrIcon === "text" ? "text-gray-200" : "text-gray-300";
       return textOrIcon === "text" ? "text-gray-100" : "text-gray-200";
-      // return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
     }
 
     if (colorsForDarkText.indexOf(finalTabColor) > -1) {
@@ -340,7 +336,6 @@ Props): JSX.Element {
     }
 
     if (regexForColors.test(finalTabColor)) {
-      // return textOrIcon === "text" ? "text-gray-300" : "text-gray-400";
       return textOrIcon === "text" ? "text-gray-100" : "text-gray-200";
     }
 

@@ -25,7 +25,7 @@ import {
 } from "../../state/tabsAndBookmarks";
 
 import { UpperVisAction } from "../../utils/interfaces";
-import {tabErrors} from "../../utils/errors";
+import { tabErrors } from "../../utils/errors";
 
 import SelectableList from "../Shared/SelectableList";
 
@@ -54,10 +54,14 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   // const [tabLinksInput, setTabBookmarksInput] = useState<string[]>([]);
 
   const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
-  const [bookmarksRepeatErrorVis, setBookmarksRepeatErrorVis] = useState<boolean>(false);
-  const [bookmarkExistenceErrorVis, setBookmarkExistenceErrorVis] = useState<boolean>(
-    false
-  );
+  const [
+    bookmarksRepeatErrorVis,
+    setBookmarksRepeatErrorVis,
+  ] = useState<boolean>(false);
+  const [
+    bookmarkExistenceErrorVis,
+    setBookmarkExistenceErrorVis,
+  ] = useState<boolean>(false);
 
   const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
     false
@@ -112,18 +116,11 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       setBookmarksListVis(false);
       setChevronDown(true);
     }
-
-    // if (newVisibleBookmarks.length > 0 && !isThisTheFirstRender) {
-    //   setBookmarksListVis(true);
-    // }
-
-    // setIsThisTheFirstRender(false);
   }, [
     bookmarksInputStr,
     initialBookmarks,
     setVisibleBookmarks,
     setBookmarksListVis,
-    // isThisTheFirstRender,
   ]);
 
   function makeInitialBookmarks(): string[] {
@@ -253,7 +250,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   setSelectablesInputStr={setBookmarksInputStr}
                   selectablesInputStr={bookmarksInputStr}
                   visibleSelectables={visibleBookmarks}
-                  
                   marginTop="0px"
                 />
               )}
@@ -330,27 +326,19 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
         )}
 
         {titleFormatErrorVis && (
-          <p className={`text-red-600`}>
-            {tabErrors.titleFormat}
-          </p>
+          <p className={`text-red-600`}>{tabErrors.titleFormat}</p>
         )}
 
         {titleUniquenessErrorVis && (
-          <p className={`text-red-600`}>
-            {tabErrors.titleUniqueness}
-          </p>
+          <p className={`text-red-600`}>{tabErrors.titleUniqueness}</p>
         )}
 
         {bookmarksErrorVis && tabType === "folder" && (
-          <p className={`text-red-600`}>
-            {tabErrors.bookmarksFormat}
-          </p>
+          <p className={`text-red-600`}>{tabErrors.bookmarksFormat}</p>
         )}
 
         {bookmarkExistenceErrorVis && tabType === "folder" && (
-          <p className={`text-red-600`}>
-            {tabErrors.bookmarkExistence}
-          </p>
+          <p className={`text-red-600`}>{tabErrors.bookmarkExistence}</p>
         )}
 
         {bookmarksRepeatErrorVis && tabType === "folder" && (
@@ -393,7 +381,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 }
 
                 if (tabType === "folder") {
-                      if (!regexForBookmarks.test(bookmarksInputArr.join(", "))) {
+                  if (!regexForBookmarks.test(bookmarksInputArr.join(", "))) {
                     setBookmarksErrorVis(true);
                     return;
                   }

@@ -16,20 +16,29 @@ export interface SingleTabData {
   // bookmarksTitles: string[];
 }
 
-
 export interface SingleBookmarkData {
   id: number | string;
   title: string;
   URL: string;
-  tags: (string |number)[]
+  tags: (string | number)[];
 }
 
 export interface GlobalSettingsState {
-  picBackground: boolean,
-  defaultImage: string,
-    oneColorForAllCols: boolean,
-    hideNonDeletable: boolean,
-    numberOfCols: 1 | 2 | 3 | 4
+  picBackground: boolean;
+  defaultImage: string;
+  oneColorForAllCols: boolean;
+  hideNonDeletable: boolean;
+  numberOfCols: 1 | 2 | 3 | 4;
+}
+
+export interface InitUpperVisState {
+  newBookmarkVis: boolean;
+  newTabVis: boolean;
+  backgroundSettingsVis: boolean;
+  settingsVis: boolean;
+  colorsSettingsVis: boolean;
+  colorsBackgroundVis: boolean;
+  colorsColumnVis: boolean;
 }
 
 export interface UpperVisAction {
@@ -48,26 +57,15 @@ export interface UpperVisAction {
 
 export interface TabVisAction {
   type:
-  "COLORS_CLOSE" |
-  "EDIT_CLOSE" |
-  "COLORS_SETTINGS_TOGGLE" |
-  "EDIT_TOGGLE"| 
-  "TAB_CONTENT_TOGGLE"|
-  // "TAB_CONTENT_CLOSE"|
-  "TAB_CONTENT_OPEN_AFTER_LOCKING"|
-  "TAB_EDITABLES_CLOSE"|
-  "NEW_BOOKMARK_TOOGLE" |
-  "EDIT_BOOKMARK_TOOGLE";
-
-    payload?: string | number;
-}
-
-export interface InitUpperVisState {
-  newBookmarkVis: boolean;
-  newTabVis: boolean;
-  backgroundSettingsVis: boolean;
-  settingsVis: boolean;
-  colorsSettingsVis: boolean;
-  colorsBackgroundVis: boolean;
-  colorsColumnVis: boolean;
+    | "COLORS_CLOSE"
+    | "EDIT_CLOSE"
+    | "COLORS_SETTINGS_TOGGLE"
+    | "EDIT_TOGGLE"
+    | "TAB_CONTENT_TOGGLE"
+    // "TAB_CONTENT_CLOSE"|
+    | "TAB_CONTENT_OPEN_AFTER_LOCKING"
+    | "TAB_EDITABLES_CLOSE"
+    | "NEW_BOOKMARK_TOOGLE"
+    | "EDIT_BOOKMARK_TOOGLE";
+  payload?: string | number;
 }

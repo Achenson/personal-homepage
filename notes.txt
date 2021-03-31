@@ -253,19 +253,17 @@ DONE 179. change placeholder/error names: bookmark/tab DONE
 DONE 180. include single spaces in error names DONE ("words")
 XXX 181. white icons on Tabs not contrastive enough on hover XXX
 DONE 183. Column forwardRef??  DONE (used for size hook) DONE
+XXX 184. newTab isThisFirstRender not working. XXX not needed anymore
+DONE 185. react ridge state: non subscribed to changes if uses outside a component: problem in Tab? move reducer inside the component? DONE
+XXX 186. move color function out of Tab XXX
+??? 187. new Rss, new Note - get rid of bookmarks ??
+DONE 189. convert all bookmark/tab indexes to find() / filter() methods !! DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-
-184. newTab isThisFirstRender not working.
-185. react ridge state: non subscribed to changes if uses outside a component: problem in Tab? move reducer inside the component?
-186. move color function out of Tab
-187. new Rss, new Note - get rid of bookmarks
-188. Action interface improve (type values)
-189. convert all bookmark/tab indexes to find() / filter() methods !!
 190. delay problem for closing Tab content by useEffect
 191. upperVisState should be joined with tabVisState
 192. "reset all tab colors to default" of make it realy change all colors in the app
