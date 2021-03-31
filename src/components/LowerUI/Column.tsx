@@ -14,11 +14,11 @@ import GapAfterTab from "./GapAfterTab";
 
 interface Props {
   colNumber: number;
-  // ref: React.MutableRefObject<number>
   closeAllTabs: boolean;
 }
 
-const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
+// const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
+function Column({colNumber, closeAllTabs}: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [
     columnsColorsImg_Data,
@@ -26,14 +26,6 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
   ] = columnsColorsImg_State.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
-
-
-
-
-
-
-
-  
 
   function calcColumnColor(
     colNumber: number,
@@ -176,6 +168,6 @@ const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
 
     </div>
   );
-});
+};
 
 export default Column;

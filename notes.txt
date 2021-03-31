@@ -250,6 +250,9 @@ DONE 176. new link - autocomplete on focus, not on change DONE
 DONE 177. autocomplete field in the grid moves out of divs DONE
 DONE 178. autocomple chevronSVG should not be scaled down too much DONE
 DONE 179. change placeholder/error names: bookmark/tab DONE
+DONE 180. include single spaces in error names DONE ("words")
+XXX 181. white icons on Tabs not contrastive enough on hover XXX
+DONE 183. Column forwardRef??  DONE (used for size hook) DONE
 
 
 1. purgecss at the end of project?
@@ -257,10 +260,6 @@ DONE 179. change placeholder/error names: bookmark/tab DONE
 
 
 
-180. include single spaces in error names
-181. white icons on Tabs not contrastive enough on hover
-182. tab editing -> should resize up the place for tab, increase columns size also as a side effect?
-183. Column forwardRef??
 184. newTab isThisFirstRender not working.
 185. react ridge state: non subscribed to changes if uses outside a component: problem in Tab? move reducer inside the component?
 186. move color function out of Tab
@@ -364,6 +363,7 @@ DONE 179. change placeholder/error names: bookmark/tab DONE
 273. xx info that new link will be an all tag (empty input)xx -> open tab for which bookmark is added automatically
 274. title & RSS link: smaller right margin!
 275. newTab & newBookmark upperUI margin above btns is too big
+276. tab editing -> should opening it increase columns size also as a side effect? (check after background img problems are fixed)
 
 App structure:
 Main

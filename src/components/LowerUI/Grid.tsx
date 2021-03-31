@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import {
   tabsDataState,
@@ -15,8 +15,6 @@ import { resetColorsState } from "../../state/colorsState";
 import { globalSettingsState } from "../../state/defaultSettings";
 import Column from "./Column";
 
-import useSize from "@react-hook/size";
-
 interface Props {}
 
 function Grid({}: Props): JSX.Element {
@@ -29,9 +27,6 @@ function Grid({}: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
-
-  const target = React.useRef(null);
-  const [width, height] = useSize(target);
 
   useEffect(() => {
     if (closeAllTabsData) {
@@ -127,7 +122,6 @@ function Grid({}: Props): JSX.Element {
         globalSettingsData.numberOfCols
       )}`}
       // className={`grid gap-x-2 gap-y-6 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`}
-      ref={target}
     >
       {renderColumns(globalSettingsData.numberOfCols)}
     </div>
