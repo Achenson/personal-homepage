@@ -51,9 +51,9 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   const [tabColumnInput, setTabColumnInput] = useState<number>(1);
   // const [tabLinksInput, setTabBookmarksInput] = useState<string[]>([]);
 
-  const [tabsErrorVis, setTabsErrorVis] = useState<boolean>(false);
-  const [tabsRepeatErrorVis, setTabsRepeatErrorVis] = useState<boolean>(false);
-  const [tabsExistenceErrorVis, setTabsExistenceErrorVis] = useState<boolean>(
+  const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
+  const [bookmarksRepeatErrorVis, setBookmarksRepeatErrorVis] = useState<boolean>(false);
+  const [bookmarksExistenceErrorVis, setBookmarksExistenceErrorVis] = useState<boolean>(
     false
   );
 
@@ -339,20 +339,20 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           </p>
         )}
 
-        {tabsErrorVis && tabType === "folder" && (
+        {bookmarksErrorVis && tabType === "folder" && (
           <p className={`text-red-600`}>
-            Tabs should consist of words separated by coma and space
+            Bookmarks should consist of words separated by coma and space
           </p>
         )}
 
-        {tabsExistenceErrorVis && tabType === "folder" && (
+        {bookmarksExistenceErrorVis && tabType === "folder" && (
           <p className={`text-red-600`}>
-            You can choose from existing tabs only
+            You can choose from existing bookmarks only
           </p>
         )}
 
-        {tabsRepeatErrorVis && tabType === "folder" && (
-          <p className={`text-red-600`}>Each tab should be unique</p>
+        {bookmarksRepeatErrorVis && tabType === "folder" && (
+          <p className={`text-red-600`}>Each bookmark should be unique</p>
         )}
 
         {textAreaErrorVis && tabType === "note" && (
@@ -370,11 +370,11 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
                 // if(tagsInput.join(", "))
 
-                setTabsErrorVis(false);
-                setTabsRepeatErrorVis(false);
+                setBookmarksErrorVis(false);
+                setBookmarksRepeatErrorVis(false);
                 setTitleFormatErrorVis(false);
                 setTitleUniquenessErrorVis(false);
-                setTabsExistenceErrorVis(false);
+                setBookmarksExistenceErrorVis(false);
                 setTextAreaErrorVis(false);
 
                 let bookmarksInputArr = bookmarksInputStr.split(", ");
@@ -393,17 +393,17 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 if (tabType === "folder") {
                   // if (!regexForTabs.test(tabBookmarksInput.join(", "))) {
                   if (!regexForBookmarks.test(bookmarksInputArr.join(", "))) {
-                    setTabsErrorVis(true);
+                    setBookmarksErrorVis(true);
                     return;
                   }
 
                   if (!tabExistenceCheck()) {
-                    setTabsExistenceErrorVis(true);
+                    setBookmarksExistenceErrorVis(true);
                     return;
                   }
 
                   if (!tagUniquenessCheck()) {
-                    setTabsRepeatErrorVis(true);
+                    setBookmarksRepeatErrorVis(true);
                     return;
                   }
                 }
