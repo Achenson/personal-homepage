@@ -259,14 +259,14 @@ XXX 186. move color function out of Tab XXX
 ??? 187. new Rss, new Note - get rid of bookmarks ??
 DONE 189. convert all bookmark/tab indexes to find() / filter() methods !! DONE
 
+XXX 192. "reset all tab colors to default" of make it realy change all colors in the app XXX
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-190. delay problem for closing Tab content by useEffect
-191. upperVisState should be joined with tabVisState
-192. "reset all tab colors to default" of make it realy change all colors in the app
+
+
 193. less Colors for columns if less columns are displayed
 194. Not - text overflow if a string contains many letters with no space?
 195. upperUi colors settings -> change positioning of colors grid on small screen sizes
@@ -275,6 +275,11 @@ DONE 189. convert all bookmark/tab indexes to find() / filter() methods !! DONE
 198. errors reducers?
 199. consitent errors! external error file
 200. input paddings
+
+190. delay problem for closing Tab content by useEffect
+191. upperVisState should be joined with tabVisState
+
+
 201. rss title & link not exactly aligned
 202. rss globalSetting!
 203. rss -> displays only one feed even if two rss tabs are open
@@ -362,6 +367,9 @@ DONE 189. convert all bookmark/tab indexes to find() / filter() methods !! DONE
 274. title & RSS link: smaller right margin!
 275. newTab & newBookmark upperUI margin above btns is too big
 276. tab editing -> should opening it increase columns size also as a side effect? (check after background img problems are fixed)
+277. background img setting -> revert to aligning to left
+278. background img zooming back after clicking any settings
+279. color setting -> rename to tab setting/ "reset tab colors to default"
 
 App structure:
 Main

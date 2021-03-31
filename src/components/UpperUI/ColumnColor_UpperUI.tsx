@@ -67,24 +67,43 @@ function ColumnColor_UpperUI({
     }
   }
 
-  return (
-    <div
-      onClick={() => {
-        setDefaultColorsFor(`column_${colNumber}` as any);
+  const triangle = {
+    width: "0",
+    height: "0",
+    borderBottom: "14px solid black",
+    borderLeft: "30px solid transparent",
+  };
 
-        if (columnSelected === colNumber) {
-          upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
-          setColumnSelected(null);
-        } else {
-          upperVisDispatch({ type: "COLORS_COLUMN_OPEN" });
-          setColumnSelected(colNumber);
-        }
-        
-      }}
-      className={`h-4 w-8 bg-${columnsColor(
-        colNumber
-      )} cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
-    ></div>
+  {
+    /* <div
+        className="absolute bottom-0 right-0 z-10"
+        style={{
+          ...triangle,
+        }}
+      ></div> */
+  }
+
+  return (
+    <div>
+      <div
+        onClick={() => {
+          setDefaultColorsFor(`column_${colNumber}` as any);
+
+          if (columnSelected === colNumber) {
+            upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
+            setColumnSelected(null);
+          } else {
+            upperVisDispatch({ type: "COLORS_COLUMN_OPEN" });
+            setColumnSelected(colNumber);
+          }
+        }}
+        className={`relative h-4 w-8 bg-${columnsColor(
+          colNumber
+        )} cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
+      >
+        <div className="absolute top-0 right-0 h-px w-8 bg-black transform -rotate-45"></div>
+      </div>
+    </div>
   );
 }
 
