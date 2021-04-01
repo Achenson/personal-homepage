@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { columnsColorsState } from "../../state/colorsState";
 
 import { UpperVisAction } from "../../utils/interfaces";
@@ -37,6 +37,7 @@ function ColumnColor_UpperUI({
   arrIndex,
 }: Props): JSX.Element {
   const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
+  const [disable, setDisable] = useState<1 | 2 | 3 | 4>(4);
 
   function columnsColor(colNumber: number) {
     switch (colNumber) {
@@ -67,12 +68,12 @@ function ColumnColor_UpperUI({
     }
   }
 
-  const triangle = {
-    width: "0",
-    height: "0",
-    borderBottom: "14px solid black",
-    borderLeft: "30px solid transparent",
-  };
+  // const triangle = {
+  //   width: "0",
+  //   height: "0",
+  //   borderBottom: "14px solid black",
+  //   borderLeft: "30px solid transparent",
+  // };
 
   {
     /* <div
@@ -85,24 +86,35 @@ function ColumnColor_UpperUI({
 
   return (
     <div>
-      <div
-        onClick={() => {
-          setDefaultColorsFor(`column_${colNumber}` as any);
+      {colNumber !== disable ? (
+        <div
+          onClick={() => {
+            setDefaultColorsFor(`column_${colNumber}` as any);
 
-          if (columnSelected === colNumber) {
-            upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
-            setColumnSelected(null);
-          } else {
-            upperVisDispatch({ type: "COLORS_COLUMN_OPEN" });
-            setColumnSelected(colNumber);
-          }
-        }}
-        className={`relative overflow-hidden h-4 w-8 bg-${columnsColor(
-          colNumber
-        )} cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
-      >
-        <div className="absolute h-px bg-black transform -rotate-24" style={{top: "6.5px", left: "-2px", width: "34.5px"}}></div>
-      </div>
+            if (columnSelected === colNumber) {
+              upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
+              setColumnSelected(null);
+            } else {
+              upperVisDispatch({ type: "COLORS_COLUMN_OPEN" });
+              setColumnSelected(colNumber);
+            }
+          }}
+          className={`relative overflow-hidden h-4 w-8 bg-${columnsColor(
+            colNumber
+          )} cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
+        >
+        
+        </div>
+      ) : (
+        <div
+          className={`relative overflow-hidden h-4 w-8 bg-white ${borderStyle()} border-black`}
+        >
+          <div
+            className="absolute bg-black transform -rotate-23"
+            style={{ top: "6px", left: "-2px", width: "35px", height: "2px" }}
+          ></div>
+        </div>
+      )}
     </div>
   );
 }
