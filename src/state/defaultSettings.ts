@@ -16,9 +16,9 @@ export const globalSettingsState = newRidgeState<GlobalSettingsState>({
     oneColorForAllCols: false,
     hideNonDeletable: false,
     numberOfCols: 4,
-    rssDate: true,
-    rssDescription: false,
-    rssItemsPerPage: 7
+    // rssDate: true,
+    // rssDescription: false,
+    // rssItemsPerPage: 9
     
 })
 

@@ -29,9 +29,9 @@ export interface GlobalSettingsState {
   oneColorForAllCols: boolean;
   hideNonDeletable: boolean;
   numberOfCols: 1 | 2 | 3 | 4;
-  rssDescription: boolean;
-  rssDate: boolean;
-  rssItemsPerPage: number;
+  // rssDescription: boolean;
+  // rssDate: boolean;
+  // rssItemsPerPage: number;
 }
 
 export interface InitUpperVisState {

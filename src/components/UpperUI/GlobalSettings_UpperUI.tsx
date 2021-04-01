@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
-
-
 import { uiColorState } from "../../state/colorsState";
 
-import { globalSettingsState } from "../../state/defaultSettings";
+import { rssSettingsState, globalSettingsState } from "../../state/defaultSettings";
 
 import { UpperVisAction } from "../../utils/interfaces";
 
@@ -17,16 +15,14 @@ interface Props {
 }
 
 function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
-
   const [uiColorData, setUiColorData] = uiColorState.use();
 
+  const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-
-  const [descriptionCheckbox, setDescriptionCheckbox] = useState(globalSettingsData.rssDescription);
-  const [dateCheckbox, setDateCheckbox] = useState(globalSettingsData.rssDate);
-  const [rssItemsPerPage, setRssItemsPerPage] = useState(globalSettingsData.rssItemsPerPage);
-
+  // const [descriptionCheckbox, setDescriptionCheckbox] = useState(globalSettingsData.rssDescription);
+  // const [dateCheckbox, setDateCheckbox] = useState(globalSettingsData.rssDate);
+  // const [rssItemsPerPage, setRssItemsPerPage] = useState(globalSettingsData.rssItemsPerPage);
 
   function renderColsNumberControls() {
     const arrOfColsNumbers: (1 | 2 | 3 | 4)[] = [1, 2, 3, 4];
@@ -118,8 +114,6 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             ></div>
           </div>
 
-
-
           <div className="flex items-center mb-2 mt-2 justify-between">
             <p className="whitespace-nowrap w-32">RSS Display</p>
             <div className="flex">
@@ -127,11 +121,14 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 <input
                   type="checkbox"
                   name="description"
-                  
-                  checked={descriptionCheckbox}
+                  checked={rssSettingsData.description}
                   onChange={() => {
-                    setDescriptionCheckbox((b) => !b);
+                    // setDescriptionCheckbox((b) => !b);
                     // setWasCheckboxClicked(true);
+                    setRssSettingsData({
+                      ...rssSettingsData,
+                      description: !rssSettingsData.description,
+                    });
                   }}
                 />
                 <label className="ml-1" htmlFor="description">
@@ -143,13 +140,15 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 <input
                   type="checkbox"
                   name="date"
-                  checked={dateCheckbox}
+                  checked={rssSettingsData.date}
                   onChange={() => {
-                    setDateCheckbox((b) => !b);
+                    // setDateCheckbox((b) => !b);
                     // setWasCheckboxClicked(true);
+                    setRssSettingsData({
+                      ...rssSettingsData,
+                      date: !rssSettingsData.date,
+                    });
                   }}
-
-                  
                 />
                 <label className="ml-1" htmlFor="date">
                   Date
@@ -163,23 +162,18 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               type="number"
               min="5"
               max="15"
-              
               className="border w-11 pl-1"
-
-
-          value={rssItemsPerPage}
+              value={rssSettingsData.itemsPerPage}
               onChange={(e) => {
-                setRssItemsPerPage(parseInt(e.target.value));
+                // setRssItemsPerPage(parseInt(e.target.value));
+                setRssSettingsData({
+                  ...rssSettingsData,
+                  itemsPerPage: parseInt(e.target.value),
+                });
                 // setWasItemsPerPageClicked(true);
               }}
-             
             />
           </div>
-
-
-
-
-
 
           <div className="flex justify-between items-center mb-2 mt-2">
             <p className="">Number of columns</p>
