@@ -1,7 +1,11 @@
 import React from "react";
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 import { produce } from "immer";
-import {folderColorState} from "../../state/colorsState"
+import {
+  folderColorState,
+  noteColorState,
+  rssColorState,
+} from "../../state/colorsState";
 
 interface Props {
   color: string;
@@ -12,35 +16,41 @@ interface Props {
 function SingleColor_Tab({ color, tabID }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
-  const [folderColorData, setFolderColorData] = folderColorState.use()
-
+  const [folderColorData, setFolderColorData] = folderColorState.use();
+  const [noteColorData, setNoteColorData] = noteColorState.use();
+  const [rssColorData, setRssColorData] = rssColorState.use();
 
   function borderMaker() {
-  
+    const selectedBorder = "border-2 border-white";
+    const defaultBorder = "border border-black";
 
-      let currentTab = tabsData.find(obj => obj.id === tabID)
+    let currentTab = tabsData.find((obj) => obj.id === tabID);
 
-      
-      //@ts-ignore
-  if(currentTab.color) {
     //@ts-ignore
-    if (color == currentTab.color) {
-      return "border-2 border-white";
+    if (currentTab.color) {
+      //@ts-ignore
+      if (color == currentTab.color) {
+        return "border-2 border-white";
+      }
     }
-  } else {
-    if(color === folderColorData) {
-      return "border-2 border-white";
+
+    //@ts-ignore
+    if (!currentTab.color) {
+      if (currentTab?.type === "folder" && color === folderColorData) {
+        return selectedBorder;
+      }
+
+      if (currentTab?.type === "note" && color === noteColorData) {
+        return selectedBorder;
+      }
+
+      if (currentTab?.type === "rss" && color === rssColorData) {
+        return selectedBorder;
+      }
     }
+
+    return defaultBorder;
   }
-      
-
-    
-
-
-      return "border border-black";
-    
-  }
-
 
   return (
     <div
@@ -48,7 +58,7 @@ function SingleColor_Tab({ color, tabID }: Props): JSX.Element {
       onClick={() => {
         setTabsData((previous) =>
           produce(previous, (updated) => {
-            let tabToChange = updated.find(obj => obj.id === tabID)
+            let tabToChange = updated.find((obj) => obj.id === tabID);
 
             if (tabToChange) {
               tabToChange.color = `${color}`;

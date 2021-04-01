@@ -263,6 +263,7 @@ DONE 193. less Colors for columns if less columns are displayed DONE (diagonal l
 DONE 194. Not - text overflow if a string contains many letters with no space? DONE (overflow-hidden)
 DONE 195. upperUi colors settings -> change positioning of colors grid on small screen sizes DONE (change to left in all cases)
 DONE 196. restrict naming size for tabs, boomarks etc. DONE (truncate className instead)
+DONE 197. select border color for Tab (whitish?) DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -270,7 +271,6 @@ DONE 196. restrict naming size for tabs, boomarks etc. DONE (truncate className 
 
 
 
-197. select border color for Tab (whitish?)
 198. errors reducers?
 199. consitent errors! external error file
 200. input paddings
@@ -370,6 +370,7 @@ DONE 196. restrict naming size for tabs, boomarks etc. DONE (truncate className 
 278. background img zooming back after clicking any settings
 279. color setting -> rename to tab setting/ "reset tab colors to default"
 280. responsive settings size
+281. tab colors changing low performance!
 
 App structure:
 Main
