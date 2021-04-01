@@ -383,9 +383,7 @@ Props): JSX.Element {
         // style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)"}}
 
         onMouseEnter={() => {
-          // setTimeout( () => {
-          //   setIconsVis(true);
-          // }, 1000)
+         
           setMouseOverTab(true);
         }}
         onMouseLeave={() => {
@@ -394,19 +392,17 @@ Props): JSX.Element {
         }}
       >
         <div
-          className="pl-1 w-full cursor-pointer"
+          className="pl-1 w-full overflow-hidden cursor-pointer"
           onClick={() => {
-            // setTabColorOpenedData(null);
-            // setTabEditOpenedData(null);
+        
 
             visDispatch({ type: "TAB_CONTENT_TOGGLE" });
           }}
         >
-          <p className="">
+          <p className="whitespace-nowrap">
             {" "}
             {tabTitle}
-            {/* {tabsData[tabIndex].priority}{" "} */}
-            {/* {tabsData[tabIndex].deletable.toString()} */}
+          
           </p>
         </div>
 
