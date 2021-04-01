@@ -1,6 +1,6 @@
 import React from "react";
 
-import SingleColor_Default from "./SingleColor_DefaultAndColumn";
+import SingleColor_DefaultAndColumn from "./SingleColor_DefaultAndColumn";
 import SingleColor_Default_Img from "./SingleColor_Column_Img";
 
 import { tabColors } from "../../utils/tabColors";
@@ -32,7 +32,7 @@ function ColorsToChoose_DefaultAndColumns({ defaultColorsFor }: Props): JSX.Elem
         <div className="flex" key={i}>
           {row.map((el, j) => {
             return (
-              <SingleColor_Default
+              <SingleColor_DefaultAndColumn
                 color={el}
                 defaultColorsFor={defaultColorsFor}
                 key={j}
@@ -51,7 +51,7 @@ function ColorsToChoose_DefaultAndColumns({ defaultColorsFor }: Props): JSX.Elem
           <div className="flex" key={i}>
             {row.map((el, j) => {
               return (
-                <SingleColor_Default
+                <SingleColor_DefaultAndColumn
                   color={el}
                   defaultColorsFor={defaultColorsFor}
                   key={j}

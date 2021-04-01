@@ -392,7 +392,7 @@ Props): JSX.Element {
         }}
       >
         <div
-          className="pl-1 truncate cursor-pointer"
+          className="pl-1 w-full truncate cursor-pointer"
           onClick={() => {
         
 

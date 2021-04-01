@@ -1,5 +1,5 @@
 import React from "react";
-import SingleColor from "./SingleColor_Tab";
+import SingleColor_Tab from "./SingleColor_Tab";
 
 import {tabColors} from "../../utils/tabColors";
 // import {columnColors} from "../../utils/columnColors";
@@ -20,7 +20,7 @@ function ColorsToChoose_Tab({
         <div className="flex" key={i}>
           {row.map((el, j) => {
             return (
-              <SingleColor color={el} tabID={tabID} key={j} />
+              <SingleColor_Tab color={el} tabID={tabID} key={j} />
             );
           })}
         </div>

@@ -12,9 +12,25 @@ function SingleColor_Tab({ color, tabID }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
 
+
+  function borderMaker() {
+  
+
+      let currentTab = tabsData.find(obj => obj.id === tabID)
+
+  //@ts-ignore
+      if (color !== currentTab.color) {
+        return "border border-black";
+      }
+
+      return "border-2 border-white";
+    
+  }
+
+
   return (
     <div
-      className={`h-4 w-8 bg-${color} cursor-pointer border border-black hover:border-gray-500`}
+      className={`h-4 w-8 bg-${color} cursor-pointer ${borderMaker()} hover:border-gray-500`}
       onClick={() => {
         setTabsData((previous) =>
           produce(previous, (updated) => {
