@@ -66,7 +66,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
       return "0px";
     }
   }
-
+  // style={{left: "67px"}}
   return (
     <div
       className="flex flex-col z-50 absolute h-screen w-screen justify-center items-center"
@@ -198,10 +198,12 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             //   ? "93px"
             //   :
             // "157px"
+
+            
           }}
         >
           {colorsToChooseVis && (
-            <div className="absolute" style={{left: "67px"}}>
+            <div className="absolute right-32 bottom-8" style={{right: "140px", bottom: "32px"}}>
               <ColorsToChoose_Default defaultColorsFor={defaultColorsFor} />
             </div>
           )}

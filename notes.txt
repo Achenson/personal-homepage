@@ -261,6 +261,7 @@ DONE 189. convert all bookmark/tab indexes to find() / filter() methods !! DONE
 XXX 192. "reset all tab colors to default" of make it realy change all colors in the app XXX
 DONE 193. less Colors for columns if less columns are displayed DONE (diagonal line)
 DONE 194. Not - text overflow if a string contains many letters with no space? DONE (overflow-hidden)
+DONE 195. upperUi colors settings -> change positioning of colors grid on small screen sizes DONE (change to left in all cases)
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -268,7 +269,6 @@ DONE 194. Not - text overflow if a string contains many letters with no space? D
 
 
 
-195. upperUi colors settings -> change positioning of colors grid on small screen sizes
 196. restrict naming size for tabs, boomarks etc.
 197. select border color for Tab (whitish?)
 198. errors reducers?
@@ -369,6 +369,7 @@ DONE 194. Not - text overflow if a string contains many letters with no space? D
 277. background img setting -> revert to aligning to left
 278. background img zooming back after clicking any settings
 279. color setting -> rename to tab setting/ "reset tab colors to default"
+280. responsive settings size
 
 App structure:
 Main
