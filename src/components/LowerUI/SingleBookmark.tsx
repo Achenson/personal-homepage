@@ -48,13 +48,16 @@ function SingleBookmark({
 
   return (
     <div className="flex justify-between bg-gray-100 h-10 py-2 border-b">
-      <div className="flex">
-        <PhotographSVG className="h-6 mr-px" />
-        <div>
+      <div className="flex truncate">
+        <div className="h-6 mr-px">
+        <PhotographSVG className="h-full" />
+        </div>
+        <div className="truncate">
           <a
             href={singleBookmarkData.URL}
             target="_blank"
             rel="noopener noreferrer"
+            className=""
           >
             {singleBookmarkData.title}
           </a>

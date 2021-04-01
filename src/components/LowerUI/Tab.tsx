@@ -392,14 +392,14 @@ Props): JSX.Element {
         }}
       >
         <div
-          className="pl-1 w-full overflow-hidden cursor-pointer"
+          className="pl-1 truncate cursor-pointer"
           onClick={() => {
         
 
             visDispatch({ type: "TAB_CONTENT_TOGGLE" });
           }}
         >
-          <p className="whitespace-nowrap">
+          <p className="truncate">
             {" "}
             {tabTitle}
           
