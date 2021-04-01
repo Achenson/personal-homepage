@@ -264,6 +264,9 @@ DONE 194. Not - text overflow if a string contains many letters with no space? D
 DONE 195. upperUi colors settings -> change positioning of colors grid on small screen sizes DONE (change to left in all cases)
 DONE 196. restrict naming size for tabs, boomarks etc. DONE (truncate className instead)
 DONE 197. select border color for Tab (whitish?) DONE
+DONE 199. consitent errors! external error file DONE
+DONE 200. input paddings DONE
+DONE ? 201. rss title & link not exactly aligned ? DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -271,15 +274,10 @@ DONE 197. select border color for Tab (whitish?) DONE
 
 
 
-198. errors reducers?
-199. consitent errors! external error file
-200. input paddings
-
-190. delay problem for closing Tab content by useEffect
-191. upperVisState should be joined with tabVisState
 
 
-201. rss title & link not exactly aligned
+
+
 202. rss globalSetting!
 203. rss -> displays only one feed even if two rss tabs are open
 204. rss -> non https feeds not working, non xml rss feeds not working (science alert)
@@ -289,6 +287,11 @@ DONE 197. select border color for Tab (whitish?) DONE
 208. closeAll not working
 209. closeAll not visible on background
 210. test different background Img
+
+190. delay problem for closing Tab content by useEffect
+191. upperVisState should be joined with tabVisState
+
+
 211. change ALL index logic to find filter etc. (GapAfterTab)
 212. less confusing drop? now are different colors right after the Tab and below
 213. not obvious how to close note if opened by clicking on text
@@ -371,6 +374,7 @@ DONE 197. select border color for Tab (whitish?) DONE
 279. color setting -> rename to tab setting/ "reset tab colors to default"
 280. responsive settings size
 281. tab colors changing low performance!
+283. errors reducers?
 
 App structure:
 Main

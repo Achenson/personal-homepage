@@ -358,8 +358,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               onClick={(e) => {
                 e.preventDefault();
 
-                // if(tagsInput.join(", "))
-
                 setBookmarksErrorVis(false);
                 setBookmarksRepeatErrorVis(false);
                 setTitleFormatErrorVis(false);
