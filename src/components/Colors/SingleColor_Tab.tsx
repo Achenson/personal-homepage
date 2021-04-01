@@ -1,6 +1,7 @@
 import React from "react";
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 import { produce } from "immer";
+import {folderColorState} from "../../state/colorsState"
 
 interface Props {
   color: string;
@@ -11,6 +12,7 @@ interface Props {
 function SingleColor_Tab({ color, tabID }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
+  const [folderColorData, setFolderColorData] = folderColorState.use()
 
 
   function borderMaker() {
@@ -18,12 +20,24 @@ function SingleColor_Tab({ color, tabID }: Props): JSX.Element {
 
       let currentTab = tabsData.find(obj => obj.id === tabID)
 
-  //@ts-ignore
-      if (color !== currentTab.color) {
-        return "border border-black";
-      }
-
+      
+      //@ts-ignore
+  if(currentTab.color) {
+    //@ts-ignore
+    if (color == currentTab.color) {
       return "border-2 border-white";
+    }
+  } else {
+    if(color === folderColorData) {
+      return "border-2 border-white";
+    }
+  }
+      
+
+    
+
+
+      return "border border-black";
     
   }
 
