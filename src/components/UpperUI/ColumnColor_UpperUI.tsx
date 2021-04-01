@@ -97,11 +97,11 @@ function ColumnColor_UpperUI({
             setColumnSelected(colNumber);
           }
         }}
-        className={`relative h-4 w-8 bg-${columnsColor(
+        className={`relative overflow-hidden h-4 w-8 bg-${columnsColor(
           colNumber
         )} cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
       >
-        <div className="absolute top-0 right-0 h-px w-8 bg-black transform -rotate-45"></div>
+        <div className="absolute h-px bg-black transform -rotate-24" style={{top: "6.5px", left: "-2px", width: "34.5px"}}></div>
       </div>
     </div>
   );

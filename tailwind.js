@@ -72,6 +72,13 @@ module.exports = {
         inner_lg: "inset 0 2px 15px 0 rgba(0, 0, 0, 0.06)",
         inner_xl: "inset 0 2px 20px 0 rgba(0, 0, 0, 0.06)",
       },
+      rotate: {
+        '-26.6': '-26.6deg',
+        '-26': '-26deg',
+        '-25': '-25deg',
+        '-24': '-24deg',
+        '-23': '-23deg',
+      }
     },
   },
   variants: {
