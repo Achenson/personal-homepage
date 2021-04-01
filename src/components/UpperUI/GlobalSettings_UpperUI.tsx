@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
@@ -18,10 +18,15 @@ interface Props {
 
 function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
-
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+
+  const [descriptionCheckbox, setDescriptionCheckbox] = useState(globalSettingsData.rssDescription);
+  const [dateCheckbox, setDateCheckbox] = useState(globalSettingsData.rssDate);
+  const [rssItemsPerPage, setRssItemsPerPage] = useState(globalSettingsData.rssItemsPerPage);
+
 
   function renderColsNumberControls() {
     const arrOfColsNumbers: (1 | 2 | 3 | 4)[] = [1, 2, 3, 4];
@@ -65,7 +70,7 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
       <div className="md:mb-40 relative">
         <div
           className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
-          style={{ width: "417px", height: "200px" }}
+          style={{ width: "417px", height: "225px" }}
         >
           <div className="absolute right-0 top-0 mt-1 mr-1">
             <CancelSVG
@@ -112,6 +117,70 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               }}
             ></div>
           </div>
+
+
+
+          <div className="flex items-center mb-2 mt-2 justify-between">
+            <p className="whitespace-nowrap w-32">RSS Display</p>
+            <div className="flex">
+              <div className="flex items-center mr-2">
+                <input
+                  type="checkbox"
+                  name="description"
+                  
+                  checked={descriptionCheckbox}
+                  onChange={() => {
+                    setDescriptionCheckbox((b) => !b);
+                    // setWasCheckboxClicked(true);
+                  }}
+                />
+                <label className="ml-1" htmlFor="description">
+                  Description
+                </label>
+              </div>
+
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  name="date"
+                  checked={dateCheckbox}
+                  onChange={() => {
+                    setDateCheckbox((b) => !b);
+                    // setWasCheckboxClicked(true);
+                  }}
+
+                  
+                />
+                <label className="ml-1" htmlFor="date">
+                  Date
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center mt-2 justify-between">
+            <p className="whitespace-nowrap w-32">RSS Items per page</p>
+            <input
+              type="number"
+              min="5"
+              max="15"
+              
+              className="border w-11 pl-1"
+
+
+          value={rssItemsPerPage}
+              onChange={(e) => {
+                setRssItemsPerPage(parseInt(e.target.value));
+                // setWasItemsPerPageClicked(true);
+              }}
+             
+            />
+          </div>
+
+
+
+
+
+
           <div className="flex justify-between items-center mb-2 mt-2">
             <p className="">Number of columns</p>
 

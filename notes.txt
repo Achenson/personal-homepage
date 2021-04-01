@@ -279,6 +279,7 @@ DONE ? 201. rss title & link not exactly aligned ? DONE
 
 
 202. rss globalSetting!
+
 203. rss -> displays only one feed even if two rss tabs are open
 204. rss -> non https feeds not working, non xml rss feeds not working (science alert)
 205. Column forwardRef - is it needed still?
@@ -375,6 +376,7 @@ DONE ? 201. rss title & link not exactly aligned ? DONE
 280. responsive settings size
 281. tab colors changing low performance!
 283. errors reducers?
+284. EditTab: rss & note -> make new components!
 
 App structure:
 Main

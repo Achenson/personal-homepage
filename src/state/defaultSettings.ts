@@ -15,7 +15,11 @@ export const globalSettingsState = newRidgeState<GlobalSettingsState>({
     defaultImage: "defaultBackground",
     oneColorForAllCols: false,
     hideNonDeletable: false,
-    numberOfCols: 4
+    numberOfCols: 4,
+    rssDate: true,
+    rssDescription: false,
+    rssItemsPerPage: 7
+    
 })
 
 export const closeAllTabsState = newRidgeState(false);
