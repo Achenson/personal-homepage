@@ -3,10 +3,10 @@ import { columnsColorsState } from "../../state/colorsState";
 
 import { UpperVisAction } from "../../utils/interfaces";
 
+import { globalSettingsState } from "../../state/defaultSettings";
+
 interface Props {
   colNumber: number;
-  // setNotesSelected: React.Dispatch<React.SetStateAction<boolean>>;
-  // setFoldersSelected: React.Dispatch<React.SetStateAction<boolean>>;
   defaultColorsFor: // | "folders"
   // | "notes"
   "column_1" | "column_2" | "column_3" | "column_4" | "unselected";
@@ -26,18 +26,14 @@ interface Props {
 
 function ColumnColor_UpperUI({
   colNumber,
-  // setNotesSelected,
-  // setTabsSelected,
-  defaultColorsFor,
   setDefaultColorsFor,
-  // setColorsToChooseVis,
   columnSelected,
   setColumnSelected,
   upperVisDispatch,
   arrIndex,
 }: Props): JSX.Element {
   const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
-  const [disable, setDisable] = useState<1 | 2 | 3 | 4>(4);
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function columnsColor(colNumber: number) {
     switch (colNumber) {
@@ -68,25 +64,9 @@ function ColumnColor_UpperUI({
     }
   }
 
-  // const triangle = {
-  //   width: "0",
-  //   height: "0",
-  //   borderBottom: "14px solid black",
-  //   borderLeft: "30px solid transparent",
-  // };
-
-  {
-    /* <div
-        className="absolute bottom-0 right-0 z-10"
-        style={{
-          ...triangle,
-        }}
-      ></div> */
-  }
-
   return (
     <div>
-      {colNumber !== disable ? (
+      {colNumber <= globalSettingsData.numberOfCols ? (
         <div
           onClick={() => {
             setDefaultColorsFor(`column_${colNumber}` as any);
@@ -102,9 +82,7 @@ function ColumnColor_UpperUI({
           className={`relative overflow-hidden h-4 w-8 bg-${columnsColor(
             colNumber
           )} cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
-        >
-        
-        </div>
+        ></div>
       ) : (
         <div
           className={`relative overflow-hidden h-4 w-8 bg-white ${borderStyle()} border-black`}

@@ -258,8 +258,8 @@ DONE 185. react ridge state: non subscribed to changes if uses outside a compone
 XXX 186. move color function out of Tab XXX
 ??? 187. new Rss, new Note - get rid of bookmarks ??
 DONE 189. convert all bookmark/tab indexes to find() / filter() methods !! DONE
-
 XXX 192. "reset all tab colors to default" of make it realy change all colors in the app XXX
+DONE 193. less Colors for columns if less columns are displayed DONE (diagonal line)
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -267,7 +267,6 @@ XXX 192. "reset all tab colors to default" of make it realy change all colors in
 
 
 
-193. less Colors for columns if less columns are displayed
 194. Not - text overflow if a string contains many letters with no space?
 195. upperUi colors settings -> change positioning of colors grid on small screen sizes
 196. restrict naming size for tabs, boomarks etc.
