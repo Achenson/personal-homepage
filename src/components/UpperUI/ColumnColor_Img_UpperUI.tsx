@@ -2,10 +2,10 @@ import React from "react";
 import { columnsColorsImg_State } from "../../state/colorsState";
 import { UpperVisAction } from "../../utils/interfaces";
 
+import { globalSettingsState } from "../../state/defaultSettings";
+
 interface Props {
   colNumber: number;
-  // setNotesSelected: React.Dispatch<React.SetStateAction<boolean>>;
-  // setTabsSelected: React.Dispatch<React.SetStateAction<boolean>>;
   defaultColorsFor: // | "folders"
   // | "notes"
   "column_1" | "column_2" | "column_3" | "column_4" | "unselected";
@@ -25,11 +25,7 @@ interface Props {
 
 function SingleColumnsColor_Img_UpperUI({
   colNumber,
-  // setNotesSelected,
-  // setTabsSelected,
-  defaultColorsFor,
   setDefaultColorsFor,
-  // setColorsToChooseVis,
   columnSelected,
   setColumnSelected,
   upperVisDispatch,
@@ -39,6 +35,8 @@ function SingleColumnsColor_Img_UpperUI({
     columnsColorImg_Data,
     setColumnsColorImg_Data,
   ] = columnsColorsImg_State.use();
+
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function columnsColor(colNumber: number) {
     switch (colNumber) {
@@ -70,21 +68,25 @@ function SingleColumnsColor_Img_UpperUI({
   }
 
   return (
-    <div
-      onClick={() => {
-        setDefaultColorsFor(`column_${colNumber}` as any);
+    <div>
+      {colNumber <= globalSettingsData.numberOfCols ? (
+        <div
+          onClick={() => {
+            setDefaultColorsFor(`column_${colNumber}` as any);
 
-        if (columnSelected === colNumber) {
-          upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
-          setColumnSelected(null);
-        } else {
-          upperVisDispatch({ type: "COLORS_COLUMN_OPEN" });
-          setColumnSelected(colNumber);
-        }
-      }}
-      className={`h-4 w-8 cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
-      style={{ backgroundColor: columnsColor(colNumber) }}
-    ></div>
+            if (columnSelected === colNumber) {
+              upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
+              setColumnSelected(null);
+            } else {
+              upperVisDispatch({ type: "COLORS_COLUMN_OPEN" });
+              setColumnSelected(colNumber);
+            }
+          }}
+          className={`h-4 w-8 cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
+          style={{ backgroundColor: columnsColor(colNumber) }}
+        ></div>
+      ) : null}
+    </div>
   );
 }
 

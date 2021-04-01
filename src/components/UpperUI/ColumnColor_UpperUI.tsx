@@ -84,14 +84,15 @@ function ColumnColor_UpperUI({
           )} cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
         ></div>
       ) : (
-        <div
-          className={`relative overflow-hidden h-4 w-8 bg-white ${borderStyle()} border-black`}
-        >
-          <div
-            className="absolute bg-black transform -rotate-23"
-            style={{ top: "6px", left: "-2px", width: "35px", height: "2px" }}
-          ></div>
-        </div>
+        // <div
+        //   className={`relative overflow-hidden h-4 w-8 bg-white ${borderStyle()} border-black`}
+        // >
+        //   <div
+        //     className="absolute bg-black transform -rotate-23"
+        //     style={{ top: "6px", left: "-2px", width: "35px", height: "2px" }}
+        //   ></div>
+        // </div>
+        null
       )}
     </div>
   );
