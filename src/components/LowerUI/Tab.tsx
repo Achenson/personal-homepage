@@ -92,6 +92,8 @@ Props): JSX.Element {
     editBookmarkVis: false,
   };
 
+//  if tabOpenedData is not equall to tabID, editables (eg. tabEdit) will not render & useEffect will close all editables
+// after clicking current Tab or its editables, tabOpenedData will be set to current tab's tabID
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   function visReducer(state: VisState, action: TabVisAction) {
@@ -464,7 +466,7 @@ Props): JSX.Element {
         </div>
       </div>
 
-      {visState.colorsVis && (
+      {visState.colorsVis && tabOpenedData === tabID && (
         <ColorsToChoose_Tab
           setIconsVis={setIconsVis}
           tabID={tabID}
@@ -473,7 +475,7 @@ Props): JSX.Element {
         />
       )}
 
-      {visState.editBookmarkVis && (
+      {visState.editBookmarkVis && tabOpenedData === tabID && (
         <Bookmark_newAndEdit
           // setBookmarkVis={setEditBookmarkVis}
           bookmarkComponentType={"edit"}
@@ -483,7 +485,7 @@ Props): JSX.Element {
         />
       )}
 
-      {visState.newBookmarkVis && (
+      {visState.newBookmarkVis && tabOpenedData === tabID && (
         // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
 
         <Bookmark_newAndEdit
@@ -495,7 +497,7 @@ Props): JSX.Element {
         />
       )}
 
-      {visState.editTabVis && (
+      {visState.editTabVis && tabOpenedData === tabID &&(
         <EditTab
           tabID={tabID}
           tabType={tabType}

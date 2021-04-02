@@ -258,6 +258,10 @@ DONE 185. react ridge state: non subscribed to changes if uses outside a compone
 XXX 186. move color function out of Tab XXX
 ??? 187. new Rss, new Note - get rid of bookmarks ??
 DONE 189. convert all bookmark/tab indexes to find() / filter() methods !! DONE
+DONE 190. !!! delay problem for closing Tab content by useEffect DONE (
+  solved be adding additional condition for rendering editables (render if tabOpenData === tabID)
+  this way editables wont appear on screen, even before useEffect will close them
+) DONE
 XXX 192. "reset all tab colors to default" of make it realy change all colors in the app XXX
 DONE 193. less Colors for columns if less columns are displayed DONE (diagonal line)
 DONE 194. Not - text overflow if a string contains many letters with no space? DONE (overflow-hidden)
@@ -272,22 +276,19 @@ DONE 202. rss globalSetting! DONE
 DONE 203. rss -> displays only one feed even if two rss tabs are open DONE
 DONE 204. rss -> non https feeds not working (work well actually on chrome with cors dis, it was a cors problem),
  non xml rss feeds not working (science alert) (made in working by add) DONE
+DONE 206. newBookmark, editBookmark left paddings DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-
-205. Column forwardRef - is it needed still?
-206. newBookmark, editBookmark left paddings
 207. should Tab also have upper border ?
 208. closeAll not working
 209. closeAll not visible on background
 210. test different background Img
 
-190. delay problem for closing Tab content by useEffect
-191. upperVisState should be joined with tabVisState
 
+191. upperVisState should be joined with tabVisState
 
 211. change ALL index logic to find filter etc. (GapAfterTab)
 212. less confusing drop? now are different colors right after the Tab and below
