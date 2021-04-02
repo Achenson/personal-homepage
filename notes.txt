@@ -72,6 +72,8 @@ UseEffect does not wait for any change - instead it wait until some state change
 9. Regex: word boundaries! (^ & &). in newRegex \ needs to be escaped (because it has special meaning in stringe. eg. \n)! but / dont (but it has to be ecspaped in normal
 regex becaus / / are used to open/close regex) 
 10. absulute positioning with width taken form other element eg. input: wrap them with div (relative pos) with same style as input (but leave styles on input also!)
+11. useQuery: to get different queries throughout the app, names of the queries need to be different! (here: tabID)
+
 
 TO DO:
 
@@ -269,12 +271,12 @@ DONE 199. consitent errors! external error file DONE
 DONE 200. input paddings DONE
 DONE ? 201. rss title & link not exactly aligned ? DONE
 DONE 202. rss globalSetting! DONE
+DONE 203. rss -> displays only one feed even if two rss tabs are open DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-203. rss -> displays only one feed even if two rss tabs are open
 204. rss -> non https feeds not working, non xml rss feeds not working (science alert)
 205. Column forwardRef - is it needed still?
 206. newBookmark, editBookmark left paddings

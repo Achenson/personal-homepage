@@ -83,7 +83,7 @@ function ReactQuery({ tabID }: Props): JSX.Element {
 
   const [pageNumber, setPageNumber] = useState(0);
 
-  const { data, status } = useQuery("feed", fetchFeed, {
+  const { data, status } = useQuery(`${tabID}`, fetchFeed, {
     // staleTime: 2000,
     // cacheTime: 10,
     onSuccess: () => console.log("data fetched with no problems"),
