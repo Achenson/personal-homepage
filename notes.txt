@@ -283,6 +283,7 @@ DONE 210. test different background Img DONE
 DONE 211. change index logic to find filter etc. (GapAfterTab) DONE
 XX ? 212. less confusing drop? now are different colors right after the Tab and below ? XX
 ??? 213. not obvious how to close note if opened by clicking on text ???
+DONE 214. closing all windows also when dragging DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -291,7 +292,6 @@ XX ? 212. less confusing drop? now are different colors right after the Tab and 
 
 
 
-214. closing all windows also when dragging
 215. background color does not stretch all the way down!
 216. Note does not look good?
 217. unmounted component error

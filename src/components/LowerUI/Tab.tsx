@@ -281,6 +281,10 @@ Props): JSX.Element {
   useEffect(() => {
     if (isDragging) {
       setTabBeingDraggedColor_Data({ tabColor: finalTabColor });
+      visDispatch({type: "TAB_EDITABLES_CLOSE"})
+      setTabOpenedData(null)
+
+
     }
   }, [isDragging, finalTabColor, setTabBeingDraggedColor_Data]);
 
