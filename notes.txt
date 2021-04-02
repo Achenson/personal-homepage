@@ -277,22 +277,20 @@ DONE 203. rss -> displays only one feed even if two rss tabs are open DONE
 DONE 204. rss -> non https feeds not working (work well actually on chrome with cors dis, it was a cors problem),
  non xml rss feeds not working (science alert) (made in working by add) DONE
 DONE 206. newBookmark, editBookmark left paddings DONE
+XXX 207. should Tab also have upper border ?XXX
+DONE 209. closeAll not visible on background DONE
+DONE 210. test different background Img DONE
+DONE 211. change index logic to find filter etc. (GapAfterTab) DONE
+XX ? 212. less confusing drop? now are different colors right after the Tab and below ? XX
+??? 213. not obvious how to close note if opened by clicking on text ???
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-207. should Tab also have upper border ?
-208. closeAll not working
-209. closeAll not visible on background
-210. test different background Img
 
 
-191. upperVisState should be joined with tabVisState
 
-211. change ALL index logic to find filter etc. (GapAfterTab)
-212. less confusing drop? now are different colors right after the Tab and below
-213. not obvious how to close note if opened by clicking on text
 214. closing all windows also when dragging
 215. background color does not stretch all the way down!
 216. Note does not look good?
@@ -300,6 +298,14 @@ DONE 206. newBookmark, editBookmark left paddings DONE
 218. rss, bookmark & notes color: choose one for all
 219. get rid of useSize/dimensions hook?
 220. eye to close on small screen
+
+
+
+191. upperVisState should be joined with tabVisState
+208. closeAll not working fully (not closing tabs)
+
+
+
 221. upper right interface background doesn't look good with light image bg/ inconsisten with upper left interface?
 222. rss error handling
 223. column color cntrl don't work properly if bg img is on
@@ -377,6 +383,7 @@ DONE 206. newBookmark, editBookmark left paddings DONE
 286. change many find() by tabID to passing props - eg. in RSS components
 287. rss error handling: catch error for data and description (cnn rss description crashes the app)
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
+289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds
 
 
 
