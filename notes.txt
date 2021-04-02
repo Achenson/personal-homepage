@@ -73,7 +73,8 @@ UseEffect does not wait for any change - instead it wait until some state change
 regex becaus / / are used to open/close regex) 
 10. absulute positioning with width taken form other element eg. input: wrap them with div (relative pos) with same style as input (but leave styles on input also!)
 11. useQuery: to get different queries throughout the app, names of the queries need to be different! (here: tabID)
-
+12. disabling cors on chrome:
+shortcut with: "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp
 
 TO DO:
 
@@ -81,7 +82,11 @@ DONE 3. bookmark move icon - hide when moving? DONE
  DONE 4. icon colors on darkBackground DONE but 1 purple & 1 pink not perfect? DONE 
 DONE 5. ColorsToChoose -> better code DONE
 DONE 5. EditLink & NewLink -> unify DONE
+XXX 6. edit bookmark & bookkmarks for color -> join? XXX
+XXX 7. one function for bookmark indexXXX will be deleted for backend?
 DONE 8. "all" bookmark should be non-deletable, non-editable? DONE
+XXX 10. undo link XX
+XXX 11. move grid logic to Main? XXX
 DONE 12. components folders? DONE
 DONE 16. newLink & newLink_UpperUI -> tags not aligned DONE
 DONE 23. bg-color vs text color of folders DONE
@@ -91,13 +96,6 @@ DONE 39. Folder: abandon darkest colors? btn like styling not visible DONE
 DONE 86. bigger draggable space in GapAfterBookmark if column is empty DONE
 DONR 70. make column component DONE
 DONE 71. Column -> make them stack when the screen is smaller DONE 
-
-
-
-XXX 11. move grid logic to Main? XXX
-XXX 6. edit bookmark & bookkmarks for color -> join? XXX
-XXX 7. one function for bookmark indexXXX will be deleted for backend?
-XXX 10. undo link XX
 
 DONE 3. how to properly set links !!! works on firefox DONE
 DONE 8.5 "all" should be added as a tag automatically & should not be visible DONE
@@ -272,12 +270,14 @@ DONE 200. input paddings DONE
 DONE ? 201. rss title & link not exactly aligned ? DONE
 DONE 202. rss globalSetting! DONE
 DONE 203. rss -> displays only one feed even if two rss tabs are open DONE
+DONE 204. rss -> non https feeds not working (work well actually on chrome with cors dis, it was a cors problem),
+ non xml rss feeds not working (science alert) (made in working by add) DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-204. rss -> non https feeds not working, non xml rss feeds not working (science alert)
+
 205. Column forwardRef - is it needed still?
 206. newBookmark, editBookmark left paddings
 207. should Tab also have upper border ?
@@ -373,6 +373,11 @@ DONE 203. rss -> displays only one feed even if two rss tabs are open DONE
 283. errors reducers?
 284. EditTab: rss & note -> make new components!
 285. rss globalSetting styling
+286. change many find() by tabID to passing props - eg. in RSS components
+287. rss error handling: catch error for data and description (cnn rss description crashes the app)
+288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
+
+
 
 App structure:
 Main

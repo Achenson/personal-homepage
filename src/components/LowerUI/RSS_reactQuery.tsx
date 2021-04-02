@@ -9,7 +9,13 @@ import { ReactComponent as ArrowLeft } from "../../svgs/arrowLeft.svg";
 import { ReactComponent as ArrowRight } from "../../svgs/arrowRight.svg";
 
 let Parser = require("rss-parser");
-let parser = new Parser();
+let parser = new Parser(
+//   {
+//   requestOptions: {
+//     rejectUnauthorized: false
+//   }
+// }
+);
 
 interface Props {
   tabID: string | number;
