@@ -264,6 +264,7 @@ DONE 194. Not - text overflow if a string contains many letters with no space? D
 DONE 195. upperUi colors settings -> change positioning of colors grid on small screen sizes DONE (change to left in all cases)
 DONE 196. restrict naming size for tabs, boomarks etc. DONE (truncate className instead)
 DONE 197. select border color for Tab (whitish?) DONE
+DONE 198. tab colors changing low performance! DONE
 DONE 199. consitent errors! external error file DONE
 DONE 200. input paddings DONE
 DONE ? 201. rss title & link not exactly aligned ? DONE
@@ -271,13 +272,6 @@ DONE 202. rss globalSetting! DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
-
-
-
-
-
-
-
 
 
 203. rss -> displays only one feed even if two rss tabs are open
@@ -374,7 +368,6 @@ DONE 202. rss globalSetting! DONE
 278. background img zooming back after clicking any settings
 279. color setting -> rename to tab setting/ "reset tab colors to default"
 280. responsive settings size
-281. tab colors changing low performance!
 283. errors reducers?
 284. EditTab: rss & note -> make new components!
 285. rss globalSetting styling

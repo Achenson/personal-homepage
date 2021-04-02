@@ -11,9 +11,16 @@ interface Props {
   color: string;
   // tabTitle: string;
   tabID: number | string;
+  tabColor: string | null;
+  tabType: "folder" | "note" | "rss";
 }
 
-function SingleColor_Tab({ color, tabID }: Props): JSX.Element {
+function SingleColor_Tab({
+  color,
+  tabID,
+  tabColor,
+  tabType,
+}: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
@@ -24,27 +31,22 @@ function SingleColor_Tab({ color, tabID }: Props): JSX.Element {
     const selectedBorder = "border-2 border-white";
     const defaultBorder = "border border-black";
 
-    let currentTab = tabsData.find((obj) => obj.id === tabID);
-
-    //@ts-ignore
-    if (currentTab.color) {
-      //@ts-ignore
-      if (color == currentTab.color) {
+    if (tabColor) {
+      if (color == tabColor) {
         return "border-2 border-white";
       }
     }
 
-    //@ts-ignore
-    if (!currentTab.color) {
-      if (currentTab?.type === "folder" && color === folderColorData) {
+    if (!tabColor) {
+      if (tabType === "folder" && color === folderColorData) {
         return selectedBorder;
       }
 
-      if (currentTab?.type === "note" && color === noteColorData) {
+      if (tabType === "note" && color === noteColorData) {
         return selectedBorder;
       }
 
-      if (currentTab?.type === "rss" && color === rssColorData) {
+      if (tabType === "rss" && color === rssColorData) {
         return selectedBorder;
       }
     }

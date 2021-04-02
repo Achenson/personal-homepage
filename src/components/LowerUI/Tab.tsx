@@ -24,7 +24,7 @@ import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
 import { ReactComponent as CrossArrowsSVG } from "../../svgs/cross-arrows.svg";
 import { ReactComponent as PlusSVG } from "../../svgs/plus.svg";
 import SingleBookmark from "./SingleBookmark";
-import ColorsToChoose from "../Colors/ColorsToChoose_Tab";
+import ColorsToChoose_Tab from "../Colors/ColorsToChoose_Tab";
 
 // import EditLink from "./EditBookmark";
 import Bookmark_newAndEdit from "../Shared/Bookmark_newAndEdit";
@@ -383,7 +383,6 @@ Props): JSX.Element {
         // style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)"}}
 
         onMouseEnter={() => {
-         
           setMouseOverTab(true);
         }}
         onMouseLeave={() => {
@@ -394,16 +393,10 @@ Props): JSX.Element {
         <div
           className="pl-1 w-full truncate cursor-pointer"
           onClick={() => {
-        
-
             visDispatch({ type: "TAB_CONTENT_TOGGLE" });
           }}
         >
-          <p className="truncate">
-            {" "}
-            {tabTitle}
-          
-          </p>
+          <p className="truncate"> {tabTitle}</p>
         </div>
 
         <div
@@ -472,7 +465,12 @@ Props): JSX.Element {
       </div>
 
       {visState.colorsVis && (
-        <ColorsToChoose setIconsVis={setIconsVis} tabID={tabID} />
+        <ColorsToChoose_Tab
+          setIconsVis={setIconsVis}
+          tabID={tabID}
+          tabColor={tabColor}
+          tabType={tabType}
+        />
       )}
 
       {visState.editBookmarkVis && (

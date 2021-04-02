@@ -7,12 +7,16 @@ import {tabColors} from "../../utils/tabColors";
 interface Props {
   setIconsVis: (value: React.SetStateAction<boolean>) => void;
   tabID: string | number
+  tabColor: string | null;
+  tabType: "folder" | "note" | "rss";
 }
 
 
 function ColorsToChoose_Tab({
   setIconsVis,
-  tabID
+  tabID,
+  tabColor,
+  tabType
 }: Props): JSX.Element {
   function mappingColors(colors: string[][]) {
     return tabColors.map((row, i) => {
@@ -20,7 +24,7 @@ function ColorsToChoose_Tab({
         <div className="flex" key={i}>
           {row.map((el, j) => {
             return (
-              <SingleColor_Tab color={el} tabID={tabID} key={j} />
+              <SingleColor_Tab color={el} tabID={tabID} tabColor={tabColor} tabType={tabType} key={j} />
             );
           })}
         </div>
