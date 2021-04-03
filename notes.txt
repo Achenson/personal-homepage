@@ -279,6 +279,7 @@ DONE 204. rss -> non https feeds not working (work well actually on chrome with 
  non xml rss feeds not working (science alert) (made in working by add) DONE
 DONE 206. newBookmark, editBookmark left paddings DONE
 XXX 207. should Tab also have upper border ?XXX
+DONE 208. closeAll not working fully (not closing tabs) DONE (resets visibility to default)
 DONE 209. closeAll not visible on background DONE
 DONE 210. test different background Img DONE
 DONE 211. change index logic to find filter etc. (GapAfterTab) DONE
@@ -291,24 +292,15 @@ DONE 215. background color does not stretch all the way down! DONE (see notes)
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-
-
-
-216. Note does not look good?
-217. unmounted component error
-218. rss, bookmark & notes color: choose one for all
+218. rss, bookmark & notes color: choose one for all/NOte does not look good?
 219. get rid of useSize/dimensions hook?
 220. eye to close on small screen
 
 
-
-191. upperVisState should be joined with tabVisState
-208. closeAll not working fully (not closing tabs)
-
+191. upperVisState should be joined with tabVisState (pass upperVisState down instead?)
 
 
 221. upper right interface background doesn't look good with light image bg/ inconsisten with upper left interface?
-222. rss error handling
 223. column color cntrl don't work properly if bg img is on
 224. reducing nr of columns should put all tabs in lower ammount of columns?
 225. bigger x gap on columns on sm only?
@@ -386,6 +378,7 @@ DONE 215. background color does not stretch all the way down! DONE (see notes)
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
 289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds
 290. SingleBookmark don't look good on lightest columns
+291. unmounted component error (err mentioned alread?)
 
 
 App structure:

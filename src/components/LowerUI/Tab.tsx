@@ -67,6 +67,7 @@ function Tab({
   tabColor,
   tabType,
   colNumber,
+  // being passed as a prop from closeAllTabsData, get if from the state instead?
   closeAllTabs,
 }: // noteInput,
 // rssLink
@@ -150,15 +151,15 @@ Props): JSX.Element {
           editBookmarkVis: false,
           tabContentVis: !state.tabContentVis,
         };
-      // case "TAB_CONTENT_CLOSE":
-      //   return {
-      //     ...state,
-      //     colorsVis: false,
-      //     editTabVis: false,
-      //     newBookmarkVis: false,
-      //     tabContentVis: false,
-      //     editBookmarkVis: false,
-      //   };
+      case "TAB_CONTENT_DEFAULT":
+        return {
+          ...state,
+          colorsVis: false,
+          editTabVis: false,
+          newBookmarkVis: false,
+          tabContentVis: tabsData[tabIndex].opened,
+          editBookmarkVis: false,
+        };
       case "TAB_CONTENT_OPEN_AFTER_LOCKING":
         return {
           ...state,
@@ -228,7 +229,8 @@ Props): JSX.Element {
 
   useEffect(() => {
     if (closeAllTabs) {
-      visDispatch({ type: "TAB_EDITABLES_CLOSE" });
+      // visDispatch({ type: "TAB_EDITABLES_CLOSE" });
+      visDispatch({ type: "TAB_CONTENT_DEFAULT" });
     }
   }, [closeAllTabs]);
 
