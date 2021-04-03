@@ -75,6 +75,7 @@ regex becaus / / are used to open/close regex)
 11. useQuery: to get different queries throughout the app, names of the queries need to be different! (here: tabID)
 12. disabling cors on chrome:
 shortcut with: "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp
+13. proper background visibility with whole column on drag effect: overflow-hidden on Column! h-screen on GapAfterTab
 
 TO DO:
 
@@ -284,6 +285,7 @@ DONE 211. change index logic to find filter etc. (GapAfterTab) DONE
 XX ? 212. less confusing drop? now are different colors right after the Tab and below ? XX
 ??? 213. not obvious how to close note if opened by clicking on text ???
 DONE 214. closing all windows also when dragging DONE
+DONE 215. background color does not stretch all the way down! DONE (see notes)
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -292,7 +294,6 @@ DONE 214. closing all windows also when dragging DONE
 
 
 
-215. background color does not stretch all the way down!
 216. Note does not look good?
 217. unmounted component error
 218. rss, bookmark & notes color: choose one for all
@@ -384,7 +385,7 @@ DONE 214. closing all windows also when dragging DONE
 287. rss error handling: catch error for data and description (cnn rss description crashes the app)
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
 289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds
-
+290. SingleBookmark don't look good on lightest columns
 
 
 App structure:

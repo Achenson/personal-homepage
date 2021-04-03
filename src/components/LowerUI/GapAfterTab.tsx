@@ -187,7 +187,7 @@ function GapAfterTab({
             // style={{ backgroundColor: singleColumnColor }}
           ></div>
           <div
-            className={`min-h-screen w-full absolute
+            className={`h-screen w-full absolute
             ${isOver ? "opacity-30 bg-blueGray-200" : ""}
           `}
           ></div>

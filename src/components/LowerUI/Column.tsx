@@ -106,7 +106,7 @@ function Column({colNumber, closeAllTabs}: Props): JSX.Element {
 
   return (
     <div
-      className={`
+      className={`overflow-hidden
        ${calcColumnColor_picBackground(
          colNumber,
          globalSettingsData.picBackground,
