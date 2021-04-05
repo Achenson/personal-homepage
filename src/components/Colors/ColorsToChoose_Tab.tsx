@@ -34,7 +34,7 @@ function ColorsToChoose_Tab({
 
   return (
     <div
-      className="bg-gray-100 absolute right-0 z-50"
+      className="bg-gray-100 absolute right-0 z-40"
       onMouseEnter={() => {
         setIconsVis(true);
       }}

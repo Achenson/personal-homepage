@@ -381,6 +381,8 @@ DONE 215. background color does not stretch all the way down! DONE (see notes)
 291. unmounted component error (err mentioned alread?)
 292. check .? occurences
 293. upperVisDispatch -> color selectable should be gone when closing all
+294. column should larger be defaul - so colors/editables are not cut by overflow-hidden!
+295. UpperRightMenu should close at least editables in lowerUI
 
 
 App structure:

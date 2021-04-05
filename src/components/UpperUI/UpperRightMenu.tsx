@@ -27,11 +27,6 @@ interface Props {
 }
 
 function UpperRightMenu({
-  // setNewBookmarkVis,
-  // setNewTabVis,
-  // setBackgroundSettingsVis,
-  // setSettingsVis,
-  // setColorsVis,
   setTabType,
   upperVisDispatch
 }: Props): JSX.Element {
