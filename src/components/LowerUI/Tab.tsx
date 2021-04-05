@@ -78,17 +78,15 @@ Props): JSX.Element {
   let currentTab = tabsData.find((obj) => obj.id === tabID);
 
   // 0s to not show typescript errors
-  let tabIndex: number = 0;
-
-  if (currentTab) {
-    tabIndex = tabsData.indexOf(currentTab);
-  }
+  // let tabIndex: number = 0;
+  //   tabIndex = tabsData.indexOf(currentTab);
 
   const initVisState: VisState = {
     // newBookmarkVis: false,
     editTabVis: false,
     colorsVis: false,
-    tabContentVis: tabsData[tabIndex].opened,
+    // @ts-ignore
+    tabContentVis: currentTab.opened,
     newBookmarkVis: false,
     editBookmarkVis: false,
   };
@@ -157,7 +155,8 @@ Props): JSX.Element {
           colorsVis: false,
           editTabVis: false,
           newBookmarkVis: false,
-          tabContentVis: tabsData[tabIndex].opened,
+          // @ts-ignore
+          tabContentVis: currentTab.opened,
           editBookmarkVis: false,
         };
       case "TAB_CONTENT_OPEN_AFTER_LOCKING":

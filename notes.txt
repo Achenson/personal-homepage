@@ -379,6 +379,7 @@ DONE 215. background color does not stretch all the way down! DONE (see notes)
 289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds
 290. SingleBookmark don't look good on lightest columns
 291. unmounted component error (err mentioned alread?)
+292. chech .? occurences
 
 
 App structure:
