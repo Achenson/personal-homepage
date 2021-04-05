@@ -50,7 +50,7 @@ interface Props {
   colNumber: number;
   // noteInput: string | null;
   // rssLink: string | null;
-  closeAllTabs: boolean;
+  // closeAllTabs: boolean;
 }
 
 interface VisState {
@@ -68,12 +68,15 @@ function Tab({
   tabType,
   colNumber,
   // being passed as a prop from closeAllTabsData, get if from the state instead?
-  closeAllTabs,
+  // closeAllTabs,
 }: // noteInput,
 // rssLink
 Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
+  
+  const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
+              
 
   let currentTab = tabsData.find((obj) => obj.id === tabID);
 
@@ -227,11 +230,11 @@ Props): JSX.Element {
   const [crossVis, setCrossVis] = useState<boolean>(true);
 
   useEffect(() => {
-    if (closeAllTabs) {
+    if (closeAllTabsData) {
       // visDispatch({ type: "TAB_EDITABLES_CLOSE" });
       visDispatch({ type: "TAB_CONTENT_DEFAULT" });
     }
-  }, [closeAllTabs]);
+  }, [closeAllTabsData]);
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();

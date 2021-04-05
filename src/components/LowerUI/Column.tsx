@@ -14,11 +14,10 @@ import GapAfterTab from "./GapAfterTab";
 
 interface Props {
   colNumber: number;
-  closeAllTabs: boolean;
 }
 
 // const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
-function Column({colNumber, closeAllTabs}: Props): JSX.Element {
+function Column({colNumber}: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [
     columnsColorsImg_Data,
@@ -133,7 +132,7 @@ function Column({colNumber, closeAllTabs}: Props): JSX.Element {
                 tabColor={el.color}
                 tabType={el.type}
                 colNumber={el.column}
-                closeAllTabs={closeAllTabs}
+               
               />
               <GapAfterTab
                 colNumber={colNumber}

@@ -75,29 +75,29 @@ function Grid({}: Props): JSX.Element {
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
     switch (numberOfCols) {
       case 1:
-        return <Column colNumber={1} closeAllTabs={closeAllTabsData} />;
+        return <Column colNumber={1} />;
       case 2:
         return (
           <>
-            <Column colNumber={1} closeAllTabs={closeAllTabsData} />
-            <Column colNumber={2} closeAllTabs={closeAllTabsData} />
+            <Column colNumber={1} />
+            <Column colNumber={2} />
           </>
         );
       case 3:
         return (
           <>
-            <Column colNumber={1} closeAllTabs={closeAllTabsData} />
-            <Column colNumber={2} closeAllTabs={closeAllTabsData} />
-            <Column colNumber={3} closeAllTabs={closeAllTabsData} />
+            <Column colNumber={1} />
+            <Column colNumber={2} />
+            <Column colNumber={3} />
           </>
         );
       case 4:
         return (
           <>
-            <Column colNumber={1} closeAllTabs={closeAllTabsData} />
-            <Column colNumber={2} closeAllTabs={closeAllTabsData} />
-            <Column colNumber={3} closeAllTabs={closeAllTabsData} />
-            <Column colNumber={4} closeAllTabs={closeAllTabsData} />
+            <Column colNumber={1} />
+            <Column colNumber={2} />
+            <Column colNumber={3} />
+            <Column colNumber={4} />
           </>
         );
     }
