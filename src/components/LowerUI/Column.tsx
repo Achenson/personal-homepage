@@ -12,12 +12,15 @@ import Tab from "./Tab";
 
 import GapAfterTab from "./GapAfterTab";
 
+import { UpperVisAction } from "../../utils/interfaces";
+
 interface Props {
   colNumber: number;
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
 // const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
-function Column({colNumber}: Props): JSX.Element {
+function Column({colNumber, upperVisDispatch}: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [
     columnsColorsImg_Data,
@@ -132,6 +135,7 @@ function Column({colNumber}: Props): JSX.Element {
                 tabColor={el.color}
                 tabType={el.type}
                 colNumber={el.column}
+                upperVisDispatch={upperVisDispatch}
                
               />
               <GapAfterTab

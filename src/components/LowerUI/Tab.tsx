@@ -34,7 +34,7 @@ import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "../../utils/itemsDnd";
 
-import { TabVisAction, SingleTabData } from "../../utils/interfaces";
+import { TabVisAction, SingleTabData, UpperVisAction } from "../../utils/interfaces";
 
 interface SingleBookmarkData {
   title: string;
@@ -48,6 +48,7 @@ interface Props {
   tabColor: string | null;
   tabType: "folder" | "note" | "rss";
   colNumber: number;
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
   // noteInput: string | null;
   // rssLink: string | null;
   // closeAllTabs: boolean;
@@ -59,6 +60,7 @@ interface VisState {
   tabContentVis: boolean;
   newBookmarkVis: boolean;
   editBookmarkVis: boolean;
+  
 }
 
 function Tab({
@@ -67,6 +69,7 @@ function Tab({
   tabColor,
   tabType,
   colNumber,
+  upperVisDispatch
   // being passed as a prop from closeAllTabsData, get if from the state instead?
   // closeAllTabs,
 }: // noteInput,
@@ -404,6 +407,7 @@ Props): JSX.Element {
           className="pl-1 w-full truncate cursor-pointer"
           onClick={() => {
             visDispatch({ type: "TAB_CONTENT_TOGGLE" });
+            upperVisDispatch({type: "CLOSE_ALL"})
           }}
         >
           <p className="truncate"> {tabTitle}</p>
@@ -439,6 +443,7 @@ Props): JSX.Element {
               style={{ marginTop: "-6px" }}
               onClick={() => {
                 visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+                upperVisDispatch({type: "CLOSE_ALL"})
               }}
             />
           )}
@@ -458,6 +463,7 @@ Props): JSX.Element {
             }}
             onClick={() => {
               visDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
+              upperVisDispatch({type: "CLOSE_ALL"})
             }}
           />
 
@@ -467,6 +473,7 @@ Props): JSX.Element {
             )} cursor-pointer`}
             onClick={() => {
               visDispatch({ type: "EDIT_TOGGLE" });
+              upperVisDispatch({type: "CLOSE_ALL"})
             }}
 
             // }}

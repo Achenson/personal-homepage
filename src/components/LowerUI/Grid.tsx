@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { produce } from "immer";
 
 import {
   tabsDataState,
@@ -8,16 +9,20 @@ import {
 
 import { closeAllTabsState } from "../../state/defaultSettings";
 
-import { produce } from "immer";
 
 import { resetColorsState } from "../../state/colorsState";
 
 import { globalSettingsState } from "../../state/defaultSettings";
+
+import { UpperVisAction } from "../../utils/interfaces";
+
 import Column from "./Column";
 
-interface Props {}
+interface Props {
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
+}
 
-function Grid({}: Props): JSX.Element {
+function Grid({upperVisDispatch}: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   const [
     bookmarksAllTagsData,
@@ -75,29 +80,29 @@ function Grid({}: Props): JSX.Element {
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
     switch (numberOfCols) {
       case 1:
-        return <Column colNumber={1} />;
+        return <Column colNumber={1} upperVisDispatch={upperVisDispatch} />;
       case 2:
         return (
           <>
-            <Column colNumber={1} />
-            <Column colNumber={2} />
+            <Column colNumber={1} upperVisDispatch={upperVisDispatch} />
+            <Column colNumber={2}  upperVisDispatch={upperVisDispatch}/>
           </>
         );
       case 3:
         return (
           <>
-            <Column colNumber={1} />
-            <Column colNumber={2} />
-            <Column colNumber={3} />
+            <Column colNumber={1} upperVisDispatch={upperVisDispatch} />
+            <Column colNumber={2}  upperVisDispatch={upperVisDispatch}/>
+            <Column colNumber={3} upperVisDispatch={upperVisDispatch}/>
           </>
         );
       case 4:
         return (
           <>
-            <Column colNumber={1} />
-            <Column colNumber={2} />
-            <Column colNumber={3} />
-            <Column colNumber={4} />
+            <Column colNumber={1} upperVisDispatch={upperVisDispatch} />
+            <Column colNumber={2} upperVisDispatch={upperVisDispatch}/>
+            <Column colNumber={3} upperVisDispatch={upperVisDispatch}/>
+            <Column colNumber={4} upperVisDispatch={upperVisDispatch}/>
           </>
         );
     }

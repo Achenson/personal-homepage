@@ -11,9 +11,8 @@ import { backgroundColorState } from "../state/colorsState";
 import Background_UpperUI from "./UpperUI/BackgroundSettings_UpperUI";
 import Settings_UpperUI from "./UpperUI/GlobalSettings_UpperUI";
 
-import { UpperVisAction } from "../utils/interfaces";
+import { UpperVisAction, InitUpperVisState } from "../utils/interfaces";
 
-import { InitUpperVisState } from "../utils/interfaces";
 
 interface Props {}
 
@@ -132,7 +131,7 @@ function Main({}: Props): JSX.Element {
         upperVisDispatch={upperVisDispatch}
         setTabType={setTabType}
       />
-      <Grid />
+      <Grid upperVisDispatch={upperVisDispatch}/>
     </div>
   );
 }
