@@ -164,7 +164,7 @@ function Column({ colNumber, upperVisDispatch }: Props): JSX.Element {
       </div>
 
       <div
-        className={`h-64 bg-${
+        className={`h-64 lg:bg-${
           globalSettingsData.picBackground ? "" : backgroundColorData
         }`}
       ></div>

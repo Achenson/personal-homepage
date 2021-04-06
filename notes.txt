@@ -293,6 +293,7 @@ DONE 219. get rid of useSize/dimensions hook? DONE
 
 DONE 221. upper right interface background doesn't look good with light image bg/ inconsisten with upper left interface? DONE
 DONE 223. column color cntrl don't work properly if bg img is on DONE
+XXX 225. bigger x gap on columns on sm only? XXX
 
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE
 
@@ -301,13 +302,9 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-
-
-
-
 220. eye to close on small screen
+
 224. reducing nr of columns should put all tabs in lower ammount of columns?
-225. bigger x gap on columns on sm only?
 226. better borders in color selecting (more similar to ColumnColor)
 227. perfomance problems when dragging
 228. change upperUI items positioning on sm -> not fitting on small screens
