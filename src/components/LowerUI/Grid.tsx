@@ -77,6 +77,36 @@ function Grid({upperVisDispatch}: Props): JSX.Element {
     });
   }, [tabsData, setTabsData, bookmarksAllTagsData]);
 
+    useEffect(() => {
+    if (globalSettingsData.numberOfCols === 1) {
+      setTabsData((previous) =>
+        produce(previous, (updated) => {
+          updated.forEach((obj) => obj.column = 1);
+        })
+      );
+
+      console.log("change");
+      
+    }
+
+    if (globalSettingsData.numberOfCols === 2) {
+      setTabsData((previous) =>
+        produce(previous, (updated) => {
+          updated.forEach((obj) => {
+            obj.column = 1
+          });
+        })
+      );
+
+      console.log("change");
+      
+    }
+
+
+
+
+  }, [globalSettingsData.numberOfCols, setTabsData]);
+
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
     switch (numberOfCols) {
       case 1:

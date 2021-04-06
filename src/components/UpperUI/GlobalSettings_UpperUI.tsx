@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { produce } from "immer";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
 import { uiColorState } from "../../state/colorsState";
 
-import { rssSettingsState, globalSettingsState } from "../../state/defaultSettings";
+import {
+  rssSettingsState,
+  globalSettingsState,
+} from "../../state/defaultSettings";
 
 import { UpperVisAction } from "../../utils/interfaces";
+import { tabsDataState } from "../../state/tabsAndBookmarks";
 
 interface Props {
   // settingsVis: boolean;
@@ -19,10 +24,21 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  const [tabsData, setTabsData] = tabsDataState.use();
 
   // const [descriptionCheckbox, setDescriptionCheckbox] = useState(globalSettingsData.rssDescription);
   // const [dateCheckbox, setDateCheckbox] = useState(globalSettingsData.rssDate);
   // const [rssItemsPerPage, setRssItemsPerPage] = useState(globalSettingsData.rssItemsPerPage);
+
+  // useEffect(() => {
+  //   if (globalSettingsData.numberOfCols === 1) {
+  //     setTabsData((previous) =>
+  //       produce(previous, (updated) => {
+  //         updated.forEach((obj) => obj.column === 1);
+  //       })
+  //     );
+  //   }
+  // }, [globalSettingsData.numberOfCols, setTabsData]);
 
   function renderColsNumberControls() {
     const arrOfColsNumbers: (1 | 2 | 3 | 4)[] = [1, 2, 3, 4];
@@ -36,7 +52,7 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
     return arrOfColsNumbers.map((el, i) => {
       return (
-        <div className="flex items-center ml-2">
+        <div className="flex items-center ml-2" key={i}>
           <p
             className={` ${
               globalSettingsData.numberOfCols === el
