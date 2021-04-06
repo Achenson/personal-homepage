@@ -12,7 +12,7 @@ export const rssSettingsState = newRidgeState({
 
 export const globalSettingsState = newRidgeState<GlobalSettingsState>({
     picBackground: true,
-    defaultImage: "defaultBackground_2",
+    defaultImage: "defaultBackground",
     oneColorForAllCols: false,
     hideNonDeletable: false,
     numberOfCols: 4,
