@@ -38,7 +38,7 @@ function SingeRssNews({
   }
 
   return (
-    <div className="bg-gray-50 py-1 px-2 border-b">
+    <div className="bg-gray-50 py-1 px-2 border-b border-l border-r">
       <a
         href={link}
         target="_blank"

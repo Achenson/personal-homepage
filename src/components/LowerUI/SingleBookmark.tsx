@@ -49,7 +49,7 @@ function SingleBookmark({
 
 
   return (
-    <div className="flex justify-between bg-gray-100 h-10 py-2 border-b">
+    <div className="flex justify-between bg-gray-50 h-10 py-2 border-b border-l border-r">
       <div className="flex truncate">
         <div className="h-6 mr-px">
         <PhotographSVG className="h-full" />

@@ -127,7 +127,7 @@ function ReactQuery({ tabID }: Props): JSX.Element {
 
   return (
     <div>
-      <div className="flex bg-gray-50 justify-end ">
+      <div className="flex bg-gray-50 justify-end border-l border-r ">
         <ArrowLeft
           className={`h-8 ${
             pageNumber === 0

@@ -288,6 +288,7 @@ XX ? 212. less confusing drop? now are different colors right after the Tab and 
 ??? 213. not obvious how to close note if opened by clicking on text ???
 DONE 214. closing all windows also when dragging DONE
 DONE 215. background color does not stretch all the way down! DONE (see notes)
+DONE 218. rss, bookmark & notes color: choose one for all/NOte does not look good? DONE
 
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE
 
@@ -296,7 +297,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 
-218. rss, bookmark & notes color: choose one for all/NOte does not look good?
 219. get rid of useSize/dimensions hook?
 220. eye to close on small screen
 
@@ -387,6 +387,9 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 295. UpperRightMenu should close at least editables in lowerUI
 296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
 297. backgroundImg: how to make the columns shorter, same as if there is no backgroundImg
+298. some effect when hovering over bookmarks?
+299. upperLeft UI should not close tab content!
+300. no img background - get rid of lightest colors?
 
 App structure:
 Main
