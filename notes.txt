@@ -263,6 +263,7 @@ DONE 190. !!! delay problem for closing Tab content by useEffect DONE (
   solved be adding additional condition for rendering editables (render if tabOpenData === tabID)
   this way editables wont appear on screen, even before useEffect will close them
 ) DONE
+DONE 191. upperVisState should be joined with tabVisState - useState & useEffect instead - inefficien DONE 
 XXX 192. "reset all tab colors to default" of make it realy change all colors in the app XXX
 DONE 193. less Colors for columns if less columns are displayed DONE (diagonal line)
 DONE 194. Not - text overflow if a string contains many letters with no space? DONE (overflow-hidden)
@@ -297,7 +298,6 @@ DONE 215. background color does not stretch all the way down! DONE (see notes)
 220. eye to close on small screen
 
 
-191. upperVisState should be joined with tabVisState (pass upperVisState down instead?)
 
 
 221. upper right interface background doesn't look good with light image bg/ inconsisten with upper left interface?
@@ -383,6 +383,7 @@ DONE 215. background color does not stretch all the way down! DONE (see notes)
 293. upperVisDispatch -> color selectable should be gone when closing all
 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden!
 295. UpperRightMenu should close at least editables in lowerUI
+296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
 
 
 App structure:

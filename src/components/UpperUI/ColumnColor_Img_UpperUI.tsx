@@ -2,7 +2,7 @@ import React from "react";
 import { columnsColorsImg_State } from "../../state/colorsState";
 import { UpperVisAction } from "../../utils/interfaces";
 
-import { globalSettingsState, closeAllTabsState } from "../../state/defaultSettings";
+import { globalSettingsState, closeAllTabsState, tabOpenedState } from "../../state/defaultSettings";
 
 interface Props {
   colNumber: number;
@@ -38,6 +38,7 @@ function SingleColumnsColor_Img_UpperUI({
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
+  const [tabOpenedData, setTabOpenedData] =tabOpenedState.use();
 
   function columnsColor(colNumber: number) {
     switch (colNumber) {
@@ -74,7 +75,9 @@ function SingleColumnsColor_Img_UpperUI({
         <div
           onClick={() => {
             setDefaultColorsFor(`column_${colNumber}` as any);
+            setTabOpenedData(null)
             setCloseAllTabsData(true);
+
 
             if (columnSelected === colNumber) {
               upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });

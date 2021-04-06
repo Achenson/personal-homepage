@@ -11,7 +11,7 @@ import { backgroundColorState } from "../state/colorsState";
 import Background_UpperUI from "./UpperUI/BackgroundSettings_UpperUI";
 import Settings_UpperUI from "./UpperUI/GlobalSettings_UpperUI";
 
-import { UpperVisAction, InitUpperVisState } from "../utils/interfaces";
+import { UpperVisAction, InitUpperVisState, TabVisAction } from "../utils/interfaces";
 
 
 interface Props {}
@@ -96,6 +96,12 @@ function Main({}: Props): JSX.Element {
   );
 
   const [tabType, setTabType] = useState<"folder" | "note" | "rss">("folder");
+
+  function dispatchTabAction(visDispatch: (value: TabVisAction) => void) {
+    visDispatch({ type: "TAB_EDITABLES_CLOSE" });
+
+  }
+
   
 
   return (

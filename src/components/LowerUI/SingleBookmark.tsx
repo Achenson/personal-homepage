@@ -8,7 +8,7 @@ import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 import { bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
 
-import { SingleBookmarkData, TabVisAction } from "../../utils/interfaces";
+import { SingleBookmarkData, TabVisAction, UpperVisAction } from "../../utils/interfaces";
 
 // interface SingleLinkData {
 //   id: number | string;
@@ -26,6 +26,7 @@ interface Props {
   >;
   tabID: string | number;
   visDispatch: React.Dispatch<TabVisAction>;
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
   // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleBookmarkData>>;
 }
 
@@ -35,6 +36,7 @@ function SingleBookmark({
   // setEditSingleLinkData,
   setBookmarkId,
   visDispatch,
+  upperVisDispatch,
   tabID,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
@@ -73,7 +75,7 @@ function SingleBookmark({
           onClick={() => {
             // setEditBookmarkVis((b) => !b);
             visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
-
+            upperVisDispatch({type: "CLOSE_ALL"})
             setBookmarkId(singleBookmarkData.id);
           }}
         />

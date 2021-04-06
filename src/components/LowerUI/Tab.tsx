@@ -531,6 +531,7 @@ Props): JSX.Element {
                 <SingleBookmark
                   // setEditBookmarkVis={setEditBookmarkVis}
                   visDispatch={visDispatch}
+                  upperVisDispatch={upperVisDispatch}
                   singleBookmarkData={el}
                   // setEditSingleLinkData={setEditSingleBookmarkData}
                   setBookmarkId={setBookmarkId}

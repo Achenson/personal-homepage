@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { backgroundColorState } from "../../state/colorsState";
 import {UpperVisAction} from "../../utils/interfaces"
 
-import { closeAllTabsState } from "../../state/defaultSettings";
+import { closeAllTabsState, tabOpenedState } from "../../state/defaultSettings";
 
 import { ReactComponent as DocumentSVG } from "../../svgs/document.svg";
 
@@ -23,6 +23,7 @@ function BackgroundColor_upperUI({
   ] = backgroundColorState.use();
 
   const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
+  const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   const [selected, setSelected] = useState(false);
 
@@ -53,8 +54,9 @@ function BackgroundColor_upperUI({
         backgroundColorData
       )} opacity-80 border border-black rounded-lg cursor-pointer  hover:border-gray-500`}
       onClick={() => {
-        setSelected((b) => !b);
+        setTabOpenedData(null)
         setCloseAllTabsData(true);
+        setSelected((b) => !b);
         // setBackgroundColorsToChooseVis((b) => !b);
         
         

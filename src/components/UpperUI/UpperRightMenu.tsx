@@ -18,6 +18,8 @@ import { uiColorState } from "../../state/colorsState";
 
 import {UpperVisAction} from "../../utils/interfaces"
 
+import { closeAllTabsState, tabOpenedState } from "../../state/defaultSettings";
+
 interface Props {
   
   setTabType: React.Dispatch<
@@ -31,6 +33,8 @@ function UpperRightMenu({
   upperVisDispatch
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
+  const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
+  const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   return (
     // <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
@@ -42,6 +46,7 @@ function UpperRightMenu({
         <BookmarkSVG
           className={`h-7 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
+            
             // setNewBookmarkVis((b) => !b);
             upperVisDispatch({type: "NEW_BOOKMARK_TOGGLE"})
           }}
@@ -51,6 +56,7 @@ function UpperRightMenu({
         <FolderSVG
           className={`h-7 cursor-pointer hover:text-${uiColorData} mr-1`}
           onClick={() => {
+            
             // setNewTabVis((b) => !b);
             upperVisDispatch({type: "NEW_TAB_TOGGLE"})
             setTabType("folder");
@@ -62,6 +68,7 @@ function UpperRightMenu({
           style={{marginTop: "2px"}}
           onClick={() => {
             // setNewTabVis((b) => !b);
+           
             upperVisDispatch({type: "NEW_TAB_TOGGLE"})
             setTabType("note");
           }}
@@ -72,6 +79,7 @@ function UpperRightMenu({
           className={`h-7 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
             // setNewTabVis((b) => !b);
+            
             upperVisDispatch({type: "NEW_TAB_TOGGLE"})
             setTabType("rss");
           }}
@@ -83,12 +91,14 @@ function UpperRightMenu({
           className={`h-6 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
             // setBackgroundSettingsVis((b) => !b);
+         
             upperVisDispatch({type: "BACKGROUND_SETTINGS_TOGGLE"})
           }}
         />
         <ColorSVG
           className={`h-6 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
+           
             upperVisDispatch({type: "COLORS_SETTINGS_TOGGLE"})
             // setColorsVis((b) => !b);
           }}
@@ -97,6 +107,8 @@ function UpperRightMenu({
           className={`h-6 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
             // setSettingsVis((b) => !b);
+            setTabOpenedData(null)
+        setCloseAllTabsData(true);
             upperVisDispatch({type: "SETTINGS_TOGGLE"})
           }}
         />
