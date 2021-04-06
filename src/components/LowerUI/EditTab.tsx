@@ -355,12 +355,15 @@ Props): JSX.Element {
         <div className="mt-2 mb-3">
           <textarea
             value={textAreaValue as string}
-            className="h-full w-full overflow-visible pl-px pr-px border font-mono"
-            rows={(currentTab[0].noteInput as string).length / 30}
+            className="h-full w-full overflow-visible pl-px pr-px border font-mono resize-none"
+            // rows={(currentTab[0].noteInput as string).length / 30}
+            rows={4}
             onChange={(e) => {
               setTextAreaValue(e.target.value);
               setWasAnythingClicked(true);
             }}
+            
+            
           ></textarea>
         </div>
       )}

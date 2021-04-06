@@ -289,6 +289,9 @@ XX ? 212. less confusing drop? now are different colors right after the Tab and 
 DONE 214. closing all windows also when dragging DONE
 DONE 215. background color does not stretch all the way down! DONE (see notes)
 
+DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE
+
+
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
@@ -381,10 +384,9 @@ DONE 215. background color does not stretch all the way down! DONE (see notes)
 291. unmounted component error (err mentioned alread?)
 292. check .? occurences
 293. upperVisDispatch -> color selectable should be gone when closing all
-294. column should larger be defaul - so colors/editables are not cut by overflow-hidden!
 295. UpperRightMenu should close at least editables in lowerUI
 296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
-
+297. backgroundImg: how to make the columns shorter, same as if there is no backgroundImg
 
 App structure:
 Main

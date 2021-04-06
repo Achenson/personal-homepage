@@ -8,6 +8,8 @@ import {
 } from "../../state/colorsState";
 import { globalSettingsState } from "../../state/defaultSettings";
 
+import { backgroundColorState } from "../../state/colorsState";
+
 import Tab from "./Tab";
 
 import GapAfterTab from "./GapAfterTab";
@@ -20,13 +22,17 @@ interface Props {
 }
 
 // const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
-function Column({colNumber, upperVisDispatch}: Props): JSX.Element {
+function Column({ colNumber, upperVisDispatch }: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [
     columnsColorsImg_Data,
     setColumnsColorsImg_Data,
   ] = columnsColorsImg_State.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  const [
+    backgroundColorData,
+    setbackgroundColorData,
+  ] = backgroundColorState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
 
   function calcColumnColor(
@@ -89,26 +95,25 @@ function Column({colNumber, upperVisDispatch}: Props): JSX.Element {
     lastTabId = sortedTabs[sortedTabs.length - 1].id;
   } else {
     lastTabId = null;
-
   }
 
-  function isThisLastGap(lastTabId: number | string | null, tabID: string|number) {
-
-  
-    
+  function isThisLastGap(
+    lastTabId: number | string | null,
+    tabID: string | number
+  ) {
     if (lastTabId === tabID) {
       // console.log("true");
-      
+
       return true;
     }
     // console.log("false");
-    
+
     return false;
   }
 
   return (
     <div
-      className={`overflow-hidden
+      className={`overflow-hidden flex flex-col justify-between
        ${calcColumnColor_picBackground(
          colNumber,
          globalSettingsData.picBackground,
@@ -122,55 +127,49 @@ function Column({colNumber, upperVisDispatch}: Props): JSX.Element {
         ),
       }}
     >
-      {tabsData
-        .filter((el) => el.column === colNumber)
-        // lower priority, higher in the column
-        .sort((a, b) => a.priority - b.priority)
-        .map((el, i) => {
-          return (
-            <div key={i} className="">
-              <Tab
-                tabID={el.id}
-                tabTitle={el.title}
-                tabColor={el.color}
-                tabType={el.type}
-                colNumber={el.column}
-                upperVisDispatch={upperVisDispatch}
-               
-              />
-              <GapAfterTab
-                colNumber={colNumber}
-                tabID={el.id}
-                picBackground={globalSettingsData.picBackground}
-                isThisLastGap={
+      <div>
+        {tabsData
+          .filter((el) => el.column === colNumber)
+          // lower priority, higher in the column
+          .sort((a, b) => a.priority - b.priority)
+          .map((el, i) => {
+            return (
+              <div key={i} className="">
+                <Tab
+                  tabID={el.id}
+                  tabTitle={el.title}
+                  tabColor={el.color}
+                  tabType={el.type}
+                  colNumber={el.column}
+                  upperVisDispatch={upperVisDispatch}
+                />
+                <GapAfterTab
+                  colNumber={colNumber}
+                  tabID={el.id}
+                  picBackground={globalSettingsData.picBackground}
+                  isThisLastGap={isThisLastGap(lastTabId, el.id)}
+                />
+              </div>
+            );
+          })}
 
-               isThisLastGap(lastTabId, el.id)
+        {tabsData.filter((el) => el.column === colNumber).length === 0 ? (
+          <GapAfterTab
+            colNumber={colNumber}
+            tabID={null}
+            picBackground={globalSettingsData.picBackground}
+            isThisLastGap={true}
+          />
+        ) : null}
+      </div>
 
-                }
-              />
-            </div>
-          );
-        })}
-
-      {tabsData.filter((el) => el.column === colNumber).length === 0 ? (
-        <GapAfterTab
-          colNumber={colNumber}
-          tabID={null}
-          picBackground={globalSettingsData.picBackground}
-          isThisLastGap={true}
-        />
-      ) : null}
-
-      {/* <GapAfterTab
-        colNumber={colNumber}
-        picBackground={globalSettingsData.picBackground}
-        tabID={lastTabId}
-        isThisLastGap={true}
-      /> */}
-
-
+      <div
+        className={`h-64 bg-${
+          globalSettingsData.picBackground ? "" : backgroundColorData
+        }`}
+      ></div>
     </div>
   );
-};
+}
 
 export default Column;
