@@ -295,6 +295,8 @@ DONE 223. column color cntrl don't work properly if bg img is on DONE
 DONE 224. reducing nr of columns should put all tabs in lower ammount of columns? DONE
 XXX 225. bigger x gap on columns on sm only? XXX
 XXX 227. perfomance problems when dragging XXX
+DONE 230. check is lazy state initialization is needed somewhere (for heavy computations) DONE (mainly generateTags/generateBookmarks)
+DONE 231. test rss description on all working rsss DONE -> error in one case
 
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE
 
@@ -302,13 +304,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-
-220. eye to close on small screen
-226. better borders in color selecting (more similar to ColumnColor)
-228. change upperUI items positioning on sm -> not fitting on small screens
-229. react query devtools not working
-230. check is lazy state initialization is needed somewhere (for heavy computations)
-231. test rss description on all working rsss
+228. change upperUI items positioning on sm -> not fitting on small screens & super small
 232. ColumnColor selection doesn't work properly if "one color for all columns" option is set
 233. newBookmark newTab titles upperUI
 234. optional/conditional getting rid of border on UpperRightMenu?
@@ -387,6 +383,8 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 300. no img background - get rid of lightest colors?
 301. clean tailwind files in the end
 302. sorting method!
+303. better borders in color selecting (more similar to ColumnColor) ??
+304. react query devtools not working
 
 App structure:
 Main

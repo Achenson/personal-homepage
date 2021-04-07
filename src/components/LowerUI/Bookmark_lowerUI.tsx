@@ -138,7 +138,7 @@ function Bookmark_lowerUI({
     return arrOut;
   }
 
-  // const [chevronDown, setChevronDown] = useState(true);
+  
 
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-2 pl-1 border">

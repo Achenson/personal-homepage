@@ -99,8 +99,6 @@ Props): JSX.Element {
 
   const [chevronDown, setChevronDown] = useState(true);
 
-  // const [tagsListVis, setTagsListVis] = useState<boolean>(false);
-
   const [arrOfBookmarksNames, setArrayOfBookmarksNames] = useState<string[]>(
     () => {
       return calcArrOfBookmarksNames();
@@ -127,7 +125,7 @@ Props): JSX.Element {
   );
 
   const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(
-    makeInitialBookmarks()
+    () => makeInitialBookmarks()
   );
 
   useEffect(() => {
@@ -161,7 +159,7 @@ Props): JSX.Element {
   // const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
   const [initialBookmarks, setInitialBookmarks] = useState(
-    makeInitialBookmarks()
+   () => makeInitialBookmarks()
   );
 
   const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);

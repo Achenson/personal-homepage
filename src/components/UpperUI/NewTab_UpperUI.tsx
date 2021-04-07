@@ -76,7 +76,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
 
   const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(
-    makeInitialBookmarks()
+    () => makeInitialBookmarks()
   );
 
   const [bookmarksInputStr, setBookmarksInputStr] = useState<string>("");
@@ -92,7 +92,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   const [chevronDown, setChevronDown] = useState(true);
 
   const [initialBookmarks, setInitialBookmarks] = useState(
-    makeInitialBookmarks()
+    () => makeInitialBookmarks()
   );
 
   // XX tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)

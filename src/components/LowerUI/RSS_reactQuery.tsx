@@ -26,10 +26,10 @@ function ReactQuery({ tabID }: Props): JSX.Element {
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
   let currentTab = tabsData.filter((obj) => obj.id === tabID);
 
-  const [itemsPerPage, setItemsPerPage] = useState(calcItemsPerPage());
+  const [itemsPerPage, setItemsPerPage] = useState(() =>calcItemsPerPage());
 
-  const [descriptionVis, setDescriptionVis] = useState(calcDescriptionVis());
-  const [dateVis, setDateVis] = useState(calcDateVis());
+  const [descriptionVis, setDescriptionVis] = useState(() =>calcDescriptionVis());
+  const [dateVis, setDateVis] = useState(() => calcDateVis());
 
   function calcItemsPerPage() {
     // if currentBookmars itemsPerPage is set, return it, otherwise

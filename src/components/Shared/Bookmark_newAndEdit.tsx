@@ -70,7 +70,7 @@ function Bookmark_newAndEdit({
   //  !!! diff in editLink
   const [tagsInputStr, setTagsInputStr] = useState<string>(
     // bookmarkComponentType === "edit" ? generateTagNames() : ""
-    generateTagNames()
+  () =>  generateTagNames()
   );
 
   //   ? (currentLink as SingleLinkData).tags.join(", ")
@@ -103,9 +103,9 @@ function Bookmark_newAndEdit({
 
   const [tagsListVis, setTagsListVis] = useState<boolean>(false);
 
-  const [visibleTags, setVisibleTags] = useState<string[]>(makeInitialTags());
+  const [visibleTags, setVisibleTags] = useState<string[]>(() => makeInitialTags());
 
-  const [initialTags, setInitialTags] = useState(makeInitialTags());
+  const [initialTags, setInitialTags] = useState(() => makeInitialTags());
 
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
   // xx const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
