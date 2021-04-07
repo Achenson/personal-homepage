@@ -297,6 +297,8 @@ XXX 225. bigger x gap on columns on sm only? XXX
 XXX 227. perfomance problems when dragging XXX
 DONE 230. check is lazy state initialization is needed somewhere (for heavy computations) DONE (mainly generateTags/generateBookmarks)
 DONE 231. test rss description on all working rsss DONE -> error in one case
+DONE 232. ColumnColor selection doesn't work properly if "one color for all columns" option is set DONE
+DONE 233. newBookmark newTab titles upperUI DONE
 
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE
 
@@ -305,8 +307,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 228. change upperUI items positioning on sm -> not fitting on small screens & super small
-232. ColumnColor selection doesn't work properly if "one color for all columns" option is set
-233. newBookmark newTab titles upperUI
 234. optional/conditional getting rid of border on UpperRightMenu?
 225. why most right icons on UpperRightUI are bold?
 226. UpperRightUI borderGray vs UpperLeftMenu opacity-80 consistency
@@ -385,6 +385,8 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 302. sorting method!
 303. better borders in color selecting (more similar to ColumnColor) ??
 304. react query devtools not working
+305. columnColor not being reduced in numbers if "one color for all columns" is set
+306. new rss & new tab: make it smaller? 
 
 App structure:
 Main
