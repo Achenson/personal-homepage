@@ -321,7 +321,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 234. bug: editing bookmark -> not posiible to add new tag -> the folder dissapears
 +  log error about memory leakage eg. when editing links (only in this case)
 237. make animations for save & cancel SVGs? or on all svgs?
-238. newTab vs newBookmark save & cancel centering?
+238. newTab vs newBookmark save & cancel centering? save icon is cut when trying to center!
 239. get rid of most "else" statements
 240. EyeOff should be positioned more to the left if image bg is on
 241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
