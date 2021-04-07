@@ -299,6 +299,8 @@ DONE 230. check is lazy state initialization is needed somewhere (for heavy comp
 DONE 231. test rss description on all working rsss DONE -> error in one case
 DONE 232. ColumnColor selection doesn't work properly if "one color for all columns" option is set DONE
 DONE 233. newBookmark newTab titles upperUI DONE
+XXX 234. optional/conditional getting rid of border on UpperRightMenu? XXX
+DONE ?? 235. why most right icons on UpperRightUI are bold?  ?? DONE (different stroke width on svgs)
 
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE
 
@@ -307,8 +309,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 228. change upperUI items positioning on sm -> not fitting on small screens & super small
-234. optional/conditional getting rid of border on UpperRightMenu?
-225. why most right icons on UpperRightUI are bold?
 226. UpperRightUI borderGray vs UpperLeftMenu opacity-80 consistency
 228. bg settings- underline selected to be consistent?
 229. bug: selection border sometimes doesn't work on UpperLeftMenu colors

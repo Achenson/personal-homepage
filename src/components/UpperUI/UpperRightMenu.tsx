@@ -86,7 +86,7 @@ function UpperRightMenu({
         />
       </div>
 
-      <div className="flex w-24 justify-around">
+      <div className="flex w-24 justify-around items-center">
         <PhotographSVG
           className={`h-6 cursor-pointer hover:text-${uiColorData}`}
           onClick={() => {
@@ -112,7 +112,7 @@ function UpperRightMenu({
             upperVisDispatch({type: "SETTINGS_TOGGLE"})
           }}
         />
-        <UserSVG className="h-6" />
+        <UserSVG className="h-6" style={{marginLeft: "-3px"}} />
       </div>
     </div>
   );
