@@ -36,7 +36,7 @@ interface Props {
   rssTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   bookmarkId: string | number;
-  
+
   // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   currentBookmark: SingleBookmarkData | undefined;
   visDispatch: React.Dispatch<TabVisAction>;
@@ -102,7 +102,6 @@ function Bookmark_lowerUI({
   setChevronDown,
   rssErrorVis,
   setRssErrorVis,
- 
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [
@@ -116,6 +115,9 @@ function Bookmark_lowerUI({
     // tagsInputStr.split(", ")
     generateTagIds()
   );
+
+  // for disabling save btn
+  const [wasAnythingChanged, setWasAnythingChanged] = useState(false);
 
   function generateTagIds() {
     if (bookmarkComponentType !== "edit") {
@@ -138,8 +140,6 @@ function Bookmark_lowerUI({
     return arrOut;
   }
 
-  
-
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-2 pl-1 border">
       <div className="mt-2">
@@ -151,7 +151,10 @@ function Bookmark_lowerUI({
             className="w-full ml-2 border pl-px"
             value={titleInput}
             placeholder={"new bookmark title"}
-            onChange={(e) => setTitleInput(e.target.value)}
+            onChange={(e) => {
+              setTitleInput(e.target.value);
+              setWasAnythingChanged(true);
+            }}
             onFocus={(e) => {
               setTagsListVis(false);
               setChevronDown(true);
@@ -167,7 +170,10 @@ function Bookmark_lowerUI({
             className="w-full ml-2 border pl-px"
             value={urlInput}
             placeholder={"enter proper URL address"}
-            onChange={(e) => setUrlInput(e.target.value)}
+            onChange={(e) => {
+              setUrlInput(e.target.value);
+              setWasAnythingChanged(true);
+            }}
             onFocus={(e) => {
               setTagsListVis(false);
               setChevronDown(true);
@@ -186,6 +192,8 @@ function Bookmark_lowerUI({
               value={tagsInputStr}
               placeholder={"tag1, tag2..."}
               onChange={(e) => {
+                setWasAnythingChanged(true);
+
                 let target = e.target.value;
 
                 setTagsInputStr(target);
@@ -219,6 +227,7 @@ function Bookmark_lowerUI({
                 selectablesInputStr={tagsInputStr}
                 visibleSelectables={visibleTags}
                 marginTop="0px"
+                setWasAnythingClicked={setWasAnythingChanged}
               />
             )}
           </div>
@@ -270,7 +279,11 @@ function Bookmark_lowerUI({
           <p className="w-1"></p>
           <div className="w-full flex justify-center">
             <SaveSVG
-              className="h-5 fill-current text-black mr-3 hover:text-green-600 cursor-pointer"
+              className={`h-5 fill-current text-black mr-3 hover:text-green-600 cursor-pointer ${
+                wasAnythingChanged || bookmarkComponentType === "new_lowerUI"
+                  ? "text-gray-900 hover:text-green-600 cursor-pointer"
+                  : "text-blueGray-400 cursor-default"
+              }`}
               onClick={(e) => {
                 e.preventDefault();
 
