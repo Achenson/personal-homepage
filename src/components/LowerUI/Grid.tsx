@@ -9,7 +9,6 @@ import {
 
 import { closeAllTabsState } from "../../state/defaultSettings";
 
-
 import { resetColorsState } from "../../state/colorsState";
 
 import { globalSettingsState } from "../../state/defaultSettings";
@@ -22,7 +21,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
-function Grid({upperVisDispatch}: Props): JSX.Element {
+function Grid({ upperVisDispatch }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   const [
     bookmarksAllTagsData,
@@ -77,30 +76,44 @@ function Grid({upperVisDispatch}: Props): JSX.Element {
     });
   }, [tabsData, setTabsData, bookmarksAllTagsData]);
 
-    useEffect(() => {
+  useEffect(() => {
     if (globalSettingsData.numberOfCols === 1) {
       setTabsData((previous) =>
         produce(previous, (updated) => {
-          updated.forEach((obj) => obj.column = 1);
+          updated.forEach((obj, i) => {
+            obj.column = 1;
+            obj.priority = i;
+          });
         })
       );
-
-      console.log("change");
-      
     }
 
     if (globalSettingsData.numberOfCols === 2) {
       setTabsData((previous) =>
         produce(previous, (updated) => {
-          updated.forEach((obj) => {
-            obj.column = 1
-          });
+          updated
+            .filter((obj) => obj.column > 1)
+            .forEach((obj, i) => {
+              obj.column = 2;
+              obj.priority = i;
+            });
         })
       );
-
-      console.log("change");
-      
     }
+
+    if (globalSettingsData.numberOfCols === 3) {
+      setTabsData((previous) =>
+        produce(previous, (updated) => {
+          updated
+            .filter((obj) => obj.column > 2)
+            .forEach((obj, i) => {
+              obj.column = 3;
+              obj.priority = i;
+            });
+        })
+      );
+    }
+
 
 
 
@@ -115,24 +128,24 @@ function Grid({upperVisDispatch}: Props): JSX.Element {
         return (
           <>
             <Column colNumber={1} upperVisDispatch={upperVisDispatch} />
-            <Column colNumber={2}  upperVisDispatch={upperVisDispatch}/>
+            <Column colNumber={2} upperVisDispatch={upperVisDispatch} />
           </>
         );
       case 3:
         return (
           <>
             <Column colNumber={1} upperVisDispatch={upperVisDispatch} />
-            <Column colNumber={2}  upperVisDispatch={upperVisDispatch}/>
-            <Column colNumber={3} upperVisDispatch={upperVisDispatch}/>
+            <Column colNumber={2} upperVisDispatch={upperVisDispatch} />
+            <Column colNumber={3} upperVisDispatch={upperVisDispatch} />
           </>
         );
       case 4:
         return (
           <>
             <Column colNumber={1} upperVisDispatch={upperVisDispatch} />
-            <Column colNumber={2} upperVisDispatch={upperVisDispatch}/>
-            <Column colNumber={3} upperVisDispatch={upperVisDispatch}/>
-            <Column colNumber={4} upperVisDispatch={upperVisDispatch}/>
+            <Column colNumber={2} upperVisDispatch={upperVisDispatch} />
+            <Column colNumber={3} upperVisDispatch={upperVisDispatch} />
+            <Column colNumber={4} upperVisDispatch={upperVisDispatch} />
           </>
         );
     }
