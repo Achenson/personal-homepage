@@ -292,6 +292,7 @@ DONE 218. rss, bookmark & notes color: choose one for all/NOte does not look goo
 DONE 219. get rid of useSize/dimensions hook? DONE
 DONE 221. upper right interface background doesn't look good with light image bg/ inconsisten with upper left interface? DONE
 DONE 223. column color cntrl don't work properly if bg img is on DONE
+DONE 224. reducing nr of columns should put all tabs in lower ammount of columns? DONE
 XXX 225. bigger x gap on columns on sm only? XXX
 XXX 227. perfomance problems when dragging XXX
 
@@ -303,7 +304,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 
 
 220. eye to close on small screen
-224. reducing nr of columns should put all tabs in lower ammount of columns?
 226. better borders in color selecting (more similar to ColumnColor)
 228. change upperUI items positioning on sm -> not fitting on small screens
 229. react query devtools not working
@@ -386,6 +386,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 299. upperLeft UI should not close tab content!
 300. no img background - get rid of lightest colors?
 301. clean tailwind files in the end
+302. sorting method!
 
 App structure:
 Main

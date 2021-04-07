@@ -410,7 +410,7 @@ Props): JSX.Element {
             upperVisDispatch({type: "CLOSE_ALL"})
           }}
         >
-          <p className="truncate"> {tabTitle} {currentTab?.priority}</p>
+          <p className="truncate">{tabTitle}</p>
         </div>
 
         <div

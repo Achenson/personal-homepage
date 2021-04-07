@@ -80,32 +80,15 @@ function Grid({ upperVisDispatch }: Props): JSX.Element {
   }, [tabsData, setTabsData, bookmarksAllTagsData]);
 
   useEffect(() => {
-    if (globalSettingsData.numberOfCols === 1) {
-      setTabsData((previous) =>
-        produce(previous, (updated) => {
-          updated
-          .sort((a, b) => {
-            if (a.title < b.title) {
-              return -1;
-            }
-            if (a.title > b.title) {
-              return 1;
-            }
-            return 0;
-          })
-          .forEach((obj, i) => {
-            obj.column = 1;
-            obj.priority = i;
-          });
-        })
-      );
-    }
+    createLessColumns(globalSettingsData.numberOfCols);
 
-    if (globalSettingsData.numberOfCols === 2) {
+    function createLessColumns(numberOfCols: 1 | 2 | 3 | 4) {
+      if (numberOfCols === 4) return;
+
       setTabsData((previous) =>
         produce(previous, (updated) => {
           updated
-            .filter((obj) => obj.column > 1)
+            .filter((obj) => obj.column >= numberOfCols)
             .sort((a, b) => {
               if (a.title < b.title) {
                 return -1;
@@ -116,29 +99,7 @@ function Grid({ upperVisDispatch }: Props): JSX.Element {
               return 0;
             })
             .forEach((obj, i) => {
-              obj.column = 2;
-              obj.priority = i;
-            });
-        })
-      );
-    }
-
-    if (globalSettingsData.numberOfCols === 3) {
-      setTabsData((previous) =>
-        produce(previous, (updated) => {
-          updated
-            .filter((obj) => obj.column > 2)
-            .sort((a, b) => {
-              if (a.title < b.title) {
-                return -1;
-              }
-              if (a.title > b.title) {
-                return 1;
-              }
-              return 0;
-            })
-            .forEach((obj, i) => {
-              obj.column = 3;
+              obj.column = numberOfCols;
               obj.priority = i;
             });
         })
