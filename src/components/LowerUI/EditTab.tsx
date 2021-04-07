@@ -546,7 +546,7 @@ Props): JSX.Element {
 
       <div className="flex justify-start mt-2">
         <p className="w-8"></p>
-        <div className="w-full pl-4 flex justify-center">
+        <div className="w-full flex justify-center">
           <SaveSVG
             className={`h-5 fill-current mr-3 ${
               wasAnythingClicked

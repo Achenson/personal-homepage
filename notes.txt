@@ -297,15 +297,19 @@ XXX 225. bigger x gap on columns on sm only? XXX
 XXX 226. UpperRightUI borderGray vs UpperLeftMenu opacity-80 consistency
 XXX 227. perfomance problems when dragging XXX
 XXX 228. bg settings- underline selected to be consistent? XXX
+??? 229. bug: selection border sometimes doesn't work on UpperLeftMenu colors ???
 DONE 230. check is lazy state initialization is needed somewhere (for heavy computations) DONE (mainly generateTags/generateBookmarks)
 XXX 230.5 longer "title" in "note" Tab? XXX
 DONE 231. test rss description on all working rsss DONE -> error in one case
+DONE 231.5 make gray border for NoteInput etc. (similar to to EditTab) ? DONE
 DONE 232. ColumnColor selection doesn't work properly if "one color for all columns" option is set DONE
 DONE 232.5 bookmark_lowerUI saveSVG should be inactive if bookmarkComponentType === "edit" DONE
 DONE 233. newBookmark newTab titles upperUI DONE
 XXX 234. optional/conditional getting rid of border on UpperRightMenu? XXX
 DONE ?? 235. why most right icons on UpperRightUI are bold?  ?? DONE (different stroke width on svgs - leave as it is?)
-
+??? DONE 235.5 editTab: changing bookmarks alone doesn't enable saveSVG DONE ???
+DONE 236. editTab: center Save & Cancel 
+(one padding removed, but it is still not centered - on purpose, invisible p to the left) DONE
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE
 
 
@@ -313,13 +317,9 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 228. change upperUI items positioning on sm -> not fitting on small screens & super small
-229. bug: selection border sometimes doesn't work on UpperLeftMenu colors
-231. make gray border for NoteInput etc. (similar to to EditTab) ?
 233. search component for bookmarks?
 234. bug: editing bookmark -> not posiible to add new tag -> the folder dissapears
 +  log error about memory leakage eg. when editing links (only in this case)
-235. editTab: changing bookmarks alone doesn't enable saveSVG
-236. editTab: center Save & Cancel
 237. make animations for save & cancel SVGs? or on all svgs?
 238. newTab vs newBookmark save & cancel centering?
 239. get rid of most "else" statements
@@ -387,6 +387,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 304. react query devtools not working
 305. columnColor not being reduced in numbers if "one color for all columns" is set
 306. new rss & new tab: make it smaller? 
+307. Selectables -> truncate bookmarks - the stick out if they are too long!
 
 App structure:
 Main
