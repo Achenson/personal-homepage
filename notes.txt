@@ -316,7 +316,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-228. change upperUI items positioning on sm -> not fitting on small screens & super small
 233. search component for bookmarks?
 234. bug: editing bookmark -> not posiible to add new tag -> the folder dissapears
 +  log error about memory leakage eg. when editing links (only in this case)
