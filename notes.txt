@@ -75,7 +75,8 @@ regex becaus / / are used to open/close regex)
 11. useQuery: to get different queries throughout the app, names of the queries need to be different! (here: tabID)
 12. disabling cors on chrome:
 shortcut with: "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp
-13. proper background visibility with whole column on drag effect: overflow-hidden on Column! h-screen on GapAfterTab
+13. proper background visibility with whole column on drag effect:
+additional div on Grid (so there is space for colors/editable), Grid - overflow-hidden
 
 TO DO:
 
@@ -311,7 +312,7 @@ DONE ?? 235. why most right icons on UpperRightUI are bold?  ?? DONE (different 
 DONE 236. editTab: center Save & Cancel 
 (one padding removed, but it is still not centered - on purpose, invisible p to the left) DONE
 DONE 239. get rid of "else" statements DONE (two cases only)
-DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE
+DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
 
 
 1. purgecss at the end of project?

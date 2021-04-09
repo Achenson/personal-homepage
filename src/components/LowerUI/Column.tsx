@@ -113,7 +113,7 @@ function Column({ colNumber, upperVisDispatch }: Props): JSX.Element {
 
   return (
     <div
-      className={`overflow-hidden flex flex-col justify-between
+      className={`flex flex-col justify-between
        ${calcColumnColor_picBackground(
          colNumber,
          globalSettingsData.picBackground,
@@ -163,11 +163,12 @@ function Column({ colNumber, upperVisDispatch }: Props): JSX.Element {
         ) : null}
       </div>
 
-      <div
+      {/* <div
         className={`h-64 lg:bg-${
           globalSettingsData.picBackground ? "" : backgroundColorData
         }`}
-      ></div>
+      ></div> */}
+     
     </div>
   );
 }
