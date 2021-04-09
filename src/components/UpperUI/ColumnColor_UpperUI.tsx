@@ -3,7 +3,11 @@ import { columnsColorsState } from "../../state/colorsState";
 
 import { UpperVisAction } from "../../utils/interfaces";
 
-import { globalSettingsState, closeAllTabsState, tabOpenedState } from "../../state/defaultSettings";
+import {
+  globalSettingsState,
+  closeAllTabsState,
+  tabOpenedState,
+} from "../../state/defaultSettings";
 
 interface Props {
   colNumber: number;
@@ -34,8 +38,8 @@ function ColumnColor_UpperUI({
 }: Props): JSX.Element {
   const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-  const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
-  const [tabOpenedData, setTabOpenedData] =tabOpenedState.use();
+  const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
+  const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   function columnsColor(colNumber: number) {
     switch (colNumber) {
@@ -54,16 +58,14 @@ function ColumnColor_UpperUI({
     if (columnSelected !== colNumber) {
       if (arrIndex > 0) {
         return "border border-l-0";
-      } else {
-        return "border";
       }
-    } else {
-      if (arrIndex > 0) {
-        return "border border-t-2 border-b-2 border-r-2";
-      } else {
-        return "border-2";
-      }
+      return "border";
     }
+
+    if (arrIndex > 0) {
+      return "border border-t-2 border-b-2 border-r-2";
+    }
+    return "border-2";
   }
 
   return (
@@ -72,9 +74,8 @@ function ColumnColor_UpperUI({
         <div
           onClick={() => {
             setDefaultColorsFor(`column_${colNumber}` as any);
-            setTabOpenedData(null)
+            setTabOpenedData(null);
             setCloseAllTabsData(true);
-       
 
             if (columnSelected === colNumber) {
               upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
@@ -88,17 +89,15 @@ function ColumnColor_UpperUI({
             colNumber
           )} cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
         ></div>
-      ) : (
-        // <div
-        //   className={`relative overflow-hidden h-4 w-8 bg-white ${borderStyle()} border-black`}
-        // >
-        //   <div
-        //     className="absolute bg-black transform -rotate-23"
-        //     style={{ top: "6px", left: "-2px", width: "35px", height: "2px" }}
-        //   ></div>
-        // </div>
-        null
-      )}
+      ) : // <div
+      //   className={`relative overflow-hidden h-4 w-8 bg-white ${borderStyle()} border-black`}
+      // >
+      //   <div
+      //     className="absolute bg-black transform -rotate-23"
+      //     style={{ top: "6px", left: "-2px", width: "35px", height: "2px" }}
+      //   ></div>
+      // </div>
+      null}
     </div>
   );
 }
