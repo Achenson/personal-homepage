@@ -77,6 +77,7 @@ regex becaus / / are used to open/close regex)
 shortcut with: "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp
 13. proper background visibility with whole column on drag effect:
 additional div on Grid (so there is space for colors/editable), Grid - overflow-hidden
+14. Tab setTimout: useEffect, unmounting necessary!
 
 TO DO:
 
@@ -315,6 +316,8 @@ DONE 236. editTab: center Save & Cancel
 (one padding removed, but it is still not centered - on purpose, invisible p to the left) DONE
 DONE 237. make animations for save & cancel SVGs? or on all svgs? DONE
 DONE 239. get rid of "else" statements DONE (two cases only)
+DONE 242. make note about setTimout in Tab DONE
+XXX 250. logo? XXX
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
 
 
@@ -325,15 +328,13 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 238. newTab vs newBookmark save & cancel centering? save icon is cut when trying to center!
 240. EyeOff should be positioned more to the left if image bg is on
 241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
-242. make note about setTimout in Tab
 243. column colors two components - redundant?
 244. border selection invisible on ColumnColor_UpperUI & Img
 245. change all selections to shadow (experiment more?)(like in UpperLeftMenu)
-246. change all border for colors to thinner
+246. change all border for colors to thinner (tables?)
 247. redundant code in SingleColor_DefaultAndColumn / setDefaultColorsFor(change/simplify)
 248. different hover effect if one color for all columns is set
 249. useEffect -> some should be unmounted? check in the end
-250. logo?
 251. css method to get rid of input numbers' arrows
 252. chevrons for selectables are sometimes in wrong state?
 253. bookmark: add rssError (similar to noteError?)
