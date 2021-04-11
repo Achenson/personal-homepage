@@ -68,6 +68,8 @@ function Grid({ upperVisDispatch }: Props): JSX.Element {
         bookmarksAllTagsData.indexOf(obj.id) === -1 &&
         obj.type === "folder"
       ) {
+        console.log(bookmarksAllTagsData);
+        
         console.log("cut");
 
         setTabsData((previous) =>

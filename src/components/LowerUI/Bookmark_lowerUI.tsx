@@ -352,6 +352,8 @@ function Bookmark_lowerUI({
                 // !!! diff in Bookmark_upper_JSX
 
                 let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
+                // for edit only
+                let newTabId: undefined | string | number;
 
                 tagsInputArr.forEach((el) => {
                   let filteredTab = tabsData.filter(
@@ -370,12 +372,17 @@ function Bookmark_lowerUI({
                     // let newTab = createFolderTab(el, 1, 0);
                     let newTab = createFolderTab(el, colNumber, newTabPriority);
                     tagsInputArr_ToIds.push(newTab.id);
+                    // for edit only
+                    newTabId = newTab.id
 
                     // adding new folder in there was no folder with title as a tag befere
 
                     let newBookmarksAllTagsData = [...bookmarksAllTagsData];
 
                     newBookmarksAllTagsData.push(newTab.id);
+
+                    console.log(newBookmarksAllTagsData);
+                    
 
                     setBookmarksAllTagsData([...newBookmarksAllTagsData]);
                     setTabsData((previous) =>
@@ -388,6 +395,9 @@ function Bookmark_lowerUI({
                       tagsInputArr_ToIds.push(filteredTab.id);
                     }
                   }
+
+
+
                 });
 
                 if (bookmarkComponentType === "edit") {
@@ -410,7 +420,9 @@ function Bookmark_lowerUI({
                   let tagsIdsToDelete: (string | number)[] = [];
 
                   initialTagsInputArr.forEach((el) => {
+                    // if the tag was present in initial tags, but is not present in the end
                     if (tagsInputArr_ToIds.indexOf(el) === -1) {
+                      // all bookmarks except for curren
                       let filteredBookmarks = bookmarksData.filter(
                         (obj) =>
                           obj.id !== (currentBookmark as SingleBookmarkData).id
@@ -420,6 +432,7 @@ function Bookmark_lowerUI({
 
                       filteredBookmarks.forEach((obj) => {
                         if (obj.tags.indexOf(el) > -1) {
+                          // tag is present in some other bookmark than this
                           isElPresent = true;
                           return;
                         }
@@ -433,6 +446,10 @@ function Bookmark_lowerUI({
 
                   let bookmarksAllTagsData_new: (string | number)[] = [];
 
+                  if(newTabId) {
+                    bookmarksAllTagsData_new.push(newTabId)
+                  }
+
                   bookmarksAllTagsData.forEach((el) => {
                     if (tagsIdsToDelete.indexOf(el) === -1) {
                       bookmarksAllTagsData_new.push(el);
@@ -440,6 +457,7 @@ function Bookmark_lowerUI({
                   });
 
                   setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
+                  
                 } else {
                   setBookmarksData((previous) =>
                     produce(previous, (updated) => {
@@ -451,9 +469,9 @@ function Bookmark_lowerUI({
                 }
 
                 // setBookmarkVis((b) => !b);
-                if (bookmarkComponentType === "edit") {
-                  visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
-                }
+                // if (bookmarkComponentType === "edit") {
+                //   visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
+                // }
 
                 if (bookmarkComponentType === "new_lowerUI") {
                   visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });

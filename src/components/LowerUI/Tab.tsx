@@ -293,7 +293,7 @@ Props): JSX.Element {
 
 
     }
-  }, [isDragging, finalTabColor, setTabBeingDraggedColor_Data]);
+  }, [isDragging, finalTabColor, setTabBeingDraggedColor_Data, setTabOpenedData]);
 
   const colorsForLightText: string[] = [
     // "orange-500",

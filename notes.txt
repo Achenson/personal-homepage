@@ -388,6 +388,10 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 305. columnColor not being reduced in numbers if "one color for all columns" is set
 306. new rss & new tab: make it smaller? 
 307. Selectables -> truncate bookmarks - the stick out if they are too long!
+308. login
+309. UpperRight Menu -> make it possible to close by clicking on the background
+310. GlobalSetting - maka editables on lower UI close after closing GlobalSetting
+311. better logic in bookmark_lowerUI -> make functions in SaveSVG, more notes?
 
 App structure:
 Main
