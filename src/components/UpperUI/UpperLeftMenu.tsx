@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-import ColumnColor from "./ColumnColor_UpperUI";
-import DefaultColorsToChoose from "../Colors/ColorsToChoose_DefaultAndColumns";
+import ColumnColor_UpperUI from "./ColumnColor_UpperUI";
+import ColorsToChoose_DefaultAndColumns from "../Colors/ColorsToChoose_DefaultAndColumns";
 
 import { globalSettingsState } from "../../state/defaultSettings";
-import ColumnColor_Img from "./ColumnColor_Img_UpperUI";
-import BackgroundColor from "./BackgroundColor_UpperUI";
-import EyeOff from "./EyeOff_UpperUI";
-import BackgroundColorsToChoose from "../Colors/ColorsToChoose_Background";
+import ColumnColor_Img_UpperUI from "./ColumnColor_Img_UpperUI";
+import BackgroundColor_UpperUI from "./BackgroundColor_UpperUI";
+import EyeOff_UpperUI from "./EyeOff_UpperUI";
+import ColorsToChoose_Background from "../Colors/ColorsToChoose_Background";
 
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
 
@@ -38,7 +38,7 @@ function UpperLeftMenu({
 
     return arrOfColumns.map((el, index) => {
       return globalSettingsData.picBackground ? (
-        <ColumnColor_Img
+        <ColumnColor_Img_UpperUI
           colNumber={oneColorForAllCols ? 1 : el}
           // colSelected={false}
 
@@ -55,7 +55,7 @@ function UpperLeftMenu({
           upperVisDispatch={upperVisDispatch}
         />
       ) : (
-        <ColumnColor
+        <ColumnColor_UpperUI
           colNumber={oneColorForAllCols ? 1 : el}
           // colSelected={false}
           defaultColorsFor={defaultColorsFor}
@@ -84,21 +84,21 @@ function UpperLeftMenu({
         </div>
       </div>
       {globalSettingsData.picBackground ? null : (
-        <BackgroundColor
+        <BackgroundColor_UpperUI
           // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
           upperVisDispatch={upperVisDispatch}
         />
       )}
-      <EyeOff upperVisDispatch={upperVisDispatch} />
+      <EyeOff_UpperUI upperVisDispatch={upperVisDispatch} />
 
       {/* <div className="absolute left-0" style={{ bottom: "104px" }}> */}
       <div className="absolute left-0 top-3">
         {upperVisState.colorsColumnVis && (
-          <DefaultColorsToChoose defaultColorsFor={defaultColorsFor} />
+          <ColorsToChoose_DefaultAndColumns defaultColorsFor={defaultColorsFor} />
         )}
         {upperVisState.colorsBackgroundVis && (
           <div className="absolute left-60 top-7">
-            <BackgroundColorsToChoose />
+            <ColorsToChoose_Background />
           </div>
         )}
       </div>

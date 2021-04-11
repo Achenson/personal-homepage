@@ -148,7 +148,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
         <div className="flex items-center ml-2 justify-end w-full" key={i}>
           <p className="mr-px">{colsNumbering[el]}</p>
           <div
-            className={`h-4 w-4 ml-px mt-px cursor-pointer border-2 border-${uiColorData} ${
+            className={`h-4 w-4 ml-px mt-px cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
               tabColumnInput === el
                 ? `bg-${uiColorData} hover:bg-opacity-50`
                 : `hover:bg-${uiColorData} hover:bg-opacity-50`
@@ -355,7 +355,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           {/* !!! pl-4 in NewLink */}
           <div className="w-full flex justify-center">
             <SaveSVG
-              className="h-5 fill-current text-black mr-3 hover:text-green-600 cursor-pointer"
+              className="h-5 fill-current text-black mr-3 hover:text-green-600 cursor-pointer transition-colors duration-75"
               onClick={(e) => {
                 e.preventDefault();
 
@@ -525,7 +525,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             />
 
             <CancelSVG
-              className="h-5 fill-current text-black ml-3 hover:text-red-600 cursor-pointer"
+              className="h-5 fill-current text-black ml-3 hover:text-red-600 cursor-pointer transition-colors duration-75"
               onClick={(e) => {
                 e.preventDefault();
                 // setNewTabVis((b) => !b);

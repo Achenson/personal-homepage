@@ -439,7 +439,7 @@ Props): JSX.Element {
 
           {tabType === "folder" && (
             <PlusSVG
-              className={`h-8 hover:${hoverText(finalTabColor)} cursor-pointer`}
+              className={`h-8 transition-colors duration-75 hover:${hoverText(finalTabColor)} cursor-pointer`}
               style={{ marginTop: "-6px" }}
               onClick={() => {
                 visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
@@ -449,7 +449,7 @@ Props): JSX.Element {
           )}
 
           <ColorSmallSVG
-            className={`h-5 mr-2 hover:${hoverText(
+            className={`h-5 mr-2 transition-colors duration-75 hover:${hoverText(
               finalTabColor
             )} cursor-pointer `}
             // ${
@@ -468,7 +468,7 @@ Props): JSX.Element {
           />
 
           <PencilSmallSVG
-            className={`h-5 -ml-px hover:${hoverText(
+            className={`h-5 -ml-px transition-colors duration-75 hover:${hoverText(
               finalTabColor
             )} cursor-pointer`}
             onClick={() => {

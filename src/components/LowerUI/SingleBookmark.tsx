@@ -71,7 +71,7 @@ function SingleBookmark({
         style={{ marginTop: "2px" }}
       >
         <PencilSmallSVG
-          className="h-5 ml-1 hover:text-black cursor-pointer"
+          className="h-5 ml-1 transition-colors duration-75 hover:text-black cursor-pointer"
           onClick={() => {
             // setEditBookmarkVis((b) => !b);
             visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
@@ -80,7 +80,7 @@ function SingleBookmark({
           }}
         />
         <TrashSmallSVG
-          className="h-5 ml-1 hover:text-black cursor-pointer"
+          className="h-5 ml-1 transition-colors duration-75 hover:text-black cursor-pointer"
           onClick={() => {
             // for deleting empty folder
 

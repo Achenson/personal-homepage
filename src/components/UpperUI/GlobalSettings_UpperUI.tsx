@@ -100,7 +100,7 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
           <div className="flex justify-between items-center mb-2 mt-2">
             <p className="">One color for all columns</p>
             <div
-              className={`h-4 w-4 cursor-pointer border-2 border-${uiColorData} ${
+              className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
                 globalSettingsData.oneColorForAllCols
                   ? `bg-${uiColorData} hover:bg-opacity-50`
                   : `hover:bg-${uiColorData} hover:bg-opacity-50`
@@ -116,7 +116,7 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
           <div className="flex justify-between items-center mb-2 mt-2">
             <p className="">Hide folder containing all bookmarks</p>
             <div
-              className={`h-4 w-4 cursor-pointer border-2 border-${uiColorData} ${
+              className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
                 globalSettingsData.hideNonDeletable
                   ? `bg-${uiColorData} hover:bg-opacity-50`
                   : `hover:bg-${uiColorData} hover:bg-opacity-50`

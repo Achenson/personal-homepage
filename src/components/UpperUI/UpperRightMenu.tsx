@@ -44,7 +44,7 @@ function UpperRightMenu({
       <div className="flex w-28 justify-around">
         {/* <AddLinkSVG */}
         <BookmarkSVG
-          className={`h-7 cursor-pointer hover:text-${uiColorData}`}
+          className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
           onClick={() => {
             
             // setNewBookmarkVis((b) => !b);
@@ -54,7 +54,7 @@ function UpperRightMenu({
 
         {/* <AddFolderSVG */}
         <FolderSVG
-          className={`h-7 cursor-pointer hover:text-${uiColorData} mr-1`}
+          className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} mr-1`}
           onClick={() => {
             
             // setNewTabVis((b) => !b);
@@ -64,7 +64,7 @@ function UpperRightMenu({
         />
         {/* <AddNote */}
         <NoteSVG
-          className={`h-6 cursor-pointer fill-current text-black hover:text-${uiColorData}`}
+          className={`h-6 cursor-pointer fill-current transition-colors duration-75 text-black hover:text-${uiColorData}`}
           style={{marginTop: "2px"}}
           onClick={() => {
             // setNewTabVis((b) => !b);
@@ -76,7 +76,7 @@ function UpperRightMenu({
 
         {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
         <AddRssSVG
-          className={`h-7 cursor-pointer hover:text-${uiColorData}`}
+          className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
           onClick={() => {
             // setNewTabVis((b) => !b);
             
@@ -88,7 +88,7 @@ function UpperRightMenu({
 
       <div className="flex w-24 justify-around items-center">
         <PhotographSVG
-          className={`h-6 cursor-pointer hover:text-${uiColorData}`}
+          className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
           onClick={() => {
             // setBackgroundSettingsVis((b) => !b);
          
@@ -96,7 +96,7 @@ function UpperRightMenu({
           }}
         />
         <ColorSVG
-          className={`h-6 cursor-pointer hover:text-${uiColorData}`}
+          className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
           onClick={() => {
            
             upperVisDispatch({type: "COLORS_SETTINGS_TOGGLE"})
@@ -104,7 +104,7 @@ function UpperRightMenu({
           }}
         />
         <SettingsSVG
-          className={`h-6 cursor-pointer hover:text-${uiColorData}`}
+          className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
           onClick={() => {
             // setSettingsVis((b) => !b);
             setTabOpenedData(null)

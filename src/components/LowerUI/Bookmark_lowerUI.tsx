@@ -279,7 +279,7 @@ function Bookmark_lowerUI({
           <p className="w-1"></p>
           <div className="w-full flex justify-center">
             <SaveSVG
-              className={`h-5 fill-current text-black mr-3 ${
+              className={`h-5 fill-current text-black mr-3 transition-colors duration-75 ${
                 wasAnythingChanged || bookmarkComponentType === "new_lowerUI"
                   ? "text-gray-900 hover:text-green-600 cursor-pointer"
                   : "text-blueGray-400 cursor-default"
@@ -508,7 +508,7 @@ function Bookmark_lowerUI({
             />
 
             <CancelSVG
-              className="h-5 fill-current text-black ml-3 hover:text-red-600 cursor-pointer"
+              className="h-5 fill-current text-black ml-3 hover:text-red-600 cursor-pointer transition-colors duration-75"
               onClick={(e) => {
                 e.preventDefault();
                 // setBookmarkVis((b) => !b);

@@ -303,7 +303,7 @@ Props): JSX.Element {
             <div style={{ height: "18px" }} className="-mr-1">
               {chevronDown ? (
                 <ChevronDownSVG
-                  className="h-full cursor-pointer hover:text-blueGray-500"
+                  className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
                   onClick={() => {
                     setChevronDown((b) => !b);
                     setBookmarksListVis((b) => !b);
@@ -311,7 +311,7 @@ Props): JSX.Element {
                 />
               ) : (
                 <ChevronUpSVG
-                  className="h-full cursor-pointer hover:text-blueGray-500"
+                  className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
                   onClick={() => {
                     setChevronDown((b) => !b);
                     setBookmarksListVis((b) => !b);
@@ -483,7 +483,7 @@ Props): JSX.Element {
 
           {tabOpen ? (
             <LockClosedSVG
-              className="h-6 text-gray-700 hover:text-black cursor-pointer"
+              className="h-6 text-gray-700 transition-colors duration-75 hover:text-black cursor-pointer"
               onClick={() => {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
@@ -493,7 +493,7 @@ Props): JSX.Element {
             />
           ) : (
             <LockOpenSVG
-              className="h-6 text-gray-700 hover:text-black cursor-pointer"
+              className="h-6 text-gray-700 transition-colors duration-75 hover:text-black cursor-pointer"
               onClick={() => {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
@@ -508,7 +508,7 @@ Props): JSX.Element {
           <p>Delete</p>
 
           <TrashSVG
-            className="h-6 text-gray-500 hover:text-black cursor-pointer"
+            className="h-6 text-gray-500 transition-colors duration-75 hover:text-black cursor-pointer"
             onClick={() => {
               if (!currentTab[0].deletable) {
                 setNoDeletionErrorVis(true);
@@ -548,7 +548,7 @@ Props): JSX.Element {
         <p className="w-8"></p>
         <div className="w-full flex justify-center">
           <SaveSVG
-            className={`h-5 fill-current mr-3 ${
+            className={`h-5 fill-current mr-3 transition-colors duration-75 ${
               wasAnythingClicked
                 ? "text-gray-900 hover:text-green-600 cursor-pointer"
                 : "text-blueGray-400 cursor-default"
@@ -713,7 +713,7 @@ Props): JSX.Element {
           />
 
           <CancelSVG
-            className="h-5 fill-current text-gray-900 ml-3 hover:text-red-600 cursor-pointer"
+            className="h-5 fill-current text-gray-900 ml-3 hover:text-red-600 cursor-pointer transition-colors duration-75"
             onClick={(e) => {
               e.preventDefault();
               // setEditTabVis((b) => !b);
