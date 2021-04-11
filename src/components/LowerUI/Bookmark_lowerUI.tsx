@@ -279,7 +279,7 @@ function Bookmark_lowerUI({
           <p className="w-1"></p>
           <div className="w-full flex justify-center">
             <SaveSVG
-              className={`h-5 fill-current text-black mr-3 hover:text-green-600 cursor-pointer ${
+              className={`h-5 fill-current text-black mr-3 ${
                 wasAnythingChanged || bookmarkComponentType === "new_lowerUI"
                   ? "text-gray-900 hover:text-green-600 cursor-pointer"
                   : "text-blueGray-400 cursor-default"
@@ -469,9 +469,9 @@ function Bookmark_lowerUI({
                 }
 
                 // setBookmarkVis((b) => !b);
-                // if (bookmarkComponentType === "edit") {
-                //   visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
-                // }
+                if (bookmarkComponentType === "edit") {
+                  visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
+                }
 
                 if (bookmarkComponentType === "new_lowerUI") {
                   visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });

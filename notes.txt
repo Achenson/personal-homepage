@@ -307,8 +307,10 @@ DONE 232. ColumnColor selection doesn't work properly if "one color for all colu
 DONE 232.5 bookmark_lowerUI saveSVG should be inactive if bookmarkComponentType === "edit" DONE
 DONE 233. newBookmark newTab titles upperUI DONE
 XXX 234. optional/conditional getting rid of border on UpperRightMenu? XXX
+DONE 234.5 bug: editing bookmark -> not posiible to add new tag -> the folder dissapears DONE
 DONE ?? 235. why most right icons on UpperRightUI are bold?  ?? DONE (different stroke width on svgs - leave as it is?)
 ??? DONE 235.5 editTab: changing bookmarks alone doesn't enable saveSVG DONE ???
+??? +  log error about memory leakage eg. when editing links (only in this case) ??? the error seem to disappaer
 DONE 236. editTab: center Save & Cancel 
 (one padding removed, but it is still not centered - on purpose, invisible p to the left) DONE
 DONE 239. get rid of "else" statements DONE (two cases only)
@@ -319,8 +321,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 233. search component for bookmarks?
-234. bug: editing bookmark -> not posiible to add new tag -> the folder dissapears
-+  log error about memory leakage eg. when editing links (only in this case)
 237. make animations for save & cancel SVGs? or on all svgs?
 238. newTab vs newBookmark save & cancel centering? save icon is cut when trying to center!
 240. EyeOff should be positioned more to the left if image bg is on
@@ -392,6 +392,10 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 309. UpperRight Menu -> make it possible to close by clicking on the background
 310. GlobalSetting - maka editables on lower UI close after closing GlobalSetting
 311. better logic in bookmark_lowerUI -> make functions in SaveSVG, more notes?
+312. error when deleting folder automatically if it is empty -> Tab -> currentTab problem
+313. make gray button disabled! eg save SVG
+
+
 
 App structure:
 Main
