@@ -385,7 +385,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 297. backgroundImg: how to make the columns shorter, same as if there is no backgroundImg
 298. some effect when hovering over bookmarks?
 299. upperLeft UI should not close tab content!
-300. no img background - get rid of lightest colors?
+300. no img background - get rid of lightest colors? (make lower border in noteInput instead!)
 301. clean tailwind files in the end
 302. sorting method!
 303. better borders in color selecting (more similar to ColumnColor) ??
