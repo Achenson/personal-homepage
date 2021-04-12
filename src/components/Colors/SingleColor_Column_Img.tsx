@@ -79,7 +79,7 @@ function SingleColor_Column_Img({ color, defaultColorsFor }: Props): JSX.Element
 
   return (
     <div
-      className={`h-4 w-8 cursor-pointer ${
+      className={`h-4 w-8 -mr-px -mt-px cursor-pointer ${
         // isThisSelected(defaultColorsFor) ? "border-2" : "border"
         borderMaker(defaultColorsFor)
       } hover:border-gray-400`}

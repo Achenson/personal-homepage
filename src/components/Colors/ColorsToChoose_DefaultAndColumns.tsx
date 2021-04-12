@@ -85,7 +85,7 @@ function ColorsToChoose_DefaultAndColumns({ defaultColorsFor }: Props): JSX.Elem
   return (
     <div className="z-50 relative">
       {/* <div className="absolute bg-white" style={{ left: "-93px", top: "0px" }}> */}
-      <div className="absolute bg-white" style={{ left: "0px", top: "0px" }}>
+      <div className="absolute bg-white" style={{ left: "0px", top: "1px" }}>
         {defaultColorsFor === "column_1" ||
         defaultColorsFor === "column_2" ||
         defaultColorsFor === "column_3" ||

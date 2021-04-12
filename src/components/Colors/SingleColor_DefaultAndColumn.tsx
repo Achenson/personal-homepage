@@ -169,10 +169,10 @@ function SingleColor_DefaultAndColumn({ color, defaultColorsFor }: Props): JSX.E
 
   return (
     <div
-      className={`h-4 w-8 bg-${color} cursor-pointer ${
+      className={`h-4 w-8 -mr-px -mt-px bg-${color} cursor-pointer ${
         // isThisSelected(defaultColorsFor) ? "border-2" : "border"
         borderMaker(defaultColorsFor)
-      } hover:border-gray-400`}
+      } hover:border-gray-500`}
       onClick={() => {
         if (defaultColorsFor === "folders") {
           setFolderColorData(color);
