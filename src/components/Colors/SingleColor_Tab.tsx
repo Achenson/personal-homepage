@@ -28,12 +28,12 @@ function SingleColor_Tab({
   const [rssColorData, setRssColorData] = rssColorState.use();
 
   function borderMaker() {
-    const selectedBorder = "border-2 border-white";
+    const selectedBorder = "border-2 border-white z-50";
     const defaultBorder = "border border-black";
 
     if (tabColor) {
       if (color == tabColor) {
-        return "border-2 border-white";
+        return selectedBorder;
       }
     }
 

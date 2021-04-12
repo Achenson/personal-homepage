@@ -318,6 +318,7 @@ DONE 237. make animations for save & cancel SVGs? or on all svgs? DONE
 DONE 239. get rid of "else" statements DONE (two cases only)
 DONE 242. make note about setTimout in Tab DONE
 DONE 243. column colors two components - redundant? DONE (unified)
+DONE 246. change all border for colors to thinner DONE
 
 
 XXX 250. logo? XXX
@@ -333,7 +334,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
 244. border selection invisible on ColumnColor_UpperUI & Img
 245. change all selections to shadow (experiment more?)(like in UpperLeftMenu)
-246. change all border for colors to thinner (tables?)
 247. redundant code in SingleColor_DefaultAndColumn / setDefaultColorsFor(change/simplify)
 
 248. different hover effect if one color for all columns is set
@@ -400,7 +400,9 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 312. error when deleting folder automatically if it is empty -> Tab -> currentTab problem
 313. make gray button disabled! eg save SVG
 314. unsellect columnColor when automatically closing ColorsToChoose! (selection state problem otherwise)
-
+315. gray area (when clicking settings) does not expand to whole page
+316. background colors selection not visible on black
+317. white border selection problem -> takes too much space to the left. modify adjacent border colors?
 
 
 App structure:

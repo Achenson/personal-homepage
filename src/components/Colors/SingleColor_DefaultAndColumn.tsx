@@ -55,7 +55,7 @@ function SingleColor_DefaultAndColumn({ color, defaultColorsFor }: Props): JSX.E
         return "border border-black";
       }
 
-      return "border-2 border-white";
+      return "border-2 border-white z-50";
     }
 
     if (defaultColorsFor === "notes") {
@@ -63,7 +63,7 @@ function SingleColor_DefaultAndColumn({ color, defaultColorsFor }: Props): JSX.E
         return "border border-black";
       }
 
-      return "border-2 border-white";
+      return "border-2 border-white z-50";
     }
 
     if (defaultColorsFor === "rss") {
@@ -71,7 +71,7 @@ function SingleColor_DefaultAndColumn({ color, defaultColorsFor }: Props): JSX.E
         return "border border-black";
       }
 
-      return "border-2 border-white";
+      return "border-2 border-white z-50";
     }
 
 
