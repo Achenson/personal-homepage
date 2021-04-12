@@ -36,7 +36,7 @@ function UpperLeftMenu({
     }
 
     return arrOfColumns.map((el, index) => {
-      return globalSettingsData.picBackground ? (
+      return  (
         <ColumnColor_UpperUI
           colNumber={oneColorForAllCols ? 1 : el}
           // colSelected={false}
@@ -52,26 +52,9 @@ function UpperLeftMenu({
           key={index}
           arrIndex={index}
           upperVisDispatch={upperVisDispatch}
-          columnType="BACKGROUND_IMG"
+          columnType={globalSettingsData.picBackground ? "BACKGROUND_IMG" : "NO_BACKGROUND_IMG"}
         />
-      ) : (
-        <ColumnColor_UpperUI
-          colNumber={oneColorForAllCols ? 1 : el}
-          // colSelected={false}
-          defaultColorsFor={defaultColorsFor}
-          // setColorsToChooseVis={setColorsToChooseVis}
-
-          columnSelected={columnSelected}
-          setColumnSelected={setColumnSelected}
-          setDefaultColorsFor={setDefaultColorsFor}
-          // setFoldersSelected={setFoldersSelected}
-          // setNotesSelected={setNotesSelected}
-          key={index}
-          arrIndex={index}
-          upperVisDispatch={upperVisDispatch}
-          columnType="NO_BACKGROUND_IMG"
-        />
-      );
+      )
     });
   }
 

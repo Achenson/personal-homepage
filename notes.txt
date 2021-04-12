@@ -335,7 +335,9 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 245. change all selections to shadow (experiment more?)(like in UpperLeftMenu)
 246. change all border for colors to thinner (tables?)
 247. redundant code in SingleColor_DefaultAndColumn / setDefaultColorsFor(change/simplify)
+
 248. different hover effect if one color for all columns is set
+
 249. useEffect -> some should be unmounted? check in the end
 251. css method to get rid of input numbers' arrows
 252. chevrons for selectables are sometimes in wrong state?
