@@ -4,7 +4,6 @@ import ColumnColor_UpperUI from "./ColumnColor_UpperUI";
 import ColorsToChoose_DefaultAndColumns from "../Colors/ColorsToChoose_DefaultAndColumns";
 
 import { globalSettingsState } from "../../state/defaultSettings";
-import ColumnColor_Img_UpperUI from "./ColumnColor_Img_UpperUI";
 import BackgroundColor_UpperUI from "./BackgroundColor_UpperUI";
 import EyeOff_UpperUI from "./EyeOff_UpperUI";
 import ColorsToChoose_Background from "../Colors/ColorsToChoose_Background";
@@ -38,7 +37,7 @@ function UpperLeftMenu({
 
     return arrOfColumns.map((el, index) => {
       return globalSettingsData.picBackground ? (
-        <ColumnColor_Img_UpperUI
+        <ColumnColor_UpperUI
           colNumber={oneColorForAllCols ? 1 : el}
           // colSelected={false}
 
@@ -53,6 +52,7 @@ function UpperLeftMenu({
           key={index}
           arrIndex={index}
           upperVisDispatch={upperVisDispatch}
+          columnType="BACKGROUND_IMG"
         />
       ) : (
         <ColumnColor_UpperUI
@@ -69,6 +69,7 @@ function UpperLeftMenu({
           key={index}
           arrIndex={index}
           upperVisDispatch={upperVisDispatch}
+          columnType="NO_BACKGROUND_IMG"
         />
       );
     });

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { columnsColorsState } from "../../state/colorsState";
+import {
+  columnsColorsState,
+  columnsColorsImg_State,
+} from "../../state/colorsState";
 
 import { UpperVisAction } from "../../utils/interfaces";
 
@@ -26,6 +29,7 @@ interface Props {
   setColumnSelected: React.Dispatch<React.SetStateAction<number | null>>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   arrIndex: number;
+  columnType: "NO_BACKGROUND_IMG" | "BACKGROUND_IMG";
 }
 
 function ColumnColor_UpperUI({
@@ -35,22 +39,46 @@ function ColumnColor_UpperUI({
   setColumnSelected,
   upperVisDispatch,
   arrIndex,
+  columnType,
 }: Props): JSX.Element {
   const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
+
+  const [
+    columnsColorImg_Data,
+    setColumnsColorImg_Data,
+  ] = columnsColorsImg_State.use();
+
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   function columnsColor(colNumber: number) {
+    if (columnType === "NO_BACKGROUND_IMG") {
+      switch (colNumber) {
+        case 1:
+          return "bg-" + columnsColorData.column_1;
+        case 2:
+          return "bg-" + columnsColorData.column_2;
+        case 3:
+          return "bg-" + columnsColorData.column_3;
+        case 4:
+          return "bg-" + columnsColorData.column_4;
+        default:
+          return columnsColorData.column_1;
+      }
+    }
+
     switch (colNumber) {
       case 1:
-        return columnsColorData.column_1;
+        return columnsColorImg_Data.column_1;
       case 2:
-        return columnsColorData.column_2;
+        return columnsColorImg_Data.column_2;
       case 3:
-        return columnsColorData.column_3;
+        return columnsColorImg_Data.column_3;
       case 4:
-        return columnsColorData.column_4;
+        return columnsColorImg_Data.column_4;
+      default:
+        return columnsColorImg_Data.column_1;
     }
   }
 
@@ -85,9 +113,14 @@ function ColumnColor_UpperUI({
               setColumnSelected(colNumber);
             }
           }}
-          className={`relative overflow-hidden h-4 w-8 bg-${columnsColor(
-            colNumber
-          )} cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
+          className={`relative overflow-hidden h-4 w-8 ${
+            columnType === "NO_BACKGROUND_IMG" ? columnsColor(colNumber) : ""
+          } cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
+          style={{
+            backgroundColor: `${
+              columnType === "BACKGROUND_IMG" ? columnsColor(colNumber) : ""
+            }`,
+          }}
         ></div>
       ) : // <div
       //   className={`relative overflow-hidden h-4 w-8 bg-white ${borderStyle()} border-black`}

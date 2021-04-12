@@ -317,6 +317,9 @@ DONE 236. editTab: center Save & Cancel
 DONE 237. make animations for save & cancel SVGs? or on all svgs? DONE
 DONE 239. get rid of "else" statements DONE (two cases only)
 DONE 242. make note about setTimout in Tab DONE
+DONE 243. column colors two components - redundant? DONE (unified)
+
+
 XXX 250. logo? XXX
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
 
@@ -328,7 +331,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 238. newTab vs newBookmark save & cancel centering? save icon is cut when trying to center!
 240. EyeOff should be positioned more to the left if image bg is on
 241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
-243. column colors two components - redundant?
 244. border selection invisible on ColumnColor_UpperUI & Img
 245. change all selections to shadow (experiment more?)(like in UpperLeftMenu)
 246. change all border for colors to thinner (tables?)
@@ -395,6 +397,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 311. better logic in bookmark_lowerUI -> make functions in SaveSVG, more notes?
 312. error when deleting folder automatically if it is empty -> Tab -> currentTab problem
 313. make gray button disabled! eg save SVG
+314. unsellect columnColor when automatically closing ColorsToChoose! (selection state problem otherwise)
 
 
 
