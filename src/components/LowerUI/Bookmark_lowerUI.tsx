@@ -184,10 +184,10 @@ function Bookmark_lowerUI({
         <div className="flex justify-start mb-2">
           <p className="w-10">Tags</p>
 
-          <div className="ml-2 relative w-full min-w-0">
+          <div className="ml-2 relative w-full">
             <input
               type="text"
-              className="w-full border pl-px min-w-0"
+              className="w-full border pl-px"
               // value={tagsInput.join(", ")}
               value={tagsInputStr}
               placeholder={"tag1, tag2..."}

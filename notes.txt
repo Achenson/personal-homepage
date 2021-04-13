@@ -322,6 +322,12 @@ DONE 245. change all selections to XXXshadowXXX wide gray border (experiment mor
 DONE 246. change all border for colors to thinner DONE
 DONE 248. different hover effect if one color for all columns is set DONE
 DONE 252. chevrons for selectables are sometimes in wrong state? DONE
+DONE 253. bookmark: add rssError (similar to noteError?) DONE
+DONE 255. closing of previously opened colors/edits from the other column should be first (not a moment when they are both visible) DONE
+DONE 256. tab & editTab errors move out DONE
+DONE 257. "always opened" -> opened by default DONE
+XXX 259. highlight in red non existing boookmarks in newTab/EditTab? XXX
+DONE 262. min-w-0 needed or not? not needed, w-full instead DONE
 
 
 XXX 250. logo? XXX
@@ -339,16 +345,10 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 
 247. redundant code in SingleColor_DefaultAndColumn / setDefaultColorsFor(change/simplify)
 
-253. bookmark: add rssError (similar to noteError?)
-254. bookmark: add link errors!
-255. closing of previously opened colors/edits from the other column should be first (not a moment when they are both visible)
-256. tab & editTab errors move out
-257. "always opened" -> opened by default
-258. adding net bookmark without tag when all bookmarks is hidden problem?
-259. highlight in red non existing boookmarks in newTab?
+254. bookmark (& RSS?): add link errors!
+258. adding new bookmark without tag when all bookmarks is hidden problem? (make some notification?)
 260. editTab etc. lower border style well selectable are on
 261. input borders more visible?
-262. min-w-0 needed or not?
 263. keyboard controls (arrows and enter) for Selectables!
 264. bug: wasAnythingClicked on NewBookmark and lower bookmark!!!! when choosing tags by clicking
 265. closing selectables on error (eg. title format error)
@@ -404,7 +404,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 318. useEffect -> some should be unmounted? check in the end
 319. "TypeError: setWasAnythingClicked is not a function" newBookmark & newTab upperUI
 320. one color for all columns: when selected, make border collapsed 
-
+321. highlight folder to which a bookmark is saved? 
 
 App structure:
 Main

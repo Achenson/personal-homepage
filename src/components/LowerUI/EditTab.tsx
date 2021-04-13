@@ -232,8 +232,7 @@ Props): JSX.Element {
           <input
             type="text"
             // min-w-0 !!
-            // className="border w-full max-w-6xl min-w-0"
-            className="border w-full max-w-6xl min-w-0 pl-px"
+            className="border w-full max-w-6xl pl-px"
             value={tabTitleInput}
             onChange={(e) => {
               setTabTitleInput(e.target.value);
@@ -255,12 +254,11 @@ Props): JSX.Element {
         {tabType === "folder" && tabID !== "ALL_TAGS" ? (
           <div className="flex items-center mt-2 justify-between">
             <p className={`mr-2`}>Bookmarks</p>
-            <div className="relative w-full min-w-0">
+            <div className="relative w-full">
               <input
                 type="text"
                 // min-w-0 !! ??
-                // className="border w-full max-w-6xl min-w-0"
-                className="border pl-px w-full min-w-0"
+                className="border pl-px w-full"
                 value={bookmarksInputStr}
                 onChange={(e) => {
                   // setTabTitleInput(e.target.value);
@@ -379,7 +377,7 @@ Props): JSX.Element {
             <input
               type="text"
               // min-w-0 !!
-              className="border w-full max-w-6xl min-w-0 pl-px"
+              className="border w-full max-w-6xl pl-px"
               value={rssLinkInput}
               onChange={(e) => {
                 setRssLinkInput(e.target.value);
