@@ -29,6 +29,8 @@ function UpperLeftMenu({
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
+  const [isHoverOnAnyColumn, setIsHoverOnAnyColumn] = useState(false)
+
   function columnsRendering(howMany: number, oneColorForAllCols: boolean) {
     let arrOfColumns = [];
     for (let i = 1; i <= howMany; i++) {
@@ -53,6 +55,7 @@ function UpperLeftMenu({
           arrIndex={index}
           upperVisDispatch={upperVisDispatch}
           columnType={globalSettingsData.picBackground ? "BACKGROUND_IMG" : "NO_BACKGROUND_IMG"}
+          isHoverOnAnyColumn={isHoverOnAnyColumn}
         />
       )
     });
@@ -63,7 +66,18 @@ function UpperLeftMenu({
       {/* <div className="absolute left-0 bottom-0"> */}
       <div className="flex justify-between items-center mb-2 mt-2">
         {/* <p className="w-32">Columns</p> */}
-        <div className="flex bg-white bg-opacity-80">
+        <div className="flex bg-white bg-opacity-80"
+        onMouseEnter={() => {
+          if(globalSettingsData.oneColorForAllCols) {
+            setIsHoverOnAnyColumn(true)
+          }
+        }}
+        onMouseLeave={() => {
+          if(globalSettingsData.oneColorForAllCols) {
+            setIsHoverOnAnyColumn(false)
+          }
+        }}
+        >
           {columnsRendering(4, globalSettingsData.oneColorForAllCols)}
         </div>
       </div>

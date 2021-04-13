@@ -320,6 +320,8 @@ DONE 242. make note about setTimout in Tab DONE
 DONE 243. column colors two components - redundant? DONE (unified)
 DONE 245. change all selections to XXXshadowXXX wide gray border (experiment more?)(like in UpperLeftMenu) DONE
 DONE 246. change all border for colors to thinner DONE
+DONE 248. different hover effect if one color for all columns is set DONE
+DONE 252. chevrons for selectables are sometimes in wrong state? DONE
 
 
 XXX 250. logo? XXX
@@ -333,14 +335,10 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 238. newTab vs newBookmark save & cancel centering? save icon is cut when trying to center!
 240. EyeOff should be positioned more to the left if image bg is on
 241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
-244. border selection invisible on ColumnColor_UpperUI & Img
+251. css method to get rid of input numbers' arrows // input bottom padding? test on chrome
+
 247. redundant code in SingleColor_DefaultAndColumn / setDefaultColorsFor(change/simplify)
 
-248. different hover effect if one color for all columns is set
-
-249. useEffect -> some should be unmounted? check in the end
-251. css method to get rid of input numbers' arrows
-252. chevrons for selectables are sometimes in wrong state?
 253. bookmark: add rssError (similar to noteError?)
 254. bookmark: add link errors!
 255. closing of previously opened colors/edits from the other column should be first (not a moment when they are both visible)
@@ -403,6 +401,9 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 315. gray area (when clicking settings) does not expand to whole page
 316. background colors selection not visible on black
 317. white border selection problem -> takes too much space to the left. modify adjacent border colors?
+318. useEffect -> some should be unmounted? check in the end
+319. "TypeError: setWasAnythingClicked is not a function" newBookmark & newTab upperUI
+320. one color for all columns: when selected, make border collapsed 
 
 
 App structure:

@@ -30,6 +30,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   arrIndex: number;
   columnType: "NO_BACKGROUND_IMG" | "BACKGROUND_IMG";
+  isHoverOnAnyColumn: boolean;
 }
 
 function ColumnColor_UpperUI({
@@ -40,6 +41,7 @@ function ColumnColor_UpperUI({
   upperVisDispatch,
   arrIndex,
   columnType,
+  isHoverOnAnyColumn
 }: Props): JSX.Element {
   const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
@@ -115,7 +117,9 @@ function ColumnColor_UpperUI({
           }}
           className={`relative overflow-hidden h-4 w-8 ${
             columnType === "NO_BACKGROUND_IMG" ? columnsColor(colNumber) : ""
-          } cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
+          }
+          ${isHoverOnAnyColumn ? "shadow-inner_lg" : ""}
+          cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
           style={{
             backgroundColor: `${
               columnType === "BACKGROUND_IMG" ? columnsColor(colNumber) : ""
