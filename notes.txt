@@ -404,7 +404,8 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 318. useEffect -> some should be unmounted? check in the end
 319. "TypeError: setWasAnythingClicked is not a function" newBookmark & newTab upperUI
 320. one color for all columns: when selected, make border collapsed 
-321. highlight folder to which a bookmark is saved? 
+321. highlight folder to which a bookmark is saved?
+322. newBookmark & editBookmark: title & link wrong responsive behaviour  
 
 App structure:
 Main

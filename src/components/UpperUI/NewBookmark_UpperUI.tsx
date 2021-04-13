@@ -120,7 +120,7 @@ Props): JSX.Element {
 
           <input
             type="text"
-            className="w-full ml-2 border pl-px"
+            className="w-full ml-2 border border-gray-300 pl-px"
             value={titleInput}
             placeholder={"new bookmark title"}
             onChange={(e) => setTitleInput(e.target.value)}
@@ -136,7 +136,7 @@ Props): JSX.Element {
 
           <input
             type="text"
-            className="w-full ml-2 border pl-px"
+            className="w-full ml-2 border border-gray-300 pl-px"
             value={urlInput}
             placeholder={"enter proper URL address"}
             onChange={(e) => setUrlInput(e.target.value)}
@@ -153,7 +153,7 @@ Props): JSX.Element {
           <div className="ml-2 relative w-full">
             <input
               type="text"
-              className="w-full border pl-px"
+              className="w-full border border-gray-300 pl-px"
               // value={tagsInput.join(", ")}
               value={tagsInputStr}
               placeholder={"tag1, tag2..."}
