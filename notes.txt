@@ -318,6 +318,7 @@ DONE 237. make animations for save & cancel SVGs? or on all svgs? DONE
 DONE 239. get rid of "else" statements DONE (two cases only)
 DONE 242. make note about setTimout in Tab DONE
 DONE 243. column colors two components - redundant? DONE (unified)
+DONE 245. change all selections to XXXshadowXXX wide gray border (experiment more?)(like in UpperLeftMenu) DONE
 DONE 246. change all border for colors to thinner DONE
 
 
@@ -333,7 +334,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 240. EyeOff should be positioned more to the left if image bg is on
 241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
 244. border selection invisible on ColumnColor_UpperUI & Img
-245. change all selections to shadow (experiment more?)(like in UpperLeftMenu)
 247. redundant code in SingleColor_DefaultAndColumn / setDefaultColorsFor(change/simplify)
 
 248. different hover effect if one color for all columns is set

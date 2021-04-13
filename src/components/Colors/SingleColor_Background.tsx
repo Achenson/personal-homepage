@@ -28,7 +28,7 @@ function SingleColor_Background({ color }: Props): JSX.Element {
     <div
       className={`h-4 w-4 -mr-px -mt-px bg-${color} cursor-pointer
       ${borderMaker()}
-         hover:border-gray-400`}
+      hover:border-2 hover:border-gray-500 hover:z-50`}
       onClick={() => {
         setBackgroundColorData(color);
       }}

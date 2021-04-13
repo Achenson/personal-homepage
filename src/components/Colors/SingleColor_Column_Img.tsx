@@ -82,7 +82,7 @@ function SingleColor_Column_Img({ color, defaultColorsFor }: Props): JSX.Element
       className={`h-4 w-8 -mr-px -mt-px cursor-pointer ${
         // isThisSelected(defaultColorsFor) ? "border-2" : "border"
         borderMaker(defaultColorsFor)
-      } hover:border-gray-400`}
+      } hover:border-2 hover:border-gray-500 hover:z-50`}
       style={{backgroundColor: color }}
       onClick={() => {
         if (

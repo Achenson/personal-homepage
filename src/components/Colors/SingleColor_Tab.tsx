@@ -56,7 +56,7 @@ function SingleColor_Tab({
 
   return (
     <div
-      className={`h-4 w-8 -mr-px -mt-px bg-${color} cursor-pointer ${borderMaker()} hover:border-gray-500`}
+      className={`h-4 w-8 -mr-px -mt-px bg-${color} cursor-pointer ${borderMaker()} hover:border-2 hover:border-gray-500 hover:z-50`}
       onClick={() => {
         setTabsData((previous) =>
           produce(previous, (updated) => {

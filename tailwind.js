@@ -82,7 +82,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      borderWidth: ['hover'],
+      zIndex: ['hover'],
+    },
   },
   plugins: [],
 };
