@@ -572,6 +572,8 @@ Props): JSX.Element {
 
               if (!regexForTitle.test(tabTitleInput)) {
                 setTitleFormatErrorVis(true);
+                setBookmarksListVis(false);
+                setChevronDown(true);
                 return;
               }
 
@@ -585,16 +587,22 @@ Props): JSX.Element {
               if (tabType === "folder") {
                 if (!regexForBookmarks.test(bookmarksInputStr)) {
                   setBookmarksErrorVis(true);
+                  setBookmarksListVis(false);
+                  setChevronDown(true);
                   return;
                 }
 
                 if (!bookmarkExistenceCheck()) {
                   setBookmarksExistenceErrorVis(true);
+                  setBookmarksListVis(false);
+                  setChevronDown(true);
                   return;
                 }
 
                 if (!bookmarksUniquenessCheck()) {
                   setBookmarksRepeatErrorVis(true);
+                  setBookmarksListVis(false);
+                  setChevronDown(true);
                   return;
                 }
               }

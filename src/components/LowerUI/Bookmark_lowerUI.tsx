@@ -300,7 +300,8 @@ function Bookmark_lowerUI({
 
                 if (!regexForTitle.test(titleInput)) {
                   setTitleFormatErrorVis(true);
-
+                  setTagsListVis(false)
+                  setChevronDown(true);
                   return;
                 }
 
@@ -313,11 +314,15 @@ function Bookmark_lowerUI({
                     titleInput !== (currentBookmark as SingleBookmarkData).title
                   ) {
                     setTitleUniquenessErrorVis(true);
+                    setTagsListVis(false)
+                    setChevronDown(true);
                     return;
                   }
                 } else {
                   if (!titleUniquenessCheck()) {
                     setTitleUniquenessErrorVis(true);
+                    setTagsListVis(false)
+                    setChevronDown(true);
                     return;
                   }
                 }
@@ -327,12 +332,16 @@ function Bookmark_lowerUI({
                   tagsInputStr !== ""
                 ) {
                   setTagErrorVis(true);
+                  setTagsListVis(false)
+                  setChevronDown(true);
                   return;
                 }
 
                 for (let el of tagsInputArr) {
                   if (notesTitlesArr.indexOf(el) > -1) {
                     setNoteErrorVis(true);
+                    setTagsListVis(false)
+                    setChevronDown(true);
                     return;
                   }
                 }
@@ -340,12 +349,15 @@ function Bookmark_lowerUI({
                 for (let el of tagsInputArr) {
                   if (rssTitlesArr.indexOf(el) > -1) {
                     setRssErrorVis(true);
+                    setTagsListVis(false)
+                    setChevronDown(true);
                     return;
                   }
                 }
 
                 if (!tagUniquenessCheck()) {
                   setTagRepeatErrorVis(true);
+                  setChevronDown(true);
                   return;
                 }
 

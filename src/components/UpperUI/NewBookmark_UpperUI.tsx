@@ -114,7 +114,7 @@ Props): JSX.Element {
         className="bg-gray-200 pb-2 pt-3 pl-2 pr-1 border-2 border-teal-500 rounded-sm md:mb-48"
         style={{ width: "350px" }}
       >
-          <p className="text-center">New bookmark</p>
+        <p className="text-center">New bookmark</p>
         <div className="flex justify-around mb-2 mt-3">
           <p className="w-10">Title</p>
 
@@ -230,8 +230,7 @@ Props): JSX.Element {
           <p className={`text-red-600`}>{bookmarkErrors.noteError}</p>
         )}
 
-        
-{rssErrorVis && (
+        {rssErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.rssError}</p>
         )}
 
@@ -260,7 +259,8 @@ Props): JSX.Element {
 
                 if (!regexForTitle.test(titleInput)) {
                   setTitleFormatErrorVis(true);
-
+                  setTagsListVis(false);
+                  setChevronDown(true);
                   return;
                 }
 
@@ -268,6 +268,8 @@ Props): JSX.Element {
 
                 if (!titleUniquenessCheck()) {
                   setTitleUniquenessErrorVis(true);
+                  setTagsListVis(false);
+                  setChevronDown(true);
                   return;
                 }
 
@@ -276,28 +278,33 @@ Props): JSX.Element {
                   tagsInputStr !== ""
                 ) {
                   setTagErrorVis(true);
+                  setTagsListVis(false);
+                  setChevronDown(true);
                   return;
                 }
 
                 for (let el of tagsInputArr) {
                   if (notesTitlesArr.indexOf(el) > -1) {
                     setNoteErrorVis(true);
+                    setTagsListVis(false);
+                    setChevronDown(true);
                     return;
                   }
                 }
-
 
                 for (let el of tagsInputArr) {
                   if (rssTitlesArr.indexOf(el) > -1) {
                     setRssErrorVis(true);
+                    setTagsListVis(false);
+                    setChevronDown(true);
                     return;
                   }
                 }
 
-                
-
                 if (!tagUniquenessCheck()) {
                   setTagRepeatErrorVis(true);
+                  setTagsListVis(false);
+                  setChevronDown(true);
                   return;
                 }
 

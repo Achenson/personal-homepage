@@ -332,6 +332,7 @@ DONE 260. editTab etc. lower border style when selectable are on DONE
 DONE 261. input borders more visible? DONE
 DONE 262. min-w-0 needed or not? not needed, w-full instead DONE
 DONE 264. bug: wasAnythingClicked on NewBookmark and lower bookmark!!!! when choosing tags by clicking DONE
+DONE 265. closing selectables on error (eg. title format error) DONE
 
 
 XXX 250. logo? XXX
@@ -351,7 +352,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 263. keyboard controls (arrows and enter) for Selectables!
 
 
-265. closing selectables on error (eg. title format error)
 266. ? before dot, new syntax being automatically added sometimes?
 267. bookmark_newAndEdit -> render 3 versions of a component instead of 2?? with different props
 268. tagsInputStr are not being sorted alphabetically after adding new tag
@@ -409,6 +409,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 323. newFolder newRSS: better input alignments
 324. delete all btn for selectables
 325. open popup with 3 default images to choose
+326. chevronDown & selectableVis -> unify logic!
 
 App structure:
 Main

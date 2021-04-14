@@ -370,28 +370,38 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
                 if (!regexForTitle.test(tabTitleInput)) {
                   setTitleFormatErrorVis(true);
+                  setBookmarksListVis(false);
+                  setChevronDown(true);
 
                   return;
                 }
 
                 if (!titleUniquenessCheck()) {
                   setTitleUniquenessErrorVis(true);
+                  setBookmarksListVis(false);
+                  setChevronDown(true);
                   return;
                 }
 
                 if (tabType === "folder") {
                   if (!regexForBookmarks.test(bookmarksInputArr.join(", "))) {
                     setBookmarksErrorVis(true);
+                    setBookmarksListVis(false);
+                    setChevronDown(true);
                     return;
                   }
 
                   if (!bookmarkExistenceCheck()) {
                     setBookmarkExistenceErrorVis(true);
+                    setBookmarksListVis(false);
+                    setChevronDown(true);
                     return;
                   }
 
                   if (!bookmarksUniquenessCheck()) {
                     setBookmarksRepeatErrorVis(true);
+                    setBookmarksListVis(false);
+                    setChevronDown(true);
                     return;
                   }
                 }
