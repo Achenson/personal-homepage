@@ -1,5 +1,5 @@
 import React from "react";
-import {folderColorState } from "../../state/colorsState";
+import { folderColorState } from "../../state/colorsState";
 import { noteColorState } from "../../state/colorsState";
 import { rssColorState } from "../../state/colorsState";
 // import { uiColorState } from "../../state/colorsState";
@@ -11,18 +11,20 @@ import { produce } from "immer";
 interface Props {
   color: string;
   defaultColorsFor:
-  | "folders"
-  | "notes"
-  | "rss"
-  | "column_1"
-  | "column_2"
-  | "column_3"
-  | "column_4"
-  | "unselected";
+    | "folders"
+    | "notes"
+    | "rss"
+    | "column_1"
+    | "column_2"
+    | "column_3"
+    | "column_4"
+    | "unselected";
 }
 
-function SingleColor_Column_Img({ color, defaultColorsFor }: Props): JSX.Element {
-  
+function SingleColor_Column_Img({
+  color,
+  defaultColorsFor,
+}: Props): JSX.Element {
   const [
     columnsColorsImg_Data,
     setColumnsColorsImg_Data,
@@ -40,40 +42,35 @@ function SingleColor_Column_Img({ color, defaultColorsFor }: Props): JSX.Element
       | "column_4"
       | "unselected"
   ) {
-    if (defaultColorsFor === "unselected") {
-      return "border border-black";
-    }
+    const unselected = "border border-black";
+    const selectedBlack = "border-2 border-black";
 
-    if (defaultColorsFor === "column_1") {
-      if (color !== columnsColorsImg_Data.column_1) {
-        return "border border-black";
-      }
+    switch (defaultColorsFor) {
+      case "column_1":
+        if (color === columnsColorsImg_Data.column_1) {
+          return selectedBlack;
+        }
+        return unselected;
 
-      return "border-2 border-black";
-    }
+      case "column_2":
+        if (color === columnsColorsImg_Data.column_2) {
+          return selectedBlack;
+        }
+        return unselected;
 
-    if (defaultColorsFor === "column_2") {
-      if (color !== columnsColorsImg_Data.column_2) {
-        return "border border-black";
-      }
+      case "column_3":
+        if (color === columnsColorsImg_Data.column_3) {
+          return selectedBlack;
+        }
+        return unselected;
 
-      return "border-2 border-black";
-    }
-
-    if (defaultColorsFor === "column_3") {
-      if (color !== columnsColorsImg_Data.column_3) {
-        return "border border-black";
-      }
-
-      return "border-2 border-black";
-    }
-
-    if (defaultColorsFor === "column_4") {
-      if (color !== columnsColorsImg_Data.column_4) {
-        return "border border-black";
-      }
-
-      return "border-2 border-black";
+      case "column_4":
+        if (color === columnsColorsImg_Data.column_4) {
+          return selectedBlack;
+        }
+        return unselected;
+      default:
+        return unselected;
     }
   }
 
@@ -83,7 +80,7 @@ function SingleColor_Column_Img({ color, defaultColorsFor }: Props): JSX.Element
         // isThisSelected(defaultColorsFor) ? "border-2" : "border"
         borderMaker(defaultColorsFor)
       } hover:border-2 hover:border-gray-500 hover:z-50`}
-      style={{backgroundColor: color }}
+      style={{ backgroundColor: color }}
       onClick={() => {
         if (
           defaultColorsFor === "column_1" ||
@@ -103,8 +100,6 @@ function SingleColor_Column_Img({ color, defaultColorsFor }: Props): JSX.Element
             })
           );
         }
-
-  
       }}
     ></div>
   );

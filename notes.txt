@@ -320,6 +320,7 @@ DONE 242. make note about setTimout in Tab DONE
 DONE 243. column colors two components - redundant? DONE (unified)
 DONE 245. change all selections to XXXshadowXXX wide gray border (experiment more?)(like in UpperLeftMenu) DONE
 DONE 246. change all border for colors to thinner DONE
+DONE 247. redundant code in SingleColor_DefaultAndColumn / setDefaultColorsFor(change/simplify) DONE
 DONE 248. different hover effect if one color for all columns is set DONE
 DONE 252. chevrons for selectables are sometimes in wrong state? DONE
 DONE 253. bookmark: add rssError (similar to noteError?) DONE
@@ -343,8 +344,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 240. EyeOff should be positioned more to the left if image bg is on
 241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
 251. css method to get rid of input numbers' arrows // input bottom padding? test on chrome
-
-247. redundant code in SingleColor_DefaultAndColumn / setDefaultColorsFor(change/simplify)
 
 254. bookmark (& RSS?): add link errors!
 258. adding new bookmark without tag when all bookmarks is hidden problem? (make some notification?)
