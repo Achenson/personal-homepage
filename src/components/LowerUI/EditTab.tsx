@@ -243,7 +243,7 @@ Props): JSX.Element {
               setChevronDown(true);
             }}
           />
-          {tabType === "folder" && (
+          {tabType === "folder" && tabID !== "ALL_TAGS" && (
             <div style={{ height: "18px" }} className="-mr-1">
               <ChevronDownSVG className="h-full invisible" />
             </div>

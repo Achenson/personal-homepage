@@ -334,6 +334,8 @@ DONE 262. min-w-0 needed or not? not needed, w-full instead DONE
 DONE 264. bug: wasAnythingClicked on NewBookmark and lower bookmark!!!! when choosing tags by clicking DONE
 DONE 265. closing selectables on error (eg. title format error) DONE
 DONE 266. ? before dot, new syntax being automatically added sometimes? DONE
+DONE 267. bookmark_newAndEdit -> render 3 versions of a component instead of 2?? with different props DONE
+DONE 270. all tags input right margin DONE
 
 
 XXX 250. logo? XXX
@@ -345,6 +347,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 
 233. search component for bookmarks?
 238. newTab vs newBookmark save & cancel centering? save icon is cut when trying to center!
+
 240. EyeOff should be positioned more to the left if image bg is on
 241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
 251. css method to get rid of input numbers' arrows // input bottom padding? test on chrome
@@ -352,10 +355,8 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 258. adding new bookmark without tag when all bookmarks is hidden problem? (make some notification?)
 263. keyboard controls (arrows and enter) for Selectables!
 
-267. bookmark_newAndEdit -> render 3 versions of a component instead of 2?? with different props
 268. tagsInputStr are not being sorted alphabetically after adding new tag
-269. editTab: error "for existing bookmarks only" gets covered by Selectables (add hide on focus?)
-270. all tags error right margin
+
 271. all tags id naming change
 272. check is lazy initialization is neede somewhere else (like in EditTab!)
 273. xx info that new link will be an all tag (empty input)xx -> open tab for which bookmark is added automatically
@@ -409,6 +410,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 324. delete all btn for selectables
 325. open popup with 3 default images to choose
 326. chevronDown & selectableVis -> unify logic!
+327. add error to editTab to all only unique titles! 
 
 App structure:
 Main
