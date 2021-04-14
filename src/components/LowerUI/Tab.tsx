@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState, useReducer, useCallback } from "react";
 
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 import { bookmarksDataState } from "../../state/tabsAndBookmarks";
@@ -34,7 +34,12 @@ import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "../../utils/itemsDnd";
 
-import { TabVisAction, SingleTabData, UpperVisAction } from "../../utils/interfaces";
+import {
+  TabVisAction,
+  SingleTabData,
+  UpperVisAction,
+} from "../../utils/interfaces";
+import { current } from "immer";
 
 interface SingleBookmarkData {
   title: string;
@@ -60,7 +65,6 @@ interface VisState {
   tabContentVis: boolean;
   newBookmarkVis: boolean;
   editBookmarkVis: boolean;
-  
 }
 
 function Tab({
@@ -69,17 +73,16 @@ function Tab({
   tabColor,
   tabType,
   colNumber,
-  upperVisDispatch
-  // being passed as a prop from closeAllTabsData, get if from the state instead?
-  // closeAllTabs,
-}: // noteInput,
+  upperVisDispatch,
+}: // being passed as a prop from closeAllTabsData, get if from the state instead?
+// closeAllTabs,
+// noteInput,
 // rssLink
 Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
-  
+
   const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
-              
 
   let currentTab = tabsData.find((obj) => obj.id === tabID);
 
@@ -97,8 +100,8 @@ Props): JSX.Element {
     editBookmarkVis: false,
   };
 
-//  if tabOpenedData is not equall to tabID, editables (eg. tabEdit) will not render & useEffect will close all editables
-// after clicking current Tab or its editables, tabOpenedData will be set to current tab's tabID
+  //  if tabOpenedData is not equall to tabID, editables (eg. tabEdit) will not render & useEffect will close all editables
+  // after clicking current Tab or its editables, tabOpenedData will be set to current tab's tabID
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   function visReducer(state: VisState, action: TabVisAction) {
@@ -215,8 +218,62 @@ Props): JSX.Element {
         return state;
     }
   }
-
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+
+  const [folderLength, setFolderLength] = useState<number>(() =>
+    calcFolderLength()
+  );
+
+  function calcFolderLength() {
+    let counter = 0;
+
+    bookmarksData.forEach((obj) => {
+      // @ts-ignore
+      if (obj.tags.indexOf(currentTab.id) > -1) {
+        counter++;
+      }
+    });
+
+    return counter;
+  }
+
+  const calcFolderLength_memoized = useCallback(() => {
+
+    let counter = 0;
+    let currentTabId: string|number|undefined;
+    if(currentTab) {
+      currentTabId = currentTab.id as string|number
+    }
+
+    bookmarksData.forEach((obj) => {
+      // @ts-ignore
+      if (obj.tags.indexOf(currentTabId) > -1) {
+        counter++;
+      }
+    });
+
+    return counter;
+  }, [bookmarksData, currentTab]);
+
+ 
+
+  useEffect(() => {
+
+    
+    let newFolderLength = calcFolderLength_memoized();
+
+    if (newFolderLength > folderLength) {
+      console.log("longer!");
+    }
+
+    if (newFolderLength < folderLength) {
+      console.log("shorter!");
+    }
+
+    if (newFolderLength !== folderLength) {
+      setFolderLength(newFolderLength);
+    }
+  }, [folderLength, calcFolderLength_memoized]);
 
   const [iconsVis, setIconsVis] = useState<boolean>(false);
 
@@ -288,12 +345,15 @@ Props): JSX.Element {
   useEffect(() => {
     if (isDragging) {
       setTabBeingDraggedColor_Data({ tabColor: finalTabColor });
-      visDispatch({type: "TAB_EDITABLES_CLOSE"})
-      setTabOpenedData(null)
-
-
+      visDispatch({ type: "TAB_EDITABLES_CLOSE" });
+      setTabOpenedData(null);
     }
-  }, [isDragging, finalTabColor, setTabBeingDraggedColor_Data, setTabOpenedData]);
+  }, [
+    isDragging,
+    finalTabColor,
+    setTabBeingDraggedColor_Data,
+    setTabOpenedData,
+  ]);
 
   const colorsForLightText: string[] = [
     // "orange-500",
@@ -407,7 +467,7 @@ Props): JSX.Element {
           className="pl-1 w-full truncate cursor-pointer"
           onClick={() => {
             visDispatch({ type: "TAB_CONTENT_TOGGLE" });
-            upperVisDispatch({type: "CLOSE_ALL"})
+            upperVisDispatch({ type: "CLOSE_ALL" });
           }}
         >
           <p className="truncate">{tabTitle}</p>
@@ -439,11 +499,13 @@ Props): JSX.Element {
 
           {tabType === "folder" && (
             <PlusSVG
-              className={`h-8 transition-colors duration-75 hover:${hoverText(finalTabColor)} cursor-pointer`}
+              className={`h-8 transition-colors duration-75 hover:${hoverText(
+                finalTabColor
+              )} cursor-pointer`}
               style={{ marginTop: "-6px" }}
               onClick={() => {
                 visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
-                upperVisDispatch({type: "CLOSE_ALL"})
+                upperVisDispatch({ type: "CLOSE_ALL" });
               }}
             />
           )}
@@ -463,7 +525,7 @@ Props): JSX.Element {
             }}
             onClick={() => {
               visDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
-              upperVisDispatch({type: "CLOSE_ALL"})
+              upperVisDispatch({ type: "CLOSE_ALL" });
             }}
           />
 
@@ -473,7 +535,7 @@ Props): JSX.Element {
             )} cursor-pointer`}
             onClick={() => {
               visDispatch({ type: "EDIT_TOGGLE" });
-              upperVisDispatch({type: "CLOSE_ALL"})
+              upperVisDispatch({ type: "CLOSE_ALL" });
             }}
 
             // }}
@@ -512,7 +574,7 @@ Props): JSX.Element {
         />
       )}
 
-      {visState.editTabVis && tabOpenedData === tabID &&(
+      {visState.editTabVis && tabOpenedData === tabID && (
         <EditTab
           tabID={tabID}
           tabType={tabType}

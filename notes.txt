@@ -359,10 +359,8 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 
 268. tagsInputStr are not being sorted alphabetically after adding new tag
 
-272. check is lazy initialization is neede somewhere else (like in EditTab!)
-273. xx info that new link will be an all tag (empty input)xx -> open tab for which bookmark is added automatically
-
-
+273. xx info that new link will be an all tag (empty input)xx -> highlight tab for which bookmark is added automatically,
+make all bookmarks appear again if hidden?
 
 276. tab editing -> should opening it increase columns size also as a side effect? (check after background img problems are fixed)
 277. background img setting -> revert to aligning to left
@@ -378,7 +376,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds
 290. SingleBookmark don't look good on lightest columns
 291. unmounted component error (err mentioned alread?)
-292. check .? occurences
 293. upperVisDispatch -> color selectable should be gone when closing all
 295. UpperRightMenu should close at least editables in lowerUI
 296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
@@ -404,15 +401,16 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 316. background colors selection not visible on black
 317. white border selection problem -> takes too much space to the left. modify adjacent border colors?
 318. useEffect -> some should be unmounted? check in the end
-319. "TypeError: setWasAnythingClicked is not a function" newBookmark & newTab upperUI
 320. one color for all columns: when selected, make border collapsed 
-321. highlight folder to which a bookmark is saved?
 322. newBookmark & editBookmark: title & link wrong responsive behaviour  
 323. newFolder newRSS: better input alignments
 324. delete all btn for selectables
 325. open popup with 3 default images to choose
 326. chevronDown & selectableVis -> unify logic!
 327. add error to editTab to all only unique titles! 
+328. bigger gap after tab on smaller screen sizes when column is empty?
+329. code order (useEffect, func itp) eg. in 
+330. extract more functions out?
 
 App structure:
 Main
