@@ -238,7 +238,7 @@ Props): JSX.Element {
           <p className={`text-red-600`}>{bookmarkErrors.tagRepeat}</p>
         )}
 
-        <div className="flex justify-start mt-6">
+        <div className="flex justify-start mt-5">
           <p className="w-1"></p>
           <div className="w-full flex justify-center">
             <SaveSVG

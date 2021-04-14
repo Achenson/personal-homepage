@@ -339,6 +339,7 @@ DONE 267. bookmark_newAndEdit -> render 3 versions of a component instead of 2??
 DONE 270. all tags input right margin DONE
 XXX 271. all tags id naming change XXX
 DONE 274. title & RSS link: smaller right margin! DONE
+DONE 275. newTab (& newBookmark & bookmark_lowerUI) upperUI margin above btns is too big DONE
 
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
 
@@ -362,7 +363,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 273. xx info that new link will be an all tag (empty input)xx -> open tab for which bookmark is added automatically
 
 
-275. newTab & newBookmark upperUI margin above btns is too big
+
 276. tab editing -> should opening it increase columns size also as a side effect? (check after background img problems are fixed)
 277. background img setting -> revert to aligning to left
 278. background img zooming back after clicking any settings

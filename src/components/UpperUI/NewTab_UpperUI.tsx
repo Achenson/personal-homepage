@@ -350,7 +350,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           <p className={`text-red-600`}>{tabErrors.textArea}</p>
         )}
 
-        <div className="flex justify-start mt-6">
+        <div className="flex justify-start mt-4">
           <p className="w-8"></p>
           {/* !!! pl-4 in NewLink */}
           <div className="w-full flex justify-center">
