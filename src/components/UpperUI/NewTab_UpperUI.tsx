@@ -180,7 +180,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           {/* <div className="w-full pl-2"> */}
           <input
             type="text"
-            className="w-full border pl-px"
+            className="w-full border border-gray-300 pl-px"
             value={tabTitleInput}
             placeholder={
               tabType === "folder"
@@ -210,7 +210,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             <div className="relative w-full">
               <input
                 type="text"
-                className="w-full border pl-px"
+                className="w-full border border-gray-300 pl-px"
                 // value={tabLinksInput.join(", ")}
                 value={bookmarksInputStr}
                 // onChange={(e) =>
@@ -287,7 +287,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             <div className="w-full">
               <input
                 type="text"
-                className="w-full border pl-px"
+                className="w-full border border-gray-300 pl-px"
                 value={rssLinkInput}
                 placeholder="enter RSS link"
                 onChange={(e) => setRssLinkInput(e.target.value)}

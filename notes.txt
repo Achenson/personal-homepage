@@ -327,6 +327,7 @@ DONE 255. closing of previously opened colors/edits from the other column should
 DONE 256. tab & editTab errors move out DONE
 DONE 257. "always opened" -> opened by default DONE
 XXX 259. highlight in red non existing boookmarks in newTab/EditTab? XXX
+DONE 261. input borders more visible? DONE
 DONE 262. min-w-0 needed or not? not needed, w-full instead DONE
 
 
@@ -348,7 +349,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 254. bookmark (& RSS?): add link errors!
 258. adding new bookmark without tag when all bookmarks is hidden problem? (make some notification?)
 260. editTab etc. lower border style well selectable are on
-261. input borders more visible?
 263. keyboard controls (arrows and enter) for Selectables!
 264. bug: wasAnythingClicked on NewBookmark and lower bookmark!!!! when choosing tags by clicking
 265. closing selectables on error (eg. title format error)
@@ -406,6 +406,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 320. one color for all columns: when selected, make border collapsed 
 321. highlight folder to which a bookmark is saved?
 322. newBookmark & editBookmark: title & link wrong responsive behaviour  
+323. newFolder newRSS: better input alignments
 
 App structure:
 Main
