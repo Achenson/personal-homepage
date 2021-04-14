@@ -89,8 +89,8 @@ function GapAfterTab({
             draggedIntoIndex = i;
           }
         });
-        // @ts-ignore
-        let itemToUpdatePriority_initial = itemToUpdate.priority;
+        
+        let itemToUpdatePriority_initial = itemToUpdate?.priority;
 
         let draggedIntoPriority = tabsData[draggedIntoIndex].priority;
 
