@@ -42,7 +42,9 @@ function SelectableList({
                   return;
                 }
 
-                (setWasAnythingClicked as React.Dispatch<React.SetStateAction<boolean>>)(true);
+                if(setWasAnythingClicked) {
+                  (setWasAnythingClicked as React.Dispatch<React.SetStateAction<boolean>>)(true);
+                }
 
                 setSelectablesInputStr(selectablesInputStr.concat(", " + el));
               }}

@@ -51,10 +51,6 @@ function SingleColor_DefaultAndColumn({
     const selectedBlack = "border-2 border-black";
     const selectedWhite = "border-2 border-white z-50";
 
-    // if (defaultColorsFor === "unselected") {
-    //   return unselected;
-    // }
-
     // const arrForLightSelect = ["blueGray-303", "blueGray-404", "gray-404", "yellow-300", "yellow-330", "yellow-400", "lime-400", "orange-300"];
 
     switch (defaultColorsFor) {
@@ -99,6 +95,7 @@ function SingleColor_DefaultAndColumn({
           return selectedBlack;
         }
         return unselected;
+
       default:
         return unselected;
     }

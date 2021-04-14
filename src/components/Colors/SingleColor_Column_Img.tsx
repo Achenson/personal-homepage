@@ -69,6 +69,7 @@ function SingleColor_Column_Img({
           return selectedBlack;
         }
         return unselected;
+        
       default:
         return unselected;
     }
