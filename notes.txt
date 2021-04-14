@@ -322,6 +322,7 @@ DONE 245. change all selections to XXXshadowXXX wide gray border (experiment mor
 DONE 246. change all border for colors to thinner DONE
 DONE 247. redundant code in SingleColor_DefaultAndColumn / setDefaultColorsFor(change/simplify) DONE
 DONE 248. different hover effect if one color for all columns is set DONE
+XXX 250. logo? XXX
 DONE 252. chevrons for selectables are sometimes in wrong state? DONE
 DONE 253. bookmark: add rssError (similar to noteError?) DONE
 DONE 255. closing of previously opened colors/edits from the other column should be first (not a moment when they are both visible) DONE
@@ -336,9 +337,9 @@ DONE 265. closing selectables on error (eg. title format error) DONE
 DONE 266. ? before dot, new syntax being automatically added sometimes? DONE
 DONE 267. bookmark_newAndEdit -> render 3 versions of a component instead of 2?? with different props DONE
 DONE 270. all tags input right margin DONE
+XXX 271. all tags id naming change XXX
+DONE 274. title & RSS link: smaller right margin! DONE
 
-
-XXX 250. logo? XXX
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
 
 
@@ -357,10 +358,10 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 
 268. tagsInputStr are not being sorted alphabetically after adding new tag
 
-271. all tags id naming change
 272. check is lazy initialization is neede somewhere else (like in EditTab!)
 273. xx info that new link will be an all tag (empty input)xx -> open tab for which bookmark is added automatically
-274. title & RSS link: smaller right margin!
+
+
 275. newTab & newBookmark upperUI margin above btns is too big
 276. tab editing -> should opening it increase columns size also as a side effect? (check after background img problems are fixed)
 277. background img setting -> revert to aligning to left

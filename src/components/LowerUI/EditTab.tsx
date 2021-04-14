@@ -24,7 +24,7 @@ import { TabVisAction } from "../../utils/interfaces";
 import { tabErrors } from "../../utils/errors";
 
 interface Props {
-  // tabTitle: string;
+  
   tabType: "folder" | "note" | "rss";
   // setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
   visDispatch: React.Dispatch<TabVisAction>;
@@ -214,7 +214,7 @@ Props): JSX.Element {
     if (tabType === "note" || tabID === "ALL_TAGS") {
       return "mr-2";
     }
-    if (tabType === "rss") return "mr-11";
+    if (tabType === "rss") return "mr-9";
     if (tabType === "folder") return "mr-14";
   }
 
@@ -371,7 +371,7 @@ Props): JSX.Element {
       {tabType === "rss" && (
         <div className="mb-1">
           <div className="flex items-center mt-2 justify-between">
-            <p className="whitespace-nowrap " style={{ marginRight: "18px" }}>
+            <p className="whitespace-nowrap " style={{ marginRight: "10px" }}>
               RSS link
             </p>
             <input
