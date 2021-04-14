@@ -3,8 +3,8 @@ import React from "react";
 import SingleColor_DefaultAndColumn from "./SingleColor_DefaultAndColumn";
 import SingleColor_Default_Img from "./SingleColor_Column_Img";
 
-import { tabColors } from "../../utils/tabColors";
-import { columnColors, imageColumnColors } from "../../utils/columnColors";
+import { tabColors } from "../../utils/colors_tab";
+import { columnColors, imageColumnColors } from "../../utils/colors_column";
 
 import { globalSettingsState } from "../../state/defaultSettings";
 

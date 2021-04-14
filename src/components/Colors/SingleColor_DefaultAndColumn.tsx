@@ -6,6 +6,8 @@ import { rssColorState } from "../../state/colorsState";
 import { columnsColorsState } from "../../state/colorsState";
 import { uiColorState } from "../../state/colorsState";
 
+import {setComplementaryUiColor} from "../../utils/func_complementaryUIcolor"
+
 import { produce } from "immer";
 
 interface Props {
@@ -111,60 +113,60 @@ function SingleColor_DefaultAndColumn({ color, defaultColorsFor }: Props): JSX.E
     }
   }
 
-  function setComplementaryUiColor(color: string) {
+  // function setComplementaryUiColor(color: string) {
 
-    function colorRgx(color: string) {
-        return new RegExp(`${color}-`)
-    }
+  //   function colorRgx(color: string) {
+  //       return new RegExp(`${color}-`)
+  //   }
 
-    if (colorRgx("gray").test(color) || colorRgx("Gray").test(color)) {
-      setUiColorData("blueGray-400");
-    }
+  //   if (colorRgx("gray").test(color) || colorRgx("Gray").test(color)) {
+  //     setUiColorData("blueGray-400");
+  //   }
 
-    if (colorRgx("yellow").test(color) || colorRgx("amber").test(color)) {
-      setUiColorData("yellow-500");
-    }
+  //   if (colorRgx("yellow").test(color) || colorRgx("amber").test(color)) {
+  //     setUiColorData("yellow-500");
+  //   }
 
-    if (colorRgx("orange").test(color)) {
-      setUiColorData("orange-500");
-    }
+  //   if (colorRgx("orange").test(color)) {
+  //     setUiColorData("orange-500");
+  //   }
 
-    if (colorRgx("red").test(color)) {
-      setUiColorData("red-400");
-    }
+  //   if (colorRgx("red").test(color)) {
+  //     setUiColorData("red-400");
+  //   }
 
-    if (
-      colorRgx("lime").test(color) || colorRgx("green").test(color) ||
-      colorRgx("emarald").test(color) ||
-      colorRgx("teal").test(color)
-    ) {
-      setUiColorData("teal-500");
-    }
+  //   if (
+  //     colorRgx("lime").test(color) || colorRgx("green").test(color) ||
+  //     colorRgx("emarald").test(color) ||
+  //     colorRgx("teal").test(color)
+  //   ) {
+  //     setUiColorData("teal-500");
+  //   }
 
-    if (colorRgx("cyan").test(color) || colorRgx("lightBlue").test(color)) {
-      setUiColorData("lightBlue-500");
-    }
+  //   if (colorRgx("cyan").test(color) || colorRgx("lightBlue").test(color)) {
+  //     setUiColorData("lightBlue-500");
+  //   }
 
-    if (colorRgx("blue").test(color) || colorRgx("indigo").test(color)) {
-      setUiColorData("blue-500");
-    }
+  //   if (colorRgx("blue").test(color) || colorRgx("indigo").test(color)) {
+  //     setUiColorData("blue-500");
+  //   }
 
-    if (colorRgx("violet").test(color) || colorRgx("purple").test(color)) {
-      setUiColorData("violet-500");
-    }
+  //   if (colorRgx("violet").test(color) || colorRgx("purple").test(color)) {
+  //     setUiColorData("violet-500");
+  //   }
 
-    if (colorRgx("fuchsia").test(color)) {
-      setUiColorData("fuchsia-500");
-    }
+  //   if (colorRgx("fuchsia").test(color)) {
+  //     setUiColorData("fuchsia-500");
+  //   }
 
-    if (colorRgx("rose").test(color)) {
-      setUiColorData("rose-400");
-    }
+  //   if (colorRgx("rose").test(color)) {
+  //     setUiColorData("rose-400");
+  //   }
 
-    if (colorRgx("pink").test(color)) {
-      setUiColorData("pink-400");
-    }
-  }
+  //   if (colorRgx("pink").test(color)) {
+  //     setUiColorData("pink-400");
+  //   }
+  // }
 
 
   return (
@@ -177,7 +179,7 @@ function SingleColor_DefaultAndColumn({ color, defaultColorsFor }: Props): JSX.E
         if (defaultColorsFor === "folders") {
           setFolderColorData(color);
 
-          setComplementaryUiColor(color);
+          setComplementaryUiColor(color, setUiColorData);
         }
 
         if (defaultColorsFor === "notes") {

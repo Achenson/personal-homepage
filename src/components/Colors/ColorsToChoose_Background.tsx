@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { backgroundColors} from "../../utils/backgroundColors";
+import { backgroundColors} from "../../utils/colors_background";
 
 
 import SingleColor_Background from './SingleColor_Background';

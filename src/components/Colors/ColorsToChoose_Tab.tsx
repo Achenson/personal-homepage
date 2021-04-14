@@ -1,7 +1,7 @@
 import React from "react";
 import SingleColor_Tab from "./SingleColor_Tab";
 
-import {tabColors} from "../../utils/tabColors";
+import {tabColors} from "../../utils/colors_tab";
 // import {columnColors} from "../../utils/columnColors";
 
 interface Props {

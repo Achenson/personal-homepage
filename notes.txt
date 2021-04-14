@@ -407,6 +407,8 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 321. highlight folder to which a bookmark is saved?
 322. newBookmark & editBookmark: title & link wrong responsive behaviour  
 323. newFolder newRSS: better input alignments
+324. delete all btn for selectables
+325. open popup with 3 default images to choose
 
 App structure:
 Main
