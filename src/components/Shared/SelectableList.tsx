@@ -21,6 +21,8 @@ function SelectableList({
   marginTop,
   setWasAnythingClicked
 }: Props): JSX.Element {
+
+  let visibleSelectables_sorted = visibleSelectables.sort()
   
 
   return (
@@ -29,10 +31,10 @@ function SelectableList({
       // style={{ width: "271px", marginLeft: "42px" }}
       style={{  marginTop: marginTop }}
     >
-      {visibleSelectables.length === 0 ? (
+      {visibleSelectables_sorted.length === 0 ? (
         <p className="invisible">[empty]</p>
       ) : (
-        visibleSelectables.map((el, i) => {
+        visibleSelectables_sorted.map((el, i) => {
           return (
             <p
               className="cursor-pointer hover:bg-blueGray-200 pl-px"
