@@ -220,61 +220,6 @@ Props): JSX.Element {
   }
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
-  const [folderLength, setFolderLength] = useState<number>(() =>
-    calcFolderLength()
-  );
-
-  function calcFolderLength() {
-    let counter = 0;
-
-    bookmarksData.forEach((obj) => {
-      // @ts-ignore
-      if (obj.tags.indexOf(currentTab.id) > -1) {
-        counter++;
-      }
-    });
-
-    return counter;
-  }
-
-  const calcFolderLength_memoized = useCallback(() => {
-
-    let counter = 0;
-    let currentTabId: string|number|undefined;
-    if(currentTab) {
-      currentTabId = currentTab.id as string|number
-    }
-
-    bookmarksData.forEach((obj) => {
-      // @ts-ignore
-      if (obj.tags.indexOf(currentTabId) > -1) {
-        counter++;
-      }
-    });
-
-    return counter;
-  }, [bookmarksData, currentTab]);
-
- 
-
-  useEffect(() => {
-
-    
-    let newFolderLength = calcFolderLength_memoized();
-
-    if (newFolderLength > folderLength) {
-      console.log("longer!");
-    }
-
-    if (newFolderLength < folderLength) {
-      console.log("shorter!");
-    }
-
-    if (newFolderLength !== folderLength) {
-      setFolderLength(newFolderLength);
-    }
-  }, [folderLength, calcFolderLength_memoized]);
-
   const [iconsVis, setIconsVis] = useState<boolean>(false);
 
   const [visState, visDispatch] = useReducer(visReducer, initVisState);
