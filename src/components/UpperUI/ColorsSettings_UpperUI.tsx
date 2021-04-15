@@ -89,9 +89,9 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             />
           </div>
 
-          <p className="text-center">Color settings</p>
+          <p className="text-center">Default tab colors</p>
           <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="w-32">Folder default</p>
+            <p className="w-32">Folders</p>
             <div
               onClick={() => {
                 setDefaultColorsFor("folders");
@@ -114,7 +114,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             ></div>
           </div>
           <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="w-32">Notes default</p>
+            <p className="w-32">Notes</p>
             <div
               onClick={() => {
                 setDefaultColorsFor("notes");
@@ -137,7 +137,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             ></div>
           </div>
           <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="w-32">RSS default</p>
+            <p className="w-32">RSS channels</p>
             <div
               onClick={() => {
                 setDefaultColorsFor("rss");
@@ -178,7 +178,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             >
               RESET
             </span>{" "}
-            all colours to default
+            all tabs to default
           </p>
         </div>
 

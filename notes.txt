@@ -343,6 +343,8 @@ XXX 273.5 highlight tab for which bookmark is added automatically, make all book
 DONE 274. title & RSS link: smaller right margin! DONE
 DONE 275. newTab (& newBookmark & bookmark_lowerUI) upperUI margin above btns is too big DONE
 XXX 276. tab editing -> should opening it increase columns size also as a side effect? (check after background img problems are fixed) XXX
+XXX 277. background img setting -> revert to aligning to left XXX
+DONE 279. color setting -> rename to tab setting/ "reset tab colors to default" DONE
 
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
 
@@ -362,9 +364,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 
 268. tagsInputStr are not being sorted alphabetically after adding new tag
 
-277. background img setting -> revert to aligning to left
 278. background img zooming back after clicking any settings
-279. color setting -> rename to tab setting/ "reset tab colors to default"
 280. responsive settings size
 283. errors reducers?
 284. EditTab: rss & note -> make new components!
