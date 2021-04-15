@@ -348,6 +348,7 @@ XXX 277. background img setting -> revert to aligning to left XXX
 DONE 279. color setting -> rename to tab setting/ "reset tab colors to default" DONE
 XXX 283. errors reducers? XXX
 DONE 284. EditTab: rss & note (&folder)-> make new components! DONE 
+DONE 285. rss globalSetting styling DONE
 
 XXX 290. SingleBookmark don't look good on lightest columns XXX
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
@@ -361,16 +362,13 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 
 240. EyeOff should be positioned more to the left if image bg is on
 241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
-251. css method to get rid of input numbers' arrows // input bottom padding? test on chrome
+251. css method to get rid of input numbers' arrows -> make them invisible, but it should be still scrollable // input bottom padding? test on chrome
 254. bookmark (& RSS?): add link errors!
 258. adding new bookmark without tag when all bookmarks is hidden problem? (make some notification?)
 263. keyboard controls (arrows and enter) for Selectables!
 
 278. background img zooming back after clicking any settings
 280. responsive settings size
-
-
-285. rss globalSetting styling
 
 286. change many find() by tabID to passing props - eg. in RSS components
 287. rss error handling: catch error for data and description (cnn rss description crashes the app)

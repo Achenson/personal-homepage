@@ -102,8 +102,10 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             <div
               className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
                 globalSettingsData.oneColorForAllCols
-                  ? `bg-${uiColorData} hover:bg-opacity-50`
-                  : `hover:bg-${uiColorData} hover:bg-opacity-50`
+                  ? // ? `bg-${uiColorData} hover:bg-opacity-50`
+                    // : `hover:bg-${uiColorData} hover:bg-opacity-50`
+                    `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                  : `hover:border-opacity-50`
               } `}
               onClick={() => {
                 setGlobalSettingsData({
@@ -118,8 +120,8 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             <div
               className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
                 globalSettingsData.hideNonDeletable
-                  ? `bg-${uiColorData} hover:bg-opacity-50`
-                  : `hover:bg-${uiColorData} hover:bg-opacity-50`
+                  ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                  : `hover:border-opacity-50`
               } `}
               onClick={() => {
                 setGlobalSettingsData({
@@ -141,9 +143,7 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                       ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                       : `hover:border-opacity-50`
                   } `}
-
-                  style={{marginTop: "2px"}}
-
+                  style={{ marginTop: "2px" }}
                   onClick={() => {
                     // setDescriptionCheckbox((b) => !b);
                     // setWasCheckboxClicked(true);
@@ -163,7 +163,7 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                       ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                       : `hover:border-opacity-50`
                   } `}
-                  style={{marginTop: "2px"}}
+                  style={{ marginTop: "2px" }}
                   onClick={() => {
                     // setDateCheckbox((b) => !b);
                     // setWasCheckboxClicked(true);
