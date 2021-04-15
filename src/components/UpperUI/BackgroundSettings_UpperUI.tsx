@@ -27,10 +27,10 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
     finalColorForImgBackgroundMode = "blueGray-700";
   }
 
-  const imgDescription_1 = "Custom transparent colors for columns";
+  const imgDescription_1 = "Transparent colors for columns";
   const imgDescription_2 = "Upload background image or ";
 
-  const noImgDescription = "Custom full colors for background and columns";
+  const noImgDescription = "Full colors for background and columns";
 
   function btnHover() {
     return `hover:bg-${uiColorData} hover:bg-opacity-50 hover:`;
@@ -64,12 +64,11 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               <p
                 className={`${
                   globalSettingsData.picBackground
-                    ? "cursor-default"
-                    : "hover:text-opacity-50 cursor-pointer"
-                } ${
-                  globalSettingsData.picBackground
-                    ? "text-" + finalColorForImgBackgroundMode
-                    : "text-gray-400"
+                    ? "cursor-default" +
+                      " " +
+                      "text-" +
+                      finalColorForImgBackgroundMode
+                    : "hover:text-opacity-50 cursor-pointer text-gray-400"
                 } text-lg`}
                 onClick={() => {
                   if (!globalSettingsData.picBackground) {
@@ -87,12 +86,11 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               <p
                 className={`${
                   globalSettingsData.picBackground
-                    ? "hover:text-opacity-50 cursor-pointer"
-                    : "cursor-default"
-                } ${
-                  globalSettingsData.picBackground
-                    ? "text-gray-400"
-                    : "text-" + finalColorForImgBackgroundMode
+                    ? "hover:text-opacity-50 cursor-pointer text-gray-400"
+                    : "cursor-default" +
+                      " " +
+                      "text-" +
+                      finalColorForImgBackgroundMode
                 } text-lg`}
                 onClick={() => {
                   if (globalSettingsData.picBackground) {
@@ -118,11 +116,9 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                     onClick={() => {
                       setGlobalSettingsData({
                         ...globalSettingsData,
-                        defaultImage: "defaultBackground"
-                      })
-                    }
-                    
-                    }
+                        defaultImage: "defaultBackground",
+                      });
+                    }}
                   >
                     use default
                   </span>
