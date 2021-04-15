@@ -21,6 +21,7 @@ import { rssSettingsState } from "../../state/defaultSettings";
 import { SingleTabData, TabVisAction } from "../../utils/interfaces";
 import { tabErrors } from "../../utils/errors";
 import EditTab_folder from "./EditTab_folder";
+import EditTab_notes from "./EditTab_notes";
 
 interface Props {
   tabType: "folder" | "note" | "rss";
@@ -124,9 +125,6 @@ Props): JSX.Element {
     arrOfBookmarksNames.join(", ")
   );
 
-  // const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(
-  //   () => makeInitialBookmarks()
-  // );
 
   useEffect(() => {
     if (wasCheckboxClicked || wasTabOpenClicked || wasItemsPerPageClicked) {
@@ -154,9 +152,6 @@ Props): JSX.Element {
   let regexForTitle = /^\w(\s?\w+)*$/;
 
   const [tabOpen, setTabOpen] = useState((currentTab as SingleTabData).opened);
-
-  // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
-  // const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
   const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
 
@@ -243,20 +238,13 @@ Props): JSX.Element {
         )}
       </div>
 
-      {tabType === "note" && (
-        <div className="mt-2 mb-3">
-          <textarea
-            value={textAreaValue as string}
-            className="h-full w-full overflow-visible pl-px pr-px border font-mono resize-none"
-            // rows={(currentTab[0].noteInput as string).length / 30}
-            rows={4}
-            onChange={(e) => {
-              setTextAreaValue(e.target.value);
-              setWasAnythingClicked(true);
-            }}
-          ></textarea>
-        </div>
-      )}
+      {
+        tabType === "note" && <EditTab_notes
+          textAreaValue={textAreaValue}
+          setTextAreaValue={setTextAreaValue}
+          setWasAnythingClicked={setWasAnythingClicked}
+        />
+      }
 
       {textAreaErrorVis && tabType === "note" && (
         <p className={`text-red-600 -mt-2 mb-1`}>{tabErrors.textArea}</p>

@@ -411,6 +411,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 329. code order (useEffect, func itp) eg. in 
 330. extract more functions out?
 331. unmounted component error (err mentioned alread?)
+332. make biggest components smaller?
 
 App structure:
 Main
