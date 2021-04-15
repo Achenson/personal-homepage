@@ -10,8 +10,6 @@ import { ReactComponent as LockOpenSVG } from "../../svgs/lock-open.svg";
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
-import SelectableList from "../Shared/SelectableList";
-
 import { produce } from "immer";
 
 import {
@@ -20,11 +18,11 @@ import {
 } from "../../state/tabsAndBookmarks";
 
 import { rssSettingsState } from "../../state/defaultSettings";
-import { TabVisAction } from "../../utils/interfaces";
+import { SingleTabData, TabVisAction } from "../../utils/interfaces";
 import { tabErrors } from "../../utils/errors";
+import EditTab_folder from "./EditTab_folder";
 
 interface Props {
-  
   tabType: "folder" | "note" | "rss";
   // setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
   visDispatch: React.Dispatch<TabVisAction>;
@@ -45,36 +43,38 @@ Props): JSX.Element {
 
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
 
-  let currentTab = tabsData.filter((obj) => obj.id === tabID);
-  let tabTitle = currentTab[0].title;
+  let currentTab = tabsData.find((obj) => obj.id === tabID);
+  let tabTitle = currentTab?.title;
 
   let rssLink: string | null | undefined = "no bookmark";
   // let rssLink;
 
   if (tabType === "rss") {
-    rssLink = currentTab[0].rssLink;
+    rssLink = currentTab?.rssLink;
   }
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   // for note only
   const [textAreaValue, setTextAreaValue] = useState<string | null>(
-    currentTab[0].noteInput as string | null
+    currentTab?.noteInput as string | null
   );
 
-  const [tabTitleInput, setTabTitleInput] = useState<string>(tabTitle);
+  const [tabTitleInput, setTabTitleInput] = useState<string>(
+    tabTitle as string
+  );
 
   const [rssLinkInput, setRssLinkInput] = useState<string>(rssLink as string);
 
   const [descriptionCheckbox, setDescriptionCheckbox] = useState(() => {
-    if (typeof currentTab[0].description === "boolean") {
-      return currentTab[0].description;
+    if (typeof currentTab?.description === "boolean") {
+      return currentTab.description;
     }
 
     return rssSettingsData.description;
   });
   const [dateCheckbox, setDateCheckbox] = useState(() => {
-    if (typeof currentTab[0].date === "boolean") {
-      return currentTab[0].date;
+    if (typeof currentTab?.date === "boolean") {
+      return currentTab.date;
     }
     return rssSettingsData.date;
   });
@@ -83,8 +83,8 @@ Props): JSX.Element {
   const [wasCheckboxClicked, setWasCheckboxClicked] = useState(false);
 
   const [rssItemsPerPage, setRssItemsPerPage] = useState(() => {
-    if (typeof currentTab[0].itemsPerPage === "number") {
-      return currentTab[0].itemsPerPage;
+    if (typeof currentTab?.itemsPerPage === "number") {
+      return currentTab.itemsPerPage;
     }
     return rssSettingsData.itemsPerPage;
   });
@@ -108,7 +108,7 @@ Props): JSX.Element {
   function calcArrOfBookmarksNames() {
     // filtered lknks
     let filteredBookmarks = bookmarksData.filter(
-      (obj) => obj.tags.indexOf(currentTab[0].id) > -1
+      (obj) => obj.tags.indexOf((currentTab as SingleTabData).id) > -1
     );
 
     let arrOfBookmarksNames: string[] = [];
@@ -124,9 +124,9 @@ Props): JSX.Element {
     arrOfBookmarksNames.join(", ")
   );
 
-  const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(
-    () => makeInitialBookmarks()
-  );
+  // const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(
+  //   () => makeInitialBookmarks()
+  // );
 
   useEffect(() => {
     if (wasCheckboxClicked || wasTabOpenClicked || wasItemsPerPageClicked) {
@@ -153,58 +153,12 @@ Props): JSX.Element {
   // let regexForTitle = /^\w+$/;
   let regexForTitle = /^\w(\s?\w+)*$/;
 
-  const [tabOpen, setTabOpen] = useState(currentTab[0].opened);
+  const [tabOpen, setTabOpen] = useState((currentTab as SingleTabData).opened);
 
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
   // const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
-  const [initialBookmarks, setInitialBookmarks] = useState(
-   () => makeInitialBookmarks()
-  );
-
   const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
-
-  useEffect(() => {
-    let newVisibleBookmarks: string[] = [];
-
-    initialBookmarks.forEach((el) => {
-      // in new RegExp the \ needs to be escaped!
-      let tagRegex = new RegExp(`\\b${el}\\b`);
-
-      if (!tagRegex.test(bookmarksInputStr)) {
-        newVisibleBookmarks.push(el);
-      }
-    });
-
-    setVisibleBookmarks([...newVisibleBookmarks]);
-
-    if (newVisibleBookmarks.length === 0) {
-      setBookmarksListVis(false);
-      setChevronDown(true);
-    }
-
-    // if (newVisibleBookmarks.length > 0 && !isThisTheFirstRender) {
-    //   setBookmarksListVis(true);
-    // }
-
-    // setIsThisTheFirstRender(false);
-  }, [
-    bookmarksInputStr,
-    initialBookmarks,
-    setVisibleBookmarks,
-    setBookmarksListVis,
-    // isThisTheFirstRender,
-  ]);
-
-  function makeInitialBookmarks(): string[] {
-    let bookmarks: string[] = [];
-
-    bookmarksData.forEach((obj) => {
-      bookmarks.push(obj.title);
-    });
-
-    return bookmarks;
-  }
 
   // ^  and $ -> beginning and end of the text!
   // let regexForTabs = /^\w+(,\s\w+)*$/;
@@ -250,75 +204,17 @@ Props): JSX.Element {
           )}
         </div>
 
-        {/* bookmarks not visible for tab with ALL Bookmarks */}
-        {tabType === "folder" && tabID !== "ALL_TAGS" ? (
-          <div className="flex items-center mt-2 justify-between">
-            <p className={`mr-2`}>Bookmarks</p>
-            <div className="relative w-full">
-              <input
-                type="text"
-                // min-w-0 !! ??
-                className="border pl-px w-full"
-                value={bookmarksInputStr}
-                onChange={(e) => {
-                  // setTabTitleInput(e.target.value);
-                  setWasAnythingClicked(true);
-
-                  let target = e.target.value;
-
-                  setBookmarksInputStr(target);
-
-                  let bookmarksInputArr = target.split(", ");
-                  let newVisibleBookmarks: string[] = [];
-
-                  visibleBookmarks.forEach((el) => {
-                    if (bookmarksInputArr.indexOf(el) === -1) {
-                      newVisibleBookmarks.push(el);
-                    }
-                  });
-
-                  setVisibleBookmarks([...newVisibleBookmarks]);
-                }}
-                onFocus={(e) => {
-                  setBookmarksListVis(true);
-                  setChevronDown(false);
-                }}
-                placeholder={"Choose at least one"}
-              />
-
-              {tabType === "folder" && bookmarksListVis && (
-                <SelectableList
-                  setSelectablesInputStr={setBookmarksInputStr}
-                  selectablesInputStr={bookmarksInputStr}
-                  visibleSelectables={visibleBookmarks}
-                  marginTop="0px"
-                  // setWasAnythingClicked
-                  setWasAnythingClicked={setWasAnythingClicked}
-                />
-              )}
-            </div>
-
-            <div style={{ height: "18px" }} className="-mr-1">
-              {chevronDown ? (
-                <ChevronDownSVG
-                  className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
-                  onClick={() => {
-                    setChevronDown((b) => !b);
-                    setBookmarksListVis((b) => !b);
-                  }}
-                />
-              ) : (
-                <ChevronUpSVG
-                  className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
-                  onClick={() => {
-                    setChevronDown((b) => !b);
-                    setBookmarksListVis((b) => !b);
-                  }}
-                />
-              )}
-            </div>
-          </div>
-        ) : null}
+        {tabType === "folder" && tabID !== "ALL_TAGS" && (
+          <EditTab_folder
+            chevronDown={chevronDown}
+            setChevronDown={setChevronDown}
+            bookmarksListVis={bookmarksListVis}
+            setBookmarksListVis={setBookmarksListVis}
+            setWasAnythingClicked={setWasAnythingClicked}
+            bookmarksInputStr={bookmarksInputStr}
+            setBookmarksInputStr={setBookmarksInputStr}
+          />
+        )}
 
         {titleFormatErrorVis && (
           <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.titleFormat}</p>
@@ -358,8 +254,6 @@ Props): JSX.Element {
               setTextAreaValue(e.target.value);
               setWasAnythingClicked(true);
             }}
-            
-            
           ></textarea>
         </div>
       )}
@@ -508,7 +402,7 @@ Props): JSX.Element {
           <TrashSVG
             className="h-6 text-gray-500 transition-colors duration-75 hover:text-black cursor-pointer"
             onClick={() => {
-              if (!currentTab[0].deletable) {
+              if (!currentTab?.deletable) {
                 setNoDeletionErrorVis(true);
                 return;
               }
@@ -529,10 +423,13 @@ Props): JSX.Element {
               visDispatch({ type: "EDIT_TOGGLE" });
               // removing deleted tab(tag) for bookmarks
               bookmarksData.forEach((obj, i) => {
-                if (obj.tags.indexOf(tabTitle) > -1) {
+                if (obj.tags.indexOf(tabTitle as string) > -1) {
                   setBookmarksData((previous) =>
                     produce(previous, (updated) => {
-                      updated[i].tags.splice(obj.tags.indexOf(tabTitle), 1);
+                      updated[i].tags.splice(
+                        obj.tags.indexOf(tabTitle as string),
+                        1
+                      );
                     })
                   );
                 }

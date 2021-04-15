@@ -348,6 +348,7 @@ XXX 277. background img setting -> revert to aligning to left XXX
 DONE 279. color setting -> rename to tab setting/ "reset tab colors to default" DONE
 XXX 283. errors reducers? XXX
 
+XXX 290. SingleBookmark don't look good on lightest columns XXX
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
 
 
@@ -366,14 +367,14 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 
 278. background img zooming back after clicking any settings
 280. responsive settings size
+
 284. EditTab: rss & note -> make new components!
+
 285. rss globalSetting styling
 286. change many find() by tabID to passing props - eg. in RSS components
 287. rss error handling: catch error for data and description (cnn rss description crashes the app)
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
 289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds
-290. SingleBookmark don't look good on lightest columns
-291. unmounted component error (err mentioned alread?)
 293. upperVisDispatch -> color selectable should be gone when closing all
 295. UpperRightMenu should close at least editables in lowerUI
 296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
@@ -409,6 +410,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 328. bigger gap after tab on smaller screen sizes when column is empty?
 329. code order (useEffect, func itp) eg. in 
 330. extract more functions out?
+331. unmounted component error (err mentioned alread?)
 
 App structure:
 Main

@@ -28,7 +28,7 @@ import ColorsToChoose_Tab from "../Colors/ColorsToChoose_Tab";
 
 // import EditLink from "./EditBookmark";
 import Bookmark_newAndEdit from "../Shared/Bookmark_newAndEdit";
-import EditTab from "./EditTab";
+import EditTab from "./EditTab_main";
 import NoteInput from "./NoteInput";
 import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
