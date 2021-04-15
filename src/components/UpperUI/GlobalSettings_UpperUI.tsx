@@ -132,13 +132,19 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
           <div className="flex items-center mb-2 mt-2 justify-between">
             <p className="whitespace-nowrap w-32">RSS Display</p>
+
             <div className="flex">
               <div className="flex items-center mr-2">
-                <input
-                  type="checkbox"
-                  name="description"
-                  checked={rssSettingsData.description}
-                  onChange={() => {
+                <div
+                  className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                    rssSettingsData.description
+                      ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                      : `hover:border-opacity-50`
+                  } `}
+
+                  style={{marginTop: "2px"}}
+
+                  onClick={() => {
                     // setDescriptionCheckbox((b) => !b);
                     // setWasCheckboxClicked(true);
                     setRssSettingsData({
@@ -147,17 +153,18 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                     });
                   }}
                 />
-                <label className="ml-1" htmlFor="description">
-                  Description
-                </label>
+                <span className="ml-1 ">Description</span>
               </div>
 
               <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="date"
-                  checked={rssSettingsData.date}
-                  onChange={() => {
+                <div
+                  className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                    rssSettingsData.date
+                      ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                      : `hover:border-opacity-50`
+                  } `}
+                  style={{marginTop: "2px"}}
+                  onClick={() => {
                     // setDateCheckbox((b) => !b);
                     // setWasCheckboxClicked(true);
                     setRssSettingsData({
@@ -166,12 +173,11 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                     });
                   }}
                 />
-                <label className="ml-1" htmlFor="date">
-                  Date
-                </label>
+                <span className="ml-1">Date</span>
               </div>
             </div>
           </div>
+
           <div className="flex items-center mt-2 justify-between">
             <p className="whitespace-nowrap w-32">RSS Items per page</p>
             <input

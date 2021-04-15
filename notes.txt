@@ -371,6 +371,7 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 
 
 285. rss globalSetting styling
+
 286. change many find() by tabID to passing props - eg. in RSS components
 287. rss error handling: catch error for data and description (cnn rss description crashes the app)
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
