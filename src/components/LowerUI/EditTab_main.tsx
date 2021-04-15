@@ -18,10 +18,12 @@ import {
 } from "../../state/tabsAndBookmarks";
 
 import { rssSettingsState } from "../../state/defaultSettings";
+
 import { SingleTabData, TabVisAction } from "../../utils/interfaces";
 import { tabErrors } from "../../utils/errors";
 import EditTab_folder from "./EditTab_folder";
 import EditTab_notes from "./EditTab_notes";
+import EditTab_RSS from "./EditTab_RSS";
 
 interface Props {
   tabType: "folder" | "note" | "rss";
@@ -79,6 +81,7 @@ Props): JSX.Element {
     }
     return rssSettingsData.date;
   });
+
   // checkboxes won't be saved on Save if there were not manipulated
   //  (so they will still respond to changing default setting (they will have null as a property))
   const [wasCheckboxClicked, setWasCheckboxClicked] = useState(false);
@@ -124,7 +127,6 @@ Props): JSX.Element {
   const [bookmarksInputStr, setBookmarksInputStr] = useState<string>(
     arrOfBookmarksNames.join(", ")
   );
-
 
   useEffect(() => {
     if (wasCheckboxClicked || wasTabOpenClicked || wasItemsPerPageClicked) {
@@ -238,124 +240,37 @@ Props): JSX.Element {
         )}
       </div>
 
-      {
-        tabType === "note" && <EditTab_notes
+      {tabType === "note" && (
+        <EditTab_notes
           textAreaValue={textAreaValue}
           setTextAreaValue={setTextAreaValue}
           setWasAnythingClicked={setWasAnythingClicked}
         />
-      }
+      )}
 
       {textAreaErrorVis && tabType === "note" && (
         <p className={`text-red-600 -mt-2 mb-1`}>{tabErrors.textArea}</p>
       )}
 
       {tabType === "rss" && (
-        <div className="mb-1">
-          <div className="flex items-center mt-2 justify-between">
-            <p className="whitespace-nowrap " style={{ marginRight: "10px" }}>
-              RSS link
-            </p>
-            <input
-              type="text"
-              // min-w-0 !!
-              className="border w-full max-w-6xl pl-px"
-              value={rssLinkInput}
-              onChange={(e) => {
-                setRssLinkInput(e.target.value);
-                setWasAnythingClicked(true);
-              }}
-            />
-          </div>
-          <div className="flex items-center mb-2 mt-2 justify-between">
-            <p className="whitespace-nowrap w-32">Display</p>
-            <div className="flex">
-              <div className="flex items-center mr-2">
-                <input
-                  type="checkbox"
-                  name="description"
-                  // className="w-full border border-gray-500"
-                  // className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
-                  checked={descriptionCheckbox}
-                  onChange={() => {
-                    setDescriptionCheckbox((b) => !b);
-                    setWasCheckboxClicked(true);
-                  }}
-                />
-                <label className="ml-1" htmlFor="description">
-                  Description
-                </label>
-              </div>
-
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="date"
-                  checked={dateCheckbox}
-                  onChange={() => {
-                    setDateCheckbox((b) => !b);
-                    setWasCheckboxClicked(true);
-                  }}
-
-                  // placeholder={"5-15"}
-                />
-                <label className="ml-1" htmlFor="date">
-                  Date
-                </label>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center mt-2 justify-between">
-            <p className="whitespace-nowrap w-32">Items per page</p>
-            <input
-              type="number"
-              min="5"
-              max="15"
-              // className="w-full border border-gray-500"
-              className="border w-11 pl-1"
-              value={rssItemsPerPage}
-              onChange={(e) => {
-                setRssItemsPerPage(parseInt(e.target.value));
-                setWasItemsPerPageClicked(true);
-              }}
-              // placeholder={"5-15"}
-            />
-          </div>
-          {/* <p className="text-center">RESET to default</p> */}
-          <p className="text-center">
-            {" "}
-            <span
-              className="text-red-600 hover:underline cursor-pointer"
-              onClick={() => {
-                // setResetColorsData(true);
-                setDescriptionCheckbox(rssSettingsData.description);
-                setDateCheckbox(rssSettingsData.date);
-                setRssItemsPerPage(rssSettingsData.itemsPerPage);
-                setWasAnythingClicked(false);
-                setWasCheckboxClicked(false);
-                setWasItemsPerPageClicked(false);
-                setWasTabOpenClicked(false);
-
-                setTabsData((previous) =>
-                  produce(previous, (updated) => {
-                    let currentTab = updated.find((obj) => obj.id == tabID);
-                    if (currentTab) {
-                      // let tabIndex = updated.indexOf(tabToDelete);
-                      // updated.splice(tabIndex, 1);
-                      currentTab.date = null;
-                      currentTab.description = null;
-                      currentTab.itemsPerPage = null;
-                    }
-                  })
-                );
-              }}
-            >
-              RESET
-            </span>{" "}
-            to default
-          </p>
-        </div>
+        <EditTab_RSS
+          currentTab={currentTab as SingleTabData}
+          dateCheckbox={dateCheckbox}
+          descriptionCheckbox={descriptionCheckbox}
+          rssItemsPerPage={rssItemsPerPage}
+          setDateCheckbox={setDateCheckbox}
+          setDescriptionCheckbox={setDescriptionCheckbox}
+          setRssItemsPerPage={setRssItemsPerPage}
+          setWasAnythingClicked={setWasAnythingClicked}
+          setWasCheckboxClicked={setWasCheckboxClicked}
+          setWasItemsPerPageClicked={setWasItemsPerPageClicked}
+          setWasTabOpenClicked={setWasTabOpenClicked}
+          tabID={tabID}
+          rssLinkInput={rssLinkInput}
+          setRssLinkInput={setRssLinkInput}
+        />
       )}
+
 
       <div className={`pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
         <div className="flex justify-between items-center">

@@ -347,6 +347,7 @@ XXX 276. tab editing -> should opening it increase columns size also as a side e
 XXX 277. background img setting -> revert to aligning to left XXX
 DONE 279. color setting -> rename to tab setting/ "reset tab colors to default" DONE
 XXX 283. errors reducers? XXX
+DONE 284. EditTab: rss & note (&folder)-> make new components! DONE 
 
 XXX 290. SingleBookmark don't look good on lightest columns XXX
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
@@ -368,7 +369,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 278. background img zooming back after clicking any settings
 280. responsive settings size
 
-284. EditTab: rss & note -> make new components!
 
 285. rss globalSetting styling
 286. change many find() by tabID to passing props - eg. in RSS components
