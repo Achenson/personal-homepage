@@ -156,7 +156,7 @@ Props): JSX.Element {
               className="w-full border border-gray-300 pl-px"
               // value={tagsInput.join(", ")}
               value={tagsInputStr}
-              placeholder={"tag1, tag2..."}
+              placeholder={"tag1, tag2... (\"all\" tag auto-added)"}
               onChange={(e) => {
                 let target = e.target.value;
 

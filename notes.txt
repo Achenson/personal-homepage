@@ -338,6 +338,8 @@ DONE 266. ? before dot, new syntax being automatically added sometimes? DONE
 DONE 267. bookmark_newAndEdit -> render 3 versions of a component instead of 2?? with different props DONE
 DONE 270. all tags input right margin DONE
 XXX 271. all tags id naming change XXX
+DONE 273. xxX info that new link will be an all tag DONE (placeholder info) DONE
+XXX 273.5 highlight tab for which bookmark is added automatically, make all bookmarks appear again if hidden? XXX 
 DONE 274. title & RSS link: smaller right margin! DONE
 DONE 275. newTab (& newBookmark & bookmark_lowerUI) upperUI margin above btns is too big DONE
 
@@ -358,9 +360,6 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 263. keyboard controls (arrows and enter) for Selectables!
 
 268. tagsInputStr are not being sorted alphabetically after adding new tag
-
-273. xx info that new link will be an all tag (empty input)xx -> highlight tab for which bookmark is added automatically,
-make all bookmarks appear again if hidden?
 
 276. tab editing -> should opening it increase columns size also as a side effect? (check after background img problems are fixed)
 277. background img setting -> revert to aligning to left
