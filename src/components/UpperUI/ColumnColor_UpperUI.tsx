@@ -4,7 +4,7 @@ import {
   columnsColorsImg_State,
 } from "../../state/colorsState";
 
-import { UpperVisAction } from "../../utils/interfaces";
+import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
 
 import {
   globalSettingsState,
@@ -25,9 +25,9 @@ interface Props {
     >
   >;
   // setColorsToChooseVis: React.Dispatch<React.SetStateAction<boolean>>;
-  columnSelected: number | null;
-  setColumnSelected: React.Dispatch<React.SetStateAction<number | null>>;
+  
   upperVisDispatch: React.Dispatch<UpperVisAction>;
+  upperVisState: InitUpperVisState;
   arrIndex: number;
   columnType: "NO_BACKGROUND_IMG" | "BACKGROUND_IMG";
   isHoverOnAnyColumn: boolean;
@@ -36,9 +36,8 @@ interface Props {
 function ColumnColor_UpperUI({
   colNumber,
   setDefaultColorsFor,
-  columnSelected,
-  setColumnSelected,
   upperVisDispatch,
+  upperVisState,
   arrIndex,
   columnType,
   isHoverOnAnyColumn
@@ -85,7 +84,7 @@ function ColumnColor_UpperUI({
   }
 
   function borderStyle() {
-    if (columnSelected !== colNumber) {
+    if (upperVisState.columnSelected !== colNumber) {
       if (arrIndex > 0) {
         return "border border-l-0";
       }
@@ -107,12 +106,12 @@ function ColumnColor_UpperUI({
             setTabOpenedData(null);
             // setCloseAllTabsData(true);
 
-            if (columnSelected === colNumber) {
-              upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
-              setColumnSelected(null);
+            if (upperVisState.columnSelected === colNumber) {
+              upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE"});
+              // setColumnSelected(null);
             } else {
-              upperVisDispatch({ type: "COLORS_COLUMN_OPEN" });
-              setColumnSelected(colNumber);
+              upperVisDispatch({ type: "COLORS_COLUMN_OPEN", payload: colNumber });
+              // setColumnSelected(colNumber);
             }
           }}
           className={`relative overflow-hidden h-4 w-8 ${

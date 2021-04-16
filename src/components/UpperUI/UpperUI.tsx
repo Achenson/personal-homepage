@@ -17,6 +17,7 @@ function UpperUI({
   setTabType,
   upperVisDispatch,
   upperVisState,
+
 }: Props): JSX.Element {
   // const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
 

@@ -11,8 +11,11 @@ import { backgroundColorState } from "../state/colorsState";
 import Background_UpperUI from "./UpperUI/BackgroundSettings_UpperUI";
 import Settings_UpperUI from "./UpperUI/GlobalSettings_UpperUI";
 
-import { UpperVisAction, InitUpperVisState, TabVisAction } from "../utils/interfaces";
-
+import {
+  UpperVisAction,
+  InitUpperVisState,
+  TabVisAction,
+} from "../utils/interfaces";
 
 interface Props {}
 
@@ -24,6 +27,7 @@ let initUpperVisState: InitUpperVisState = {
   colorsSettingsVis: false,
   colorsBackgroundVis: false,
   colorsColumnVis: false,
+  columnSelected: null,
 };
 
 const upperVisStateAllFalse: InitUpperVisState = {
@@ -70,6 +74,7 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
     case "COLORS_COLUMN_OPEN":
       return {
         ...upperVisStateAllFalse,
+        columnSelected: action.payload as number,
         colorsColumnVis: true,
       };
     case "CLOSE_ALL":
@@ -90,6 +95,7 @@ function Main({}: Props): JSX.Element {
     setBackgroundColorData,
   ] = backgroundColorState.use();
 
+  // const [columnSelected, setColumnSelected] = useState<number | null >(null);
   const [upperVisState, upperVisDispatch] = useReducer(
     upperVisReducer,
     initUpperVisState
@@ -99,10 +105,7 @@ function Main({}: Props): JSX.Element {
 
   function dispatchTabAction(visDispatch: (value: TabVisAction) => void) {
     visDispatch({ type: "TAB_EDITABLES_CLOSE" });
-
   }
-
-  
 
   return (
     // <div className="relative h-screen bg-testBackground bg-cover">
@@ -137,7 +140,7 @@ function Main({}: Props): JSX.Element {
         upperVisDispatch={upperVisDispatch}
         setTabType={setTabType}
       />
-      <Grid upperVisDispatch={upperVisDispatch}/>
+      <Grid upperVisDispatch={upperVisDispatch} />
     </div>
   );
 }

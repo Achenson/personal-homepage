@@ -42,6 +42,7 @@ export interface InitUpperVisState {
   colorsSettingsVis: boolean;
   colorsBackgroundVis: boolean;
   colorsColumnVis: boolean;
+  columnSelected: null | number;
 }
 
 export interface UpperVisAction {
@@ -55,7 +56,7 @@ export interface UpperVisAction {
     | "COLORS_COLUMN_TOGGLE"
     | "COLORS_COLUMN_OPEN"
     | "CLOSE_ALL";
-  payload?: string | number;
+  payload?: number;
 }
 
 export interface TabVisAction {

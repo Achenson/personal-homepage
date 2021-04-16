@@ -21,7 +21,8 @@ function UpperLeftMenu({
   upperVisDispatch,
   upperVisState,
 }: Props): JSX.Element {
-  const [columnSelected, setColumnSelected] = useState<number | null>(null);
+
+  // const [columnSelected, setColumnSelected] = useState<number | null>(null);
 
   const [defaultColorsFor, setDefaultColorsFor] = useState<
     "column_1" | "column_2" | "column_3" | "column_4" | "unselected"
@@ -46,14 +47,12 @@ function UpperLeftMenu({
           defaultColorsFor={defaultColorsFor}
           setDefaultColorsFor={setDefaultColorsFor}
           // setColorsToChooseVis={setColorsToChooseVis}
-
-          columnSelected={columnSelected}
-          setColumnSelected={setColumnSelected}
           // setFoldersSelected={setFoldersSelected}
           // setNotesSelected={setNotesSelected}
           key={index}
           arrIndex={index}
           upperVisDispatch={upperVisDispatch}
+          upperVisState={upperVisState}
           columnType={globalSettingsData.picBackground ? "BACKGROUND_IMG" : "NO_BACKGROUND_IMG"}
           isHoverOnAnyColumn={isHoverOnAnyColumn}
         />
