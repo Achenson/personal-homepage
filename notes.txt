@@ -353,6 +353,8 @@ DONE 285. rss globalSetting styling DONE
 
 XXX 290. SingleBookmark don't look good on lightest columns XXX
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
+DONE 298. some effect when hovering over bookmarks? DONE
+DONE 303. better borders in color selecting DONE
 DONE 335. RSS settings - date & description better styles DONE
 
 
@@ -381,13 +383,13 @@ DONE 335. RSS settings - date & description better styles DONE
 295. UpperRightMenu should close at least editables in lowerUI
 296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
 297. backgroundImg: how to make the columns shorter, same as if there is no backgroundImg
-298. some effect when hovering over bookmarks?
+
+
 299. upperLeft UI should not close tab content!
 
 300. no img background - get rid of lightest colors? (make lower border in noteInput instead!)
 
 302. sorting method!
-303. better borders in color selecting (more similar to ColumnColor) ??
 304. react query devtools not working
 305. columnColor not being reduced in numbers if "one color for all columns" is set
 306. new rss & new tab: make it smaller? 
