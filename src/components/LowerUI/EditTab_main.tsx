@@ -343,7 +343,8 @@ Props): JSX.Element {
       </div>
 
       <div className="flex justify-start mt-2">
-        <p className="w-8"></p>
+         {/* SaveSVG is cut without the <p> - bug? */}
+        <p className="w-px"></p>
         <div className="w-full flex justify-center">
           <SaveSVG
             className={`h-5 fill-current mr-3 transition-colors duration-75 ${

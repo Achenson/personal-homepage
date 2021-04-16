@@ -351,7 +351,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
         )}
 
         <div className="flex justify-start mt-4">
-          <p className="w-8"></p>
+          {/* SaveSVG is cut without the <p> - bug? */}
+          <p className="w-px"></p>
           {/* !!! pl-4 in NewLink */}
           <div className="w-full flex justify-center">
             <SaveSVG
