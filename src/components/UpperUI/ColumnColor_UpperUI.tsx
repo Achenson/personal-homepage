@@ -51,7 +51,7 @@ function ColumnColor_UpperUI({
   ] = columnsColorsImg_State.use();
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-  const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
+  // const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   function columnsColor(colNumber: number) {
@@ -105,7 +105,7 @@ function ColumnColor_UpperUI({
           onClick={() => {
             setDefaultColorsFor(`column_${colNumber}` as any);
             setTabOpenedData(null);
-            setCloseAllTabsData(true);
+            // setCloseAllTabsData(true);
 
             if (columnSelected === colNumber) {
               upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });

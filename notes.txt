@@ -357,6 +357,7 @@ DONE 286. change many find() by tabID to passing props - eg. in RSS components, 
 XXX 290. SingleBookmark don't look good on lightest columns XXX
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
 DONE 298. some effect when hovering over bookmarks? DONE
+DONE 299. upperLeft UI should not close tab content! DONE
 DONE 303. better borders in color selecting DONE
 DONE 335. RSS settings - date & description better styles DONE
 
@@ -373,7 +374,6 @@ DONE 335. RSS settings - date & description better styles DONE
 278. background img zooming back after clicking any settings
 280. responsive upperUI settings size
 
-
 287. rss error handling: catch error for data and description (cnn rss description crashes the app)
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
 289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds
@@ -383,7 +383,6 @@ DONE 335. RSS settings - date & description better styles DONE
 297. backgroundImg: how to make the columns shorter, same as if there is no backgroundImg
 
 
-299. upperLeft UI should not close tab content!
 
 300. no img background - get rid of lightest colors? (make lower border in noteInput instead!)
 

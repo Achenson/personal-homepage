@@ -22,7 +22,7 @@ function BackgroundColor_upperUI({
     setBackgroundColorState,
   ] = backgroundColorState.use();
 
-  const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
+  // const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   const [selected, setSelected] = useState(false);
@@ -55,7 +55,7 @@ function BackgroundColor_upperUI({
       )} opacity-80 border border-black rounded-lg cursor-pointer  hover:border-gray-500`}
       onClick={() => {
         setTabOpenedData(null)
-        setCloseAllTabsData(true);
+        // setCloseAllTabsData(true);
         setSelected((b) => !b);
         // setBackgroundColorsToChooseVis((b) => !b);
         
