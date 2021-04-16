@@ -110,7 +110,7 @@ function EditTab_RSS({
           min="5"
           max="15"
           // className="w-full border border-gray-500"
-          className="border w-11 pl-1"
+          className="border w-8 text-center border-gray-300"
           value={rssItemsPerPage}
           onChange={(e) => {
             setRssItemsPerPage(parseInt(e.target.value));

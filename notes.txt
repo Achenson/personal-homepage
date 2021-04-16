@@ -323,6 +323,7 @@ DONE 246. change all border for colors to thinner DONE
 DONE 247. redundant code in SingleColor_DefaultAndColumn / setDefaultColorsFor(change/simplify) DONE
 DONE 248. different hover effect if one color for all columns is set DONE
 XXX 250. logo? XXX
+DONE 251. css method to get rid of input numbers' arrows -> make them invisible DONE (custom.css file)
 DONE 252. chevrons for selectables are sometimes in wrong state? DONE
 DONE 253. bookmark: add rssError (similar to noteError?) DONE
 DONE 255. closing of previously opened colors/edits from the other column should be first (not a moment when they are both visible) DONE
@@ -362,7 +363,8 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 
 240. EyeOff should be positioned more to the left if image bg is on
 241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
-251. css method to get rid of input numbers' arrows -> make them invisible, but it should be still scrollable // input bottom padding? test on chrome
+
+
 254. bookmark (& RSS?): add link errors!
 258. adding new bookmark without tag when all bookmarks is hidden problem? (make some notification?)
 263. keyboard controls (arrows and enter) for Selectables!
@@ -380,8 +382,9 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 297. backgroundImg: how to make the columns shorter, same as if there is no backgroundImg
 298. some effect when hovering over bookmarks?
 299. upperLeft UI should not close tab content!
+
 300. no img background - get rid of lightest colors? (make lower border in noteInput instead!)
-301. clean tailwind files in the end
+
 302. sorting method!
 303. better borders in color selecting (more similar to ColumnColor) ??
 304. react query devtools not working
@@ -411,6 +414,10 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 330. extract more functions out?
 331. unmounted component error (err mentioned alread?)
 332. make biggest components smaller?
+333. clean tailwind files in the end
+334. saveSVGs onClick -> convert code to functions
+335. RSS settings - date & description better styles
+336. Rss SingleLink - empty??
 
 App structure:
 Main
