@@ -7,6 +7,8 @@ import { SingleTabData } from "../../utils/interfaces";
 import { rssSettingsState } from "../../state/defaultSettings";
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 
+import { uiColorState } from "../../state/colorsState";
+
 interface Props {
   currentTab: SingleTabData;
   setWasAnythingClicked: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,8 +22,8 @@ interface Props {
   setRssItemsPerPage: React.Dispatch<React.SetStateAction<number>>;
   setWasItemsPerPageClicked: React.Dispatch<React.SetStateAction<boolean>>;
   tabID: string | number;
-  rssLinkInput: string
-  setRssLinkInput: React.Dispatch<React.SetStateAction<string>>
+  rssLinkInput: string;
+  setRssLinkInput: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function EditTab_RSS({
@@ -38,11 +40,13 @@ function EditTab_RSS({
   setWasItemsPerPageClicked,
   tabID,
   rssLinkInput,
-  setRssLinkInput
+  setRssLinkInput,
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
+
+  const [uiColorData, setUiColorData] = uiColorState.use();
 
   let rssLink: string | null | undefined = "no bookmark";
 
@@ -69,37 +73,36 @@ function EditTab_RSS({
         <p className="whitespace-nowrap w-32">Display</p>
         <div className="flex">
           <div className="flex items-center mr-2">
-            <input
-              type="checkbox"
-              name="description"
-              // className="w-full border border-gray-500"
-              // className="border w-14 max-w-6xl min-w-0 mr-6 pl-1"
-              checked={descriptionCheckbox}
-              onChange={() => {
+            <div
+              style={{ marginTop: "2px" }}
+              className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-blueGray-400 ${
+                descriptionCheckbox
+                  ? `bg-blueGray-400 bg-opacity-50 hover:border-opacity-30`
+                  : `hover:border-opacity-50`
+              } `}
+              onClick={() => {
                 setDescriptionCheckbox((b) => !b);
                 setWasCheckboxClicked(true);
               }}
             />
-            <label className="ml-1" htmlFor="description">
-              Description
-            </label>
+            <span className="ml-1">Description</span>
           </div>
 
           <div className="flex items-center">
-            <input
-              type="checkbox"
-              name="date"
-              checked={dateCheckbox}
-              onChange={() => {
+            <div
+              style={{ marginTop: "2px" }}
+              className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-blueGray-400 ${
+                dateCheckbox
+                  ? `bg-blueGray-400 bg-opacity-50 hover:border-opacity-30`
+                  : `hover:border-opacity-50`
+              } `}
+              onClick={() => {
                 setDateCheckbox((b) => !b);
                 setWasCheckboxClicked(true);
               }}
 
-              // placeholder={"5-15"}
             />
-            <label className="ml-1" htmlFor="date">
-              Date
-            </label>
+            <span className="ml-1">Date</span>
           </div>
         </div>
       </div>

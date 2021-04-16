@@ -353,6 +353,7 @@ DONE 285. rss globalSetting styling DONE
 
 XXX 290. SingleBookmark don't look good on lightest columns XXX
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
+DONE 335. RSS settings - date & description better styles DONE
 
 
 1. purgecss at the end of project?
@@ -416,8 +417,8 @@ DONE 294. column should larger be defaul - so colors/editables are not cut by ov
 332. make biggest components smaller?
 333. clean tailwind files in the end
 334. saveSVGs onClick -> convert code to functions
-335. RSS settings - date & description better styles
 336. Rss SingleLink - empty??
+337. rss date formatting
 
 App structure:
 Main
