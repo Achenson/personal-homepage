@@ -5,6 +5,8 @@ import SingleRssNews from "./SingleRssNews";
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 import { rssSettingsState } from "../../state/defaultSettings";
 
+import {SingleTabData} from "../../utils/interfaces"
+
 import { ReactComponent as ArrowLeft } from "../../svgs/arrowLeft.svg";
 import { ReactComponent as ArrowRight } from "../../svgs/arrowRight.svg";
 
@@ -19,12 +21,13 @@ let parser = new Parser(
 
 interface Props {
   tabID: string | number;
+  currentTab: SingleTabData;
 }
 
-function ReactQuery({ tabID }: Props): JSX.Element {
+function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
-  let currentTab = tabsData.filter((obj) => obj.id === tabID);
+  // let currentTab = tabsData.filter((obj) => obj.id === tabID);
 
   const [itemsPerPage, setItemsPerPage] = useState(() =>calcItemsPerPage());
 
@@ -35,24 +38,24 @@ function ReactQuery({ tabID }: Props): JSX.Element {
     // if currentBookmars itemsPerPage is set, return it, otherwise
     // return defaul option for RSS setting
 
-    if (typeof currentTab[0].itemsPerPage === "number") {
-      return currentTab[0].itemsPerPage;
+    if (typeof currentTab.itemsPerPage === "number") {
+      return currentTab.itemsPerPage;
     }
 
     return rssSettingsData.itemsPerPage;
   }
 
   function calcDescriptionVis() {
-    if (typeof currentTab[0].itemsPerPage === "boolean") {
-      return currentTab[0].description;
+    if (typeof currentTab.itemsPerPage === "boolean") {
+      return currentTab.description;
     }
 
     return rssSettingsData.description;
   }
 
   function calcDateVis() {
-    if (typeof currentTab[0].itemsPerPage === "boolean") {
-      return currentTab[0].date;
+    if (typeof currentTab.itemsPerPage === "boolean") {
+      return currentTab.date;
     }
 
     return rssSettingsData.date;
@@ -60,9 +63,8 @@ function ReactQuery({ tabID }: Props): JSX.Element {
 
   useEffect(() => {
     let tabToUpdate = tabsData.find((obj) => obj.id === tabID);
-
     if (tabToUpdate) {
-      let tabIndex = tabsData.indexOf(tabToUpdate);
+      let tabIndex = tabsData.indexOf(tabToUpdate as SingleTabData);
 
       if (
         tabsData[tabIndex].itemsPerPage !== itemsPerPage &&
@@ -97,8 +99,8 @@ function ReactQuery({ tabID }: Props): JSX.Element {
   console.log(data);
 
   async function fetchFeed() {
-    let currentTab = tabsData.filter((obj) => obj.id === tabID);
-    const response = await parser.parseURL(currentTab[0].rssLink);
+    // let currentTab = tabsData.filter((obj) => obj.id === tabID);
+    const response = await parser.parseURL(currentTab.rssLink);
 
     return response;
   }

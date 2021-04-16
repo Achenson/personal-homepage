@@ -31,12 +31,14 @@ interface Props {
   visDispatch: React.Dispatch<TabVisAction>;
   // noteInput: string | null;
   tabID: string | number;
+  currentTab: SingleTabData;
 }
 
 function EditTab({
   tabID,
   visDispatch,
   tabType,
+  currentTab,
 }: // setEditTabVis,
 // noteInput,
 Props): JSX.Element {
@@ -46,20 +48,20 @@ Props): JSX.Element {
 
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
 
-  let currentTab = tabsData.find((obj) => obj.id === tabID);
-  let tabTitle = currentTab?.title;
+  // let currentTab = tabsData.find((obj) => obj.id === tabID);
+  let tabTitle = currentTab.title;
 
   let rssLink: string | null | undefined = "no bookmark";
   // let rssLink;
 
   if (tabType === "rss") {
-    rssLink = currentTab?.rssLink;
+    rssLink = currentTab.rssLink;
   }
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   // for note only
   const [textAreaValue, setTextAreaValue] = useState<string | null>(
-    currentTab?.noteInput as string | null
+    currentTab.noteInput as string | null
   );
 
   const [tabTitleInput, setTabTitleInput] = useState<string>(
@@ -69,14 +71,14 @@ Props): JSX.Element {
   const [rssLinkInput, setRssLinkInput] = useState<string>(rssLink as string);
 
   const [descriptionCheckbox, setDescriptionCheckbox] = useState(() => {
-    if (typeof currentTab?.description === "boolean") {
+    if (typeof currentTab.description === "boolean") {
       return currentTab.description;
     }
 
     return rssSettingsData.description;
   });
   const [dateCheckbox, setDateCheckbox] = useState(() => {
-    if (typeof currentTab?.date === "boolean") {
+    if (typeof currentTab.date === "boolean") {
       return currentTab.date;
     }
     return rssSettingsData.date;
@@ -87,7 +89,7 @@ Props): JSX.Element {
   const [wasCheckboxClicked, setWasCheckboxClicked] = useState(false);
 
   const [rssItemsPerPage, setRssItemsPerPage] = useState(() => {
-    if (typeof currentTab?.itemsPerPage === "number") {
+    if (typeof currentTab.itemsPerPage === "number") {
       return currentTab.itemsPerPage;
     }
     return rssSettingsData.itemsPerPage;
@@ -112,7 +114,7 @@ Props): JSX.Element {
   function calcArrOfBookmarksNames() {
     // filtered lknks
     let filteredBookmarks = bookmarksData.filter(
-      (obj) => obj.tags.indexOf((currentTab as SingleTabData).id) > -1
+      (obj) => obj.tags.indexOf(currentTab.id) > -1
     );
 
     let arrOfBookmarksNames: string[] = [];
@@ -153,7 +155,7 @@ Props): JSX.Element {
   // let regexForTitle = /^\w+$/;
   let regexForTitle = /^\w(\s?\w+)*$/;
 
-  const [tabOpen, setTabOpen] = useState((currentTab as SingleTabData).opened);
+  const [tabOpen, setTabOpen] = useState(currentTab.opened);
 
   const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
 
@@ -254,7 +256,6 @@ Props): JSX.Element {
 
       {tabType === "rss" && (
         <EditTab_RSS
-          currentTab={currentTab as SingleTabData}
           dateCheckbox={dateCheckbox}
           descriptionCheckbox={descriptionCheckbox}
           rssItemsPerPage={rssItemsPerPage}
@@ -270,7 +271,6 @@ Props): JSX.Element {
           setRssLinkInput={setRssLinkInput}
         />
       )}
-
 
       <div className={`pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
         <div className="flex justify-between items-center">
@@ -305,7 +305,7 @@ Props): JSX.Element {
           <TrashSVG
             className="h-6 text-gray-500 transition-colors duration-75 hover:text-black cursor-pointer"
             onClick={() => {
-              if (!currentTab?.deletable) {
+              if (!currentTab.deletable) {
                 setNoDeletionErrorVis(true);
                 return;
               }
@@ -343,7 +343,7 @@ Props): JSX.Element {
       </div>
 
       <div className="flex justify-start mt-2">
-         {/* SaveSVG is cut without the <p> - bug? */}
+        {/* SaveSVG is cut without the <p> - bug? */}
         <p className="w-px"></p>
         <div className="w-full flex justify-center">
           <SaveSVG

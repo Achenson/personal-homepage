@@ -10,7 +10,6 @@ import { tabsDataState } from "../../state/tabsAndBookmarks";
 import { uiColorState } from "../../state/colorsState";
 
 interface Props {
-  currentTab: SingleTabData;
   setWasAnythingClicked: React.Dispatch<React.SetStateAction<boolean>>;
   setWasTabOpenClicked: React.Dispatch<React.SetStateAction<boolean>>;
   descriptionCheckbox: boolean;
@@ -27,7 +26,6 @@ interface Props {
 }
 
 function EditTab_RSS({
-  currentTab,
   setWasAnythingClicked,
   setWasTabOpenClicked,
   descriptionCheckbox,
@@ -48,9 +46,8 @@ function EditTab_RSS({
 
   const [uiColorData, setUiColorData] = uiColorState.use();
 
-  let rssLink: string | null | undefined = "no bookmark";
-
-  rssLink = currentTab?.rssLink;
+  // let rssLink: string | null | undefined = "no bookmark";
+  // rssLink = currentTab.rssLink;
 
   return (
     <div className="mb-1">

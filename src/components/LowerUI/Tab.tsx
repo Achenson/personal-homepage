@@ -525,6 +525,7 @@ Props): JSX.Element {
           tabType={tabType}
           // setEditTabVis={setEditTabVis}
           visDispatch={visDispatch}
+          currentTab={currentTab as SingleTabData}
           // noteInput={noteInput}
         />
       )}
@@ -555,14 +556,14 @@ Props): JSX.Element {
       {visState.tabContentVis && tabType === "note" && (
         <NoteInput
           //  noteInput={noteInput}
-          tabID={tabID}
+          currentTab={currentTab as SingleTabData}
           // setEditTabVis={setEditTabVis}
           visDispatch={visDispatch}
         />
       )}
 
       {visState.tabContentVis && tabType === "rss" && (
-        <RSS_reactQuery tabID={tabID} />
+        <RSS_reactQuery tabID={tabID} currentTab={currentTab as SingleTabData}/>
       )}
     </div>
   );

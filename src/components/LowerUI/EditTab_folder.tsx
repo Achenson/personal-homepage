@@ -60,6 +60,7 @@ function EditTab_folder({
     initialBookmarks,
     setVisibleBookmarks,
     setBookmarksListVis,
+    setChevronDown
   ]);
 
   function makeInitialBookmarks(): string[] {
