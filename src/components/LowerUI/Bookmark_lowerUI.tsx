@@ -60,8 +60,7 @@ interface Props {
   setRssErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
   regexForTags: RegExp;
   regexForTitle: RegExp;
-  chevronDown: boolean;
-  setChevronDown: React.Dispatch<React.SetStateAction<boolean>>;
+ 
 }
 
 function Bookmark_lowerUI({
@@ -98,8 +97,7 @@ function Bookmark_lowerUI({
   setNoteErrorVis,
   regexForTags,
   regexForTitle,
-  chevronDown,
-  setChevronDown,
+ 
   rssErrorVis,
   setRssErrorVis,
 }: Props): JSX.Element {
@@ -157,7 +155,6 @@ function Bookmark_lowerUI({
             }}
             onFocus={(e) => {
               setTagsListVis(false);
-              setChevronDown(true);
             }}
           />
           <ChevronDownSVG className="h-6 invisible" />
@@ -176,7 +173,6 @@ function Bookmark_lowerUI({
             }}
             onFocus={(e) => {
               setTagsListVis(false);
-              setChevronDown(true);
             }}
           />
           <ChevronDownSVG className="h-6 invisible" />
@@ -215,7 +211,6 @@ function Bookmark_lowerUI({
               }}
               onFocus={(e) => {
                 setTagsListVis(true);
-                setChevronDown(false);
               }}
 
               // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
@@ -232,19 +227,17 @@ function Bookmark_lowerUI({
             )}
           </div>
 
-          {chevronDown ? (
-            <ChevronDownSVG
+          {tagsListVis ? (
+            <ChevronUpSVG
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
-                setChevronDown((b) => !b);
                 setTagsListVis((b) => !b);
               }}
             />
           ) : (
-            <ChevronUpSVG
+            <ChevronDownSVG
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
-                setChevronDown((b) => !b);
                 setTagsListVis((b) => !b);
               }}
             />
@@ -276,7 +269,7 @@ function Bookmark_lowerUI({
         )}
 
         <div className="flex justify-start mt-5">
-           {/* SaveSVG is cut without the <p> - bug? */}
+          {/* SaveSVG is cut without the <p> - bug? */}
           <p className="w-px"></p>
           <div className="w-full flex justify-center">
             <SaveSVG
@@ -301,8 +294,8 @@ function Bookmark_lowerUI({
 
                 if (!regexForTitle.test(titleInput)) {
                   setTitleFormatErrorVis(true);
-                  setTagsListVis(false)
-                  setChevronDown(true);
+                  setTagsListVis(false);
+                 
                   return;
                 }
 
@@ -315,15 +308,15 @@ function Bookmark_lowerUI({
                     titleInput !== (currentBookmark as SingleBookmarkData).title
                   ) {
                     setTitleUniquenessErrorVis(true);
-                    setTagsListVis(false)
-                    setChevronDown(true);
+                    setTagsListVis(false);
+                  
                     return;
                   }
                 } else {
                   if (!titleUniquenessCheck()) {
                     setTitleUniquenessErrorVis(true);
-                    setTagsListVis(false)
-                    setChevronDown(true);
+                    setTagsListVis(false);
+                 
                     return;
                   }
                 }
@@ -333,16 +326,16 @@ function Bookmark_lowerUI({
                   tagsInputStr !== ""
                 ) {
                   setTagErrorVis(true);
-                  setTagsListVis(false)
-                  setChevronDown(true);
+                  setTagsListVis(false);
+                  
                   return;
                 }
 
                 for (let el of tagsInputArr) {
                   if (notesTitlesArr.indexOf(el) > -1) {
                     setNoteErrorVis(true);
-                    setTagsListVis(false)
-                    setChevronDown(true);
+                    setTagsListVis(false);
+                    
                     return;
                   }
                 }
@@ -350,15 +343,15 @@ function Bookmark_lowerUI({
                 for (let el of tagsInputArr) {
                   if (rssTitlesArr.indexOf(el) > -1) {
                     setRssErrorVis(true);
-                    setTagsListVis(false)
-                    setChevronDown(true);
+                    setTagsListVis(false);
+                   
                     return;
                   }
                 }
 
                 if (!tagUniquenessCheck()) {
                   setTagRepeatErrorVis(true);
-                  setChevronDown(true);
+                  
                   return;
                 }
 
@@ -386,7 +379,7 @@ function Bookmark_lowerUI({
                     let newTab = createFolderTab(el, colNumber, newTabPriority);
                     tagsInputArr_ToIds.push(newTab.id);
                     // for edit only
-                    newTabId = newTab.id
+                    newTabId = newTab.id;
 
                     // adding new folder in there was no folder with title as a tag befere
 
@@ -395,7 +388,6 @@ function Bookmark_lowerUI({
                     newBookmarksAllTagsData.push(newTab.id);
 
                     console.log(newBookmarksAllTagsData);
-                    
 
                     setBookmarksAllTagsData([...newBookmarksAllTagsData]);
                     setTabsData((previous) =>
@@ -408,9 +400,6 @@ function Bookmark_lowerUI({
                       tagsInputArr_ToIds.push(filteredTab.id);
                     }
                   }
-
-
-
                 });
 
                 if (bookmarkComponentType === "edit") {
@@ -459,8 +448,8 @@ function Bookmark_lowerUI({
 
                   let bookmarksAllTagsData_new: (string | number)[] = [];
 
-                  if(newTabId) {
-                    bookmarksAllTagsData_new.push(newTabId)
+                  if (newTabId) {
+                    bookmarksAllTagsData_new.push(newTabId);
                   }
 
                   bookmarksAllTagsData.forEach((el) => {
@@ -470,7 +459,6 @@ function Bookmark_lowerUI({
                   });
 
                   setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
-                  
                 } else {
                   setBookmarksData((previous) =>
                     produce(previous, (updated) => {

@@ -122,8 +122,6 @@ function Bookmark_newAndEdit({
   const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
   const [rssErrorVis, setRssErrorVis] = useState<boolean>(false);
 
-  const [chevronDown, setChevronDown] = useState(true);
-
   // ^  and $ -> beginning and end of the text!
   // let regexForTags = /^\w+(,\s\w+)*$/;
   // let regexForTitle = /^\w+$/;
@@ -165,7 +163,6 @@ function Bookmark_newAndEdit({
 
     if (newVisibleTags.length === 0) {
       setTagsListVis(false);
-      setChevronDown(true);
     }
 
     // if (newVisibleTags.length > 0 && !isThisTheFirstRender) {
@@ -225,8 +222,6 @@ function Bookmark_newAndEdit({
     setRssErrorVis,
     regexForTags,
     regexForTitle,
-    chevronDown,
-    setChevronDown
   };
 
   return (

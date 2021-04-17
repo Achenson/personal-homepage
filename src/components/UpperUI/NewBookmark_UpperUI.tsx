@@ -54,8 +54,6 @@ interface Props {
   setRssErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
   regexForTags: RegExp;
   regexForTitle: RegExp;
-  chevronDown: boolean;
-  setChevronDown: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function NewBookmark_UpperUI({
@@ -91,8 +89,6 @@ function NewBookmark_UpperUI({
   setRssErrorVis,
   regexForTags,
   regexForTitle,
-  chevronDown,
-  setChevronDown,
 }: // setBookmarkVis,
 Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
@@ -101,8 +97,6 @@ Props): JSX.Element {
     bookmarksAllTagsData,
     setBookmarksAllTagsData,
   ] = bookmarksAllTagsState.use();
-
-  // const [chevronDown, setChevronDown] = useState(true);
 
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable
@@ -126,7 +120,6 @@ Props): JSX.Element {
             onChange={(e) => setTitleInput(e.target.value)}
             onFocus={(e) => {
               setTagsListVis(false);
-              setChevronDown(true);
             }}
           />
           <ChevronDownSVG className="h-6 invisible" />
@@ -142,7 +135,6 @@ Props): JSX.Element {
             onChange={(e) => setUrlInput(e.target.value)}
             onFocus={(e) => {
               setTagsListVis(false);
-              setChevronDown(true);
             }}
           />
           <ChevronDownSVG className="h-6 invisible" />
@@ -156,7 +148,7 @@ Props): JSX.Element {
               className="w-full border border-gray-300 pl-px"
               // value={tagsInput.join(", ")}
               value={tagsInputStr}
-              placeholder={"tag1, tag2... (\"all\" tag auto-added)"}
+              placeholder={'tag1, tag2... ("all" tag auto-added)'}
               onChange={(e) => {
                 let target = e.target.value;
 
@@ -179,7 +171,6 @@ Props): JSX.Element {
               }}
               onFocus={(e) => {
                 setTagsListVis(true);
-                setChevronDown(false);
               }}
 
               // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
@@ -195,19 +186,17 @@ Props): JSX.Element {
             )}
           </div>
 
-          {chevronDown ? (
-            <ChevronDownSVG
+          {tagsListVis ? (
+            <ChevronUpSVG
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
-                setChevronDown((b) => !b);
                 setTagsListVis((b) => !b);
               }}
             />
           ) : (
-            <ChevronUpSVG
+            <ChevronDownSVG
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
-                setChevronDown((b) => !b);
                 setTagsListVis((b) => !b);
               }}
             />
@@ -239,7 +228,7 @@ Props): JSX.Element {
         )}
 
         <div className="flex justify-start mt-5">
-           {/* SaveSVG is cut without the <p> - bug? */}
+          {/* SaveSVG is cut without the <p> - bug? */}
           <p className="w-px"></p>
           <div className="w-full flex justify-center">
             <SaveSVG
@@ -261,7 +250,6 @@ Props): JSX.Element {
                 if (!regexForTitle.test(titleInput)) {
                   setTitleFormatErrorVis(true);
                   setTagsListVis(false);
-                  setChevronDown(true);
                   return;
                 }
 
@@ -270,7 +258,6 @@ Props): JSX.Element {
                 if (!titleUniquenessCheck()) {
                   setTitleUniquenessErrorVis(true);
                   setTagsListVis(false);
-                  setChevronDown(true);
                   return;
                 }
 
@@ -280,7 +267,6 @@ Props): JSX.Element {
                 ) {
                   setTagErrorVis(true);
                   setTagsListVis(false);
-                  setChevronDown(true);
                   return;
                 }
 
@@ -288,7 +274,6 @@ Props): JSX.Element {
                   if (notesTitlesArr.indexOf(el) > -1) {
                     setNoteErrorVis(true);
                     setTagsListVis(false);
-                    setChevronDown(true);
                     return;
                   }
                 }
@@ -297,7 +282,6 @@ Props): JSX.Element {
                   if (rssTitlesArr.indexOf(el) > -1) {
                     setRssErrorVis(true);
                     setTagsListVis(false);
-                    setChevronDown(true);
                     return;
                   }
                 }
@@ -305,7 +289,6 @@ Props): JSX.Element {
                 if (!tagUniquenessCheck()) {
                   setTagRepeatErrorVis(true);
                   setTagsListVis(false);
-                  setChevronDown(true);
                   return;
                 }
 
