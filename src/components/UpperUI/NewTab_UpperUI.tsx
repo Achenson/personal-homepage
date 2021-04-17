@@ -89,8 +89,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
   const [textAreaValue, setTextAreaValue] = useState<string | null>("");
 
-  const [chevronDown, setChevronDown] = useState(true);
-
   const [initialBookmarks, setInitialBookmarks] = useState(
     () => makeInitialBookmarks()
   );
@@ -114,7 +112,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
     if (newVisibleBookmarks.length === 0) {
       setBookmarksListVis(false);
-      setChevronDown(true);
     }
   }, [
     bookmarksInputStr,
@@ -156,7 +153,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             onClick={() => {
               setTabColumnInput(el);
               setBookmarksListVis(false);
-              setChevronDown(true);
             }}
           ></div>
         </div>
@@ -192,7 +188,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             onChange={(e) => setTabTitleInput(e.target.value)}
             onFocus={(e) => {
               setBookmarksListVis(false);
-              setChevronDown(true);
             }}
           />
           {/* </div> */}
@@ -239,7 +234,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 }}
                 onFocus={(e) => {
                   setBookmarksListVis(true);
-                  setChevronDown(false);
                 }}
                 // onBlur={}
 
@@ -257,22 +251,20 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             </div>
 
             {/* </div> */}
-            {chevronDown ? (
+            {bookmarksListVis ? (
               <div className="w-5 h-5 mt-1">
-                <ChevronDownSVG
+                <ChevronUpSVG
                   className="h-full cursor-pointer hover:text-blueGray-500"
                   onClick={() => {
-                    setChevronDown((b) => !b);
                     setBookmarksListVis((b) => !b);
                   }}
                 />
               </div>
             ) : (
               <div className="w-5 h-5 mt-1">
-                <ChevronUpSVG
+                <ChevronDownSVG
                   className="h-full cursor-pointer hover:text-blueGray-500"
                   onClick={() => {
-                    setChevronDown((b) => !b);
                     setBookmarksListVis((b) => !b);
                   }}
                 />
@@ -372,15 +364,12 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 if (!regexForTitle.test(tabTitleInput)) {
                   setTitleFormatErrorVis(true);
                   setBookmarksListVis(false);
-                  setChevronDown(true);
-
                   return;
                 }
 
                 if (!titleUniquenessCheck()) {
                   setTitleUniquenessErrorVis(true);
                   setBookmarksListVis(false);
-                  setChevronDown(true);
                   return;
                 }
 
@@ -388,21 +377,18 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   if (!regexForBookmarks.test(bookmarksInputArr.join(", "))) {
                     setBookmarksErrorVis(true);
                     setBookmarksListVis(false);
-                    setChevronDown(true);
                     return;
                   }
 
                   if (!bookmarkExistenceCheck()) {
                     setBookmarkExistenceErrorVis(true);
                     setBookmarksListVis(false);
-                    setChevronDown(true);
                     return;
                   }
 
                   if (!bookmarksUniquenessCheck()) {
                     setBookmarksRepeatErrorVis(true);
                     setBookmarksListVis(false);
-                    setChevronDown(true);
                     return;
                   }
                 }

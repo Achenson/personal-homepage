@@ -8,8 +8,6 @@ import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 
 interface Props {
-  chevronDown: boolean;
-  setChevronDown: React.Dispatch<React.SetStateAction<boolean>>;
   bookmarksListVis: boolean;
   setBookmarksListVis: React.Dispatch<React.SetStateAction<boolean>>;
   setWasAnythingClicked: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,8 +16,6 @@ interface Props {
 }
 
 function EditTab_folder({
-  chevronDown,
-  setChevronDown,
   bookmarksListVis,
   setBookmarksListVis,
   setWasAnythingClicked,
@@ -52,7 +48,6 @@ function EditTab_folder({
 
     if (newVisibleBookmarks.length === 0) {
       setBookmarksListVis(false);
-      setChevronDown(true);
     }
 
   }, [
@@ -60,7 +55,6 @@ function EditTab_folder({
     initialBookmarks,
     setVisibleBookmarks,
     setBookmarksListVis,
-    setChevronDown
   ]);
 
   function makeInitialBookmarks(): string[] {
@@ -105,7 +99,6 @@ function EditTab_folder({
           }}
           onFocus={(e) => {
             setBookmarksListVis(true);
-            setChevronDown(false);
           }}
           placeholder={"Choose at least one"}
         />
@@ -123,19 +116,17 @@ function EditTab_folder({
       </div>
 
       <div style={{ height: "18px" }} className="-mr-1">
-        {chevronDown ? (
-          <ChevronDownSVG
+        {bookmarksListVis ? (
+          <ChevronUpSVG
             className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
             onClick={() => {
-              setChevronDown((b) => !b);
               setBookmarksListVis((b) => !b);
             }}
           />
         ) : (
-          <ChevronUpSVG
+          <ChevronDownSVG
             className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
             onClick={() => {
-              setChevronDown((b) => !b);
               setBookmarksListVis((b) => !b);
             }}
           />

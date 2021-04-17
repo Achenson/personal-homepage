@@ -103,8 +103,6 @@ Props): JSX.Element {
   // for disabling save btn
   const [wasAnythingClicked, setWasAnythingClicked] = useState(false);
 
-  const [chevronDown, setChevronDown] = useState(true);
-
   const [arrOfBookmarksNames, setArrayOfBookmarksNames] = useState<string[]>(
     () => {
       return calcArrOfBookmarksNames();
@@ -193,7 +191,6 @@ Props): JSX.Element {
             }}
             onFocus={(e) => {
               setBookmarksListVis(false);
-              setChevronDown(true);
             }}
           />
           {tabType === "folder" && tabID !== "ALL_TAGS" && (
@@ -205,8 +202,6 @@ Props): JSX.Element {
 
         {tabType === "folder" && tabID !== "ALL_TAGS" && (
           <EditTab_folder
-            chevronDown={chevronDown}
-            setChevronDown={setChevronDown}
             bookmarksListVis={bookmarksListVis}
             setBookmarksListVis={setBookmarksListVis}
             setWasAnythingClicked={setWasAnythingClicked}
@@ -283,7 +278,6 @@ Props): JSX.Element {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
                 setBookmarksListVis(false);
-                setChevronDown(true);
               }}
             />
           ) : (
@@ -293,7 +287,6 @@ Props): JSX.Element {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
                 setBookmarksListVis(false);
-                setChevronDown(true);
               }}
             />
           )}
@@ -374,7 +367,6 @@ Props): JSX.Element {
               if (!regexForTitle.test(tabTitleInput)) {
                 setTitleFormatErrorVis(true);
                 setBookmarksListVis(false);
-                setChevronDown(true);
                 return;
               }
 
@@ -389,21 +381,18 @@ Props): JSX.Element {
                 if (!regexForBookmarks.test(bookmarksInputStr)) {
                   setBookmarksErrorVis(true);
                   setBookmarksListVis(false);
-                  setChevronDown(true);
                   return;
                 }
 
                 if (!bookmarkExistenceCheck()) {
                   setBookmarksExistenceErrorVis(true);
                   setBookmarksListVis(false);
-                  setChevronDown(true);
                   return;
                 }
 
                 if (!bookmarksUniquenessCheck()) {
                   setBookmarksRepeatErrorVis(true);
                   setBookmarksListVis(false);
-                  setChevronDown(true);
                   return;
                 }
               }

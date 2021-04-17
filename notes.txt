@@ -361,6 +361,7 @@ DONE 298. some effect when hovering over bookmarks? DONE
 DONE 299. upperLeft UI should not close tab content! DONE
 ???302. sorting method???
 DONE 303. better borders in color selecting DONE
+DONE 326. chevronDown & selectableVis -> unify logic! DONE
 DONE 335. RSS settings - date & description better styles DONE
 
 
@@ -407,7 +408,6 @@ DONE 335. RSS settings - date & description better styles DONE
 323. newFolder newRSS: better input alignments
 324. delete all btn for selectables
 325. open popup with 3 default images to choose
-326. chevronDown & selectableVis -> unify logic!
 327. add error to editTab to all only unique titles! 
 328. bigger gap after tab on smaller screen sizes when column is empty?
 329. code order (useEffect, func itp) eg. in 
