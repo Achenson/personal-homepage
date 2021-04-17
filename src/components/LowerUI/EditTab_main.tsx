@@ -169,6 +169,169 @@ Props): JSX.Element {
     if (tabType === "folder") return "mr-14";
   }
 
+
+
+  function errorHandling(bookmarksInputArr: string[]): boolean {
+
+    setTitleFormatErrorVis(false);
+    setTextAreaErrorVis(false);
+    setNoDeletionErrorVis(false);
+    setBookmarksErrorVis(false);
+    setBookmarksRepeatErrorVis(false);
+    setBookmarksExistenceErrorVis(false);
+
+
+    if (!wasAnythingClicked) {
+      return true;
+    }
+
+    setWasCheckboxClicked(false);
+    setWasItemsPerPageClicked(false);
+
+    if (!regexForTitle.test(tabTitleInput)) {
+      setTitleFormatErrorVis(true);
+      setBookmarksListVis(false);
+      return true;
+    }
+
+    if (tabType === "note") {
+      if ((textAreaValue as string).length === 0) {
+        setTextAreaErrorVis(true);
+        return true;
+      }
+    }
+
+    if (tabType === "folder") {
+      if (!regexForBookmarks.test(bookmarksInputStr)) {
+        setBookmarksErrorVis(true);
+        setBookmarksListVis(false);
+        return true;
+      }
+
+      if (!bookmarkExistenceCheck()) {
+        setBookmarksExistenceErrorVis(true);
+        setBookmarksListVis(false);
+        return true;
+      }
+
+      if (!bookmarksUniquenessCheck()) {
+        setBookmarksRepeatErrorVis(true);
+        setBookmarksListVis(false);
+        return true;
+      }
+    }
+
+    return false;
+
+    function bookmarkExistenceCheck() {
+      let bookmarksArr: string[] = [];
+
+      bookmarksData.forEach((obj) => {
+        bookmarksArr.push(obj.title);
+      });
+
+      for (let el of bookmarksInputArr) {
+        if (bookmarksArr.indexOf(el) === -1) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    function bookmarksUniquenessCheck() {
+      let isUnique: boolean = true;
+
+      bookmarksInputArr.forEach((el, i) => {
+        let bookmarksInputCopy = [...bookmarksInputArr];
+        bookmarksInputCopy.splice(i, 1);
+
+        if (bookmarksInputCopy.indexOf(el) > -1) {
+          isUnique = false;
+          return;
+        }
+      });
+
+      return isUnique;
+    }
+
+
+
+  }
+
+  function addOrEditTab(bookmarksInputArr: string[]) {
+
+    setTabsData((previous) =>
+    produce(previous, (updated) => {
+      let tabToUpdate = updated.find((obj) => obj.id === tabID);
+
+      if (tabToUpdate) {
+        tabToUpdate.title = tabTitleInput;
+        // updated[tabIndex].deletable = currentTab[0].deletable
+        if (wasTabOpenClicked) {
+          tabToUpdate.opened = tabOpen;
+        }
+
+        if (tabType === "note") {
+          tabToUpdate.noteInput = textAreaValue;
+        }
+        if (tabType === "rss") {
+          tabToUpdate.rssLink = rssLinkInput;
+
+          if (wasCheckboxClicked) {
+            tabToUpdate.date = dateCheckbox;
+          }
+
+          if (wasCheckboxClicked) {
+            tabToUpdate.description = descriptionCheckbox;
+          }
+
+          if (wasItemsPerPageClicked) {
+            tabToUpdate.itemsPerPage = rssItemsPerPage;
+          }
+        }
+      }
+    })
+  );
+
+  if (tabType === "folder") {
+    // changing tags in links
+    setBookmarksData((previous) =>
+      produce(previous, (updated) => {
+        updated.forEach((obj) => {
+          let bookmarksInputArr = bookmarksInputStr.split(", ");
+
+          // all initial links inside a folder
+          // make array of missing links
+          // if this links' title is inside missing bookmarks
+          // cut out tabID (current folder) from tags
+
+          let missingBookmarks: string[] = [];
+
+          arrOfBookmarksNames.forEach((el, i) => {
+            if (bookmarksInputArr.indexOf(el) === -1) {
+              missingBookmarks.push(el);
+            }
+          });
+
+          if (missingBookmarks.indexOf(obj.title) > -1) {
+            obj.tags.splice(obj.tags.indexOf(tabID), 1);
+          }
+
+          //  if link title is present in folder's new input for tabs & if folder title wasn't already in tags
+          // add new tag
+          if (
+            bookmarksInputArr.indexOf(obj.title) > -1 &&
+            obj.tags.indexOf(tabID) === -1
+          ) {
+            obj.tags.push(tabID);
+          }
+        });
+      })
+    );
+  }
+  }
+
   return (
     <div className={`absolute z-40 bg-gray-100 pb-2 border w-full pl-1 pr-1`}>
       <div className="mb-3">
@@ -348,157 +511,14 @@ Props): JSX.Element {
             onClick={(e) => {
               e.preventDefault();
 
-              setTitleFormatErrorVis(false);
-              setTextAreaErrorVis(false);
-              setNoDeletionErrorVis(false);
-              setBookmarksErrorVis(false);
-              setBookmarksRepeatErrorVis(false);
-              setBookmarksExistenceErrorVis(false);
-
               let bookmarksInputArr = bookmarksInputStr.split(", ");
 
-              if (!wasAnythingClicked) {
-                return;
-              }
+              let isThereAnError = errorHandling(bookmarksInputArr)
+              // return also if nothing has been clicked
+              if(isThereAnError) return;
 
-              setWasCheckboxClicked(false);
-              setWasItemsPerPageClicked(false);
-
-              if (!regexForTitle.test(tabTitleInput)) {
-                setTitleFormatErrorVis(true);
-                setBookmarksListVis(false);
-                return;
-              }
-
-              if (tabType === "note") {
-                if ((textAreaValue as string).length === 0) {
-                  setTextAreaErrorVis(true);
-                  return;
-                }
-              }
-
-              if (tabType === "folder") {
-                if (!regexForBookmarks.test(bookmarksInputStr)) {
-                  setBookmarksErrorVis(true);
-                  setBookmarksListVis(false);
-                  return;
-                }
-
-                if (!bookmarkExistenceCheck()) {
-                  setBookmarksExistenceErrorVis(true);
-                  setBookmarksListVis(false);
-                  return;
-                }
-
-                if (!bookmarksUniquenessCheck()) {
-                  setBookmarksRepeatErrorVis(true);
-                  setBookmarksListVis(false);
-                  return;
-                }
-              }
-
-              function bookmarkExistenceCheck() {
-                let bookmarksArr: string[] = [];
-
-                bookmarksData.forEach((obj) => {
-                  bookmarksArr.push(obj.title);
-                });
-
-                for (let el of bookmarksInputArr) {
-                  if (bookmarksArr.indexOf(el) === -1) {
-                    return false;
-                  }
-                }
-
-                return true;
-              }
-
-              function bookmarksUniquenessCheck() {
-                let isUnique: boolean = true;
-
-                bookmarksInputArr.forEach((el, i) => {
-                  let bookmarksInputCopy = [...bookmarksInputArr];
-                  bookmarksInputCopy.splice(i, 1);
-
-                  if (bookmarksInputCopy.indexOf(el) > -1) {
-                    isUnique = false;
-                    return;
-                  }
-                });
-
-                return isUnique;
-              }
-
-              setTabsData((previous) =>
-                produce(previous, (updated) => {
-                  let tabToUpdate = updated.find((obj) => obj.id === tabID);
-
-                  if (tabToUpdate) {
-                    tabToUpdate.title = tabTitleInput;
-                    // updated[tabIndex].deletable = currentTab[0].deletable
-                    if (wasTabOpenClicked) {
-                      tabToUpdate.opened = tabOpen;
-                    }
-
-                    if (tabType === "note") {
-                      tabToUpdate.noteInput = textAreaValue;
-                    }
-                    if (tabType === "rss") {
-                      tabToUpdate.rssLink = rssLinkInput;
-
-                      if (wasCheckboxClicked) {
-                        tabToUpdate.date = dateCheckbox;
-                      }
-
-                      if (wasCheckboxClicked) {
-                        tabToUpdate.description = descriptionCheckbox;
-                      }
-
-                      if (wasItemsPerPageClicked) {
-                        tabToUpdate.itemsPerPage = rssItemsPerPage;
-                      }
-                    }
-                  }
-                })
-              );
-
-              if (tabType === "folder") {
-                // changing tags in links
-                setBookmarksData((previous) =>
-                  produce(previous, (updated) => {
-                    updated.forEach((obj) => {
-                      let bookmarksInputArr = bookmarksInputStr.split(", ");
-
-                      // all initial links inside a folder
-                      // make array of missing links
-                      // if this links' title is inside missing bookmarks
-                      // cut out tabID (current folder) from tags
-
-                      let missingBookmarks: string[] = [];
-
-                      arrOfBookmarksNames.forEach((el, i) => {
-                        if (bookmarksInputArr.indexOf(el) === -1) {
-                          missingBookmarks.push(el);
-                        }
-                      });
-
-                      if (missingBookmarks.indexOf(obj.title) > -1) {
-                        obj.tags.splice(obj.tags.indexOf(tabID), 1);
-                      }
-
-                      //  if link title is present in folder's new input for tabs & if folder title wasn't already in tags
-                      // add new tag
-                      if (
-                        bookmarksInputArr.indexOf(obj.title) > -1 &&
-                        obj.tags.indexOf(tabID) === -1
-                      ) {
-                        obj.tags.push(tabID);
-                      }
-                    });
-                  })
-                );
-              }
-
+              addOrEditTab(bookmarksInputArr)
+  
               // setEditTabVis((b) => !b);
               if (tabOpen) {
                 visDispatch({ type: "TAB_CONTENT_OPEN_AFTER_LOCKING" });

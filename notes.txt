@@ -419,7 +419,8 @@ DONE 335. RSS settings - date & description better styles DONE
 336. Rss SingleLink - empty??
 337. rss date formatting
 338. aligning left-hand text with right-hand input -> do it without margins!
-
+339. move note & rss edit errors lower
+340. allow trailing commas in selectables
 
 
 
