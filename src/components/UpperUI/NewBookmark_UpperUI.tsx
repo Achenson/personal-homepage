@@ -98,6 +98,133 @@ Props): JSX.Element {
     setBookmarksAllTagsData,
   ] = bookmarksAllTagsState.use();
 
+  function errorHandling(tagsInputArr: string[]) {
+    setTagErrorVis(false);
+    setTagRepeatErrorVis(false);
+    setTitleFormatErrorVis(false);
+    setTitleUniquenessErrorVis(false);
+    setNoteErrorVis(false);
+    setRssErrorVis(false);
+
+    if (!regexForTitle.test(titleInput)) {
+      setTitleFormatErrorVis(true);
+      setTagsListVis(false);
+      return;
+    }
+
+    // !!! difference in Link_lower_JSX for edit type
+
+    if (!titleUniquenessCheck()) {
+      setTitleUniquenessErrorVis(true);
+      setTagsListVis(false);
+      return;
+    }
+
+    if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "") {
+      setTagErrorVis(true);
+      setTagsListVis(false);
+      return;
+    }
+
+    for (let el of tagsInputArr) {
+      if (notesTitlesArr.indexOf(el) > -1) {
+        setNoteErrorVis(true);
+        setTagsListVis(false);
+        return;
+      }
+    }
+
+    for (let el of tagsInputArr) {
+      if (rssTitlesArr.indexOf(el) > -1) {
+        setRssErrorVis(true);
+        setTagsListVis(false);
+        return;
+      }
+    }
+
+    if (!tagUniquenessCheck()) {
+      setTagRepeatErrorVis(true);
+      setTagsListVis(false);
+      return;
+    }
+
+    function tagUniquenessCheck() {
+      let isUnique: boolean = true;
+
+      tagsInputArr.forEach((el, i) => {
+        let tagsInputCopy = [...tagsInputArr];
+        tagsInputCopy.splice(i, 1);
+
+        if (tagsInputCopy.indexOf(el) > -1) {
+          isUnique = false;
+          return;
+        }
+      });
+
+      return isUnique;
+    }
+
+    function titleUniquenessCheck() {
+      let isUnique: boolean = true;
+
+      bookmarksData.forEach((obj, i) => {
+        if (obj.title === titleInput) {
+          isUnique = false;
+        }
+      });
+
+      return isUnique;
+    }
+  }
+
+  function addBookmarkAndTag(tagsInputArr: string[]) {
+    // !!! diff in Link_lower_JSX
+    // all tags always being added
+    let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
+
+    tagsInputArr.forEach((el) => {
+      let tabCorrespondingToTag = tabsData.find((obj) => obj.title === el);
+
+      let sortedTabsInCol = tabsData
+        .filter((obj) => obj.column === 1)
+        .sort((a, b) => a.priority - b.priority);
+
+      let newTabPriority =
+        sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
+
+      // if folder with title corresponding to tag doesn't exist
+      if (!tabCorrespondingToTag && tagsInputStr !== "") {
+        let newTab = createFolderTab(el, 1, newTabPriority);
+        tagsInputArr_ToIds.push(newTab.id);
+
+        // adding new folder in there was no folder with title as a tag befere
+
+        let newBookmarksAllTagsData = [...bookmarksAllTagsData];
+
+        newBookmarksAllTagsData.push(newTab.id);
+
+        setBookmarksAllTagsData([...newBookmarksAllTagsData]);
+
+        setTabsData((previous) =>
+          produce(previous, (updated) => {
+            updated.push(newTab);
+          })
+        );
+      } else {
+        // if input is not empty (if it is empty, "ALL_TAG" will be the only tag)
+        if (tagsInputStr !== "" && tabCorrespondingToTag) {
+          tagsInputArr_ToIds.push(tabCorrespondingToTag.id);
+        }
+      }
+    });
+
+    setBookmarksData((previous) =>
+      produce(previous, (updated) => {
+        updated.push(createBookmark(titleInput, urlInput, tagsInputArr_ToIds));
+      })
+    );
+  }
+
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable
     <div
@@ -236,143 +363,12 @@ Props): JSX.Element {
               onClick={(e) => {
                 e.preventDefault();
 
-                // if(tagsInput.join(", "))
-
-                setTagErrorVis(false);
-                setTagRepeatErrorVis(false);
-                setTitleFormatErrorVis(false);
-                setTitleUniquenessErrorVis(false);
-                setNoteErrorVis(false);
-                setRssErrorVis(false);
-
                 let tagsInputArr = tagsInputStr.split(", ");
 
-                if (!regexForTitle.test(titleInput)) {
-                  setTitleFormatErrorVis(true);
-                  setTagsListVis(false);
-                  return;
-                }
-
-                // !!! difference in Link_lower_JSX for edit type
-
-                if (!titleUniquenessCheck()) {
-                  setTitleUniquenessErrorVis(true);
-                  setTagsListVis(false);
-                  return;
-                }
-
-                if (
-                  !regexForTags.test(tagsInputArr.join(", ")) &&
-                  tagsInputStr !== ""
-                ) {
-                  setTagErrorVis(true);
-                  setTagsListVis(false);
-                  return;
-                }
-
-                for (let el of tagsInputArr) {
-                  if (notesTitlesArr.indexOf(el) > -1) {
-                    setNoteErrorVis(true);
-                    setTagsListVis(false);
-                    return;
-                  }
-                }
-
-                for (let el of tagsInputArr) {
-                  if (rssTitlesArr.indexOf(el) > -1) {
-                    setRssErrorVis(true);
-                    setTagsListVis(false);
-                    return;
-                  }
-                }
-
-                if (!tagUniquenessCheck()) {
-                  setTagRepeatErrorVis(true);
-                  setTagsListVis(false);
-                  return;
-                }
-
-                // !!! diff in Link_lower_JSX
-
-                // all tags always being added
-                let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
-
-                tagsInputArr.forEach((el) => {
-                  let filteredTab = tabsData.filter(
-                    (obj) => obj.title === el
-                  )[0];
-
-                  let sortedTabsInCol = tabsData
-                    .filter((obj) => obj.column === 1)
-                    .sort((a, b) => a.priority - b.priority);
-
-                  let newTabPriority =
-                    sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
-
-                  // if folder with title corresponding to tag doesn't exist
-                  if (!filteredTab && tagsInputStr !== "") {
-                    let newTab = createFolderTab(el, 1, newTabPriority);
-                    tagsInputArr_ToIds.push(newTab.id);
-
-                    // adding new folder in there was no folder with title as a tag befere
-
-                    let newBookmarksAllTagsData = [...bookmarksAllTagsData];
-
-                    newBookmarksAllTagsData.push(newTab.id);
-
-                    setBookmarksAllTagsData([...newBookmarksAllTagsData]);
-
-                    setTabsData((previous) =>
-                      produce(previous, (updated) => {
-                        updated.push(newTab);
-                      })
-                    );
-                  } else {
-                    // if input is not empty
-                    if (tagsInputStr !== "") {
-                      tagsInputArr_ToIds.push(filteredTab.id);
-                    }
-                  }
-                });
-
-                setBookmarksData((previous) =>
-                  produce(previous, (updated) => {
-                    updated.push(
-                      createBookmark(titleInput, urlInput, tagsInputArr_ToIds)
-                    );
-                  })
-                );
-
-                // setBookmarkVis((b) => !b);
+                errorHandling(tagsInputArr);
+                // 1. adding bookmark  2. adding folder/s if some tags do not correspond to existing folders
+                addBookmarkAndTag(tagsInputArr);
                 upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
-
-                function tagUniquenessCheck() {
-                  let isUnique: boolean = true;
-
-                  tagsInputArr.forEach((el, i) => {
-                    let tagsInputCopy = [...tagsInputArr];
-                    tagsInputCopy.splice(i, 1);
-
-                    if (tagsInputCopy.indexOf(el) > -1) {
-                      isUnique = false;
-                      return;
-                    }
-                  });
-
-                  return isUnique;
-                }
-
-                function titleUniquenessCheck() {
-                  let isUnique: boolean = true;
-
-                  bookmarksData.forEach((obj, i) => {
-                    if (obj.title === titleInput) {
-                      isUnique = false;
-                    }
-                  });
-
-                  return isUnique;
-                }
               }}
             />
 
