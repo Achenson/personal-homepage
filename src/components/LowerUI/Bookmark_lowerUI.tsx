@@ -60,7 +60,6 @@ interface Props {
   setRssErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
   regexForTags: RegExp;
   regexForTitle: RegExp;
- 
 }
 
 function Bookmark_lowerUI({
@@ -97,7 +96,7 @@ function Bookmark_lowerUI({
   setNoteErrorVis,
   regexForTags,
   regexForTitle,
- 
+
   rssErrorVis,
   setRssErrorVis,
 }: Props): JSX.Element {
@@ -136,6 +135,216 @@ function Bookmark_lowerUI({
     });
 
     return arrOut;
+  }
+
+  function errorHandling(tagsInputArr: string[]): boolean {
+    setTagErrorVis(false);
+    setTagRepeatErrorVis(false);
+    setTitleFormatErrorVis(false);
+    setTitleUniquenessErrorVis(false);
+    setNoteErrorVis(false);
+    setRssErrorVis(false);
+
+    if (!regexForTitle.test(titleInput)) {
+      setTitleFormatErrorVis(true);
+      setTagsListVis(false);
+
+      return true;
+    }
+
+    // !!! difference in Bookmark_upper_JSX
+
+    if (bookmarkComponentType === "edit") {
+      if (
+        !titleUniquenessCheck() &&
+        // for editing it is permitted to have same title as before
+        titleInput !== (currentBookmark as SingleBookmarkData).title
+      ) {
+        setTitleUniquenessErrorVis(true);
+        setTagsListVis(false);
+
+        return true;
+      }
+    } else {
+      if (!titleUniquenessCheck()) {
+        setTitleUniquenessErrorVis(true);
+        setTagsListVis(false);
+
+        return true;
+      }
+    }
+
+    if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "") {
+      setTagErrorVis(true);
+      setTagsListVis(false);
+
+      return true;
+    }
+
+    for (let el of tagsInputArr) {
+      if (notesTitlesArr.indexOf(el) > -1) {
+        setNoteErrorVis(true);
+        setTagsListVis(false);
+
+        return true;
+      }
+    }
+
+    for (let el of tagsInputArr) {
+      if (rssTitlesArr.indexOf(el) > -1) {
+        setRssErrorVis(true);
+        setTagsListVis(false);
+
+        return true;
+      }
+    }
+
+    if (!tagUniquenessCheck()) {
+      setTagRepeatErrorVis(true);
+
+      return true;
+    }
+
+    return false;
+
+    function tagUniquenessCheck() {
+      let isUnique: boolean = true;
+
+      tagsInputArr.forEach((el, i) => {
+        let tagsInputCopy = [...tagsInputArr];
+        tagsInputCopy.splice(i, 1);
+
+        if (tagsInputCopy.indexOf(el) > -1) {
+          isUnique = false;
+          return;
+        }
+      });
+
+      return isUnique;
+    }
+
+    function titleUniquenessCheck() {
+      let isUnique: boolean = true;
+
+      bookmarksData.forEach((obj, i) => {
+        if (obj.title === titleInput) {
+          isUnique = false;
+        }
+      });
+
+      return isUnique;
+    }
+  }
+
+  function addBookmark(tagsInputArr: string[]) {
+    // !!! diff in Bookmark_upper_JSX
+
+    let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
+    // for edit only
+    let newTabId: undefined | string | number;
+
+    tagsInputArr.forEach((el) => {
+      let filteredTab = tabsData.filter((obj) => obj.title === el)[0];
+
+      let sortedTabsInCol = tabsData
+        .filter((obj) => obj.column === colNumber)
+        .sort((a, b) => a.priority - b.priority);
+
+      let newTabPriority =
+        sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
+
+      // if folder with title corresponding to tag doesn't exist
+      if (!filteredTab && tagsInputStr !== "") {
+        // let newTab = createFolderTab(el, 1, 0);
+        let newTab = createFolderTab(el, colNumber, newTabPriority);
+        tagsInputArr_ToIds.push(newTab.id);
+        // for edit only
+        newTabId = newTab.id;
+
+        // adding new folder in there was no folder with title as a tag befere
+
+        let newBookmarksAllTagsData = [...bookmarksAllTagsData];
+
+        newBookmarksAllTagsData.push(newTab.id);
+
+        console.log(newBookmarksAllTagsData);
+
+        setBookmarksAllTagsData([...newBookmarksAllTagsData]);
+        setTabsData((previous) =>
+          produce(previous, (updated) => {
+            updated.push(newTab);
+          })
+        );
+      } else {
+        if (tagsInputStr !== "") {
+          tagsInputArr_ToIds.push(filteredTab.id);
+        }
+      }
+    });
+
+    if (bookmarkComponentType === "edit") {
+      setBookmarksData((previous) =>
+        produce(previous, (updated) => {
+          let bookmarkToUpdate = updated.find((obj) => obj.id === bookmarkId);
+          //"if" to get rid of ts error
+          if (bookmarkToUpdate) {
+            bookmarkToUpdate.title = titleInput;
+            bookmarkToUpdate.URL = urlInput;
+            bookmarkToUpdate.tags = [...tagsInputArr_ToIds];
+          }
+        })
+      );
+
+      // for deleting empty folder
+
+      let tagsIdsToDelete: (string | number)[] = [];
+
+      initialTagsInputArr.forEach((el) => {
+        // if the tag was present in initial tags, but is not present in the end
+        if (tagsInputArr_ToIds.indexOf(el) === -1) {
+          // all bookmarks except for curren
+          let filteredBookmarks = bookmarksData.filter(
+            (obj) => obj.id !== (currentBookmark as SingleBookmarkData).id
+          );
+
+          let isElPresent: boolean = false;
+
+          filteredBookmarks.forEach((obj) => {
+            if (obj.tags.indexOf(el) > -1) {
+              // tag is present in some other bookmark than this
+              isElPresent = true;
+              return;
+            }
+          });
+
+          if (!isElPresent && el !== "ALL_TAGS") {
+            tagsIdsToDelete.push(el);
+          }
+        }
+      });
+
+      let bookmarksAllTagsData_new: (string | number)[] = [];
+
+      if (newTabId) {
+        bookmarksAllTagsData_new.push(newTabId);
+      }
+
+      bookmarksAllTagsData.forEach((el) => {
+        if (tagsIdsToDelete.indexOf(el) === -1) {
+          bookmarksAllTagsData_new.push(el);
+        }
+      });
+
+      setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
+    } else {
+      setBookmarksData((previous) =>
+        produce(previous, (updated) => {
+          updated.push(
+            createBookmark(titleInput, urlInput, tagsInputArr_ToIds)
+          );
+        })
+      );
+    }
   }
 
   return (
@@ -281,193 +490,14 @@ function Bookmark_lowerUI({
               onClick={(e) => {
                 e.preventDefault();
 
-                // if(tagsInput.join(", "))
-
-                setTagErrorVis(false);
-                setTagRepeatErrorVis(false);
-                setTitleFormatErrorVis(false);
-                setTitleUniquenessErrorVis(false);
-                setNoteErrorVis(false);
-                setRssErrorVis(false);
-
                 let tagsInputArr = tagsInputStr.split(", ");
 
-                if (!regexForTitle.test(titleInput)) {
-                  setTitleFormatErrorVis(true);
-                  setTagsListVis(false);
-                 
-                  return;
-                }
+                let isThereAnError = errorHandling(tagsInputArr);
+                if (isThereAnError) return;
 
-                // !!! difference in Bookmark_upper_JSX
-
-                if (bookmarkComponentType === "edit") {
-                  if (
-                    !titleUniquenessCheck() &&
-                    // for editing it is permitted to have same title as before
-                    titleInput !== (currentBookmark as SingleBookmarkData).title
-                  ) {
-                    setTitleUniquenessErrorVis(true);
-                    setTagsListVis(false);
-                  
-                    return;
-                  }
-                } else {
-                  if (!titleUniquenessCheck()) {
-                    setTitleUniquenessErrorVis(true);
-                    setTagsListVis(false);
-                 
-                    return;
-                  }
-                }
-
-                if (
-                  !regexForTags.test(tagsInputArr.join(", ")) &&
-                  tagsInputStr !== ""
-                ) {
-                  setTagErrorVis(true);
-                  setTagsListVis(false);
-                  
-                  return;
-                }
-
-                for (let el of tagsInputArr) {
-                  if (notesTitlesArr.indexOf(el) > -1) {
-                    setNoteErrorVis(true);
-                    setTagsListVis(false);
-                    
-                    return;
-                  }
-                }
-
-                for (let el of tagsInputArr) {
-                  if (rssTitlesArr.indexOf(el) > -1) {
-                    setRssErrorVis(true);
-                    setTagsListVis(false);
-                   
-                    return;
-                  }
-                }
-
-                if (!tagUniquenessCheck()) {
-                  setTagRepeatErrorVis(true);
-                  
-                  return;
-                }
-
-                // !!! diff in Bookmark_upper_JSX
-
-                let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
-                // for edit only
-                let newTabId: undefined | string | number;
-
-                tagsInputArr.forEach((el) => {
-                  let filteredTab = tabsData.filter(
-                    (obj) => obj.title === el
-                  )[0];
-
-                  let sortedTabsInCol = tabsData
-                    .filter((obj) => obj.column === colNumber)
-                    .sort((a, b) => a.priority - b.priority);
-
-                  let newTabPriority =
-                    sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
-
-                  // if folder with title corresponding to tag doesn't exist
-                  if (!filteredTab && tagsInputStr !== "") {
-                    // let newTab = createFolderTab(el, 1, 0);
-                    let newTab = createFolderTab(el, colNumber, newTabPriority);
-                    tagsInputArr_ToIds.push(newTab.id);
-                    // for edit only
-                    newTabId = newTab.id;
-
-                    // adding new folder in there was no folder with title as a tag befere
-
-                    let newBookmarksAllTagsData = [...bookmarksAllTagsData];
-
-                    newBookmarksAllTagsData.push(newTab.id);
-
-                    console.log(newBookmarksAllTagsData);
-
-                    setBookmarksAllTagsData([...newBookmarksAllTagsData]);
-                    setTabsData((previous) =>
-                      produce(previous, (updated) => {
-                        updated.push(newTab);
-                      })
-                    );
-                  } else {
-                    if (tagsInputStr !== "") {
-                      tagsInputArr_ToIds.push(filteredTab.id);
-                    }
-                  }
-                });
-
-                if (bookmarkComponentType === "edit") {
-                  setBookmarksData((previous) =>
-                    produce(previous, (updated) => {
-                      let bookmarkToUpdate = updated.find(
-                        (obj) => obj.id === bookmarkId
-                      );
-                      //"if" to get rid of ts error
-                      if (bookmarkToUpdate) {
-                        bookmarkToUpdate.title = titleInput;
-                        bookmarkToUpdate.URL = urlInput;
-                        bookmarkToUpdate.tags = [...tagsInputArr_ToIds];
-                      }
-                    })
-                  );
-
-                  // for deleting empty folder
-
-                  let tagsIdsToDelete: (string | number)[] = [];
-
-                  initialTagsInputArr.forEach((el) => {
-                    // if the tag was present in initial tags, but is not present in the end
-                    if (tagsInputArr_ToIds.indexOf(el) === -1) {
-                      // all bookmarks except for curren
-                      let filteredBookmarks = bookmarksData.filter(
-                        (obj) =>
-                          obj.id !== (currentBookmark as SingleBookmarkData).id
-                      );
-
-                      let isElPresent: boolean = false;
-
-                      filteredBookmarks.forEach((obj) => {
-                        if (obj.tags.indexOf(el) > -1) {
-                          // tag is present in some other bookmark than this
-                          isElPresent = true;
-                          return;
-                        }
-                      });
-
-                      if (!isElPresent && el !== "ALL_TAGS") {
-                        tagsIdsToDelete.push(el);
-                      }
-                    }
-                  });
-
-                  let bookmarksAllTagsData_new: (string | number)[] = [];
-
-                  if (newTabId) {
-                    bookmarksAllTagsData_new.push(newTabId);
-                  }
-
-                  bookmarksAllTagsData.forEach((el) => {
-                    if (tagsIdsToDelete.indexOf(el) === -1) {
-                      bookmarksAllTagsData_new.push(el);
-                    }
-                  });
-
-                  setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
-                } else {
-                  setBookmarksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated.push(
-                        createBookmark(titleInput, urlInput, tagsInputArr_ToIds)
-                      );
-                    })
-                  );
-                }
+                // 1. adding bookmark  2. adding folder/s if some tags do not correspond to existing folders
+                // 3. for deleting empty folder -> setting bookmarksAllTagsState
+                addBookmark(tagsInputArr);
 
                 // setBookmarkVis((b) => !b);
                 if (bookmarkComponentType === "edit") {
@@ -476,34 +506,6 @@ function Bookmark_lowerUI({
 
                 if (bookmarkComponentType === "new_lowerUI") {
                   visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
-                }
-
-                function tagUniquenessCheck() {
-                  let isUnique: boolean = true;
-
-                  tagsInputArr.forEach((el, i) => {
-                    let tagsInputCopy = [...tagsInputArr];
-                    tagsInputCopy.splice(i, 1);
-
-                    if (tagsInputCopy.indexOf(el) > -1) {
-                      isUnique = false;
-                      return;
-                    }
-                  });
-
-                  return isUnique;
-                }
-
-                function titleUniquenessCheck() {
-                  let isUnique: boolean = true;
-
-                  bookmarksData.forEach((obj, i) => {
-                    if (obj.title === titleInput) {
-                      isUnique = false;
-                    }
-                  });
-
-                  return isUnique;
                 }
               }}
             />
