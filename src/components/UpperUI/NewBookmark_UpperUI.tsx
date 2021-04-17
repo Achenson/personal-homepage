@@ -18,6 +18,7 @@ import {
 import { UpperVisAction } from "../../utils/interfaces";
 import { bookmarkErrors } from "../../utils/errors";
 import SelectableList from "../Shared/SelectableList";
+import { is } from "immer/dist/internal";
 
 interface Props {
   titleInput: string;
@@ -98,7 +99,7 @@ Props): JSX.Element {
     setBookmarksAllTagsData,
   ] = bookmarksAllTagsState.use();
 
-  function errorHandling(tagsInputArr: string[]) {
+  function errorHandling(tagsInputArr: string[]): boolean {
     setTagErrorVis(false);
     setTagRepeatErrorVis(false);
     setTitleFormatErrorVis(false);
@@ -109,7 +110,7 @@ Props): JSX.Element {
     if (!regexForTitle.test(titleInput)) {
       setTitleFormatErrorVis(true);
       setTagsListVis(false);
-      return;
+      return true;
     }
 
     // !!! difference in Link_lower_JSX for edit type
@@ -117,20 +118,20 @@ Props): JSX.Element {
     if (!titleUniquenessCheck()) {
       setTitleUniquenessErrorVis(true);
       setTagsListVis(false);
-      return;
+      return true;
     }
 
     if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "") {
       setTagErrorVis(true);
       setTagsListVis(false);
-      return;
+      return true;
     }
 
     for (let el of tagsInputArr) {
       if (notesTitlesArr.indexOf(el) > -1) {
         setNoteErrorVis(true);
         setTagsListVis(false);
-        return;
+        return true;
       }
     }
 
@@ -138,15 +139,17 @@ Props): JSX.Element {
       if (rssTitlesArr.indexOf(el) > -1) {
         setRssErrorVis(true);
         setTagsListVis(false);
-        return;
+        return true;
       }
     }
 
     if (!tagUniquenessCheck()) {
       setTagRepeatErrorVis(true);
       setTagsListVis(false);
-      return;
+      return true;
     }
+
+    return false;
 
     function tagUniquenessCheck() {
       let isUnique: boolean = true;
@@ -177,7 +180,7 @@ Props): JSX.Element {
     }
   }
 
-  function addBookmarkAndTag(tagsInputArr: string[]) {
+  function addBookmark(tagsInputArr: string[]) {
     // !!! diff in Link_lower_JSX
     // all tags always being added
     let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
@@ -365,9 +368,12 @@ Props): JSX.Element {
 
                 let tagsInputArr = tagsInputStr.split(", ");
 
-                errorHandling(tagsInputArr);
+                let isThereAnError = errorHandling(tagsInputArr);
+
+                if (isThereAnError) return;
+
                 // 1. adding bookmark  2. adding folder/s if some tags do not correspond to existing folders
-                addBookmarkAndTag(tagsInputArr);
+                addBookmark(tagsInputArr);
                 upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
               }}
             />

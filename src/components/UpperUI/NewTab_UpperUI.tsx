@@ -75,8 +75,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
   const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
 
-  const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(
-    () => makeInitialBookmarks()
+  const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(() =>
+    makeInitialBookmarks()
   );
 
   const [bookmarksInputStr, setBookmarksInputStr] = useState<string>("");
@@ -89,8 +89,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
   const [textAreaValue, setTextAreaValue] = useState<string | null>("");
 
-  const [initialBookmarks, setInitialBookmarks] = useState(
-    () => makeInitialBookmarks()
+  const [initialBookmarks, setInitialBookmarks] = useState(() =>
+    makeInitialBookmarks()
   );
 
   // XX tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
@@ -160,6 +160,174 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     });
   }
 
+  function errorHandling(bookmarksInputArr: string[]): boolean {
+    setBookmarksErrorVis(false);
+    setBookmarksRepeatErrorVis(false);
+    setTitleFormatErrorVis(false);
+    setTitleUniquenessErrorVis(false);
+    setBookmarkExistenceErrorVis(false);
+    setTextAreaErrorVis(false);
+
+    if (!regexForTitle.test(tabTitleInput)) {
+      setTitleFormatErrorVis(true);
+      setBookmarksListVis(false);
+      return true;
+    }
+
+    if (!titleUniquenessCheck()) {
+      setTitleUniquenessErrorVis(true);
+      setBookmarksListVis(false);
+      return true;
+    }
+
+    if (tabType === "folder") {
+      if (!regexForBookmarks.test(bookmarksInputArr.join(", "))) {
+        setBookmarksErrorVis(true);
+        setBookmarksListVis(false);
+        return true;
+      }
+
+      if (!bookmarkExistenceCheck()) {
+        setBookmarkExistenceErrorVis(true);
+        setBookmarksListVis(false);
+        return true;
+      }
+
+      if (!bookmarksUniquenessCheck()) {
+        setBookmarksRepeatErrorVis(true);
+        setBookmarksListVis(false);
+        return true;
+      }
+    }
+
+    if (tabType === "note") {
+      if ((textAreaValue as string).length === 0) {
+        setTextAreaErrorVis(true);
+        return true;
+      }
+    }
+
+    return false;
+
+    function bookmarkExistenceCheck() {
+      let bookmarksArr: string[] = [];
+
+      bookmarksData.forEach((obj) => {
+        bookmarksArr.push(obj.title);
+      });
+
+      for (let el of bookmarksInputArr) {
+        if (bookmarksArr.indexOf(el) === -1) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    function bookmarksUniquenessCheck() {
+      let isUnique: boolean = true;
+
+      bookmarksInputArr.forEach((el, i) => {
+        let bookmarksInputCopy = [...bookmarksInputArr];
+        bookmarksInputCopy.splice(i, 1);
+
+        if (bookmarksInputCopy.indexOf(el) > -1) {
+          isUnique = false;
+          return;
+        }
+      });
+
+      return isUnique;
+    }
+
+    function titleUniquenessCheck() {
+      let isUnique: boolean = true;
+
+      tabsData.forEach((obj, i) => {
+        if (obj.title === tabTitleInput) {
+          isUnique = false;
+        }
+      });
+
+      return isUnique;
+    }
+  }
+
+  function addTab(bookmarksInputArr: string[]) {
+    let sortedTabsInCol = tabsData
+      .filter((obj) => obj.column === tabColumnInput)
+      .sort((a, b) => a.priority - b.priority);
+
+    let newTabPriority =
+      sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
+
+    if (tabType === "note") {
+      setTabsData((previous) =>
+        produce(previous, (updated) => {
+          updated.push({
+            ...createNote(
+              tabTitleInput,
+              tabColumnInput,
+              newTabPriority,
+              textAreaValue
+            ),
+          });
+        })
+      );
+    }
+
+    if (tabType === "folder") {
+      let newFolderTab = createFolderTab(
+        tabTitleInput,
+        tabColumnInput,
+        newTabPriority
+      );
+
+      let newBookmarksAllTagsData = [...bookmarksAllTagsData];
+      newBookmarksAllTagsData.push(newFolderTab.id);
+      setBookmarksAllTagsData([...newBookmarksAllTagsData]);
+
+      setTabsData((previous) =>
+        produce(previous, (updated) => {
+          updated.push(
+            // ...createFolderTab(tabTitleInput, tabColumnInput, 0),
+            newFolderTab
+          );
+        })
+      );
+
+      // updating links data (tags array)
+      setBookmarksData((previous) =>
+        produce(previous, (updated) => {
+          updated.forEach((obj) => {
+            if (
+              bookmarksInputArr.indexOf(obj.title) > -1 &&
+              obj.tags.indexOf(newFolderTab.id) === -1
+            ) {
+              obj.tags.push(newFolderTab.id);
+            }
+          });
+        })
+      );
+    }
+
+    if (tabType === "rss") {
+      setTabsData((previous) =>
+        produce(previous, (updated) => {
+          updated.push({
+            ...createRSS(
+              tabTitleInput,
+              tabColumnInput,
+              newTabPriority,
+              rssLinkInput
+            ),
+          });
+        })
+      );
+    }
+  }
+
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable
     <div
@@ -170,7 +338,14 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
         className="bg-gray-200 pb-2 pt-3 pl-2 pr-1 border-2 border-teal-500 rounded-sm md:mb-48"
         style={{ width: "350px" }}
       >
-        <p className="text-center">New {tabType === "folder" ? "folder" : tabType === "note" ? "note" : "RSS channel"}</p>
+        <p className="text-center">
+          New{" "}
+          {tabType === "folder"
+            ? "folder"
+            : tabType === "note"
+            ? "note"
+            : "RSS channel"}
+        </p>
         <div className="flex justify-around mb-2 mt-3">
           <p className="w-32">Title</p>
           {/* <div className="w-full pl-2"> */}
@@ -352,172 +527,15 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               onClick={(e) => {
                 e.preventDefault();
 
-                setBookmarksErrorVis(false);
-                setBookmarksRepeatErrorVis(false);
-                setTitleFormatErrorVis(false);
-                setTitleUniquenessErrorVis(false);
-                setBookmarkExistenceErrorVis(false);
-                setTextAreaErrorVis(false);
-
                 let bookmarksInputArr = bookmarksInputStr.split(", ");
 
-                if (!regexForTitle.test(tabTitleInput)) {
-                  setTitleFormatErrorVis(true);
-                  setBookmarksListVis(false);
-                  return;
-                }
+                let isThereAnError = errorHandling(bookmarksInputArr);
 
-                if (!titleUniquenessCheck()) {
-                  setTitleUniquenessErrorVis(true);
-                  setBookmarksListVis(false);
-                  return;
-                }
+                if (isThereAnError) return;
 
-                if (tabType === "folder") {
-                  if (!regexForBookmarks.test(bookmarksInputArr.join(", "))) {
-                    setBookmarksErrorVis(true);
-                    setBookmarksListVis(false);
-                    return;
-                  }
-
-                  if (!bookmarkExistenceCheck()) {
-                    setBookmarkExistenceErrorVis(true);
-                    setBookmarksListVis(false);
-                    return;
-                  }
-
-                  if (!bookmarksUniquenessCheck()) {
-                    setBookmarksRepeatErrorVis(true);
-                    setBookmarksListVis(false);
-                    return;
-                  }
-                }
-
-                if (tabType === "note") {
-                  if ((textAreaValue as string).length === 0) {
-                    setTextAreaErrorVis(true);
-                    return;
-                  }
-                }
-
-                let sortedTabsInCol = tabsData
-                  .filter((obj) => obj.column === tabColumnInput)
-                  .sort((a, b) => a.priority - b.priority);
-
-                let newTabPriority =
-                  sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
-
-                if (tabType === "note") {
-                  setTabsData((previous) =>
-                    produce(previous, (updated) => {
-                      updated.push({
-                        ...createNote(
-                          tabTitleInput,
-                          tabColumnInput,
-                          newTabPriority,
-                          textAreaValue
-                        ),
-                      });
-                    })
-                  );
-                }
-
-                if (tabType === "folder") {
-                  let newFolderTab = createFolderTab(
-                    tabTitleInput,
-                    tabColumnInput,
-                    newTabPriority
-                  );
-
-                  let newBookmarksAllTagsData = [...bookmarksAllTagsData];
-                  newBookmarksAllTagsData.push(newFolderTab.id);
-                  setBookmarksAllTagsData([...newBookmarksAllTagsData]);
-
-                  setTabsData((previous) =>
-                    produce(previous, (updated) => {
-                      updated.push(
-                        // ...createFolderTab(tabTitleInput, tabColumnInput, 0),
-                        newFolderTab
-                      );
-                    })
-                  );
-
-                  // updating links data (tags array)
-                  setBookmarksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated.forEach((obj) => {
-                        if (
-                          bookmarksInputArr.indexOf(obj.title) > -1 &&
-                          obj.tags.indexOf(newFolderTab.id) === -1
-                        ) {
-                          obj.tags.push(newFolderTab.id);
-                        }
-                      });
-                    })
-                  );
-                }
-
-                if (tabType === "rss") {
-                  setTabsData((previous) =>
-                    produce(previous, (updated) => {
-                      updated.push({
-                        ...createRSS(
-                          tabTitleInput,
-                          tabColumnInput,
-                          newTabPriority,
-                          rssLinkInput
-                        ),
-                      });
-                    })
-                  );
-                }
-
-                // setNewTabVis((b) => !b);
+                // 1. adding Tab(Folder/RSS?Notes) 2.updating Bookmarks with tags (same as new folder title)
+                addTab(bookmarksInputArr);
                 upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-
-                function bookmarkExistenceCheck() {
-                  let bookmarksArr: string[] = [];
-
-                  bookmarksData.forEach((obj) => {
-                    bookmarksArr.push(obj.title);
-                  });
-
-                  for (let el of bookmarksInputArr) {
-                    if (bookmarksArr.indexOf(el) === -1) {
-                      return false;
-                    }
-                  }
-
-                  return true;
-                }
-
-                function bookmarksUniquenessCheck() {
-                  let isUnique: boolean = true;
-
-                  bookmarksInputArr.forEach((el, i) => {
-                    let bookmarksInputCopy = [...bookmarksInputArr];
-                    bookmarksInputCopy.splice(i, 1);
-
-                    if (bookmarksInputCopy.indexOf(el) > -1) {
-                      isUnique = false;
-                      return;
-                    }
-                  });
-
-                  return isUnique;
-                }
-
-                function titleUniquenessCheck() {
-                  let isUnique: boolean = true;
-
-                  tabsData.forEach((obj, i) => {
-                    if (obj.title === tabTitleInput) {
-                      isUnique = false;
-                    }
-                  });
-
-                  return isUnique;
-                }
               }}
             />
 
