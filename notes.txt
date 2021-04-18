@@ -422,6 +422,7 @@ DONE 335. RSS settings - date & description better styles DONE
 339. move note & rss edit errors lower
 340. allow trailing commas in selectables
 341. bookmark_lowerUI -> divide function to new & edit
+342. chevroDown: lower it so it will be on the level of "x" ?
 
 
 

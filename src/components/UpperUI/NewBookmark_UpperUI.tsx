@@ -6,6 +6,7 @@ import { createBookmark, createFolderTab } from "../../utils/objCreators";
 
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
+import { ReactComponent as XsmallSVG } from "../../svgs/x-small.svg";
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
@@ -18,7 +19,6 @@ import {
 import { UpperVisAction } from "../../utils/interfaces";
 import { bookmarkErrors } from "../../utils/errors";
 import SelectableList from "../Shared/SelectableList";
-import { is } from "immer/dist/internal";
 
 interface Props {
   titleInput: string;
@@ -275,38 +275,50 @@ Props): JSX.Element {
           <p className="w-10">Tags</p>
 
           <div className="ml-2 relative w-full">
-            <input
-              type="text"
-              className="w-full border border-gray-300 pl-px"
-              // value={tagsInput.join(", ")}
-              value={tagsInputStr}
-              placeholder={'tag1, tag2... ("all" tag auto-added)'}
-              onChange={(e) => {
-                let target = e.target.value;
+            {/* focus-within:ring-1 focus-within:ring-gray-400 pr-1 */}
+            <div className="relative">
+              <input
+                type="text"
+                className="w-full border border-gray-300 pl-px pr-5"
+                // value={tagsInput.join(", ")}
+                value={tagsInputStr}
+                placeholder={'tag1, tag2... ("all" tag auto-added)'}
+                onChange={(e) => {
+                  let target = e.target.value;
 
-                setTagsInputStr(target);
+                  setTagsInputStr(target);
 
-                let tagsInputArr = target.split(", ");
+                  let tagsInputArr = target.split(", ");
+                  // setTagsInputArr(tagsInputStr.split(" ,"))
+                  // let newVisibleTags = [...visibleTags];
+                  let newVisibleTags: string[] = [];
 
-                // setTagsInputArr(tagsInputStr.split(" ,"))
+                  visibleTags.forEach((el) => {
+                    if (tagsInputArr.indexOf(el) === -1) {
+                      newVisibleTags.push(el);
+                    }
+                  });
 
-                // let newVisibleTags = [...visibleTags];
-                let newVisibleTags: string[] = [];
+                  setVisibleTags([...newVisibleTags]);
+                }}
+                onFocus={(e) => {
+                  setTagsListVis(true);
+                }}
 
-                visibleTags.forEach((el) => {
-                  if (tagsInputArr.indexOf(el) === -1) {
-                    newVisibleTags.push(el);
-                  }
-                });
-
-                setVisibleTags([...newVisibleTags]);
-              }}
-              onFocus={(e) => {
-                setTagsListVis(true);
-              }}
-
-              // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
-            />
+                // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
+              />
+              {tagsInputStr.length !== 0 && (
+                <span
+                  className="absolute h-4 bg-white z-50"
+                  style={{ top: "7px", right: "2px" }}
+                >
+                  <XsmallSVG
+                    className="h-full text-gray-500 cursor-pointer hover:text-opacity-60"
+                    onClick={() => setTagsInputStr("")}
+                  />
+                </span>
+              )}
+            </div>
 
             {tagsListVis && (
               <SelectableList
