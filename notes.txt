@@ -361,7 +361,9 @@ DONE 298. some effect when hovering over bookmarks? DONE
 DONE 299. upperLeft UI should not close tab content! DONE
 ???302. sorting method???
 DONE 303. better borders in color selecting DONE
+DONE 313. make gray button disabled! eg save SVG DONE (return if nothings changed)
 DONE 326. chevronDown & selectableVis -> unify logic! DONE
+DONE 334. saveSVGs onClick -> convert code to functions DONE
 DONE 335. RSS settings - date & description better styles DONE
 
 
@@ -397,7 +399,6 @@ DONE 335. RSS settings - date & description better styles DONE
 310. GlobalSetting - maka editables on lower UI close after closing GlobalSetting
 311. better logic in bookmark_lowerUI -> make functions in SaveSVG, more notes?
 312. error when deleting folder automatically if it is empty -> Tab -> currentTab problem
-313. make gray button disabled! eg save SVG
 314. unsellect columnColor when automatically closing ColorsToChoose! (selection state problem otherwise)
 315. gray area (when clicking settings) does not expand to whole page
 316. background colors selection not visible on black
@@ -415,12 +416,12 @@ DONE 335. RSS settings - date & description better styles DONE
 331. unmounted component error (err mentioned alread?)
 332. make biggest components smaller?
 333. clean tailwind files in the end
-334. saveSVGs onClick -> convert code to functions
 336. Rss SingleLink - empty??
 337. rss date formatting
 338. aligning left-hand text with right-hand input -> do it without margins!
 339. move note & rss edit errors lower
 340. allow trailing commas in selectables
+341. bookmark_lowerUI -> divide function to new & edit
 
 
 

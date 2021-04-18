@@ -238,15 +238,17 @@ function Bookmark_lowerUI({
     }
   }
 
-  function addBookmark() {
+  function addOrEditBookmark() {
     // !!! diff in Bookmark_upper_JSX
 
+
+// creating tags for bookmark being added
     let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
     // for edit only
     let newTabId: undefined | string | number;
 
     tagsInputArr.forEach((el) => {
-      let filteredTab = tabsData.filter((obj) => obj.title === el)[0];
+      let tabForCurrentTag = tabsData.find((obj) => obj.title === el);
 
       let sortedTabsInCol = tabsData
         .filter((obj) => obj.column === colNumber)
@@ -255,15 +257,15 @@ function Bookmark_lowerUI({
       let newTabPriority =
         sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
 
-      // if folder with title corresponding to tag doesn't exist
-      if (!filteredTab && tagsInputStr !== "") {
+      // if folder with title corresponding to tag doesn't exist create it...
+      if (!tabForCurrentTag && tagsInputStr !== "") {
         // let newTab = createFolderTab(el, 1, 0);
         let newTab = createFolderTab(el, colNumber, newTabPriority);
         tagsInputArr_ToIds.push(newTab.id);
         // for edit only
         newTabId = newTab.id;
 
-        // adding new folder in there was no folder with title as a tag befere
+        //... and add new folder tab to the main tags list
 
         let newBookmarksAllTagsData = [...bookmarksAllTagsData];
 
@@ -278,8 +280,8 @@ function Bookmark_lowerUI({
           })
         );
       } else {
-        if (tagsInputStr !== "") {
-          tagsInputArr_ToIds.push(filteredTab.id);
+        if (tagsInputStr !== "" && tabForCurrentTag) {
+          tagsInputArr_ToIds.push(tabForCurrentTag.id);
         }
       }
     });
@@ -499,9 +501,10 @@ function Bookmark_lowerUI({
                 let isThereAnError = errorHandling();
                 if (isThereAnError) return;
 
-                // 1. adding bookmark  2. adding folder/s if some tags do not correspond to existing folders
-                // 3. for deleting empty folder -> setting bookmarksAllTagsState
-                addBookmark();
+                // 1. adding or editing bookmark  
+                // 2. adding folder/s (also to the main state with array of tags) if some tags do not correspond to existing folders
+                // 3. (if editing bookmark) for deleting empty folder -> setting bookmarksAllTagsState
+                addOrEditBookmark();
 
                 // setBookmarkVis((b) => !b);
                 if (bookmarkComponentType === "edit") {

@@ -169,21 +169,15 @@ Props): JSX.Element {
     if (tabType === "folder") return "mr-14";
   }
 
+  let bookmarksInputArr = bookmarksInputStr.split(", ");
 
-
-  function errorHandling(bookmarksInputArr: string[]): boolean {
-
+  function errorHandling(): boolean {
     setTitleFormatErrorVis(false);
     setTextAreaErrorVis(false);
     setNoDeletionErrorVis(false);
     setBookmarksErrorVis(false);
     setBookmarksRepeatErrorVis(false);
     setBookmarksExistenceErrorVis(false);
-
-
-    if (!wasAnythingClicked) {
-      return true;
-    }
 
     setWasCheckboxClicked(false);
     setWasItemsPerPageClicked(false);
@@ -254,82 +248,76 @@ Props): JSX.Element {
 
       return isUnique;
     }
-
-
-
   }
 
-  function addOrEditTab(bookmarksInputArr: string[]) {
-
+  function editTab() {
     setTabsData((previous) =>
-    produce(previous, (updated) => {
-      let tabToUpdate = updated.find((obj) => obj.id === tabID);
-
-      if (tabToUpdate) {
-        tabToUpdate.title = tabTitleInput;
-        // updated[tabIndex].deletable = currentTab[0].deletable
-        if (wasTabOpenClicked) {
-          tabToUpdate.opened = tabOpen;
-        }
-
-        if (tabType === "note") {
-          tabToUpdate.noteInput = textAreaValue;
-        }
-        if (tabType === "rss") {
-          tabToUpdate.rssLink = rssLinkInput;
-
-          if (wasCheckboxClicked) {
-            tabToUpdate.date = dateCheckbox;
-          }
-
-          if (wasCheckboxClicked) {
-            tabToUpdate.description = descriptionCheckbox;
-          }
-
-          if (wasItemsPerPageClicked) {
-            tabToUpdate.itemsPerPage = rssItemsPerPage;
-          }
-        }
-      }
-    })
-  );
-
-  if (tabType === "folder") {
-    // changing tags in links
-    setBookmarksData((previous) =>
       produce(previous, (updated) => {
-        updated.forEach((obj) => {
-          let bookmarksInputArr = bookmarksInputStr.split(", ");
+        let tabToUpdate = updated.find((obj) => obj.id === tabID);
 
-          // all initial links inside a folder
-          // make array of missing links
-          // if this links' title is inside missing bookmarks
-          // cut out tabID (current folder) from tags
+        if (tabToUpdate) {
+          tabToUpdate.title = tabTitleInput;
+          // updated[tabIndex].deletable = currentTab[0].deletable
+          if (wasTabOpenClicked) {
+            tabToUpdate.opened = tabOpen;
+          }
 
-          let missingBookmarks: string[] = [];
+          if (tabType === "note") {
+            tabToUpdate.noteInput = textAreaValue;
+          }
+          if (tabType === "rss") {
+            tabToUpdate.rssLink = rssLinkInput;
 
-          arrOfBookmarksNames.forEach((el, i) => {
-            if (bookmarksInputArr.indexOf(el) === -1) {
-              missingBookmarks.push(el);
+            if (wasCheckboxClicked) {
+              tabToUpdate.date = dateCheckbox;
             }
-          });
 
-          if (missingBookmarks.indexOf(obj.title) > -1) {
-            obj.tags.splice(obj.tags.indexOf(tabID), 1);
-          }
+            if (wasCheckboxClicked) {
+              tabToUpdate.description = descriptionCheckbox;
+            }
 
-          //  if link title is present in folder's new input for tabs & if folder title wasn't already in tags
-          // add new tag
-          if (
-            bookmarksInputArr.indexOf(obj.title) > -1 &&
-            obj.tags.indexOf(tabID) === -1
-          ) {
-            obj.tags.push(tabID);
+            if (wasItemsPerPageClicked) {
+              tabToUpdate.itemsPerPage = rssItemsPerPage;
+            }
           }
-        });
+        }
       })
     );
-  }
+
+    if (tabType === "folder") {
+      // changing tags in bookmarks
+      setBookmarksData((previous) =>
+        produce(previous, (updated) => {
+          updated.forEach((obj) => {
+            let bookmarksInputArr = bookmarksInputStr.split(", ");
+
+            // make array of missing bookmarks
+            let missingBookmarks: string[] = [];
+
+            arrOfBookmarksNames.forEach((el, i) => {
+              if (bookmarksInputArr.indexOf(el) === -1) {
+                missingBookmarks.push(el);
+              }
+            });
+
+            // if this bookmarks' title is inside missing bookmarks
+            // cut out tabID (current folder) from tags
+            if (missingBookmarks.indexOf(obj.title) > -1) {
+              obj.tags.splice(obj.tags.indexOf(tabID), 1);
+            }
+
+            //  if link title is present in folder's new input for tags & if folder title wasn't already in tags
+            // add new tag
+            if (
+              bookmarksInputArr.indexOf(obj.title) > -1 &&
+              obj.tags.indexOf(tabID) === -1
+            ) {
+              obj.tags.push(tabID);
+            }
+          });
+        })
+      );
+    }
   }
 
   return (
@@ -511,14 +499,17 @@ Props): JSX.Element {
             onClick={(e) => {
               e.preventDefault();
 
-              let bookmarksInputArr = bookmarksInputStr.split(", ");
+              if (!wasAnythingClicked) {
+                return;
+              }
 
-              let isThereAnError = errorHandling(bookmarksInputArr)
-              // return also if nothing has been clicked
-              if(isThereAnError) return;
+              let isThereAnError = errorHandling();
+              if (isThereAnError) return;
 
-              addOrEditTab(bookmarksInputArr)
-  
+              // 1.edit tab(folder,rss or note)
+              // 2. (in case of folders) delete tag from bookmark or add tag to bookmark
+              editTab();
+
               // setEditTabVis((b) => !b);
               if (tabOpen) {
                 visDispatch({ type: "TAB_CONTENT_OPEN_AFTER_LOCKING" });
