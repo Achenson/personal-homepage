@@ -8,6 +8,7 @@ import { uiColorState } from "../../state/colorsState";
 import {
   rssSettingsState,
   globalSettingsState,
+  tabOpenedState,
 } from "../../state/defaultSettings";
 
 import { UpperVisAction } from "../../utils/interfaces";
@@ -24,6 +25,7 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
 
   // const [descriptionCheckbox, setDescriptionCheckbox] = useState(globalSettingsData.rssDescription);
@@ -151,6 +153,8 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                       ...rssSettingsData,
                       description: !rssSettingsData.description,
                     });
+
+                    setTabOpenedData(null);
                   }}
                 />
                 <span className="ml-1 ">Description</span>
@@ -171,6 +175,8 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                       ...rssSettingsData,
                       date: !rssSettingsData.date,
                     });
+
+                    setTabOpenedData(null);
                   }}
                 />
                 <span className="ml-1">Date</span>
@@ -193,6 +199,7 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                   itemsPerPage: parseInt(e.target.value),
                 });
                 // setWasItemsPerPageClicked(true);
+                setTabOpenedData(null);
               }}
             />
           </div>

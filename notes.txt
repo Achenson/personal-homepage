@@ -357,6 +357,8 @@ DONE 286. change many find() by tabID to passing props - eg. in RSS components, 
 XXX 290. SingleBookmark don't look good on lightest columns XXX
 DONE 293. upperVisDispatch -> color selectable should be gone when closing all DONE logic moved to upperReducer
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
+DONE 295. UpperRightMenu should close at least editables in lowerUI
+ (closing editables/colors if rss setting are clicked) DONE
 DONE 298. some effect when hovering over bookmarks? DONE
 DONE 299. upperLeft UI should not close tab content! DONE
 DONE 300. no img background - X get rid of lightest colors? X (make lower border in noteInput instead!) DONE
@@ -386,14 +388,12 @@ DONE 335. RSS settings - date & description better styles DONE
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
 289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds
 
-295. UpperRightMenu should close at least editables in lowerUI
 296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
 297. backgroundImg: how to make the columns shorter, same as if there is no backgroundImg
 
 304. react query devtools not working
 305. columnColor not being reduced in numbers if "one color for all columns" is set
 306. new rss & new tab: make it smaller?
-
 
 308. login
 309. UpperRight Menu -> make it possible to close by clicking on the background

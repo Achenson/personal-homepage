@@ -33,7 +33,7 @@ function UpperRightMenu({
   upperVisDispatch
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
-  const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
+  // const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   return (
@@ -106,9 +106,10 @@ function UpperRightMenu({
         <SettingsSVG
           className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
           onClick={() => {
-            // setSettingsVis((b) => !b);
-            setTabOpenedData(null)
-        setCloseAllTabsData(true);
+
+            // setTabOpenedData(null)
+
+        // setCloseAllTabsData(true);
             upperVisDispatch({type: "SETTINGS_TOGGLE"})
           }}
         />
