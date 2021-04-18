@@ -4,6 +4,7 @@ import SelectableList from "../Shared/SelectableList";
 
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
+import { ReactComponent as XsmallSVG } from "../../svgs/x-small.svg";
 
 import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 
@@ -20,7 +21,7 @@ function EditTab_folder({
   setBookmarksListVis,
   setWasAnythingClicked,
   bookmarksInputStr,
-  setBookmarksInputStr 
+  setBookmarksInputStr,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
@@ -49,7 +50,6 @@ function EditTab_folder({
     if (newVisibleBookmarks.length === 0) {
       setBookmarksListVis(false);
     }
-
   }, [
     bookmarksInputStr,
     initialBookmarks,
@@ -73,35 +73,51 @@ function EditTab_folder({
     <div className="flex items-center mt-2 justify-between">
       <p className={`mr-2`}>Bookmarks</p>
       <div className="relative w-full">
-        <input
-          type="text"
-          // min-w-0 !! ??
-          className="border pl-px w-full"
-          value={bookmarksInputStr}
-          onChange={(e) => {
-            // setTabTitleInput(e.target.value);
-            setWasAnythingClicked(true);
+        <div className="relative">
+          <input
+            type="text"
+            // min-w-0 !! ??
+            className="border pl-px w-full pr-5"
+            value={bookmarksInputStr}
+            onChange={(e) => {
+              // setTabTitleInput(e.target.value);
+              setWasAnythingClicked(true);
 
-            let target = e.target.value;
+              let target = e.target.value;
 
-            setBookmarksInputStr(target);
+              setBookmarksInputStr(target);
 
-            let bookmarksInputArr = target.split(", ");
-            let newVisibleBookmarks: string[] = [];
+              let bookmarksInputArr = target.split(", ");
+              let newVisibleBookmarks: string[] = [];
 
-            visibleBookmarks.forEach((el) => {
-              if (bookmarksInputArr.indexOf(el) === -1) {
-                newVisibleBookmarks.push(el);
-              }
-            });
+              visibleBookmarks.forEach((el) => {
+                if (bookmarksInputArr.indexOf(el) === -1) {
+                  newVisibleBookmarks.push(el);
+                }
+              });
 
-            setVisibleBookmarks([...newVisibleBookmarks]);
-          }}
-          onFocus={(e) => {
-            setBookmarksListVis(true);
-          }}
-          placeholder={"Choose at least one"}
-        />
+              setVisibleBookmarks([...newVisibleBookmarks]);
+            }}
+            onFocus={(e) => {
+              setBookmarksListVis(true);
+            }}
+            placeholder={"Choose at least one"}
+          />
+          {bookmarksInputStr.length !== 0 && (
+            <span
+              className="absolute h-4 bg-white z-50"
+              style={{ top: "7px", right: "2px" }}
+            >
+              <XsmallSVG
+                className="h-full text-gray-500 cursor-pointer hover:text-opacity-60"
+                onClick={() => {
+                  setBookmarksInputStr("");
+                  setWasAnythingClicked(true);
+                }}
+              />
+            </span>
+          )}
+        </div>
 
         {bookmarksListVis && (
           <SelectableList

@@ -7,6 +7,7 @@ import { uiColorState } from "../../state/colorsState";
 import { v4 as uuidv4 } from "uuid";
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
+import { ReactComponent as XsmallSVG } from "../../svgs/x-small.svg";
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
@@ -380,42 +381,55 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             {/* <div className="w-full pl-2"> */}
 
             <div className="relative w-full">
-              <input
-                type="text"
-                className="w-full border border-gray-300 pl-px"
-                // value={tabLinksInput.join(", ")}
-                value={bookmarksInputStr}
-                // onChange={(e) =>
-                //   setTabLinksInput([...e.target.value.split(", ")])
-                // }
+              <div className="relative">
+                <input
+                  type="text"
+                  className="w-full border border-gray-300 pl-px pr-5"
+                  // value={tabLinksInput.join(", ")}
+                  value={bookmarksInputStr}
+                  // onChange={(e) =>
+                  //   setTabLinksInput([...e.target.value.split(", ")])
+                  // }
 
-                onChange={(e) => {
-                  let target = e.target.value;
+                  onChange={(e) => {
+                    let target = e.target.value;
 
-                  setBookmarksInputStr(target);
+                    setBookmarksInputStr(target);
 
-                  let bookmarksInputArr = target.split(", ");
+                    let bookmarksInputArr = target.split(", ");
 
-                  // setTagsInputArr(tagsInputStr.split(" ,"))
+                    // setTagsInputArr(tagsInputStr.split(" ,"))
 
-                  // let newVisibleTags = [...visibleTags];
-                  let newVisibleBookmarks: string[] = [];
+                    // let newVisibleTags = [...visibleTags];
+                    let newVisibleBookmarks: string[] = [];
 
-                  visibleBookmarks.forEach((el) => {
-                    if (bookmarksInputArr.indexOf(el) === -1) {
-                      newVisibleBookmarks.push(el);
-                    }
-                  });
+                    visibleBookmarks.forEach((el) => {
+                      if (bookmarksInputArr.indexOf(el) === -1) {
+                        newVisibleBookmarks.push(el);
+                      }
+                    });
 
-                  setVisibleBookmarks([...newVisibleBookmarks]);
-                }}
-                onFocus={(e) => {
-                  setBookmarksListVis(true);
-                }}
-                // onBlur={}
+                    setVisibleBookmarks([...newVisibleBookmarks]);
+                  }}
+                  onFocus={(e) => {
+                    setBookmarksListVis(true);
+                  }}
+                  // onBlur={}
 
-                placeholder={"Choose at least one"}
-              />
+                  placeholder={"Choose at least one"}
+                />
+                {bookmarksInputStr.length !== 0 && (
+                  <span
+                    className="absolute h-4 bg-white z-50"
+                    style={{ top: "7px", right: "2px" }}
+                  >
+                    <XsmallSVG
+                      className="h-full text-gray-500 cursor-pointer hover:text-opacity-60"
+                      onClick={() => setBookmarksInputStr("")}
+                    />
+                  </span>
+                )}
+              </div>
 
               {bookmarksListVis && (
                 <SelectableList

@@ -362,6 +362,7 @@ DONE 299. upperLeft UI should not close tab content! DONE
 ???302. sorting method???
 DONE 303. better borders in color selecting DONE
 DONE 313. make gray button disabled! eg save SVG DONE (return if nothings changed)
+DONE 324. delete all btn for selectables DONE
 DONE 326. chevronDown & selectableVis -> unify logic! DONE
 DONE 334. saveSVGs onClick -> convert code to functions DONE
 DONE 335. RSS settings - date & description better styles DONE
@@ -399,7 +400,9 @@ DONE 335. RSS settings - date & description better styles DONE
 310. GlobalSetting - maka editables on lower UI close after closing GlobalSetting
 311. better logic in bookmark_lowerUI -> make functions in SaveSVG, more notes?
 312. error when deleting folder automatically if it is empty -> Tab -> currentTab problem
+
 314. unsellect columnColor when automatically closing ColorsToChoose! (selection state problem otherwise)
+
 315. gray area (when clicking settings) does not expand to whole page
 316. background colors selection not visible on black
 317. white border selection problem -> takes too much space to the left. modify adjacent border colors?
@@ -407,7 +410,6 @@ DONE 335. RSS settings - date & description better styles DONE
 320. one color for all columns: when selected, make border collapsed 
 322. newBookmark & editBookmark: title & link wrong responsive behaviour  
 323. newFolder newRSS: better input alignments
-324. delete all btn for selectables
 325. open popup with 3 default images to choose
 327. add error to editTab to all only unique titles! 
 328. bigger gap after tab on smaller screen sizes when column is empty?

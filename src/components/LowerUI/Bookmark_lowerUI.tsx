@@ -6,6 +6,7 @@ import { createBookmark, createFolderTab } from "../../utils/objCreators";
 
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
+import { ReactComponent as XsmallSVG } from "../../svgs/x-small.svg";
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
@@ -241,8 +242,7 @@ function Bookmark_lowerUI({
   function addOrEditBookmark() {
     // !!! diff in Bookmark_upper_JSX
 
-
-// creating tags for bookmark being added
+    // creating tags for bookmark being added
     let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
     // for edit only
     let newTabId: undefined | string | number;
@@ -394,40 +394,58 @@ function Bookmark_lowerUI({
           <p className="w-10">Tags</p>
 
           <div className="ml-2 relative w-full">
-            <input
-              type="text"
-              className="w-full border pl-px"
-              // value={tagsInput.join(", ")}
-              value={tagsInputStr}
-              placeholder={"tag1, tag2..."}
-              onChange={(e) => {
-                setWasAnythingChanged(true);
+            <div className="relative">
+              <input
+                type="text"
+                className="w-full border pl-px pr-5"
+                // value={tagsInput.join(", ")}
+                value={tagsInputStr}
+                placeholder={"tag1, tag2..."}
+                onChange={(e) => {
+                  setWasAnythingChanged(true);
 
-                let target = e.target.value;
+                  let target = e.target.value;
 
-                setTagsInputStr(target);
+                  setTagsInputStr(target);
 
-                let tagsInputArr = target.split(", ");
+                  let tagsInputArr = target.split(", ");
 
-                // setTagsInputArr(tagsInputStr.split(" ,"))
+                  // setTagsInputArr(tagsInputStr.split(" ,"))
 
-                // let newVisibleTags = [...visibleTags];
-                let newVisibleTags: string[] = [];
+                  // let newVisibleTags = [...visibleTags];
+                  let newVisibleTags: string[] = [];
 
-                visibleTags.forEach((el) => {
-                  if (tagsInputArr.indexOf(el) === -1) {
-                    newVisibleTags.push(el);
-                  }
-                });
+                  visibleTags.forEach((el) => {
+                    if (tagsInputArr.indexOf(el) === -1) {
+                      newVisibleTags.push(el);
+                    }
+                  });
 
-                setVisibleTags([...newVisibleTags]);
-              }}
-              onFocus={(e) => {
-                setTagsListVis(true);
-              }}
+                  setVisibleTags([...newVisibleTags]);
+                }}
+                onFocus={(e) => {
+                  setTagsListVis(true);
+                }}
 
-              // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
-            />
+                // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
+              />
+              {tagsInputStr.length !== 0 && (
+                <span
+                  className="absolute h-4 bg-white z-50"
+                  style={{ top: "7px", right: "2px" }}
+                >
+                  <XsmallSVG
+                    className="h-full text-gray-500 cursor-pointer hover:text-opacity-60"
+                    onClick={() => {
+                      setTagsInputStr("");
+                      if ((bookmarkComponentType = "edit")) {
+                        setWasAnythingChanged(true);
+                      }
+                    }}
+                  />
+                </span>
+              )}
+            </div>
 
             {tagsListVis && (
               <SelectableList
@@ -494,14 +512,14 @@ function Bookmark_lowerUI({
               onClick={(e) => {
                 e.preventDefault();
 
-                if(bookmarkComponentType === "edit" && !wasAnythingChanged) {
-                  return
+                if (bookmarkComponentType === "edit" && !wasAnythingChanged) {
+                  return;
                 }
 
                 let isThereAnError = errorHandling();
                 if (isThereAnError) return;
 
-                // 1. adding or editing bookmark  
+                // 1. adding or editing bookmark
                 // 2. adding folder/s (also to the main state with array of tags) if some tags do not correspond to existing folders
                 // 3. (if editing bookmark) for deleting empty folder -> setting bookmarksAllTagsState
                 addOrEditBookmark();
