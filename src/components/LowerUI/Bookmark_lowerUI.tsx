@@ -137,7 +137,9 @@ function Bookmark_lowerUI({
     return arrOut;
   }
 
-  function errorHandling(tagsInputArr: string[]): boolean {
+  let tagsInputArr = tagsInputStr.split(", ");
+
+  function errorHandling(): boolean {
     setTagErrorVis(false);
     setTagRepeatErrorVis(false);
     setTitleFormatErrorVis(false);
@@ -236,7 +238,7 @@ function Bookmark_lowerUI({
     }
   }
 
-  function addBookmark(tagsInputArr: string[]) {
+  function addBookmark() {
     // !!! diff in Bookmark_upper_JSX
 
     let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
@@ -490,14 +492,16 @@ function Bookmark_lowerUI({
               onClick={(e) => {
                 e.preventDefault();
 
-                let tagsInputArr = tagsInputStr.split(", ");
+                if(bookmarkComponentType === "edit" && !wasAnythingChanged) {
+                  return
+                }
 
-                let isThereAnError = errorHandling(tagsInputArr);
+                let isThereAnError = errorHandling();
                 if (isThereAnError) return;
 
                 // 1. adding bookmark  2. adding folder/s if some tags do not correspond to existing folders
                 // 3. for deleting empty folder -> setting bookmarksAllTagsState
-                addBookmark(tagsInputArr);
+                addBookmark();
 
                 // setBookmarkVis((b) => !b);
                 if (bookmarkComponentType === "edit") {

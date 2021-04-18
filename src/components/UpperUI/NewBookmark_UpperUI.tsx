@@ -99,7 +99,9 @@ Props): JSX.Element {
     setBookmarksAllTagsData,
   ] = bookmarksAllTagsState.use();
 
-  function errorHandling(tagsInputArr: string[]): boolean {
+  let tagsInputArr = tagsInputStr.split(", ");
+
+  function errorHandling(): boolean {
     setTagErrorVis(false);
     setTagRepeatErrorVis(false);
     setTitleFormatErrorVis(false);
@@ -180,7 +182,7 @@ Props): JSX.Element {
     }
   }
 
-  function addBookmark(tagsInputArr: string[]) {
+  function addBookmark() {
     // !!! diff in Link_lower_JSX
     // all tags always being added
     let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
@@ -366,14 +368,11 @@ Props): JSX.Element {
               onClick={(e) => {
                 e.preventDefault();
 
-                let tagsInputArr = tagsInputStr.split(", ");
-
-                let isThereAnError = errorHandling(tagsInputArr);
-
+                let isThereAnError = errorHandling();
                 if (isThereAnError) return;
 
                 // 1. adding bookmark  2. adding folder/s if some tags do not correspond to existing folders
-                addBookmark(tagsInputArr);
+                addBookmark();
                 upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
               }}
             />

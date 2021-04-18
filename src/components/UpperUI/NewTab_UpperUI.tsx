@@ -160,7 +160,9 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     });
   }
 
-  function errorHandling(bookmarksInputArr: string[]): boolean {
+  let bookmarksInputArr = bookmarksInputStr.split(", ");
+
+  function errorHandling(): boolean {
     setBookmarksErrorVis(false);
     setBookmarksRepeatErrorVis(false);
     setTitleFormatErrorVis(false);
@@ -254,7 +256,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     }
   }
 
-  function addTab(bookmarksInputArr: string[]) {
+  function addTab() {
     let sortedTabsInCol = tabsData
       .filter((obj) => obj.column === tabColumnInput)
       .sort((a, b) => a.priority - b.priority);
@@ -527,14 +529,11 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               onClick={(e) => {
                 e.preventDefault();
 
-                let bookmarksInputArr = bookmarksInputStr.split(", ");
-
-                let isThereAnError = errorHandling(bookmarksInputArr);
-
+                let isThereAnError = errorHandling();
                 if (isThereAnError) return;
 
                 // 1. adding Tab(Folder/RSS?Notes) 2.updating Bookmarks with tags (same as new folder title)
-                addTab(bookmarksInputArr);
+                addTab();
                 upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               }}
             />
