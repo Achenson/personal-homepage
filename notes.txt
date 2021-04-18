@@ -359,6 +359,7 @@ DONE 293. upperVisDispatch -> color selectable should be gone when closing all D
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
 DONE 298. some effect when hovering over bookmarks? DONE
 DONE 299. upperLeft UI should not close tab content! DONE
+DONE 300. no img background - X get rid of lightest colors? X (make lower border in noteInput instead!) DONE
 ???302. sorting method???
 DONE 303. better borders in color selecting DONE
 DONE 313. make gray button disabled! eg save SVG DONE (return if nothings changed)
@@ -389,8 +390,6 @@ DONE 335. RSS settings - date & description better styles DONE
 296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
 297. backgroundImg: how to make the columns shorter, same as if there is no backgroundImg
 
-300. no img background - get rid of lightest colors? (make lower border in noteInput instead!)
-
 304. react query devtools not working
 305. columnColor not being reduced in numbers if "one color for all columns" is set
 306. new rss & new tab: make it smaller? 
@@ -400,9 +399,6 @@ DONE 335. RSS settings - date & description better styles DONE
 310. GlobalSetting - maka editables on lower UI close after closing GlobalSetting
 311. better logic in bookmark_lowerUI -> make functions in SaveSVG, more notes?
 312. error when deleting folder automatically if it is empty -> Tab -> currentTab problem
-
-314. unsellect columnColor when automatically closing ColorsToChoose! (selection state problem otherwise)
-
 315. gray area (when clicking settings) does not expand to whole page
 316. background colors selection not visible on black
 317. white border selection problem -> takes too much space to the left. modify adjacent border colors?
@@ -425,6 +421,7 @@ DONE 335. RSS settings - date & description better styles DONE
 340. allow trailing commas in selectables
 341. bookmark_lowerUI -> divide function to new & edit
 342. chevroDown: lower it so it will be on the level of "x" ?
+343. make column appear thinner (notes, bookmarks etc. seem to stick out)
 
 
 

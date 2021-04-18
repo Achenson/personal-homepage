@@ -19,7 +19,7 @@ function NoteInput({visDispatch, currentTab }: Props): JSX.Element {
   // let currentTab = tabsData.filter((obj) => obj.id === tabID);
 
   return (
-    <div className={`${globalSettingsData.picBackground ? "bg-white bg-opacity-40 border-b border-black border-opacity-20" : "bg-yellow-50 border border-gray-100 border-t-0 border-b-0"} p-2 `}>
+    <div className={`${globalSettingsData.picBackground ? "bg-white bg-opacity-40 border-b border-black border-opacity-20" : "bg-yellow-50 border border-t-0"} p-2 `}>
       <div
         className="p-2 rounded-md overflow-hidden border border-black border-opacity-10"
         style={{backgroundColor: "rgb(247, 243, 132)"}}
