@@ -362,6 +362,7 @@ DONE 299. upperLeft UI should not close tab content! DONE
 DONE 300. no img background - X get rid of lightest colors? X (make lower border in noteInput instead!) DONE
 ???302. sorting method???
 DONE 303. better borders in color selecting DONE
+DONE 307. Selectables -> truncate (and should appear on one line only) - the stick out if too long! DONE
 DONE 313. make gray button disabled! eg save SVG DONE (return if nothings changed)
 DONE 324. delete all btn for selectables DONE
 DONE 326. chevronDown & selectableVis -> unify logic! DONE
@@ -385,15 +386,15 @@ DONE 335. RSS settings - date & description better styles DONE
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
 289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds
 
-
 295. UpperRightMenu should close at least editables in lowerUI
 296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
 297. backgroundImg: how to make the columns shorter, same as if there is no backgroundImg
 
 304. react query devtools not working
 305. columnColor not being reduced in numbers if "one color for all columns" is set
-306. new rss & new tab: make it smaller? 
-307. Selectables -> truncate bookmarks - the stick out if they are too long!
+306. new rss & new tab: make it smaller?
+
+
 308. login
 309. UpperRight Menu -> make it possible to close by clicking on the background
 310. GlobalSetting - maka editables on lower UI close after closing GlobalSetting
@@ -422,6 +423,7 @@ DONE 335. RSS settings - date & description better styles DONE
 341. bookmark_lowerUI -> divide function to new & edit
 342. chevroDown: lower it so it will be on the level of "x" ?
 343. make column appear thinner (notes, bookmarks etc. seem to stick out)
+343. saveSVG still being cut on firefox!
 
 
 

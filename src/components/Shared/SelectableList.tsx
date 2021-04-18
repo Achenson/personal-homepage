@@ -37,7 +37,7 @@ function SelectableList({
         visibleSelectables_sorted.map((el, i) => {
           return (
             <p
-              className="cursor-pointer hover:bg-blueGray-200 pl-px"
+              className="cursor-pointer hover:bg-blueGray-200 pl-px truncate"
               onClick={() => {
                 if (selectablesInputStr.length === 0) {
                   setSelectablesInputStr(el);
