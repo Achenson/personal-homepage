@@ -369,6 +369,7 @@ DONE 307. Selectables -> truncate (and should appear on one line only) - the sti
 DONE 313. make gray button disabled! eg save SVG DONE (return if nothings changed)
 DONE 320. one color for all columns: when selected, make border collapsed DONE
 DONE 324. delete all btn for selectables DONE
+DONE 325. xxx open popup with 3 default images to choose xx -> chosing enablem in Background Settings without popup DONE
 DONE 326. chevronDown & selectableVis -> unify logic! DONE
 DONE 334. saveSVGs onClick -> convert code to functions DONE
 DONE 335. RSS settings - date & description better styles DONE
@@ -378,7 +379,6 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
-
 
 240. EyeOff should be positioned more to the left if image bg is on
 241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
@@ -401,8 +401,7 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 
 308. login
 309. UpperRight Menu -> make it possible to close by clicking on the background
-310. GlobalSetting - maka editables on lower UI close after closing GlobalSetting
-311. better logic in bookmark_lowerUI -> make functions in SaveSVG, more notes?
+
 312. error when deleting folder automatically if it is empty -> Tab -> currentTab problem
 315. gray area (when clicking settings) does not expand to whole page
 316. background colors selection not visible on black
@@ -410,7 +409,7 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 318. useEffect -> some should be unmounted? check in the end
 322. newBookmark & editBookmark: title & link wrong responsive behaviour  
 323. newFolder newRSS: better input alignments
-325. open popup with 3 default images to choose
+
 327. add error to editTab to all only unique titles! 
 328. bigger gap after tab on smaller screen sizes when column is empty?
 329. code order (useEffect, func itp) eg. in 
@@ -426,6 +425,7 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 341. bookmark_lowerUI -> divide function to new & edit
 342. chevroDown: lower it so it will be on the level of "x" ?
 343. make column appear thinner (notes, bookmarks etc. seem to stick out)
+344. get rid of border-b in img mode on note input when bg is transparetn? (light bg problem)
 
 
 

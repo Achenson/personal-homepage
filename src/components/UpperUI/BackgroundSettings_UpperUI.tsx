@@ -28,7 +28,7 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   }
 
   const imgDescription_1 = "Transparent colors for columns";
-  const imgDescription_2 = "Upload background image or ";
+  const imgDescription_2 = "Upload background image or use default: ";
 
   const noImgDescription = "Full colors for background and columns";
 
@@ -120,7 +120,31 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                       });
                     }}
                   >
-                    use default
+                    1
+                  </span>
+                  <span> </span>
+                  <span
+                    className={`text-${uiColorData} cursor-pointer hover:underline`}
+                    onClick={() => {
+                      setGlobalSettingsData({
+                        ...globalSettingsData,
+                        defaultImage: "defaultBackground_2",
+                      });
+                    }}
+                  >
+                    2
+                  </span>
+                  <span> </span>
+                  <span
+                    className={`text-${uiColorData} cursor-pointer hover:underline`}
+                    onClick={() => {
+                      setGlobalSettingsData({
+                        ...globalSettingsData,
+                        defaultImage: "defaultBackground_3",
+                      });
+                    }}
+                  >
+                    3
                   </span>
                 </p>
               </div>
