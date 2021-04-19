@@ -372,6 +372,7 @@ DONE 324. delete all btn for selectables DONE
 DONE 326. chevronDown & selectableVis -> unify logic! DONE
 DONE 334. saveSVGs onClick -> convert code to functions DONE
 DONE 335. RSS settings - date & description better styles DONE
+DONE 343. saveSVG still being cut on firefox! DONE (w-1 instead of w-px)
 DONE 344. NoteInput: make better bg for IMG background version DONE
 
 
@@ -425,7 +426,6 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 341. bookmark_lowerUI -> divide function to new & edit
 342. chevroDown: lower it so it will be on the level of "x" ?
 343. make column appear thinner (notes, bookmarks etc. seem to stick out)
-343. saveSVG still being cut on firefox!
 
 
 
