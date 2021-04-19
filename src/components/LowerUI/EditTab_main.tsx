@@ -387,12 +387,44 @@ Props): JSX.Element {
           />
         )}
 
+        {tabType === "note" && (
+          <EditTab_notes
+            textAreaValue={textAreaValue}
+            setTextAreaValue={setTextAreaValue}
+            setWasAnythingClicked={setWasAnythingClicked}
+          />
+        )}
+
+        {tabType === "rss" && (
+          <EditTab_RSS
+            dateCheckbox={dateCheckbox}
+            descriptionCheckbox={descriptionCheckbox}
+            rssItemsPerPage={rssItemsPerPage}
+            setDateCheckbox={setDateCheckbox}
+            setDescriptionCheckbox={setDescriptionCheckbox}
+            setRssItemsPerPage={setRssItemsPerPage}
+            setWasAnythingClicked={setWasAnythingClicked}
+            setWasCheckboxClicked={setWasCheckboxClicked}
+            setWasItemsPerPageClicked={setWasItemsPerPageClicked}
+            setWasTabOpenClicked={setWasTabOpenClicked}
+            tabID={tabID}
+            rssLinkInput={rssLinkInput}
+            setRssLinkInput={setRssLinkInput}
+          />
+        )}
+
         {titleFormatErrorVis && (
           <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.titleFormat}</p>
         )}
 
         {titleUniquenessErrorVis && (
-          <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.titleUniqueness}</p>
+          <p className={`text-red-600 mt-1 -mb-2`}>
+            {tabErrors.titleUniqueness}
+          </p>
+        )}
+
+        {textAreaErrorVis && tabType === "note" && (
+          <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.textArea}</p>
         )}
 
         {bookmarksErrorVis && tabType === "folder" && (
@@ -417,36 +449,6 @@ Props): JSX.Element {
           <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.noDeletion}</p>
         )}
       </div>
-
-      {tabType === "note" && (
-        <EditTab_notes
-          textAreaValue={textAreaValue}
-          setTextAreaValue={setTextAreaValue}
-          setWasAnythingClicked={setWasAnythingClicked}
-        />
-      )}
-
-      {textAreaErrorVis && tabType === "note" && (
-        <p className={`text-red-600 -mt-2 mb-1`}>{tabErrors.textArea}</p>
-      )}
-
-      {tabType === "rss" && (
-        <EditTab_RSS
-          dateCheckbox={dateCheckbox}
-          descriptionCheckbox={descriptionCheckbox}
-          rssItemsPerPage={rssItemsPerPage}
-          setDateCheckbox={setDateCheckbox}
-          setDescriptionCheckbox={setDescriptionCheckbox}
-          setRssItemsPerPage={setRssItemsPerPage}
-          setWasAnythingClicked={setWasAnythingClicked}
-          setWasCheckboxClicked={setWasCheckboxClicked}
-          setWasItemsPerPageClicked={setWasItemsPerPageClicked}
-          setWasTabOpenClicked={setWasTabOpenClicked}
-          tabID={tabID}
-          rssLinkInput={rssLinkInput}
-          setRssLinkInput={setRssLinkInput}
-        />
-      )}
 
       <div className={`pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
         <div className="flex justify-between items-center">

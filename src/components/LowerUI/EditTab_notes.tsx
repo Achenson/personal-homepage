@@ -9,7 +9,7 @@ interface Props {
 function EditTab_notes({textAreaValue, setTextAreaValue, setWasAnythingClicked}: Props): JSX.Element{
     return (
       
-      <div className="mt-2 mb-3">
+      <div className="mt-2">
       <textarea
         value={textAreaValue as string}
         className="h-full w-full overflow-visible pl-px pr-px border font-mono resize-none"

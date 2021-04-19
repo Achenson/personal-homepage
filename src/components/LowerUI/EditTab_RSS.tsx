@@ -50,7 +50,7 @@ function EditTab_RSS({
   // rssLink = currentTab.rssLink;
 
   return (
-    <div className="mb-1">
+    <div className="-mb-1">
       <div className="flex items-center mt-2 justify-between">
         <p className="whitespace-nowrap " style={{ marginRight: "10px" }}>
           RSS link
@@ -120,7 +120,7 @@ function EditTab_RSS({
         />
       </div>
       {/* <p className="text-center">RESET to default</p> */}
-      <p className="text-center">
+      <p className="text-center mt-1">
         {" "}
         <span
           className="text-red-600 hover:underline cursor-pointer"

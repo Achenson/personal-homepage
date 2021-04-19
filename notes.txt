@@ -372,8 +372,10 @@ DONE 324. delete all btn for selectables DONE
 DONE 325. xxx open popup with 3 default images to choose xx -> chosing enablem in Background Settings without popup DONE
 DONE 326. chevronDown & selectableVis -> unify logic! DONE
 DONE 327. add error to editTab to all only unique titles! DONE
+XXX 328. bigger gap after tab on smaller screen sizes when column is empty? XXX
 DONE 334. saveSVGs onClick -> convert code to functions DONE
 DONE 335. RSS settings - date & description better styles DONE
+DONE 339. move note & rss edit errors lower DONE
 DONE 343. saveSVG still being cut on firefox! DONE (w-1 instead of w-px)
 DONE 344. NoteInput: make better bg for IMG background version DONE
 
@@ -411,7 +413,6 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 322. newBookmark & editBookmark: title & link wrong responsive behaviour  
 323. newFolder newRSS: better input alignments
 
-328. bigger gap after tab on smaller screen sizes when column is empty?
 
 329. code order (useEffect, func itp) eg. in 
 330. extract more functions out?
@@ -421,12 +422,14 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 336. Rss SingleLink - empty??
 337. rss date formatting
 338. aligning left-hand text with right-hand input -> do it without margins!
-339. move note & rss edit errors lower
+
+
 340. allow trailing commas in selectables
 341. bookmark_lowerUI -> divide function to new & edit
 342. chevroDown: lower it so it will be on the level of "x" ?
 343. make column appear thinner (notes, bookmarks etc. seem to stick out)
 344. get rid of border-b in img mode on note input when bg is transparetn? (light bg problem)
+345. background color setting -> no defualt color selection
 
 
 
