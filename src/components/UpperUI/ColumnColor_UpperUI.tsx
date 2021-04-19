@@ -25,7 +25,7 @@ interface Props {
     >
   >;
   // setColorsToChooseVis: React.Dispatch<React.SetStateAction<boolean>>;
-  
+
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   upperVisState: InitUpperVisState;
   arrIndex: number;
@@ -40,7 +40,7 @@ function ColumnColor_UpperUI({
   upperVisState,
   arrIndex,
   columnType,
-  isHoverOnAnyColumn
+  isHoverOnAnyColumn,
 }: Props): JSX.Element {
   const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
@@ -84,6 +84,7 @@ function ColumnColor_UpperUI({
   }
 
   function borderStyle() {
+    // unselected column
     if (upperVisState.columnSelected !== colNumber) {
       if (arrIndex > 0) {
         return "border border-l-0";
@@ -91,15 +92,18 @@ function ColumnColor_UpperUI({
       return "border";
     }
 
+    // selected column (or all columns if oneColorForAllCols is true)
     if (arrIndex > 0) {
-      return "border border-t-2 border-b-2 border-r-2";
+      return `border border-t-2 border-b-2 border-r-2 ${
+        globalSettingsData.oneColorForAllCols ? "border-l-0" : ""
+      }`;
     }
     return "border-2";
   }
 
   return (
     <div>
-      {colNumber <= globalSettingsData.numberOfCols ? (
+      {arrIndex + 1 <= globalSettingsData.numberOfCols ? (
         <div
           onClick={() => {
             setDefaultColorsFor(`column_${colNumber}` as any);
@@ -107,10 +111,13 @@ function ColumnColor_UpperUI({
             // setCloseAllTabsData(true);
 
             if (upperVisState.columnSelected === colNumber) {
-              upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE"});
+              upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
               // setColumnSelected(null);
             } else {
-              upperVisDispatch({ type: "COLORS_COLUMN_OPEN", payload: colNumber });
+              upperVisDispatch({
+                type: "COLORS_COLUMN_OPEN",
+                payload: colNumber,
+              });
               // setColumnSelected(colNumber);
             }
           }}

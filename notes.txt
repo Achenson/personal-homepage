@@ -364,8 +364,10 @@ DONE 299. upperLeft UI should not close tab content! DONE
 DONE 300. no img background - X get rid of lightest colors? X (make lower border in noteInput instead!) DONE
 ???302. sorting method???
 DONE 303. better borders in color selecting DONE
+DONE 305. columnColor not being reduced in numbers if "one color for all columns" is set DONE
 DONE 307. Selectables -> truncate (and should appear on one line only) - the stick out if too long! DONE
 DONE 313. make gray button disabled! eg save SVG DONE (return if nothings changed)
+DONE 320. one color for all columns: when selected, make border collapsed DONE
 DONE 324. delete all btn for selectables DONE
 DONE 326. chevronDown & selectableVis -> unify logic! DONE
 DONE 334. saveSVGs onClick -> convert code to functions DONE
@@ -392,7 +394,7 @@ DONE 335. RSS settings - date & description better styles DONE
 297. backgroundImg: how to make the columns shorter, same as if there is no backgroundImg
 
 304. react query devtools not working
-305. columnColor not being reduced in numbers if "one color for all columns" is set
+
 306. new rss & new tab: make it smaller?
 
 308. login
@@ -404,7 +406,6 @@ DONE 335. RSS settings - date & description better styles DONE
 316. background colors selection not visible on black
 317. white border selection problem -> takes too much space to the left. modify adjacent border colors?
 318. useEffect -> some should be unmounted? check in the end
-320. one color for all columns: when selected, make border collapsed 
 322. newBookmark & editBookmark: title & link wrong responsive behaviour  
 323. newFolder newRSS: better input alignments
 325. open popup with 3 default images to choose
