@@ -255,6 +255,9 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
       return isUnique;
     }
+
+
+    
   }
 
   function addTab() {

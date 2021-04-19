@@ -371,6 +371,7 @@ DONE 320. one color for all columns: when selected, make border collapsed DONE
 DONE 324. delete all btn for selectables DONE
 DONE 325. xxx open popup with 3 default images to choose xx -> chosing enablem in Background Settings without popup DONE
 DONE 326. chevronDown & selectableVis -> unify logic! DONE
+DONE 327. add error to editTab to all only unique titles! DONE
 DONE 334. saveSVGs onClick -> convert code to functions DONE
 DONE 335. RSS settings - date & description better styles DONE
 DONE 343. saveSVG still being cut on firefox! DONE (w-1 instead of w-px)
@@ -410,8 +411,8 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 322. newBookmark & editBookmark: title & link wrong responsive behaviour  
 323. newFolder newRSS: better input alignments
 
-327. add error to editTab to all only unique titles! 
 328. bigger gap after tab on smaller screen sizes when column is empty?
+
 329. code order (useEffect, func itp) eg. in 
 330. extract more functions out?
 331. unmounted component error (err mentioned alread?)

@@ -137,6 +137,12 @@ Props): JSX.Element {
   const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
     false
   );
+
+  const [
+    titleUniquenessErrorVis,
+    setTitleUniquenessErrorVis,
+  ] = useState<boolean>(false);
+
   const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
   const [noDeletionErrorVis, setNoDeletionErrorVis] = useState<boolean>(false);
 
@@ -173,6 +179,7 @@ Props): JSX.Element {
 
   function errorHandling(): boolean {
     setTitleFormatErrorVis(false);
+    setTitleUniquenessErrorVis(false);
     setTextAreaErrorVis(false);
     setNoDeletionErrorVis(false);
     setBookmarksErrorVis(false);
@@ -184,6 +191,12 @@ Props): JSX.Element {
 
     if (!regexForTitle.test(tabTitleInput)) {
       setTitleFormatErrorVis(true);
+      setBookmarksListVis(false);
+      return true;
+    }
+
+    if (!titleUniquenessCheck()) {
+      setTitleUniquenessErrorVis(true);
       setBookmarksListVis(false);
       return true;
     }
@@ -231,6 +244,19 @@ Props): JSX.Element {
       }
 
       return true;
+    }
+
+    function titleUniquenessCheck() {
+      let isUnique: boolean = true;
+
+      tabsData.forEach((obj, i) => {
+        // diff than NewTab_UpperUI
+        if (obj.title === tabTitleInput && obj.id !== tabID) {
+          isUnique = false;
+        }
+      });
+
+      return isUnique;
     }
 
     function bookmarksUniquenessCheck() {
@@ -363,6 +389,10 @@ Props): JSX.Element {
 
         {titleFormatErrorVis && (
           <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.titleFormat}</p>
+        )}
+
+        {titleUniquenessErrorVis && (
+          <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.titleUniqueness}</p>
         )}
 
         {bookmarksErrorVis && tabType === "folder" && (
