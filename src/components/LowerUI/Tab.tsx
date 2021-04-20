@@ -94,8 +94,7 @@ Props): JSX.Element {
     // newBookmarkVis: false,
     editTabVis: false,
     colorsVis: false,
-    // @ts-ignore
-    tabContentVis: currentTab.opened,
+    tabContentVis: currentTab?.opened ?? false,
     newBookmarkVis: false,
     editBookmarkVis: false,
   };
@@ -563,7 +562,10 @@ Props): JSX.Element {
       )}
 
       {visState.tabContentVis && tabType === "rss" && (
-        <RSS_reactQuery tabID={tabID} currentTab={currentTab as SingleTabData}/>
+        <RSS_reactQuery
+          tabID={tabID}
+          currentTab={currentTab as SingleTabData}
+        />
       )}
     </div>
   );

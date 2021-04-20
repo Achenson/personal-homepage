@@ -366,6 +366,7 @@ DONE 300. no img background - X get rid of lightest colors? X (make lower border
 DONE 303. better borders in color selecting DONE
 DONE 305. columnColor not being reduced in numbers if "one color for all columns" is set DONE
 DONE 307. Selectables -> truncate (and should appear on one line only) - the stick out if too long! DONE
+DONE 312. error when deleting folder automatically if it is empty -> Tab -> currentTab problem DONE
 DONE 313. make gray button disabled! eg save SVG DONE (return if nothings changed)
 DONE 320. one color for all columns: when selected, make border collapsed DONE
 DONE 324. delete all btn for selectables DONE
@@ -405,14 +406,13 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 308. login
 309. UpperRight Menu -> make it possible to close by clicking on the background
 
-312. error when deleting folder automatically if it is empty -> Tab -> currentTab problem
+
 315. gray area (when clicking settings) does not expand to whole page
 316. background colors selection not visible on black
 317. white border selection problem -> takes too much space to the left. modify adjacent border colors?
 318. useEffect -> some should be unmounted? check in the end
 322. newBookmark & editBookmark: title & link wrong responsive behaviour  
 323. newFolder newRSS: better input alignments
-
 
 329. code order (useEffect, func itp) eg. in 
 330. extract more functions out?
@@ -430,6 +430,7 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 343. make column appear thinner (notes, bookmarks etc. seem to stick out)
 344. get rid of border-b in img mode on note input when bg is transparetn? (light bg problem)
 345. background color setting -> no defualt color selection
+346. error in console.log if empty tag auto deletes itself
 
 
 
