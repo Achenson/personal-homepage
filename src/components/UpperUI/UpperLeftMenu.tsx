@@ -84,7 +84,7 @@ function UpperLeftMenu({
           {columnsRendering(4, globalSettingsData.oneColorForAllCols)}
         </div>
         {globalSettingsData.picBackground ? null : (
-          <div className="absolute block xs:hidden" style={{bottom: "20px"}}>
+          <div className="absolute hidden" style={{bottom: "20px"}}>
              <BackgroundColor_UpperUI
             // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
             upperVisDispatch={upperVisDispatch}
@@ -96,7 +96,7 @@ function UpperLeftMenu({
       </div>
       <div className="flex justify-between w-16 ml-2">
         {globalSettingsData.picBackground ? null : (
-          <div className="hidden xs:block">
+          <div className="">
               <BackgroundColor_UpperUI
             // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
             upperVisDispatch={upperVisDispatch}

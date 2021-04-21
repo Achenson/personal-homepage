@@ -38,7 +38,7 @@ function UpperRightMenu({
 
   return (
     // <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
-    <div className="h-7 w-56 flex justify-between items-center bg-white bg-opacity-80 rounded-md border border-gray-700 "
+    <div className="h-7 w-28 xs:w-56  flex justify-between items-center bg-white bg-opacity-80 rounded-md border border-gray-700 "
     style={{marginBottom: "2px"}}
     >
       <div className="flex w-28 justify-around">
@@ -86,7 +86,7 @@ function UpperRightMenu({
         />
       </div>
 
-      <div className="flex w-24 justify-around items-center">
+      <div className="hidden xs:flex w-24 justify-around items-center">
         <PhotographSVG
           className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
           onClick={() => {
@@ -115,6 +115,10 @@ function UpperRightMenu({
         />
         <UserSVG className="h-6" style={{marginLeft: "-3px"}} />
       </div>
+
+
+
+      
     </div>
   );
 }

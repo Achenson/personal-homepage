@@ -432,6 +432,7 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 345. background color setting -> no defualt color selection
 346. error in console.log if empty tag auto deletes itself
 347. touch screen compatibility?
+348. background colors list to the left?
 
 
 
