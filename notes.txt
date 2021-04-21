@@ -318,6 +318,7 @@ DONE 236. editTab: center Save & Cancel
 DONE 237. make animations for save & cancel SVGs? or on all svgs? DONE
 DONE 238. newTab vs newBookmark save & cancel centering? save icon is cut when trying to center! DONE (bug? px wide div have to be kept for some reason)
 DONE 239. get rid of "else" statements DONE (two cases only)
+DONE 240. EyeOff should be positioned more to the left if image bg is on DONE
 DONE 242. make note about setTimout in Tab DONE
 DONE 243. column colors two components - redundant? DONE (unified)
 DONE 245. change all selections to XXXshadowXXX wide gray border (experiment more?)(like in UpperLeftMenu) DONE
@@ -384,7 +385,6 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-240. EyeOff should be positioned more to the left if image bg is on
 241. Icons to clotted on smallest screen size? make UpperRightMenu more clotted on small screen? (make search UI first!)
 
 254. bookmark (& RSS?): add link errors!
@@ -431,6 +431,7 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 344. get rid of border-b in img mode on note input when bg is transparetn? (light bg problem)
 345. background color setting -> no defualt color selection
 346. error in console.log if empty tag auto deletes itself
+347. touch screen compatibility?
 
 
 

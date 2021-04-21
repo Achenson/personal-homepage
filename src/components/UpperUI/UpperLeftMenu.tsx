@@ -21,7 +21,6 @@ function UpperLeftMenu({
   upperVisDispatch,
   upperVisState,
 }: Props): JSX.Element {
-
   // const [columnSelected, setColumnSelected] = useState<number | null>(null);
 
   const [defaultColorsFor, setDefaultColorsFor] = useState<
@@ -30,7 +29,7 @@ function UpperLeftMenu({
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  const [isHoverOnAnyColumn, setIsHoverOnAnyColumn] = useState(false)
+  const [isHoverOnAnyColumn, setIsHoverOnAnyColumn] = useState(false);
 
   function columnsRendering(howMany: number, oneColorForAllCols: boolean) {
     let arrOfColumns = [];
@@ -39,7 +38,7 @@ function UpperLeftMenu({
     }
 
     return arrOfColumns.map((el, index) => {
-      return  (
+      return (
         <ColumnColor_UpperUI
           colNumber={oneColorForAllCols ? 1 : el}
           // colSelected={false}
@@ -53,45 +52,54 @@ function UpperLeftMenu({
           arrIndex={index}
           upperVisDispatch={upperVisDispatch}
           upperVisState={upperVisState}
-          columnType={globalSettingsData.picBackground ? "BACKGROUND_IMG" : "NO_BACKGROUND_IMG"}
+          columnType={
+            globalSettingsData.picBackground
+              ? "BACKGROUND_IMG"
+              : "NO_BACKGROUND_IMG"
+          }
           isHoverOnAnyColumn={isHoverOnAnyColumn}
         />
-      )
+      );
     });
   }
 
   return (
-    <div className="flex items-center justify-between w-48 sm:w-52">
+    <div className="flex items-center justify-between">
       {/* <div className="absolute left-0 bottom-0"> */}
       <div className="flex justify-between items-center mb-2 mt-2">
         {/* <p className="w-32">Columns</p> */}
-        <div className="flex bg-white bg-opacity-80"
-        onMouseEnter={() => {
-          if(globalSettingsData.oneColorForAllCols) {
-            setIsHoverOnAnyColumn(true)
-          }
-        }}
-        onMouseLeave={() => {
-          if(globalSettingsData.oneColorForAllCols) {
-            setIsHoverOnAnyColumn(false)
-          }
-        }}
+        <div
+          className="flex bg-white bg-opacity-80"
+          onMouseEnter={() => {
+            if (globalSettingsData.oneColorForAllCols) {
+              setIsHoverOnAnyColumn(true);
+            }
+          }}
+          onMouseLeave={() => {
+            if (globalSettingsData.oneColorForAllCols) {
+              setIsHoverOnAnyColumn(false);
+            }
+          }}
         >
           {columnsRendering(4, globalSettingsData.oneColorForAllCols)}
         </div>
       </div>
-      {globalSettingsData.picBackground ? null : (
-        <BackgroundColor_UpperUI
-          // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
-          upperVisDispatch={upperVisDispatch}
-        />
-      )}
-      <EyeOff_UpperUI upperVisDispatch={upperVisDispatch} />
+      <div className="flex justify-between w-16 ml-2">
+        {globalSettingsData.picBackground ? null : (
+          <BackgroundColor_UpperUI
+            // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
+            upperVisDispatch={upperVisDispatch}
+          />
+        )}
+        <EyeOff_UpperUI upperVisDispatch={upperVisDispatch} />
+      </div>
 
       {/* <div className="absolute left-0" style={{ bottom: "104px" }}> */}
       <div className="absolute left-0 top-3">
         {upperVisState.colorsColumnVis && (
-          <ColorsToChoose_DefaultAndColumns defaultColorsFor={defaultColorsFor} />
+          <ColorsToChoose_DefaultAndColumns
+            defaultColorsFor={defaultColorsFor}
+          />
         )}
         {upperVisState.colorsBackgroundVis && (
           <div className="absolute left-60 top-7">
