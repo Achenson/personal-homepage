@@ -66,7 +66,7 @@ function UpperLeftMenu({
   return (
     <div className="flex items-center justify-between">
       {/* <div className="absolute left-0 bottom-0"> */}
-      <div className="flex justify-between items-center mb-2 mt-2">
+      <div className="flex relative justify-between items-center mb-2 mt-2">
         {/* <p className="w-32">Columns</p> */}
         <div
           className="flex bg-white bg-opacity-80"
@@ -83,13 +83,26 @@ function UpperLeftMenu({
         >
           {columnsRendering(4, globalSettingsData.oneColorForAllCols)}
         </div>
-      </div>
-      <div className="flex justify-between w-16 ml-2">
         {globalSettingsData.picBackground ? null : (
-          <BackgroundColor_UpperUI
+          <div className="absolute block xs:hidden" style={{bottom: "20px"}}>
+             <BackgroundColor_UpperUI
             // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
             upperVisDispatch={upperVisDispatch}
           />
+          </div>
+         
+        )}
+
+      </div>
+      <div className="flex justify-between w-16 ml-2">
+        {globalSettingsData.picBackground ? null : (
+          <div className="hidden xs:block">
+              <BackgroundColor_UpperUI
+            // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
+            upperVisDispatch={upperVisDispatch}
+          />
+          </div>
+        
         )}
         <EyeOff_UpperUI upperVisDispatch={upperVisDispatch} />
       </div>
