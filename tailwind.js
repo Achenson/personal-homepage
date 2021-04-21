@@ -65,7 +65,6 @@ module.exports = {
         defaultBackground: "url('../images/unsplash.jpg')",
         defaultBackground_2: "url('../images/pexels-a-pasaric-small.jpg')",
         defaultBackground_3: "url('../images/pexels-j-novacek-small.jpg')",
-
       }),
       boxShadow: {
         inner_md: "inset 0 2px 10px 0 rgba(0, 0, 0, 0.06)",
@@ -73,18 +72,21 @@ module.exports = {
         inner_xl: "inset 0 2px 20px 0 rgba(0, 0, 0, 0.06)",
       },
       rotate: {
-        '-26.6': '-26.6deg',
-        '-26': '-26deg',
-        '-25': '-25deg',
-        '-24': '-24deg',
-        '-23': '-23deg',
-      }
+        "-26.6": "-26.6deg",
+        "-26": "-26deg",
+        "-25": "-25deg",
+        "-24": "-24deg",
+        "-23": "-23deg",
+      },
+      screens: {
+        xs: "490px",
+      },
     },
   },
   variants: {
     extend: {
-      borderWidth: ['hover'],
-      zIndex: ['hover'],
+      borderWidth: ["hover"],
+      zIndex: ["hover"],
     },
   },
   plugins: [],

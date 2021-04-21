@@ -22,7 +22,7 @@ function UpperUI({
   // const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
 
   return (
-    <div className="h-36 relative mx-4 flex justify-between items-end">
+    <div className="h-36 relative mx-2 xs:mx-4 flex justify-between items-end">
       <UpperLeftMenu
         upperVisDispatch={upperVisDispatch}
         upperVisState={upperVisState}

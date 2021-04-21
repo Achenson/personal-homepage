@@ -154,9 +154,9 @@ function Grid({ upperVisDispatch }: Props): JSX.Element {
   }
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden mx-2 xs:mx-4">
     <div
-      className={`grid gap-x-2 gap-y-6 mx-4 ${gridSettings(
+      className={`grid gap-x-2 gap-y-6 ${gridSettings(
         globalSettingsData.numberOfCols
       )}`}
       // className={`grid gap-x-2 gap-y-6 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`}
