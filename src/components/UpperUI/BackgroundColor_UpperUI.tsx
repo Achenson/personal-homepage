@@ -50,7 +50,7 @@ function BackgroundColor_upperUI({
 
     <DocumentSVG
       // className={`h-7 bg-${calcIconBackground(backgroundColorData)} opacity-80 border border-black rounded-lg cursor-pointer fill-current text-${backgroundColorData} hover:border-gray-500`}
-      className={`h-7 transition-colors duration-75 ${calcIconBackground(
+      className={`hidden xs:block h-7 transition-colors duration-75 ${calcIconBackground(
         backgroundColorData
       )} opacity-80 border border-black rounded-lg cursor-pointer  hover:border-gray-500`}
       onClick={() => {
