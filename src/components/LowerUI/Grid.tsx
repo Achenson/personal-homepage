@@ -143,13 +143,13 @@ function Grid({ upperVisDispatch }: Props): JSX.Element {
   function gridSettings(numberOfCols: 1 | 2 | 3 | 4) {
     switch (numberOfCols) {
       case 1:
-        return ``;
+        return `grid-cols-1`;
       case 2:
-        return `sm:grid-cols-2`;
+        return `grid-cols-1 sm:grid-cols-2`;
       case 3:
-        return `sm:grid-cols-2 md:grid-cols-3`;
+        return `grid-cols-1 sm:grid-cols-2 md:grid-cols-3`;
       case 4:
-        return `sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`;
+        return `grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`;
     }
   }
 
