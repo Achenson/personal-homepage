@@ -32,71 +32,81 @@ let initUpperVisState: InitUpperVisState = {
   settingsVis_xs: false,
 };
 
-const upperVisStateAllFalse: InitUpperVisState = {
-  ...initUpperVisState,
-};
-
 function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
+    const upperVisStateAllFalse: InitUpperVisState = {
+    ...initUpperVisState,
+  };
+
+  let upperVisStateMostlyFalse: InitUpperVisState = {
+    ...initUpperVisState,
+    addTagVis_xs: state.addTagVis_xs,
+    settingsVis_xs: state.settingsVis_xs,
+  };
+
   switch (action.type) {
     case "BACKGROUND_SETTINGS_TOGGLE":
       return {
-        ...upperVisStateAllFalse,
+        ...upperVisStateMostlyFalse,
         backgroundSettingsVis: !state.backgroundSettingsVis,
       };
     case "COLORS_SETTINGS_TOGGLE":
       return {
-        ...upperVisStateAllFalse,
+        ...upperVisStateMostlyFalse,
         colorsSettingsVis: !state.colorsSettingsVis,
       };
     case "NEW_BOOKMARK_TOGGLE":
       return {
-        ...upperVisStateAllFalse,
+        ...upperVisStateMostlyFalse,
         newBookmarkVis: !state.newBookmarkVis,
       };
     case "NEW_TAB_TOGGLE":
       return {
-        ...upperVisStateAllFalse,
+        ...upperVisStateMostlyFalse,
         newTabVis: !state.newTabVis,
       };
     case "SETTINGS_TOGGLE":
       return {
-        ...upperVisStateAllFalse,
+        ...upperVisStateMostlyFalse,
         settingsVis: !state.settingsVis,
       };
     case "COLORS_BACKGROUND_TOGGLE":
       return {
-        ...upperVisStateAllFalse,
+        ...upperVisStateMostlyFalse,
         colorsBackgroundVis: !state.colorsBackgroundVis,
       };
     case "COLORS_COLUMN_TOGGLE":
       return {
-        ...upperVisStateAllFalse,
+        ...upperVisStateMostlyFalse,
         colorsColumnVis: !state.colorsColumnVis,
       };
     case "COLORS_COLUMN_OPEN":
       return {
-        ...upperVisStateAllFalse,
+        ...upperVisStateMostlyFalse,
         columnSelected: action.payload as number,
         colorsColumnVis: true,
       };
     case "ADD_TAG_XS_TOGGLE":
       return {
-        ...upperVisStateAllFalse,
+        // ...upperVisStateMostlyFalse,
+        ...state,
         addTagVis_xs: !state.addTagVis_xs,
+        settingsVis_xs: false
       };
     case "SETTINGS_XS_TOGGLE":
       return {
-        ...upperVisStateAllFalse,
+        // ...upperVisStateMostlyFalse,
+        ...state,
         settingsVis_xs: !state.settingsVis_xs,
+        addTagVis_xs: false
       };
 
     case "CLOSE_ALL":
       return {
-        ...upperVisStateAllFalse,
+        ...upperVisStateMostlyFalse,
       };
 
     default:
-      return { ...upperVisStateAllFalse };
+      return { ...upperVisStateMostlyFalse };
   }
 }
 
