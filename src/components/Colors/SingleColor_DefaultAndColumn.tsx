@@ -103,7 +103,13 @@ function SingleColor_DefaultAndColumn({
 
   return (
     <div
-      className={`h-4 w-8 -mr-px -mt-px bg-${color} cursor-pointer ${
+      className={`h-4 ${
+        defaultColorsFor === "folders" ||
+        defaultColorsFor === "rss" ||
+        defaultColorsFor === "notes"
+          ? "w-8"
+          : "w-6 xs:w-8"
+      } -mr-px -mt-px bg-${color} cursor-pointer ${
         // isThisSelected(defaultColorsFor) ? "border-2" : "border"
         borderMaker(defaultColorsFor)
       } hover:border-2 hover:border-gray-500 hover:z-50`}
