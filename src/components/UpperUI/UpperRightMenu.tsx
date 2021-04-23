@@ -44,7 +44,7 @@ function UpperRightMenu({
   return (
     // <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
     <div
-      className="h-14 xs:h-7 w-28 xs:w-56  block xs:flex justify-between items-center bg-white bg-opacity-80 rounded-md border border-gray-700 "
+      className={`${upperVisState.addTagVis_xs || upperVisState.settingsVis_xs ? "h-14" : "h-7"} xs:h-7 w-28 xs:w-56  block xs:flex justify-between items-center bg-white bg-opacity-80 rounded-md border border-gray-700 `}
       style={{ marginBottom: "2px" }}
     >
       <div className="hidden xs:flex w-28 justify-around">
@@ -187,9 +187,7 @@ function UpperRightMenu({
         <PlusSquareSVG
           className={`h-5 w-5 self-center cursor-pointer transition-colors duration-75 fill-current hover:text-${uiColorData} mr-1`}
           onClick={() => {
-            // setNewTabVis((b) => !b);
-            upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-            setTabType("folder");
+            upperVisDispatch({ type: "ADD_TAG_XS_TOGGLE" });
           }}
         />
         {/* <AddNote */}
@@ -197,10 +195,7 @@ function UpperRightMenu({
           className={`h-6 cursor-pointer transition-colors duration-75  hover:text-${uiColorData}`}
           style={{ marginTop: "2px" }}
           onClick={() => {
-            // setNewTabVis((b) => !b);
-
-            upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-            setTabType("note");
+            upperVisDispatch({ type: "SETTINGS_XS_TOGGLE" });
           }}
         />
 

@@ -29,7 +29,7 @@ let initUpperVisState: InitUpperVisState = {
   colorsColumnVis: false,
   columnSelected: null,
   addTagVis_xs: false,
-  settingsVis_xs: true,
+  settingsVis_xs: false,
 };
 
 const upperVisStateAllFalse: InitUpperVisState = {
