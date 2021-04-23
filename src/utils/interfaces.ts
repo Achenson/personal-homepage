@@ -43,6 +43,8 @@ export interface InitUpperVisState {
   colorsBackgroundVis: boolean;
   colorsColumnVis: boolean;
   columnSelected: null | number;
+  addTagVis_xs: boolean;
+  settingsVis_xs: boolean;
 }
 
 export interface UpperVisAction {
@@ -55,7 +57,9 @@ export interface UpperVisAction {
     | "COLORS_BACKGROUND_TOGGLE"
     | "COLORS_COLUMN_TOGGLE"
     | "COLORS_COLUMN_OPEN"
-    | "CLOSE_ALL";
+    | "CLOSE_ALL"
+    | "ADD_TAG_XS_TOGGLE"
+    | "SETTINGS_XS_TOGGLE"
   payload?: number;
 }
 

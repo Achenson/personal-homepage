@@ -28,6 +28,8 @@ let initUpperVisState: InitUpperVisState = {
   colorsBackgroundVis: false,
   colorsColumnVis: false,
   columnSelected: null,
+  addTagVis_xs: false,
+  settingsVis_xs: true,
 };
 
 const upperVisStateAllFalse: InitUpperVisState = {
@@ -77,6 +79,17 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
         columnSelected: action.payload as number,
         colorsColumnVis: true,
       };
+    case "ADD_TAG_XS_TOGGLE":
+      return {
+        ...upperVisStateAllFalse,
+        addTagVis_xs: !state.addTagVis_xs,
+      };
+    case "SETTINGS_XS_TOGGLE":
+      return {
+        ...upperVisStateAllFalse,
+        settingsVis_xs: !state.settingsVis_xs,
+      };
+
     case "CLOSE_ALL":
       return {
         ...upperVisStateAllFalse,

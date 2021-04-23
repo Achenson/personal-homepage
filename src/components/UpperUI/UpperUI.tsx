@@ -31,6 +31,7 @@ function UpperUI({
       <UpperRightMenu
         upperVisDispatch={upperVisDispatch}
         setTabType={setTabType}
+        upperVisState={upperVisState}
       />
     </div>
   );
