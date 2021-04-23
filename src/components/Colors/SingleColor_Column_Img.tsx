@@ -77,7 +77,7 @@ function SingleColor_Column_Img({
 
   return (
     <div
-      className={`h-4 w-8 -mr-px -mt-px cursor-pointer ${
+      className={`h-4 w-6 xs:w-8 -mr-px -mt-px cursor-pointer ${
         // isThisSelected(defaultColorsFor) ? "border-2" : "border"
         borderMaker(defaultColorsFor)
       } hover:border-2 hover:border-gray-500 hover:z-50`}

@@ -436,6 +436,8 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 349. svg error still! on lower ui 
 350. can't access tab options with touch
 351. ColorsToChoose - control positioning on encompassing div, not inside components
+352. clear svgs
+353. SingleColor_DefaultAndColumn SingleColor_Column_Img unify?
 
 
 App structure:
