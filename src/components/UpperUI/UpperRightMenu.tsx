@@ -1,5 +1,7 @@
 import React from "react";
 
+import UpperRightMenu_XS from "./UpperRightMenu_XS"
+
 import { ReactComponent as AddFolderSVG } from "../../svgs/addFolder.svg";
 import { ReactComponent as FolderSVG } from "../../svgs/folder.svg";
 
@@ -92,124 +94,12 @@ function UpperRightMenu({
 
       {/* XS============================== */}
 
-      {upperVisState.addTagVis_xs && (
-        <div className="flex xs:hidden w-28 justify-around">
-          <FolderSVG
-            className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} mr-1`}
-            onClick={() => {
-              // setNewTabVis((b) => !b);
-              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-              setTabType("folder");
-            }}
-          />
-          {/* <AddNote */}
-          <NoteSVG
-            className={`h-6 cursor-pointer fill-current transition-colors duration-75 text-black hover:text-${uiColorData}`}
-            style={{ marginTop: "2px" }}
-            onClick={() => {
-              // setNewTabVis((b) => !b);
-
-              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-              setTabType("note");
-            }}
-          />
-
-          {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
-          <AddRssSVG
-            className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            onClick={() => {
-              // setNewTabVis((b) => !b);
-
-              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-              setTabType("rss");
-            }}
-          />
-          <UserSVG
-            className={`invisible h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            onClick={() => {
-              // setNewTabVis((b) => !b);
-
-              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-              setTabType("rss");
-            }}
-          />
-        </div>
-      )}
-
-      {upperVisState.settingsVis_xs && (
-        <div className="flex xs:hidden w-28 justify-around">
-          <FolderSVG
-            className={`invisible h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} mr-1`}
-            onClick={() => {
-              // setNewTabVis((b) => !b);
-              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-              setTabType("folder");
-            }}
-          />
-          <PhotographSVG
-            className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            onClick={() => {
-              // setBackgroundSettingsVis((b) => !b);
-
-              upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
-            }}
-          />
-          <ColorSVG
-            className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            onClick={() => {
-              upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
-              // setColorsVis((b) => !b);
-            }}
-          />
-          <SettingsSVG
-            className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            onClick={() => {
-              // setTabOpenedData(null)
-
-              // setCloseAllTabsData(true);
-              upperVisDispatch({ type: "SETTINGS_TOGGLE" });
-            }}
-          />
-        </div>
-      )}
-
-      <div className="flex xs:hidden w-28 justify-around">
-        {/* <AddLinkSVG */}
-        <BookmarkSVG
-          className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-          onClick={() => {
-            // setNewBookmarkVis((b) => !b);
-            upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
-          }}
-        />
-
-        {/* <AddFolderSVG */}
-        <PlusSquareSVG
-          className={`h-5 w-5 self-center cursor-pointer transition-colors duration-75 fill-current hover:text-${uiColorData} mr-1`}
-          onClick={() => {
-            upperVisDispatch({ type: "ADD_TAG_XS_TOGGLE" });
-          }}
-        />
-        {/* <AddNote */}
-        <CogSVG
-          className={`h-6 cursor-pointer transition-colors duration-75  hover:text-${uiColorData}`}
-          style={{ marginTop: "2px" }}
-          onClick={() => {
-            upperVisDispatch({ type: "SETTINGS_XS_TOGGLE" });
-          }}
-        />
-
-        {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
-        <UserSVG
-          className={`h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-          onClick={() => {
-            // setNewTabVis((b) => !b);
-
-            upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-            setTabType("rss");
-          }}
-        />
-      </div>
+     <UpperRightMenu_XS
+     setTabType={setTabType}
+     upperVisDispatch={upperVisDispatch}
+     upperVisState={upperVisState}
+     />
+      {/* xs ============================^ */}
 
       <div className="hidden xs:flex w-24 justify-around items-center">
         <PhotographSVG
