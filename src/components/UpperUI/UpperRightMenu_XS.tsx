@@ -30,12 +30,10 @@ function UpperRightMenu({
   return (
     <>
       {upperVisState.addTagVis_xs && (
-        <div className="flex xs:hidden justify-around"
-        
-        >
+        <div className="flex xs:hidden justify-around">
           <FolderSVG
             className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            style={{marginLeft: "0px"}}
+            style={{ marginLeft: "0px" }}
             onClick={() => {
               // setNewTabVis((b) => !b);
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
@@ -56,7 +54,7 @@ function UpperRightMenu({
           {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
           <AddRssSVG
             className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            style={{marginRight: "-6px"}}
+            style={{ marginRight: "-6px" }}
             onClick={() => {
               // setNewTabVis((b) => !b);
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
@@ -76,7 +74,7 @@ function UpperRightMenu({
           />
           <PhotographSVG
             className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            style={{marginLeft: "-5px"}}
+            style={{ marginLeft: "-5px" }}
             onClick={() => {
               // setBackgroundSettingsVis((b) => !b);
 
@@ -85,7 +83,7 @@ function UpperRightMenu({
           />
           <ColorSVG
             className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            style={{marginLeft: "-1px"}}
+            style={{ marginLeft: "-1px" }}
             onClick={() => {
               upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
               // setColorsVis((b) => !b);
@@ -103,8 +101,9 @@ function UpperRightMenu({
         </div>
       )}
 
-      <div className="flex xs:hidden justify-around"
-      style={{ marginTop: "-1px" }}
+      <div
+        className="flex xs:hidden justify-around"
+        style={{ marginTop: "-1px" }}
       >
         {/* <AddLinkSVG */}
         <BookmarkSVG
