@@ -20,6 +20,7 @@ import {
 
 import { ReactComponent as ColorSmallSVG } from "../../svgs/beakerSmall.svg";
 import { ReactComponent as PencilSmallSVG } from "../../svgs/pencilSmall.svg";
+import { ReactComponent as DotsSVG } from "../../svgs/dots.svg";
 import { ReactComponent as TrashSmallSVG } from "../svgs/trashSmall.svg";
 import { ReactComponent as CrossArrowsSVG } from "../../svgs/cross-arrows.svg";
 import { ReactComponent as PlusSVG } from "../../svgs/plus.svg";
