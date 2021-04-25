@@ -30,9 +30,11 @@ function UpperRightMenu({
   return (
     <>
       {upperVisState.addTagVis_xs && (
-        <div className="flex xs:hidden justify-around">
+        <div className="flex xs:hidden justify-around"
+        style={{marginLeft: "1px"}}
+        >
           <FolderSVG
-            className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} mr-1`}
+            className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} -mr-0.5`}
             onClick={() => {
               // setNewTabVis((b) => !b);
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
@@ -42,7 +44,7 @@ function UpperRightMenu({
           {/* <AddNote */}
           <NoteSVG
             className={`h-6 cursor-pointer fill-current transition-colors duration-75 text-black hover:text-${uiColorData}`}
-            style={{ marginTop: "2px" }}
+            style={{ marginTop: "2px", marginLeft: "3px" }}
             onClick={() => {
               // setNewTabVis((b) => !b);
 
@@ -53,6 +55,7 @@ function UpperRightMenu({
           {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
           <AddRssSVG
             className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+            style={{marginRight: "-6px"}}
             onClick={() => {
               // setNewTabVis((b) => !b);
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
