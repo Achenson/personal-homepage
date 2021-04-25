@@ -85,6 +85,8 @@ Props): JSX.Element {
 
   const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
 
+  const [touchScreenMode, seTouchScreenMode] = useState(true);
+
   let currentTab = tabsData.find((obj) => obj.id === tabID);
 
   // 0s to not show typescript errors
@@ -387,7 +389,7 @@ Props): JSX.Element {
     >
       <div
         ref={drag}
-        className={`pl-0 h-8 px-2 pt-px bg-${
+        className={`pl-0 h-8 ${touchScreenMode ? "" : "pr-2"} pt-px bg-${
           // tabColor ? tabColor : finalTabColor
           finalTabColor
         } ${textOrIconColor(
@@ -424,7 +426,9 @@ Props): JSX.Element {
           } fill-current ${textOrIconColor(finalTabColor, "icon")} `}
         >
           <div
-            className="w-6 -mt-1 pt-1 cursor-move"
+            className={`w-6 -mt-1 pt-1 cursor-move ${
+              touchScreenMode ? "hidden" : "block"
+            }`}
             style={{ height: "29px" }}
             onMouseEnter={() => {
               setCrossVis(false);
@@ -486,6 +490,14 @@ Props): JSX.Element {
             // }}
           />
         </div>
+        {touchScreenMode && (
+          <div className={`h-8 w-6 bg-gray-200 bg-opacity-30 -mt-px`}>
+
+            {/* <div className="mt-2 h-4 w-1 rounded -ml-1 bg-gray-700 transition-colors duration-75 text-gray-700 hover:text-black cursor-pointer"
+            // style={{height: "80%"}}
+            /> */}
+          </div>
+        )}
       </div>
 
       {visState.colorsVis && tabOpenedData === tabID && (
