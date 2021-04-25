@@ -1,6 +1,5 @@
 import React from "react";
 
-
 import { ReactComponent as FolderSVG } from "../../svgs/folder.svg";
 import { ReactComponent as PlusSquareSVG } from "../../svgs/plus-square-line_uxwing.svg";
 import { ReactComponent as BookmarkSVG } from "../../svgs/bookmarkAlt.svg";
@@ -31,7 +30,7 @@ function UpperRightMenu({
   return (
     <>
       {upperVisState.addTagVis_xs && (
-        <div className="flex xs:hidden w-28 justify-around">
+        <div className="flex xs:hidden justify-around">
           <FolderSVG
             className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} mr-1`}
             onClick={() => {
@@ -51,41 +50,29 @@ function UpperRightMenu({
               setTabType("note");
             }}
           />
-
           {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
           <AddRssSVG
             className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
             onClick={() => {
               // setNewTabVis((b) => !b);
-
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               setTabType("rss");
             }}
           />
           <UserSVG
             className={`invisible h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            onClick={() => {
-              // setNewTabVis((b) => !b);
-
-              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-              setTabType("rss");
-            }}
           />
         </div>
       )}
 
       {upperVisState.settingsVis_xs && (
-        <div className="flex xs:hidden w-28 justify-around">
-          <FolderSVG
+        <div className="flex xs:hidden items-center justify-around">
+          <BookmarkSVG
             className={`invisible h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} mr-1`}
-            onClick={() => {
-              // setNewTabVis((b) => !b);
-              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-              setTabType("folder");
-            }}
           />
           <PhotographSVG
             className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+            style={{marginLeft: "-5px"}}
             onClick={() => {
               // setBackgroundSettingsVis((b) => !b);
 
@@ -94,13 +81,14 @@ function UpperRightMenu({
           />
           <ColorSVG
             className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+            style={{marginLeft: "-1px"}}
             onClick={() => {
               upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
               // setColorsVis((b) => !b);
             }}
           />
           <SettingsSVG
-            className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+            className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} -ml-1`}
             onClick={() => {
               // setTabOpenedData(null)
 
@@ -111,7 +99,9 @@ function UpperRightMenu({
         </div>
       )}
 
-      <div className="flex xs:hidden w-28 justify-around">
+      <div className="flex xs:hidden justify-around"
+      style={{ marginTop: "-1px" }}
+      >
         {/* <AddLinkSVG */}
         <BookmarkSVG
           className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -123,14 +113,14 @@ function UpperRightMenu({
 
         {/* <AddFolderSVG */}
         <PlusSquareSVG
-          className={`h-5 w-5 self-center cursor-pointer transition-colors duration-75 fill-current hover:text-${uiColorData} mr-1`}
+          className={`h-5 w-5 self-center cursor-pointer transition-colors duration-75 fill-current hover:text-${uiColorData} ml-px`}
           onClick={() => {
             upperVisDispatch({ type: "ADD_TAG_XS_TOGGLE" });
           }}
         />
         {/* <AddNote */}
         <CogSVG
-          className={`h-6 cursor-pointer transition-colors duration-75  hover:text-${uiColorData}`}
+          className={`h-6 cursor-pointer transition-colors duration-75  hover:text-${uiColorData} ml-px`}
           style={{ marginTop: "2px" }}
           onClick={() => {
             upperVisDispatch({ type: "SETTINGS_XS_TOGGLE" });
@@ -139,7 +129,7 @@ function UpperRightMenu({
 
         {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
         <UserSVG
-          className={`h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+          className={`h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData} -ml-1`}
           onClick={() => {
             // setNewTabVis((b) => !b);
 
