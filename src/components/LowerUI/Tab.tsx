@@ -171,6 +171,8 @@ Props): JSX.Element {
           // @ts-ignore
           tabContentVis: currentTab.opened,
           editBookmarkVis: false,
+          touchScreenModeOn: false
+
         };
       case "TAB_CONTENT_OPEN_AFTER_LOCKING":
         return {
@@ -191,6 +193,7 @@ Props): JSX.Element {
           newBookmarkVis: false,
           // tabContentVis: false,
           editBookmarkVis: false,
+          touchScreenModeOn: false
         };
       case "NEW_BOOKMARK_TOOGLE":
         if (!state.newBookmarkVis) {
@@ -226,10 +229,6 @@ Props): JSX.Element {
 
         return {
           ...state,
-          colorsVis: false,
-          editTabVis: false,
-          newBookmarkVis: false,
-          editBookmarkVis: false,
           touchScreenModeOn: true,
         };
 
