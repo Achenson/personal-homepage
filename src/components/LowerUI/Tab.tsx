@@ -397,7 +397,11 @@ Props): JSX.Element {
           "text"
         )} border border-t-0 border-r-0 border-l-0 border-gray-700 border-opacity-25 flex justify-between`}
         style={{ boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)" }}
-        
+        onTouchStart={() => {
+          setTimeout(() => {
+            setTouchScreenMode(true);
+          }, 200);
+        }}
         // old style
 
         // )} border border-t-0 border-r-0 border-l-0 border-gray-400 flex justify-between`}
@@ -422,80 +426,72 @@ Props): JSX.Element {
         </div>
 
         <div
-          onTouchStart={() => {
-            setTimeout(() => {
-              setTouchScreenMode(true);
-            }, 200);
-          }}
+          className={`pt-1 flex ${
+            iconsVis || touchScreenMode ? "visible" : "invisible"
+          } fill-current ${textOrIconColor(finalTabColor, "icon")} `}
         >
           <div
-            className={`pt-1 flex ${
-              iconsVis || touchScreenMode ? "visible" : "invisible"
-            } fill-current ${textOrIconColor(finalTabColor, "icon")} `}
+            className={`w-6 -mt-1 pt-1 cursor-move `}
+            style={{ height: "29px" }}
+            onMouseEnter={() => {
+              setCrossVis(false);
+            }}
+            onMouseLeave={() => {
+              setCrossVis(true);
+            }}
           >
-            <div
-              className={`w-6 -mt-1 pt-1 cursor-move `}
-              style={{ height: "29px" }}
-              onMouseEnter={() => {
-                setCrossVis(false);
-              }}
-              onMouseLeave={() => {
-                setCrossVis(true);
-              }}
-            >
-              {crossVis && (
-                <CrossArrowsSVG
-                  // className="h-6  hover:text-black hover:invisible"
-                  className="h-6"
-                  style={{ marginTop: "-2px" }}
-                />
-              )}
-            </div>
-
-            {tabType === "folder" && (
-              <PlusSVG
-                className={`h-8 transition-colors duration-75 hover:${hoverText(
-                  finalTabColor
-                )} cursor-pointer`}
-                style={{ marginTop: "-6px" }}
-                onClick={() => {
-                  visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
-                  upperVisDispatch({ type: "CLOSE_ALL" });
-                }}
+            {crossVis && (
+              <CrossArrowsSVG
+                // className="h-6  hover:text-black hover:invisible"
+                className="h-6"
+                style={{ marginTop: "-2px" }}
               />
             )}
+          </div>
 
-            <ColorSmallSVG
-              className={`h-5 mr-2 transition-colors duration-75 hover:${hoverText(
-                finalTabColor
-              )} cursor-pointer `}
-              // ${
-              //   tabType === "note" || tabType === "rss" ? "ml-1" : ""
-              // }
-              // `}
-              style={{
-                marginLeft: `${
-                  tabType === "note" || tabType === "rss" ? "7px" : ""
-                }`,
-              }}
-              onClick={() => {
-                visDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
-                upperVisDispatch({ type: "CLOSE_ALL" });
-              }}
-            />
-
-            <PencilSmallSVG
-              className={`h-5 -ml-px transition-colors duration-75 hover:${hoverText(
+          {tabType === "folder" && (
+            <PlusSVG
+              className={`h-8 transition-colors duration-75 hover:${hoverText(
                 finalTabColor
               )} cursor-pointer`}
+              style={{ marginTop: "-6px" }}
               onClick={() => {
-                visDispatch({ type: "EDIT_TOGGLE" });
+                visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
                 upperVisDispatch({ type: "CLOSE_ALL" });
               }}
-
-              // }}
             />
-          </div>
+          )}
+
+          <ColorSmallSVG
+            className={`h-5 mr-2 transition-colors duration-75 hover:${hoverText(
+              finalTabColor
+            )} cursor-pointer `}
+            // ${
+            //   tabType === "note" || tabType === "rss" ? "ml-1" : ""
+            // }
+            // `}
+            style={{
+              marginLeft: `${
+                tabType === "note" || tabType === "rss" ? "7px" : ""
+              }`,
+            }}
+            onClick={() => {
+              visDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
+              upperVisDispatch({ type: "CLOSE_ALL" });
+            }}
+          />
+
+          <PencilSmallSVG
+            className={`h-5 -ml-px transition-colors duration-75 hover:${hoverText(
+              finalTabColor
+            )} cursor-pointer`}
+            onClick={() => {
+              visDispatch({ type: "EDIT_TOGGLE" });
+              upperVisDispatch({ type: "CLOSE_ALL" });
+            }}
+
+            // }}
+          />
         </div>
       </div>
 
