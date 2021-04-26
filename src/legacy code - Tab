@@ -491,11 +491,11 @@ Props): JSX.Element {
           />
         </div>
         {touchScreenMode && (
-          <div className="h-7 w-4 mt-1">
+          <div className={`h-8 w-6 bg-gray-200 bg-opacity-30 -mt-px`}>
 
-            <DotsSVG className=" -ml-1 transition-colors duration-75 text-gray-700 hover:text-black cursor-pointer"
-            style={{height: "80%"}}
-            />
+            {/* <div className="mt-2 h-4 w-1 rounded -ml-1 bg-gray-700 transition-colors duration-75 text-gray-700 hover:text-black cursor-pointer"
+            // style={{height: "80%"}}
+            /> */}
           </div>
         )}
       </div>

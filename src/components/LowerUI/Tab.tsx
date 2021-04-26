@@ -85,7 +85,7 @@ Props): JSX.Element {
 
   const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
 
-  const [touchScreenMode, seTouchScreenMode] = useState(true);
+  const [touchScreenMode, setTouchScreenMode] = useState(false);
 
   let currentTab = tabsData.find((obj) => obj.id === tabID);
 
@@ -389,7 +389,7 @@ Props): JSX.Element {
     >
       <div
         ref={drag}
-        className={`pl-0 h-8 ${touchScreenMode ? "" : "pr-2"} pt-px bg-${
+        className={`pl-0 h-8 pr-1 pt-px bg-${
           // tabColor ? tabColor : finalTabColor
           finalTabColor
         } ${textOrIconColor(
@@ -397,6 +397,7 @@ Props): JSX.Element {
           "text"
         )} border border-t-0 border-r-0 border-l-0 border-gray-700 border-opacity-25 flex justify-between`}
         style={{ boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)" }}
+        
         // old style
 
         // )} border border-t-0 border-r-0 border-l-0 border-gray-400 flex justify-between`}
@@ -421,83 +422,81 @@ Props): JSX.Element {
         </div>
 
         <div
-          className={`pt-1 flex ${
-            iconsVis ? "visible" : "invisible"
-          } fill-current ${textOrIconColor(finalTabColor, "icon")} `}
+          onTouchStart={() => {
+            setTimeout(() => {
+              setTouchScreenMode(true);
+            }, 200);
+          }}
         >
           <div
-            className={`w-6 -mt-1 pt-1 cursor-move ${
-              touchScreenMode ? "hidden" : "block"
-            }`}
-            style={{ height: "29px" }}
-            onMouseEnter={() => {
-              setCrossVis(false);
-            }}
-            onMouseLeave={() => {
-              setCrossVis(true);
-            }}
+            className={`pt-1 flex ${
+              iconsVis || touchScreenMode ? "visible" : "invisible"
+            } fill-current ${textOrIconColor(finalTabColor, "icon")} `}
           >
-            {crossVis && (
-              <CrossArrowsSVG
-                // className="h-6  hover:text-black hover:invisible"
-                className="h-6"
-                style={{ marginTop: "-2px" }}
+            <div
+              className={`w-6 -mt-1 pt-1 cursor-move `}
+              style={{ height: "29px" }}
+              onMouseEnter={() => {
+                setCrossVis(false);
+              }}
+              onMouseLeave={() => {
+                setCrossVis(true);
+              }}
+            >
+              {crossVis && (
+                <CrossArrowsSVG
+                  // className="h-6  hover:text-black hover:invisible"
+                  className="h-6"
+                  style={{ marginTop: "-2px" }}
+                />
+              )}
+            </div>
+
+            {tabType === "folder" && (
+              <PlusSVG
+                className={`h-8 transition-colors duration-75 hover:${hoverText(
+                  finalTabColor
+                )} cursor-pointer`}
+                style={{ marginTop: "-6px" }}
+                onClick={() => {
+                  visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+                  upperVisDispatch({ type: "CLOSE_ALL" });
+                }}
               />
             )}
-          </div>
 
-          {tabType === "folder" && (
-            <PlusSVG
-              className={`h-8 transition-colors duration-75 hover:${hoverText(
+            <ColorSmallSVG
+              className={`h-5 mr-2 transition-colors duration-75 hover:${hoverText(
                 finalTabColor
-              )} cursor-pointer`}
-              style={{ marginTop: "-6px" }}
+              )} cursor-pointer `}
+              // ${
+              //   tabType === "note" || tabType === "rss" ? "ml-1" : ""
+              // }
+              // `}
+              style={{
+                marginLeft: `${
+                  tabType === "note" || tabType === "rss" ? "7px" : ""
+                }`,
+              }}
               onClick={() => {
-                visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+                visDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
                 upperVisDispatch({ type: "CLOSE_ALL" });
               }}
             />
-          )}
 
-          <ColorSmallSVG
-            className={`h-5 mr-2 transition-colors duration-75 hover:${hoverText(
-              finalTabColor
-            )} cursor-pointer `}
-            // ${
-            //   tabType === "note" || tabType === "rss" ? "ml-1" : ""
-            // }
-            // `}
-            style={{
-              marginLeft: `${
-                tabType === "note" || tabType === "rss" ? "7px" : ""
-              }`,
-            }}
-            onClick={() => {
-              visDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
-              upperVisDispatch({ type: "CLOSE_ALL" });
-            }}
-          />
+            <PencilSmallSVG
+              className={`h-5 -ml-px transition-colors duration-75 hover:${hoverText(
+                finalTabColor
+              )} cursor-pointer`}
+              onClick={() => {
+                visDispatch({ type: "EDIT_TOGGLE" });
+                upperVisDispatch({ type: "CLOSE_ALL" });
+              }}
 
-          <PencilSmallSVG
-            className={`h-5 -ml-px transition-colors duration-75 hover:${hoverText(
-              finalTabColor
-            )} cursor-pointer`}
-            onClick={() => {
-              visDispatch({ type: "EDIT_TOGGLE" });
-              upperVisDispatch({ type: "CLOSE_ALL" });
-            }}
-
-            // }}
-          />
-        </div>
-        {touchScreenMode && (
-          <div className={`h-8 w-6 bg-gray-200 bg-opacity-30 -mt-px`}>
-
-            {/* <div className="mt-2 h-4 w-1 rounded -ml-1 bg-gray-700 transition-colors duration-75 text-gray-700 hover:text-black cursor-pointer"
-            // style={{height: "80%"}}
-            /> */}
+              // }}
+            />
           </div>
-        )}
+        </div>
       </div>
 
       {visState.colorsVis && tabOpenedData === tabID && (

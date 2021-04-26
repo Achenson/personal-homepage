@@ -440,6 +440,8 @@ DONE 344. NoteInput: make better bg for IMG background version DONE
 353. SingleColor_DefaultAndColumn SingleColor_Column_Img unify?
 354. limit column width?
 355. upperRightUI: Note to close to the lower svgs?
+356 || instead of ?? in tab?
+357. cant drag tabs with touch
 
 
 
