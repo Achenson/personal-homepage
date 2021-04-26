@@ -74,6 +74,7 @@ export interface TabVisAction {
     | "TAB_CONTENT_OPEN_AFTER_LOCKING"
     | "TAB_EDITABLES_CLOSE"
     | "NEW_BOOKMARK_TOOGLE"
-    | "EDIT_BOOKMARK_TOOGLE";
+    | "EDIT_BOOKMARK_TOOGLE"
+    | "TOUCH_SCREEN_MODE_ON"
   payload?: string | number;
 }

@@ -66,6 +66,7 @@ interface VisState {
   tabContentVis: boolean;
   newBookmarkVis: boolean;
   editBookmarkVis: boolean;
+  touchScreenModeOn: boolean;
 }
 
 function Tab({
@@ -85,7 +86,7 @@ Props): JSX.Element {
 
   const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
 
-  const [touchScreenMode, setTouchScreenMode] = useState(false);
+  // const [touchScreenMode, setTouchScreenMode] = useState(false);
 
   let currentTab = tabsData.find((obj) => obj.id === tabID);
 
@@ -100,6 +101,7 @@ Props): JSX.Element {
     tabContentVis: currentTab?.opened ?? false,
     newBookmarkVis: false,
     editBookmarkVis: false,
+    touchScreenModeOn: false,
   };
 
   //  if tabOpenedData is not equall to tabID, editables (eg. tabEdit) will not render & useEffect will close all editables
@@ -216,6 +218,21 @@ Props): JSX.Element {
           newBookmarkVis: false,
           editBookmarkVis: !state.editBookmarkVis,
         };
+
+      case "TOUCH_SCREEN_MODE_ON":
+        if (!state.touchScreenModeOn) {
+          setTabOpenedData(tabID);
+        }
+
+        return {
+          ...state,
+          colorsVis: false,
+          editTabVis: false,
+          newBookmarkVis: false,
+          editBookmarkVis: false,
+          touchScreenModeOn: true,
+        };
+
       default:
         return state;
     }
@@ -399,7 +416,8 @@ Props): JSX.Element {
         style={{ boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)" }}
         onTouchStart={() => {
           setTimeout(() => {
-            setTouchScreenMode(true);
+            visDispatch({ type: "TOUCH_SCREEN_MODE_ON" });
+            // setTouchScreenMode(true);
           }, 200);
         }}
         // old style
@@ -427,7 +445,7 @@ Props): JSX.Element {
 
         <div
           className={`pt-1 flex ${
-            iconsVis || touchScreenMode ? "visible" : "invisible"
+            iconsVis || visState.touchScreenModeOn ? "visible" : "invisible"
           } fill-current ${textOrIconColor(finalTabColor, "icon")} `}
         >
           <div
