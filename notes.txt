@@ -381,6 +381,7 @@ DONE 335. RSS settings - date & description better styles DONE
 DONE 339. move note & rss edit errors lower DONE
 DONE 343. saveSVG still being cut on firefox! DONE (w-1 instead of w-px)
 DONE 344. NoteInput: make better bg for IMG background version DONE
+DONE 358. bug -> when on sm or lower (one col displayed) cannot drag tabs properly DONE
 
 
 1. purgecss at the end of project?

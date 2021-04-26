@@ -187,7 +187,8 @@ function GapAfterTab({
             // style={{ backgroundColor: singleColumnColor }}
           ></div>
           <div
-            className={`h-screen w-full absolute
+          // hidden sm:block <- to properly enable draggin if one col is displayed
+            className={`hidden sm:block h-screen w-full absolute
             ${isOver ? "opacity-30 bg-blueGray-200" : ""}
           `}
           ></div>
