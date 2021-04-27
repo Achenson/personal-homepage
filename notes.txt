@@ -381,6 +381,7 @@ DONE 335. RSS settings - date & description better styles DONE
 DONE 339. move note & rss edit errors lower DONE
 DONE 343. saveSVG still being cut on firefox! DONE (w-1 instead of w-px)
 DONE 344. NoteInput: make better bg for IMG background version DONE
+DONE 357. cant drag tabs with touch (react-dnd-multi-backend) DONE
 DONE 358. bug -> when on sm or lower (one col displayed) cannot drag tabs properly DONE
 
 
@@ -442,7 +443,7 @@ DONE 358. bug -> when on sm or lower (one col displayed) cannot drag tabs proper
 354. limit column width?
 355. upperRightUI: Note to close to the lower svgs?
 356 || instead of ?? in tab?
-357. cant drag tabs with touch
+358. tab open/close randomly when dragging? (all)
 
 
 

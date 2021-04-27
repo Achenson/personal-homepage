@@ -1,8 +1,12 @@
 import React from "react";
-import { DndProvider } from "react-dnd";
+// import { DndProvider } from "react-dnd";
+// @ts-ignore
+import { DndProvider } from "react-dnd-multi-backend";
+// @ts-ignore
+import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
 
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { TouchBackend } from 'react-dnd-touch-backend'
+// import { HTML5Backend } from "react-dnd-html5-backend";
+// import { TouchBackend } from 'react-dnd-touch-backend';
 
 import { ReactQueryDevtools} from "react-query-devtools";
 import {QueryClientProvider, QueryClient} from "react-query";
@@ -14,13 +18,13 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
         <div className="App">
-        <DndProvider backend={HTML5Backend}>
+        {/* <DndProvider backend={HTML5Backend}> */}
+        <DndProvider options={HTML5toTouch}>
           <Main />
         </DndProvider>
       </div>
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
-    
     
   );
 }
