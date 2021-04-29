@@ -58,6 +58,7 @@ interface Props {
   colNumber: number;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   tabOpened: boolean;
+  tabOpenedByDefault: boolean;
   // noteInput: string | null;
   // rssLink: string | null;
   // closeAllTabs: boolean;
@@ -80,6 +81,7 @@ function Tab({
   colNumber,
   upperVisDispatch,
   tabOpened,
+  tabOpenedByDefault,
 }: // being passed as a prop from closeAllTabsData, get if from the state instead?
 // closeAllTabs,
 // noteInput,
@@ -178,6 +180,17 @@ Props): JSX.Element {
           // tabContentVis: !state.tabContentVis,
         };
       case "TAB_CONTENT_DEFAULT":
+        setTabsData((previous) =>
+          produce(previous, (updated) => {
+            let tabToUpdate = updated.find((obj) => obj.id === tabID);
+
+            if (tabToUpdate) {
+              let tabIndex = updated.indexOf(tabToUpdate);
+              updated[tabIndex].opened = tabOpenedByDefault;
+            }
+          })
+        );
+
         return {
           ...state,
           colorsVis: false,
