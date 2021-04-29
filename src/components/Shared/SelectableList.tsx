@@ -7,13 +7,14 @@ interface Props {
 
   marginTop: string;
   setWasAnythingClicked?: React.Dispatch<React.SetStateAction<boolean>>;
+  
 }
 
 function SelectableList({
   setSelectablesInputStr,
   selectablesInputStr,
   visibleSelectables,
-
+  
   marginTop,
   setWasAnythingClicked,
 }: Props): JSX.Element {
@@ -21,7 +22,57 @@ function SelectableList({
 
   const [selectableToHighlight, setSelectableToHighlight] = useState<
     null | number
-  >(1);
+  >(null);
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    // !!!! without this everything will be recalculated from start - lag
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
+
+  function handleKeyDown(event: KeyboardEvent) {
+    // if (visibleSelectables_sorted.length === 0) {
+    //   return;
+    // }
+
+    switch (event.code) {
+      case "ArrowUp":
+        highlightHigher();
+      case "ArrowDown":
+        highlightLower();
+      case "ArrowRight":
+        chooseCurrent();
+      case "Enter":
+        chooseCurrent();
+      case "Delete":
+        setSelectablesInputStr("")
+    }
+
+    function highlightHigher() {
+
+    }
+
+    function highlightLower() {
+
+    }
+
+    function chooseCurrent() {
+
+
+    }
+
+
+
+
+
+
+  }
+
+
+  
 
   return (
     <div
@@ -39,6 +90,10 @@ function SelectableList({
                 selectableToHighlight === i ? "bg-blueGray-200" : ""
               } pl-px truncate`}
               onClick={() => {
+                if (visibleSelectables_sorted.length === 0) {
+                  return;
+                }
+
                 if (selectableToHighlight !== i) {
                   return;
                 }
