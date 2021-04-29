@@ -446,6 +446,13 @@ DONE 358. bug -> when on sm or lower (one col displayed) cannot drag tabs proper
 358. tab open/close randomly when dragging? (all)
 
 
+Browserslist: caniuse-lite is outdated. Please run:
+npx browserslist@latest --update-db
+
+Why you should do it regularly:
+https://github.com/browserslist/browserslist#browsers-data-updating
+
+
 
 App structure:
 Main

@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useReducer, useCallback } from "react";
 
+import { produce } from "immer";
+
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 import { deletedTabState } from "../../state/tabsAndBookmarks";
@@ -55,6 +57,7 @@ interface Props {
   tabType: "folder" | "note" | "rss";
   colNumber: number;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
+  tabOpened: boolean;
   // noteInput: string | null;
   // rssLink: string | null;
   // closeAllTabs: boolean;
@@ -63,7 +66,7 @@ interface Props {
 interface VisState {
   editTabVis: boolean;
   colorsVis: boolean;
-  tabContentVis: boolean;
+  // tabContentVis: boolean;
   newBookmarkVis: boolean;
   editBookmarkVis: boolean;
   touchScreenModeOn: boolean;
@@ -76,6 +79,7 @@ function Tab({
   tabType,
   colNumber,
   upperVisDispatch,
+  tabOpened,
 }: // being passed as a prop from closeAllTabsData, get if from the state instead?
 // closeAllTabs,
 // noteInput,
@@ -98,7 +102,7 @@ Props): JSX.Element {
     // newBookmarkVis: false,
     editTabVis: false,
     colorsVis: false,
-    tabContentVis: currentTab?.opened ?? false,
+    // tabContentVis: currentTab?.opened ?? false,
     newBookmarkVis: false,
     editBookmarkVis: false,
     touchScreenModeOn: false,
@@ -154,13 +158,24 @@ Props): JSX.Element {
       case "TAB_CONTENT_TOGGLE":
         setTabOpenedData(tabID);
 
+        setTabsData((previous) =>
+          produce(previous, (updated) => {
+            let tabToUpdate = updated.find((obj) => obj.id === tabID);
+
+            if (tabToUpdate) {
+              let tabIndex = updated.indexOf(tabToUpdate);
+              updated[tabIndex].opened = !tabOpened;
+            }
+          })
+        );
+
         return {
           ...state,
           colorsVis: false,
           editTabVis: false,
           newBookmarkVis: false,
           editBookmarkVis: false,
-          tabContentVis: !state.tabContentVis,
+          // tabContentVis: !state.tabContentVis,
         };
       case "TAB_CONTENT_DEFAULT":
         return {
@@ -168,11 +183,10 @@ Props): JSX.Element {
           colorsVis: false,
           editTabVis: false,
           newBookmarkVis: false,
-          // @ts-ignore
-          tabContentVis: currentTab.opened,
-          editBookmarkVis: false,
-          touchScreenModeOn: false
 
+          // tabContentVis: currentTab.opened,
+          editBookmarkVis: false,
+          touchScreenModeOn: false,
         };
       case "TAB_CONTENT_OPEN_AFTER_LOCKING":
         return {
@@ -193,7 +207,7 @@ Props): JSX.Element {
           newBookmarkVis: false,
           // tabContentVis: false,
           editBookmarkVis: false,
-          touchScreenModeOn: false
+          touchScreenModeOn: false,
         };
       case "NEW_BOOKMARK_TOOGLE":
         if (!state.newBookmarkVis) {
@@ -554,7 +568,7 @@ Props): JSX.Element {
         />
       )}
 
-      {visState.tabContentVis && tabType === "folder" && (
+      {tabOpened && tabType === "folder" && (
         <div>
           {bookmarksData
             .filter((el) => el.tags.indexOf(tabID) > -1)
@@ -577,7 +591,7 @@ Props): JSX.Element {
         </div>
       )}
 
-      {visState.tabContentVis && tabType === "note" && (
+      {tabOpened && tabType === "note" && (
         <NoteInput
           //  noteInput={noteInput}
           currentTab={currentTab as SingleTabData}
@@ -586,7 +600,7 @@ Props): JSX.Element {
         />
       )}
 
-      {visState.tabContentVis && tabType === "rss" && (
+      {tabOpened && tabType === "rss" && (
         <RSS_reactQuery
           tabID={tabID}
           currentTab={currentTab as SingleTabData}
