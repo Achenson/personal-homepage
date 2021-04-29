@@ -7,14 +7,13 @@ interface Props {
 
   marginTop: string;
   setWasAnythingClicked?: React.Dispatch<React.SetStateAction<boolean>>;
-  
 }
 
 function SelectableList({
   setSelectablesInputStr,
   selectablesInputStr,
   visibleSelectables,
-  
+
   marginTop,
   setWasAnythingClicked,
 }: Props): JSX.Element {
@@ -41,38 +40,46 @@ function SelectableList({
     switch (event.code) {
       case "ArrowUp":
         highlightHigher();
+        return;
       case "ArrowDown":
         highlightLower();
+        return;
       case "ArrowRight":
         chooseCurrent();
+        return;
+
       case "Enter":
         chooseCurrent();
+        return;
       case "Delete":
-        setSelectablesInputStr("")
+        setSelectablesInputStr("");
+        return;
+
+      default:
+        return;
     }
 
     function highlightHigher() {
+      if (visibleSelectables_sorted.length === 0) {
+        return;
+      }
 
+      if (selectableToHighlight === 0) {
+        return;
+      }
+
+      if (selectableToHighlight === null) {
+        setSelectableToHighlight(0);
+        return;
+      }
+
+      setSelectableToHighlight((nr) => (nr as number) - 1);
     }
 
-    function highlightLower() {
+    function highlightLower() {}
 
-    }
-
-    function chooseCurrent() {
-
-
-    }
-
-
-
-
-
-
+    function chooseCurrent() {}
   }
-
-
-  
 
   return (
     <div
