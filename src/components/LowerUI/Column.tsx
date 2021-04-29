@@ -143,6 +143,7 @@ function Column({ colNumber, upperVisDispatch }: Props): JSX.Element {
                   colNumber={el.column}
                   tabOpened={el.opened}
                   tabOpenedByDefault={el.openedByDefault}
+                  tabIsDeletable={el.deletable}
                   upperVisDispatch={upperVisDispatch}
                 />
                 <GapAfterTab

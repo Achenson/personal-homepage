@@ -59,6 +59,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   tabOpened: boolean;
   tabOpenedByDefault: boolean;
+  tabIsDeletable: boolean;
   // noteInput: string | null;
   // rssLink: string | null;
   // closeAllTabs: boolean;
@@ -82,6 +83,7 @@ function Tab({
   upperVisDispatch,
   tabOpened,
   tabOpenedByDefault,
+  tabIsDeletable
 }: // being passed as a prop from closeAllTabsData, get if from the state instead?
 // closeAllTabs,
 // noteInput,
@@ -425,7 +427,8 @@ Props): JSX.Element {
     <div
       className={`relative ${
         globalSettingsData.hideNonDeletable &&
-        (!(currentTab as SingleTabData).deletable as boolean)
+        // (!(currentTab as SingleTabData).deletable as boolean)
+        !tabIsDeletable
           ? "hidden"
           : ""
       }`}
