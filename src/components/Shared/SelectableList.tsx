@@ -19,7 +19,9 @@ function SelectableList({
 }: Props): JSX.Element {
   let visibleSelectables_sorted = visibleSelectables.sort();
 
-  let selectableToHighlight: null | number = null;
+  const [selectableToHighlight, setSelectableToHighlight] = useState<
+    null | number
+  >(1);
 
   return (
     <div
@@ -33,8 +35,14 @@ function SelectableList({
         visibleSelectables_sorted.map((el, i) => {
           return (
             <p
-              className="cursor-pointer hover:bg-blueGray-200 pl-px truncate"
+              className={`cursor-pointer ${
+                selectableToHighlight === i ? "bg-blueGray-200" : ""
+              } pl-px truncate`}
               onClick={() => {
+                if (selectableToHighlight !== i) {
+                  return;
+                }
+
                 if (setWasAnythingClicked) {
                   (setWasAnythingClicked as React.Dispatch<
                     React.SetStateAction<boolean>
@@ -47,6 +55,12 @@ function SelectableList({
                 }
 
                 setSelectablesInputStr(selectablesInputStr.concat(", " + el));
+              }}
+              onMouseEnter={() => {
+                setSelectableToHighlight(i);
+              }}
+              onMouseLeave={() => {
+                setSelectableToHighlight(null);
               }}
               key={i}
             >
