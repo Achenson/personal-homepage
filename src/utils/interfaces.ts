@@ -5,6 +5,7 @@ export interface SingleTabData {
   column: number;
   priority: number;
   opened: boolean;
+  openedByDefault: boolean;
   deletable: boolean;
   type: "folder" | "note" | "rss";
   noteInput?: string | null;

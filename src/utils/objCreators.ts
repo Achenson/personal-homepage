@@ -1,10 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
 
+import {SingleTabData, SingleBookmarkData} from "../utils/interfaces"
+
 export function createBasicTab(
   title: string,
   column: number,
   priority: number,
   opened: boolean = false,
+  openedByDefault: boolean = false,
   deletable: boolean = true
 ) {
   return {
@@ -14,6 +17,7 @@ export function createBasicTab(
     column,
     priority,
     opened,
+    openedByDefault,
     deletable,
   };
 }
@@ -69,7 +73,7 @@ export function createNote(
   column: number,
   priority: number,
   noteInput: string | null
-) {
+): SingleTabData {
   return {
     ...createBasicTab(title, column, priority),
     ...createNote_partial(noteInput),
@@ -81,14 +85,14 @@ export function createRSS(
   column: number,
   priority: number,
   rssLink: string
-) {
+): SingleTabData  {
   return {
     ...createBasicTab(title, column, priority),
     ...createRSS_partial(rssLink),
   };
 }
 
-export function createBookmark(title: string, URL: string, tags: (string|number)[]) {
+export function createBookmark(title: string, URL: string, tags: (string|number)[]): SingleBookmarkData {
   return {
     id: uuidv4(),
     title,
