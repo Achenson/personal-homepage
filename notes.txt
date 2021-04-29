@@ -429,7 +429,7 @@ DONE 359. tab open/close randomly (not randomly, but state of the prev component
 
 340. allow trailing commas in selectables
 341. bookmark_lowerUI -> divide function to new & edit
-342. chevroDown: lower it so it will be on the level of "x" ?
+342. chevroDown: lower it so it will be on the level of "x" ? edit bookmark only?
 343. make column appear thinner (notes, bookmarks etc. seem to stick out)
 344. get rid of border-b in img mode on note input when bg is transparetn? (light bg problem)
 345. background color setting -> no defualt color selection
