@@ -32,11 +32,11 @@ function SelectableList({
     };
   });
 
-  function handleKeyDown(event: KeyboardEvent) {
-    // if (visibleSelectables_sorted.length === 0) {
-    //   return;
-    // }
+  // useEffect(() => {
+  //   console.log(selectableToHighlight);
+  // }, [selectableToHighlight]);
 
+  function handleKeyDown(event: KeyboardEvent) {
     switch (event.code) {
       case "ArrowUp":
         highlightHigher();
@@ -44,12 +44,21 @@ function SelectableList({
       case "ArrowDown":
         highlightLower();
         return;
-      case "ArrowRight":
-        chooseCurrent();
-        return;
-
+      // case "ArrowRight":
+      //   if (selectableToHighlight !== null) {
+      //     chooseCurrent(
+      //       visibleSelectables_sorted[selectableToHighlight],
+      //       "keyboard"
+      //     );
+      //   }
+      //   return;
       case "Enter":
-        chooseCurrent();
+        if (selectableToHighlight !== null) {
+          chooseCurrent(
+            visibleSelectables_sorted[selectableToHighlight],
+            "keyboard"
+          );
+        }
         return;
       case "Delete":
         setSelectablesInputStr("");
@@ -74,7 +83,11 @@ function SelectableList({
         return;
       }
 
+      // if (selectableToHighlight > visibleSelectables_sorted.length - 1) {
+      //   setSelectableToHighlight(0);
+      // } else {
       setSelectableToHighlight((nr) => (nr as number) - 1);
+      // }
     }
 
     function highlightLower() {
@@ -92,13 +105,45 @@ function SelectableList({
         return;
       }
 
+      // if (selectableToHighlight < visibleSelectables_sorted.length - 1) {
       setSelectableToHighlight((nr) => (nr as number) + 1);
+      // } else {
+      //   setSelectableToHighlight(0);
+      //  }
+    }
+  }
+
+  function chooseCurrent(el: string, eventType: "mouse" | "keyboard") {
+    if (visibleSelectables_sorted.length === 0) {
+      return;
     }
 
-    function chooseCurrent() {
+    if (selectableToHighlight === null) {
+      return;
+    }
 
+    if (setWasAnythingClicked) {
+      (setWasAnythingClicked as React.Dispatch<React.SetStateAction<boolean>>)(
+        true
+      );
+    }
 
-      
+    if (selectablesInputStr.length === 0) {
+      setSelectablesInputStr(el);
+    } else {
+      setSelectablesInputStr(selectablesInputStr.concat(", " + el));
+    }
+
+    if (eventType === "keyboard") {
+      // return if the array will be empty on the next render
+      if (visibleSelectables_sorted.length === 1) {
+        return;
+      }
+
+      // if the array will be shorter on the next render, highlight last item in the array
+      if (selectableToHighlight === visibleSelectables_sorted.length - 1) {
+        setSelectableToHighlight((nr) => (nr as number) - 1);
+      }
     }
   }
 
@@ -116,28 +161,13 @@ function SelectableList({
             <p
               className={`cursor-pointer ${
                 selectableToHighlight === i ? "bg-blueGray-200" : ""
-              } pl-px truncate`}
+              }  pl-px truncate`}
               onClick={() => {
-                if (visibleSelectables_sorted.length === 0) {
-                  return;
-                }
-
                 if (selectableToHighlight !== i) {
                   return;
                 }
 
-                if (setWasAnythingClicked) {
-                  (setWasAnythingClicked as React.Dispatch<
-                    React.SetStateAction<boolean>
-                  >)(true);
-                }
-
-                if (selectablesInputStr.length === 0) {
-                  setSelectablesInputStr(el);
-                  return;
-                }
-
-                setSelectablesInputStr(selectablesInputStr.concat(", " + el));
+                chooseCurrent(el, "mouse");
               }}
               onMouseEnter={() => {
                 setSelectableToHighlight(i);

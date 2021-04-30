@@ -443,7 +443,7 @@ DONE 359. tab open/close randomly (not randomly, but state of the prev component
 353. SingleColor_DefaultAndColumn SingleColor_Column_Img unify?
 354. limit column width?
 355. upperRightUI: Note to close to the lower svgs?
-
+356. selectables bug: no list if string lenght will be 0
 
 
 
