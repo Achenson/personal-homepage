@@ -64,7 +64,21 @@ function SelectableList({
         return;
       }
 
+      if (selectableToHighlight === null) {
+        setSelectableToHighlight(0);
+        return;
+      }
+
       if (selectableToHighlight === 0) {
+        setSelectableToHighlight(visibleSelectables_sorted.length - 1);
+        return;
+      }
+
+      setSelectableToHighlight((nr) => (nr as number) - 1);
+    }
+
+    function highlightLower() {
+      if (visibleSelectables_sorted.length === 0) {
         return;
       }
 
@@ -73,12 +87,19 @@ function SelectableList({
         return;
       }
 
-      setSelectableToHighlight((nr) => (nr as number) - 1);
+      if (selectableToHighlight === visibleSelectables_sorted.length - 1) {
+        setSelectableToHighlight(0);
+        return;
+      }
+
+      setSelectableToHighlight((nr) => (nr as number) + 1);
     }
 
-    function highlightLower() {}
+    function chooseCurrent() {
 
-    function chooseCurrent() {}
+
+      
+    }
   }
 
   return (
