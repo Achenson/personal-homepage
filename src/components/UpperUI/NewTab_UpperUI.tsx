@@ -17,6 +17,8 @@ import {
   createRSS,
 } from "../../utils/objCreators";
 
+import {handleKeyDown_inner} from "../../utils/func_handleKeyDown_inner"
+
 import { produce } from "immer";
 
 import { tabsDataState } from "../../state/tabsAndBookmarks";
@@ -349,32 +351,9 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       event.code,
       selectablesListVis,
       setSelectablesListVis,
+      setSelectablesInputStr,
       selectablesRef
     );
-  }
-
-  function handleKeyDown_inner(
-    eventCode: string,
-    selectablesListVis: boolean,
-    setSelectablesListVis: React.Dispatch<React.SetStateAction<boolean>>,
-    selectablesRef: React.MutableRefObject<undefined>
-  ) {
-    switch (eventCode) {
-      case "ArrowDown":
-        if (!selectablesListVis) {
-          setSelectablesListVis(true);
-          // @ts-ignore
-          selectablesRef.current.focus();
-        }
-        return;
-      case "Delete":
-        if (!selectablesListVis) {
-          setSelectablesInputStr("");
-        }
-        return;
-      default:
-        return;
-    }
   }
 
   return (
