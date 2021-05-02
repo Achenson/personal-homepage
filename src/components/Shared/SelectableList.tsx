@@ -4,18 +4,18 @@ interface Props {
   selectablesInputStr: string;
   setSelectablesInputStr: React.Dispatch<React.SetStateAction<string>>;
   visibleSelectables: string[];
-
   marginTop: string;
   setWasAnythingClicked?: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectablesVis: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function SelectableList({
   setSelectablesInputStr,
   selectablesInputStr,
   visibleSelectables,
-
   marginTop,
   setWasAnythingClicked,
+  setSelectablesVis
 }: Props): JSX.Element {
   let visibleSelectables_sorted = visibleSelectables.sort();
 
@@ -44,14 +44,6 @@ function SelectableList({
       case "ArrowDown":
         highlightLower();
         return;
-      // case "ArrowRight":
-      //   if (selectableToHighlight !== null) {
-      //     chooseCurrent(
-      //       visibleSelectables_sorted[selectableToHighlight],
-      //       "keyboard"
-      //     );
-      //   }
-      //   return;
       case "Enter":
         if (selectableToHighlight !== null) {
           chooseCurrent(
@@ -62,6 +54,9 @@ function SelectableList({
         return;
       case "Delete":
         setSelectablesInputStr("");
+        return;
+      case "Escape":
+        setSelectablesVis(false);
         return;
 
       default:

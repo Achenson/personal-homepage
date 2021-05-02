@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { uiColorState } from "../../state/colorsState";
 
@@ -47,6 +47,17 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   ] = bookmarksAllTagsState.use();
 
   const [uiColorData, setUiColorData] = uiColorState.use();
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    // !!!! without this everything will be recalculated from start - lag
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
+
+  let selectablesRef = useRef() 
 
   const [tabTitleInput, setTabTitleInput] = useState<string>("");
   const [rssLinkInput, setRssLinkInput] = useState<string>("");
@@ -255,9 +266,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
       return isUnique;
     }
-
-
-    
   }
 
   function addTab() {
@@ -334,6 +342,25 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     }
   }
 
+  function handleKeyDown(event: KeyboardEvent) {
+    switch (event.code) {
+      case "ArrowDown":
+        if (!bookmarksListVis) {
+          setBookmarksListVis(true);
+          // @ts-ignore
+          selectablesRef.current.focus();
+        }
+        return;
+      case "Delete":
+        if (!bookmarksListVis) {
+          setBookmarksInputStr("");
+        }
+        return;
+      default:
+        return;
+    }
+  }
+
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable
     <div
@@ -366,7 +393,9 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 ? "new note title"
                 : "new RSS title"
             }
-            onChange={(e) => setTabTitleInput(e.target.value)}
+            onChange={(e) => {
+              setTabTitleInput(e.target.value);
+            }}
             onFocus={(e) => {
               setBookmarksListVis(false);
             }}
@@ -390,11 +419,10 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   className="w-full border border-gray-300 pl-px pr-5"
                   // value={tabLinksInput.join(", ")}
                   value={bookmarksInputStr}
-                  // onChange={(e) =>
-                  //   setTabLinksInput([...e.target.value.split(", ")])
-                  // }
-
+                  //@ts-ignore
+                  ref={selectablesRef}
                   onChange={(e) => {
+                    if (!bookmarksListVis) setBookmarksListVis(true);
                     let target = e.target.value;
 
                     setBookmarksInputStr(target);
@@ -420,6 +448,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   // onBlur={}
 
                   placeholder={"Choose at least one"}
+                 
                 />
                 {bookmarksInputStr.length !== 0 && (
                   <span
@@ -439,6 +468,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   setSelectablesInputStr={setBookmarksInputStr}
                   selectablesInputStr={bookmarksInputStr}
                   visibleSelectables={visibleBookmarks}
+                  setSelectablesVis={setBookmarksListVis}
                   marginTop="0px"
                 />
               )}

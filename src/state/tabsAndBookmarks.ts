@@ -189,7 +189,7 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
   },
   {
     id: 2,
-    title: "tvn24 dsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsds",
+    title: "tvn24 d",
     URL: "https://en.wikipedia.org/wiki/Webfoot_Technologies",
     // tags: ["all", "main"],
     tags: ["ALL_TAGS", "2"],
