@@ -85,13 +85,13 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   // for notes
   const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
 
-  const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
+  const [selectablesListVis, setSelectablesListVis] = useState<boolean>(false);
 
   const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(() =>
     makeInitialBookmarks()
   );
 
-  const [bookmarksInputStr, setBookmarksInputStr] = useState<string>("");
+  const [selectablesInputStr, setSelectablesInputStr] = useState<string>("");
 
   // ^  and $ -> beginning and end of the text!
   // let regexForBookmarks = /^\w+(,\s\w+)*$/;
@@ -115,7 +115,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       // in new RegExp the \ needs to be escaped!
       let tagRegex = new RegExp(`\\b${el}\\b`);
 
-      if (!tagRegex.test(bookmarksInputStr)) {
+      if (!tagRegex.test(selectablesInputStr)) {
         newVisibleBookmarks.push(el);
       }
     });
@@ -123,13 +123,13 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     setVisibleBookmarks([...newVisibleBookmarks]);
 
     if (newVisibleBookmarks.length === 0) {
-      setBookmarksListVis(false);
+      setSelectablesListVis(false);
     }
   }, [
-    bookmarksInputStr,
+    selectablesInputStr,
     initialBookmarks,
     setVisibleBookmarks,
-    setBookmarksListVis,
+    setSelectablesListVis,
   ]);
 
   function makeInitialBookmarks(): string[] {
@@ -164,7 +164,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             } `}
             onClick={() => {
               setTabColumnInput(el);
-              setBookmarksListVis(false);
+              setSelectablesListVis(false);
             }}
           ></div>
         </div>
@@ -172,7 +172,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     });
   }
 
-  let bookmarksInputArr = bookmarksInputStr.split(", ");
+  let bookmarksInputArr = selectablesInputStr.split(", ");
 
   function errorHandling(): boolean {
     setBookmarksErrorVis(false);
@@ -184,32 +184,32 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
     if (!regexForTitle.test(tabTitleInput)) {
       setTitleFormatErrorVis(true);
-      setBookmarksListVis(false);
+      setSelectablesListVis(false);
       return true;
     }
 
     if (!titleUniquenessCheck()) {
       setTitleUniquenessErrorVis(true);
-      setBookmarksListVis(false);
+      setSelectablesListVis(false);
       return true;
     }
 
     if (tabType === "folder") {
       if (!regexForBookmarks.test(bookmarksInputArr.join(", "))) {
         setBookmarksErrorVis(true);
-        setBookmarksListVis(false);
+        setSelectablesListVis(false);
         return true;
       }
 
       if (!bookmarkExistenceCheck()) {
         setBookmarkExistenceErrorVis(true);
-        setBookmarksListVis(false);
+        setSelectablesListVis(false);
         return true;
       }
 
       if (!bookmarksUniquenessCheck()) {
         setBookmarksRepeatErrorVis(true);
-        setBookmarksListVis(false);
+        setSelectablesListVis(false);
         return true;
       }
     }
@@ -345,15 +345,15 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   function handleKeyDown(event: KeyboardEvent) {
     switch (event.code) {
       case "ArrowDown":
-        if (!bookmarksListVis) {
-          setBookmarksListVis(true);
+        if (!selectablesListVis) {
+          setSelectablesListVis(true);
           // @ts-ignore
           selectablesRef.current.focus();
         }
         return;
       case "Delete":
-        if (!bookmarksListVis) {
-          setBookmarksInputStr("");
+        if (!selectablesListVis) {
+          setSelectablesInputStr("");
         }
         return;
       default:
@@ -397,7 +397,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               setTabTitleInput(e.target.value);
             }}
             onFocus={(e) => {
-              setBookmarksListVis(false);
+              setSelectablesListVis(false);
             }}
           />
           {/* </div> */}
@@ -418,14 +418,14 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   type="text"
                   className="w-full border border-gray-300 pl-px pr-5"
                   // value={tabLinksInput.join(", ")}
-                  value={bookmarksInputStr}
+                  value={selectablesInputStr}
                   //@ts-ignore
                   ref={selectablesRef}
                   onChange={(e) => {
-                    if (!bookmarksListVis) setBookmarksListVis(true);
+                    if (!selectablesListVis) setSelectablesListVis(true);
                     let target = e.target.value;
 
-                    setBookmarksInputStr(target);
+                    setSelectablesInputStr(target);
 
                     let bookmarksInputArr = target.split(", ");
 
@@ -443,44 +443,44 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                     setVisibleBookmarks([...newVisibleBookmarks]);
                   }}
                   onFocus={(e) => {
-                    setBookmarksListVis(true);
+                    setSelectablesListVis(true);
                   }}
                   // onBlur={}
 
                   placeholder={"Choose at least one"}
                  
                 />
-                {bookmarksInputStr.length !== 0 && (
+                {selectablesInputStr.length !== 0 && (
                   <span
                     className="absolute h-4 bg-white z-50"
                     style={{ top: "7px", right: "2px" }}
                   >
                     <XsmallSVG
                       className="h-full text-gray-500 cursor-pointer hover:text-opacity-60"
-                      onClick={() => setBookmarksInputStr("")}
+                      onClick={() => setSelectablesInputStr("")}
                     />
                   </span>
                 )}
               </div>
 
-              {bookmarksListVis && (
+              {selectablesListVis && (
                 <SelectableList
-                  setSelectablesInputStr={setBookmarksInputStr}
-                  selectablesInputStr={bookmarksInputStr}
+                  setSelectablesInputStr={setSelectablesInputStr}
+                  selectablesInputStr={selectablesInputStr}
                   visibleSelectables={visibleBookmarks}
-                  setSelectablesVis={setBookmarksListVis}
+                  setSelectablesVis={setSelectablesListVis}
                   marginTop="0px"
                 />
               )}
             </div>
 
             {/* </div> */}
-            {bookmarksListVis ? (
+            {selectablesListVis ? (
               <div className="w-5 h-5 mt-1">
                 <ChevronUpSVG
                   className="h-full cursor-pointer hover:text-blueGray-500"
                   onClick={() => {
-                    setBookmarksListVis((b) => !b);
+                    setSelectablesListVis((b) => !b);
                   }}
                 />
               </div>
@@ -489,7 +489,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 <ChevronDownSVG
                   className="h-full cursor-pointer hover:text-blueGray-500"
                   onClick={() => {
-                    setBookmarksListVis((b) => !b);
+                    setSelectablesListVis((b) => !b);
                   }}
                 />
               </div>

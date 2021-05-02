@@ -9,19 +9,19 @@ import { ReactComponent as XsmallSVG } from "../../svgs/x-small.svg";
 import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 
 interface Props {
-  bookmarksListVis: boolean;
-  setBookmarksListVis: React.Dispatch<React.SetStateAction<boolean>>;
+  selectablesListVis: boolean;
+  setSelectablesListVis: React.Dispatch<React.SetStateAction<boolean>>;
   setWasAnythingClicked: React.Dispatch<React.SetStateAction<boolean>>;
-  bookmarksInputStr: string;
-  setBookmarksInputStr: React.Dispatch<React.SetStateAction<string>>;
+  selectablesInputStr: string;
+  setSelectablesInputStr: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function EditTab_folder({
-  bookmarksListVis,
-  setBookmarksListVis,
+  selectablesListVis,
+  setSelectablesListVis,
   setWasAnythingClicked,
-  bookmarksInputStr,
-  setBookmarksInputStr,
+  selectablesInputStr,
+  setSelectablesInputStr,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
@@ -40,7 +40,7 @@ function EditTab_folder({
       // in new RegExp the \ needs to be escaped!
       let tagRegex = new RegExp(`\\b${el}\\b`);
 
-      if (!tagRegex.test(bookmarksInputStr)) {
+      if (!tagRegex.test(selectablesInputStr)) {
         newVisibleBookmarks.push(el);
       }
     });
@@ -48,13 +48,13 @@ function EditTab_folder({
     setVisibleBookmarks([...newVisibleBookmarks]);
 
     if (newVisibleBookmarks.length === 0) {
-      setBookmarksListVis(false);
+      setSelectablesListVis(false);
     }
   }, [
-    bookmarksInputStr,
+    selectablesInputStr,
     initialBookmarks,
     setVisibleBookmarks,
-    setBookmarksListVis,
+    setSelectablesListVis,
   ]);
 
   function makeInitialBookmarks(): string[] {
@@ -78,14 +78,14 @@ function EditTab_folder({
             type="text"
             // min-w-0 !! ??
             className="border pl-px w-full pr-5"
-            value={bookmarksInputStr}
+            value={selectablesInputStr}
             onChange={(e) => {
               // setTabTitleInput(e.target.value);
               setWasAnythingClicked(true);
 
               let target = e.target.value;
 
-              setBookmarksInputStr(target);
+              setSelectablesInputStr(target);
 
               let bookmarksInputArr = target.split(", ");
               let newVisibleBookmarks: string[] = [];
@@ -99,11 +99,11 @@ function EditTab_folder({
               setVisibleBookmarks([...newVisibleBookmarks]);
             }}
             onFocus={(e) => {
-              setBookmarksListVis(true);
+              setSelectablesListVis(true);
             }}
             placeholder={"Choose at least one"}
           />
-          {bookmarksInputStr.length !== 0 && (
+          {selectablesInputStr.length !== 0 && (
             <span
               className="absolute h-4 bg-white z-50"
               style={{ top: "7px", right: "2px" }}
@@ -111,7 +111,7 @@ function EditTab_folder({
               <XsmallSVG
                 className="h-full text-gray-500 cursor-pointer hover:text-opacity-60"
                 onClick={() => {
-                  setBookmarksInputStr("");
+                  setSelectablesInputStr("");
                   setWasAnythingClicked(true);
                 }}
               />
@@ -119,12 +119,12 @@ function EditTab_folder({
           )}
         </div>
 
-        {bookmarksListVis && (
+        {selectablesListVis && (
           <SelectableList
-            setSelectablesInputStr={setBookmarksInputStr}
-            selectablesInputStr={bookmarksInputStr}
+            setSelectablesInputStr={setSelectablesInputStr}
+            selectablesInputStr={selectablesInputStr}
             visibleSelectables={visibleBookmarks}
-            setSelectablesVis={setBookmarksListVis}
+            setSelectablesVis={setSelectablesListVis}
             marginTop="0px"
             // setWasAnythingClicked
             setWasAnythingClicked={setWasAnythingClicked}
@@ -133,18 +133,18 @@ function EditTab_folder({
       </div>
 
       <div style={{ height: "18px" }} className="-mr-1">
-        {bookmarksListVis ? (
+        {selectablesListVis ? (
           <ChevronUpSVG
             className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
             onClick={() => {
-              setBookmarksListVis((b) => !b);
+              setSelectablesListVis((b) => !b);
             }}
           />
         ) : (
           <ChevronDownSVG
             className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
             onClick={() => {
-              setBookmarksListVis((b) => !b);
+              setSelectablesListVis((b) => !b);
             }}
           />
         )}

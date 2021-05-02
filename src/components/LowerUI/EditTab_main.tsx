@@ -124,7 +124,7 @@ Props): JSX.Element {
     return arrOfBookmarksNames;
   }
 
-  const [bookmarksInputStr, setBookmarksInputStr] = useState<string>(
+  const [selectablesInputStr, setSelectablesInputStr] = useState<string>(
     arrOfBookmarksNames.join(", ")
   );
 
@@ -161,7 +161,7 @@ Props): JSX.Element {
 
   const [tabOpen, setTabOpen] = useState(currentTab.opened);
 
-  const [bookmarksListVis, setBookmarksListVis] = useState<boolean>(false);
+  const [selectablesListVis, setSelectablesListVis] = useState<boolean>(false);
 
   // ^  and $ -> beginning and end of the text!
   // let regexForTabs = /^\w+(,\s\w+)*$/;
@@ -175,7 +175,7 @@ Props): JSX.Element {
     if (tabType === "folder") return "mr-14";
   }
 
-  let bookmarksInputArr = bookmarksInputStr.split(", ");
+  let bookmarksInputArr = selectablesInputStr.split(", ");
 
   function errorHandling(): boolean {
     setTitleFormatErrorVis(false);
@@ -191,13 +191,13 @@ Props): JSX.Element {
 
     if (!regexForTitle.test(tabTitleInput)) {
       setTitleFormatErrorVis(true);
-      setBookmarksListVis(false);
+      setSelectablesListVis(false);
       return true;
     }
 
     if (!titleUniquenessCheck()) {
       setTitleUniquenessErrorVis(true);
-      setBookmarksListVis(false);
+      setSelectablesListVis(false);
       return true;
     }
 
@@ -209,21 +209,21 @@ Props): JSX.Element {
     }
 
     if (tabType === "folder") {
-      if (!regexForBookmarks.test(bookmarksInputStr)) {
+      if (!regexForBookmarks.test(selectablesInputStr)) {
         setBookmarksErrorVis(true);
-        setBookmarksListVis(false);
+        setSelectablesListVis(false);
         return true;
       }
 
       if (!bookmarkExistenceCheck()) {
         setBookmarksExistenceErrorVis(true);
-        setBookmarksListVis(false);
+        setSelectablesListVis(false);
         return true;
       }
 
       if (!bookmarksUniquenessCheck()) {
         setBookmarksRepeatErrorVis(true);
-        setBookmarksListVis(false);
+        setSelectablesListVis(false);
         return true;
       }
     }
@@ -315,7 +315,7 @@ Props): JSX.Element {
       setBookmarksData((previous) =>
         produce(previous, (updated) => {
           updated.forEach((obj) => {
-            let bookmarksInputArr = bookmarksInputStr.split(", ");
+            let bookmarksInputArr = selectablesInputStr.split(", ");
 
             // make array of missing bookmarks
             let missingBookmarks: string[] = [];
@@ -367,7 +367,7 @@ Props): JSX.Element {
               setWasAnythingClicked(true);
             }}
             onFocus={(e) => {
-              setBookmarksListVis(false);
+              setSelectablesListVis(false);
             }}
           />
           {tabType === "folder" && tabID !== "ALL_TAGS" && (
@@ -379,11 +379,11 @@ Props): JSX.Element {
 
         {tabType === "folder" && tabID !== "ALL_TAGS" && (
           <EditTab_folder
-            bookmarksListVis={bookmarksListVis}
-            setBookmarksListVis={setBookmarksListVis}
+            selectablesListVis={selectablesListVis}
+            setSelectablesListVis={setSelectablesListVis}
             setWasAnythingClicked={setWasAnythingClicked}
-            bookmarksInputStr={bookmarksInputStr}
-            setBookmarksInputStr={setBookmarksInputStr}
+            selectablesInputStr={selectablesInputStr}
+            setSelectablesInputStr={setSelectablesInputStr}
           />
         )}
 
@@ -460,7 +460,7 @@ Props): JSX.Element {
               onClick={() => {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
-                setBookmarksListVis(false);
+                setSelectablesListVis(false);
               }}
             />
           ) : (
@@ -469,7 +469,7 @@ Props): JSX.Element {
               onClick={() => {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
-                setBookmarksListVis(false);
+                setSelectablesListVis(false);
               }}
             />
           )}
