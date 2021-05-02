@@ -12,6 +12,7 @@ import {
 } from "../../state/defaultSettings";
 
 import { UpperVisAction } from "../../utils/interfaces";
+import { useWindowSize } from "../../utils/hook_useWindowSize";
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 
 interface Props {
@@ -28,19 +29,18 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
 
-  // const [descriptionCheckbox, setDescriptionCheckbox] = useState(globalSettingsData.rssDescription);
-  // const [dateCheckbox, setDateCheckbox] = useState(globalSettingsData.rssDate);
-  // const [rssItemsPerPage, setRssItemsPerPage] = useState(globalSettingsData.rssItemsPerPage);
+  const windowSize = useWindowSize();
+  const [xsScreen, setXsScreen] = useState(false);
 
-  // useEffect(() => {
-  //   if (globalSettingsData.numberOfCols === 1) {
-  //     setTabsData((previous) =>
-  //       produce(previous, (updated) => {
-  //         updated.forEach((obj) => obj.column === 1);
-  //       })
-  //     );
-  //   }
-  // }, [globalSettingsData.numberOfCols, setTabsData]);
+  useEffect(() => {
+    if (windowSize.width) {
+      if (windowSize.width < 490) {
+        setXsScreen(true);
+      } else {
+        setXsScreen(false);
+      }
+    }
+  }, [windowSize.width]);
 
   function renderColsNumberControls() {
     const arrOfColsNumbers: (1 | 2 | 3 | 4)[] = [1, 2, 3, 4];
@@ -84,7 +84,8 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
       <div className="md:mb-40 relative">
         <div
           className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
-          style={{ width: "417px", height: "225px" }}
+          // style={{ width: "417px", height: "225px" }}
+          style={{ width: `${xsScreen ? "350px" : "417px"}`, height: "225px" }}
         >
           <div className="absolute right-0 top-0 mt-1 mr-1">
             <CancelSVG

@@ -337,6 +337,7 @@ XXX 259. highlight in red non existing boookmarks in newTab/EditTab? XXX
 DONE 260. editTab etc. lower border style when selectable are on DONE
 DONE 261. input borders more visible? DONE
 DONE 262. min-w-0 needed or not? not needed, w-full instead DONE
+DONE 263. keyboard controls (arrows and enter) for Selectables! DONE
 DONE 264. bug: wasAnythingClicked on NewBookmark and lower bookmark!!!! when choosing tags by clicking DONE
 DONE 265. closing selectables on error (eg. title format error) DONE
 DONE 266. ? before dot, new syntax being automatically added sometimes? DONE
@@ -393,8 +394,8 @@ DONE 359. tab open/close randomly (not randomly, but state of the prev component
 
 
 254. bookmark (& RSS?): add link errors!
-263. keyboard controls (arrows and enter) for Selectables!
 278. background img zooming back after clicking any settings
+
 280. responsive upperUI settings size
 
 287. rss error handling: catch error for data and description (cnn rss description crashes the app)
@@ -445,7 +446,7 @@ DONE 359. tab open/close randomly (not randomly, but state of the prev component
 353. SingleColor_DefaultAndColumn SingleColor_Column_Img unify?
 354. limit column width?
 355. upperRightUI: Note to close to the lower svgs?
-360. newTab etc. enter keyboard?
+360. newTab etc. enter to save & esc to cancel keyboard ? move handleKeyDown from editTab_folder to editTab_main
 
 
 Browserslist: caniuse-lite is outdated. Please run:
