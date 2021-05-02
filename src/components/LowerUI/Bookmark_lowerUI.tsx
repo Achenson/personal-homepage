@@ -31,8 +31,8 @@ interface Props {
   setTagsInputStr: React.Dispatch<React.SetStateAction<string>>;
   visibleTags: string[];
   setVisibleTags: React.Dispatch<React.SetStateAction<string[]>>;
-  tagsListVis: boolean;
-  setTagsListVis: React.Dispatch<React.SetStateAction<boolean>>;
+  selectablesListVis: boolean;
+  setSelectablesListVis: React.Dispatch<React.SetStateAction<boolean>>;
   notesTitlesArr: string[];
   rssTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
@@ -72,8 +72,8 @@ function Bookmark_lowerUI({
   setTagsInputStr,
   visibleTags,
   setVisibleTags,
-  tagsListVis,
-  setTagsListVis,
+  selectablesListVis,
+  setSelectablesListVis,
   notesTitlesArr,
   rssTitlesArr,
   bookmarkComponentType,
@@ -150,7 +150,7 @@ function Bookmark_lowerUI({
 
     if (!regexForTitle.test(titleInput)) {
       setTitleFormatErrorVis(true);
-      setTagsListVis(false);
+      setSelectablesListVis(false);
 
       return true;
     }
@@ -164,14 +164,14 @@ function Bookmark_lowerUI({
         titleInput !== (currentBookmark as SingleBookmarkData).title
       ) {
         setTitleUniquenessErrorVis(true);
-        setTagsListVis(false);
+        setSelectablesListVis(false);
 
         return true;
       }
     } else {
       if (!titleUniquenessCheck()) {
         setTitleUniquenessErrorVis(true);
-        setTagsListVis(false);
+        setSelectablesListVis(false);
 
         return true;
       }
@@ -179,7 +179,7 @@ function Bookmark_lowerUI({
 
     if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "") {
       setTagErrorVis(true);
-      setTagsListVis(false);
+      setSelectablesListVis(false);
 
       return true;
     }
@@ -187,7 +187,7 @@ function Bookmark_lowerUI({
     for (let el of tagsInputArr) {
       if (notesTitlesArr.indexOf(el) > -1) {
         setNoteErrorVis(true);
-        setTagsListVis(false);
+        setSelectablesListVis(false);
 
         return true;
       }
@@ -196,7 +196,7 @@ function Bookmark_lowerUI({
     for (let el of tagsInputArr) {
       if (rssTitlesArr.indexOf(el) > -1) {
         setRssErrorVis(true);
-        setTagsListVis(false);
+        setSelectablesListVis(false);
 
         return true;
       }
@@ -367,7 +367,7 @@ function Bookmark_lowerUI({
               setWasAnythingChanged(true);
             }}
             onFocus={(e) => {
-              setTagsListVis(false);
+              setSelectablesListVis(false);
             }}
           />
           <ChevronDownSVG className="h-6 invisible" />
@@ -385,7 +385,7 @@ function Bookmark_lowerUI({
               setWasAnythingChanged(true);
             }}
             onFocus={(e) => {
-              setTagsListVis(false);
+              setSelectablesListVis(false);
             }}
           />
           <ChevronDownSVG className="h-6 invisible" />
@@ -424,7 +424,7 @@ function Bookmark_lowerUI({
                   setVisibleTags([...newVisibleTags]);
                 }}
                 onFocus={(e) => {
-                  setTagsListVis(true);
+                  setSelectablesListVis(true);
                 }}
 
                 // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
@@ -447,30 +447,30 @@ function Bookmark_lowerUI({
               )}
             </div>
 
-            {tagsListVis && (
+            {selectablesListVis && (
               <SelectableList
                 setSelectablesInputStr={setTagsInputStr}
                 selectablesInputStr={tagsInputStr}
                 visibleSelectables={visibleTags}
-                setSelectablesVis={setTagsListVis}
+                setSelectablesVis={setSelectablesListVis}
                 marginTop="0px"
                 setWasAnythingClicked={setWasAnythingChanged}
               />
             )}
           </div>
 
-          {tagsListVis ? (
+          {selectablesListVis ? (
             <ChevronUpSVG
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
-                setTagsListVis((b) => !b);
+                setSelectablesListVis((b) => !b);
               }}
             />
           ) : (
             <ChevronDownSVG
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
-                setTagsListVis((b) => !b);
+                setSelectablesListVis((b) => !b);
               }}
             />
           )}

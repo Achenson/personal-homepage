@@ -101,7 +101,7 @@ function Bookmark_newAndEdit({
 
   // const [tagsInputArr, setTagsInputArr] = useState<string[]>([]);
 
-  const [tagsListVis, setTagsListVis] = useState<boolean>(false);
+  const [selectablesListVis, setSelectablesListVis] = useState<boolean>(false);
 
   const [visibleTags, setVisibleTags] = useState<string[]>(() => makeInitialTags());
 
@@ -162,11 +162,11 @@ function Bookmark_newAndEdit({
     setVisibleTags([...newVisibleTags]);
 
     if (newVisibleTags.length === 0) {
-      setTagsListVis(false);
+      setSelectablesListVis(false);
     }
 
     // if (newVisibleTags.length > 0 && !isThisTheFirstRender) {
-    //   setTagsListVis(true);
+    //   setSelectablesListVis(true);
     // }
 
     // setIsThisTheFirstRender(false);
@@ -174,7 +174,7 @@ function Bookmark_newAndEdit({
     tagsInputStr,
     initialTags,
     setVisibleTags,
-    setTagsListVis,
+    setSelectablesListVis,
     // isThisTheFirstRender,
   ]);
 
@@ -202,8 +202,8 @@ function Bookmark_newAndEdit({
     setTagsInputStr,
     visibleTags,
     setVisibleTags,
-    tagsListVis,
-    setTagsListVis,
+    selectablesListVis,
+    setSelectablesListVis,
     notesTitlesArr,
     rssTitlesArr,
     bookmarkComponentType,

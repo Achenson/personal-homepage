@@ -29,8 +29,8 @@ interface Props {
   setTagsInputStr: React.Dispatch<React.SetStateAction<string>>;
   visibleTags: string[];
   setVisibleTags: React.Dispatch<React.SetStateAction<string[]>>;
-  tagsListVis: boolean;
-  setTagsListVis: React.Dispatch<React.SetStateAction<boolean>>;
+  selectablesListVis: boolean;
+  setSelectablesListVis: React.Dispatch<React.SetStateAction<boolean>>;
   notesTitlesArr: string[];
   rssTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
@@ -66,8 +66,8 @@ function NewBookmark_UpperUI({
   setTagsInputStr,
   visibleTags,
   setVisibleTags,
-  tagsListVis,
-  setTagsListVis,
+  selectablesListVis,
+  setSelectablesListVis,
   notesTitlesArr,
   rssTitlesArr,
   upperVisDispatch,
@@ -111,7 +111,7 @@ Props): JSX.Element {
 
     if (!regexForTitle.test(titleInput)) {
       setTitleFormatErrorVis(true);
-      setTagsListVis(false);
+      setSelectablesListVis(false);
       return true;
     }
 
@@ -119,20 +119,20 @@ Props): JSX.Element {
 
     if (!titleUniquenessCheck()) {
       setTitleUniquenessErrorVis(true);
-      setTagsListVis(false);
+      setSelectablesListVis(false);
       return true;
     }
 
     if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "") {
       setTagErrorVis(true);
-      setTagsListVis(false);
+      setSelectablesListVis(false);
       return true;
     }
 
     for (let el of tagsInputArr) {
       if (notesTitlesArr.indexOf(el) > -1) {
         setNoteErrorVis(true);
-        setTagsListVis(false);
+        setSelectablesListVis(false);
         return true;
       }
     }
@@ -140,14 +140,14 @@ Props): JSX.Element {
     for (let el of tagsInputArr) {
       if (rssTitlesArr.indexOf(el) > -1) {
         setRssErrorVis(true);
-        setTagsListVis(false);
+        setSelectablesListVis(false);
         return true;
       }
     }
 
     if (!tagUniquenessCheck()) {
       setTagRepeatErrorVis(true);
-      setTagsListVis(false);
+      setSelectablesListVis(false);
       return true;
     }
 
@@ -251,7 +251,7 @@ Props): JSX.Element {
             placeholder={"new bookmark title"}
             onChange={(e) => setTitleInput(e.target.value)}
             onFocus={(e) => {
-              setTagsListVis(false);
+              setSelectablesListVis(false);
             }}
           />
           <ChevronDownSVG className="h-6 invisible" />
@@ -266,7 +266,7 @@ Props): JSX.Element {
             placeholder={"enter proper URL address"}
             onChange={(e) => setUrlInput(e.target.value)}
             onFocus={(e) => {
-              setTagsListVis(false);
+              setSelectablesListVis(false);
             }}
           />
           <ChevronDownSVG className="h-6 invisible" />
@@ -302,7 +302,7 @@ Props): JSX.Element {
                   setVisibleTags([...newVisibleTags]);
                 }}
                 onFocus={(e) => {
-                  setTagsListVis(true);
+                  setSelectablesListVis(true);
                 }}
 
                 // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
@@ -320,29 +320,29 @@ Props): JSX.Element {
               )}
             </div>
 
-            {tagsListVis && (
+            {selectablesListVis && (
               <SelectableList
                 setSelectablesInputStr={setTagsInputStr}
                 selectablesInputStr={tagsInputStr}
                 visibleSelectables={visibleTags}
-                setSelectablesVis={setTagsListVis}
+                setSelectablesVis={setSelectablesListVis}
                 marginTop="0px"
               />
             )}
           </div>
 
-          {tagsListVis ? (
+          {selectablesListVis ? (
             <ChevronUpSVG
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
-                setTagsListVis((b) => !b);
+                setSelectablesListVis((b) => !b);
               }}
             />
           ) : (
             <ChevronDownSVG
               className="h-6 cursor-pointer hover:text-blueGray-500"
               onClick={() => {
-                setTagsListVis((b) => !b);
+                setSelectablesListVis((b) => !b);
               }}
             />
           )}
