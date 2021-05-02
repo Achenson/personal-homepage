@@ -68,7 +68,7 @@ function Bookmark_newAndEdit({
   );
 
   //  !!! diff in editLink
-  const [tagsInputStr, setTagsInputStr] = useState<string>(
+  const [selectablesInputStr, setSelectablesInputStr] = useState<string>(
     // bookmarkComponentType === "edit" ? generateTagNames() : ""
   () =>  generateTagNames()
   );
@@ -154,7 +154,7 @@ function Bookmark_newAndEdit({
       // in new RegExp the \ needs to be escaped!
       let tagRegex = new RegExp(`\\b${el}\\b`);
 
-      if (!tagRegex.test(tagsInputStr)) {
+      if (!tagRegex.test(selectablesInputStr)) {
         newVisibleTags.push(el);
       }
     });
@@ -171,7 +171,7 @@ function Bookmark_newAndEdit({
 
     // setIsThisTheFirstRender(false);
   }, [
-    tagsInputStr,
+    selectablesInputStr,
     initialTags,
     setVisibleTags,
     setSelectablesListVis,
@@ -198,8 +198,8 @@ function Bookmark_newAndEdit({
     setTitleInput,
     urlInput,
     setUrlInput,
-    tagsInputStr,
-    setTagsInputStr,
+    selectablesInputStr,
+    setSelectablesInputStr,
     visibleTags,
     setVisibleTags,
     selectablesListVis,

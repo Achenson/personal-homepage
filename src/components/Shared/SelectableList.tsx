@@ -24,11 +24,11 @@ function SelectableList({
   >(null);
 
   useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown_selectables);
 
     // !!!! without this everything will be recalculated from start - lag
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown_selectables);
     };
   });
 
@@ -36,7 +36,7 @@ function SelectableList({
   //   console.log(selectableToHighlight);
   // }, [selectableToHighlight]);
 
-  function handleKeyDown(event: KeyboardEvent) {
+  function handleKeyDown_selectables(event: KeyboardEvent) {
     switch (event.code) {
       case "ArrowUp":
         highlightHigher();

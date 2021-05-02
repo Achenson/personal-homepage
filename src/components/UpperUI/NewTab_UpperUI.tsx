@@ -57,7 +57,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     };
   });
 
-  let selectablesRef = useRef() 
+  let selectablesRef = useRef();
 
   const [tabTitleInput, setTabTitleInput] = useState<string>("");
   const [rssLinkInput, setRssLinkInput] = useState<string>("");
@@ -342,8 +342,24 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     }
   }
 
-  function handleKeyDown(event: KeyboardEvent) {
-    switch (event.code) {
+  function handleKeyDown(
+    event: KeyboardEvent
+  ) {
+    handleKeyDown_inner(
+      event.code,
+      selectablesListVis,
+      setSelectablesListVis,
+      selectablesRef
+    );
+  }
+
+  function handleKeyDown_inner(
+    eventCode: string,
+    selectablesListVis: boolean,
+    setSelectablesListVis: React.Dispatch<React.SetStateAction<boolean>>,
+    selectablesRef: React.MutableRefObject<undefined>
+  ) {
+    switch (eventCode) {
       case "ArrowDown":
         if (!selectablesListVis) {
           setSelectablesListVis(true);
@@ -448,7 +464,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   // onBlur={}
 
                   placeholder={"Choose at least one"}
-                 
                 />
                 {selectablesInputStr.length !== 0 && (
                   <span

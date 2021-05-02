@@ -27,8 +27,8 @@ interface Props {
   setTitleInput: React.Dispatch<React.SetStateAction<string>>;
   urlInput: string;
   setUrlInput: React.Dispatch<React.SetStateAction<string>>;
-  tagsInputStr: string;
-  setTagsInputStr: React.Dispatch<React.SetStateAction<string>>;
+  selectablesInputStr: string;
+  setSelectablesInputStr: React.Dispatch<React.SetStateAction<string>>;
   visibleTags: string[];
   setVisibleTags: React.Dispatch<React.SetStateAction<string[]>>;
   selectablesListVis: boolean;
@@ -68,8 +68,8 @@ function Bookmark_lowerUI({
   setTitleInput,
   urlInput,
   setUrlInput,
-  tagsInputStr,
-  setTagsInputStr,
+  selectablesInputStr,
+  setSelectablesInputStr,
   visibleTags,
   setVisibleTags,
   selectablesListVis,
@@ -110,7 +110,7 @@ function Bookmark_lowerUI({
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [initialTagsInputArr, setInitialTagsInputArr] = useState(() =>
-    // tagsInputStr.split(", ")
+    // selectablesInputStr.split(", ")
     generateTagIds()
   );
 
@@ -124,7 +124,7 @@ function Bookmark_lowerUI({
 
     let arrOut: (string | number)[] = [];
 
-    tagsInputStr.split(", ").forEach((el) => {
+    selectablesInputStr.split(", ").forEach((el) => {
       // if ((currentBookmark as SingleBookmarkData).tags.indexOf(obj.id) > -1) {
       //   arrOut.push(obj.id);
       // }
@@ -138,7 +138,7 @@ function Bookmark_lowerUI({
     return arrOut;
   }
 
-  let tagsInputArr = tagsInputStr.split(", ");
+  let tagsInputArr = selectablesInputStr.split(", ");
 
   function errorHandling(): boolean {
     setTagErrorVis(false);
@@ -177,7 +177,7 @@ function Bookmark_lowerUI({
       }
     }
 
-    if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "") {
+    if (!regexForTags.test(tagsInputArr.join(", ")) && selectablesInputStr !== "") {
       setTagErrorVis(true);
       setSelectablesListVis(false);
 
@@ -258,7 +258,7 @@ function Bookmark_lowerUI({
         sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
 
       // if folder with title corresponding to tag doesn't exist create it...
-      if (!tabForCurrentTag && tagsInputStr !== "") {
+      if (!tabForCurrentTag && selectablesInputStr !== "") {
         // let newTab = createFolderTab(el, 1, 0);
         let newTab = createFolderTab(el, colNumber, newTabPriority);
         tagsInputArr_ToIds.push(newTab.id);
@@ -280,7 +280,7 @@ function Bookmark_lowerUI({
           })
         );
       } else {
-        if (tagsInputStr !== "" && tabForCurrentTag) {
+        if (selectablesInputStr !== "" && tabForCurrentTag) {
           tagsInputArr_ToIds.push(tabForCurrentTag.id);
         }
       }
@@ -399,18 +399,18 @@ function Bookmark_lowerUI({
                 type="text"
                 className="w-full border pl-px pr-5"
                 // value={tagsInput.join(", ")}
-                value={tagsInputStr}
+                value={selectablesInputStr}
                 placeholder={"tag1, tag2..."}
                 onChange={(e) => {
                   setWasAnythingChanged(true);
 
                   let target = e.target.value;
 
-                  setTagsInputStr(target);
+                  setSelectablesInputStr(target);
 
                   let tagsInputArr = target.split(", ");
 
-                  // setTagsInputArr(tagsInputStr.split(" ,"))
+                  // setTagsInputArr(selectablesInputStr.split(" ,"))
 
                   // let newVisibleTags = [...visibleTags];
                   let newVisibleTags: string[] = [];
@@ -429,7 +429,7 @@ function Bookmark_lowerUI({
 
                 // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
               />
-              {tagsInputStr.length !== 0 && (
+              {selectablesInputStr.length !== 0 && (
                 <span
                   className="absolute h-4 bg-white z-50"
                   style={{ top: "7px", right: "2px" }}
@@ -437,7 +437,7 @@ function Bookmark_lowerUI({
                   <XsmallSVG
                     className="h-full text-gray-500 cursor-pointer hover:text-opacity-60"
                     onClick={() => {
-                      setTagsInputStr("");
+                      setSelectablesInputStr("");
                       if ((bookmarkComponentType = "edit")) {
                         setWasAnythingChanged(true);
                       }
@@ -449,8 +449,8 @@ function Bookmark_lowerUI({
 
             {selectablesListVis && (
               <SelectableList
-                setSelectablesInputStr={setTagsInputStr}
-                selectablesInputStr={tagsInputStr}
+                setSelectablesInputStr={setSelectablesInputStr}
+                selectablesInputStr={selectablesInputStr}
                 visibleSelectables={visibleTags}
                 setSelectablesVis={setSelectablesListVis}
                 marginTop="0px"

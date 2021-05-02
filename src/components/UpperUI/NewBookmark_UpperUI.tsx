@@ -25,8 +25,8 @@ interface Props {
   setTitleInput: React.Dispatch<React.SetStateAction<string>>;
   urlInput: string;
   setUrlInput: React.Dispatch<React.SetStateAction<string>>;
-  tagsInputStr: string;
-  setTagsInputStr: React.Dispatch<React.SetStateAction<string>>;
+  selectablesInputStr: string;
+  setSelectablesInputStr: React.Dispatch<React.SetStateAction<string>>;
   visibleTags: string[];
   setVisibleTags: React.Dispatch<React.SetStateAction<string[]>>;
   selectablesListVis: boolean;
@@ -62,8 +62,8 @@ function NewBookmark_UpperUI({
   setTitleInput,
   urlInput,
   setUrlInput,
-  tagsInputStr,
-  setTagsInputStr,
+  selectablesInputStr,
+  setSelectablesInputStr,
   visibleTags,
   setVisibleTags,
   selectablesListVis,
@@ -99,7 +99,7 @@ Props): JSX.Element {
     setBookmarksAllTagsData,
   ] = bookmarksAllTagsState.use();
 
-  let tagsInputArr = tagsInputStr.split(", ");
+  let tagsInputArr = selectablesInputStr.split(", ");
 
   function errorHandling(): boolean {
     setTagErrorVis(false);
@@ -123,7 +123,7 @@ Props): JSX.Element {
       return true;
     }
 
-    if (!regexForTags.test(tagsInputArr.join(", ")) && tagsInputStr !== "") {
+    if (!regexForTags.test(tagsInputArr.join(", ")) && selectablesInputStr !== "") {
       setTagErrorVis(true);
       setSelectablesListVis(false);
       return true;
@@ -198,7 +198,7 @@ Props): JSX.Element {
         sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
 
       // if folder with title corresponding to tag doesn't exist
-      if (!tabCorrespondingToTag && tagsInputStr !== "") {
+      if (!tabCorrespondingToTag && selectablesInputStr !== "") {
         let newTab = createFolderTab(el, 1, newTabPriority);
         tagsInputArr_ToIds.push(newTab.id);
 
@@ -217,7 +217,7 @@ Props): JSX.Element {
         );
       } else {
         // if input is not empty (if it is empty, "ALL_TAG" will be the only tag)
-        if (tagsInputStr !== "" && tabCorrespondingToTag) {
+        if (selectablesInputStr !== "" && tabCorrespondingToTag) {
           tagsInputArr_ToIds.push(tabCorrespondingToTag.id);
         }
       }
@@ -281,15 +281,15 @@ Props): JSX.Element {
                 type="text"
                 className="w-full border border-gray-300 pl-px pr-5"
                 // value={tagsInput.join(", ")}
-                value={tagsInputStr}
+                value={selectablesInputStr}
                 placeholder={'tag1, tag2... ("all" tag auto-added)'}
                 onChange={(e) => {
                   let target = e.target.value;
 
-                  setTagsInputStr(target);
+                  setSelectablesInputStr(target);
 
                   let tagsInputArr = target.split(", ");
-                  // setTagsInputArr(tagsInputStr.split(" ,"))
+                  // setTagsInputArr(selectablesInputStr.split(" ,"))
                   // let newVisibleTags = [...visibleTags];
                   let newVisibleTags: string[] = [];
 
@@ -307,14 +307,14 @@ Props): JSX.Element {
 
                 // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
               />
-              {tagsInputStr.length !== 0 && (
+              {selectablesInputStr.length !== 0 && (
                 <span
                   className="absolute h-4 bg-white z-50"
                   style={{ top: "7px", right: "2px" }}
                 >
                   <XsmallSVG
                     className="h-full text-gray-500 cursor-pointer hover:text-opacity-60"
-                    onClick={() => setTagsInputStr("")}
+                    onClick={() => setSelectablesInputStr("")}
                   />
                 </span>
               )}
@@ -322,8 +322,8 @@ Props): JSX.Element {
 
             {selectablesListVis && (
               <SelectableList
-                setSelectablesInputStr={setTagsInputStr}
-                selectablesInputStr={tagsInputStr}
+                setSelectablesInputStr={setSelectablesInputStr}
+                selectablesInputStr={selectablesInputStr}
                 visibleSelectables={visibleTags}
                 setSelectablesVis={setSelectablesListVis}
                 marginTop="0px"
