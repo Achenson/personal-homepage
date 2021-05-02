@@ -53,7 +53,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
 
-    // !!!! without this everything will be recalculated from start - lag
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };

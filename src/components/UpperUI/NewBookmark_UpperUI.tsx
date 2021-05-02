@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { produce } from "immer";
 
@@ -18,6 +18,7 @@ import {
 
 import { UpperVisAction } from "../../utils/interfaces";
 import { bookmarkErrors } from "../../utils/errors";
+import {handleKeyDown_inner} from "../../utils/func_handleKeyDown_inner"
 import SelectableList from "../Shared/SelectableList";
 
 interface Props {
@@ -98,6 +99,16 @@ Props): JSX.Element {
     bookmarksAllTagsData,
     setBookmarksAllTagsData,
   ] = bookmarksAllTagsState.use();
+
+  let selectablesRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
 
   let tagsInputArr = selectablesInputStr.split(", ");
 
@@ -230,6 +241,17 @@ Props): JSX.Element {
     );
   }
 
+  function handleKeyDown(
+    event: KeyboardEvent
+  ) {
+    handleKeyDown_inner(
+      event.code,
+      selectablesListVis,
+      setSelectablesListVis,
+      setSelectablesInputStr,
+      selectablesRef
+    );
+  }
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable
     <div
@@ -280,6 +302,8 @@ Props): JSX.Element {
               <input
                 type="text"
                 className="w-full border border-gray-300 pl-px pr-5"
+                // @ts-ignore
+                ref={selectablesRef}
                 // value={tagsInput.join(", ")}
                 value={selectablesInputStr}
                 placeholder={'tag1, tag2... ("all" tag auto-added)'}

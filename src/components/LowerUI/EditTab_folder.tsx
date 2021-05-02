@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import SelectableList from "../Shared/SelectableList";
 
@@ -7,6 +7,9 @@ import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 import { ReactComponent as XsmallSVG } from "../../svgs/x-small.svg";
 
 import { bookmarksDataState } from "../../state/tabsAndBookmarks";
+
+import {handleKeyDown_inner} from "../../utils/func_handleKeyDown_inner"
+
 
 interface Props {
   selectablesListVis: boolean;
@@ -24,6 +27,16 @@ function EditTab_folder({
   setSelectablesInputStr,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+
+  let selectablesRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
 
   const [initialBookmarks, setInitialBookmarks] = useState(() =>
     makeInitialBookmarks()
@@ -67,6 +80,18 @@ function EditTab_folder({
     return bookmarks;
   }
 
+  function handleKeyDown(
+    event: KeyboardEvent
+  ) {
+    handleKeyDown_inner(
+      event.code,
+      selectablesListVis,
+      setSelectablesListVis,
+      setSelectablesInputStr,
+      selectablesRef
+    );
+  }
+
   return (
     /* bookmarks not visible for tab with ALL Bookmarks */
 
@@ -78,6 +103,8 @@ function EditTab_folder({
             type="text"
             // min-w-0 !! ??
             className="border pl-px w-full pr-5"
+            //@ts-ignore
+            ref={selectablesRef}
             value={selectablesInputStr}
             onChange={(e) => {
               // setTabTitleInput(e.target.value);

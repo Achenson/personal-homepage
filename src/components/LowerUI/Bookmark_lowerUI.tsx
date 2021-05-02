@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { produce } from "immer";
 
@@ -17,9 +17,9 @@ import {
 } from "../../state/tabsAndBookmarks";
 
 import { SingleBookmarkData } from "../../utils/interfaces";
-
 import { TabVisAction } from "../../utils/interfaces";
 import { bookmarkErrors } from "../../utils/errors";
+import { handleKeyDown_inner } from "../../utils/func_handleKeyDown_inner";
 import SelectableList from "../Shared/SelectableList";
 
 interface Props {
@@ -109,6 +109,16 @@ function Bookmark_lowerUI({
 
   const [tabsData, setTabsData] = tabsDataState.use();
 
+  let selectablesRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
+
   const [initialTagsInputArr, setInitialTagsInputArr] = useState(() =>
     // selectablesInputStr.split(", ")
     generateTagIds()
@@ -177,7 +187,10 @@ function Bookmark_lowerUI({
       }
     }
 
-    if (!regexForTags.test(tagsInputArr.join(", ")) && selectablesInputStr !== "") {
+    if (
+      !regexForTags.test(tagsInputArr.join(", ")) &&
+      selectablesInputStr !== ""
+    ) {
       setTagErrorVis(true);
       setSelectablesListVis(false);
 
@@ -351,6 +364,18 @@ function Bookmark_lowerUI({
     }
   }
 
+  function handleKeyDown(
+    event: KeyboardEvent
+  ) {
+    handleKeyDown_inner(
+      event.code,
+      selectablesListVis,
+      setSelectablesListVis,
+      setSelectablesInputStr,
+      selectablesRef
+    );
+  }
+
   return (
     <div className="absolute z-40 bg-gray-100 w-full pb-2 pl-1 border">
       <div className="mt-2">
@@ -398,6 +423,8 @@ function Bookmark_lowerUI({
               <input
                 type="text"
                 className="w-full border pl-px pr-5"
+                // @ts-ignore
+                ref={selectablesRef}
                 // value={tagsInput.join(", ")}
                 value={selectablesInputStr}
                 placeholder={"tag1, tag2..."}

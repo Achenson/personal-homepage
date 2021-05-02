@@ -382,6 +382,7 @@ DONE 339. move note & rss edit errors lower DONE
 DONE 343. saveSVG still being cut on firefox! DONE (w-1 instead of w-px)
 DONE 344. NoteInput: make better bg for IMG background version DONE
 DONE 356. selectables bug: no list if string lenght will be 0 DONE (now opens on change, or with arrow down)
+DONE 356.5 newTab newBookmark EditTab bookmark_lowerUI -> change bookmarks/tags naming to selectables, extract functions DONE
 DONE 357. cant drag tabs with touch (react-dnd-multi-backend) DONE
 DONE 358. bug -> when on sm or lower (one col displayed) cannot drag tabs properly DONE
 DONE 359. tab open/close randomly (not randomly, but state of the prev component was preserved) when dragging? (all) DONE
@@ -444,8 +445,7 @@ DONE 359. tab open/close randomly (not randomly, but state of the prev component
 353. SingleColor_DefaultAndColumn SingleColor_Column_Img unify?
 354. limit column width?
 355. upperRightUI: Note to close to the lower svgs?
-356. newTab newBookmark EditTab bookmark_lowerUI -> change bookmarks/tags naming to selectables, extract functions
-357. newTab etc. enter keyboard?
+360. newTab etc. enter keyboard?
 
 
 Browserslist: caniuse-lite is outdated. Please run:
