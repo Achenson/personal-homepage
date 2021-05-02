@@ -21,10 +21,11 @@ interface Props {
     | "column_3"
     | "column_4"
     | "unselected";
+  leftPositioning: string;
 }
 
 function ColorsToChoose_DefaultAndColumns({
-  defaultColorsFor,
+  defaultColorsFor, leftPositioning
 }: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
@@ -88,13 +89,14 @@ function ColorsToChoose_DefaultAndColumns({
       <div
         className="absolute bg-white"
         style={{
-          left: `${
-            defaultColorsFor === "folders" ||
-            defaultColorsFor === "rss" ||
-            defaultColorsFor === "notes"
-              ? "8px"
-              : "0px"
-          }`,
+          // left: `${
+          //   defaultColorsFor === "folders" ||
+          //   defaultColorsFor === "rss" ||
+          //   defaultColorsFor === "notes"
+          //     ? "8px"
+          //     : "0px"
+          // }`,
+          left: leftPositioning,
           top: "1px",
         }}
       >

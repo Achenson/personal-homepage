@@ -75,8 +75,8 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
       <div className="md:mb-40 relative">
         <div
           className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
-          // style={{ width: "417px", height: "200px" }}
-          style={{ width: "350px", height: "200px" }}
+          style={{ width: "417px", height: "200px" }}
+          // style={{ width: "350px", height: "200px" }}
         >
           <div className="absolute right-0 top-0 mt-1 mr-1">
             <CancelSVG
@@ -186,26 +186,13 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
         <div
           className="absolute"
           style={{
-            // top: "200px",
-            // left: "93px"
-
             top: calcColorTop(defaultColorsFor),
             left: "300px",
-            // `${
-            // defaultColorsFor === "column_1" ||
-            // "column_2" ||
-            // "column_3" ||
-            // "column_4"
-            //   ? "93px"
-            //   :
-            // "157px"
-
-            
           }}
         >
           {colorsToChooseVis && (
             <div className="absolute right-32 bottom-8" style={{right: "140px", bottom: "32px"}}>
-              <ColorsToChoose_Default defaultColorsFor={defaultColorsFor} />
+              <ColorsToChoose_Default defaultColorsFor={defaultColorsFor} leftPositioning={"8px"} />
             </div>
           )}
         </div>

@@ -112,6 +112,7 @@ function UpperLeftMenu({
         {upperVisState.colorsColumnVis && (
           <ColorsToChoose_DefaultAndColumns
             defaultColorsFor={defaultColorsFor}
+            leftPositioning={"0px"}
           />
         )}
         {upperVisState.colorsBackgroundVis && (
