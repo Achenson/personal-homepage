@@ -84,7 +84,6 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
       <div className="md:mb-40 relative">
         <div
           className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
-          // style={{ width: "417px", height: "225px" }}
           style={{ width: `${xsScreen ? "350px" : "417px"}`, height: "225px" }}
         >
           <div className="absolute right-0 top-0 mt-1 mr-1">
