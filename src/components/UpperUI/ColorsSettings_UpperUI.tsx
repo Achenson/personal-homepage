@@ -36,7 +36,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
   const [colorsToChooseVis, setColorsToChooseVis] = useState<boolean>(false);
 
-  const [tabsSelected, setTabsSelected] = useState<boolean>(false);
+  const [foldersSelected, setFoldersSelected] = useState<boolean>(false);
   const [notesSelected, setNotesSelected] = useState<boolean>(false);
   const [rssSelected, setRssSelected] = useState<boolean>(false);
   // const [columnsSelected, setColumnsSelected] = useState<boolean>(false);
@@ -82,6 +82,12 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
     }
   }
   // style={{left: "67px"}}
+
+  let isAnythingSelected = false;
+  if(rssSelected || foldersSelected || notesSelected) {
+    isAnythingSelected = true;
+  }
+
   return (
     <div
       className="flex flex-col z-50 absolute h-screen w-screen justify-center items-center"
@@ -122,10 +128,10 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 setRssSelected(false);
                 // setColumnSelected(null);
 
-                setTabsSelected((b) => !b);
+                setFoldersSelected((b) => !b);
               }}
               className={`h-4 w-8 bg-${folderColorData} cursor-pointer ${
-                tabsSelected ? "border-2" : "border"
+                foldersSelected ? "border-2" : "border"
               } border-black hover:border-gray-500`}
             ></div>
           </div>
@@ -141,7 +147,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                   setColorsToChooseVis(true);
                 }
 
-                setTabsSelected(false);
+                setFoldersSelected(false);
                 setRssSelected(false);
                 // setColumnSelected(null);
 
@@ -164,7 +170,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                   setColorsToChooseVis(true);
                 }
 
-                setTabsSelected(false);
+                setFoldersSelected(false);
                 setNotesSelected(false);
 
                 // setColumnSelected(null);
@@ -182,11 +188,12 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             <div className="flex">{columnsRendering(4)}</div>
           </div> */}
 
-          <p className="text-center mt-5">
+          <p className={`text-center mt-5`}>
             {" "}
             <span
-              className="text-red-600 hover:underline cursor-pointer"
+              className={`${isAnythingSelected ? "text-gray-300" : "text-red-600 hover:underline cursor-pointer"} `}
               onClick={() => {
+                if(isAnythingSelected) return;
                 // setFolderColorData("teal-500");
                 // setNoteColorData("yellow-500");
               setResetColorsData(true);
@@ -194,7 +201,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             >
               RESET
             </span>{" "}
-            all tabs to default
+            tabs to default
           </p>
         </div>
 
@@ -207,7 +214,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
         >
           {colorsToChooseVis && (
             <div className="absolute right-32 bottom-8" style={{right: "140px", bottom: "32px"}}>
-              <ColorsToChoose_Default defaultColorsFor={defaultColorsFor} leftPositioning={`${xsScreen ? "-70px" : "8px"}`} />
+              <ColorsToChoose_Default defaultColorsFor={defaultColorsFor} leftPositioning={`${xsScreen ? "-60px" : "8px"}`} />
             </div>
           )}
         </div>
