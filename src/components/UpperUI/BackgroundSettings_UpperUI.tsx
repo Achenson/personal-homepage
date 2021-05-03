@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
@@ -7,6 +7,7 @@ import { globalSettingsState } from "../../state/defaultSettings";
 import { uiColorState } from "../../state/colorsState";
 
 import { UpperVisAction } from "../../utils/interfaces";
+import { useWindowSize } from "../../utils/hook_useWindowSize";
 
 interface Props {
   // backgroundSettingsVis: boolean;
@@ -21,6 +22,19 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
+  const windowSize = useWindowSize();
+  const [xsScreen, setXsScreen] = useState(false);
+
+  useEffect(() => {
+    if (windowSize.width) {
+      if (windowSize.width < 490) {
+        setXsScreen(true);
+      } else {
+        setXsScreen(false);
+      }
+    }
+  }, [windowSize.width]);
+
   let finalColorForImgBackgroundMode = uiColorData;
 
   if (uiColorData === "blueGray-400") {
@@ -28,7 +42,7 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   }
 
   const imgDescription_1 = "Transparent colors for columns";
-  const imgDescription_2 = "Upload background image or use default: ";
+  const imgDescription_2 = "Upload background image or use default:";
 
   const noImgDescription = "Full colors for background and columns";
 
@@ -44,8 +58,11 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
       <div className="md:mb-40 relative">
         <div
           className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
-          // style={{ width: "417px", height: "205px" }}
-          style={{ width: "350px", height: "275px" }}
+          style={{
+            width: `${xsScreen ? "350px" : "417px"}`,
+            height: `${xsScreen ? "238px" : "205px"}`,
+          }}
+          // style={{ width: "350px", height: "250px" }}
         >
           <div className="absolute right-0 top-0 mt-1 mr-1">
             <CancelSVG
@@ -59,10 +76,11 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             />
           </div>
 
-          <div className="mx-2">
+          <div className="mx-0 xs:mx-2">
             <p className="text-center mb-3">Background mode</p>
-            <div className="flex justify-between mb-3">
-              <p
+            <div className="mb-3 text-center">
+              <span className="text-lg">Background image:</span>
+              <span
                 className={`${
                   globalSettingsData.picBackground
                     ? "cursor-default" +
@@ -81,10 +99,10 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                   }
                 }}
               >
-                Background image
-              </p>
+                &nbsp;&nbsp;ON
+              </span>
               {/* <p>|</p> */}
-              <p
+              <span
                 className={`${
                   globalSettingsData.picBackground
                     ? "hover:text-opacity-50 cursor-pointer text-gray-400"
@@ -103,15 +121,16 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                   }
                 }}
               >
-                No background image
-              </p>
+                &nbsp;&nbsp;OFF
+              </span>
             </div>
 
             {globalSettingsData.picBackground ? (
               <div className="text-center">
-                <p className="">{imgDescription_1}</p>
-                <p className="mb-3">
-                  {imgDescription_2}
+                <p className={`mb-2 xs:mb-0`}>{imgDescription_1}</p>
+                <div className={`mb-3`}>
+                  <p className="block xs:inline-block">{imgDescription_2}</p>
+                  <span> </span>
                   <span
                     className={`text-${uiColorData} cursor-pointer hover:underline`}
                     onClick={() => {
@@ -147,7 +166,7 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                   >
                     3
                   </span>
-                </p>
+                </div>
               </div>
             ) : (
               <p className="text-center mb-3">{noImgDescription}</p>
@@ -158,7 +177,9 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 globalSettingsData.picBackground ? "" : "hidden"
               }`}
             >
-              <div className="bg-white h-6 w-60"></div>
+              <div
+                className={`bg-white h-6 ${xsScreen ? "w-48" : "w-60"}`}
+              ></div>
               <button
                 className={`border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150`}
               >

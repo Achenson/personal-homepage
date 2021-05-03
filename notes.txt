@@ -447,7 +447,9 @@ DONE 359. tab open/close randomly (not randomly, but state of the prev component
 354. limit column width?
 355. upperRightUI: Note to close to the lower svgs?
 360. newTab etc. enter to save & esc to cancel keyboard ? move handleKeyDown from editTab_folder to editTab_main
-
+361. error object in state?
+362. selectables filtered alphabetically?
+363. more professional selectables?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
