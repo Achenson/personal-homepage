@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import Grid from "./LowerUI/Grid";
 import Bookmark_newAndEdit from "./Shared/Bookmark_newAndEdit";
 import NewTab_UpperUI from "./UpperUI/NewTab_UpperUI";
@@ -33,7 +33,7 @@ let initUpperVisState: InitUpperVisState = {
 };
 
 function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
-    const upperVisStateAllFalse: InitUpperVisState = {
+  const upperVisStateAllFalse: InitUpperVisState = {
     ...initUpperVisState,
   };
 
@@ -90,14 +90,14 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
         // ...upperVisStateMostlyFalse,
         ...state,
         addTagVis_xs: !state.addTagVis_xs,
-        settingsVis_xs: false
+        settingsVis_xs: false,
       };
     case "SETTINGS_XS_TOGGLE":
       return {
         // ...upperVisStateMostlyFalse,
         ...state,
         settingsVis_xs: !state.settingsVis_xs,
-        addTagVis_xs: false
+        addTagVis_xs: false,
       };
 
     case "CLOSE_ALL":
@@ -130,6 +130,25 @@ function Main({}: Props): JSX.Element {
     visDispatch({ type: "TAB_EDITABLES_CLOSE" });
   }
 
+  // 
+  useEffect(() => {
+    if (
+      upperVisState.colorsSettingsVis ||
+      upperVisState.backgroundSettingsVis ||
+      upperVisState.settingsVis
+    ) {
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = "17px";
+    } else {
+      document.body.style.overflow = "visible";
+      document.body.style.paddingRight = "0px";
+    }
+  }, [
+    upperVisState.colorsSettingsVis,
+    upperVisState.backgroundSettingsVis,
+    upperVisState.settingsVis,
+  ]);
+
   return (
     // <div className="relative h-screen bg-testBackground bg-cover">
     <div
@@ -138,6 +157,10 @@ function Main({}: Props): JSX.Element {
           ? `bg-${globalSettingsData.defaultImage}`
           : `bg-${backgroundColorData}`
       } bg-cover bg-fixed`}
+      onScroll={(e) => {
+        e.preventDefault();
+        return;
+      }}
     >
       {upperVisState.newTabVis && (
         <NewTab_UpperUI upperVisDispatch={upperVisDispatch} tabType={tabType} />

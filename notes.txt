@@ -78,6 +78,9 @@ shortcut with: "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --d
 13. proper background visibility with whole column on drag effect:
 additional div on Grid (so there is space for colors/editable), Grid - overflow-hidden
 14. Tab setTimout: useEffect, unmounting necessary!
+15. Main -> manipulating document body directy for hidding scrollbard -> fine, because
+react is manipulatin only #app & everything below, no possible conflict with anything above #app
+https://stackoverflow.com/questions/39962757/prevent-scrolling-using-css-on-react-rendered-components
 
 TO DO:
 
@@ -352,6 +355,7 @@ DONE 275. newTab (& newBookmark & bookmark_lowerUI) upperUI margin above btns is
 XXX 276. tab editing -> should opening it increase columns size also as a side effect? (check after background img problems are fixed) XXX
 XXX 277. background img setting -> revert to aligning to left XXX
 DONE 279. color setting -> rename to tab setting/ "reset tab colors to default" DONE
+DONE 280. responsive upperUI settings size DONE
 XXX 283. errors reducers? XXX
 DONE 284. EditTab: rss & note (&folder)-> make new components! DONE 
 DONE 285. rss globalSetting styling DONE
@@ -371,6 +375,7 @@ DONE 305. columnColor not being reduced in numbers if "one color for all columns
 DONE 307. Selectables -> truncate (and should appear on one line only) - the stick out if too long! DONE
 DONE 312. error when deleting folder automatically if it is empty -> Tab -> currentTab problem DONE
 DONE 313. make gray button disabled! eg save SVG DONE (return if nothings changed)
+DONE 315. gray area (when clicking settings) does not expand to whole page (hidding scrollbar in Main instead)  DONE
 DONE 320. one color for all columns: when selected, make border collapsed DONE
 DONE 324. delete all btn for selectables DONE
 DONE 325. xxx open popup with 3 default images to choose xx -> chosing enablem in Background Settings without popup DONE
@@ -382,6 +387,7 @@ DONE 335. RSS settings - date & description better styles DONE
 DONE 339. move note & rss edit errors lower DONE
 DONE 343. saveSVG still being cut on firefox! DONE (w-1 instead of w-px)
 DONE 344. NoteInput: make better bg for IMG background version DONE
+DONE 347. touch screen compatibility? DONE
 DONE 351. ColorsToChoose_Default - control positioning by props, not inside components DONE
 DONE 356. selectables bug: no list if string lenght will be 0 DONE (now opens on change, or with arrow down)
 DONE 356.5 newTab newBookmark EditTab bookmark_lowerUI -> change bookmarks/tags naming to selectables, extract functions DONE
@@ -397,7 +403,6 @@ DONE 359. tab open/close randomly (not randomly, but state of the prev component
 254. bookmark (& RSS?): add link errors!
 278. background img zooming back after clicking any settings
 
-280. responsive upperUI settings size
 
 287. rss error handling: catch error for data and description (cnn rss description crashes the app)
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
@@ -411,10 +416,11 @@ DONE 359. tab open/close randomly (not randomly, but state of the prev component
 306. new rss & new tab: make it smaller?
 
 308. login
+
 309. UpperRight Menu -> make it possible to close by clicking on the background
 
 
-315. gray area (when clicking settings) does not expand to whole page
+
 316. background colors selection not visible on black
 317. white border selection problem -> takes too much space to the left. modify adjacent border colors?
 318. useEffect -> some should be unmounted? check in the end
@@ -438,7 +444,6 @@ DONE 359. tab open/close randomly (not randomly, but state of the prev component
 344. get rid of border-b in img mode on note input when bg is transparetn? (light bg problem)
 345. background color setting -> no defualt color selection
 346. error in console.log if empty tag auto deletes itself
-347. touch screen compatibility?
 348. background colors list to the left?
 349. svg error still! on lower ui 
 350. can't access tab options with touch
@@ -450,6 +455,7 @@ DONE 359. tab open/close randomly (not randomly, but state of the prev component
 361. error object in state?
 362. selectables filtered alphabetically?
 363. more professional selectables?
+364. all settings in one in case of xsScreen?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
