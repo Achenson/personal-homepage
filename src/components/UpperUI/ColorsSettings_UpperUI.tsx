@@ -12,14 +12,14 @@ import {
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
-import {UpperVisAction} from "../../utils/interfaces"
+import { UpperVisAction } from "../../utils/interfaces";
 
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 
 interface Props {
   // colorsVis: boolean;
   // setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
 function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
@@ -84,7 +84,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   // style={{left: "67px"}}
 
   let isAnythingSelected = false;
-  if(rssSelected || foldersSelected || notesSelected) {
+  if (rssSelected || foldersSelected || notesSelected) {
     isAnythingSelected = true;
   }
 
@@ -92,8 +92,17 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
     <div
       className="flex flex-col z-50 absolute h-screen w-screen justify-center items-center"
       style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
+      onClick={() => {
+        upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
+      }}
     >
-      <div className="md:mb-40 relative">
+      <div
+        className="md:mb-40 relative"
+        onClick={(e) => {
+          e.stopPropagation();
+          return;
+        }}
+      >
         <div
           className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
           style={{ width: `${xsScreen ? "350px" : "417px"}`, height: "200px" }}
@@ -103,10 +112,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             <CancelSVG
               className="h-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"
               onClick={() => {
-                // if (colorsVis) {
-                //   setColorsVis(false);
-                // }
-                upperVisDispatch({type: "COLORS_SETTINGS_TOGGLE"})
+                upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
               }}
             />
           </div>
@@ -159,7 +165,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             ></div>
           </div>
           <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="w-32">RSS{xsScreen ? "": " channels"}</p>
+            <p className="w-32">RSS{xsScreen ? "" : " channels"}</p>
             <div
               onClick={() => {
                 setDefaultColorsFor("rss");
@@ -191,12 +197,16 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
           <p className={`text-center mt-5`}>
             {" "}
             <span
-              className={`${isAnythingSelected ? "text-gray-300" : "text-red-600 hover:underline cursor-pointer"} `}
+              className={`${
+                isAnythingSelected
+                  ? "text-gray-300"
+                  : "text-red-600 hover:underline cursor-pointer"
+              } `}
               onClick={() => {
-                if(isAnythingSelected) return;
+                if (isAnythingSelected) return;
                 // setFolderColorData("teal-500");
                 // setNoteColorData("yellow-500");
-              setResetColorsData(true);
+                setResetColorsData(true);
               }}
             >
               RESET
@@ -213,8 +223,14 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
           }}
         >
           {colorsToChooseVis && (
-            <div className="absolute right-32 bottom-8" style={{right: "140px", bottom: "32px"}}>
-              <ColorsToChoose_Default defaultColorsFor={defaultColorsFor} leftPositioning={`${xsScreen ? "-60px" : "8px"}`} />
+            <div
+              className="absolute right-32 bottom-8"
+              style={{ right: "140px", bottom: "32px" }}
+            >
+              <ColorsToChoose_Default
+                defaultColorsFor={defaultColorsFor}
+                leftPositioning={`${xsScreen ? "-60px" : "8px"}`}
+              />
             </div>
           )}
         </div>

@@ -54,8 +54,16 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
     <div
       className="flex flex-col z-50 absolute h-screen w-screen justify-center items-center"
       style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
+      onClick={() => {
+        upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
+      }}
     >
-      <div className="md:mb-40 relative">
+      <div className="md:mb-40 relative"
+      onClick={ (e) => {
+        e.stopPropagation()
+        return;
+      }}
+      >
         <div
           className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
           style={{
