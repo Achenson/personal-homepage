@@ -377,6 +377,7 @@ DONE 309. UpperRight Menu -> make it possible to close by clicking on the backgr
 DONE 312. error when deleting folder automatically if it is empty -> Tab -> currentTab problem DONE
 DONE 313. make gray button disabled! eg save SVG DONE (return if nothings changed)
 DONE 315. gray area (when clicking settings) does not expand to whole page (hidding scrollbar in Main instead)  DONE
+DONE 316. background colors selection not visible on black (whitish border with z-50) DONE
 DONE 320. one color for all columns: when selected, make border collapsed DONE
 DONE 324. delete all btn for selectables DONE
 DONE 325. xxx open popup with 3 default images to choose xx -> chosing enablem in Background Settings without popup DONE
@@ -405,13 +406,11 @@ DONE 366. bug-> paddingAdded when scrollbar in now visible -> fixed by comparing
 254. bookmark (& RSS?): add link errors!
 278. background img zooming back after clicking any settings
 
-
 287. rss error handling: catch error for data and description (cnn rss description crashes the app)
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
 289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds
 
 296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
-297. backgroundImg: how to make the columns shorter, same as if there is no backgroundImg
 
 304. react query devtools not working
 
@@ -419,7 +418,7 @@ DONE 366. bug-> paddingAdded when scrollbar in now visible -> fixed by comparing
 
 308. login
 
-316. background colors selection not visible on black
+
 317. white border selection problem -> takes too much space to the left. modify adjacent border colors?
 318. useEffect -> some should be unmounted? check in the end
 322. newBookmark & editBookmark: title & link wrong responsive behaviour  
@@ -440,7 +439,9 @@ DONE 366. bug-> paddingAdded when scrollbar in now visible -> fixed by comparing
 342. chevroDown: lower it so it will be on the level of "x" ? edit bookmark only?
 343. make column appear thinner (notes, bookmarks etc. seem to stick out)
 344. get rid of border-b in img mode on note input when bg is transparetn? (light bg problem)
+
 345. background color setting -> no defualt color selection
+
 346. error in console.log if empty tag auto deletes itself
 348. background colors list to the left?
 349. svg error still! on lower ui 
@@ -455,7 +456,9 @@ DONE 366. bug-> paddingAdded when scrollbar in now visible -> fixed by comparing
 363. more professional selectables?
 364. all settings in one in case of xsScreen?
 365. colorSettings -> make large version same as xs?
-366. when scrollbar is being changed to padding right, gray background is visible
+366. when scrollbar is being changed to padding right, gray background is visibilities
+367. dragging hover effect: change it on in 2x2 & 3x1 col cases 
+368. background colors:  make white border on every color on the most right column?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

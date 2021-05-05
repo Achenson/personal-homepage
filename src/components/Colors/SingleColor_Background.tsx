@@ -4,8 +4,6 @@ import { produce } from "immer";
 
 import { backgroundColorState } from "../../state/colorsState";
 
-
-
 interface Props {
   color: string;
 }
@@ -21,7 +19,11 @@ function SingleColor_Background({ color }: Props): JSX.Element {
       return "border border-black";
     }
 
-    return "border-2 border-black";
+    return `${
+      color === "black" || color === "blueGray-700" || color === "yellow-900"
+        ? "border-2 border-gray-100 z-50"
+        : "border-2 border-black"
+    }`;
   }
 
   return (
