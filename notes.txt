@@ -395,6 +395,7 @@ DONE 357. cant drag tabs with touch (react-dnd-multi-backend) DONE
 DONE 358. bug -> when on sm or lower (one col displayed) cannot drag tabs properly DONE
 DONE 359. tab open/close randomly (not randomly, but state of the prev component was preserved) when dragging? (all) DONE
 (opened state is in global state now)
+DONE 366. bug-> paddingAdded when scrollbar in now visible -> fixed by comparing <html> scrollHeight & clientHeight DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -456,6 +457,7 @@ DONE 359. tab open/close randomly (not randomly, but state of the prev component
 362. selectables filtered alphabetically?
 363. more professional selectables?
 364. all settings in one in case of xsScreen?
+365. colorSettings -> make large version same as xs?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

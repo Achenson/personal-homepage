@@ -130,24 +130,43 @@ function Main({}: Props): JSX.Element {
     visDispatch({ type: "TAB_EDITABLES_CLOSE" });
   }
 
-  // 
+  //
   useEffect(() => {
     if (
       upperVisState.colorsSettingsVis ||
       upperVisState.backgroundSettingsVis ||
       upperVisState.settingsVis
     ) {
-      document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = "17px";
-    } else {
-      document.body.style.overflow = "visible";
-      document.body.style.paddingRight = "0px";
+    
+      // console.log(document.documentElement.scrollHeight);
+      // console.log(document.documentElement.clientHeight);
+  
+      // document.documentElement - for body it is <html> elemen
+      // does not work with document.body scrollHeight & clientHeight!
+      if (
+        document.documentElement.scrollHeight >
+        document.documentElement.clientHeight
+      ) {
+        document.body.style.overflow = "hidden";
+        document.body.style.paddingRight = "17px";
+      }
+
+      return;
     }
+
+    document.body.style.overflow = "visible";
+    document.body.style.paddingRight = "0px";
   }, [
     upperVisState.colorsSettingsVis,
     upperVisState.backgroundSettingsVis,
     upperVisState.settingsVis,
   ]);
+
+  // useEffect(() => {
+  // console.log(document.body.scrollHeight);
+  //     console.log(document.body.clientHeight);
+  //     console.log(document.body.offsetHeight);
+  // }, [document.body.scrollHeight, document.body.clientHeight, document.body.offsetHeight])
 
   return (
     // <div className="relative h-screen bg-testBackground bg-cover">
