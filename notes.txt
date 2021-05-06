@@ -399,6 +399,7 @@ DONE 358. bug -> when on sm or lower (one col displayed) cannot drag tabs proper
 DONE 359. tab open/close randomly (not randomly, but state of the prev component was preserved) when dragging? (all) DONE
 (opened state is in global state now)
 DONE 366. bug-> paddingAdded when scrollbar in now visible -> fixed by comparing <html> scrollHeight & clientHeight DONE
+DONE 369. initial colors in global state -> import instead of hardcoding DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -459,7 +460,7 @@ DONE 366. bug-> paddingAdded when scrollbar in now visible -> fixed by comparing
 366. when scrollbar is being changed to padding right, gray background is visibilities
 367. dragging hover effect: change it on in 2x2 & 3x1 col cases 
 368. background colors:  make white border on every color on the most right column?
-369. initial colors in global state -> import instead of hardcoding
+370. change colors data to objects?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
