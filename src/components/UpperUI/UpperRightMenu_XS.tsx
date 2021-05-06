@@ -134,10 +134,7 @@ function UpperRightMenu({
         <UserSVG
           className={`h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData} -ml-1`}
           onClick={() => {
-            // setNewTabVis((b) => !b);
-
-            upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-            setTabType("rss");
+            upperVisDispatch({ type: "PROFILE_TOGGLE" });
           }}
         />
       </div>

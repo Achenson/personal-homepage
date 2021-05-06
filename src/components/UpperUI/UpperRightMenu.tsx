@@ -126,7 +126,11 @@ function UpperRightMenu({
             upperVisDispatch({ type: "SETTINGS_TOGGLE" });
           }}
         />
-        <UserSVG className="h-6" style={{ marginLeft: "-3px" }} />
+        <UserSVG className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`} style={{ marginLeft: "-3px" }}
+        onClick={() => {
+          upperVisDispatch({type: "PROFILE_TOGGLE"})
+        }}
+        />
       </div>
     </div>
   );

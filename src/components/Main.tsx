@@ -10,6 +10,7 @@ import { globalSettingsState } from "../state/defaultSettings";
 import { backgroundColorState } from "../state/colorsState";
 import Background_UpperUI from "./UpperUI/BackgroundSettings_UpperUI";
 import Settings_UpperUI from "./UpperUI/GlobalSettings_UpperUI";
+import Profile_UpperUI from "./UpperUI/Profile_UpperUI";
 
 import {
   UpperVisAction,
@@ -24,6 +25,7 @@ let initUpperVisState: InitUpperVisState = {
   newTabVis: false,
   backgroundSettingsVis: false,
   settingsVis: false,
+  profileVis: false,
   colorsSettingsVis: false,
   colorsBackgroundVis: false,
   colorsColumnVis: false,
@@ -68,6 +70,11 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
       return {
         ...upperVisStateMostlyFalse,
         settingsVis: !state.settingsVis,
+      };
+    case "PROFILE_TOGGLE":
+      return {
+        ...upperVisStateMostlyFalse,
+        profileVis: !state.profileVis,
       };
     case "COLORS_BACKGROUND_TOGGLE":
       return {
@@ -135,12 +142,12 @@ function Main({}: Props): JSX.Element {
     if (
       upperVisState.colorsSettingsVis ||
       upperVisState.backgroundSettingsVis ||
-      upperVisState.settingsVis
+      upperVisState.settingsVis ||
+      upperVisState.profileVis
     ) {
-    
       // console.log(document.documentElement.scrollHeight);
       // console.log(document.documentElement.clientHeight);
-  
+
       // document.documentElement - for body it is <html> elemen
       // does not work with document.body scrollHeight & clientHeight!
       if (
@@ -160,6 +167,7 @@ function Main({}: Props): JSX.Element {
     upperVisState.colorsSettingsVis,
     upperVisState.backgroundSettingsVis,
     upperVisState.settingsVis,
+    upperVisState.profileVis,
   ]);
 
   // useEffect(() => {
@@ -200,6 +208,11 @@ function Main({}: Props): JSX.Element {
       {upperVisState.colorsSettingsVis && (
         <Colors_UpperUI upperVisDispatch={upperVisDispatch} />
       )}
+
+      {upperVisState.profileVis && (
+        <Profile_UpperUI upperVisDispatch={upperVisDispatch} />
+      )}
+
       <UpperUI
         upperVisState={upperVisState}
         upperVisDispatch={upperVisDispatch}

@@ -40,6 +40,7 @@ export interface InitUpperVisState {
   newTabVis: boolean;
   backgroundSettingsVis: boolean;
   settingsVis: boolean;
+  profileVis: boolean;
   colorsSettingsVis: boolean;
   colorsBackgroundVis: boolean;
   colorsColumnVis: boolean;
@@ -61,6 +62,7 @@ export interface UpperVisAction {
     | "CLOSE_ALL"
     | "ADD_TAG_XS_TOGGLE"
     | "SETTINGS_XS_TOGGLE"
+    | "PROFILE_TOGGLE"
   payload?: number;
 }
 
