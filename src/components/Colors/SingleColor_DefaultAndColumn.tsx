@@ -130,9 +130,9 @@ function SingleColor_DefaultAndColumn({
 
         if (
           defaultColorsFor === "column_1" ||
-          "column_2" ||
-          "column_3" ||
-          "column_4"
+          defaultColorsFor === "column_2" ||
+          defaultColorsFor === "column_3" ||
+          defaultColorsFor === "column_4"
         ) {
           setColumnsColorsData((previous) =>
             produce(previous, (updated) => {

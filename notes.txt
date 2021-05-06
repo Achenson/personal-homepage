@@ -401,6 +401,7 @@ DONE 359. tab open/close randomly (not randomly, but state of the prev component
 DONE 366. bug-> paddingAdded when scrollbar in now visible -> fixed by comparing <html> scrollHeight & clientHeight DONE
 DONE 368. background colors:  make white border on columns to the right? DONE
 DONE 369. initial colors in global state -> import instead of hardcoding DONE
+DONE 371. is there a way to do less repeats in if( || || ||)? typescript? no - fixed wrong use of || || DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -461,7 +462,6 @@ DONE 369. initial colors in global state -> import instead of hardcoding DONE
 366. when scrollbar is being changed to padding right, gray background is visibilities
 367. dragging hover effect: change it on in 2x2 & 3x1 col cases 
 370. change colors data to objects?
-371. is there a way to do less repeats in if( || || ||)? typescript?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

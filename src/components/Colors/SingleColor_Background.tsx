@@ -20,17 +20,15 @@ function SingleColor_Background({ color, colorCol }: Props): JSX.Element {
       return "border border-black";
     }
 
-    return `border-2 z-20 ${
-      colorCol === 6 || colorCol === 7 || colorCol === 8 || colorCol === 9
-        ? "border-gray-100"
-        : "border-black"
-    }`;
-
-    // return `${
-    //   color === "black" || color === "blueGray-700" || color === "yellow-900"
-    //     ? "border-2 border-gray-100 z-50"
-    //     : "border-2 border-black"
+    // return `border-2 z-20 ${
+    //   colorCol === 6 || colorCol === 7 || colorCol === 8 || colorCol === 9
+    //     ? "border-gray-100"
+    //     : "border-black"
     // }`;
+
+    return `border-2 z-20 ${
+      [6, 7, 8, 9].indexOf(colorCol) > -1 ? "border-gray-100" : "border-black"
+    }`;
   }
 
   return (
