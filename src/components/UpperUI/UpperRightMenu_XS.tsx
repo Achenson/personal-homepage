@@ -7,6 +7,7 @@ import { ReactComponent as NoteSVG } from "../../svgs/note_UXwing.svg";
 import { ReactComponent as SettingsSVG } from "../../svgs/settingsAlt.svg";
 import { ReactComponent as CogSVG } from "../../svgs/cog.svg";
 import { ReactComponent as UserSVG } from "../../svgs/user.svg";
+import { ReactComponent as LogoutSVG } from "../../svgs/logout.svg";
 import { ReactComponent as ColorSVG } from "../../svgs/beaker.svg";
 import { ReactComponent as AddRssSVG } from "../../svgs/rss.svg";
 import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
@@ -19,12 +20,16 @@ interface Props {
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   upperVisState: InitUpperVisState;
+  loggedIn: boolean;
+  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function UpperRightMenu({
   upperVisDispatch,
   upperVisState,
   setTabType,
+  loggedIn,
+  setLoggedIn
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
   return (
@@ -64,6 +69,8 @@ function UpperRightMenu({
           <UserSVG
             className={`invisible h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
           />
+
+          
         </div>
       )}
 
@@ -131,12 +138,35 @@ function UpperRightMenu({
         />
 
         {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
-        <UserSVG
+        {/* <UserSVG
           className={`h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData} -ml-1`}
           onClick={() => {
             upperVisDispatch({ type: "PROFILE_TOGGLE" });
           }}
-        />
+/> */}
+
+          {loggedIn ? (
+            <LogoutSVG
+              className={`h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+              style={{ marginLeft: "0px" }}
+              onClick={() => {
+                // upperVisDispatch({ type: "PROFILE_TOGGLE" });
+                setLoggedIn(false);
+              }}
+            />
+          ) : (
+            <UserSVG
+            // -ml-1
+          className={`h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+          onClick={() => {
+            upperVisDispatch({ type: "PROFILE_TOGGLE" });
+            setLoggedIn(true)
+          }}
+          />
+
+          )}
+
+
       </div>
     </>
   );
