@@ -6,9 +6,10 @@ import { backgroundColorState } from "../../state/colorsState";
 
 interface Props {
   color: string;
+  colorCol: number;
 }
 
-function SingleColor_Background({ color }: Props): JSX.Element {
+function SingleColor_Background({ color, colorCol }: Props): JSX.Element {
   const [
     backgroundColorData,
     setBackgroundColorData,
@@ -19,11 +20,17 @@ function SingleColor_Background({ color }: Props): JSX.Element {
       return "border border-black";
     }
 
-    return `${
-      color === "black" || color === "blueGray-700" || color === "yellow-900"
-        ? "border-2 border-gray-100 z-50"
-        : "border-2 border-black"
+    return `border-2 z-20 ${
+      colorCol === 6 || colorCol === 7 || colorCol === 8 || colorCol === 9
+        ? "border-gray-100"
+        : "border-black"
     }`;
+
+    // return `${
+    //   color === "black" || color === "blueGray-700" || color === "yellow-900"
+    //     ? "border-2 border-gray-100 z-50"
+    //     : "border-2 border-black"
+    // }`;
   }
 
   return (

@@ -23,6 +23,7 @@ function ColorsToChoose_Background({}: Props): JSX.Element{
                 // defaultColorsFor="column_4"
                 color={el}
                 key={j}
+                colorCol={j}
               />
             );
           })}
