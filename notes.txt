@@ -389,6 +389,7 @@ DONE 335. RSS settings - date & description better styles DONE
 DONE 339. move note & rss edit errors lower DONE
 DONE 343. saveSVG still being cut on firefox! DONE (w-1 instead of w-px)
 DONE 344. NoteInput: make better bg for IMG background version DONE
+DONE 345. background color setting -> no defualt color selection DONE
 DONE 347. touch screen compatibility? DONE
 DONE 351. ColorsToChoose_Default - control positioning by props, not inside components DONE
 DONE 356. selectables bug: no list if string lenght will be 0 DONE (now opens on change, or with arrow down)
@@ -440,7 +441,6 @@ DONE 366. bug-> paddingAdded when scrollbar in now visible -> fixed by comparing
 343. make column appear thinner (notes, bookmarks etc. seem to stick out)
 344. get rid of border-b in img mode on note input when bg is transparetn? (light bg problem)
 
-345. background color setting -> no defualt color selection
 
 346. error in console.log if empty tag auto deletes itself
 348. background colors list to the left?
@@ -459,6 +459,7 @@ DONE 366. bug-> paddingAdded when scrollbar in now visible -> fixed by comparing
 366. when scrollbar is being changed to padding right, gray background is visibilities
 367. dragging hover effect: change it on in 2x2 & 3x1 col cases 
 368. background colors:  make white border on every color on the most right column?
+369. initial colors in global state -> import instead of hardcoding
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

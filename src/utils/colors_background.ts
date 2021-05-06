@@ -1,7 +1,7 @@
 export const backgroundColors: string[][] = [
   [
     "white",
-    "blueGray-50",
+    "gray-50",
     "blueGray-100",
     "blueGray-200",
     "blueGray-300",
