@@ -264,11 +264,11 @@ Props): JSX.Element {
       >
         <p className="text-center">New bookmark</p>
         <div className="flex justify-around mb-2 mt-3">
-          <p className="w-10">Title</p>
+          <p className="w-11 flex-none">Title</p>
 
           <input
             type="text"
-            className="w-full ml-2 border border-gray-300 pl-px"
+            className="w-full border border-gray-300 pl-px"
             value={titleInput}
             placeholder={"new bookmark title"}
             onChange={(e) => setTitleInput(e.target.value)}
@@ -279,11 +279,11 @@ Props): JSX.Element {
           <ChevronDownSVG className="h-6 invisible" />
         </div>
         <div className="flex justify-around mb-2">
-          <p className="w-10">Link</p>
+          <p className="w-11 flex-none">Link</p>
 
           <input
             type="text"
-            className="w-full ml-2 border border-gray-300 pl-px"
+            className="w-full border border-gray-300 pl-px"
             value={urlInput}
             placeholder={"enter proper URL address"}
             onChange={(e) => setUrlInput(e.target.value)}
@@ -294,9 +294,9 @@ Props): JSX.Element {
           <ChevronDownSVG className="h-6 invisible" />
         </div>
         <div className="flex justify-start mb-2">
-          <p className="w-10">Tags</p>
+          <p className="w-11 flex-none">Tags</p>
 
-          <div className="ml-2 relative w-full">
+          <div className="relative w-full">
             {/* focus-within:ring-1 focus-within:ring-gray-400 pr-1 */}
             <div className="relative">
               <input
