@@ -20,16 +20,16 @@ interface Props {
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   upperVisState: InitUpperVisState;
-  loggedIn: boolean;
-  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  loggedInData: boolean;
+  setLoggedInData: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function UpperRightMenu({
   upperVisDispatch,
   upperVisState,
   setTabType,
-  loggedIn,
-  setLoggedIn,
+  loggedInData,
+  setLoggedInData,
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
   return (
@@ -144,13 +144,13 @@ function UpperRightMenu({
 /> */}
         <div className="self-center"
         style={{width: "24px", height: "24px"}}>
-          {loggedIn ? (
+          {loggedInData ? (
             <LogoutSVG
               className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
               style={{ marginLeft: "-1px" }}
               onClick={() => {
                 // upperVisDispatch({ type: "PROFILE_TOGGLE" });
-                setLoggedIn(false);
+                setLoggedInData(false);
               }}
             />
           ) : (
@@ -160,7 +160,7 @@ function UpperRightMenu({
               style={{ marginLeft: "-3px", marginBottom: "0px" }}
               onClick={() => {
                 upperVisDispatch({ type: "PROFILE_TOGGLE" });
-                setLoggedIn(true);
+                // setLoggedInData(true);
               }}
             />
           )}

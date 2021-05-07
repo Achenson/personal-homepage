@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
-// import { globalSettingsState } from "../../state/defaultSettings";
+import { loggedInState } from "../../state/defaultSettings";
 
 import { uiColorState } from "../../state/colorsState";
 
@@ -20,6 +20,8 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   const [loginOrRegister, setLoginOrRegister] = useState<"login" | "register">(
     "login"
   );
+
+  const [loggedInData, setLoggedInData] = loggedInState.use();
 
   let finalColorForImgBackgroundMode = uiColorData;
 
@@ -145,6 +147,17 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               {loginOrRegister === "login" ? (
                 <button
                   className={`w-24 border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150`}
+                  onClick={()=> {
+                    if(loggedInData === false) {
+                      setLoggedInData(true)
+                      console.log("sthh");
+                      
+                    }
+
+                    
+                    upperVisDispatch({type: "PROFILE_TOGGLE"})
+
+                  }}
                 >
                   Login
                 </button>

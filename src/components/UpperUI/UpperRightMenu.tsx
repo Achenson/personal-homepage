@@ -27,7 +27,7 @@ import { uiColorState } from "../../state/colorsState";
 
 import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
 
-import { closeAllTabsState, tabOpenedState } from "../../state/defaultSettings";
+import { closeAllTabsState, tabOpenedState, loggedInState } from "../../state/defaultSettings";
 
 interface Props {
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
@@ -44,7 +44,9 @@ function UpperRightMenu({
   // const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  // const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedInData, setLoggedInData] = loggedInState.use();
+ 
 
   return (
     // <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
@@ -105,8 +107,8 @@ function UpperRightMenu({
         setTabType={setTabType}
         upperVisDispatch={upperVisDispatch}
         upperVisState={upperVisState}
-        loggedIn={loggedIn}
-        setLoggedIn={setLoggedIn}
+        loggedInData={loggedInData}
+        setLoggedInData={setLoggedInData}
       />
       {/* xs ============================^ */}
 
@@ -136,14 +138,14 @@ function UpperRightMenu({
           }}
         />
         <div style={{width: "24px", height: "24px"}}>
-        {loggedIn ? (
+        {loggedInData ? (
         
         <LogoutSVG
           className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
           style={{ marginLeft: "0px" }}
           onClick={() => {
             // upperVisDispatch({ type: "PROFILE_TOGGLE" });
-            setLoggedIn(false);
+            setLoggedInData(false);
           }}
         />
       ) : (
@@ -152,7 +154,7 @@ function UpperRightMenu({
           style={{ marginLeft: "-2px", marginBottom: "0px" }}
           onClick={() => {
             upperVisDispatch({ type: "PROFILE_TOGGLE" });
-            setLoggedIn(true);
+            // setLoggedInData(true);
           }}
         />
       )}
