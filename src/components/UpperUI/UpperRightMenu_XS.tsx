@@ -21,7 +21,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   upperVisState: InitUpperVisState;
   loggedIn: boolean;
-  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
+  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function UpperRightMenu({
@@ -29,7 +29,7 @@ function UpperRightMenu({
   upperVisState,
   setTabType,
   loggedIn,
-  setLoggedIn
+  setLoggedIn,
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
   return (
@@ -69,8 +69,6 @@ function UpperRightMenu({
           <UserSVG
             className={`invisible h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
           />
-
-          
         </div>
       )}
 
@@ -130,7 +128,7 @@ function UpperRightMenu({
         />
         {/* <AddNote */}
         <CogSVG
-          className={`h-6 cursor-pointer transition-colors duration-75  hover:text-${uiColorData} ml-px`}
+          className={`h-6 cursor-pointer transition-colors duration-75  hover:text-${uiColorData} ml-0.5`}
           style={{ marginTop: "2px" }}
           onClick={() => {
             upperVisDispatch({ type: "SETTINGS_XS_TOGGLE" });
@@ -144,11 +142,12 @@ function UpperRightMenu({
             upperVisDispatch({ type: "PROFILE_TOGGLE" });
           }}
 /> */}
-
+        <div className="self-center"
+        style={{width: "24px", height: "24px"}}>
           {loggedIn ? (
             <LogoutSVG
-              className={`h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-              style={{ marginLeft: "0px" }}
+              className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+              style={{ marginLeft: "-1px" }}
               onClick={() => {
                 // upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 setLoggedIn(false);
@@ -156,17 +155,16 @@ function UpperRightMenu({
             />
           ) : (
             <UserSVG
-            // -ml-1
-          className={`h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-          onClick={() => {
-            upperVisDispatch({ type: "PROFILE_TOGGLE" });
-            setLoggedIn(true)
-          }}
-          />
-
+              // -ml-1
+              className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+              style={{ marginLeft: "-3px", marginBottom: "0px" }}
+              onClick={() => {
+                upperVisDispatch({ type: "PROFILE_TOGGLE" });
+                setLoggedIn(true);
+              }}
+            />
           )}
-
-
+        </div>
       </div>
     </>
   );

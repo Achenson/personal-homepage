@@ -110,7 +110,7 @@ function UpperRightMenu({
       />
       {/* xs ============================^ */}
 
-      <div className="hidden xs:flex w-24 justify-around items-center">
+      <div className="hidden xs:flex w-24 justify-around items-center mr-0.5">
         <PhotographSVG
           className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
           onClick={() => {
@@ -135,25 +135,30 @@ function UpperRightMenu({
             upperVisDispatch({ type: "SETTINGS_TOGGLE" });
           }}
         />
+        <div style={{width: "24px", height: "24px"}}>
         {loggedIn ? (
-          <LogoutSVG
-            className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            style={{ marginLeft: "0px" }}
-            onClick={() => {
-              // upperVisDispatch({ type: "PROFILE_TOGGLE" });
-              setLoggedIn(false);
-            }}
-          />
-        ) : (
-          <UserSVG
-            className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            // style={{ marginLeft: "-3px" }}
-            onClick={() => {
-              upperVisDispatch({ type: "PROFILE_TOGGLE" });
-              setLoggedIn(true);
-            }}
-          />
-        )}
+        
+        <LogoutSVG
+          className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+          style={{ marginLeft: "0px" }}
+          onClick={() => {
+            // upperVisDispatch({ type: "PROFILE_TOGGLE" });
+            setLoggedIn(false);
+          }}
+        />
+      ) : (
+        <UserSVG
+          className={`h-full cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+          style={{ marginLeft: "-2px", marginBottom: "0px" }}
+          onClick={() => {
+            upperVisDispatch({ type: "PROFILE_TOGGLE" });
+            setLoggedIn(true);
+          }}
+        />
+      )}
+
+        </div>
+
       </div>
     </div>
   );
