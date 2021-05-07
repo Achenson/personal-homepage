@@ -17,7 +17,7 @@ import {
   createRSS,
 } from "../../utils/objCreators";
 
-import {handleKeyDown_inner} from "../../utils/func_handleKeyDown_inner"
+import { handleKeyDown_inner } from "../../utils/func_handleKeyDown_inner";
 
 import { produce } from "immer";
 
@@ -343,9 +343,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     }
   }
 
-  function handleKeyDown(
-    event: KeyboardEvent
-  ) {
+  function handleKeyDown(event: KeyboardEvent) {
     handleKeyDown_inner(
       event.code,
       selectablesListVis,
@@ -374,7 +372,9 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             : "RSS channel"}
         </p>
         <div className="flex justify-around mb-2 mt-3">
-          <p className="w-32">Title</p>
+          <p className="flex-none" style={{ width: `${tabType === "folder" ? "87px" : "66px"}` }}>
+            Title
+          </p>
           {/* <div className="w-full pl-2"> */}
           <input
             type="text"
@@ -403,7 +403,9 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
         {tabType === "folder" && (
           <div className="flex justify-around mb-2 mt-2">
-            <p className="w-32">Bookmarks</p>
+            <p className="flex-none" style={{ width: "87px" }}>
+              Bookmarks
+            </p>
             {/* <div className="w-full pl-2"> */}
 
             <div className="relative w-full">
@@ -492,7 +494,9 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
         {tabType === "rss" && (
           <div className="flex justify-around mb-2 mt-2">
-            <p className="w-32">RSS link</p>
+            <p className="flex-none"
+            style={{width: "66px"}}
+            >RSS link</p>
             <div className="w-full">
               <input
                 type="text"

@@ -81,6 +81,7 @@ additional div on Grid (so there is space for colors/editable), Grid - overflow-
 15. Main -> manipulating document body directy for hidding scrollbard -> fine, because
 react is manipulatin only #app & everything below, no possible conflict with anything above #app
 https://stackoverflow.com/questions/39962757/prevent-scrolling-using-css-on-react-rendered-components
+16. uneven input length fix: flex-none on labels on the left
 
 TO DO:
 
@@ -381,6 +382,7 @@ DONE 313. make gray button disabled! eg save SVG DONE (return if nothings change
 DONE 315. gray area (when clicking settings) does not expand to whole page (hidding scrollbar in Main instead)  DONE
 DONE 316. background colors selection not visible on black (whitish border with z-50) DONE
 DONE 320. one color for all columns: when selected, make border collapsed DONE
+DONE 323. newFolder newRSS: better input alignments (flex-none on labels to the left) DONE
 DONE 324. delete all btn for selectables DONE
 DONE 325. xxx open popup with 3 default images to choose xx -> chosing enablem in Background Settings without popup DONE
 DONE 326. chevronDown & selectableVis -> unify logic! DONE
@@ -427,7 +429,6 @@ DONE 372. svg for loginOut? DONE
 317. white border selection problem -> takes too much space to the left. modify adjacent border colors?
 318. useEffect -> some should be unmounted? check in the end
 322. newBookmark & editBookmark: title & link wrong responsive behaviour  
-323. newFolder newRSS: better input alignments
 
 329. code order (useEffect, func itp) eg. in 
 330. extract more functions out?
@@ -440,7 +441,9 @@ DONE 372. svg for loginOut? DONE
 
 340. allow trailing commas in selectables
 341. bookmark_lowerUI -> divide function to new & edit
+
 342. chevroDown: lower it so it will be on the level of "x" ? edit bookmark only?
+
 343. make column appear thinner (notes, bookmarks etc. seem to stick out)
 344. get rid of border-b in img mode on note input when bg is transparetn? (light bg problem)
 
@@ -466,7 +469,8 @@ DONE 372. svg for loginOut? DONE
 
 373. xs screen expendable svg to aligned well?
 
-374. make upperUI adding component work same as settings -> close when clicking on gray background
+374. make upperUI adding component work same as settings -> close when clicking on gray background & hide scrollbar
+375. newNote paddingTop vh instead of center?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
