@@ -372,6 +372,7 @@ DONE 300. no img background - X get rid of lightest colors? X (make lower border
 ???302. sorting method???
 DONE 303. better borders in color selecting DONE
 DONE 305. columnColor not being reduced in numbers if "one color for all columns" is set DONE
+XXX 306. new rss & new tab: make it smaller? XXX
 DONE 307. Selectables -> truncate (and should appear on one line only) - the stick out if too long! DONE
 DONE 308. login DONE
 DONE 309. UpperRight Menu -> make it possible to close by clicking on the background (e.stopPropagation() on immediate div child) DONE
@@ -387,11 +388,13 @@ DONE 327. add error to editTab to all only unique titles! DONE
 XXX 328. bigger gap after tab on smaller screen sizes when column is empty? XXX
 DONE 334. saveSVGs onClick -> convert code to functions DONE
 DONE 335. RSS settings - date & description better styles DONE
+DONE 336. Rss SingleLink - empty?? (deleted) DONE
 DONE 339. move note & rss edit errors lower DONE
 DONE 343. saveSVG still being cut on firefox! DONE (w-1 instead of w-px)
 DONE 344. NoteInput: make better bg for IMG background version DONE
 DONE 345. background color setting -> no defualt color selection DONE
 DONE 347. touch screen compatibility? DONE
+DONE 350. can't access tab options with touch DONE
 DONE 351. ColorsToChoose_Default - control positioning by props, not inside components DONE
 DONE 356. selectables bug: no list if string lenght will be 0 DONE (now opens on change, or with arrow down)
 DONE 356.5 newTab newBookmark EditTab bookmark_lowerUI -> change bookmarks/tags naming to selectables, extract functions DONE
@@ -414,15 +417,12 @@ DONE 372. svg for loginOut? DONE
 
 287. rss error handling: catch error for data and description (cnn rss description crashes the app)
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
+
 289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds
 
 296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
 
 304. react query devtools not working
-
-306. new rss & new tab: make it smaller?
-
-
 
 317. white border selection problem -> takes too much space to the left. modify adjacent border colors?
 318. useEffect -> some should be unmounted? check in the end
@@ -434,7 +434,6 @@ DONE 372. svg for loginOut? DONE
 331. unmounted component error (err mentioned alread?)
 332. make biggest components smaller?
 333. clean tailwind files in the end
-336. Rss SingleLink - empty??
 337. rss date formatting
 338. aligning left-hand text with right-hand input -> do it without margins!
 
@@ -449,7 +448,6 @@ DONE 372. svg for loginOut? DONE
 346. error in console.log if empty tag auto deletes itself
 348. background colors list to the left?
 349. svg error still! on lower ui 
-350. can't access tab options with touch
 352. clear svgs
 353. SingleColor_DefaultAndColumn SingleColor_Column_Img unify?
 354. limit column width?
@@ -465,6 +463,10 @@ DONE 372. svg for loginOut? DONE
 370. change colors data to objects?
 371. fixed position of upperMenu?
 372. popoup for messages for user (eg. logged out, tab created etc.)
+
+373. xs screen expendable svg to aligned well?
+
+374. make upperUI adding component work same as settings -> close when clicking on gray background
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
