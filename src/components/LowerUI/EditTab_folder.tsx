@@ -8,8 +8,7 @@ import { ReactComponent as XsmallSVG } from "../../svgs/x-small.svg";
 
 import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 
-import {handleKeyDown_inner} from "../../utils/func_handleKeyDown_inner"
-
+import { handleKeyDown_inner } from "../../utils/func_handleKeyDown_inner";
 
 interface Props {
   selectablesListVis: boolean;
@@ -80,9 +79,7 @@ function EditTab_folder({
     return bookmarks;
   }
 
-  function handleKeyDown(
-    event: KeyboardEvent
-  ) {
+  function handleKeyDown(event: KeyboardEvent) {
     handleKeyDown_inner(
       event.code,
       selectablesListVis,
@@ -96,7 +93,9 @@ function EditTab_folder({
     /* bookmarks not visible for tab with ALL Bookmarks */
 
     <div className="flex items-center mt-2 justify-between">
-      <p className={`mr-2`}>Bookmarks</p>
+      <p className={`flex-none`} style={{ width: "87px" }}>
+        Bookmarks
+      </p>
       <div className="relative w-full">
         <div className="relative">
           <input

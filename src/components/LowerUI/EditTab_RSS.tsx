@@ -52,7 +52,7 @@ function EditTab_RSS({
   return (
     <div className="-mb-1">
       <div className="flex items-center mt-2 justify-between">
-        <p className="whitespace-nowrap " style={{ marginRight: "10px" }}>
+        <p className="whitespace-nowrap flex-none" style={{ width: "65px" }}>
           RSS link
         </p>
         <input

@@ -167,12 +167,15 @@ Props): JSX.Element {
   // let regexForTabs = /^\w+(,\s\w+)*$/;
   let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
 
-  function titleMarginRight() {
+  function titleWidth() {
     if (tabType === "note" || tabID === "ALL_TAGS") {
-      return "mr-2";
+      // return "mr-2";
+      return "40px";
     }
-    if (tabType === "rss") return "mr-9";
-    if (tabType === "folder") return "mr-14";
+    // if (tabType === "rss") return "mr-9";
+    if (tabType === "rss") return "65px";
+    // if (tabType === "folder") return "mr-14";
+    if (tabType === "folder") return "87px";
   }
 
   let bookmarksInputArr = selectablesInputStr.split(", ");
@@ -351,9 +354,10 @@ Props): JSX.Element {
       <div className="mb-3">
         <div className={`flex items-center mt-2 justify-between`}>
           <p
-            className={`
-              ${titleMarginRight()}
-            `}
+            className="flex-none"
+
+            
+            style={{ width: `${titleWidth()}` }}
           >
             Title
           </p>

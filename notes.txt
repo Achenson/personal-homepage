@@ -391,6 +391,7 @@ XXX 328. bigger gap after tab on smaller screen sizes when column is empty? XXX
 DONE 334. saveSVGs onClick -> convert code to functions DONE
 DONE 335. RSS settings - date & description better styles DONE
 DONE 336. Rss SingleLink - empty?? (deleted) DONE
+DONE 338. aligning left-hand text with right-hand input -> do it without margins! (flex-none instead) DONE
 DONE 339. move note & rss edit errors lower DONE
 DONE 343. saveSVG still being cut on firefox! DONE (w-1 instead of w-px)
 DONE 344. NoteInput: make better bg for IMG background version DONE
@@ -436,7 +437,6 @@ DONE 372. svg for loginOut? DONE
 332. make biggest components smaller?
 333. clean tailwind files in the end
 337. rss date formatting
-338. aligning left-hand text with right-hand input -> do it without margins!
 
 
 340. allow trailing commas in selectables

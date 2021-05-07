@@ -380,11 +380,11 @@ function Bookmark_lowerUI({
     <div className="absolute z-40 bg-gray-100 w-full pb-2 pl-1 border">
       <div className="mt-2">
         <div className="flex justify-around mb-2 mt-2">
-          <p className="w-10">Title</p>
+          <p className="w-10 flex-none">Title</p>
 
           <input
             type="text"
-            className="w-full ml-2 border pl-px"
+            className="w-full border pl-px"
             value={titleInput}
             placeholder={"new bookmark title"}
             onChange={(e) => {
@@ -398,11 +398,11 @@ function Bookmark_lowerUI({
           <ChevronDownSVG className="h-6 invisible" />
         </div>
         <div className="flex justify-around mb-2">
-          <p className="w-10">Link</p>
+          <p className="w-10 flex-none">Link</p>
 
           <input
             type="text"
-            className="w-full ml-2 border pl-px"
+            className="w-full border pl-px"
             value={urlInput}
             placeholder={"enter proper URL address"}
             onChange={(e) => {
@@ -416,9 +416,9 @@ function Bookmark_lowerUI({
           <ChevronDownSVG className="h-6 invisible" />
         </div>
         <div className="flex justify-start mb-2">
-          <p className="w-10">Tags</p>
+          <p className="w-10 flex-none">Tags</p>
 
-          <div className="ml-2 relative w-full">
+          <div className="relative w-full">
             <div className="relative">
               <input
                 type="text"
