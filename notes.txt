@@ -473,6 +473,7 @@ DONE 372. svg for loginOut? DONE
 375. newNote paddingTop vh instead of center?
 376. selectables "x" center vertically?
 377. padding right lowerbookmark editTab & editBookmark unite
+378. delete inv chevrons in uppperUI
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
