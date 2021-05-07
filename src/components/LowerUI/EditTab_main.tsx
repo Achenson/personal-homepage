@@ -375,8 +375,8 @@ Props): JSX.Element {
             }}
           />
           {tabType === "folder" && tabID !== "ALL_TAGS" && (
-            <div style={{ height: "18px" }} className="-mr-1">
-              <ChevronDownSVG className="h-full invisible" />
+            <div style={{ height: "18px", width: "18px" }} className="flex-none">
+              
             </div>
           )}
         </div>

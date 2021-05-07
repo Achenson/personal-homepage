@@ -372,7 +372,10 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             : "RSS channel"}
         </p>
         <div className="flex justify-around mb-2 mt-3">
-          <p className="flex-none" style={{ width: `${tabType === "folder" ? "87px" : "66px"}` }}>
+          <p
+            className="flex-none"
+            style={{ width: `${tabType === "folder" ? "87px" : "66px"}` }}
+          >
             Title
           </p>
           {/* <div className="w-full pl-2"> */}
@@ -469,34 +472,31 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               )}
             </div>
 
-            {/* </div> */}
-            {selectablesListVis ? (
-              <div className="w-5 h-5 mt-1">
+            <div className="w-5 h-5 mt-1">
+              {selectablesListVis ? (
                 <ChevronUpSVG
                   className="h-full cursor-pointer hover:text-blueGray-500"
                   onClick={() => {
                     setSelectablesListVis((b) => !b);
                   }}
                 />
-              </div>
-            ) : (
-              <div className="w-5 h-5 mt-1">
+              ) : (
                 <ChevronDownSVG
                   className="h-full cursor-pointer hover:text-blueGray-500"
                   onClick={() => {
                     setSelectablesListVis((b) => !b);
                   }}
                 />
-              </div>
-            )}
+              )}
+            </div>
           </div>
         )}
 
         {tabType === "rss" && (
           <div className="flex justify-around mb-2 mt-2">
-            <p className="flex-none"
-            style={{width: "66px"}}
-            >RSS link</p>
+            <p className="flex-none" style={{ width: "66px" }}>
+              RSS link
+            </p>
             <div className="w-full">
               <input
                 type="text"

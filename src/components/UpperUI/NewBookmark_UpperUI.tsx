@@ -18,7 +18,7 @@ import {
 
 import { UpperVisAction } from "../../utils/interfaces";
 import { bookmarkErrors } from "../../utils/errors";
-import {handleKeyDown_inner} from "../../utils/func_handleKeyDown_inner"
+import { handleKeyDown_inner } from "../../utils/func_handleKeyDown_inner";
 import SelectableList from "../Shared/SelectableList";
 
 interface Props {
@@ -134,7 +134,10 @@ Props): JSX.Element {
       return true;
     }
 
-    if (!regexForTags.test(tagsInputArr.join(", ")) && selectablesInputStr !== "") {
+    if (
+      !regexForTags.test(tagsInputArr.join(", ")) &&
+      selectablesInputStr !== ""
+    ) {
       setTagErrorVis(true);
       setSelectablesListVis(false);
       return true;
@@ -241,9 +244,7 @@ Props): JSX.Element {
     );
   }
 
-  function handleKeyDown(
-    event: KeyboardEvent
-  ) {
+  function handleKeyDown(event: KeyboardEvent) {
     handleKeyDown_inner(
       event.code,
       selectablesListVis,
@@ -355,21 +356,23 @@ Props): JSX.Element {
             )}
           </div>
 
-          {selectablesListVis ? (
-            <ChevronUpSVG
-              className="h-6 cursor-pointer hover:text-blueGray-500"
-              onClick={() => {
-                setSelectablesListVis((b) => !b);
-              }}
-            />
-          ) : (
-            <ChevronDownSVG
-              className="h-6 cursor-pointer hover:text-blueGray-500"
-              onClick={() => {
-                setSelectablesListVis((b) => !b);
-              }}
-            />
-          )}
+          <div className="w-5 h-5 mt-1">
+            {selectablesListVis ? (
+              <ChevronUpSVG
+                className="h-full cursor-pointer hover:text-blueGray-500"
+                onClick={() => {
+                  setSelectablesListVis((b) => !b);
+                }}
+              />
+            ) : (
+              <ChevronDownSVG
+                className="h-full cursor-pointer hover:text-blueGray-500"
+                onClick={() => {
+                  setSelectablesListVis((b) => !b);
+                }}
+              />
+            )}
+          </div>
         </div>
 
         {titleFormatErrorVis && (

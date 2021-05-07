@@ -364,9 +364,7 @@ function Bookmark_lowerUI({
     }
   }
 
-  function handleKeyDown(
-    event: KeyboardEvent
-  ) {
+  function handleKeyDown(event: KeyboardEvent) {
     handleKeyDown_inner(
       event.code,
       selectablesListVis,
@@ -395,7 +393,9 @@ function Bookmark_lowerUI({
               setSelectablesListVis(false);
             }}
           />
-          <ChevronDownSVG className="h-6 invisible" />
+          
+          <div className="invisible flex-none"
+          style={{width: "18px"}} />
         </div>
         <div className="flex justify-around mb-2">
           <p className="w-10 flex-none">Link</p>
@@ -413,7 +413,8 @@ function Bookmark_lowerUI({
               setSelectablesListVis(false);
             }}
           />
-          <ChevronDownSVG className="h-6 invisible" />
+          <div className="invisible flex-none"
+          style={{width: "18px"}} />
         </div>
         <div className="flex justify-start mb-2">
           <p className="w-10 flex-none">Tags</p>
@@ -486,21 +487,23 @@ function Bookmark_lowerUI({
             )}
           </div>
 
-          {selectablesListVis ? (
-            <ChevronUpSVG
-              className="h-6 cursor-pointer hover:text-blueGray-500"
-              onClick={() => {
-                setSelectablesListVis((b) => !b);
-              }}
-            />
-          ) : (
-            <ChevronDownSVG
-              className="h-6 cursor-pointer hover:text-blueGray-500"
-              onClick={() => {
-                setSelectablesListVis((b) => !b);
-              }}
-            />
-          )}
+          <div style={{ height: "18px", width: "18px" }} className="mt-1 flex-none">
+            {selectablesListVis ? (
+              <ChevronUpSVG
+                className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
+                onClick={() => {
+                  setSelectablesListVis((b) => !b);
+                }}
+              />
+            ) : (
+              <ChevronDownSVG
+                className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
+                onClick={() => {
+                  setSelectablesListVis((b) => !b);
+                }}
+              />
+            )}
+          </div>
         </div>
 
         {titleFormatErrorVis && (

@@ -158,7 +158,7 @@ function EditTab_folder({
         )}
       </div>
 
-      <div style={{ height: "18px" }} className="-mr-1">
+      <div style={{ height: "18px", width: "18px" }} className="mt-0.5 flex-none">
         {selectablesListVis ? (
           <ChevronUpSVG
             className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
