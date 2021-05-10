@@ -260,7 +260,7 @@ Props): JSX.Element {
       style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
     >
       <div
-        className="bg-gray-200 pb-2 pt-3 pl-2 pr-1 border-2 border-teal-500 rounded-sm md:mb-48"
+        className="bg-gray-200 pb-2 pt-3 pl-2 pr-0.5 border-2 border-teal-500 rounded-sm md:mb-48"
         style={{ width: "350px" }}
       >
         <p className="text-center">New bookmark</p>
@@ -277,7 +277,8 @@ Props): JSX.Element {
               setSelectablesListVis(false);
             }}
           />
-          <ChevronDownSVG className="h-6 invisible" />
+          {/* <ChevronDownSVG className="h-6 invisible" /> */}
+          <div className="w-5 flex-none"></div>
         </div>
         <div className="flex justify-around mb-2">
           <p className="w-11 flex-none">Link</p>
@@ -292,7 +293,8 @@ Props): JSX.Element {
               setSelectablesListVis(false);
             }}
           />
-          <ChevronDownSVG className="h-6 invisible" />
+          {/* <ChevronDownSVG className="h-6 invisible" /> */}
+          <div className="w-5 flex-none"></div>
         </div>
         <div className="flex justify-start mb-2">
           <p className="w-11 flex-none">Tags</p>
@@ -356,7 +358,7 @@ Props): JSX.Element {
             )}
           </div>
 
-          <div className="w-5 h-5 mt-1">
+          <div className="w-5 h-5 mt-1 flex-none">
             {selectablesListVis ? (
               <ChevronUpSVG
                 className="h-full cursor-pointer hover:text-blueGray-500"

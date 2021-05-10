@@ -412,6 +412,7 @@ DONE 369. initial colors in global state -> import instead of hardcoding DONE
 DONE 371. is there a way to do less repeats in if( || || ||)? typescript? no - fixed wrong use of || || DONE
 DONE 372. svg for loginOut? DONE
 DONE 377. padding right lowerbookmark editTab & editBookmark unite DONE
+DONE 378. delete inv chevrons in uppperUI DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -473,7 +474,6 @@ DONE 377. padding right lowerbookmark editTab & editBookmark unite DONE
 374. make upperUI adding component work same as settings -> close when clicking on gray background & hide scrollbar
 375. newNote paddingTop vh instead of center?
 376. selectables "x" center vertically?
-378. delete inv chevrons in uppperUI
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

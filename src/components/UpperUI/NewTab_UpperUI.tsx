@@ -360,7 +360,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
     >
       <div
-        className="bg-gray-200 pb-2 pt-3 pl-2 pr-1 border-2 border-teal-500 rounded-sm md:mb-48"
+        className="bg-gray-200 pb-2 pt-3 pl-2 pr-0.5 border-2 border-teal-500 rounded-sm md:mb-48"
         style={{ width: "350px" }}
       >
         <p className="text-center">
@@ -398,9 +398,10 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             }}
           />
           {/* </div> */}
-          <div className="w-5 h-5">
-            <ChevronDownSVG className="h-full invisible" />
-          </div>
+          {/* <div className="w-5 h-5"> */}
+            {/* <ChevronDownSVG className="h-full invisible" /> */}
+            <div className="w-5 flex-none"></div>
+          {/* </div> */}
           {/* <ChevronDownSVG className="h-6 invisible" /> */}
         </div>
 
@@ -472,7 +473,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               )}
             </div>
 
-            <div className="w-5 h-5 mt-1">
+            <div className="flex-none w-5 h-5 mt-1">
               {selectablesListVis ? (
                 <ChevronUpSVG
                   className="h-full cursor-pointer hover:text-blueGray-500"
@@ -506,9 +507,10 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 onChange={(e) => setRssLinkInput(e.target.value)}
               />
             </div>
-            <div className="w-5 h-5 mt-1">
-              <ChevronDownSVG className="h-full invisible" />
-            </div>
+            {/* <div className="w-5 h-5 mt-1"> */}
+              {/* <ChevronDownSVG className="h-full invisible" /> */}
+              <div className="w-5 flex-none"></div>
+            {/* </div> */}
           </div>
         )}
 
@@ -518,9 +520,10 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
           <div className="flex">
             {renderColsNumberControls()}
-            <div className="w-5 h-5">
-              <ChevronDownSVG className="h-full invisible" />
-            </div>
+            {/* <div className="w-5 h-5"> */}
+              {/* <ChevronDownSVG className="h-full invisible" /> */}
+              <div className="w-5 flex-none"></div>
+            {/* </div> */}
           </div>
 
           {/* </div> */}
