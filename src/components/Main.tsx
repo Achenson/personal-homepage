@@ -143,7 +143,11 @@ function Main({}: Props): JSX.Element {
       upperVisState.colorsSettingsVis ||
       upperVisState.backgroundSettingsVis ||
       upperVisState.settingsVis ||
-      upperVisState.profileVis
+      upperVisState.profileVis ||
+      upperVisState.newBookmarkVis ||
+      upperVisState.newTabVis
+     
+
     ) {
       // console.log(document.documentElement.scrollHeight);
       // console.log(document.documentElement.clientHeight);
@@ -168,6 +172,8 @@ function Main({}: Props): JSX.Element {
     upperVisState.backgroundSettingsVis,
     upperVisState.settingsVis,
     upperVisState.profileVis,
+    upperVisState.newBookmarkVis,
+    upperVisState.newTabVis
   ]);
 
   // useEffect(() => {

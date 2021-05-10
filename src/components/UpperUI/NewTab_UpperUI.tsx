@@ -406,10 +406,17 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     <div
       className="flex z-50 absolute h-screen w-screen items-center justify-center"
       style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
+      onClick={() => {
+        upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+      }}
     >
       <div
         className="bg-gray-200 pb-2 pt-3 pl-2 pr-0.5 border-2 border-teal-500 rounded-sm md:mb-48"
         style={{ width: "350px" }}
+        onClick={(e) => {
+          e.stopPropagation();
+          return;
+        }}
       >
         <p className="text-center">
           New{" "}
