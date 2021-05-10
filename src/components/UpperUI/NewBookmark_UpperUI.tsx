@@ -38,24 +38,52 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   // currentLink: SingleLinkData | undefined
-  tagErrorVis: boolean;
-  setTagErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
 
-  tagRepeatErrorVis: boolean;
-  setTagRepeatErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // tagErrorVis: boolean;
+  // setTagErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
 
-  titleFormatErrorVis: boolean;
-  setTitleFormatErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // tagRepeatErrorVis: boolean;
+  // setTagRepeatErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
 
-  titleUniquenessErrorVis: boolean;
-  setTitleUniquenessErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // titleFormatErrorVis: boolean;
+  // setTitleFormatErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
 
-  noteErrorVis: boolean;
-  setNoteErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
-  rssErrorVis: boolean;
-  setRssErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // titleUniquenessErrorVis: boolean;
+  // setTitleUniquenessErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+
+  // noteErrorVis: boolean;
+  // setNoteErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // rssErrorVis: boolean;
+  // setRssErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
+
+  errors: {
+    tagErrorVis: boolean;
+    tagRepeatErrorVis: boolean;
+    titleFormatErrorVis: boolean;
+    titleUniquenessErrorVis: boolean;
+    noteErrorVis: boolean;
+    rssErrorVis: boolean;
+};
+  setErrors:React.Dispatch<React.SetStateAction<{
+    tagErrorVis: boolean;
+    tagRepeatErrorVis: boolean;
+    titleFormatErrorVis: boolean;
+    titleUniquenessErrorVis: boolean;
+    noteErrorVis: boolean;
+    rssErrorVis: boolean;
+}>> ;
+
   regexForTags: RegExp;
   regexForTitle: RegExp;
+}
+
+const errorsAllFalse = {
+  tagErrorVis: false,
+tagRepeatErrorVis: false,
+titleFormatErrorVis: false,
+titleUniquenessErrorVis: false,
+noteErrorVis: false,
+rssErrorVis: false
 }
 
 function NewBookmark_UpperUI({
@@ -73,22 +101,27 @@ function NewBookmark_UpperUI({
   rssTitlesArr,
   upperVisDispatch,
   bookmarkComponentType,
-  tagErrorVis,
-  setTagErrorVis,
 
-  tagRepeatErrorVis,
-  setTagRepeatErrorVis,
+  // tagErrorVis,
+  // setTagErrorVis,
 
-  titleFormatErrorVis,
-  setTitleFormatErrorVis,
+  // tagRepeatErrorVis,
+  // setTagRepeatErrorVis,
 
-  titleUniquenessErrorVis,
-  setTitleUniquenessErrorVis,
+  // titleFormatErrorVis,
+  // setTitleFormatErrorVis,
 
-  noteErrorVis,
-  setNoteErrorVis,
-  rssErrorVis,
-  setRssErrorVis,
+  // titleUniquenessErrorVis,
+  // setTitleUniquenessErrorVis,
+
+  // noteErrorVis,
+  // setNoteErrorVis,
+
+  // rssErrorVis,
+  // setRssErrorVis,
+  errors,
+  setErrors,
+  
   regexForTags,
   regexForTitle,
 }: // setBookmarkVis,
@@ -113,15 +146,21 @@ Props): JSX.Element {
   let tagsInputArr = selectablesInputStr.split(", ");
 
   function errorHandling(): boolean {
-    setTagErrorVis(false);
-    setTagRepeatErrorVis(false);
-    setTitleFormatErrorVis(false);
-    setTitleUniquenessErrorVis(false);
-    setNoteErrorVis(false);
-    setRssErrorVis(false);
+    // setTagErrorVis(false);
+    // setTagRepeatErrorVis(false);
+    // setTitleFormatErrorVis(false);
+    // setTitleUniquenessErrorVis(false);
+    // setNoteErrorVis(false);
+    // setRssErrorVis(false);
 
     if (!regexForTitle.test(titleInput)) {
-      setTitleFormatErrorVis(true);
+      // setTitleFormatErrorVis(true);
+
+      setErrors({
+        ...errorsAllFalse,
+        titleFormatErrorVis: true
+      })
+
       setSelectablesListVis(false);
       return true;
     }
@@ -129,7 +168,14 @@ Props): JSX.Element {
     // !!! difference in Link_lower_JSX for edit type
 
     if (!titleUniquenessCheck()) {
-      setTitleUniquenessErrorVis(true);
+      // setTitleUniquenessErrorVis(true);
+      setErrors({
+        ...errorsAllFalse,
+        titleUniquenessErrorVis: true
+      })
+
+
+
       setSelectablesListVis(false);
       return true;
     }
@@ -138,14 +184,24 @@ Props): JSX.Element {
       !regexForTags.test(tagsInputArr.join(", ")) &&
       selectablesInputStr !== ""
     ) {
-      setTagErrorVis(true);
+      // setTagErrorVis(true);
+
+      setErrors({
+        ...errorsAllFalse,
+        tagErrorVis: true
+      })
+
       setSelectablesListVis(false);
       return true;
     }
 
     for (let el of tagsInputArr) {
       if (notesTitlesArr.indexOf(el) > -1) {
-        setNoteErrorVis(true);
+        // setNoteErrorVis(true);
+        setErrors({
+          ...errorsAllFalse,
+          noteErrorVis: true
+        })
         setSelectablesListVis(false);
         return true;
       }
@@ -153,14 +209,22 @@ Props): JSX.Element {
 
     for (let el of tagsInputArr) {
       if (rssTitlesArr.indexOf(el) > -1) {
-        setRssErrorVis(true);
+        // setRssErrorVis(true);
+        setErrors({
+          ...errorsAllFalse,
+          rssErrorVis: true
+        })
         setSelectablesListVis(false);
         return true;
       }
     }
 
     if (!tagUniquenessCheck()) {
-      setTagRepeatErrorVis(true);
+      // setTagRepeatErrorVis(true);
+      setErrors({
+        ...errorsAllFalse,
+        tagRepeatErrorVis: true
+      })
       setSelectablesListVis(false);
       return true;
     }
@@ -377,27 +441,27 @@ Props): JSX.Element {
           </div>
         </div>
 
-        {titleFormatErrorVis && (
+        {errors.titleFormatErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.titleFormat}</p>
         )}
 
-        {titleUniquenessErrorVis && (
+        {errors.titleUniquenessErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.titleUniqueness}</p>
         )}
 
-        {tagErrorVis && (
+        {errors.tagErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.tagFormat}</p>
         )}
 
-        {noteErrorVis && (
+        {errors.noteErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.noteError}</p>
         )}
 
-        {rssErrorVis && (
+        {errors.rssErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.rssError}</p>
         )}
 
-        {tagRepeatErrorVis && (
+        {errors.tagRepeatErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.tagRepeat}</p>
         )}
 

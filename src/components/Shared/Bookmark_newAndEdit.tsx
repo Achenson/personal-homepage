@@ -29,6 +29,16 @@ interface Props {
   
 }
 
+const errorsAllFalse = {
+  tagErrorVis: false,
+tagRepeatErrorVis: false,
+titleFormatErrorVis: false,
+titleUniquenessErrorVis: false,
+noteErrorVis: false,
+rssErrorVis: false
+}
+
+
 function Bookmark_newAndEdit({
   // setBookmarkVis,
   bookmarkComponentType,
@@ -110,17 +120,22 @@ function Bookmark_newAndEdit({
   // tags won't be visible on first render even though visibleTags length won't be 0 (see useEffect)
   // xx const [isThisTheFirstRender, setIsThisTheFirstRender] = useState(true);
 
-  const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
-  const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
-  const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
-    false
-  );
-  const [
-    titleUniquenessErrorVis,
-    setTitleUniquenessErrorVis,
-  ] = useState<boolean>(false);
-  const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
-  const [rssErrorVis, setRssErrorVis] = useState<boolean>(false);
+  // const [tagErrorVis, setTagErrorVis] = useState<boolean>(false);
+  // const [tagRepeatErrorVis, setTagRepeatErrorVis] = useState<boolean>(false);
+  // const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
+  //   false
+  // );
+  // const [
+  //   titleUniquenessErrorVis,
+  //   setTitleUniquenessErrorVis,
+  // ] = useState<boolean>(false);
+  // const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
+  // const [rssErrorVis, setRssErrorVis] = useState<boolean>(false);
+
+
+  const [errors, setErrors] = useState({
+    ...errorsAllFalse
+  })
 
   // ^  and $ -> beginning and end of the text!
   // let regexForTags = /^\w+(,\s\w+)*$/;
@@ -207,19 +222,31 @@ function Bookmark_newAndEdit({
     notesTitlesArr,
     rssTitlesArr,
     bookmarkComponentType,
+
+    errors,
+    setErrors,
    
-    tagErrorVis,
-    setTagErrorVis,
-    tagRepeatErrorVis,
-    setTagRepeatErrorVis,
-    titleFormatErrorVis,
-    setTitleFormatErrorVis,
-    titleUniquenessErrorVis,
-    setTitleUniquenessErrorVis,
-    noteErrorVis,
-    setNoteErrorVis,
-    rssErrorVis,
-    setRssErrorVis,
+    // tagErrorVis,
+    // setTagErrorVis,
+
+    // tagRepeatErrorVis,
+    // setTagRepeatErrorVis,
+
+    // titleFormatErrorVis,
+    // setTitleFormatErrorVis,
+
+    // titleUniquenessErrorVis,
+    // setTitleUniquenessErrorVis,
+
+    // noteErrorVis,
+    // setNoteErrorVis,
+
+    // rssErrorVis,
+    // setRssErrorVis,
+
+
+
+
     regexForTags,
     regexForTitle,
   };
