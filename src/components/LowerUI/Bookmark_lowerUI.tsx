@@ -487,7 +487,7 @@ function Bookmark_lowerUI({
             )}
           </div>
 
-          <div style={{ height: "18px", width: "18px" }} className="mt-1 flex-none">
+          <div style={{ height: "18px", width: "18px", marginTop: "5px" }} className=" flex-none">
             {selectablesListVis ? (
               <ChevronUpSVG
                 className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"

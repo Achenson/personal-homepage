@@ -375,7 +375,7 @@ Props): JSX.Element {
             }}
           />
           {tabType === "folder" && tabID !== "ALL_TAGS" && (
-            <div style={{ height: "18px", width: "18px" }} className="flex-none">
+            <div style={{ height: "18px", width: "18px" }} className="flex-none -mr-1">
               
             </div>
           )}
