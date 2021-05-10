@@ -34,6 +34,16 @@ interface Props {
   currentTab: SingleTabData;
 }
 
+const errorsAllFalse = {
+  bookmarksErrorVis: false,
+  bookmarksRepeatErrorVis: false,
+  titleFormatErrorVis: false,
+  titleUniquenessErrorVis: false,
+  bookmarkExistenceErrorVis: false,
+  textAreaErrorVis: false,
+  noDeletionErrorVis: false,
+};
+
 function EditTab({
   tabID,
   visDispatch,
@@ -134,27 +144,31 @@ Props): JSX.Element {
     }
   }, [wasCheckboxClicked, wasTabOpenClicked, wasItemsPerPageClicked]);
 
-  const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
-    false
-  );
+  // const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
+  //   false
+  // );
 
-  const [
-    titleUniquenessErrorVis,
-    setTitleUniquenessErrorVis,
-  ] = useState<boolean>(false);
+  // const [
+  //   titleUniquenessErrorVis,
+  //   setTitleUniquenessErrorVis,
+  // ] = useState<boolean>(false);
 
-  const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
-  const [noDeletionErrorVis, setNoDeletionErrorVis] = useState<boolean>(false);
+  // const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
+  // const [noDeletionErrorVis, setNoDeletionErrorVis] = useState<boolean>(false);
 
-  const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
-  const [
-    bookmarksRepeatErrorVis,
-    setBookmarksRepeatErrorVis,
-  ] = useState<boolean>(false);
-  const [
-    bookmarksExistenceErrorVis,
-    setBookmarksExistenceErrorVis,
-  ] = useState<boolean>(false);
+  // const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
+  // const [
+  //   bookmarksRepeatErrorVis,
+  //   setBookmarksRepeatErrorVis,
+  // ] = useState<boolean>(false);
+  // const [
+  //   bookmarksExistenceErrorVis,
+  //   setBookmarksExistenceErrorVis,
+  // ] = useState<boolean>(false);
+
+  const [errors, setErrors] = useState({
+    ...errorsAllFalse,
+  });
 
   // let regexForTitle = /^\w+$/;
   let regexForTitle = /^\w(\s?\w+)*$/;
@@ -181,51 +195,75 @@ Props): JSX.Element {
   let bookmarksInputArr = selectablesInputStr.split(", ");
 
   function errorHandling(): boolean {
-    setTitleFormatErrorVis(false);
-    setTitleUniquenessErrorVis(false);
-    setTextAreaErrorVis(false);
-    setNoDeletionErrorVis(false);
-    setBookmarksErrorVis(false);
-    setBookmarksRepeatErrorVis(false);
-    setBookmarksExistenceErrorVis(false);
+    // setTitleFormatErrorVis(false);
+    // setTitleUniquenessErrorVis(false);
+    // setTextAreaErrorVis(false);
+    // setNoDeletionErrorVis(false);
+    // setBookmarksErrorVis(false);
+    // setBookmarksRepeatErrorVis(false);
+    // setBookmarksExistenceErrorVis(false);
 
     setWasCheckboxClicked(false);
     setWasItemsPerPageClicked(false);
 
     if (!regexForTitle.test(tabTitleInput)) {
-      setTitleFormatErrorVis(true);
+      // setTitleFormatErrorVis(true);
+      setErrors({
+        ...errorsAllFalse,
+        titleFormatErrorVis: true,
+      });
       setSelectablesListVis(false);
       return true;
     }
 
     if (!titleUniquenessCheck()) {
-      setTitleUniquenessErrorVis(true);
+      // setTitleUniquenessErrorVis(true);
+      setErrors({
+        ...errorsAllFalse,
+        titleUniquenessErrorVis: true,
+      });
       setSelectablesListVis(false);
       return true;
     }
 
     if (tabType === "note") {
       if ((textAreaValue as string).length === 0) {
-        setTextAreaErrorVis(true);
+        // setTextAreaErrorVis(true);
+        setErrors({
+          ...errorsAllFalse,
+          textAreaErrorVis: true,
+        });
         return true;
       }
     }
 
     if (tabType === "folder") {
       if (!regexForBookmarks.test(selectablesInputStr)) {
-        setBookmarksErrorVis(true);
+        // setBookmarksErrorVis(true);
+        setErrors({
+          ...errorsAllFalse,
+          bookmarksErrorVis: true,
+        });
         setSelectablesListVis(false);
         return true;
       }
 
       if (!bookmarkExistenceCheck()) {
-        setBookmarksExistenceErrorVis(true);
+        // setBookmarksExistenceErrorVis(true);
+        setErrors({
+          ...errorsAllFalse,
+          bookmarkExistenceErrorVis: true,
+        });
         setSelectablesListVis(false);
         return true;
       }
 
       if (!bookmarksUniquenessCheck()) {
-        setBookmarksRepeatErrorVis(true);
+        // setBookmarksRepeatErrorVis(true);
+        setErrors({
+          ...errorsAllFalse,
+          bookmarksRepeatErrorVis: true,
+        });
         setSelectablesListVis(false);
         return true;
       }
@@ -413,39 +451,39 @@ Props): JSX.Element {
           />
         )}
 
-        {titleFormatErrorVis && (
+        {errors.titleFormatErrorVis && (
           <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.titleFormat}</p>
         )}
 
-        {titleUniquenessErrorVis && (
+        {errors.titleUniquenessErrorVis && (
           <p className={`text-red-600 mt-1 -mb-2`}>
             {tabErrors.titleUniqueness}
           </p>
         )}
 
-        {textAreaErrorVis && tabType === "note" && (
+        {errors.textAreaErrorVis && tabType === "note" && (
           <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.textArea}</p>
         )}
 
-        {bookmarksErrorVis && tabType === "folder" && (
+        {errors.bookmarksErrorVis && tabType === "folder" && (
           <p className={`text-red-600 mt-1 -mb-2`}>
             {tabErrors.bookmarksFormat}
           </p>
         )}
 
-        {bookmarksExistenceErrorVis && tabType === "folder" && (
+        {errors.bookmarkExistenceErrorVis && tabType === "folder" && (
           <p className={`text-red-600 mt-1 -mb-2`}>
             {tabErrors.bookmarkExistence}
           </p>
         )}
 
-        {bookmarksRepeatErrorVis && tabType === "folder" && (
+        {errors.bookmarksRepeatErrorVis && tabType === "folder" && (
           <p className={`text-red-600 mt-1 -mb-2`}>
             {tabErrors.bookmarksRepeat}
           </p>
         )}
 
-        {noDeletionErrorVis && (
+        {errors.noDeletionErrorVis && (
           <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.noDeletion}</p>
         )}
       </div>
@@ -482,7 +520,11 @@ Props): JSX.Element {
             className="h-6 text-gray-500 transition-colors duration-75 hover:text-black cursor-pointer"
             onClick={() => {
               if (!currentTab.deletable) {
-                setNoDeletionErrorVis(true);
+                // setNoDeletionErrorVis(true);
+                setErrors({
+                  ...errorsAllFalse,
+                  noDeletionErrorVis: true,
+                });
                 return;
               }
 
