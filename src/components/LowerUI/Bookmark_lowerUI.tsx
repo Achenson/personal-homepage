@@ -530,12 +530,11 @@ function Bookmark_lowerUI({
           <p className={`text-red-600`}>{bookmarkErrors.tagRepeat}</p>
         )}
 
-        <div className="flex justify-start mt-5">
+       
           {/* SaveSVG is cut without the <p> - bug? */}
-          <p className="w-px"></p>
-          <div className="w-full flex justify-center">
+          <div className="mt-5 w-full flex justify-center">
             <SaveSVG
-              className={`h-5 fill-current text-black mr-3 transition-colors duration-75 ${
+              className={`h-5 w-5 fill-current text-black mr-6 transition-colors duration-75 ${
                 wasAnythingChanged || bookmarkComponentType === "new_lowerUI"
                   ? "text-gray-900 hover:text-green-600 cursor-pointer"
                   : "text-blueGray-400 cursor-default"
@@ -567,7 +566,7 @@ function Bookmark_lowerUI({
             />
 
             <CancelSVG
-              className="h-5 fill-current text-black ml-3 hover:text-red-600 cursor-pointer transition-colors duration-75"
+              className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75"
               onClick={(e) => {
                 e.preventDefault();
                 // setBookmarkVis((b) => !b);
@@ -582,7 +581,7 @@ function Bookmark_lowerUI({
               }}
             />
           </div>
-        </div>
+       
       </div>
     </div>
   );

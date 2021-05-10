@@ -398,6 +398,7 @@ DONE 343. saveSVG still being cut on firefox! DONE (w-1 instead of w-px)
 DONE 344. NoteInput: make better bg for IMG background version DONE
 DONE 345. background color setting -> no defualt color selection DONE
 DONE 347. touch screen compatibility? DONE
+DONE 349. svg error still! on lower ui (solution: setting fixed width to svg) DONE
 DONE 350. can't access tab options with touch DONE
 DONE 351. ColorsToChoose_Default - control positioning by props, not inside components DONE
 DONE 356. selectables bug: no list if string lenght will be 0 DONE (now opens on change, or with arrow down)
@@ -452,7 +453,6 @@ DONE 378. delete inv chevrons in uppperUI DONE
 
 346. error in console.log if empty tag auto deletes itself
 348. background colors list to the left?
-349. svg error still! on lower ui 
 352. clear svgs
 353. SingleColor_DefaultAndColumn SingleColor_Column_Img unify?
 354. limit column width?

@@ -353,12 +353,7 @@ Props): JSX.Element {
     <div className={`absolute z-40 bg-gray-100 pb-2 border w-full pl-1 pr-1`}>
       <div className="mb-3">
         <div className={`flex items-center mt-2 justify-between`}>
-          <p
-            className="flex-none"
-
-            
-            style={{ width: `${titleWidth()}` }}
-          >
+          <p className="flex-none" style={{ width: `${titleWidth()}` }}>
             Title
           </p>
           <input
@@ -375,9 +370,10 @@ Props): JSX.Element {
             }}
           />
           {tabType === "folder" && tabID !== "ALL_TAGS" && (
-            <div style={{ height: "18px", width: "18px" }} className="flex-none -mr-1">
-              
-            </div>
+            <div
+              style={{ height: "18px", width: "18px" }}
+              className="flex-none -mr-1"
+            ></div>
           )}
         </div>
 
@@ -522,49 +518,46 @@ Props): JSX.Element {
         </div>
       </div>
 
-      <div className="flex justify-start mt-2">
-        {/* SaveSVG is cut without the <p> - bug? */}
-        <p className="w-px"></p>
-        <div className="w-full flex justify-center">
-          <SaveSVG
-            className={`h-5 fill-current mr-3 transition-colors duration-75 ${
-              wasAnythingClicked
-                ? "text-gray-900 hover:text-green-600 cursor-pointer"
-                : "text-blueGray-400 cursor-default"
-            }`}
-            onClick={(e) => {
-              e.preventDefault();
+      <div className="w-full flex justify-center mt-2">
+        <SaveSVG
+          className={`h-5 w-5 fill-current mr-6 transition-colors duration-75 ${
+            wasAnythingClicked
+              ? "text-gray-900 hover:text-green-600 cursor-pointer"
+              : "text-blueGray-400 cursor-default"
+          }`}
+          onClick={(e) => {
+            e.preventDefault();
 
-              if (!wasAnythingClicked) {
-                return;
-              }
+            if (!wasAnythingClicked) {
+              return;
+            }
 
-              let isThereAnError = errorHandling();
-              if (isThereAnError) return;
+            let isThereAnError = errorHandling();
+            if (isThereAnError) return;
 
-              // 1.edit tab(folder,rss or note)
-              // 2. (in case of folders) delete tag from bookmark or add tag to bookmark
-              editTab();
+            // 1.edit tab(folder,rss or note)
+            // 2. (in case of folders) delete tag from bookmark or add tag to bookmark
+            editTab();
 
-              // setEditTabVis((b) => !b);
-              if (tabOpen) {
-                visDispatch({ type: "TAB_CONTENT_OPEN_AFTER_LOCKING" });
-              } else {
-                visDispatch({ type: "EDIT_TOGGLE" });
-              }
-            }}
-          />
-
-          <CancelSVG
-            className="h-5 fill-current text-gray-900 ml-3 hover:text-red-600 cursor-pointer transition-colors duration-75"
-            onClick={(e) => {
-              e.preventDefault();
-              // setEditTabVis((b) => !b);
+            // setEditTabVis((b) => !b);
+            if (tabOpen) {
+              visDispatch({ type: "TAB_CONTENT_OPEN_AFTER_LOCKING" });
+            } else {
               visDispatch({ type: "EDIT_TOGGLE" });
-            }}
-          />
-        </div>
+            }
+          }}
+        />
+
+        <CancelSVG
+          className="h-5 w-5 fill-current text-gray-900 hover:text-red-600 cursor-pointer transition-colors duration-75"
+          onClick={(e) => {
+            e.preventDefault();
+            // setEditTabVis((b) => !b);
+            visDispatch({ type: "EDIT_TOGGLE" });
+          }}
+        />
       </div>
+
       {/* </form> */}
     </div>
   );

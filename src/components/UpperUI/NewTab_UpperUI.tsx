@@ -399,8 +399,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           />
           {/* </div> */}
           {/* <div className="w-5 h-5"> */}
-            {/* <ChevronDownSVG className="h-full invisible" /> */}
-            <div className="w-5 flex-none"></div>
+          {/* <ChevronDownSVG className="h-full invisible" /> */}
+          <div className="w-5 flex-none"></div>
           {/* </div> */}
           {/* <ChevronDownSVG className="h-6 invisible" /> */}
         </div>
@@ -508,8 +508,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               />
             </div>
             {/* <div className="w-5 h-5 mt-1"> */}
-              {/* <ChevronDownSVG className="h-full invisible" /> */}
-              <div className="w-5 flex-none"></div>
+            {/* <ChevronDownSVG className="h-full invisible" /> */}
+            <div className="w-5 flex-none"></div>
             {/* </div> */}
           </div>
         )}
@@ -521,8 +521,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           <div className="flex">
             {renderColsNumberControls()}
             {/* <div className="w-5 h-5"> */}
-              {/* <ChevronDownSVG className="h-full invisible" /> */}
-              <div className="w-5 flex-none"></div>
+            {/* <ChevronDownSVG className="h-full invisible" /> */}
+            <div className="w-5 flex-none"></div>
             {/* </div> */}
           </div>
 
@@ -566,34 +566,30 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           <p className={`text-red-600`}>{tabErrors.textArea}</p>
         )}
 
-        <div className="flex justify-start mt-4">
-          {/* SaveSVG is cut without the <p> - bug? */}
-          <p className="w-1"></p>
-          {/* !!! pl-4 in NewLink */}
-          <div className="w-full flex justify-center">
-            <SaveSVG
-              className="h-5 fill-current text-black mr-3 hover:text-green-600 cursor-pointer transition-colors duration-75"
-              onClick={(e) => {
-                e.preventDefault();
+        {/* !!! pl-4 in NewLink */}
+        <div className="w-full flex justify-center mt-4">
+          <SaveSVG
+            className="h-5 w-5 fill-current text-black mr-6 hover:text-green-600 cursor-pointer transition-colors duration-75"
+            onClick={(e) => {
+              e.preventDefault();
 
-                let isThereAnError = errorHandling();
-                if (isThereAnError) return;
+              let isThereAnError = errorHandling();
+              if (isThereAnError) return;
 
-                // 1. adding Tab(Folder/RSS?Notes) 2.updating Bookmarks with tags (same as new folder title)
-                addTab();
-                upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-              }}
-            />
+              // 1. adding Tab(Folder/RSS?Notes) 2.updating Bookmarks with tags (same as new folder title)
+              addTab();
+              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+            }}
+          />
 
-            <CancelSVG
-              className="h-5 fill-current text-black ml-3 hover:text-red-600 cursor-pointer transition-colors duration-75"
-              onClick={(e) => {
-                e.preventDefault();
-                // setNewTabVis((b) => !b);
-                upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-              }}
-            />
-          </div>
+          <CancelSVG
+            className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75"
+            onClick={(e) => {
+              e.preventDefault();
+              // setNewTabVis((b) => !b);
+              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+            }}
+          />
         </div>
       </div>
     </div>

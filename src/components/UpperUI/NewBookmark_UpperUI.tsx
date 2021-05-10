@@ -401,33 +401,29 @@ Props): JSX.Element {
           <p className={`text-red-600`}>{bookmarkErrors.tagRepeat}</p>
         )}
 
-        <div className="flex justify-start mt-5">
-          {/* SaveSVG is cut without the <p> - bug? */}
-          <p className="w-1"></p>
-          <div className="w-full flex justify-center">
-            <SaveSVG
-              className="h-5 fill-current text-black mr-3 hover:text-green-600 cursor-pointer transition-colors duration-75"
-              onClick={(e) => {
-                e.preventDefault();
+        <div className="w-full flex justify-center mt-5">
+          <SaveSVG
+            className="h-5 w-5 fill-current text-black mr-6 hover:text-green-600 cursor-pointer transition-colors duration-75"
+            onClick={(e) => {
+              e.preventDefault();
 
-                let isThereAnError = errorHandling();
-                if (isThereAnError) return;
+              let isThereAnError = errorHandling();
+              if (isThereAnError) return;
 
-                // 1. adding bookmark  2. adding folder/s if some tags do not correspond to existing folders
-                addBookmark();
-                upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
-              }}
-            />
+              // 1. adding bookmark  2. adding folder/s if some tags do not correspond to existing folders
+              addBookmark();
+              upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+            }}
+          />
 
-            <CancelSVG
-              className="h-5 fill-current text-black ml-3 hover:text-red-600 cursor-pointer transition-colors duration-75"
-              onClick={(e) => {
-                e.preventDefault();
-                // setBookmarkVis((b) => !b);
-                upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
-              }}
-            />
-          </div>
+          <CancelSVG
+            className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75"
+            onClick={(e) => {
+              e.preventDefault();
+              // setBookmarkVis((b) => !b);
+              upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+            }}
+          />
         </div>
       </div>
     </div>
