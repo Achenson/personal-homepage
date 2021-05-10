@@ -38,7 +38,21 @@ interface Props {
   tabType: "folder" | "note" | "rss";
 }
 
+
+const errorsAllFalse = {
+  bookmarksErrorVis: false,
+  bookmarksRepeatErrorVis: false,
+  titleFormatErrorVis: false,
+  titleUniquenessErrorVis: false,
+  bookmarkExistenceErrorVis: false,
+  textAreaErrorVis: false,
+};
+
 function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
+
+
+  // console.log("rendered");
+
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
@@ -66,25 +80,33 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   const [tabColumnInput, setTabColumnInput] = useState<number>(1);
   // const [tabLinksInput, setTabBookmarksInput] = useState<string[]>([]);
 
-  const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
-  const [
-    bookmarksRepeatErrorVis,
-    setBookmarksRepeatErrorVis,
-  ] = useState<boolean>(false);
-  const [
-    bookmarkExistenceErrorVis,
-    setBookmarkExistenceErrorVis,
-  ] = useState<boolean>(false);
+  const [errors, setErrors] = useState({
+    ...errorsAllFalse
+  });
 
-  const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
-    false
-  );
-  const [
-    titleUniquenessErrorVis,
-    setTitleUniquenessErrorVis,
-  ] = useState<boolean>(false);
-  // for notes
-  const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
+  // const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
+  // const [
+  //   bookmarksRepeatErrorVis,
+  //   setBookmarksRepeatErrorVis,
+  // ] = useState<boolean>(false);
+  // const [
+  //   bookmarkExistenceErrorVis,
+  //   setBookmarkExistenceErrorVis,
+  // ] = useState<boolean>(false);
+
+  // const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
+  //   false
+  // );
+  // const [
+  //   titleUniquenessErrorVis,
+  //   setTitleUniquenessErrorVis,
+  // ] = useState<boolean>(false);
+  // // for notes
+  // const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
+
+
+
+
 
   const [selectablesListVis, setSelectablesListVis] = useState<boolean>(false);
 
@@ -176,40 +198,62 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   let bookmarksInputArr = selectablesInputStr.split(", ");
 
   function errorHandling(): boolean {
-    setBookmarksErrorVis(false);
-    setBookmarksRepeatErrorVis(false);
-    setTitleFormatErrorVis(false);
-    setTitleUniquenessErrorVis(false);
-    setBookmarkExistenceErrorVis(false);
-    setTextAreaErrorVis(false);
+    // setBookmarksErrorVis(false);
+    // setBookmarksRepeatErrorVis(false);
+    // setTitleFormatErrorVis(false);
+    // setTitleUniquenessErrorVis(false);
+    // setBookmarkExistenceErrorVis(false);
+    // setTextAreaErrorVis(false);
+
+    // setErrors({...errorsAllFalse})
 
     if (!regexForTitle.test(tabTitleInput)) {
-      setTitleFormatErrorVis(true);
+      // setTitleFormatErrorVis(true);
+      setErrors({
+        ...errorsAllFalse,
+        titleFormatErrorVis: true
+      })
       setSelectablesListVis(false);
       return true;
     }
 
     if (!titleUniquenessCheck()) {
-      setTitleUniquenessErrorVis(true);
+      // setTitleUniquenessErrorVis(true);
+      setErrors({
+        ...errorsAllFalse,
+        titleUniquenessErrorVis: true
+      })
       setSelectablesListVis(false);
       return true;
     }
 
     if (tabType === "folder") {
       if (!regexForBookmarks.test(bookmarksInputArr.join(", "))) {
-        setBookmarksErrorVis(true);
+        // setBookmarksErrorVis(true);
+        setErrors({
+          ...errorsAllFalse,
+          bookmarksErrorVis: true
+        })
         setSelectablesListVis(false);
         return true;
       }
 
       if (!bookmarkExistenceCheck()) {
-        setBookmarkExistenceErrorVis(true);
+        // setBookmarkExistenceErrorVis(true);
+        setErrors({
+          ...errorsAllFalse,
+          bookmarkExistenceErrorVis: true
+        })
         setSelectablesListVis(false);
         return true;
       }
 
       if (!bookmarksUniquenessCheck()) {
-        setBookmarksRepeatErrorVis(true);
+        // setBookmarksRepeatErrorVis(true);
+        setErrors({
+          ...errorsAllFalse,
+          bookmarksRepeatErrorVis: true
+        })
         setSelectablesListVis(false);
         return true;
       }
@@ -217,7 +261,11 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
     if (tabType === "note") {
       if ((textAreaValue as string).length === 0) {
-        setTextAreaErrorVis(true);
+        // setTextAreaErrorVis(true);
+        setErrors({
+          ...errorsAllFalse,
+          textAreaErrorVis: true
+        })
         return true;
       }
     }
@@ -542,27 +590,27 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           </div>
         )}
 
-        {titleFormatErrorVis && (
+        {errors.titleFormatErrorVis && (
           <p className={`text-red-600`}>{tabErrors.titleFormat}</p>
         )}
 
-        {titleUniquenessErrorVis && (
+        {errors.titleUniquenessErrorVis && (
           <p className={`text-red-600`}>{tabErrors.titleUniqueness}</p>
         )}
 
-        {bookmarksErrorVis && tabType === "folder" && (
+        {errors.bookmarksErrorVis && tabType === "folder" && (
           <p className={`text-red-600`}>{tabErrors.bookmarksFormat}</p>
         )}
 
-        {bookmarkExistenceErrorVis && tabType === "folder" && (
+        {errors.bookmarkExistenceErrorVis && tabType === "folder" && (
           <p className={`text-red-600`}>{tabErrors.bookmarkExistence}</p>
         )}
 
-        {bookmarksRepeatErrorVis && tabType === "folder" && (
+        {errors.bookmarksRepeatErrorVis && tabType === "folder" && (
           <p className={`text-red-600`}>{tabErrors.bookmarksRepeat}</p>
         )}
 
-        {textAreaErrorVis && tabType === "note" && (
+        {errors.textAreaErrorVis && tabType === "note" && (
           <p className={`text-red-600`}>{tabErrors.textArea}</p>
         )}
 
