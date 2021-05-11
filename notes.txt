@@ -402,6 +402,7 @@ DONE 347. touch screen compatibility? DONE
 DONE 349. svg error still! on lower ui (solution: setting fixed width to svg) DONE
 DONE 350. can't access tab options with touch DONE
 DONE 351. ColorsToChoose_Default - control positioning by props, not inside components DONE
+XXX 355. upperRightUI: Note to close to the lower svgs?XXX
 DONE 356. selectables bug: no list if string lenght will be 0 DONE (now opens on change, or with arrow down)
 DONE 356.5 newTab newBookmark EditTab bookmark_lowerUI -> change bookmarks/tags naming to selectables, extract functions DONE
 DONE 357. cant drag tabs with touch (react-dnd-multi-backend) DONE
@@ -409,6 +410,7 @@ DONE 358. bug -> when on sm or lower (one col displayed) cannot drag tabs proper
 DONE 359. tab open/close randomly (not randomly, but state of the prev component was preserved) when dragging? (all) DONE
 (opened state is in global state now)
 DONE 361. error object in state? check how many renders are there (1 only either way) DONE
+DONE 365. colorSettings -> make large version same as xs? DONE
 DONE 366. bug-> paddingAdded when scrollbar in now visible -> fixed by comparing <html> scrollHeight & clientHeight DONE
 DONE 368. background colors:  make white border on columns to the right? DONE
 DONE 369. initial colors in global state -> import instead of hardcoding DONE
@@ -451,22 +453,22 @@ DONE 380. "lock as opened by default" better? DONE
 340. allow trailing commas in selectables
 341. bookmark_lowerUI -> divide function to new & edit
 
-343. make column appear thinner (notes, bookmarks etc. seem to stick out)
-
+343. make column appear thinner - border? (notes, bookmarks etc. seem to stick out)
 
 346. error in console.log if empty tag auto deletes itself
 348. background colors list to the left?
 352. clear svgs
 353. SingleColor_DefaultAndColumn SingleColor_Column_Img unify?
 354. limit column width?
-355. upperRightUI: Note to close to the lower svgs?
 360. newTab etc. enter to save & esc to cancel keyboard ? move handleKeyDown from editTab_folder to editTab_main
 
 
 362. selectables filtered alphabetically?
 363. more professional selectables?
 364. all settings in one in case of xsScreen?
-365. colorSettings -> make large version same as xs?
+
+
+
 366. when scrollbar is being changed to padding right, gray background is visibilities
 367. dragging hover effect: change it on in 2x2 & 3x1 col cases 
 370. change colors data to objects?
@@ -478,7 +480,8 @@ DONE 380. "lock as opened by default" better? DONE
 375. newNote paddingTop vh instead of center?
 376. selectables "x" center vertically?
 377. "error fetching data" non visible on dark background
-
+378. yellow columns when img is on -> change note or yellow to amber
+379. bring back automatic closing/opening after locking (when state will be in its final form)
 
 
 Browserslist: caniuse-lite is outdated. Please run:
