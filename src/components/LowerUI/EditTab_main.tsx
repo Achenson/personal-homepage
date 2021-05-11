@@ -173,7 +173,7 @@ Props): JSX.Element {
   // let regexForTitle = /^\w+$/;
   let regexForTitle = /^\w(\s?\w+)*$/;
 
-  const [tabOpen, setTabOpen] = useState(currentTab.opened);
+  const [tabOpen, setTabOpen] = useState(currentTab.openedByDefault);
 
   const [selectablesListVis, setSelectablesListVis] = useState<boolean>(false);
 
@@ -326,7 +326,7 @@ Props): JSX.Element {
           tabToUpdate.title = tabTitleInput;
           // updated[tabIndex].deletable = currentTab[0].deletable
           if (wasTabOpenClicked) {
-            tabToUpdate.opened = tabOpen;
+            tabToUpdate.openedByDefault = tabOpen;
           }
 
           if (tabType === "note") {
@@ -490,7 +490,7 @@ Props): JSX.Element {
 
       <div className={`pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
         <div className="flex justify-between items-center">
-          <p>Lock as always-open</p>
+          <p>Lock as opened by default</p>
 
           {tabOpen ? (
             <LockClosedSVG
@@ -581,12 +581,13 @@ Props): JSX.Element {
             // 2. (in case of folders) delete tag from bookmark or add tag to bookmark
             editTab();
 
-            // setEditTabVis((b) => !b);
-            if (tabOpen) {
-              visDispatch({ type: "TAB_CONTENT_OPEN_AFTER_LOCKING" });
-            } else {
-              visDispatch({ type: "EDIT_TOGGLE" });
-            }
+            // if (tabOpen) {
+            //   visDispatch({ type: "TAB_CONTENT_OPEN_AFTER_LOCKING" });
+            // } else {
+            //    visDispatch({ type: "EDIT_TOGGLE" });
+            //   }
+
+            visDispatch({ type: "EDIT_TOGGLE" });
           }}
         />
 

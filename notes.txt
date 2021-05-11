@@ -417,6 +417,9 @@ DONE 372. svg for loginOut? DONE
 DONE 374. make upperUI adding component work same as settings -> close when clicking on gray background & hide scrollbar DONE
 DONE 377. padding right lowerbookmark editTab & editBookmark unite DONE
 DONE 378. delete inv chevrons in uppperUI DONE
+DONE 378. bug: eye off not working properly when locking tabs (changed in editTab()) DONE
+XXX 379. automatic tab closing/opening after locking doesn't work correctly (function) XXX
+DONE 380. "lock as opened by default" better? DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -475,7 +478,8 @@ DONE 378. delete inv chevrons in uppperUI DONE
 375. newNote paddingTop vh instead of center?
 376. selectables "x" center vertically?
 377. "error fetching data" non visible on dark background
-378. bug: eye off not working properly when locking tabs
+
+
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
