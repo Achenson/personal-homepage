@@ -7,8 +7,13 @@ import { ReactComponent as TrashSmallSVG } from "../../svgs/trashSmall.svg";
 import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 import { bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
+import { globalSettingsState } from "../../state/defaultSettings";
 
-import { SingleBookmarkData, TabVisAction, UpperVisAction } from "../../utils/interfaces";
+import {
+  SingleBookmarkData,
+  TabVisAction,
+  UpperVisAction,
+} from "../../utils/interfaces";
 
 // interface SingleLinkData {
 //   id: number | string;
@@ -40,19 +45,22 @@ function SingleBookmark({
   tabID,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-  const [
-    bookmarksAllTagsData,
-    setBookmarksAllTagsData,
-  ] = bookmarksAllTagsState.use();
+  const [bookmarksAllTagsData, setBookmarksAllTagsData] =
+    bookmarksAllTagsState.use();
+
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   // let linkURL = new URL(singleBookmarkData.URL)
 
-
   return (
-    <div className="flex justify-between bg-gray-50 h-10 py-2 border-b border-l border-r">
+    <div
+      className={`flex justify-between bg-gray-50 h-10 py-2 border border-t-0 ${
+        globalSettingsData.picBackground ? "" : "border-black border-opacity-10"
+      }`}
+    >
       <div className="flex truncate">
         <div className="h-6 mr-px">
-        <PhotographSVG className="h-full" />
+          <PhotographSVG className="h-full" />
         </div>
         <div className="truncate">
           <a
@@ -75,7 +83,7 @@ function SingleBookmark({
           onClick={() => {
             // setEditBookmarkVis((b) => !b);
             visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
-            upperVisDispatch({type: "CLOSE_ALL"})
+            upperVisDispatch({ type: "CLOSE_ALL" });
             setBookmarkId(singleBookmarkData.id);
           }}
         />

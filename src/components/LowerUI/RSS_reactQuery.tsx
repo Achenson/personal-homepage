@@ -10,6 +10,8 @@ import {SingleTabData} from "../../utils/interfaces"
 import { ReactComponent as ArrowLeft } from "../../svgs/arrowLeft.svg";
 import { ReactComponent as ArrowRight } from "../../svgs/arrowRight.svg";
 
+import { globalSettingsState } from "../../state/defaultSettings";
+
 let Parser = require("rss-parser");
 let parser = new Parser(
 //   {
@@ -33,6 +35,8 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
 
   const [descriptionVis, setDescriptionVis] = useState(() =>calcDescriptionVis());
   const [dateVis, setDateVis] = useState(() => calcDateVis());
+
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function calcItemsPerPage() {
     // if currentBookmars itemsPerPage is set, return it, otherwise
@@ -129,7 +133,8 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
 
   return (
     <div>
-      <div className="flex bg-gray-50 justify-end border-l border-r ">
+      <div className={`flex bg-gray-50 justify-end border-r border-l
+    ${globalSettingsData.picBackground ? "" : "border-black border-opacity-10"}`}>
         <ArrowLeft
           className={`h-8 ${
             pageNumber === 0

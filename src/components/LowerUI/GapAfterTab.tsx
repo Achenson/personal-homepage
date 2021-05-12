@@ -8,7 +8,7 @@ import { ItemTypes } from "../../utils/itemsDnd";
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 
 import { tabBeingDraggedColor_State } from "../../state/colorsState";
-
+import { globalSettingsState } from "../../state/defaultSettings";
 
 interface Item {
   type: string;
@@ -32,10 +32,10 @@ function GapAfterTab({
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
-  const [
-    tabBeingDraggedColor_Data,
-    setTabBeingDraggedColor_Data,
-  ] = tabBeingDraggedColor_State.use();
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+  const [tabBeingDraggedColor_Data, setTabBeingDraggedColor_Data] =
+    tabBeingDraggedColor_State.use();
 
   const [{ isOver }, drop] = useDrop({
     //    required property
@@ -89,7 +89,7 @@ function GapAfterTab({
             draggedIntoIndex = i;
           }
         });
-        
+
         let itemToUpdatePriority_initial = itemToUpdate?.priority;
 
         let draggedIntoPriority = tabsData[draggedIntoIndex].priority;
@@ -162,17 +162,17 @@ function GapAfterTab({
   }
 
   function calcOpacityOnDrop(picBackground: boolean) {
-   
-
     // if (picBackground) {
     //   return "bg-black opacity-50";
     // } else {
     //   return `bg-${tabBeingDraggedColor_Data.tabColor} opacity-60`;
     // }
 
-   
-      return `bg-${tabBeingDraggedColor_Data.tabColor} opacity-60`;
-  
+    return `bg-${tabBeingDraggedColor_Data.tabColor} opacity-60`;
+  }
+
+  function bordersIfNoBackground() {
+    return `border-black border-opacity-10 border-l border-r`;
   }
 
   return (
@@ -180,22 +180,28 @@ function GapAfterTab({
       {isThisLastGap ? (
         <div ref={drop} className="relative">
           <div
-            className={`h-6
+            className={`h-6 ${
+              globalSettingsData.picBackground ? "" : bordersIfNoBackground()
+            }
              ${isOver ? calcOpacityOnDrop(picBackground) : ""}
         
          `}
             // style={{ backgroundColor: singleColumnColor }}
           ></div>
           <div
-          // hidden sm:block <- to properly enable draggin if one col is displayed
-            className={`hidden sm:block h-screen w-full absolute
+            className={`w-full absolute ${
+              globalSettingsData.picBackground ? "" : bordersIfNoBackground()
+            }
             ${isOver ? "opacity-30 bg-blueGray-200" : ""}
           `}
+            style={{ height: "10000vh" }}
           ></div>
         </div>
       ) : (
         <div
-          className={`h-6 ${isOver ? calcOpacityOnDrop(picBackground) : ""}
+          className={`h-6 ${
+            globalSettingsData.picBackground ? "" : bordersIfNoBackground()
+          } ${isOver ? calcOpacityOnDrop(picBackground) : ""}
      
      `}
           // style={{ backgroundColor: singleColumnColor }}

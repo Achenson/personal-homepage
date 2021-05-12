@@ -1,5 +1,6 @@
 import React from "react";
 
+import { globalSettingsState } from "../../state/defaultSettings";
 interface Props {
   title: string;
   link: string;
@@ -25,6 +26,8 @@ function SingeRssNews({
 
   // let currentTab = tabsData.filter((obj) => obj.id === tabID);
 
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
   function renderDescription(descripion: string) {
     let descriptionSplitted = descripion.split(" ");
 
@@ -38,7 +41,12 @@ function SingeRssNews({
   }
 
   return (
-    <div className="bg-gray-50 py-1 px-2 border-b border-l border-r">
+    <div
+      className={`bg-gray-50 py-1 px-2
+    border border-t-0
+    ${globalSettingsData.picBackground ? "" : "border-black border-opacity-10"}
+     `}
+    >
       <a
         href={link}
         target="_blank"

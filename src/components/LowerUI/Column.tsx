@@ -97,6 +97,8 @@ function Column({ colNumber, upperVisDispatch }: Props): JSX.Element {
     lastTabId = null;
   }
 
+  let tabDataLength = tabsData.filter((el) => el.column === colNumber).length
+
   function isThisLastGap(
     lastTabId: number | string | null,
     tabID: string | number
@@ -111,9 +113,13 @@ function Column({ colNumber, upperVisDispatch }: Props): JSX.Element {
     return false;
   }
 
+  function bordersIfNoBackground() {
+    return `border-black border-opacity-10 border-b ${tabDataLength === 0 ? "border-t" : ""}`
+  }
+
   return (
     <div
-      className={`flex flex-col justify-between
+      className={`flex flex-col justify-between overflow-hidden ${globalSettingsData.picBackground ? "" : bordersIfNoBackground()}
        ${calcColumnColor_picBackground(
          colNumber,
          globalSettingsData.picBackground,
@@ -156,7 +162,7 @@ function Column({ colNumber, upperVisDispatch }: Props): JSX.Element {
             );
           })}
 
-        {tabsData.filter((el) => el.column === colNumber).length === 0 ? (
+        {tabDataLength === 0 ? (
           <GapAfterTab
             colNumber={colNumber}
             tabID={null}
