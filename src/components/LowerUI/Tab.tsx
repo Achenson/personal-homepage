@@ -85,7 +85,7 @@ function Tab({
   upperVisDispatch,
   tabOpened,
   tabOpenedByDefault,
-  tabIsDeletable
+  tabIsDeletable,
 }: // being passed as a prop from closeAllTabsData, get if from the state instead?
 // closeAllTabs,
 // noteInput,
@@ -98,11 +98,9 @@ Props): JSX.Element {
 
   // const [state, setstate] = useState(initialState)
 
-
   const reachRef = React.useRef();
   const rect = useRect(reachRef);
-  // @ts-ignore
-  // const {top, left} = useRect(reachRef);
+ 
 
   /* 
   {
@@ -124,11 +122,8 @@ Props): JSX.Element {
   //     console.log(JSON.stringify(rect, null, 2));
 
   //   }
-    
-   
+
   // })
-
-
 
   // const [touchScreenMode, setTouchScreenMode] = useState(false);
 
@@ -365,10 +360,8 @@ Props): JSX.Element {
     }),
   });
 
-  const [
-    tabBeingDraggedColor_Data,
-    setTabBeingDraggedColor_Data,
-  ] = tabBeingDraggedColor_State.use();
+  const [tabBeingDraggedColor_Data, setTabBeingDraggedColor_Data] =
+    tabBeingDraggedColor_State.use();
 
   useEffect(() => {
     if (isDragging) {
@@ -586,13 +579,9 @@ Props): JSX.Element {
           tabID={tabID}
           tabColor={tabColor}
           tabType={tabType}
-          // @ts-ignore
-          top={rect.top}
-          // @ts-ignore
-          left={rect.left}
-          // @ts-ignore
-          tabWidth={rect.width}
-          
+          top={rect?.top as number}
+          left={rect?.left as number}
+          tabWidth={rect?.width as number}
         />
       )}
 
@@ -603,6 +592,9 @@ Props): JSX.Element {
           bookmarkId={bookmarkId}
           visDispatch={visDispatch}
           colNumber={colNumber}
+          top={rect?.top as number}
+          left={rect?.left as number}
+          tabWidth={rect?.width as number}
         />
       )}
 
@@ -615,6 +607,9 @@ Props): JSX.Element {
           visDispatch={visDispatch}
           colNumber={colNumber}
           tabTitle={tabTitle as string}
+          top={rect?.top as number}
+          left={rect?.left as number}
+          tabWidth={rect?.width as number}
         />
       )}
 
@@ -626,12 +621,10 @@ Props): JSX.Element {
           visDispatch={visDispatch}
           currentTab={currentTab as SingleTabData}
           // noteInput={noteInput}
-          // @ts-ignore
-          top={rect.top}
-          // @ts-ignore
-          left={rect.left}
-          // @ts-ignore
-          tabWidth={rect.width}
+
+          top={rect?.top as number}
+          left={rect?.left as number}
+          tabWidth={rect?.width as number}
         />
       )}
 

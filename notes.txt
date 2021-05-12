@@ -424,6 +424,7 @@ DONE 378. delete inv chevrons in uppperUI DONE
 DONE 378. bug: eye off not working properly when locking tabs (changed in editTab()) DONE
 XXX 379. automatic tab closing/opening after locking doesn't work correctly (function) XXX
 DONE 380. "lock as opened by default" better? DONE
+DONE 381. use portals for lowerUI popups? DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -480,8 +481,8 @@ DONE 380. "lock as opened by default" better? DONE
 377. "error fetching data" & loading.. non visible on dark background?
 378. yellow columns when img is on -> change note or yellow to amber
 379. bring back automatic closing/opening after locking (when state will be in its final form)
-380. use portals for lowerUI popups?
-381. upperUI scroll still visible when resizing browser down -> add dependency in Main?
+382. upperUI scroll still visible when resizing browser down -> add dependency in Main?
+383. many bookmarks in a Folder -> newBookmark or editBookmark clashes visually?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

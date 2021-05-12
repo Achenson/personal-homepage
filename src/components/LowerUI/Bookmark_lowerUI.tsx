@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import ReactDOM from "react-dom";
 
 import { produce } from "immer";
 
@@ -43,24 +44,6 @@ interface Props {
   visDispatch: React.Dispatch<TabVisAction>;
   colNumber: number;
 
-  // tagErrorVis: boolean;
-  // setTagErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
-
-  // tagRepeatErrorVis: boolean;
-  // setTagRepeatErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
-
-  // titleFormatErrorVis: boolean;
-  // setTitleFormatErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
-
-  // titleUniquenessErrorVis: boolean;
-  // setTitleUniquenessErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
-
-  // noteErrorVis: boolean;
-  // setNoteErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
-
-  // rssErrorVis: boolean;
-  // setRssErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
-  
   errors: {
     tagErrorVis: boolean;
     tagRepeatErrorVis: boolean;
@@ -68,30 +51,34 @@ interface Props {
     titleUniquenessErrorVis: boolean;
     noteErrorVis: boolean;
     rssErrorVis: boolean;
-};
-  setErrors:React.Dispatch<React.SetStateAction<{
-    tagErrorVis: boolean;
-    tagRepeatErrorVis: boolean;
-    titleFormatErrorVis: boolean;
-    titleUniquenessErrorVis: boolean;
-    noteErrorVis: boolean;
-    rssErrorVis: boolean;
-}>> ;
-
+  };
+  setErrors: React.Dispatch<
+    React.SetStateAction<{
+      tagErrorVis: boolean;
+      tagRepeatErrorVis: boolean;
+      titleFormatErrorVis: boolean;
+      titleUniquenessErrorVis: boolean;
+      noteErrorVis: boolean;
+      rssErrorVis: boolean;
+    }>
+  >;
 
   regexForTags: RegExp;
   regexForTitle: RegExp;
-}
 
+  top: number;
+  left: number;
+  tabWidth: number;
+}
 
 const errorsAllFalse = {
   tagErrorVis: false,
-tagRepeatErrorVis: false,
-titleFormatErrorVis: false,
-titleUniquenessErrorVis: false,
-noteErrorVis: false,
-rssErrorVis: false
-}
+  tagRepeatErrorVis: false,
+  titleFormatErrorVis: false,
+  titleUniquenessErrorVis: false,
+  noteErrorVis: false,
+  rssErrorVis: false,
+};
 
 function Bookmark_lowerUI({
   titleInput,
@@ -136,13 +123,13 @@ function Bookmark_lowerUI({
   regexForTags,
   regexForTitle,
 
- 
+  top,
+  left,
+  tabWidth,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-  const [
-    bookmarksAllTagsData,
-    setBookmarksAllTagsData,
-  ] = bookmarksAllTagsState.use();
+  const [bookmarksAllTagsData, setBookmarksAllTagsData] =
+    bookmarksAllTagsState.use();
 
   const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -199,8 +186,8 @@ function Bookmark_lowerUI({
       // setTitleFormatErrorVis(true);
       setErrors({
         ...errorsAllFalse,
-        titleFormatErrorVis: true
-      })
+        titleFormatErrorVis: true,
+      });
       setSelectablesListVis(false);
 
       return true;
@@ -217,8 +204,8 @@ function Bookmark_lowerUI({
         // setTitleUniquenessErrorVis(true);
         setErrors({
           ...errorsAllFalse,
-          titleUniquenessErrorVis: true
-        })
+          titleUniquenessErrorVis: true,
+        });
         setSelectablesListVis(false);
 
         return true;
@@ -228,8 +215,8 @@ function Bookmark_lowerUI({
         // setTitleUniquenessErrorVis(true);
         setErrors({
           ...errorsAllFalse,
-          titleUniquenessErrorVis: true
-        })
+          titleUniquenessErrorVis: true,
+        });
         setSelectablesListVis(false);
 
         return true;
@@ -243,8 +230,8 @@ function Bookmark_lowerUI({
       // setTagErrorVis(true);
       setErrors({
         ...errorsAllFalse,
-        tagErrorVis: true
-      })
+        tagErrorVis: true,
+      });
       setSelectablesListVis(false);
 
       return true;
@@ -255,8 +242,8 @@ function Bookmark_lowerUI({
         // setNoteErrorVis(true);
         setErrors({
           ...errorsAllFalse,
-          noteErrorVis: true
-        })
+          noteErrorVis: true,
+        });
         setSelectablesListVis(false);
 
         return true;
@@ -268,8 +255,8 @@ function Bookmark_lowerUI({
         // setRssErrorVis(true);
         setErrors({
           ...errorsAllFalse,
-          rssErrorVis: true
-        })
+          rssErrorVis: true,
+        });
         setSelectablesListVis(false);
 
         return true;
@@ -280,8 +267,8 @@ function Bookmark_lowerUI({
       // setTagRepeatErrorVis(true);
       setErrors({
         ...errorsAllFalse,
-        tagRepeatErrorVis: true
-      })
+        tagRepeatErrorVis: true,
+      });
 
       return true;
     }
@@ -439,8 +426,15 @@ function Bookmark_lowerUI({
     );
   }
 
-  return (
-    <div className="absolute z-40 bg-gray-100 w-full pb-2 pl-1 border">
+  return ReactDOM.createPortal(
+    <div
+      className="absolute z-40 bg-gray-100 pb-2 pl-1 border"
+      style={{
+        top: `${top + 32 + document.documentElement.scrollTop}px`,
+        left: `${left}px`,
+        width: `${tabWidth}px`,
+      }}
+    >
       <div className="mt-2">
         <div className="flex justify-around mb-2 mt-2">
           <p className="w-10 flex-none">Title</p>
@@ -458,9 +452,8 @@ function Bookmark_lowerUI({
               setSelectablesListVis(false);
             }}
           />
-          
-          <div className="invisible flex-none"
-          style={{width: "18px"}} />
+
+          <div className="invisible flex-none" style={{ width: "18px" }} />
         </div>
         <div className="flex justify-around mb-2">
           <p className="w-10 flex-none">Link</p>
@@ -478,8 +471,7 @@ function Bookmark_lowerUI({
               setSelectablesListVis(false);
             }}
           />
-          <div className="invisible flex-none"
-          style={{width: "18px"}} />
+          <div className="invisible flex-none" style={{ width: "18px" }} />
         </div>
         <div className="flex justify-start mb-2">
           <p className="w-10 flex-none">Tags</p>
@@ -552,7 +544,10 @@ function Bookmark_lowerUI({
             )}
           </div>
 
-          <div style={{ height: "18px", width: "18px", marginTop: "5px" }} className=" flex-none">
+          <div
+            style={{ height: "18px", width: "18px", marginTop: "5px" }}
+            className=" flex-none"
+          >
             {selectablesListVis ? (
               <ChevronUpSVG
                 className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
@@ -595,60 +590,59 @@ function Bookmark_lowerUI({
           <p className={`text-red-600`}>{bookmarkErrors.tagRepeat}</p>
         )}
 
-       
-          {/* SaveSVG is cut without the <p> - bug? */}
-          <div className="mt-5 w-full flex justify-center">
-            <SaveSVG
-              className={`h-5 w-5 fill-current text-black mr-6 transition-colors duration-75 ${
-                wasAnythingChanged || bookmarkComponentType === "new_lowerUI"
-                  ? "text-gray-900 hover:text-green-600 cursor-pointer"
-                  : "text-blueGray-400 cursor-default"
-              }`}
-              onClick={(e) => {
-                e.preventDefault();
+        {/* SaveSVG is cut without the <p> - bug? */}
+        <div className="mt-5 w-full flex justify-center">
+          <SaveSVG
+            className={`h-5 w-5 fill-current text-black mr-6 transition-colors duration-75 ${
+              wasAnythingChanged || bookmarkComponentType === "new_lowerUI"
+                ? "text-gray-900 hover:text-green-600 cursor-pointer"
+                : "text-blueGray-400 cursor-default"
+            }`}
+            onClick={(e) => {
+              e.preventDefault();
 
-                if (bookmarkComponentType === "edit" && !wasAnythingChanged) {
-                  return;
-                }
+              if (bookmarkComponentType === "edit" && !wasAnythingChanged) {
+                return;
+              }
 
-                let isThereAnError = errorHandling();
-                if (isThereAnError) return;
+              let isThereAnError = errorHandling();
+              if (isThereAnError) return;
 
-                // 1. adding or editing bookmark
-                // 2. adding folder/s (also to the main state with array of tags) if some tags do not correspond to existing folders
-                // 3. (if editing bookmark) for deleting empty folder -> setting bookmarksAllTagsState
-                addOrEditBookmark();
+              // 1. adding or editing bookmark
+              // 2. adding folder/s (also to the main state with array of tags) if some tags do not correspond to existing folders
+              // 3. (if editing bookmark) for deleting empty folder -> setting bookmarksAllTagsState
+              addOrEditBookmark();
 
-                // setBookmarkVis((b) => !b);
-                if (bookmarkComponentType === "edit") {
-                  visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
-                }
+              // setBookmarkVis((b) => !b);
+              if (bookmarkComponentType === "edit") {
+                visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
+              }
 
-                if (bookmarkComponentType === "new_lowerUI") {
-                  visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
-                }
-              }}
-            />
+              if (bookmarkComponentType === "new_lowerUI") {
+                visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+              }
+            }}
+          />
 
-            <CancelSVG
-              className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75"
-              onClick={(e) => {
-                e.preventDefault();
-                // setBookmarkVis((b) => !b);
-                // visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
-                if (bookmarkComponentType === "edit") {
-                  visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
-                }
+          <CancelSVG
+            className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75"
+            onClick={(e) => {
+              e.preventDefault();
+              // setBookmarkVis((b) => !b);
+              // visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
+              if (bookmarkComponentType === "edit") {
+                visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
+              }
 
-                if (bookmarkComponentType === "new_lowerUI") {
-                  visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
-                }
-              }}
-            />
-          </div>
-       
+              if (bookmarkComponentType === "new_lowerUI") {
+                visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+              }
+            }}
+          />
+        </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
