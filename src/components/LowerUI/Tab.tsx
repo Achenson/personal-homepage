@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useReducer, useCallback } from "react";
 
+import Rect, { useRect } from "@reach/rect";
+
 import { produce } from "immer";
 
 import { tabsDataState } from "../../state/tabsAndBookmarks";
@@ -93,6 +95,40 @@ Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
+
+  // const [state, setstate] = useState(initialState)
+
+
+  const reachRef = React.useRef();
+  const rect = useRect(reachRef);
+  // @ts-ignore
+  // const {top, left} = useRect(reachRef);
+
+  /* 
+  {
+  "x": 16,
+  "y": 336,
+  "width": 543,
+  "height": 32,
+  "top": 336,
+  "right": 559,
+  "bottom": 368,
+  "left": 16
+}
+  
+  */
+
+  // useEffect(() => {
+
+  //   if(tabID === "ALL_TAGS") {
+  //     console.log(JSON.stringify(rect, null, 2));
+
+  //   }
+    
+   
+  // })
+
+
 
   // const [touchScreenMode, setTouchScreenMode] = useState(false);
 
@@ -432,6 +468,8 @@ Props): JSX.Element {
           ? "hidden"
           : ""
       }`}
+      // @ts-ignore
+      ref={reachRef}
     >
       <div
         ref={drag}
@@ -548,6 +586,10 @@ Props): JSX.Element {
           tabID={tabID}
           tabColor={tabColor}
           tabType={tabType}
+          // @ts-ignore
+          top={rect.top}
+          // @ts-ignore
+          left={rect.left}
         />
       )}
 
