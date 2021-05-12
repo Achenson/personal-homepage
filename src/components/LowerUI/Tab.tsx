@@ -590,6 +590,9 @@ Props): JSX.Element {
           top={rect.top}
           // @ts-ignore
           left={rect.left}
+          // @ts-ignore
+          tabWidth={rect.width}
+          
         />
       )}
 

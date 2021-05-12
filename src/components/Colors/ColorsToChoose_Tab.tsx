@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import SingleColor_Tab from "./SingleColor_Tab";
 
@@ -12,6 +12,7 @@ interface Props {
   tabType: "folder" | "note" | "rss";
   top: number;
   left: number;
+  tabWidth: number;
 }
 
 function ColorsToChoose_Tab({
@@ -21,7 +22,13 @@ function ColorsToChoose_Tab({
   tabType,
   top,
   left,
+  tabWidth,
 }: Props): JSX.Element {
+  // useEffect(() => {
+  //   console.log(document.documentElement.scrollTop);
+
+  // }, [document.documentElement.scrollTop])
+
   function mappingColors(colors: string[][]) {
     return tabColors.map((row, i) => {
       return (
@@ -45,7 +52,10 @@ function ColorsToChoose_Tab({
   return ReactDOM.createPortal(
     <div
       className={`absolute bg-gray-100 mr-px mt-px z-40`}
-      style={{ top: `${(top+32).toString()}px`, left: `${(left+0).toString()}px` }}
+      style={{
+        top: `${(top + 32 + document.documentElement.scrollTop).toString()}px`,
+        left: `${(left + (tabWidth - 187)).toString()}px`,
+      }}
       onMouseEnter={() => {
         setIconsVis(true);
       }}
@@ -54,6 +64,8 @@ function ColorsToChoose_Tab({
       // }}
     >
       {mappingColors(tabColors)}
+
+      {/* scroll:{document.body.scrollHeight} */}
     </div>,
     document.body
   );
