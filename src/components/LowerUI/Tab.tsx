@@ -33,7 +33,7 @@ import ColorsToChoose_Tab from "../Colors/ColorsToChoose_Tab";
 
 // import EditLink from "./EditBookmark";
 import Bookmark_newAndEdit from "../Shared/Bookmark_newAndEdit";
-import EditTab from "./EditTab_main";
+import EditTab_main from "./EditTab_main";
 import NoteInput from "./NoteInput";
 import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
@@ -619,13 +619,19 @@ Props): JSX.Element {
       )}
 
       {visState.editTabVis && tabOpenedData === tabID && (
-        <EditTab
+        <EditTab_main
           tabID={tabID}
           tabType={tabType}
           // setEditTabVis={setEditTabVis}
           visDispatch={visDispatch}
           currentTab={currentTab as SingleTabData}
           // noteInput={noteInput}
+          // @ts-ignore
+          top={rect.top}
+          // @ts-ignore
+          left={rect.left}
+          // @ts-ignore
+          tabWidth={rect.width}
         />
       )}
 

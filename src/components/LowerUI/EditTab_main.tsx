@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
 import { useState } from "react";
 
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
@@ -32,6 +33,9 @@ interface Props {
   // noteInput: string | null;
   tabID: string | number;
   currentTab: SingleTabData;
+  top: number;
+  left: number;
+  tabWidth: number;
 }
 
 const errorsAllFalse = {
@@ -49,6 +53,9 @@ function EditTab({
   visDispatch,
   tabType,
   currentTab,
+  top,
+  left,
+  tabWidth
 }: // setEditTabVis,
 // noteInput,
 Props): JSX.Element {
@@ -387,8 +394,10 @@ Props): JSX.Element {
     }
   }
 
-  return (
-    <div className={`absolute z-40 bg-gray-100 pb-2 border w-full pl-1 pr-1`}>
+  return ReactDOM.createPortal(
+    <div className={`absolute z-40 bg-gray-100 pb-2 border pl-1 pr-1`}
+    style={{top: `${top+32+document.documentElement.scrollTop}px`, left: `${left}px`, width: `${tabWidth}px`}}
+    >
       <div className="mb-3">
         <div className={`flex items-center mt-2 justify-between`}>
           <p className="flex-none" style={{ width: `${titleWidth()}` }}>
@@ -602,7 +611,8 @@ Props): JSX.Element {
       </div>
 
       {/* </form> */}
-    </div>
+    </div>,
+    document.body
   );
 }
 
