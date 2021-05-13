@@ -424,6 +424,8 @@ DONE 378. delete inv chevrons in uppperUI DONE
 DONE 378. bug: eye off not working properly when locking tabs (changed in editTab()) DONE
 DONE 378.5 yellow columns when img is on -> change note or yellow to gold DONE
 XXX 379. automatic tab closing/opening after locking doesn't work correctly (function) XXX
+DONE 379.5 bring back automatic closing/opening after locking (when state will be in its final form) 
+   (local opened state in Tab, depending on opened state from global state)  DONE
 DONE 380. "lock as opened by default" better? DONE
 DONE 381. use portals for lowerUI popups? DONE
 DONE 384. bug: adding new tab to empty column doesn't work ->DONE
@@ -486,8 +488,9 @@ DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 377. "error fetching data" & loading.. non visible on dark background?
 
 
-379. bring back automatic closing/opening after locking (when state will be in its final form)
-    -> use opened state before defaultOpened state in render?
+
+    
+
 382. upperUI scroll still visible when resizing browser down -> add dependency in Main?
 383. many bookmarks in a Folder -> newBookmark or editBookmark clashes visually?
     

@@ -36,6 +36,7 @@ interface Props {
   top: number;
   left: number;
   tabWidth: number;
+  setTabOpened_local: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const errorsAllFalse = {
@@ -55,7 +56,8 @@ function EditTab({
   currentTab,
   top,
   left,
-  tabWidth
+  tabWidth,
+  setTabOpened_local
 }: // setEditTabVis,
 // noteInput,
 Props): JSX.Element {
@@ -334,6 +336,8 @@ Props): JSX.Element {
           // updated[tabIndex].deletable = currentTab[0].deletable
           if (wasTabOpenClicked) {
             tabToUpdate.openedByDefault = tabOpen;
+            setTabOpened_local(tabOpen)
+            tabToUpdate.opened = tabOpen;
           }
 
           if (tabType === "note") {

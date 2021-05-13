@@ -98,6 +98,20 @@ Props): JSX.Element {
 
   // const [state, setstate] = useState(initialState)
 
+  // let tabOpened_local: null | boolean = null
+
+  // if (tabOpened_local === null) {
+  //   tabOpened_local = tabOpened
+  // }
+
+  const [tabOpened_local, setTabOpened_local] = useState(tabOpened)
+
+  useEffect(() => {
+
+    setTabOpened_local(tabOpened)
+   
+  }, [tabOpened])
+
   const reachRef = React.useRef();
   const rect = useRect(reachRef);
  
@@ -625,10 +639,11 @@ Props): JSX.Element {
           top={rect?.top as number}
           left={rect?.left as number}
           tabWidth={rect?.width as number}
+          setTabOpened_local={setTabOpened_local}
         />
       )}
 
-      {tabOpened && tabType === "folder" && (
+      {tabOpened_local && tabType === "folder" && (
         <div>
           {bookmarksData
             .filter((el) => el.tags.indexOf(tabID) > -1)
@@ -651,7 +666,7 @@ Props): JSX.Element {
         </div>
       )}
 
-      {tabOpened && tabType === "note" && (
+      {tabOpened_local && tabType === "note" && (
         <NoteInput
           //  noteInput={noteInput}
           currentTab={currentTab as SingleTabData}
@@ -660,7 +675,7 @@ Props): JSX.Element {
         />
       )}
 
-      {tabOpened && tabType === "rss" && (
+      {tabOpened_local && tabType === "rss" && (
         <RSS_reactQuery
           tabID={tabID}
           currentTab={currentTab as SingleTabData}
