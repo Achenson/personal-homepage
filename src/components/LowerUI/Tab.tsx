@@ -98,12 +98,9 @@ Props): JSX.Element {
 
   // const [state, setstate] = useState(initialState)
 
-  // let tabOpened_local: null | boolean = null
+  
 
-  // if (tabOpened_local === null) {
-  //   tabOpened_local = tabOpened
-  // }
-
+// needed for immediate tab content opening/closing after locking/unlocking
   const [tabOpened_local, setTabOpened_local] = useState(tabOpened)
 
   useEffect(() => {

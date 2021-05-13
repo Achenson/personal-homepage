@@ -120,10 +120,8 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
 function Main({}: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  const [
-    backgroundColorData,
-    setBackgroundColorData,
-  ] = backgroundColorState.use();
+  const [backgroundColorData, setBackgroundColorData] =
+    backgroundColorState.use();
 
   // const [columnSelected, setColumnSelected] = useState<number | null >(null);
   const [upperVisState, upperVisDispatch] = useReducer(
@@ -137,6 +135,8 @@ function Main({}: Props): JSX.Element {
     visDispatch({ type: "TAB_EDITABLES_CLOSE" });
   }
 
+  const [paddingRight, setPaddingRight] = useState(false);
+
   //
   useEffect(() => {
     if (
@@ -146,8 +146,6 @@ function Main({}: Props): JSX.Element {
       upperVisState.profileVis ||
       upperVisState.newBookmarkVis ||
       upperVisState.newTabVis
-     
-
     ) {
       // console.log(document.documentElement.scrollHeight);
       // console.log(document.documentElement.clientHeight);
@@ -159,21 +157,25 @@ function Main({}: Props): JSX.Element {
         document.documentElement.clientHeight
       ) {
         document.body.style.overflow = "hidden";
-        document.body.style.paddingRight = "17px";
+
+        // document.body.style.paddingRight = "17px";
+        setPaddingRight(true);
       }
 
       return;
     }
 
     document.body.style.overflow = "visible";
-    document.body.style.paddingRight = "0px";
+
+    // document.body.style.paddingRight = "0px";
+    setPaddingRight(false);
   }, [
     upperVisState.colorsSettingsVis,
     upperVisState.backgroundSettingsVis,
     upperVisState.settingsVis,
     upperVisState.profileVis,
     upperVisState.newBookmarkVis,
-    upperVisState.newTabVis
+    upperVisState.newTabVis,
   ]);
 
   // useEffect(() => {
@@ -190,6 +192,7 @@ function Main({}: Props): JSX.Element {
           ? `bg-${globalSettingsData.defaultImage}`
           : `bg-${backgroundColorData}`
       } bg-cover bg-fixed`}
+      style={{paddingRight: `${paddingRight ? "17px" : ""}`}}
       onScroll={(e) => {
         e.preventDefault();
         return;
