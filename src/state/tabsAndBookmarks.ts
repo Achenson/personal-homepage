@@ -201,6 +201,24 @@ export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
     // tags: ["all", "main"],
     tags: ["ALL_TAGS", "2"],
   },
+  {
+    id: 4,
+    title: "oneMore",
+    URL: "https://en.wikipedia.org/wiki/Microsoft_Windows",
+    // tags: ["all", "main"],
+    tags: ["ALL_TAGS"],
+  },
+  {
+    id: 5,
+    title: "anotherOne",
+    URL: "https://en.wikipedia.org/wiki/Microsoft_Windows",
+    // tags: ["all", "main"],
+    tags: ["ALL_TAGS"],
+  },
+
+
+
+
 ]);
 
 export const bookmarksAllTagsState = newRidgeState<(string | number)[]>(["ALL_TAGS", "2", "3"]);

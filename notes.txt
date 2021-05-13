@@ -430,6 +430,7 @@ DONE 379.5 bring back automatic closing/opening after locking (when state will b
    (local opened state in Tab, depending on opened state from global state)  DONE
 DONE 380. "lock as opened by default" better? DONE
 DONE 381. use portals for lowerUI popups? DONE
+DONE 383. many bookmarks in a Folder -> newBookmark or editBookmark clashes visually? (inner shadow added) DONE
 DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 
 1. purgecss at the end of project?
@@ -477,9 +478,6 @@ DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 363. more professional selectables?
 364. all settings in one in case of xsScreen?
 
-
-
-
 370. change colors data to objects?
 371. fixed position of upperMenu?
 372. popoup for messages for user (eg. logged out, tab created etc.)
@@ -490,13 +488,8 @@ DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 376. selectables "x" center vertically?
 377. "error fetching data" & loading.. non visible on dark background?
 
-
-
-    
-
 382. upperUI scroll still visible when resizing browser down -> add dependency in Main?
-383. many bookmarks in a Folder -> newBookmark or editBookmark clashes visually?
-    
+
 
 
 Browserslist: caniuse-lite is outdated. Please run:
