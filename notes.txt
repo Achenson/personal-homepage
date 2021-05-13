@@ -422,6 +422,7 @@ DONE 374. make upperUI adding component work same as settings -> close when clic
 DONE 377. padding right lowerbookmark editTab & editBookmark unite DONE
 DONE 378. delete inv chevrons in uppperUI DONE
 DONE 378. bug: eye off not working properly when locking tabs (changed in editTab()) DONE
+DONE 378.5 yellow columns when img is on -> change note or yellow to gold DONE
 XXX 379. automatic tab closing/opening after locking doesn't work correctly (function) XXX
 DONE 380. "lock as opened by default" better? DONE
 DONE 381. use portals for lowerUI popups? DONE
@@ -461,7 +462,10 @@ DONE 381. use portals for lowerUI popups? DONE
 348. background colors list to the left?
 352. clear svgs
 353. SingleColor_DefaultAndColumn SingleColor_Column_Img unify?
-354. limit column width?
+
+354. limit column width? -> make UpperLeftUI part of 1st col, UpperLefMenu part of last col,
+    in Grid: justify-content center & set Cols to repeat minmax(0,<maxwidth>)
+
 360. newTab etc. enter to save & esc to cancel keyboard ? move handleKeyDown from editTab_folder to editTab_main
 
 362. selectables filtered alphabetically?
@@ -479,10 +483,12 @@ DONE 381. use portals for lowerUI popups? DONE
 375. newNote paddingTop vh instead of center?
 376. selectables "x" center vertically?
 377. "error fetching data" & loading.. non visible on dark background?
-378. yellow columns when img is on -> change note or yellow to amber
+
+
 379. bring back automatic closing/opening after locking (when state will be in its final form)
 382. upperUI scroll still visible when resizing browser down -> add dependency in Main?
 383. many bookmarks in a Folder -> newBookmark or editBookmark clashes visually?
+384. bug: adding new tab to empty column doesn't work
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
