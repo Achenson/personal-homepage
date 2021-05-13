@@ -38,7 +38,6 @@ interface Props {
   tabType: "folder" | "note" | "rss";
 }
 
-
 const errorsAllFalse = {
   bookmarksErrorVis: false,
   bookmarksRepeatErrorVis: false,
@@ -49,18 +48,14 @@ const errorsAllFalse = {
 };
 
 function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
-
-
   // console.log("rendered");
 
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
-  const [
-    bookmarksAllTagsData,
-    setBookmarksAllTagsData,
-  ] = bookmarksAllTagsState.use();
+  const [bookmarksAllTagsData, setBookmarksAllTagsData] =
+    bookmarksAllTagsState.use();
 
   const [uiColorData, setUiColorData] = uiColorState.use();
 
@@ -81,7 +76,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   // const [tabLinksInput, setTabBookmarksInput] = useState<string[]>([]);
 
   const [errors, setErrors] = useState({
-    ...errorsAllFalse
+    ...errorsAllFalse,
   });
 
   // const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
@@ -103,10 +98,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   // ] = useState<boolean>(false);
   // // for notes
   // const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
-
-
-
-
 
   const [selectablesListVis, setSelectablesListVis] = useState<boolean>(false);
 
@@ -211,8 +202,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       // setTitleFormatErrorVis(true);
       setErrors({
         ...errorsAllFalse,
-        titleFormatErrorVis: true
-      })
+        titleFormatErrorVis: true,
+      });
       setSelectablesListVis(false);
       return true;
     }
@@ -221,8 +212,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       // setTitleUniquenessErrorVis(true);
       setErrors({
         ...errorsAllFalse,
-        titleUniquenessErrorVis: true
-      })
+        titleUniquenessErrorVis: true,
+      });
       setSelectablesListVis(false);
       return true;
     }
@@ -232,8 +223,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
         // setBookmarksErrorVis(true);
         setErrors({
           ...errorsAllFalse,
-          bookmarksErrorVis: true
-        })
+          bookmarksErrorVis: true,
+        });
         setSelectablesListVis(false);
         return true;
       }
@@ -242,8 +233,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
         // setBookmarkExistenceErrorVis(true);
         setErrors({
           ...errorsAllFalse,
-          bookmarkExistenceErrorVis: true
-        })
+          bookmarkExistenceErrorVis: true,
+        });
         setSelectablesListVis(false);
         return true;
       }
@@ -252,8 +243,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
         // setBookmarksRepeatErrorVis(true);
         setErrors({
           ...errorsAllFalse,
-          bookmarksRepeatErrorVis: true
-        })
+          bookmarksRepeatErrorVis: true,
+        });
         setSelectablesListVis(false);
         return true;
       }
@@ -264,8 +255,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
         // setTextAreaErrorVis(true);
         setErrors({
           ...errorsAllFalse,
-          textAreaErrorVis: true
-        })
+          textAreaErrorVis: true,
+        });
         return true;
       }
     }
@@ -322,8 +313,11 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       .filter((obj) => obj.column === tabColumnInput)
       .sort((a, b) => a.priority - b.priority);
 
-    let newTabPriority =
-      sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
+    let newTabPriority: number = 0;
+
+    if (sortedTabsInCol.length > 0) {
+      newTabPriority = sortedTabsInCol[sortedTabsInCol.length - 1].priority + 1;
+    }
 
     if (tabType === "note") {
       setTabsData((previous) =>

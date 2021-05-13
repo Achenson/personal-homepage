@@ -426,6 +426,7 @@ DONE 378.5 yellow columns when img is on -> change note or yellow to gold DONE
 XXX 379. automatic tab closing/opening after locking doesn't work correctly (function) XXX
 DONE 380. "lock as opened by default" better? DONE
 DONE 381. use portals for lowerUI popups? DONE
+DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -486,9 +487,11 @@ DONE 381. use portals for lowerUI popups? DONE
 
 
 379. bring back automatic closing/opening after locking (when state will be in its final form)
+    -> use opened state before defaultOpened state in render?
 382. upperUI scroll still visible when resizing browser down -> add dependency in Main?
 383. many bookmarks in a Folder -> newBookmark or editBookmark clashes visually?
-384. bug: adding new tab to empty column doesn't work
+    
+
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
