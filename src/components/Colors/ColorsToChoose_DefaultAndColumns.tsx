@@ -1,7 +1,7 @@
 import React from "react";
 
 import SingleColor_DefaultAndColumn from "./SingleColor_DefaultAndColumn";
-import SingleColor_Column_Img from "./SingleColor_Column_Img";
+
 
 import { tabColors } from "../../utils/colors_tab";
 import { columnColors, imageColumnColors } from "../../utils/colors_column";
@@ -25,7 +25,8 @@ interface Props {
 }
 
 function ColorsToChoose_DefaultAndColumns({
-  defaultColorsFor, leftPositioning
+  defaultColorsFor,
+  leftPositioning,
 }: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
@@ -47,34 +48,20 @@ function ColorsToChoose_DefaultAndColumns({
     });
   }
 
-  function mapColumnColors() {
-    if (!globalSettingsData.picBackground) {
-      return columnColors.map((row, i) => {
-        return (
-          <div className="flex" key={i}>
-            {row.map((el, j) => {
-              return (
-                <SingleColor_DefaultAndColumn
-                  color={el}
-                  defaultColorsFor={defaultColorsFor}
-                  key={j}
-                />
-              );
-            })}
-          </div>
-        );
-      });
-    }
-
-    return imageColumnColors.map((row, i) => {
+  function mapColumnColors(arrToMap: string[][]) {
+    return arrToMap.map((row, i) => {
+      // return imageColumnColors.map((row, i) => {
       return (
         <div className="flex" key={i}>
           {row.map((el, j) => {
             return (
-              <SingleColor_Column_Img
+              <SingleColor_DefaultAndColumn
                 color={el}
                 defaultColorsFor={defaultColorsFor}
                 key={j}
+                colsForBackgroundImg={
+                  globalSettingsData.picBackground ? true : false
+                }
               />
             );
           })}
@@ -104,7 +91,11 @@ function ColorsToChoose_DefaultAndColumns({
         defaultColorsFor === "column_2" ||
         defaultColorsFor === "column_3" ||
         defaultColorsFor === "column_4"
-          ? mapColumnColors()
+          ? mapColumnColors(
+              globalSettingsData.picBackground
+                ? imageColumnColors
+                : columnColors
+            )
           : mapTabColors()}
       </div>
     </div>

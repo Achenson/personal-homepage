@@ -3,7 +3,10 @@ import { folderColorState } from "../../state/colorsState";
 import { noteColorState } from "../../state/colorsState";
 import { rssColorState } from "../../state/colorsState";
 // import { uiColorState } from "../../state/colorsState";
-import { columnsColorsState } from "../../state/colorsState";
+import {
+  columnsColorsState,
+  columnsColorsImg_State,
+} from "../../state/colorsState";
 import { uiColorState } from "../../state/colorsState";
 
 import { setComplementaryUiColor } from "../../utils/func_complementaryUIcolor";
@@ -22,11 +25,13 @@ interface Props {
     | "column_3"
     | "column_4"
     | "unselected";
+  colsForBackgroundImg?: boolean;
 }
 
 function SingleColor_DefaultAndColumn({
   color,
   defaultColorsFor,
+  colsForBackgroundImg,
 }: Props): JSX.Element {
   // const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -34,6 +39,9 @@ function SingleColor_DefaultAndColumn({
   const [noteColorData, setNoteColorData] = noteColorState.use();
   const [rssColorData, setRssColorData] = rssColorState.use();
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
+  const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
+    columnsColorsImg_State.use();
+
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   function borderMaker(
@@ -73,25 +81,37 @@ function SingleColor_DefaultAndColumn({
         return unselected;
 
       case "column_1":
-        if (color === columnsColorsData.column_1) {
+        if (
+          (color === columnsColorsData.column_1 && !colsForBackgroundImg) ||
+          (color === columnsColorsImg_Data.column_1 && colsForBackgroundImg)
+        ) {
           return selectedBlack;
         }
         return unselected;
 
       case "column_2":
-        if (color === columnsColorsData.column_2) {
+        if (
+          (color === columnsColorsData.column_2 && !colsForBackgroundImg) ||
+          (color === columnsColorsImg_Data.column_2 && colsForBackgroundImg)
+        ) {
           return selectedBlack;
         }
         return unselected;
 
       case "column_3":
-        if (color === columnsColorsData.column_3) {
+        if (
+          (color === columnsColorsData.column_3 && !colsForBackgroundImg) ||
+          (color === columnsColorsImg_Data.column_3 && colsForBackgroundImg)
+        ) {
           return selectedBlack;
         }
         return unselected;
 
       case "column_4":
-        if (color === columnsColorsData.column_4) {
+        if (
+          (color === columnsColorsData.column_4 && !colsForBackgroundImg) ||
+          (color === columnsColorsImg_Data.column_4 && colsForBackgroundImg)
+        ) {
           return selectedBlack;
         }
         return unselected;
@@ -113,6 +133,8 @@ function SingleColor_DefaultAndColumn({
         // isThisSelected(defaultColorsFor) ? "border-2" : "border"
         borderMaker(defaultColorsFor)
       } hover:border-2 hover:border-gray-500 hover:z-50`}
+      // for columns with background img only
+      style={{ backgroundColor: `${colsForBackgroundImg ? color : ""}` }}
       onClick={() => {
         if (defaultColorsFor === "folders") {
           setFolderColorData(color);
@@ -129,12 +151,33 @@ function SingleColor_DefaultAndColumn({
         }
 
         if (
-          defaultColorsFor === "column_1" ||
-          defaultColorsFor === "column_2" ||
-          defaultColorsFor === "column_3" ||
-          defaultColorsFor === "column_4"
+          (defaultColorsFor === "column_1" ||
+            defaultColorsFor === "column_2" ||
+            defaultColorsFor === "column_3" ||
+            defaultColorsFor === "column_4") &&
+          !colsForBackgroundImg
         ) {
           setColumnsColorsData((previous) =>
+            produce(previous, (updated) => {
+              updated[
+                defaultColorsFor as
+                  | "column_1"
+                  | "column_2"
+                  | "column_3"
+                  | "column_4"
+              ] = color;
+            })
+          );
+        }
+
+        if (
+          (defaultColorsFor === "column_1" ||
+            defaultColorsFor === "column_2" ||
+            defaultColorsFor === "column_3" ||
+            defaultColorsFor === "column_4") &&
+          colsForBackgroundImg
+        ) {
+          setColumnsColorsImg_Data((previous) =>
             produce(previous, (updated) => {
               updated[
                 defaultColorsFor as

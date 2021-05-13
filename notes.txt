@@ -361,7 +361,7 @@ XXX 283. errors reducers? XXX
 DONE 284. EditTab: rss & note (&folder)-> make new components! DONE 
 DONE 285. rss globalSetting styling DONE
 DONE 286. change many find() by tabID to passing props - eg. in RSS components, editTab, noteInput DONE
-
+XXX 289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds XXX
 XXX 290. SingleBookmark don't look good on lightest columns XXX
 DONE 293. upperVisDispatch -> color selectable should be gone when closing all DONE logic moved to upperReducer
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
@@ -405,6 +405,7 @@ DONE 349. svg error still! on lower ui (solution: setting fixed width to svg) DO
 DONE 350. can't access tab options with touch DONE
 DONE 351. ColorsToChoose_Default - control positioning by props, not inside components DONE
 DONE 352. clear svgs DONE
+DONE 353. SingleColor_DefaultAndColumn SingleColor_Column_Img unify? DONE
 XXX 355. upperRightUI: Note to close to the lower svgs?XXX
 DONE 356. selectables bug: no list if string lenght will be 0 DONE (now opens on change, or with arrow down)
 DONE 356.5 newTab newBookmark EditTab bookmark_lowerUI -> change bookmarks/tags naming to selectables, extract functions DONE
@@ -446,7 +447,6 @@ DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 287. rss error handling: catch error for data and description (cnn rss description crashes the app)
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
 
-289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds
 
 296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
 
@@ -468,7 +468,9 @@ DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 
 346. error in console.log if empty tag auto deletes itself
 
-353. SingleColor_DefaultAndColumn SingleColor_Column_Img unify?
+
+
+
 
 354. limit column width? -> make UpperLeftUI part of 1st col, UpperLefMenu part of last col,
     in Grid: justify-content center & set Cols to repeat minmax(0,<maxwidth>)
@@ -489,7 +491,7 @@ DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 376. selectables "x" center vertically?
 377. "error fetching data" & loading.. non visible on dark background?
 
-
+385. change bookmark_lowerUI & editTab bg so it won't clash with one of the background cols
 
 
 Browserslist: caniuse-lite is outdated. Please run:
