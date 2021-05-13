@@ -35,7 +35,7 @@ function ColorsToChoose_Background({}: Props): JSX.Element{
   
   return (
       <div className="z-50 relative">
-      <div className="absolute bg-white" style={{ left: "-94px", top: "105px" }}>
+      <div className="absolute bg-white" style={{ left: "-98px", top: "105px" }}>
           {mapBackgroundColors()}
       </div>
     </div>
