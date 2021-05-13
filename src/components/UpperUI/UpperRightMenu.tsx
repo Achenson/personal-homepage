@@ -2,25 +2,19 @@ import React, { useState } from "react";
 
 import UpperRightMenu_XS from "./UpperRightMenu_XS";
 
-import { ReactComponent as AddFolderSVG } from "../../svgs/addFolder.svg";
 import { ReactComponent as FolderSVG } from "../../svgs/folder.svg";
 
-import { ReactComponent as PlusSmSVG } from "../../svgs/plus-sm.svg";
-import { ReactComponent as PlusSVG } from "../../svgs/plus.svg";
-import { ReactComponent as PlusSquareSVG } from "../../svgs/plus-square-line_uxwing.svg";
-import { ReactComponent as PlusCircleSVG } from "../../svgs/plus-circle.svg";
-import { ReactComponent as PlusCircleZondSVG } from "../../svgs/add-outline_zond.svg";
+
 import { ReactComponent as BookmarkSVG } from "../../svgs/bookmarkAlt.svg";
-// import { ReactComponent as AddNote } from "../../svgs/addNote.svg";
-import { ReactComponent as AddNote } from "../../svgs/text-document-add.svg";
+
 import { ReactComponent as NoteSVG } from "../../svgs/note_UXwing.svg";
 import { ReactComponent as SettingsSVG } from "../../svgs/settingsAlt.svg";
-import { ReactComponent as CogSVG } from "../../svgs/cog.svg";
+
 import { ReactComponent as UserSVG } from "../../svgs/user.svg";
 import { ReactComponent as LogoutSVG } from "../../svgs/logout.svg";
 import { ReactComponent as ColorSVG } from "../../svgs/beaker.svg";
 import { ReactComponent as AddRssSVG } from "../../svgs/rss.svg";
-import { ReactComponent as RssSVG } from "../../svgs/rss_UXwing.svg";
+
 import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 import { uiColorState } from "../../state/colorsState";
