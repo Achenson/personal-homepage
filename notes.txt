@@ -487,7 +487,7 @@ DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 377. "error fetching data" & loading.. non visible on dark background?
 
 385. change bookmark_lowerUI & editTab bg so it won't clash with one of the background cols
-
+386. xs: flickering of settings (those with 2 size versions) when using Settings_inner_xs
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

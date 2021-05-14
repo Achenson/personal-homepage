@@ -9,6 +9,8 @@ import { uiColorState } from "../../state/colorsState";
 import { UpperVisAction } from "../../utils/interfaces";
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 
+import Settings_inner_xs from "./Settings_inner_xs";
+
 interface Props {
   // backgroundSettingsVis: boolean;
   // setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
@@ -72,6 +74,11 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
           }}
           // style={{ width: "350px", height: "250px" }}
         >
+
+          <Settings_inner_xs
+          currentSettings={"background"}
+          upperVisDispatch={upperVisDispatch}
+          />
           <div className="absolute right-0 top-0 mt-1 mr-1">
             <CancelSVG
               className="h-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"

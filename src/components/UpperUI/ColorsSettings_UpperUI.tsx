@@ -119,6 +119,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
         <Settings_inner_xs
         upperVisDispatch={upperVisDispatch}
+        currentSettings={"colors"}
         />
 
 

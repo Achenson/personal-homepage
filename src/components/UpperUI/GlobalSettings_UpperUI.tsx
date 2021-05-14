@@ -14,6 +14,7 @@ import {
 import { UpperVisAction } from "../../utils/interfaces";
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 import { tabsDataState } from "../../state/tabsAndBookmarks";
+import Settings_inner_xs from "./Settings_inner_xs";
 
 interface Props {
   // settingsVis: boolean;
@@ -95,6 +96,15 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
           className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
           style={{ width: `${xsScreen ? "350px" : "417px"}`, height: "225px" }}
         >
+
+        <Settings_inner_xs
+        upperVisDispatch={upperVisDispatch}
+        currentSettings="global"
+        />
+
+
+
+
           <div className="absolute right-0 top-0 mt-1 mr-1">
             <CancelSVG
               className="h-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"
