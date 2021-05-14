@@ -438,6 +438,9 @@ DONE 381. use portals for lowerUI popups? DONE
 XXX 382. upperUI scroll still visible when resizing browser down (not visible anymore somehow) XXX
 DONE 383. many bookmarks in a Folder -> newBookmark or editBookmark clashes visually? (inner shadow added) DONE
 DONE 384. bug: adding new tab to empty column doesn't work ->DONE
+DONE 385. change bookmark_lowerUI & editTab bg (different gray?) 
+    so it won't clash with one of the background cols (warmGray-100) DONE
+XXX 388. disable input in newTab? XXX (no because it works as a filter also now)
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -475,6 +478,8 @@ DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 360. newTab etc. enter to save & esc to cancel keyboard ? move handleKeyDown from editTab_folder to editTab_main
 
 362. selectables filtered alphabetically?
+
+
 363. more professional selectables?
 
 370. change colors data to objects?
@@ -485,10 +490,9 @@ DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 376. selectables "x" center vertically?
 377. "error fetching data" & loading.. non visible on dark background?
 
-385. change bookmark_lowerUI & editTab bg (different gray?) so it won't clash with one of the background cols
+
 386. xs: flickering of settings (those with 2 size versions) when using Settings_inner_xs
 387. innerShadow on inputs?
-388. disable input in newTab?
 389. cursor start/end in input for selectables 
 
 Browserslist: caniuse-lite is outdated. Please run:

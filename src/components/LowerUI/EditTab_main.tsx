@@ -399,7 +399,7 @@ Props): JSX.Element {
   }
 
   return ReactDOM.createPortal(
-    <div className={`absolute z-40 bg-gray-100 pb-2 border pl-1 pr-1 shadow-inner`}
+    <div className={`absolute z-40 bg-warmGray-100 pb-2 border pl-1 pr-1 shadow-inner`}
     style={{top: `${top+32+document.documentElement.scrollTop}px`, left: `${left}px`, width: `${tabWidth}px`}}
     >
       <div className="mb-3">
