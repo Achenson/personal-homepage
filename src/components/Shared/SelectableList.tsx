@@ -15,13 +15,12 @@ function SelectableList({
   visibleSelectables,
   marginTop,
   setWasAnythingClicked,
-  setSelectablesVis
+  setSelectablesVis,
 }: Props): JSX.Element {
   let visibleSelectables_sorted = visibleSelectables.sort();
 
-  const [selectableToHighlight, setSelectableToHighlight] = useState<
-    null | number
-  >(null);
+  const [selectableToHighlight, setSelectableToHighlight] =
+    useState<null | number>(null);
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown_selectables);
@@ -126,7 +125,19 @@ function SelectableList({
     if (selectablesInputStr.length === 0) {
       setSelectablesInputStr(el);
     } else {
-      setSelectablesInputStr(selectablesInputStr.concat(", " + el));
+      let lastChar = selectablesInputStr[selectablesInputStr.length - 1];
+
+      if (lastChar === ",") {
+        setSelectablesInputStr(selectablesInputStr.concat(" " + el));
+      }
+
+      if (lastChar === " ") {
+        setSelectablesInputStr(selectablesInputStr.concat(el));
+      }
+
+      if (lastChar !== " " && lastChar !== ",") {
+        setSelectablesInputStr(selectablesInputStr.concat(", " + el));
+      }
     }
 
     if (eventType === "keyboard") {
