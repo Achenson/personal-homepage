@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 
+import Settings_inner_xs from "./Settings_inner_xs";
+
 import ColorsToChoose_Default from "../Colors/ColorsToChoose_DefaultAndColumns";
+
+// import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
+// import { ReactComponent as ColorSVG } from "../../svgs/beaker.svg";
+// import { ReactComponent as SettingsSVG } from "../../svgs/settingsAlt.svg";
 
 import {
   noteColorState,
@@ -23,16 +29,17 @@ interface Props {
 }
 
 function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
-  const [defaultColorsFor, setDefaultColorsFor] = useState<
-    | "folders"
-    | "notes"
-    | "rss"
-    // | "column_1"
-    // | "column_2"
-    // | "column_3"
-    // | "column_4"
-    | "unselected"
-  >("unselected");
+  const [defaultColorsFor, setDefaultColorsFor] =
+    useState<
+      | "folders"
+      | "notes"
+      | "rss"
+      // | "column_1"
+      // | "column_2"
+      // | "column_3"
+      // | "column_4"
+      | "unselected"
+    >("unselected");
 
   const [colorsToChooseVis, setColorsToChooseVis] = useState<boolean>(false);
 
@@ -108,6 +115,13 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
           style={{ width: `350px`, height: "200px" }}
           // style={{ width: "350px", height: "200px" }}
         >
+
+
+        <Settings_inner_xs
+        upperVisDispatch={upperVisDispatch}
+        />
+
+
           <div className="absolute right-0 top-0 mt-1 mr-1">
             <CancelSVG
               className="h-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"

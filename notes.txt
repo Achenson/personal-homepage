@@ -447,7 +447,6 @@ DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 287. rss error handling: catch error for data and description (cnn rss description crashes the app)
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
 
-
 296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
 
 304. react query devtools not working
@@ -467,10 +466,6 @@ DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 341. bookmark_lowerUI -> divide function to new & edit
 
 346. error in console.log if empty tag auto deletes itself
-
-
-
-
 
 354. limit column width? -> make UpperLeftUI part of 1st col, UpperLefMenu part of last col,
     in Grid: justify-content center & set Cols to repeat minmax(0,<maxwidth>)
