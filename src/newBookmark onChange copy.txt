@@ -1,0 +1,41 @@
+        onChange={(e) => {
+                  let target = e.target.value;
+
+                  setSelectablesInputStr(target);
+
+                  let selectablesInputArr = target.split(", ");
+
+                  let lastSelectablesArrEl =
+                    selectablesInputArr[tagsInputArr.length - 1];
+                  // setTagsInputArr(selectablesInputStr.split(" ,"))
+                  // let newVisibleTags = [...visibleTags];
+                  let newVisibleTags: string[] = [];
+
+                  function letterToLetterMatch(lastInput: string, el: string) {
+                    for (let i = 0; i < lastInput.length; i++) {
+                      if (
+                        lastInput[i] !== el[i] &&
+                        // returns true if lastInput is present in initial bookmarks
+                        visibleTags.indexOf(lastInput) === -1 &&
+                        // returns true is last char is a comma
+                        selectablesInputStr[selectablesInputStr.length - 1] !== ","
+                      ) {
+                        return false;
+                      }
+                    }
+                    return false;
+                  }
+
+
+                  visibleTags.forEach((el) => {
+                    if (
+                      selectablesInputArr.indexOf(el) === -1 &&
+                      (letterToLetterMatch(lastSelectablesArrEl, el) ||
+                        selectablesInputStr.length === 0)
+                    ) {
+                      newVisibleTags.push(el);
+                    }
+                  });
+
+                  setVisibleTags([...newVisibleTags]);
+                }}

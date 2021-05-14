@@ -32,6 +32,7 @@ interface Props {
   setSelectablesInputStr: React.Dispatch<React.SetStateAction<string>>;
   visibleTags: string[];
   setVisibleTags: React.Dispatch<React.SetStateAction<string[]>>;
+  initialTags: string[];
   selectablesListVis: boolean;
   setSelectablesListVis: React.Dispatch<React.SetStateAction<boolean>>;
   notesTitlesArr: string[];
@@ -89,6 +90,7 @@ function Bookmark_lowerUI({
   setSelectablesInputStr,
   visibleTags,
   setVisibleTags,
+  initialTags,
   selectablesListVis,
   setSelectablesListVis,
   notesTitlesArr,
@@ -537,6 +539,7 @@ function Bookmark_lowerUI({
                 setSelectablesInputStr={setSelectablesInputStr}
                 selectablesInputStr={selectablesInputStr}
                 visibleSelectables={visibleTags}
+                initialSelectables={initialTags}
                 setSelectablesVis={setSelectablesListVis}
                 marginTop="0px"
                 setWasAnythingClicked={setWasAnythingChanged}

@@ -7,6 +7,8 @@ interface Props {
   marginTop: string;
   setWasAnythingClicked?: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectablesVis: React.Dispatch<React.SetStateAction<boolean>>;
+  // Change !!!!!!
+  initialSelectables: string[];
 }
 
 function SelectableList({
@@ -16,6 +18,7 @@ function SelectableList({
   marginTop,
   setWasAnythingClicked,
   setSelectablesVis,
+  initialSelectables,
 }: Props): JSX.Element {
   let visibleSelectables_sorted = visibleSelectables.sort();
 
@@ -122,23 +125,7 @@ function SelectableList({
       );
     }
 
-    if (selectablesInputStr.length === 0) {
-      setSelectablesInputStr(el);
-    } else {
-      let lastChar = selectablesInputStr[selectablesInputStr.length - 1];
-
-      if (lastChar === ",") {
-        setSelectablesInputStr(selectablesInputStr.concat(" " + el));
-      }
-
-      if (lastChar === " ") {
-        setSelectablesInputStr(selectablesInputStr.concat(el));
-      }
-
-      if (lastChar !== " " && lastChar !== ",") {
-        setSelectablesInputStr(selectablesInputStr.concat(", " + el));
-      }
-    }
+    concatToTheEnd()
 
     if (eventType === "keyboard") {
       // return if the array will be empty on the next render
@@ -150,6 +137,39 @@ function SelectableList({
       if (selectableToHighlight === visibleSelectables_sorted.length - 1) {
         setSelectableToHighlight((nr) => (nr as number) - 1);
       }
+    }
+
+    function concatToTheEnd() {
+      if (selectablesInputStr.length === 0) {
+        setSelectablesInputStr(el);
+        return;
+      }
+
+      let lastChar = selectablesInputStr[selectablesInputStr.length - 1];
+
+      if (lastChar === ",") {
+        setSelectablesInputStr(selectablesInputStr.concat(" " + el));
+        return;
+      }
+
+      if (lastChar === " ") {
+        setSelectablesInputStr(selectablesInputStr.concat(el));
+        return;
+      }
+
+      let selectableArr = selectablesInputStr.split(", ");
+
+      if (
+        initialSelectables.indexOf(selectableArr[selectableArr.length - 1]) > -1
+      ) {
+        setSelectablesInputStr(selectablesInputStr.concat(", " + el));
+        return;
+      }
+
+      selectableArr.pop();
+      selectableArr.push(el);
+
+      setSelectablesInputStr(selectableArr.join(", "));
     }
   }
 

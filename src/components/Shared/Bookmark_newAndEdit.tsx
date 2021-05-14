@@ -223,6 +223,7 @@ function Bookmark_newAndEdit({
     setSelectablesInputStr,
     visibleTags,
     setVisibleTags,
+    initialTags,
     selectablesListVis,
     setSelectablesListVis,
     notesTitlesArr,

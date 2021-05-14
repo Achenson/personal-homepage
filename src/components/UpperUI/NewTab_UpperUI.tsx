@@ -125,35 +125,35 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   useEffect(() => {
     let newVisibleBookmarks: string[] = [];
 
+    let selectablesInputArr = selectablesInputStr.split(", ");
+
+    let lastSelectablesArrEl =
+      selectablesInputArr[selectablesInputArr.length - 1];
+
+    function letterToLetterMatch(lastInput: string, el: string) {
+      for (let i = 0; i < lastInput.length; i++) {
+        if (
+          lastInput[i] !== el[i] &&
+          // returns true if lastInput is present in initial bookmarks
+          initialBookmarks.indexOf(lastInput) === -1 &&
+          // returns true is last char is a comma
+          selectablesInputStr[selectablesInputStr.length - 1] !== ","
+        ) {
+          return false;
+        }
+      }
+      return true;
+    }
+
     initialBookmarks.forEach((el) => {
       // in new RegExp the \ needs to be escaped!
       // \b -> word boundary
       let tagRegex = new RegExp(`\\b${el}\\b`);
 
-      let selectablesInputArr = selectablesInputStr.split(", ");
-
-      let lastSelectablesArrEl =
-        selectablesInputArr[selectablesInputArr.length - 1];
-
-      function letterToLetterMatch(lastInput: string) {
-        for (let i = 0; i < lastInput.length; i++) {
-          if (
-            lastInput[i] !== el[i] &&
-            // returns true if lastInput is present in initial bookmarks
-            initialBookmarks.indexOf(lastInput) === -1 &&
-            // returns true is last char is a comma
-            selectablesInputStr[selectablesInputStr.length - 1] !== ","
-          ) {
-            return false;
-          }
-        }
-        return true;
-      }
-
       // a selectable is visible only if the input does not contain it
       if (
         !tagRegex.test(selectablesInputStr) &&
-        (letterToLetterMatch(lastSelectablesArrEl) ||
+        (letterToLetterMatch(lastSelectablesArrEl, el) ||
           selectablesInputStr.length === 0)
       ) {
         newVisibleBookmarks.push(el);
@@ -542,6 +542,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   setSelectablesInputStr={setSelectablesInputStr}
                   selectablesInputStr={selectablesInputStr}
                   visibleSelectables={visibleBookmarks}
+                  initialSelectables={initialBookmarks}
                   setSelectablesVis={setSelectablesListVis}
                   marginTop="0px"
                 />

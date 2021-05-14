@@ -151,6 +151,7 @@ function EditTab_folder({
             selectablesInputStr={selectablesInputStr}
             visibleSelectables={visibleBookmarks}
             setSelectablesVis={setSelectablesListVis}
+            initialSelectables={initialBookmarks}
             marginTop="0px"
             // setWasAnythingClicked
             setWasAnythingClicked={setWasAnythingClicked}

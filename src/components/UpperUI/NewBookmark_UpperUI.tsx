@@ -30,6 +30,7 @@ interface Props {
   setSelectablesInputStr: React.Dispatch<React.SetStateAction<string>>;
   visibleTags: string[];
   setVisibleTags: React.Dispatch<React.SetStateAction<string[]>>;
+  initialTags: string[];
   selectablesListVis: boolean;
   setSelectablesListVis: React.Dispatch<React.SetStateAction<boolean>>;
   notesTitlesArr: string[];
@@ -95,6 +96,7 @@ function NewBookmark_UpperUI({
   setSelectablesInputStr,
   visibleTags,
   setVisibleTags,
+  initialTags,
   selectablesListVis,
   setSelectablesListVis,
   notesTitlesArr,
@@ -424,6 +426,7 @@ Props): JSX.Element {
                 setSelectablesInputStr={setSelectablesInputStr}
                 selectablesInputStr={selectablesInputStr}
                 visibleSelectables={visibleTags}
+                initialSelectables={initialTags}
                 setSelectablesVis={setSelectablesListVis}
                 marginTop="0px"
               />
