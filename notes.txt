@@ -414,6 +414,7 @@ DONE 358. bug -> when on sm or lower (one col displayed) cannot drag tabs proper
 DONE 359. tab open/close randomly (not randomly, but state of the prev component was preserved) when dragging? (all) DONE
 (opened state is in global state now)
 DONE 361. error object in state? check how many renders are there (1 only either way) DONE
+DONE 364. all settings in one in case of xsScreen? DONE
 DONE 365. colorSettings -> make large version same as xs? DONE
 DONE 366. bug-> paddingAdded when scrollbar in now visible -> fixed by comparing <html> scrollHeight & clientHeight DONE
 DONE 366.5 when scrollbar is being changed to padding right, gray background is visible
@@ -474,7 +475,7 @@ DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 
 362. selectables filtered alphabetically?
 363. more professional selectables?
-364. all settings in one in case of xsScreen?
+
 
 370. change colors data to objects?
 371. fixed position of upperMenu?

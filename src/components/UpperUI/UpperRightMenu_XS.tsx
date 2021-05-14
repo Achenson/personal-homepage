@@ -72,7 +72,7 @@ function UpperRightMenu({
         </div>
       )}
 
-      {upperVisState.settingsVis_xs && (
+      {/* {upperVisState.settingsVis_xs && (
         <div className="flex xs:hidden items-center justify-around">
           <BookmarkSVG
             className={`invisible h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} mr-1`}
@@ -104,7 +104,7 @@ function UpperRightMenu({
             }}
           />
         </div>
-      )}
+      )} */}
 
       <div
         className="flex xs:hidden justify-around"
@@ -131,7 +131,7 @@ function UpperRightMenu({
           className={`h-6 cursor-pointer transition-colors duration-75  hover:text-${uiColorData} ml-0.5`}
           style={{ marginTop: "2px" }}
           onClick={() => {
-            upperVisDispatch({ type: "SETTINGS_XS_TOGGLE" });
+            upperVisDispatch({ type: "SETTINGS_TOGGLE" });
           }}
         />
 
