@@ -17,7 +17,7 @@ import { UpperVisAction, TabVisAction } from "../../utils/interfaces";
 interface Props {
   // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
-  
+
   upperVisDispatch?: React.Dispatch<UpperVisAction>;
   visDispatch?: React.Dispatch<TabVisAction>;
   colNumber?: number;
@@ -29,18 +29,16 @@ interface Props {
   top?: number;
   left?: number;
   tabWidth?: number;
-  
 }
 
 const errorsAllFalse = {
   tagErrorVis: false,
-tagRepeatErrorVis: false,
-titleFormatErrorVis: false,
-titleUniquenessErrorVis: false,
-noteErrorVis: false,
-rssErrorVis: false
-}
-
+  tagRepeatErrorVis: false,
+  titleFormatErrorVis: false,
+  titleUniquenessErrorVis: false,
+  noteErrorVis: false,
+  rssErrorVis: false,
+};
 
 function Bookmark_newAndEdit({
   // setBookmarkVis,
@@ -52,7 +50,7 @@ function Bookmark_newAndEdit({
   colNumber,
   top,
   left,
-  tabWidth
+  tabWidth,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [
@@ -86,19 +84,18 @@ function Bookmark_newAndEdit({
   //  !!! diff in editLink
   const [selectablesInputStr, setSelectablesInputStr] = useState<string>(
     // bookmarkComponentType === "edit" ? generateTagNames() : ""
-  () =>  generateTagNames()
+    () => generateTagNames()
   );
 
   //   ? (currentLink as SingleLinkData).tags.join(", ")
 
   function generateTagNames() {
-
-    if(bookmarkComponentType === "new_upperUI") {
-      return ""
+    if (bookmarkComponentType === "new_upperUI") {
+      return "";
     }
 
-    if(bookmarkComponentType === "new_lowerUI") {
-      return (tabTitle as string)
+    if (bookmarkComponentType === "new_lowerUI") {
+      return tabTitle as string;
     }
 
     let arrOut: string[] = [];
@@ -119,7 +116,9 @@ function Bookmark_newAndEdit({
 
   const [selectablesListVis, setSelectablesListVis] = useState<boolean>(false);
 
-  const [visibleTags, setVisibleTags] = useState<string[]>(() => makeInitialTags());
+  const [visibleTags, setVisibleTags] = useState<string[]>(() =>
+    makeInitialTags()
+  );
 
   const [initialTags, setInitialTags] = useState(() => makeInitialTags());
 
@@ -138,10 +137,9 @@ function Bookmark_newAndEdit({
   // const [noteErrorVis, setNoteErrorVis] = useState<boolean>(false);
   // const [rssErrorVis, setRssErrorVis] = useState<boolean>(false);
 
-
   const [errors, setErrors] = useState({
-    ...errorsAllFalse
-  })
+    ...errorsAllFalse,
+  });
 
   // ^  and $ -> beginning and end of the text!
   // let regexForTags = /^\w+(,\s\w+)*$/;
@@ -151,7 +149,6 @@ function Bookmark_newAndEdit({
 
   let notesTitlesArr: string[] = [];
   let rssTitlesArr: string[] = [];
-  
 
   tabsData.forEach((obj) => {
     if (obj.type === "note") {
@@ -161,21 +158,59 @@ function Bookmark_newAndEdit({
     if (obj.type === "rss") {
       rssTitlesArr.push(obj.title);
     }
-
-
   });
 
-
-
-
   useEffect(() => {
+    // let newVisibleTags: string[] = [];
+
+    // initialTags.forEach((el) => {
+    //   // in new RegExp the \ needs to be escaped!
+    //   let tagRegex = new RegExp(`\\b${el}\\b`);
+
+    //   if (!tagRegex.test(selectablesInputStr)) {
+    //     newVisibleTags.push(el);
+    //   }
+    // });
+
+    // setVisibleTags([...newVisibleTags]);
+
+    // if (newVisibleTags.length === 0) {
+    //   setSelectablesListVis(false);
+    // }
+
     let newVisibleTags: string[] = [];
+
+    let selectablesInputArr = selectablesInputStr.split(", ");
+
+    let lastSelectablesArrEl =
+      selectablesInputArr[selectablesInputArr.length - 1];
+
+    function letterToLetterMatch(lastInput: string, el: string) {
+      for (let i = 0; i < lastInput.length; i++) {
+        if (
+          lastInput[i] !== el[i] &&
+          // returns true if lastInput is present in initial bookmarks
+          initialTags.indexOf(lastInput) === -1 &&
+          // returns true is last char is a comma
+          selectablesInputStr[selectablesInputStr.length - 1] !== ","
+        ) {
+          return false;
+        }
+      }
+      return true;
+    }
 
     initialTags.forEach((el) => {
       // in new RegExp the \ needs to be escaped!
+      // \b -> word boundary
       let tagRegex = new RegExp(`\\b${el}\\b`);
 
-      if (!tagRegex.test(selectablesInputStr)) {
+      // a selectable is visible only if the input does not contain it
+      if (
+        !tagRegex.test(selectablesInputStr) &&
+        (letterToLetterMatch(lastSelectablesArrEl, el) ||
+          selectablesInputStr.length === 0)
+      ) {
         newVisibleTags.push(el);
       }
     });
@@ -185,12 +220,6 @@ function Bookmark_newAndEdit({
     if (newVisibleTags.length === 0) {
       setSelectablesListVis(false);
     }
-
-    // if (newVisibleTags.length > 0 && !isThisTheFirstRender) {
-    //   setSelectablesListVis(true);
-    // }
-
-    // setIsThisTheFirstRender(false);
   }, [
     selectablesInputStr,
     initialTags,
@@ -198,9 +227,6 @@ function Bookmark_newAndEdit({
     setSelectablesListVis,
     // isThisTheFirstRender,
   ]);
-
-
-
 
   function makeInitialTags(): string[] {
     let tags: string[] = [];
@@ -232,7 +258,7 @@ function Bookmark_newAndEdit({
 
     errors,
     setErrors,
-   
+
     // tagErrorVis,
     // setTagErrorVis,
 
@@ -250,9 +276,6 @@ function Bookmark_newAndEdit({
 
     // rssErrorVis,
     // setRssErrorVis,
-
-
-
 
     regexForTags,
     regexForTitle,
@@ -275,8 +298,6 @@ function Bookmark_newAndEdit({
           top={top as number}
           left={left as number}
           tabWidth={tabWidth as number}
-          
-          
         />
       )}
     </>

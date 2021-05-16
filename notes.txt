@@ -414,6 +414,7 @@ DONE 358. bug -> when on sm or lower (one col displayed) cannot drag tabs proper
 DONE 359. tab open/close randomly (not randomly, but state of the prev component was preserved) when dragging? (all) DONE
 (opened state is in global state now)
 DONE 361. error object in state? check how many renders are there (1 only either way) DONE
+DONE 362. selectables filtered alphabetically? DONE
 DONE 364. all settings in one in case of xsScreen? DONE
 DONE 365. colorSettings -> make large version same as xs? DONE
 DONE 366. bug-> paddingAdded when scrollbar in now visible -> fixed by comparing <html> scrollHeight & clientHeight DONE
@@ -477,7 +478,6 @@ XXX 388. disable input in newTab? XXX (no because it works as a filter also now)
 
 360. newTab etc. enter to save & esc to cancel keyboard ? move handleKeyDown from editTab_folder to editTab_main
 
-362. selectables filtered alphabetically?
 
 
 363. more professional selectables?

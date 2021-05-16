@@ -130,8 +130,10 @@ function Bookmark_lowerUI({
   tabWidth,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-  const [bookmarksAllTagsData, setBookmarksAllTagsData] =
-    bookmarksAllTagsState.use();
+  const [
+    bookmarksAllTagsData,
+    setBookmarksAllTagsData,
+  ] = bookmarksAllTagsState.use();
 
   const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -490,25 +492,26 @@ function Bookmark_lowerUI({
                 placeholder={"tag1, tag2..."}
                 onChange={(e) => {
                   setWasAnythingChanged(true);
+                  if (!selectablesListVis) setSelectablesListVis(true);
 
                   let target = e.target.value;
 
                   setSelectablesInputStr(target);
 
-                  let tagsInputArr = target.split(", ");
+                  // let tagsInputArr = target.split(", ");
 
-                  // setTagsInputArr(selectablesInputStr.split(" ,"))
+                  // // setTagsInputArr(selectablesInputStr.split(" ,"))
 
-                  // let newVisibleTags = [...visibleTags];
-                  let newVisibleTags: string[] = [];
+                  // // let newVisibleTags = [...visibleTags];
+                  // let newVisibleTags: string[] = [];
 
-                  visibleTags.forEach((el) => {
-                    if (tagsInputArr.indexOf(el) === -1) {
-                      newVisibleTags.push(el);
-                    }
-                  });
+                  // visibleTags.forEach((el) => {
+                  //   if (tagsInputArr.indexOf(el) === -1) {
+                  //     newVisibleTags.push(el);
+                  //   }
+                  // });
 
-                  setVisibleTags([...newVisibleTags]);
+                  // setVisibleTags([...newVisibleTags]);
                 }}
                 onFocus={(e) => {
                   setSelectablesListVis(true);

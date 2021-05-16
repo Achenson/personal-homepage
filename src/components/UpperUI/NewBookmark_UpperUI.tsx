@@ -104,23 +104,7 @@ function NewBookmark_UpperUI({
   upperVisDispatch,
   bookmarkComponentType,
 
-  // tagErrorVis,
-  // setTagErrorVis,
 
-  // tagRepeatErrorVis,
-  // setTagRepeatErrorVis,
-
-  // titleFormatErrorVis,
-  // setTitleFormatErrorVis,
-
-  // titleUniquenessErrorVis,
-  // setTitleUniquenessErrorVis,
-
-  // noteErrorVis,
-  // setNoteErrorVis,
-
-  // rssErrorVis,
-  // setRssErrorVis,
   errors,
   setErrors,
   
@@ -385,22 +369,25 @@ Props): JSX.Element {
                 value={selectablesInputStr}
                 placeholder={'tag1, tag2... ("all" tag auto-added)'}
                 onChange={(e) => {
+                  if (!selectablesListVis) setSelectablesListVis(true);
+
+
                   let target = e.target.value;
 
                   setSelectablesInputStr(target);
 
-                  let tagsInputArr = target.split(", ");
-                  // setTagsInputArr(selectablesInputStr.split(" ,"))
-                  // let newVisibleTags = [...visibleTags];
-                  let newVisibleTags: string[] = [];
+                  // let tagsInputArr = target.split(", ");
+                  // // setTagsInputArr(selectablesInputStr.split(" ,"))
+                  // // let newVisibleTags = [...visibleTags];
+                  // let newVisibleTags: string[] = [];
 
-                  visibleTags.forEach((el) => {
-                    if (tagsInputArr.indexOf(el) === -1) {
-                      newVisibleTags.push(el);
-                    }
-                  });
+                  // visibleTags.forEach((el) => {
+                  //   if (tagsInputArr.indexOf(el) === -1) {
+                  //     newVisibleTags.push(el);
+                  //   }
+                  // });
 
-                  setVisibleTags([...newVisibleTags]);
+                  // setVisibleTags([...newVisibleTags]);
                 }}
                 onFocus={(e) => {
                   setSelectablesListVis(true);
