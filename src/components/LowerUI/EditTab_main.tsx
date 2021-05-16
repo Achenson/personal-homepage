@@ -153,27 +153,6 @@ Props): JSX.Element {
     }
   }, [wasCheckboxClicked, wasTabOpenClicked, wasItemsPerPageClicked]);
 
-  // const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
-  //   false
-  // );
-
-  // const [
-  //   titleUniquenessErrorVis,
-  //   setTitleUniquenessErrorVis,
-  // ] = useState<boolean>(false);
-
-  // const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
-  // const [noDeletionErrorVis, setNoDeletionErrorVis] = useState<boolean>(false);
-
-  // const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
-  // const [
-  //   bookmarksRepeatErrorVis,
-  //   setBookmarksRepeatErrorVis,
-  // ] = useState<boolean>(false);
-  // const [
-  //   bookmarksExistenceErrorVis,
-  //   setBookmarksExistenceErrorVis,
-  // ] = useState<boolean>(false);
 
   const [errors, setErrors] = useState({
     ...errorsAllFalse,

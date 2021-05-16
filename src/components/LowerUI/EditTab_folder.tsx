@@ -46,13 +46,57 @@ function EditTab_folder({
   );
 
   useEffect(() => {
+
+
+    // let newVisibleBookmarks: string[] = [];
+
+    // initialBookmarks.forEach((el) => {
+    //   // in new RegExp the \ needs to be escaped!
+    //   let tagRegex = new RegExp(`\\b${el}\\b`);
+
+    //   if (!tagRegex.test(selectablesInputStr)) {
+    //     newVisibleBookmarks.push(el);
+    //   }
+    // });
+
+    // setVisibleBookmarks([...newVisibleBookmarks]);
+
+    // if (newVisibleBookmarks.length === 0) {
+    //   setSelectablesListVis(false);
+    // }
     let newVisibleBookmarks: string[] = [];
+
+    let selectablesInputArr = selectablesInputStr.split(", ");
+
+    let lastSelectablesArrEl =
+      selectablesInputArr[selectablesInputArr.length - 1];
+
+    function letterToLetterMatch(lastInput: string, el: string) {
+      for (let i = 0; i < lastInput.length; i++) {
+        if (
+          lastInput[i] !== el[i] &&
+          // returns true if lastInput is present in initial bookmarks
+          initialBookmarks.indexOf(lastInput) === -1 &&
+          // returns true is last char is a comma
+          selectablesInputStr[selectablesInputStr.length - 1] !== ","
+        ) {
+          return false;
+        }
+      }
+      return true;
+    }
 
     initialBookmarks.forEach((el) => {
       // in new RegExp the \ needs to be escaped!
+      // \b -> word boundary
       let tagRegex = new RegExp(`\\b${el}\\b`);
 
-      if (!tagRegex.test(selectablesInputStr)) {
+      // a selectable is visible only if the input does not contain it
+      if (
+        !tagRegex.test(selectablesInputStr) &&
+        (letterToLetterMatch(lastSelectablesArrEl, el) ||
+          selectablesInputStr.length === 0)
+      ) {
         newVisibleBookmarks.push(el);
       }
     });
@@ -62,6 +106,13 @@ function EditTab_folder({
     if (newVisibleBookmarks.length === 0) {
       setSelectablesListVis(false);
     }
+
+
+
+
+
+
+
   }, [
     selectablesInputStr,
     initialBookmarks,
@@ -113,16 +164,16 @@ function EditTab_folder({
 
               setSelectablesInputStr(target);
 
-              let bookmarksInputArr = target.split(", ");
-              let newVisibleBookmarks: string[] = [];
+              // let bookmarksInputArr = target.split(", ");
+              // let newVisibleBookmarks: string[] = [];
 
-              visibleBookmarks.forEach((el) => {
-                if (bookmarksInputArr.indexOf(el) === -1) {
-                  newVisibleBookmarks.push(el);
-                }
-              });
+              // visibleBookmarks.forEach((el) => {
+              //   if (bookmarksInputArr.indexOf(el) === -1) {
+              //     newVisibleBookmarks.push(el);
+              //   }
+              // });
 
-              setVisibleBookmarks([...newVisibleBookmarks]);
+              // setVisibleBookmarks([...newVisibleBookmarks]);
             }}
             onFocus={(e) => {
               setSelectablesListVis(true);

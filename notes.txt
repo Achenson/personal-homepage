@@ -494,6 +494,7 @@ XXX 388. disable input in newTab? XXX (no because it works as a filter also now)
 386. xs: flickering of settings (those with 2 size versions) when using Settings_inner_xs
 387. innerShadow on inputs?
 389. cursor start/end in input for selectables 
+390. selectables -> not visible if input is empty after typing non existent selectable
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
