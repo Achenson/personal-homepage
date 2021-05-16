@@ -54,8 +54,10 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
-  const [bookmarksAllTagsData, setBookmarksAllTagsData] =
-    bookmarksAllTagsState.use();
+  const [
+    bookmarksAllTagsData,
+    setBookmarksAllTagsData,
+  ] = bookmarksAllTagsState.use();
 
   const [uiColorData, setUiColorData] = uiColorState.use();
 
@@ -413,6 +415,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
   function handleKeyDown(event: KeyboardEvent) {
     handleKeyDown_inner(
+      event,
       event.code,
       selectablesListVis,
       setSelectablesListVis,

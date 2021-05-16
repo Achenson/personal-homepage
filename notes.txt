@@ -442,6 +442,7 @@ DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 DONE 385. change bookmark_lowerUI & editTab bg (different gray?) 
     so it won't clash with one of the background cols (warmGray-100) DONE
 XXX 388. disable input in newTab? XXX (no because it works as a filter also now)
+DONE 389. cursor start/end in input for selectables (e.preventDefault())DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -493,7 +494,6 @@ XXX 388. disable input in newTab? XXX (no because it works as a filter also now)
 
 386. xs: flickering of settings (those with 2 size versions) when using Settings_inner_xs
 387. innerShadow on inputs?
-389. cursor start/end in input for selectables 
 390. selectables -> not visible if input is empty after typing non existent selectable
 
 Browserslist: caniuse-lite is outdated. Please run:

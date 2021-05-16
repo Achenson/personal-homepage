@@ -132,6 +132,7 @@ function EditTab_folder({
 
   function handleKeyDown(event: KeyboardEvent) {
     handleKeyDown_inner(
+      event,
       event.code,
       selectablesListVis,
       setSelectablesListVis,

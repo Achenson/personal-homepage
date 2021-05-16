@@ -422,6 +422,7 @@ function Bookmark_lowerUI({
 
   function handleKeyDown(event: KeyboardEvent) {
     handleKeyDown_inner(
+      event,
       event.code,
       selectablesListVis,
       setSelectablesListVis,
