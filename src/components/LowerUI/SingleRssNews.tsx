@@ -11,9 +11,6 @@ interface Props {
   dateVis: boolean | null | undefined;
 }
 
-// ${globalSettingsData.picBackground ? "border border-t-0" : "border border-t-0 border-black border-opacity-10"}
-// `}
-
 function SingeRssNews({
   title,
   link,
@@ -46,9 +43,9 @@ function SingeRssNews({
   return (
     <div
       className={`bg-gray-50 py-1 px-2
-      
-      
-      `}
+    border border-t-0
+    ${globalSettingsData.picBackground ? "" : "border-black border-opacity-10"}
+     `}
     >
       <a
         href={link}
