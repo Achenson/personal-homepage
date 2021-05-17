@@ -442,6 +442,8 @@ DONE 383. many bookmarks in a Folder -> newBookmark or editBookmark clashes visu
 DONE 384. bug: adding new tab to empty column doesn't work ->DONE
 DONE 385. change bookmark_lowerUI & editTab bg (different gray?) 
     so it won't clash with one of the background cols (warmGray-100) DONE
+DONE 386. xs: flickering of settings (those with 2 size versions) when using Settings_inner_xs
+     (lazy init state from upperVisState, Main -> actions depending on window size) DONE
 XXX 388. disable input in newTab? XXX (no because it works as a filter also now)
 DONE 389. cursor start/end in input for selectables (e.preventDefault())DONE
 
@@ -492,7 +494,7 @@ DONE 389. cursor start/end in input for selectables (e.preventDefault())DONE
 377. "error fetching data" & loading.. non visible on dark background?
 
 
-386. xs: flickering of settings (those with 2 size versions) when using Settings_inner_xs
+
 387. innerShadow on inputs?
 390. selectables -> not visible if input is empty after typing non existent selectable
 

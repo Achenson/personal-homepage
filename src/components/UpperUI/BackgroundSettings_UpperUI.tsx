@@ -6,7 +6,7 @@ import { globalSettingsState } from "../../state/defaultSettings";
 
 import { uiColorState } from "../../state/colorsState";
 
-import { UpperVisAction } from "../../utils/interfaces";
+import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 
 import Settings_inner_xs from "./Settings_inner_xs";
@@ -15,9 +15,10 @@ interface Props {
   // backgroundSettingsVis: boolean;
   // setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
+  upperVisState: InitUpperVisState
 }
 
-function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
+function BackgroundSettings_UpperUI({ upperVisDispatch, upperVisState }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   // const [imgBackgroundMode, setImgBackgroundMode] = useState(true);
@@ -25,7 +26,7 @@ function BackgroundSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   const windowSize = useWindowSize();
-  const [xsScreen, setXsScreen] = useState(false);
+  const [xsScreen, setXsScreen] = useState(() => upperVisState.xsSizing_initial);
 
   useEffect(() => {
     if (windowSize.width) {
