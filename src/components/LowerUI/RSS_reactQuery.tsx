@@ -177,10 +177,11 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
 
         {status === "error" && <div>Error fetching data</div>}
 
+        </div>
+        
         {status === "success" && <div
       
         >{mapData()}</div>}
-      </div>
     </div>
   );
 }

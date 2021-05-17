@@ -434,8 +434,9 @@ DONE 373. xs screen expendable svg to aligned well DONE
 XXX 376. selectables "x" center vertically?XXX
 DONE 374. make upperUI adding component work same as settings -> close when clicking on gray background & hide scrollbar DONE
 DONE 377. padding right lowerbookmark editTab & editBookmark unite DONE
+DONE 377. "error fetching data" & loading.. non visible on dark background? DONE
 DONE 378. delete inv chevrons in uppperUI DONE
-DONE 378. bug: eye off not working properly when locking tabs (changed in editTab()) DONE
+DONE 378.25 bug: eye off not working properly when locking tabs (changed in editTab()) DONE
 DONE 378.5 yellow columns when img is on -> change note or yellow to gold DONE
 XXX 379. automatic tab closing/opening after locking doesn't work correctly (function) XXX
 DONE 379.5 bring back automatic closing/opening after locking (when state will be in its final form) 
@@ -489,7 +490,6 @@ DONE 389. cursor start/end in input for selectables (e.preventDefault())DONE
 372. popoup for messages for user (eg. logged out, tab created etc.)
 
 375. newNote paddingTop vh instead of center?
-377. "error fetching data" & loading.. non visible on dark background?
 
 387. innerShadow on inputs?
 390. selectables -> not visible if input is empty after typing non existent selectable
