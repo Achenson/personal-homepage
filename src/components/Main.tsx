@@ -33,9 +33,13 @@ let initUpperVisState: InitUpperVisState = {
   columnSelected: null,
   addTagVis_xs: false,
   xsSizing_initial: false,
+  tabEditablesOpenable: true,
 };
 
-function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
+function upperVisReducer(
+  state: InitUpperVisState,
+  action: UpperVisAction
+): InitUpperVisState {
   const upperVisStateAllFalse: InitUpperVisState = {
     ...initUpperVisState,
   };
@@ -81,6 +85,7 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
       return {
         ...upperVisStateMostlyFalse,
         colorsBackgroundVis: !state.colorsBackgroundVis,
+        tabEditablesOpenable: false,
       };
     case "COLORS_COLUMN_TOGGLE":
       return {
@@ -98,7 +103,6 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
         // ...upperVisStateMostlyFalse,
         ...state,
         addTagVis_xs: !state.addTagVis_xs,
-        settingsVis_xs: false,
       };
     case "XS_SIZING_TRUE":
       return {
@@ -109,6 +113,11 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
       return {
         ...state,
         xsSizing_initial: false,
+      };
+    case "TAB_EDITABLES_OPENABLE_DEFAULT":
+      return {
+        ...state,
+        tabEditablesOpenable: true,
       };
 
     case "CLOSE_ALL":
@@ -224,8 +233,9 @@ function Main({}: Props): JSX.Element {
         />
       )}
       {upperVisState.backgroundSettingsVis && (
-        <Background_UpperUI upperVisDispatch={upperVisDispatch}
-        upperVisState={upperVisState}
+        <Background_UpperUI
+          upperVisDispatch={upperVisDispatch}
+          upperVisState={upperVisState}
         />
       )}
       {upperVisState.settingsVis && (
@@ -248,7 +258,7 @@ function Main({}: Props): JSX.Element {
         upperVisDispatch={upperVisDispatch}
         setTabType={setTabType}
       />
-      <Grid upperVisDispatch={upperVisDispatch} />
+      <Grid upperVisDispatch={upperVisDispatch} upperVisState={upperVisState} />
     </div>
   );
 }

@@ -43,6 +43,7 @@ import {
   TabVisAction,
   SingleTabData,
   UpperVisAction,
+  InitUpperVisState,
 } from "../../utils/interfaces";
 import { current } from "immer";
 
@@ -59,6 +60,7 @@ interface Props {
   tabType: "folder" | "note" | "rss";
   colNumber: number;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
+  upperVisState: InitUpperVisState;
   tabOpened: boolean;
   tabOpenedByDefault: boolean;
   tabIsDeletable: boolean;
@@ -83,6 +85,7 @@ function Tab({
   tabType,
   colNumber,
   upperVisDispatch,
+  upperVisState,
   tabOpened,
   tabOpenedByDefault,
   tabIsDeletable,
@@ -98,20 +101,15 @@ Props): JSX.Element {
 
   // const [state, setstate] = useState(initialState)
 
-  
-
-// needed for immediate tab content opening/closing after locking/unlocking
-  const [tabOpened_local, setTabOpened_local] = useState(tabOpened)
+  // needed for immediate tab content opening/closing after locking/unlocking
+  const [tabOpened_local, setTabOpened_local] = useState(tabOpened);
 
   useEffect(() => {
-
-    setTabOpened_local(tabOpened)
-   
-  }, [tabOpened])
+    setTabOpened_local(tabOpened);
+  }, [tabOpened]);
 
   const reachRef = React.useRef();
   const rect = useRect(reachRef);
- 
 
   /* 
   {
@@ -430,6 +428,15 @@ Props): JSX.Element {
     };
   }, [mouseOverTab]);
 
+
+  useEffect(() => {
+    if(!upperVisState.tabEditablesOpenable) {
+      visDispatch({type: "TAB_EDITABLES_CLOSE"})
+      upperVisDispatch({type: "TAB_EDITABLES_OPENABLE_DEFAULT"})
+    }
+  
+  }, [upperVisState.tabEditablesOpenable])
+
   function textOrIconColor(finalTabColor: string, textOrIcon: "text" | "icon") {
     // exceptions
     if (colorsForLightText.indexOf(finalTabColor) > -1) {
@@ -584,61 +591,69 @@ Props): JSX.Element {
         </div>
       </div>
 
-      {visState.colorsVis && tabOpenedData === tabID && (
-        <ColorsToChoose_Tab
-          setIconsVis={setIconsVis}
-          tabID={tabID}
-          tabColor={tabColor}
-          tabType={tabType}
-          top={rect?.top as number}
-          left={rect?.left as number}
-          tabWidth={rect?.width as number}
-        />
-      )}
+      {visState.colorsVis &&
+        tabOpenedData === tabID &&
+        upperVisState.tabEditablesOpenable && (
+          <ColorsToChoose_Tab
+            setIconsVis={setIconsVis}
+            tabID={tabID}
+            tabColor={tabColor}
+            tabType={tabType}
+            top={rect?.top as number}
+            left={rect?.left as number}
+            tabWidth={rect?.width as number}
+          />
+        )}
 
-      {visState.editBookmarkVis && tabOpenedData === tabID && (
-        <Bookmark_newAndEdit
-          // setBookmarkVis={setEditBookmarkVis}
-          bookmarkComponentType={"edit"}
-          bookmarkId={bookmarkId}
-          visDispatch={visDispatch}
-          colNumber={colNumber}
-          top={rect?.top as number}
-          left={rect?.left as number}
-          tabWidth={rect?.width as number}
-        />
-      )}
+      {visState.editBookmarkVis &&
+        tabOpenedData === tabID &&
+        upperVisState.tabEditablesOpenable && (
+          <Bookmark_newAndEdit
+            // setBookmarkVis={setEditBookmarkVis}
+            bookmarkComponentType={"edit"}
+            bookmarkId={bookmarkId}
+            visDispatch={visDispatch}
+            colNumber={colNumber}
+            top={rect?.top as number}
+            left={rect?.left as number}
+            tabWidth={rect?.width as number}
+          />
+        )}
 
-      {visState.newBookmarkVis && tabOpenedData === tabID && (
-        // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
+      {visState.newBookmarkVis &&
+        tabOpenedData === tabID &&
+        upperVisState.tabEditablesOpenable && (
+          // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
 
-        <Bookmark_newAndEdit
-          // setBookmarkVis={setNewBookmarkVis}
-          bookmarkComponentType={"new_lowerUI"}
-          visDispatch={visDispatch}
-          colNumber={colNumber}
-          tabTitle={tabTitle as string}
-          top={rect?.top as number}
-          left={rect?.left as number}
-          tabWidth={rect?.width as number}
-        />
-      )}
+          <Bookmark_newAndEdit
+            // setBookmarkVis={setNewBookmarkVis}
+            bookmarkComponentType={"new_lowerUI"}
+            visDispatch={visDispatch}
+            colNumber={colNumber}
+            tabTitle={tabTitle as string}
+            top={rect?.top as number}
+            left={rect?.left as number}
+            tabWidth={rect?.width as number}
+          />
+        )}
 
-      {visState.editTabVis && tabOpenedData === tabID && (
-        <EditTab_main
-          tabID={tabID}
-          tabType={tabType}
-          // setEditTabVis={setEditTabVis}
-          visDispatch={visDispatch}
-          currentTab={currentTab as SingleTabData}
-          // noteInput={noteInput}
+      {visState.editTabVis &&
+        tabOpenedData === tabID &&
+        upperVisState.tabEditablesOpenable && (
+          <EditTab_main
+            tabID={tabID}
+            tabType={tabType}
+            // setEditTabVis={setEditTabVis}
+            visDispatch={visDispatch}
+            currentTab={currentTab as SingleTabData}
+            // noteInput={noteInput}
 
-          top={rect?.top as number}
-          left={rect?.left as number}
-          tabWidth={rect?.width as number}
-          setTabOpened_local={setTabOpened_local}
-        />
-      )}
+            top={rect?.top as number}
+            left={rect?.left as number}
+            tabWidth={rect?.width as number}
+            setTabOpened_local={setTabOpened_local}
+          />
+        )}
 
       {tabOpened_local && tabType === "folder" && (
         <div>

@@ -54,12 +54,9 @@ function BackgroundColor_upperUI({
         backgroundColorData
       )} opacity-80 border border-black rounded-lg cursor-pointer  hover:border-gray-500`}
       onClick={() => {
-        setTabOpenedData(null)
+        // setTabOpenedData(null)
         // setCloseAllTabsData(true);
         setSelected((b) => !b);
-        // setBackgroundColorsToChooseVis((b) => !b);
-        
-        
         upperVisDispatch({type: "COLORS_BACKGROUND_TOGGLE"})
       }}
     />

@@ -16,15 +16,16 @@ import {
 
 import { globalSettingsState } from "../../state/defaultSettings";
 
-import { UpperVisAction } from "../../utils/interfaces";
+import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
 
 import Column from "./Column";
 
 interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
+  upperVisState: InitUpperVisState
 }
 
-function Grid({ upperVisDispatch }: Props): JSX.Element {
+function Grid({ upperVisDispatch, upperVisState }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   const [
     bookmarksAllTagsData,
@@ -112,29 +113,29 @@ function Grid({ upperVisDispatch }: Props): JSX.Element {
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
     switch (numberOfCols) {
       case 1:
-        return <Column colNumber={1} upperVisDispatch={upperVisDispatch} />;
+        return <Column colNumber={1} upperVisDispatch={upperVisDispatch} upperVisState={upperVisState}/>;
       case 2:
         return (
           <>
-            <Column colNumber={1} upperVisDispatch={upperVisDispatch} />
-            <Column colNumber={2} upperVisDispatch={upperVisDispatch} />
+            <Column colNumber={1} upperVisDispatch={upperVisDispatch} upperVisState={upperVisState}/>
+            <Column colNumber={2} upperVisDispatch={upperVisDispatch} upperVisState={upperVisState} />
           </>
         );
       case 3:
         return (
           <>
-            <Column colNumber={1} upperVisDispatch={upperVisDispatch} />
-            <Column colNumber={2} upperVisDispatch={upperVisDispatch} />
-            <Column colNumber={3} upperVisDispatch={upperVisDispatch} />
+            <Column colNumber={1} upperVisDispatch={upperVisDispatch} upperVisState={upperVisState} />
+            <Column colNumber={2} upperVisDispatch={upperVisDispatch} upperVisState={upperVisState} />
+            <Column colNumber={3} upperVisDispatch={upperVisDispatch} upperVisState={upperVisState} />
           </>
         );
       case 4:
         return (
           <>
-            <Column colNumber={1} upperVisDispatch={upperVisDispatch} />
-            <Column colNumber={2} upperVisDispatch={upperVisDispatch} />
-            <Column colNumber={3} upperVisDispatch={upperVisDispatch} />
-            <Column colNumber={4} upperVisDispatch={upperVisDispatch} />
+            <Column colNumber={1} upperVisDispatch={upperVisDispatch} upperVisState={upperVisState}/>
+            <Column colNumber={2} upperVisDispatch={upperVisDispatch} upperVisState={upperVisState} />
+            <Column colNumber={3} upperVisDispatch={upperVisDispatch} upperVisState={upperVisState}/>
+            <Column colNumber={4} upperVisDispatch={upperVisDispatch} upperVisState={upperVisState} />
           </>
         );
     }

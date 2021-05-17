@@ -367,6 +367,8 @@ DONE 293. upperVisDispatch -> color selectable should be gone when closing all D
 DONE 294. column should larger be defaul - so colors/editables are not cut by overflow-hidden! DONE (see notes)
 DONE 295. UpperRightMenu should close at least editables in lowerUI
  (closing editables/colors if rss setting are clicked) DONE
+DONE 296. upperVis controlling tab state -> flickering problem
+     (new state property in upperVisState, in Tab -> useEffect to change it immediately to true again) DONE
 DONE 298. some effect when hovering over bookmarks? DONE
 DONE 299. upperLeft UI should not close tab content! DONE
 DONE 300. no img background - X get rid of lightest colors? X (make lower border in noteInput instead!) DONE
@@ -459,8 +461,6 @@ DONE 389. cursor start/end in input for selectables (e.preventDefault())DONE
 287. rss error handling: catch error for data and description (cnn rss description crashes the app)
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
 
-296. proper global state for all Tabs & upperVis joining wit tab vis reducers in Main
-
 304. react query devtools not working
 
 317. white border selection problem -> takes too much space to the left. modify adjacent border colors?
@@ -483,16 +483,14 @@ DONE 389. cursor start/end in input for selectables (e.preventDefault())DONE
 
 360. newTab etc. enter to save & esc to cancel keyboard ? move handleKeyDown from editTab_folder to editTab_main
 
-
 363. more professional selectables?
 
 371. fixed position of upperMenu?
+371. UppperUI should be higher on small screens? (remember to adjust UpperLeftUI colors to not cause flickering)
 372. popoup for messages for user (eg. logged out, tab created etc.)
 
 375. newNote paddingTop vh instead of center?
 377. "error fetching data" & loading.. non visible on dark background?
-
-
 
 387. innerShadow on inputs?
 390. selectables -> not visible if input is empty after typing non existent selectable

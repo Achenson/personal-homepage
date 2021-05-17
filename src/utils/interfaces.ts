@@ -47,6 +47,7 @@ export interface InitUpperVisState {
   columnSelected: null | number;
   addTagVis_xs: boolean;
   xsSizing_initial: boolean;
+  tabEditablesOpenable: boolean;
 }
 
 export interface UpperVisAction {
@@ -64,6 +65,7 @@ export interface UpperVisAction {
     | "PROFILE_TOGGLE"
     | "XS_SIZING_TRUE"
     | "XS_SIZING_FALSE"
+    | "TAB_EDITABLES_OPENABLE_DEFAULT"
   payload?: number;
 }
 
