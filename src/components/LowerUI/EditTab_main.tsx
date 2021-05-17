@@ -57,7 +57,7 @@ function EditTab({
   top,
   left,
   tabWidth,
-  setTabOpened_local
+  setTabOpened_local,
 }: // setEditTabVis,
 // noteInput,
 Props): JSX.Element {
@@ -153,7 +153,6 @@ Props): JSX.Element {
     }
   }, [wasCheckboxClicked, wasTabOpenClicked, wasItemsPerPageClicked]);
 
-
   const [errors, setErrors] = useState({
     ...errorsAllFalse,
   });
@@ -167,7 +166,8 @@ Props): JSX.Element {
 
   // ^  and $ -> beginning and end of the text!
   // let regexForTabs = /^\w+(,\s\w+)*$/;
-  let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
+  // let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
+  let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*,?$/;
 
   function titleWidth() {
     if (tabType === "note" || tabID === "ALL_TAGS") {
@@ -180,17 +180,22 @@ Props): JSX.Element {
     if (tabType === "folder") return "87px";
   }
 
-  let bookmarksInputArr = selectablesInputStr.split(", ");
+  // let bookmarksInputArr = selectablesInputStr.split(", ");
+
+  let bookmarksInputArr: string[] = selectablesInputStr.split(", ");
+
+  let selectablesInputStr_noComma: string;
+
+  if (selectablesInputStr[selectablesInputStr.length - 1] === ",") {
+    selectablesInputStr_noComma = selectablesInputStr.slice(
+      0,
+      selectablesInputStr.length - 1
+    );
+    bookmarksInputArr = selectablesInputStr_noComma.split(", ");
+  }
+
 
   function errorHandling(): boolean {
-    // setTitleFormatErrorVis(false);
-    // setTitleUniquenessErrorVis(false);
-    // setTextAreaErrorVis(false);
-    // setNoDeletionErrorVis(false);
-    // setBookmarksErrorVis(false);
-    // setBookmarksRepeatErrorVis(false);
-    // setBookmarksExistenceErrorVis(false);
-
     setWasCheckboxClicked(false);
     setWasItemsPerPageClicked(false);
 
@@ -315,7 +320,7 @@ Props): JSX.Element {
           // updated[tabIndex].deletable = currentTab[0].deletable
           if (wasTabOpenClicked) {
             tabToUpdate.openedByDefault = tabOpen;
-            setTabOpened_local(tabOpen)
+            setTabOpened_local(tabOpen);
             tabToUpdate.opened = tabOpen;
           }
 
@@ -346,7 +351,7 @@ Props): JSX.Element {
       setBookmarksData((previous) =>
         produce(previous, (updated) => {
           updated.forEach((obj) => {
-            let bookmarksInputArr = selectablesInputStr.split(", ");
+            // let bookmarksInputArr = selectablesInputStr.split(", ");
 
             // make array of missing bookmarks
             let missingBookmarks: string[] = [];
@@ -378,8 +383,13 @@ Props): JSX.Element {
   }
 
   return ReactDOM.createPortal(
-    <div className={`absolute z-40 bg-warmGray-100 pb-2 border pl-1 pr-1 shadow-inner`}
-    style={{top: `${top+32+document.documentElement.scrollTop}px`, left: `${left}px`, width: `${tabWidth}px`}}
+    <div
+      className={`absolute z-40 bg-warmGray-100 pb-2 border pl-1 pr-1 shadow-inner`}
+      style={{
+        top: `${top + 32 + document.documentElement.scrollTop}px`,
+        left: `${left}px`,
+        width: `${tabWidth}px`,
+      }}
     >
       <div className="mb-3">
         <div className={`flex items-center mt-2 justify-between`}>

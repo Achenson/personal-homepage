@@ -393,6 +393,7 @@ DONE 335. RSS settings - date & description better styles DONE
 DONE 336. Rss SingleLink - empty?? (deleted) DONE
 DONE 338. aligning left-hand text with right-hand input -> do it without margins! (flex-none instead) DONE
 DONE 339. move note & rss edit errors lower DONE
+DONE 340. allow trailing coma in selectables DONE
 DONE 342. chevroDown: lower it so it will be on the level of "x" (plus flex-none added) DONE
 DONE 343. saveSVG still being cut on firefox! DONE (w-1 instead of w-px)
 DONE 343.5 make column appear thinner - border? (tabs seem to stick out) - border in Column DONE
@@ -423,6 +424,7 @@ DONE 366.5 when scrollbar is being changed to padding right, gray background is 
 DONE 367. dragging hover effect: change it on in 2x2 & 3x1 col cases (overflow-hidden is back) DONE
 DONE 368. background colors:  make white border on columns to the right? DONE
 DONE 369. initial colors in global state -> import instead of hardcoding DONE
+XXX 370. change colors data to objects? XXX
 DONE 371. is there a way to do less repeats in if( || || ||)? typescript? no - fixed wrong use of || || DONE
 DONE 372. svg for loginOut? DONE
 DONE 373. xs screen expendable svg to aligned well DONE
@@ -472,7 +474,6 @@ DONE 389. cursor start/end in input for selectables (e.preventDefault())DONE
 333. clean tailwind files in the end
 337. rss date formatting
 
-340. allow trailing commas in selectables
 341. bookmark_lowerUI -> divide function to new & edit
 
 346. error in console.log if empty tag auto deletes itself
@@ -483,10 +484,8 @@ DONE 389. cursor start/end in input for selectables (e.preventDefault())DONE
 360. newTab etc. enter to save & esc to cancel keyboard ? move handleKeyDown from editTab_folder to editTab_main
 
 
-
 363. more professional selectables?
 
-370. change colors data to objects?
 371. fixed position of upperMenu?
 372. popoup for messages for user (eg. logged out, tab created etc.)
 

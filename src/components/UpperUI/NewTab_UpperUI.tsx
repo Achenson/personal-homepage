@@ -111,7 +111,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
   // ^  and $ -> beginning and end of the text!
   // let regexForBookmarks = /^\w+(,\s\w+)*$/;
-  let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
+  // let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
+  let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*,?$/;
   // let regexForTitle = /^\w+$/;
   let regexForTitle = /^\w(\s?\w+)*$/;
 
@@ -214,17 +215,18 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     });
   }
 
-  let bookmarksInputArr = selectablesInputStr.split(", ");
+  let bookmarksInputArr: string[] = selectablesInputStr.split(", ");
+
+  let selectablesInputStr_noComma: string;
+  
+  if (selectablesInputStr[selectablesInputStr.length-1] === ",") {
+    selectablesInputStr_noComma = selectablesInputStr.slice(0, selectablesInputStr.length-1)
+    bookmarksInputArr = selectablesInputStr_noComma.split(", ");
+  }
+  
 
   function errorHandling(): boolean {
-    // setBookmarksErrorVis(false);
-    // setBookmarksRepeatErrorVis(false);
-    // setTitleFormatErrorVis(false);
-    // setTitleUniquenessErrorVis(false);
-    // setBookmarkExistenceErrorVis(false);
-    // setTextAreaErrorVis(false);
-
-    // setErrors({...errorsAllFalse})
+   
 
     if (!regexForTitle.test(tabTitleInput)) {
       // setTitleFormatErrorVis(true);

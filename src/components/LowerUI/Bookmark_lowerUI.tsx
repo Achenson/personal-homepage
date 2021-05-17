@@ -176,7 +176,17 @@ function Bookmark_lowerUI({
     return arrOut;
   }
 
-  let tagsInputArr = selectablesInputStr.split(", ");
+  // let tagsInputArr = selectablesInputStr.split(", ");
+
+  let tagsInputArr: string[] = selectablesInputStr.split(", ");
+
+  let selectablesInputStr_noComma: string;
+  
+  if (selectablesInputStr[selectablesInputStr.length-1] === ",") {
+    selectablesInputStr_noComma = selectablesInputStr.slice(0, selectablesInputStr.length-1)
+    tagsInputArr = selectablesInputStr_noComma.split(", ");
+  }
+
 
   function errorHandling(): boolean {
     // setTagErrorVis(false);
