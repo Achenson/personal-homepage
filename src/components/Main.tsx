@@ -6,6 +6,7 @@ import Colors_UpperUI from "./UpperUI/ColorsSettings_UpperUI";
 import UpperUI from "./UpperUI/UpperUI";
 
 import { globalSettingsState } from "../state/defaultSettings";
+import { useWindowSize } from "../utils/hook_useWindowSize";
 
 import { backgroundColorState } from "../state/colorsState";
 import Background_UpperUI from "./UpperUI/BackgroundSettings_UpperUI";
@@ -31,7 +32,7 @@ let initUpperVisState: InitUpperVisState = {
   colorsColumnVis: false,
   columnSelected: null,
   addTagVis_xs: false,
-  settingsVis_xs: false,
+  xsSizing_initial: false,
 };
 
 function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
@@ -42,7 +43,7 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
   let upperVisStateMostlyFalse: InitUpperVisState = {
     ...initUpperVisState,
     addTagVis_xs: state.addTagVis_xs,
-    settingsVis_xs: state.settingsVis_xs,
+    xsSizing_initial: state.xsSizing_initial,
   };
 
   switch (action.type) {
@@ -99,12 +100,15 @@ function upperVisReducer(state: InitUpperVisState, action: UpperVisAction) {
         addTagVis_xs: !state.addTagVis_xs,
         settingsVis_xs: false,
       };
-    case "SETTINGS_XS_TOGGLE":
+    case "XS_SIZING_TRUE":
       return {
-        // ...upperVisStateMostlyFalse,
         ...state,
-        settingsVis_xs: !state.settingsVis_xs,
-        addTagVis_xs: false,
+        xsSizing_initial: true,
+      };
+    case "XS_SIZING_FALSE":
+      return {
+        ...state,
+        xsSizing_initial: false,
       };
 
     case "CLOSE_ALL":
@@ -136,6 +140,18 @@ function Main({}: Props): JSX.Element {
   }
 
   const [paddingRight, setPaddingRight] = useState(false);
+
+  const windowSize = useWindowSize();
+
+  useEffect(() => {
+    if (windowSize.width) {
+      if (windowSize.width < 490) {
+        upperVisDispatch({ type: "XS_SIZING_TRUE" });
+      } else {
+        upperVisDispatch({ type: "XS_SIZING_FALSE" });
+      }
+    }
+  }, [windowSize.width]);
 
   //
   useEffect(() => {
@@ -192,7 +208,7 @@ function Main({}: Props): JSX.Element {
           ? `bg-${globalSettingsData.defaultImage}`
           : `bg-${backgroundColorData}`
       } bg-cover bg-fixed`}
-      style={{paddingRight: `${paddingRight ? "17px" : ""}`}}
+      style={{ paddingRight: `${paddingRight ? "17px" : ""}` }}
       onScroll={(e) => {
         e.preventDefault();
         return;
@@ -211,7 +227,10 @@ function Main({}: Props): JSX.Element {
         <Background_UpperUI upperVisDispatch={upperVisDispatch} />
       )}
       {upperVisState.settingsVis && (
-        <Settings_UpperUI upperVisDispatch={upperVisDispatch} />
+        <Settings_UpperUI
+          upperVisDispatch={upperVisDispatch}
+          upperVisState={upperVisState}
+        />
       )}
 
       {upperVisState.colorsSettingsVis && (

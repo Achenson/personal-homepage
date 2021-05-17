@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import { produce } from "immer";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
@@ -11,7 +11,8 @@ import {
   tabOpenedState,
 } from "../../state/defaultSettings";
 
-import { UpperVisAction } from "../../utils/interfaces";
+import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
+
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 import Settings_inner_xs from "./Settings_inner_xs";
@@ -20,9 +21,11 @@ interface Props {
   // settingsVis: boolean;
   // setSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
+  upperVisState: InitUpperVisState
+  // xsSizing: boolean;
 }
 
-function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
+function GlobalSettings_UpperUI({ upperVisDispatch, upperVisState}: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
@@ -31,7 +34,7 @@ function GlobalSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const windowSize = useWindowSize();
-  const [xsScreen, setXsScreen] = useState(false);
+  const [xsScreen, setXsScreen] = useState(() =>upperVisState.xsSizing_initial);
 
   useEffect(() => {
     if (windowSize.width) {

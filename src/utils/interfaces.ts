@@ -46,7 +46,7 @@ export interface InitUpperVisState {
   colorsColumnVis: boolean;
   columnSelected: null | number;
   addTagVis_xs: boolean;
-  settingsVis_xs: boolean;
+  xsSizing_initial: boolean;
 }
 
 export interface UpperVisAction {
@@ -61,8 +61,9 @@ export interface UpperVisAction {
     | "COLORS_COLUMN_OPEN"
     | "CLOSE_ALL"
     | "ADD_TAG_XS_TOGGLE"
-    | "SETTINGS_XS_TOGGLE"
     | "PROFILE_TOGGLE"
+    | "XS_SIZING_TRUE"
+    | "XS_SIZING_FALSE"
   payload?: number;
 }
 
