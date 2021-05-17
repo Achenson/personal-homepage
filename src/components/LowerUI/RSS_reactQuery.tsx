@@ -5,7 +5,7 @@ import SingleRssNews from "./SingleRssNews";
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 import { rssSettingsState } from "../../state/defaultSettings";
 
-import {SingleTabData} from "../../utils/interfaces"
+import { SingleTabData } from "../../utils/interfaces";
 
 import { ReactComponent as ArrowLeft } from "../../svgs/arrowLeft.svg";
 import { ReactComponent as ArrowRight } from "../../svgs/arrowRight.svg";
@@ -13,13 +13,12 @@ import { ReactComponent as ArrowRight } from "../../svgs/arrowRight.svg";
 import { globalSettingsState } from "../../state/defaultSettings";
 
 let Parser = require("rss-parser");
-let parser = new Parser(
+let parser = new Parser();
 //   {
 //   requestOptions: {
 //     rejectUnauthorized: false
 //   }
 // }
-);
 
 interface Props {
   tabID: string | number;
@@ -31,9 +30,11 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
   // let currentTab = tabsData.filter((obj) => obj.id === tabID);
 
-  const [itemsPerPage, setItemsPerPage] = useState(() =>calcItemsPerPage());
+  const [itemsPerPage, setItemsPerPage] = useState(() => calcItemsPerPage());
 
-  const [descriptionVis, setDescriptionVis] = useState(() =>calcDescriptionVis());
+  const [descriptionVis, setDescriptionVis] = useState(() =>
+    calcDescriptionVis()
+  );
   const [dateVis, setDateVis] = useState(() => calcDateVis());
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
@@ -132,9 +133,13 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
   }
 
   return (
-    <div>
-      <div className={`flex bg-gray-50 justify-end border-r border-l
-    ${globalSettingsData.picBackground ? "" : "border-black border-opacity-10"}`}>
+    <div className={``}>
+      <div
+        className={`flex bg-gray-50 justify-end border-r border-l
+    ${
+      globalSettingsData.picBackground ? "" : "border-black border-opacity-10"
+    }`}
+      >
         <ArrowLeft
           className={`h-8 ${
             pageNumber === 0
@@ -160,12 +165,22 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
           }}
         />
       </div>
+      <div
+        className={`text-center
+    ${
+      globalSettingsData.picBackground
+        ? "bg-white bg-opacity-90 border-r border-l"
+        : "border-r border-l border-black border-opacity-10"
+    }`}
+      >
+        {status === "loading" && <div>Loading data...</div>}
 
-      {status === "loading" && <div>Loading data</div>}
+        {status === "error" && <div>Error fetching data</div>}
 
-      {status === "error" && <div>Error fetching data</div>}
-
-      {status === "success" && <div>{mapData()}</div>}
+        {status === "success" && <div
+      
+        >{mapData()}</div>}
+      </div>
     </div>
   );
 }
