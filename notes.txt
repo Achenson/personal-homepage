@@ -500,6 +500,7 @@ DONE 391. scrollbar visibility: gray background wrong if scrolldown before click
 392. div spanning rest of the parent div but without overflow-hidden?
 
 393. wrap SVGs with buttons? for better keyboard control
+394. uiDefual colors missing on newTab & newBookmark
 
 
 

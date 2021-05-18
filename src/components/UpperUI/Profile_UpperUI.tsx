@@ -17,11 +17,16 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  const [loginOrRegister, setLoginOrRegister] = useState<"login" | "register">(
-    "login"
-  );
+  const [loginOrRegister, setLoginOrRegister] =
+    useState<"login" | "register">("login");
 
   const [loggedInData, setLoggedInData] = loggedInState.use();
+
+  const [inputHover, setInputHover] = useState(false);
+
+  // useEffect(() => {
+
+  // }, [inputHover, setInputHover])
 
   let finalColorForImgBackgroundMode = uiColorData;
 
@@ -101,24 +106,32 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               {loginOrRegister === "login" ? (
                 <div className="">
                   <p>Email address / username</p>
-                  <input type="text" className="pl-px border border-gray-300" />
+                  <input
+                    type="text"
+                    className="input-profile hover:border-blue-200 transition-colors duration-75"
+                    style={{
+                      borderTopColor: `${
+                        inputHover ? "lightSkyBlue" : "silver"
+                      }`,
+                    }}
+                    onMouseEnter={() => {
+                      setInputHover(true);
+                    }}
+                    onMouseLeave={() => {
+                      setInputHover(false);
+                    }}
+                  />
                 </div>
               ) : (
                 <>
                   <div className="">
                     <p>Username</p>
-                    <input
-                      type="text"
-                      className="pl-px border border-gray-300"
-                    />
+                    <input type="text" className="input-profile" />
                   </div>
 
                   <div className="mt-1">
                     <p>Email address</p>
-                    <input
-                      type="text"
-                      className="pl-px border border-gray-300"
-                    />
+                    <input type="text" className="input-profile" />
                   </div>
                 </>
               )}
@@ -128,16 +141,13 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               >
                 <div className="mt-1">
                   <p>Password</p>
-                  <input type="text" className="pl-px border border-gray-300" />
+                  <input type="text" className="input-profile" />
                 </div>
 
                 {loginOrRegister === "register" && (
                   <div className="mt-1">
                     <p>Confirm password</p>
-                    <input
-                      type="text"
-                      className="pl-px border border-gray-300"
-                    />
+                    <input type="text" className="input-profile" />
                   </div>
                 )}
               </div>
@@ -147,16 +157,13 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               {loginOrRegister === "login" ? (
                 <button
                   className={`w-24 border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150`}
-                  onClick={()=> {
-                    if(loggedInData === false) {
-                      setLoggedInData(true)
+                  onClick={() => {
+                    if (loggedInData === false) {
+                      setLoggedInData(true);
                       console.log("sthh");
-                      
                     }
 
-                    
-                    upperVisDispatch({type: "PROFILE_TOGGLE"})
-
+                    upperVisDispatch({ type: "PROFILE_TOGGLE" });
                   }}
                 >
                   Login
