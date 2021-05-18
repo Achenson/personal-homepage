@@ -97,7 +97,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
   return (
     <div
-      className="flex flex-col z-50 absolute h-screen w-screen justify-center items-center"
+      className="flex flex-col z-50 absolute h-full w-screen justify-center items-center"
       style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
       onClick={() => {
         upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });

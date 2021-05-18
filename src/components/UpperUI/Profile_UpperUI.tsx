@@ -32,7 +32,7 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   return (
     <div
       // justify-center changed to paddingTop so login & register are on the same height
-      className="flex flex-col z-50 absolute h-screen w-screen items-center"
+      className="flex flex-col z-50 absolute h-full w-screen items-center"
       style={{ backgroundColor: "rgba(90, 90, 90, 0.4)", paddingTop: "30vh" }}
       onClick={() => {
         upperVisDispatch({ type: "PROFILE_TOGGLE" });

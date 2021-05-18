@@ -17,8 +17,7 @@ import {
   bookmarksAllTagsState,
 } from "../../state/tabsAndBookmarks";
 
-import { SingleBookmarkData } from "../../utils/interfaces";
-import { TabVisAction } from "../../utils/interfaces";
+import { SingleBookmarkData, TabVisAction } from "../../utils/interfaces";
 import { bookmarkErrors } from "../../utils/errors";
 import { handleKeyDown_inner } from "../../utils/func_handleKeyDown_inner";
 import SelectableList from "../Shared/SelectableList";
@@ -39,8 +38,6 @@ interface Props {
   rssTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   bookmarkId: string | number;
-
-  // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   currentBookmark: SingleBookmarkData | undefined;
   visDispatch: React.Dispatch<TabVisAction>;
   colNumber: number;
@@ -101,24 +98,6 @@ function Bookmark_lowerUI({
   visDispatch,
   colNumber,
 
-  // tagErrorVis,
-  // setTagErrorVis,
-
-  // tagRepeatErrorVis,
-  // setTagRepeatErrorVis,
-
-  // titleFormatErrorVis,
-  // setTitleFormatErrorVis,
-
-  // titleUniquenessErrorVis,
-  // setTitleUniquenessErrorVis,
-
-  // noteErrorVis,
-  // setNoteErrorVis,
-
-  // rssErrorVis,
-  // setRssErrorVis,
-
   errors,
   setErrors,
 
@@ -163,9 +142,6 @@ function Bookmark_lowerUI({
     let arrOut: (string | number)[] = [];
 
     selectablesInputStr.split(", ").forEach((el) => {
-      // if ((currentBookmark as SingleBookmarkData).tags.indexOf(obj.id) > -1) {
-      //   arrOut.push(obj.id);
-      // }
 
       let currentTab = tabsData.find((obj) => obj.title === el);
       if (currentTab) {
@@ -189,12 +165,7 @@ function Bookmark_lowerUI({
 
 
   function errorHandling(): boolean {
-    // setTagErrorVis(false);
-    // setTagRepeatErrorVis(false);
-    // setTitleFormatErrorVis(false);
-    // setTitleUniquenessErrorVis(false);
-    // setNoteErrorVis(false);
-    // setRssErrorVis(false);
+   
 
     if (!regexForTitle.test(titleInput)) {
       // setTitleFormatErrorVis(true);
@@ -509,20 +480,7 @@ function Bookmark_lowerUI({
 
                   setSelectablesInputStr(target);
 
-                  // let tagsInputArr = target.split(", ");
-
-                  // // setTagsInputArr(selectablesInputStr.split(" ,"))
-
-                  // // let newVisibleTags = [...visibleTags];
-                  // let newVisibleTags: string[] = [];
-
-                  // visibleTags.forEach((el) => {
-                  //   if (tagsInputArr.indexOf(el) === -1) {
-                  //     newVisibleTags.push(el);
-                  //   }
-                  // });
-
-                  // setVisibleTags([...newVisibleTags]);
+             
                 }}
                 onFocus={(e) => {
                   setSelectablesListVis(true);
