@@ -5,7 +5,8 @@ export function handleKeyDown_inner(
   selectablesListVis: boolean,
   setSelectablesListVis: React.Dispatch<React.SetStateAction<boolean>>,
   setSelectablesInputStr: React.Dispatch<React.SetStateAction<string>>,
-  selectablesRef: React.MutableRefObject<undefined>
+  selectablesRef: React.MutableRefObject<undefined>,
+  saveFunc: () => void
 ) {
   switch (eventCode) {
     case "ArrowDown":
@@ -16,14 +17,21 @@ export function handleKeyDown_inner(
         selectablesRef.current.focus();
       }
       return;
+    case "ArrowUp":
+      event.preventDefault();
+      return;
+    case "Enter":
+      if (!selectablesListVis) {
+        saveFunc();
+      }
+      return;
+
     case "Delete":
       if (!selectablesListVis) {
         setSelectablesInputStr("");
       }
       return;
-    case "ArrowUp":
-      event.preventDefault();
-      return;
+
     default:
       return;
   }

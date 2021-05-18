@@ -64,15 +64,17 @@ interface Props {
     titleUniquenessErrorVis: boolean;
     noteErrorVis: boolean;
     rssErrorVis: boolean;
-};
-  setErrors:React.Dispatch<React.SetStateAction<{
-    tagErrorVis: boolean;
-    tagRepeatErrorVis: boolean;
-    titleFormatErrorVis: boolean;
-    titleUniquenessErrorVis: boolean;
-    noteErrorVis: boolean;
-    rssErrorVis: boolean;
-}>> ;
+  };
+  setErrors: React.Dispatch<
+    React.SetStateAction<{
+      tagErrorVis: boolean;
+      tagRepeatErrorVis: boolean;
+      titleFormatErrorVis: boolean;
+      titleUniquenessErrorVis: boolean;
+      noteErrorVis: boolean;
+      rssErrorVis: boolean;
+    }>
+  >;
 
   regexForTags: RegExp;
   regexForTitle: RegExp;
@@ -80,12 +82,12 @@ interface Props {
 
 const errorsAllFalse = {
   tagErrorVis: false,
-tagRepeatErrorVis: false,
-titleFormatErrorVis: false,
-titleUniquenessErrorVis: false,
-noteErrorVis: false,
-rssErrorVis: false
-}
+  tagRepeatErrorVis: false,
+  titleFormatErrorVis: false,
+  titleUniquenessErrorVis: false,
+  noteErrorVis: false,
+  rssErrorVis: false,
+};
 
 function NewBookmark_UpperUI({
   titleInput,
@@ -104,20 +106,17 @@ function NewBookmark_UpperUI({
   upperVisDispatch,
   bookmarkComponentType,
 
-
   errors,
   setErrors,
-  
+
   regexForTags,
   regexForTitle,
 }: // setBookmarkVis,
 Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
-  const [
-    bookmarksAllTagsData,
-    setBookmarksAllTagsData,
-  ] = bookmarksAllTagsState.use();
+  const [bookmarksAllTagsData, setBookmarksAllTagsData] =
+    bookmarksAllTagsState.use();
 
   let selectablesRef = useRef();
 
@@ -129,30 +128,28 @@ Props): JSX.Element {
     };
   });
 
-
   // let tagsInputArr = selectablesInputStr.split(", ");
-
 
   let tagsInputArr: string[] = selectablesInputStr.split(", ");
 
   let selectablesInputStr_noComma: string;
-  
-  if (selectablesInputStr[selectablesInputStr.length-1] === ",") {
-    selectablesInputStr_noComma = selectablesInputStr.slice(0, selectablesInputStr.length-1)
+
+  if (selectablesInputStr[selectablesInputStr.length - 1] === ",") {
+    selectablesInputStr_noComma = selectablesInputStr.slice(
+      0,
+      selectablesInputStr.length - 1
+    );
     tagsInputArr = selectablesInputStr_noComma.split(", ");
   }
 
-
   function errorHandling(): boolean {
- 
-
     if (!regexForTitle.test(titleInput)) {
       // setTitleFormatErrorVis(true);
 
       setErrors({
         ...errorsAllFalse,
-        titleFormatErrorVis: true
-      })
+        titleFormatErrorVis: true,
+      });
 
       setSelectablesListVis(false);
       return true;
@@ -164,10 +161,8 @@ Props): JSX.Element {
       // setTitleUniquenessErrorVis(true);
       setErrors({
         ...errorsAllFalse,
-        titleUniquenessErrorVis: true
-      })
-
-
+        titleUniquenessErrorVis: true,
+      });
 
       setSelectablesListVis(false);
       return true;
@@ -181,8 +176,8 @@ Props): JSX.Element {
 
       setErrors({
         ...errorsAllFalse,
-        tagErrorVis: true
-      })
+        tagErrorVis: true,
+      });
 
       setSelectablesListVis(false);
       return true;
@@ -193,8 +188,8 @@ Props): JSX.Element {
         // setNoteErrorVis(true);
         setErrors({
           ...errorsAllFalse,
-          noteErrorVis: true
-        })
+          noteErrorVis: true,
+        });
         setSelectablesListVis(false);
         return true;
       }
@@ -205,8 +200,8 @@ Props): JSX.Element {
         // setRssErrorVis(true);
         setErrors({
           ...errorsAllFalse,
-          rssErrorVis: true
-        })
+          rssErrorVis: true,
+        });
         setSelectablesListVis(false);
         return true;
       }
@@ -216,8 +211,8 @@ Props): JSX.Element {
       // setTagRepeatErrorVis(true);
       setErrors({
         ...errorsAllFalse,
-        tagRepeatErrorVis: true
-      })
+        tagRepeatErrorVis: true,
+      });
       setSelectablesListVis(false);
       return true;
     }
@@ -308,9 +303,20 @@ Props): JSX.Element {
       selectablesListVis,
       setSelectablesListVis,
       setSelectablesInputStr,
-      selectablesRef
+      selectablesRef,
+      saveFunc
     );
   }
+
+  function saveFunc() {
+    let isThereAnError = errorHandling();
+    if (isThereAnError) return;
+
+    // 1. adding bookmark  2. adding folder/s if some tags do not correspond to existing folders
+    addBookmark();
+    upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+  }
+
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable
     <div
@@ -319,7 +325,6 @@ Props): JSX.Element {
       onClick={() => {
         upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
       }}
-
     >
       <div
         className="bg-gray-200 pb-2 pt-3 pl-2 pr-0.5 border-2 border-teal-500 rounded-sm md:mb-48"
@@ -378,7 +383,6 @@ Props): JSX.Element {
                 placeholder={'tag1, tag2... ("all" tag auto-added)'}
                 onChange={(e) => {
                   if (!selectablesListVis) setSelectablesListVis(true);
-
 
                   let target = e.target.value;
 
@@ -477,12 +481,7 @@ Props): JSX.Element {
             onClick={(e) => {
               e.preventDefault();
 
-              let isThereAnError = errorHandling();
-              if (isThereAnError) return;
-
-              // 1. adding bookmark  2. adding folder/s if some tags do not correspond to existing folders
-              addBookmark();
-              upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+              saveFunc();
             }}
           />
 

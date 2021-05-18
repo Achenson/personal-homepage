@@ -194,7 +194,6 @@ Props): JSX.Element {
     bookmarksInputArr = selectablesInputStr_noComma.split(", ");
   }
 
-
   function errorHandling(): boolean {
     setWasCheckboxClicked(false);
     setWasItemsPerPageClicked(false);
@@ -382,6 +381,27 @@ Props): JSX.Element {
     }
   }
 
+  function saveFunc() {
+    if (!wasAnythingClicked) {
+      return;
+    }
+
+    let isThereAnError = errorHandling();
+    if (isThereAnError) return;
+
+    // 1.edit tab(folder,rss or note)
+    // 2. (in case of folders) delete tag from bookmark or add tag to bookmark
+    editTab();
+
+    // if (tabOpen) {
+    //   visDispatch({ type: "TAB_CONTENT_OPEN_AFTER_LOCKING" });
+    // } else {
+    //    visDispatch({ type: "EDIT_TOGGLE" });
+    //   }
+
+    visDispatch({ type: "EDIT_TOGGLE" });
+  }
+
   return ReactDOM.createPortal(
     <div
       className={`absolute z-40 bg-warmGray-100 pb-2 border pl-1 pr-1 shadow-inner`}
@@ -424,6 +444,7 @@ Props): JSX.Element {
             setWasAnythingClicked={setWasAnythingClicked}
             selectablesInputStr={selectablesInputStr}
             setSelectablesInputStr={setSelectablesInputStr}
+            saveFunc={saveFunc}
           />
         )}
 
@@ -572,24 +593,7 @@ Props): JSX.Element {
           onClick={(e) => {
             e.preventDefault();
 
-            if (!wasAnythingClicked) {
-              return;
-            }
-
-            let isThereAnError = errorHandling();
-            if (isThereAnError) return;
-
-            // 1.edit tab(folder,rss or note)
-            // 2. (in case of folders) delete tag from bookmark or add tag to bookmark
-            editTab();
-
-            // if (tabOpen) {
-            //   visDispatch({ type: "TAB_CONTENT_OPEN_AFTER_LOCKING" });
-            // } else {
-            //    visDispatch({ type: "EDIT_TOGGLE" });
-            //   }
-
-            visDispatch({ type: "EDIT_TOGGLE" });
+            saveFunc();
           }}
         />
 

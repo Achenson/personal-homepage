@@ -477,6 +477,7 @@ DONE 391. scrollbar visibility: gray background wrong if scrolldown before click
 332. make biggest components smaller/extaract more funcions out? (max 500 lines of code)
 
 333. clean tailwind files in the end
+
 337. rss date formatting
 
 341. bookmark_lowerUI -> divide function to new & edit
@@ -497,7 +498,6 @@ DONE 391. scrollbar visibility: gray background wrong if scrolldown before click
 390. selectables -> not visible if input is empty after typing non existent selectable
 
 392. div spanning rest of the parent div but without overflow-hidden?
-
 
 
 

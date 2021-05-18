@@ -109,10 +109,8 @@ function Bookmark_lowerUI({
   tabWidth,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-  const [
-    bookmarksAllTagsData,
-    setBookmarksAllTagsData,
-  ] = bookmarksAllTagsState.use();
+  const [bookmarksAllTagsData, setBookmarksAllTagsData] =
+    bookmarksAllTagsState.use();
 
   const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -142,7 +140,6 @@ function Bookmark_lowerUI({
     let arrOut: (string | number)[] = [];
 
     selectablesInputStr.split(", ").forEach((el) => {
-
       let currentTab = tabsData.find((obj) => obj.title === el);
       if (currentTab) {
         arrOut.push(currentTab.id);
@@ -157,16 +154,16 @@ function Bookmark_lowerUI({
   let tagsInputArr: string[] = selectablesInputStr.split(", ");
 
   let selectablesInputStr_noComma: string;
-  
-  if (selectablesInputStr[selectablesInputStr.length-1] === ",") {
-    selectablesInputStr_noComma = selectablesInputStr.slice(0, selectablesInputStr.length-1)
+
+  if (selectablesInputStr[selectablesInputStr.length - 1] === ",") {
+    selectablesInputStr_noComma = selectablesInputStr.slice(
+      0,
+      selectablesInputStr.length - 1
+    );
     tagsInputArr = selectablesInputStr_noComma.split(", ");
   }
 
-
   function errorHandling(): boolean {
-   
-
     if (!regexForTitle.test(titleInput)) {
       // setTitleFormatErrorVis(true);
       setErrors({
@@ -408,8 +405,32 @@ function Bookmark_lowerUI({
       selectablesListVis,
       setSelectablesListVis,
       setSelectablesInputStr,
-      selectablesRef
+      selectablesRef,
+      saveFunc
     );
+  }
+
+  function saveFunc() {
+    if (bookmarkComponentType === "edit" && !wasAnythingChanged) {
+      return;
+    }
+
+    let isThereAnError = errorHandling();
+    if (isThereAnError) return;
+
+    // 1. adding or editing bookmark
+    // 2. adding folder/s (also to the main state with array of tags) if some tags do not correspond to existing folders
+    // 3. (if editing bookmark) for deleting empty folder -> setting bookmarksAllTagsState
+    addOrEditBookmark();
+
+    // setBookmarkVis((b) => !b);
+    if (bookmarkComponentType === "edit") {
+      visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
+    }
+
+    if (bookmarkComponentType === "new_lowerUI") {
+      visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+    }
   }
 
   return ReactDOM.createPortal(
@@ -479,8 +500,6 @@ function Bookmark_lowerUI({
                   let target = e.target.value;
 
                   setSelectablesInputStr(target);
-
-             
                 }}
                 onFocus={(e) => {
                   setSelectablesListVis(true);
@@ -576,26 +595,7 @@ function Bookmark_lowerUI({
             onClick={(e) => {
               e.preventDefault();
 
-              if (bookmarkComponentType === "edit" && !wasAnythingChanged) {
-                return;
-              }
-
-              let isThereAnError = errorHandling();
-              if (isThereAnError) return;
-
-              // 1. adding or editing bookmark
-              // 2. adding folder/s (also to the main state with array of tags) if some tags do not correspond to existing folders
-              // 3. (if editing bookmark) for deleting empty folder -> setting bookmarksAllTagsState
-              addOrEditBookmark();
-
-              // setBookmarkVis((b) => !b);
-              if (bookmarkComponentType === "edit") {
-                visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
-              }
-
-              if (bookmarkComponentType === "new_lowerUI") {
-                visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
-              }
+              saveFunc();
             }}
           />
 

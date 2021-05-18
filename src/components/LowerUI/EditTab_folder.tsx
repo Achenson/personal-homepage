@@ -16,6 +16,7 @@ interface Props {
   setWasAnythingClicked: React.Dispatch<React.SetStateAction<boolean>>;
   selectablesInputStr: string;
   setSelectablesInputStr: React.Dispatch<React.SetStateAction<string>>;
+  saveFunc: () => void;
 }
 
 function EditTab_folder({
@@ -24,6 +25,7 @@ function EditTab_folder({
   setWasAnythingClicked,
   selectablesInputStr,
   setSelectablesInputStr,
+  saveFunc,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
@@ -46,8 +48,6 @@ function EditTab_folder({
   );
 
   useEffect(() => {
-
-
     // let newVisibleBookmarks: string[] = [];
 
     // initialBookmarks.forEach((el) => {
@@ -106,13 +106,6 @@ function EditTab_folder({
     if (newVisibleBookmarks.length === 0) {
       setSelectablesListVis(false);
     }
-
-
-
-
-
-
-
   }, [
     selectablesInputStr,
     initialBookmarks,
@@ -137,7 +130,8 @@ function EditTab_folder({
       selectablesListVis,
       setSelectablesListVis,
       setSelectablesInputStr,
-      selectablesRef
+      selectablesRef,
+      saveFunc
     );
   }
 
@@ -211,7 +205,10 @@ function EditTab_folder({
         )}
       </div>
 
-      <div style={{ height: "18px", width: "18px" }} className=" mt-0.5 flex-none -mr-1">
+      <div
+        style={{ height: "18px", width: "18px" }}
+        className=" mt-0.5 flex-none -mr-1"
+      >
         {selectablesListVis ? (
           <ChevronUpSVG
             className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"

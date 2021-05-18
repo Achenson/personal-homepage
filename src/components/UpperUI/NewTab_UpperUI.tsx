@@ -422,8 +422,19 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       selectablesListVis,
       setSelectablesListVis,
       setSelectablesInputStr,
-      selectablesRef
+      selectablesRef,
+      saveFunc
     );
+  }
+
+  function saveFunc() {
+
+    let isThereAnError = errorHandling();
+    if (isThereAnError) return;
+
+    // 1. adding Tab(Folder/RSS?Notes) 2.updating Bookmarks with tags (same as new folder title)
+    addTab();
+    upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
   }
 
   return (
@@ -507,20 +518,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
                     setSelectablesInputStr(target);
 
-                    // let bookmarksInputArr = target.split(", ");
-
-                    // // setTagsInputArr(tagsInputStr.split(" ,"))
-
-                    // // let newVisibleTags = [...visibleTags];
-                    // let newVisibleBookmarks: string[] = [];
-
-                    // visibleBookmarks.forEach((el) => {
-                    //   if (bookmarksInputArr.indexOf(el) === -1) {
-                    //     newVisibleBookmarks.push(el);
-                    //   }
-                    // });
-
-                    // setVisibleBookmarks([...newVisibleBookmarks]);
+         
                   }}
                   onFocus={(e) => {
                     setSelectablesListVis(true);
@@ -654,12 +652,11 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             onClick={(e) => {
               e.preventDefault();
 
-              let isThereAnError = errorHandling();
-              if (isThereAnError) return;
+              saveFunc()
 
-              // 1. adding Tab(Folder/RSS?Notes) 2.updating Bookmarks with tags (same as new folder title)
-              addTab();
-              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+
+
+       
             }}
           />
 
