@@ -314,7 +314,7 @@ Props): JSX.Element {
   return (
     // opacity cannot be used, because children will inherit it and the text won't be readable
     <div
-      className="flex z-50 absolute h-full w-screen items-center justify-center"
+      className="flex z-50 fixed h-full w-screen items-center justify-center"
       style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
       onClick={() => {
         upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });

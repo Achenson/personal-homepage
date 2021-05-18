@@ -82,7 +82,7 @@ function GlobalSettings_UpperUI({ upperVisDispatch, upperVisState}: Props): JSX.
   }
   return (
     <div
-      className="flex flex-col z-50 absolute h-full w-screen justify-center items-center"
+      className="flex flex-col z-50 fixed h-full w-screen justify-center items-center"
       style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
       onClick={() => {
         upperVisDispatch({ type: "SETTINGS_TOGGLE" });

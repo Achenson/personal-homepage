@@ -433,6 +433,7 @@ DONE 372. svg for loginOut? DONE
 DONE 373. xs screen expendable svg to aligned well DONE
 XXX 376. selectables "x" center vertically?XXX
 DONE 374. make upperUI adding component work same as settings -> close when clicking on gray background & hide scrollbar DONE
+DONE 375. invalid display of upperUI pseudoModal (fixed insead of absolute) DONE
 DONE 377. padding right lowerbookmark editTab & editBookmark unite DONE
 DONE 377. "error fetching data" & loading.. non visible on dark background? DONE
 DONE 378. delete inv chevrons in uppperUI DONE
@@ -473,7 +474,7 @@ DONE 391. scrollbar visibility: gray background wrong if scrolldown before click
 329. code order (useEffect, func itp) eg. in 
 
 331. unmounted component error (err mentioned alread?)
-332. make biggest components smaller/extaract more funcions out?
+332. make biggest components smaller/extaract more funcions out? (max 500 lines of code)
 
 333. clean tailwind files in the end
 337. rss date formatting
@@ -491,15 +492,14 @@ DONE 391. scrollbar visibility: gray background wrong if scrolldown before click
 371. UppperUI should be higher on small screens? (remember to adjust UpperLeftUI colors to not cause flickering)
 372. popoup for messages for user (eg. logged out, tab created etc.)
 
-375. newNote paddingTop vh instead of center?
-
-
 
 387. innerShadow on inputs?
 390. selectables -> not visible if input is empty after typing non existent selectable
 
-
 392. div spanning rest of the parent div but without overflow-hidden?
+
+
+
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
