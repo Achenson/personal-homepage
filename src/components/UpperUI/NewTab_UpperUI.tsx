@@ -423,7 +423,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       setSelectablesListVis,
       setSelectablesInputStr,
       selectablesRef,
-      saveFunc
+      saveFunc,
+      tabType === "folder" ? false : true
     );
   }
 

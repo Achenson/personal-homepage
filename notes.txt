@@ -416,6 +416,8 @@ DONE 357. cant drag tabs with touch (react-dnd-multi-backend) DONE
 DONE 358. bug -> when on sm or lower (one col displayed) cannot drag tabs properly DONE
 DONE 359. tab open/close randomly (not randomly, but state of the prev component was preserved) when dragging? (all) DONE
 (opened state is in global state now)
+DONE 360. newTab etc. enter to save (implemtenet) & esc to cancel keyboard (not implemented in the end) ?
+     move handleKeyDown from editTab_folder to editTab_main (not moved! saveFunc from editTab_main called) DONE
 DONE 361. error object in state? check how many renders are there (1 only either way) DONE
 DONE 362. selectables filtered alphabetically? DONE
 XXX ?? 363. more professional selectables?   ?? XXX
@@ -487,8 +489,6 @@ DONE 391. scrollbar visibility: gray background wrong if scrolldown before click
 354. limit column width? -> make UpperLeftUI part of 1st col, UpperLefMenu part of last col,
     in Grid: justify-content center & set Cols to repeat minmax(0,<maxwidth>)
 
-360. newTab etc. enter to save & esc to cancel keyboard ? move handleKeyDown from editTab_folder to editTab_main
-
 371. fixed position of upperMenu?
 371. UppperUI should be higher on small screens? (remember to adjust UpperLeftUI colors to not cause flickering)
 372. popoup for messages for user (eg. logged out, tab created etc.)
@@ -498,6 +498,8 @@ DONE 391. scrollbar visibility: gray background wrong if scrolldown before click
 390. selectables -> not visible if input is empty after typing non existent selectable
 
 392. div spanning rest of the parent div but without overflow-hidden?
+
+393. wrap SVGs with buttons? for better keyboard control
 
 
 
