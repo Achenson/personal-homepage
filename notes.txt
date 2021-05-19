@@ -457,6 +457,7 @@ DONE 387. innerShadow or other styling on inputs? (darker upper border plus hove
 XXX 388. disable input in newTab? XXX (no because it works as a filter also now)
 DONE 389. cursor start/end in input for selectables (e.preventDefault())DONE
 DONE 391. scrollbar visibility: gray background wrong if scrolldown before clicking settings etc.
+DONE 393. wrap SVGs with buttons? for better keyboard (settings svgs not wrapped with btns) DONE
 DONE 394. uiDefual colors missing on newTab & newBookmark DONE
    (h-full inseatd of h-screen) DONE
 DONE 395. gray-100 on Upper UI bg? DONE
@@ -500,9 +501,8 @@ DONE 395. gray-100 on Upper UI bg? DONE
 
 392. div spanning rest of the parent div but without overflow-hidden?
 
-393. wrap SVGs with buttons? for better keyboard control
-
 394. tab with "ALL_TAG" special look?
+395. focus on title on upperUI components mount
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

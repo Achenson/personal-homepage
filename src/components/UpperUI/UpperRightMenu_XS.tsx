@@ -36,36 +36,52 @@ function UpperRightMenu({
     <>
       {upperVisState.addTagVis_xs && (
         <div className="flex xs:hidden justify-around">
-          <FolderSVG
-            className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            style={{ marginLeft: "0px" }}
+          <button
+            className="h-7 w-7"
+            style={{ marginLeft: "1px" }}
             onClick={() => {
               // setNewTabVis((b) => !b);
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               setTabType("folder");
             }}
-          />
+          >
+            <FolderSVG
+              className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+            />
+          </button>
+
           {/* <AddNote */}
-          <NoteSVG
-            className={`h-6 w-6 cursor-pointer fill-current transition-colors duration-75 text-black hover:text-${uiColorData}`}
-            style={{ marginTop: "2px", marginLeft: "0px" }}
+          <button
+            className="h-6 w-6"
+            style={{ marginTop: "2px", marginLeft: "1px" }}
             onClick={() => {
               // setNewTabVis((b) => !b);
 
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               setTabType("note");
             }}
-          />
+          >
+            <NoteSVG
+              className={`h-6 w-6 cursor-pointer fill-current transition-colors duration-75 text-black hover:text-${uiColorData}`}
+            />
+          </button>
+
           {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
-          <AddRssSVG
-            className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+
+          <button
+            className="h-7 w-7"
             style={{ marginRight: "-2px" }}
             onClick={() => {
               // setNewTabVis((b) => !b);
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               setTabType("rss");
             }}
-          />
+          >
+            <AddRssSVG
+              className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+            />
+          </button>
+
           <UserSVG
             className={`invisible h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
           />
@@ -111,21 +127,32 @@ function UpperRightMenu({
         style={{ marginTop: "-1px" }}
       >
         {/* <AddLinkSVG */}
-        <BookmarkSVG
-          className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+
+        <button
+          className="h-7 w-7"
           onClick={() => {
             // setNewBookmarkVis((b) => !b);
             upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
           }}
-        />
+        >
+          <BookmarkSVG
+            className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+          />
+        </button>
 
         {/* <AddFolderSVG */}
-        <PlusSquareSVG
-          className={`h-5 w-5 self-center cursor-pointer transition-colors duration-75 fill-current hover:text-${uiColorData} ml-px`}
+
+        <button
+          className="h-5 w-5 self-center"
           onClick={() => {
             upperVisDispatch({ type: "ADD_TAG_XS_TOGGLE" });
           }}
-        />
+        >
+          <PlusSquareSVG
+            className={`h-5 w-5 cursor-pointer transition-colors duration-75 fill-current hover:text-${uiColorData} ml-px`}
+          />
+        </button>
+
         {/* <AddNote */}
         <CogSVG
           className={`h-6 cursor-pointer transition-colors duration-75  hover:text-${uiColorData} ml-0.5`}
@@ -142,27 +169,34 @@ function UpperRightMenu({
             upperVisDispatch({ type: "PROFILE_TOGGLE" });
           }}
 /> */}
-        <div className="self-center"
-        style={{width: "24px", height: "24px"}}>
+        <div className="self-center" style={{ width: "24px", height: "24px" }}>
           {loggedInData ? (
-            <LogoutSVG
-              className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-              style={{ marginLeft: "-1px" }}
+            <button
+              className="h-6 w-6"
               onClick={() => {
                 // upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 setLoggedInData(false);
               }}
-            />
+            >
+              <LogoutSVG
+                className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+                style={{ marginLeft: "-1px" }}
+              />
+            </button>
           ) : (
-            <UserSVG
-              // -ml-1
-              className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-              style={{ marginLeft: "-3px", marginBottom: "0px" }}
+            <button
+              className="h-6 w-6"
               onClick={() => {
                 upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 // setLoggedInData(true);
               }}
-            />
+            >
+              <UserSVG
+                // -ml-1
+                className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+                style={{ marginLeft: "-3px", marginBottom: "0px" }}
+              />
+            </button>
           )}
         </div>
       </div>
