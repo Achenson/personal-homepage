@@ -52,7 +52,7 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
         }}
       >
         <div
-          className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
+          className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
           style={{
             width: `350px`,
           }}
@@ -108,11 +108,13 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                   <p>Email address / username</p>
                   <input
                     type="text"
-                    className="input-profile hover:border-blue-200 transition-colors duration-75"
+                    className="input-profile hover:border-gray-200 transition-colors duration-150"
                     style={{
-                      borderTopColor: `${
-                        inputHover ? "lightSkyBlue" : "silver"
-                      }`,
+                      borderTopColor: `${inputHover ? "#D1D5DB" : "#9CA3AF"}`,
+                      transitionProperty:
+                        "background-color, border-color, color, fill, stroke",
+                      transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+                      transitionDuration: "150ms",
                     }}
                     onMouseEnter={() => {
                       setInputHover(true);

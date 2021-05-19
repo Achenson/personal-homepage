@@ -501,6 +501,7 @@ DONE 391. scrollbar visibility: gray background wrong if scrolldown before click
 
 393. wrap SVGs with buttons? for better keyboard control
 394. uiDefual colors missing on newTab & newBookmark
+395. gray-100 on Upper UI bg?
 
 
 
