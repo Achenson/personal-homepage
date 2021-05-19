@@ -459,23 +459,27 @@ Props): JSX.Element {
         )}
 
         <div className="w-full flex justify-center mt-5">
-          <SaveSVG
-            className="h-5 w-5 fill-current text-black mr-6 hover:text-green-600 cursor-pointer transition-colors duration-75"
+          <button
+            className="h-5 w-5 mr-6"
             onClick={(e) => {
               e.preventDefault();
 
               saveFunc();
             }}
-          />
+          >
+            <SaveSVG className="h-5 w-5 fill-current text-black hover:text-green-600 cursor-pointer transition-colors duration-75" />
+          </button>
 
-          <CancelSVG
-            className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75"
+          <button
+            className="h-5 w-5"
             onClick={(e) => {
               e.preventDefault();
               // setBookmarkVis((b) => !b);
               upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
             }}
-          />
+          >
+            <CancelSVG className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75" />
+          </button>
         </div>
       </div>
     </div>

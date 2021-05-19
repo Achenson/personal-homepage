@@ -502,7 +502,7 @@ DONE 395. gray-100 on Upper UI bg? DONE
 
 393. wrap SVGs with buttons? for better keyboard control
 
-
+394. tab with "ALL_TAG" special look?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

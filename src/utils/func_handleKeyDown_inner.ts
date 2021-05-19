@@ -22,11 +22,11 @@ export function handleKeyDown_inner(
     case "ArrowUp":
       event.preventDefault();
       return;
-    case "Enter":
-      if (!selectablesListVis && !saveFunc_disabled) {
-        saveFunc();
-      }
-      return;
+    // case "Enter":
+    //   if (!selectablesListVis && !saveFunc_disabled) {
+    //     saveFunc();
+    //   }
+    //   return;
 
     case "Delete":
       if (!selectablesListVis) {

@@ -57,6 +57,10 @@ function SelectableList({
       case "Delete":
         setSelectablesInputStr("");
         return;
+      case "Tab":
+        setSelectablesVis(false);
+        return;
+
       case "Escape":
         setSelectablesVis(false);
         return;
@@ -125,7 +129,7 @@ function SelectableList({
       );
     }
 
-    concatToTheEnd()
+    concatToTheEnd();
 
     if (eventType === "keyboard") {
       // return if the array will be empty on the next render

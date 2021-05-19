@@ -516,31 +516,35 @@ Props): JSX.Element {
           <p>Lock as opened by default</p>
 
           {tabOpen ? (
-            <LockClosedSVG
-              className="h-6 text-gray-700 transition-colors duration-75 hover:text-black cursor-pointer"
+            <button
+              className="h-6 w-6"
               onClick={() => {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
                 setSelectablesListVis(false);
               }}
-            />
+            >
+              <LockClosedSVG className="text-gray-700 transition-colors duration-75 hover:text-black cursor-pointer" />
+            </button>
           ) : (
-            <LockOpenSVG
-              className="h-6 text-gray-700 transition-colors duration-75 hover:text-black cursor-pointer"
+            <button
+              className="h-6 w-6"
               onClick={() => {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
                 setSelectablesListVis(false);
               }}
-            />
+            >
+              <LockOpenSVG className="h-6 w-6 text-gray-700 transition-colors duration-75 hover:text-black cursor-pointer" />
+            </button>
           )}
         </div>
 
         <div className="flex justify-between items-center mt-2">
           <p>Delete</p>
 
-          <TrashSVG
-            className="h-6 text-gray-500 transition-colors duration-75 hover:text-black cursor-pointer"
+          <button
+            className="h-6 w-6"
             onClick={() => {
               if (!currentTab.deletable) {
                 // setNoDeletionErrorVis(true);
@@ -579,32 +583,40 @@ Props): JSX.Element {
                 }
               });
             }}
-          />
+          >
+            <TrashSVG className="h-6 w-6 text-gray-500 transition-colors duration-75 hover:text-black cursor-pointer" />
+          </button>
         </div>
       </div>
 
       <div className="w-full flex justify-center mt-2">
-        <SaveSVG
-          className={`h-5 w-5 fill-current mr-6 transition-colors duration-75 ${
-            wasAnythingClicked
-              ? "text-gray-900 hover:text-green-600 cursor-pointer"
-              : "text-blueGray-400 cursor-default"
-          }`}
+        <button
+          className="h-5 w-5 mr-6"
           onClick={(e) => {
             e.preventDefault();
 
             saveFunc();
           }}
-        />
+        >
+          <SaveSVG
+            className={`h-5 w-5 fill-current transition-colors duration-75 ${
+              wasAnythingClicked
+                ? "text-gray-900 hover:text-green-600 cursor-pointer"
+                : "text-blueGray-400 cursor-default"
+            }`}
+          />
+        </button>
 
-        <CancelSVG
-          className="h-5 w-5 fill-current text-gray-900 hover:text-red-600 cursor-pointer transition-colors duration-75"
+        <button
+          className="h-5 w-5"
           onClick={(e) => {
             e.preventDefault();
             // setEditTabVis((b) => !b);
             visDispatch({ type: "EDIT_TOGGLE" });
           }}
-        />
+        >
+          <CancelSVG className="h-5 w-5 fill-current text-gray-900 hover:text-red-600 cursor-pointer transition-colors duration-75" />
+        </button>
       </div>
 
       {/* </form> */}

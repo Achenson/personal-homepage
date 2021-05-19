@@ -586,21 +586,24 @@ function Bookmark_lowerUI({
 
         {/* SaveSVG is cut without the <p> - bug? */}
         <div className="mt-5 w-full flex justify-center">
-          <SaveSVG
-            className={`h-5 w-5 fill-current text-black mr-6 transition-colors duration-75 ${
-              wasAnythingChanged || bookmarkComponentType === "new_lowerUI"
-                ? "text-gray-900 hover:text-green-600 cursor-pointer"
-                : "text-blueGray-400 cursor-default"
-            }`}
+          <button
+            className="h-5 w-5 mr-6"
             onClick={(e) => {
               e.preventDefault();
-
               saveFunc();
             }}
-          />
+          >
+            <SaveSVG
+              className={`h-5 w-5 fill-current text-black transition-colors duration-75 ${
+                wasAnythingChanged || bookmarkComponentType === "new_lowerUI"
+                  ? "text-gray-900 hover:text-green-600 cursor-pointer"
+                  : "text-blueGray-400 cursor-default"
+              }`}
+            />
+          </button>
 
-          <CancelSVG
-            className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75"
+          <button
+            className="h-5 w-5"
             onClick={(e) => {
               e.preventDefault();
               // setBookmarkVis((b) => !b);
@@ -613,7 +616,9 @@ function Bookmark_lowerUI({
                 visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
               }
             }}
-          />
+          >
+            <CancelSVG className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75" />
+          </button>
         </div>
       </div>
     </div>,
