@@ -448,7 +448,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       }}
     >
       <div
-        className="bg-warmGray-100 pb-2 pt-3 pl-2 pr-0.5 border-2 border-teal-500 rounded-sm md:mb-48"
+        className={`bg-warmGray-100 pb-2 pt-3 pl-2 pr-0.5 border-2 border-${uiColorData} rounded-sm md:mb-48`}
         style={{ width: "350px" }}
         onClick={(e) => {
           e.stopPropagation();

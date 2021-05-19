@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { produce } from "immer";
 
 import { createBookmark, createFolderTab } from "../../utils/objCreators";
+import { uiColorState } from "../../state/colorsState";
 
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
@@ -37,25 +38,6 @@ interface Props {
   rssTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   upperVisDispatch: React.Dispatch<UpperVisAction>;
-  // setBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
-  // currentLink: SingleLinkData | undefined
-
-  // tagErrorVis: boolean;
-  // setTagErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
-
-  // tagRepeatErrorVis: boolean;
-  // setTagRepeatErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
-
-  // titleFormatErrorVis: boolean;
-  // setTitleFormatErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
-
-  // titleUniquenessErrorVis: boolean;
-  // setTitleUniquenessErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
-
-  // noteErrorVis: boolean;
-  // setNoteErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
-  // rssErrorVis: boolean;
-  // setRssErrorVis: React.Dispatch<React.SetStateAction<boolean>>;
 
   errors: {
     tagErrorVis: boolean;
@@ -117,6 +99,7 @@ Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   const [bookmarksAllTagsData, setBookmarksAllTagsData] =
     bookmarksAllTagsState.use();
+  const [uiColorData, setUiColorData] = uiColorState.use();
 
   let selectablesRef = useRef();
 
@@ -327,7 +310,7 @@ Props): JSX.Element {
       }}
     >
       <div
-        className="bg-warmGray-100 pb-2 pt-3 pl-2 pr-0.5 border-2 border-teal-500 rounded-sm md:mb-48"
+        className={`bg-warmGray-100 pb-2 pt-3 pl-2 pr-0.5 border-2 border-${uiColorData} rounded-sm md:mb-48`}
         style={{ width: "350px" }}
         onClick={(e) => {
           e.stopPropagation();
