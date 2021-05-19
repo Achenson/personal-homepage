@@ -458,6 +458,7 @@ XXX 388. disable input in newTab? XXX (no because it works as a filter also now)
 DONE 389. cursor start/end in input for selectables (e.preventDefault())DONE
 DONE 391. scrollbar visibility: gray background wrong if scrolldown before clicking settings etc.
    (h-full inseatd of h-screen) DONE
+DONE 395. gray-100 on Upper UI bg? DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -500,7 +501,6 @@ DONE 391. scrollbar visibility: gray background wrong if scrolldown before click
 
 393. wrap SVGs with buttons? for better keyboard control
 394. uiDefual colors missing on newTab & newBookmark
-395. gray-100 on Upper UI bg?
 
 
 

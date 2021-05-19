@@ -448,7 +448,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       }}
     >
       <div
-        className="bg-gray-200 pb-2 pt-3 pl-2 pr-0.5 border-2 border-teal-500 rounded-sm md:mb-48"
+        className="bg-warmGray-100 pb-2 pt-3 pl-2 pr-0.5 border-2 border-teal-500 rounded-sm md:mb-48"
         style={{ width: "350px" }}
         onClick={(e) => {
           e.stopPropagation();
@@ -473,7 +473,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           {/* <div className="w-full pl-2"> */}
           <input
             type="text"
-            className="w-full border border-gray-300 pl-px"
+            className="w-full border pl-px"
             value={tabTitleInput}
             placeholder={
               tabType === "folder"
@@ -508,7 +508,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               <div className="relative">
                 <input
                   type="text"
-                  className="w-full border border-gray-300 pl-px pr-5"
+                  className="w-full border pl-px pr-5"
                   // value={tabLinksInput.join(", ")}
                   value={selectablesInputStr}
                   //@ts-ignore
@@ -581,7 +581,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             <div className="w-full">
               <input
                 type="text"
-                className="w-full border border-gray-300 pl-px"
+                className="w-full border pl-px"
                 value={rssLinkInput}
                 placeholder="enter RSS link"
                 onChange={(e) => setRssLinkInput(e.target.value)}
