@@ -96,7 +96,7 @@ function GlobalSettings_UpperUI({ upperVisDispatch, upperVisState}: Props): JSX.
         }}
       >
         <div
-          className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
+          className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
           style={{ width: `${xsScreen ? "350px" : "417px"}`, height: "225px" }}
         >
 

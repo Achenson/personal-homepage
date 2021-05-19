@@ -111,7 +111,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
         }}
       >
         <div
-          className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
+          className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
           style={{ width: `350px`, height: "200px" }}
           // style={{ width: "350px", height: "200px" }}
         >

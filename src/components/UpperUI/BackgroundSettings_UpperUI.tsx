@@ -68,7 +68,7 @@ function BackgroundSettings_UpperUI({ upperVisDispatch, upperVisState }: Props):
       }}
       >
         <div
-          className={`bg-gray-200 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
+          className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
           style={{
             width: `${xsScreen ? "350px" : "417px"}`,
             height: `${xsScreen ? "238px" : "205px"}`,
@@ -194,7 +194,7 @@ function BackgroundSettings_UpperUI({ upperVisDispatch, upperVisState }: Props):
               }`}
             >
               <div
-                className={`bg-white h-6 ${xsScreen ? "w-48" : "w-60"}`}
+                className={`bg-blueGray-50 h-6 ${xsScreen ? "w-48" : "w-60"} border border-gray-300`}
               ></div>
               <button
                 className={`border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150`}

@@ -494,9 +494,6 @@ DONE 391. scrollbar visibility: gray background wrong if scrolldown before click
 371. UppperUI should be higher on small screens? (remember to adjust UpperLeftUI colors to not cause flickering)
 372. popoup for messages for user (eg. logged out, tab created etc.)
 
-
-
-
 390. selectables -> not visible if input is empty after typing non existent selectable
 
 392. div spanning rest of the parent div but without overflow-hidden?
