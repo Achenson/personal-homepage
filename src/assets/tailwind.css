@@ -2,8 +2,3 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@layer components {
-  .input-profile {
-    @apply pl-px border border-gray-300 h-7;
-  }
-}

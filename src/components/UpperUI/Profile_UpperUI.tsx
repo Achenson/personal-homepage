@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
+import Profile_input from "../UpperUI/Profile_input";
+
 import { loggedInState } from "../../state/defaultSettings";
 
 import { uiColorState } from "../../state/colorsState";
@@ -67,8 +69,8 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
           </div>
 
           <div className="">
-            <p className="text-center mb-3">User account</p>
-            <div className="mx-auto w-36 flex justify-between">
+            {/* <p className="text-center mb-3">User account</p> */}
+            <div className="mx-auto w-32 flex justify-between">
               <span
                 className={`${
                   loginOrRegister === "login"
@@ -106,34 +108,19 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               {loginOrRegister === "login" ? (
                 <div className="">
                   <p>Email address / username</p>
-                  <input
-                    type="text"
-                    className="input-profile hover:border-gray-200 transition-colors duration-150"
-                    style={{
-                      borderTopColor: `${inputHover ? "#D1D5DB" : "#9CA3AF"}`,
-                      transitionProperty:
-                        "background-color, border-color, color, fill, stroke",
-                      transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-                      transitionDuration: "150ms",
-                    }}
-                    onMouseEnter={() => {
-                      setInputHover(true);
-                    }}
-                    onMouseLeave={() => {
-                      setInputHover(false);
-                    }}
-                  />
+
+                  <Profile_input />
                 </div>
               ) : (
                 <>
                   <div className="">
                     <p>Username</p>
-                    <input type="text" className="input-profile" />
+                    <Profile_input />
                   </div>
 
                   <div className="mt-1">
                     <p>Email address</p>
-                    <input type="text" className="input-profile" />
+                    <Profile_input />
                   </div>
                 </>
               )}
@@ -143,13 +130,13 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               >
                 <div className="mt-1">
                   <p>Password</p>
-                  <input type="text" className="input-profile" />
+                  <Profile_input />
                 </div>
 
                 {loginOrRegister === "register" && (
                   <div className="mt-1">
                     <p>Confirm password</p>
-                    <input type="text" className="input-profile" />
+                    <Profile_input />
                   </div>
                 )}
               </div>
