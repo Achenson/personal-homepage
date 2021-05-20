@@ -428,14 +428,12 @@ Props): JSX.Element {
     };
   }, [mouseOverTab]);
 
-
   useEffect(() => {
-    if(!upperVisState.tabEditablesOpenable) {
-      visDispatch({type: "TAB_EDITABLES_CLOSE"})
-      upperVisDispatch({type: "TAB_EDITABLES_OPENABLE_DEFAULT"})
+    if (!upperVisState.tabEditablesOpenable) {
+      visDispatch({ type: "TAB_EDITABLES_CLOSE" });
+      upperVisDispatch({ type: "TAB_EDITABLES_OPENABLE_DEFAULT" });
     }
-  
-  }, [upperVisState.tabEditablesOpenable, upperVisDispatch])
+  }, [upperVisState.tabEditablesOpenable, upperVisDispatch]);
 
   function textOrIconColor(finalTabColor: string, textOrIcon: "text" | "icon") {
     // exceptions
@@ -518,7 +516,11 @@ Props): JSX.Element {
             upperVisDispatch({ type: "CLOSE_ALL" });
           }}
         >
-          <p className="truncate">{tabTitle}</p>
+          <p className={`truncate ${tabID === "ALL_TAGS" ? "font-mono mt-px" : ""} `}>
+            {tabID === "ALL_TAGS" ? "" : ""}
+            {tabTitle}
+            {tabID === "ALL_TAGS" ? "" : ""}
+          </p>
         </div>
 
         <div

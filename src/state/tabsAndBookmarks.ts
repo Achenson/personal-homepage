@@ -7,7 +7,7 @@ import { SingleBookmarkData } from "../utils/interfaces";
 export const tabsDataState = newRidgeState<SingleTabData[]>([
   {
     id: "ALL_TAGS",
-    title: "all",
+    title: "all bookmarks",
     color: null,
     column: 1,
     priority: 2,
