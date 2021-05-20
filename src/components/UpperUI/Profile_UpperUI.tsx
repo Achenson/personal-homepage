@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
@@ -25,6 +25,15 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
   const [loggedInData, setLoggedInData] = loggedInState.use();
 
   const [inputHover, setInputHover] = useState(false);
+
+  let firstFieldRef = useRef(null);
+
+  useEffect(() => {
+    if (firstFieldRef.current) {
+    // @ts-ignore
+      firstFieldRef.current.focus();
+    }
+  }, []);
 
   // useEffect(() => {
 
@@ -71,7 +80,10 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
           <div className="">
             {/* <p className="text-center mb-3">User account</p> */}
             <div className="mx-auto w-32 flex justify-between">
-              <span
+              <button
+                onClick={() => {
+                  setLoginOrRegister("login");
+                }}
                 className={`${
                   loginOrRegister === "login"
                     ? "cursor-default" +
@@ -80,14 +92,11 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                       finalColorForImgBackgroundMode
                     : "hover:text-opacity-50 cursor-pointer text-gray-400"
                 } text-lg`}
-                onClick={() => {
-                  setLoginOrRegister("login");
-                }}
               >
-                Login
-              </span>
-              {/* <p>|</p> */}
-              <span
+                <span>Login</span>
+              </button>
+
+              <button
                 className={`${
                   loginOrRegister === "login"
                     ? "hover:text-opacity-50 cursor-pointer text-gray-400"
@@ -101,7 +110,8 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 }}
               >
                 Register
-              </span>
+              </button>
+              {/* <p>|</p> */}
             </div>
 
             <div className="mt-3 mb-5 flex flex-col items-center">
@@ -109,7 +119,7 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 <div className="">
                   <p>Email address / username</p>
 
-                  <Profile_input />
+                  <Profile_input ref={firstFieldRef} />
                 </div>
               ) : (
                 <>

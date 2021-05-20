@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 
-interface Props {}
+interface Props {
+  // inputType: "title" | "other"
+}
 
-function Test({}: Props): JSX.Element {
+function Profile_input(
+  {}: Props,
+  passedRef: React.LegacyRef<HTMLInputElement> | undefined
+): JSX.Element {
   const [inputHover, setInputHover] = useState(false);
 
   /* 
@@ -15,6 +20,7 @@ function Test({}: Props): JSX.Element {
 
   return (
     <input
+      ref={passedRef}
       type="text"
       className="pl-px border border-gray-200 h-7 hover:border-gray-300 transition-colors duration-150"
       style={{
@@ -35,4 +41,4 @@ function Test({}: Props): JSX.Element {
   );
 }
 
-export default Test;
+export default React.forwardRef(Profile_input);

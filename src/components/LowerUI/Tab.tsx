@@ -435,7 +435,7 @@ Props): JSX.Element {
       upperVisDispatch({type: "TAB_EDITABLES_OPENABLE_DEFAULT"})
     }
   
-  }, [upperVisState.tabEditablesOpenable])
+  }, [upperVisState.tabEditablesOpenable, upperVisDispatch])
 
   function textOrIconColor(finalTabColor: string, textOrIcon: "text" | "icon") {
     // exceptions
