@@ -45,6 +45,7 @@ const errorsAllFalse = {
   titleUniquenessErrorVis: false,
   bookmarkExistenceErrorVis: false,
   textAreaErrorVis: false,
+  invalidLinkErrorVis: false,
 };
 
 function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
@@ -86,26 +87,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     ...errorsAllFalse,
   });
 
-  // const [bookmarksErrorVis, setBookmarksErrorVis] = useState<boolean>(false);
-  // const [
-  //   bookmarksRepeatErrorVis,
-  //   setBookmarksRepeatErrorVis,
-  // ] = useState<boolean>(false);
-  // const [
-  //   bookmarkExistenceErrorVis,
-  //   setBookmarkExistenceErrorVis,
-  // ] = useState<boolean>(false);
-
-  // const [titleFormatErrorVis, setTitleFormatErrorVis] = useState<boolean>(
-  //   false
-  // );
-  // const [
-  //   titleUniquenessErrorVis,
-  //   setTitleUniquenessErrorVis,
-  // ] = useState<boolean>(false);
-  // // for notes
-  // const [textAreaErrorVis, setTextAreaErrorVis] = useState<boolean>(false);
-
   const [selectablesListVis, setSelectablesListVis] = useState<boolean>(false);
 
   const [visibleBookmarks, setVisibleBookmarks] = useState<string[]>(() =>
@@ -117,9 +98,12 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   // ^  and $ -> beginning and end of the text!
   // let regexForBookmarks = /^\w+(,\s\w+)*$/;
   // let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
-  let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*,?$/;
+  const regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*,?$/;
   // let regexForTitle = /^\w+$/;
-  let regexForTitle = /^\w(\s?\w+)*$/;
+  const regexForTitle = /^\w(\s?\w+)*$/;
+
+  const regexForLink =
+    /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
 
   const [textAreaValue, setTextAreaValue] = useState<string | null>("");
 
@@ -281,6 +265,16 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           bookmarksRepeatErrorVis: true,
         });
         setSelectablesListVis(false);
+        return true;
+      }
+    }
+
+    if (tabType === "rss") {
+      if (!regexForLink.test(rssLinkInput)) {
+        setErrors({
+          ...errorsAllFalse,
+          invalidLinkErrorVis: true,
+        });
         return true;
       }
     }
@@ -647,6 +641,10 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
         {errors.textAreaErrorVis && tabType === "note" && (
           <p className={`text-red-600`}>{tabErrors.textArea}</p>
+        )}
+
+        {errors.invalidLinkErrorVis && tabType === "rss" && (
+          <p className={`text-red-600`}>{tabErrors.invalidLinkError}</p>
         )}
 
         {/* !!! pl-4 in NewLink */}

@@ -14,6 +14,7 @@ export const tabErrors = {
   // not used in edit tab
   titleUniqueness: "Tab with that title already exists",
   // bookmarksFormat: "Bookmarks should consist of words separated by coma and space",
+  invalidLinkError: "Invalid RSS link",
   bookmarksFormat:
     "Bookmarks should consist of words (without special characters) separated by coma and space",
   bookmarkExistence: "You can choose from existing bookmarks only",
