@@ -98,17 +98,19 @@ function UpperRightMenu({
             className={`h-6 w-6 cursor-pointer fill-current transition-colors duration-75 text-black hover:text-${uiColorData}`}
           />
         </button>
-
-        {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
-        <AddRssSVG
-          className={`h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+        <button
+          className="h-7 w-7"
           onClick={() => {
             // setNewTabVis((b) => !b);
-
             upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
             setTabType("rss");
           }}
-        />
+        >
+          <AddRssSVG
+            className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+          />
+        </button>
+        {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
       </div>
 
       {/* XS============================== */}

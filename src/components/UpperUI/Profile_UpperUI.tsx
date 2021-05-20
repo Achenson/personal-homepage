@@ -26,11 +26,10 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
   const [inputHover, setInputHover] = useState(false);
 
-  let firstFieldRef = useRef(null);
+  let firstFieldRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (firstFieldRef.current) {
-    // @ts-ignore
+    if (firstFieldRef.current !== null) {
       firstFieldRef.current.focus();
     }
   }, []);

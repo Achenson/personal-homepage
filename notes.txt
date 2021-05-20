@@ -461,6 +461,7 @@ DONE 393. wrap SVGs with buttons? for better keyboard (settings svgs not wrapped
 DONE 394. uiDefual colors missing on newTab & newBookmark DONE
    (h-full inseatd of h-screen) DONE
 DONE 395. gray-100 on Upper UI bg? DONE
+DONE 396. focus on title on upperUI components mount DONE
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
@@ -502,7 +503,7 @@ DONE 395. gray-100 on Upper UI bg? DONE
 392. div spanning rest of the parent div but without overflow-hidden?
 
 394. tab with "ALL_TAG" special look?
-395. focus on title on upperUI components mount
+397. ts-ignors -> get rid off, at least for refs
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

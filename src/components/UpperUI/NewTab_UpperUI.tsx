@@ -68,6 +68,13 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   });
 
   let selectablesRef = useRef();
+  let firstFieldRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (firstFieldRef.current !== null) {
+      firstFieldRef.current.focus();
+    }
+  }, []);
 
   const [tabTitleInput, setTabTitleInput] = useState<string>("");
   const [rssLinkInput, setRssLinkInput] = useState<string>("");
@@ -469,6 +476,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           </p>
           {/* <div className="w-full pl-2"> */}
           <input
+            ref={firstFieldRef}
             type="text"
             className="w-full border pl-px"
             value={tabTitleInput}
@@ -643,26 +651,26 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
         {/* !!! pl-4 in NewLink */}
         <div className="w-full flex justify-center mt-4">
-          <button className="h-5 w-5 mr-6">
-            <SaveSVG
-              className="h-5 w-5 fill-current text-black mr-6 hover:text-green-600 cursor-pointer transition-colors duration-75"
-              onClick={(e) => {
-                e.preventDefault();
+          <button
+            className="h-5 w-5 mr-6"
+            onClick={(e) => {
+              e.preventDefault();
 
-                saveFunc();
-              }}
-            />
+              saveFunc();
+            }}
+          >
+            <SaveSVG className="h-5 w-5 fill-current text-black mr-6 hover:text-green-600 cursor-pointer transition-colors duration-75" />
           </button>
 
-          <button className="h-5 w-5">
-            <CancelSVG
-              className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75"
-              onClick={(e) => {
-                e.preventDefault();
-                // setNewTabVis((b) => !b);
-                upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-              }}
-            />
+          <button
+            className="h-5 w-5"
+            onClick={(e) => {
+              e.preventDefault();
+              // setNewTabVis((b) => !b);
+              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+            }}
+          >
+            <CancelSVG className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75" />
           </button>
         </div>
       </div>

@@ -102,6 +102,7 @@ Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   let selectablesRef = useRef();
+  let firstFieldRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -110,6 +111,12 @@ Props): JSX.Element {
       document.removeEventListener("keydown", handleKeyDown);
     };
   });
+
+  useEffect(() => {
+    if (firstFieldRef.current !== null) {
+      firstFieldRef.current.focus();
+    }
+  }, []);
 
   // let tagsInputArr = selectablesInputStr.split(", ");
 
@@ -323,6 +330,7 @@ Props): JSX.Element {
 
           <input
             type="text"
+            ref={firstFieldRef}
             className="w-full border pl-px"
             value={titleInput}
             placeholder={"new bookmark title"}
