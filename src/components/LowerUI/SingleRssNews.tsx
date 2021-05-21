@@ -51,12 +51,13 @@ function SingeRssNews({
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="hover:underline text-lightBlue-700 "
+        className="hover:underline text-lightBlue-700"
+        // style={{lineHeight: "-50px"}}
       >
-        {title}
+       <p className="leading-snug">{title}</p> 
       </a>
-      <p>{descriptionVis && renderDescription(description)}</p>
-      <p className="text-xs text-gray-700">{dateVis && pubDate}</p>
+      <p className="text-sm mt-0.5 leading-snug">{descriptionVis && renderDescription(description)}</p>
+      <p className="text-xs mt-0.5 text-gray-700">{dateVis && pubDate}</p>
     </div>
   );
 }
