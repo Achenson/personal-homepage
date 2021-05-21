@@ -29,6 +29,11 @@ function SingeRssNews({
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function renderDescription(descripion: string) {
+
+    if(!description) {
+      return "short description unavailable"
+    }
+
     let descriptionSplitted = descripion.split(" ");
 
     let newArr: string[] = [];

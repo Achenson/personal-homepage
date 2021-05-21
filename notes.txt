@@ -362,6 +362,7 @@ XXX 283. errors reducers? XXX
 DONE 284. EditTab: rss & note (&folder)-> make new components! DONE 
 DONE 285. rss globalSetting styling DONE
 DONE 286. change many find() by tabID to passing props - eg. in RSS components, editTab, noteInput DONE
+DONE 287. rss error handling: catch error for data and description (cnn rss description crashes the app) DONE
 XXX 289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds XXX
 XXX 290. SingleBookmark don't look good on lightest columns XXX
 DONE 293. upperVisDispatch -> color selectable should be gone when closing all DONE logic moved to upperReducer
@@ -474,7 +475,6 @@ DONE 399. make links working!! DONE (direct link has to be copied - hint in an e
 
 278. background img zooming back after clicking any settings
 
-287. rss error handling: catch error for data and description (cnn rss description crashes the app)
 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
 
 304. react query devtools not working
@@ -488,7 +488,6 @@ DONE 399. make links working!! DONE (direct link has to be copied - hint in an e
 332. make biggest components smaller/extaract more funcions out? (max 500 lines of code)
 
 333. clean tailwind files in the end
-
 
 341. bookmark_lowerUI -> divide function to new & edit
 
@@ -507,6 +506,8 @@ DONE 399. make links working!! DONE (direct link has to be copied - hint in an e
 
 400. error - text-center?
 401. check rss pagination && chevrons (1 page too far)
+402. chrome Tab titles too high?
+403. globalSettings -> closeAllTabs if description or date is changed
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
