@@ -101,7 +101,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   const regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*,?$/;
   // let regexForTitle = /^\w+$/;
   const regexForTitle = /^\w(\s?\w+)*$/;
-
+  // https://stackoverflow.com/questions/1500260/detect-urls-in-text-with-javascript
   const regexForLink =
     /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
 

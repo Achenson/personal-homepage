@@ -508,6 +508,7 @@ DONE 397. focus on title on upperUI components mount DONE
 398. ts-ignors -> get rid off, at least for refs
 
 399. make links working!!
+400. error - text-center?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

@@ -47,6 +47,7 @@ const errorsAllFalse = {
   bookmarkExistenceErrorVis: false,
   textAreaErrorVis: false,
   noDeletionErrorVis: false,
+  invalidLinkErrorVis: false,
 };
 
 function EditTab({
@@ -168,6 +169,9 @@ Props): JSX.Element {
   // let regexForTabs = /^\w+(,\s\w+)*$/;
   // let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
   let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*,?$/;
+   // https://stackoverflow.com/questions/1500260/detect-urls-in-text-with-javascript
+   const regexForLink =
+   /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
 
   function titleWidth() {
     if (tabType === "note" || tabID === "ALL_TAGS") {
@@ -224,6 +228,16 @@ Props): JSX.Element {
         setErrors({
           ...errorsAllFalse,
           textAreaErrorVis: true,
+        });
+        return true;
+      }
+    }
+
+    if (tabType === "rss") {
+      if (!regexForLink.test(rssLinkInput)) {
+        setErrors({
+          ...errorsAllFalse,
+          invalidLinkErrorVis: true,
         });
         return true;
       }
@@ -509,6 +523,15 @@ Props): JSX.Element {
         {errors.noDeletionErrorVis && (
           <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.noDeletion}</p>
         )}
+
+        {errors.invalidLinkErrorVis && tabType === "rss" && (
+          <p  className={`text-red-600 mt-1 -mb-2`}
+          >
+            {tabErrors.invalidLinkError}
+          </p>
+        )}
+
+
       </div>
 
       <div className={`pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
