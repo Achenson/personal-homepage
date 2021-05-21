@@ -394,6 +394,7 @@ XXX 328. bigger gap after tab on smaller screen sizes when column is empty? XXX
 DONE 334. saveSVGs onClick -> convert code to functions DONE
 DONE 335. RSS settings - date & description better styles DONE
 DONE 336. Rss SingleLink - empty?? (deleted) DONE
+DONE 337. rss date formatting DONE
 DONE 338. aligning left-hand text with right-hand input -> do it without margins! (flex-none instead) DONE
 DONE 339. move note & rss edit errors lower DONE
 DONE 340. allow trailing coma in selectables DONE
@@ -488,7 +489,6 @@ DONE 399. make links working!! DONE (direct link has to be copied - hint in an e
 
 333. clean tailwind files in the end
 
-337. rss date formatting
 
 341. bookmark_lowerUI -> divide function to new & edit
 
@@ -506,6 +506,7 @@ DONE 399. make links working!! DONE (direct link has to be copied - hint in an e
 398. ts-ignors -> get rid off, at least for refs
 
 400. error - text-center?
+401. check rss pagination && chevrons (1 page too far)
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

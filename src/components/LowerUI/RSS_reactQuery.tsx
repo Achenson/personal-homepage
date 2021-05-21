@@ -119,6 +119,71 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
       }
     }
 
+    function convertRssDate(pubDate: string) {
+      let date = new Date(pubDate);
+      if (!date || !date.getDay() || !date.getMonth()) {
+        return "unknown date";
+      }
+      // let dateShorter = new Date(date.getFullYear(), date.getMonth(), date.getDate())
+
+      let dateNow = new Date();
+      // let dateNowShorter = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate())
+
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+      let date_day = date.getDate();
+      let dateNow_day = dateNow.getDate();
+
+      if (date_day === dateNow_day) {
+        return "today";
+      }
+
+      if (date_day + 1 === dateNow_day) {
+        return "yesterday";
+      }
+
+      for (let i = 2; i <= 31; i++) {
+        if (date_day + i === dateNow_day) {
+          return `${i} days ago`;
+        }
+      }
+
+      return "older than a month";
+
+      // let newDatePartial =
+      //   `${dayOfTheMonth(date)}` + " " + months[date.getMonth()];
+
+      // return newDatePartial;
+
+      // function dayOfTheMonth(date: Date) {
+      //   let day = date.getDate();
+
+      //   switch (day) {
+      //     case 1:
+      //       return `${day}st`;
+      //     case 2:
+      //       return `${day}nd`;
+      //     case 3:
+      //       return `${day}rd`;
+      //     default:
+      //       return `${day}th`;
+      //   }
+      // }
+    }
+
     return arrOfObj.map((el, i) => (
       <SingleRssNews
         title={el.title}
@@ -127,7 +192,8 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
         dateVis={dateVis}
         link={el.link}
         key={i}
-        pubDate={el.pubDate}
+        // pubDate={el.pubDate}
+        pubDate={convertRssDate(el.pubDate)}
       />
     ));
   }
@@ -176,12 +242,9 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
         {status === "loading" && <div>Loading data...</div>}
 
         {status === "error" && <div>Error fetching data</div>}
+      </div>
 
-        </div>
-        
-        {status === "success" && <div
-      
-        >{mapData()}</div>}
+      {status === "success" && <div>{mapData()}</div>}
     </div>
   );
 }

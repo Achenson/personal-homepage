@@ -56,7 +56,7 @@ function SingeRssNews({
         {title}
       </a>
       <p>{descriptionVis && renderDescription(description)}</p>
-      <p>{dateVis && pubDate}</p>
+      <p className="text-xs text-gray-700">{dateVis && pubDate}</p>
     </div>
   );
 }
