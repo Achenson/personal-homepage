@@ -5,6 +5,7 @@ export const bookmarkErrors = {
   noteError: "Tag names cannot be the same as Notes titles",
   rssError: "Tag names cannot be the same as RSS titles",
   tagRepeat: "Each tag should be unique",
+  invalidLink: "Invalid URL. Try copying URL directly from your browser address bar"
 };
 
 export const tabErrors = {

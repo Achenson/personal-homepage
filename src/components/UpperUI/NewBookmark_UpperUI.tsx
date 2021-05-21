@@ -46,6 +46,7 @@ interface Props {
     titleUniquenessErrorVis: boolean;
     noteErrorVis: boolean;
     rssErrorVis: boolean;
+    invalidLinkVis: boolean;
   };
   setErrors: React.Dispatch<
     React.SetStateAction<{
@@ -55,11 +56,13 @@ interface Props {
       titleUniquenessErrorVis: boolean;
       noteErrorVis: boolean;
       rssErrorVis: boolean;
+      invalidLinkVis: boolean;
     }>
   >;
 
   regexForTags: RegExp;
   regexForTitle: RegExp;
+  regexForLink: RegExp;
 }
 
 const errorsAllFalse = {
@@ -69,6 +72,8 @@ const errorsAllFalse = {
   titleUniquenessErrorVis: false,
   noteErrorVis: false,
   rssErrorVis: false,
+  invalidLinkVis: false,
+  regexForLink: false,
 };
 
 function NewBookmark_UpperUI({
@@ -93,6 +98,7 @@ function NewBookmark_UpperUI({
 
   regexForTags,
   regexForTitle,
+  regexForLink,
 }: // setBookmarkVis,
 Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
@@ -152,6 +158,16 @@ Props): JSX.Element {
       setErrors({
         ...errorsAllFalse,
         titleUniquenessErrorVis: true,
+      });
+
+      setSelectablesListVis(false);
+      return true;
+    }
+
+    if (!regexForLink.test(urlInput)) {
+      setErrors({
+        ...errorsAllFalse,
+        invalidLinkVis: true,
       });
 
       setSelectablesListVis(false);
@@ -448,6 +464,10 @@ Props): JSX.Element {
 
         {errors.titleUniquenessErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.titleUniqueness}</p>
+        )}
+
+        {errors.invalidLinkVis && (
+          <p className={`text-red-600`}>{bookmarkErrors.invalidLink}</p>
         )}
 
         {errors.tagErrorVis && (

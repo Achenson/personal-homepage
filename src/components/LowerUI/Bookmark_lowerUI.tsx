@@ -49,6 +49,7 @@ interface Props {
     titleUniquenessErrorVis: boolean;
     noteErrorVis: boolean;
     rssErrorVis: boolean;
+    invalidLinkVis: boolean;
   };
   setErrors: React.Dispatch<
     React.SetStateAction<{
@@ -58,11 +59,13 @@ interface Props {
       titleUniquenessErrorVis: boolean;
       noteErrorVis: boolean;
       rssErrorVis: boolean;
+      invalidLinkVis: boolean;
     }>
   >;
 
   regexForTags: RegExp;
   regexForTitle: RegExp;
+  regexForLink: RegExp;
 
   top: number;
   left: number;
@@ -76,6 +79,7 @@ const errorsAllFalse = {
   titleUniquenessErrorVis: false,
   noteErrorVis: false,
   rssErrorVis: false,
+  invalidLinkVis: false,
 };
 
 function Bookmark_lowerUI({
@@ -103,6 +107,7 @@ function Bookmark_lowerUI({
 
   regexForTags,
   regexForTitle,
+  regexForLink,
 
   top,
   left,
@@ -203,6 +208,16 @@ function Bookmark_lowerUI({
 
         return true;
       }
+    }
+
+    if (!regexForLink.test(urlInput)) {
+      setErrors({
+        ...errorsAllFalse,
+        invalidLinkVis: true,
+      });
+
+      setSelectablesListVis(false);
+      return true;
     }
 
     if (
@@ -566,6 +581,10 @@ function Bookmark_lowerUI({
 
         {errors.titleUniquenessErrorVis && (
           <p className={`text-red-600`}>{bookmarkErrors.titleUniqueness}</p>
+        )}
+
+        {errors.invalidLinkVis && (
+          <p className={`text-red-600`}>{bookmarkErrors.invalidLink}</p>
         )}
 
         {errors.tagErrorVis && (

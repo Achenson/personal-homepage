@@ -334,6 +334,7 @@ XXX 250. logo? XXX
 DONE 251. css method to get rid of input numbers' arrows -> make them invisible DONE (custom.css file)
 DONE 252. chevrons for selectables are sometimes in wrong state? DONE
 DONE 253. bookmark: add rssError (similar to noteError?) DONE
+DONE 254. bookmark (& RSS?): add link errors! DONE
 DONE 255. closing of previously opened colors/edits from the other column should be first (not a moment when they are both visible) DONE
 DONE 256. tab & editTab errors move out DONE
 DONE 257. "always opened" -> opened by default DONE
@@ -464,14 +465,11 @@ DONE 395. tab with "ALL_TAG" special look? (mono font) DONE
    (h-full inseatd of h-screen) DONE
 DONE 396. gray-100 on Upper UI bg? DONE
 DONE 397. focus on title on upperUI components mount DONE
+DONE 399. make links working!! DONE (direct link has to be copied - hint in an error) DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
-
-
-254. bookmark (& RSS?): add link errors!
-
 
 278. background img zooming back after clicking any settings
 
@@ -507,7 +505,6 @@ DONE 397. focus on title on upperUI components mount DONE
 
 398. ts-ignors -> get rid off, at least for refs
 
-399. make links working!!
 400. error - text-center?
 
 Browserslist: caniuse-lite is outdated. Please run:

@@ -38,6 +38,7 @@ const errorsAllFalse = {
   titleUniquenessErrorVis: false,
   noteErrorVis: false,
   rssErrorVis: false,
+  invalidLinkVis: false
 };
 
 function Bookmark_newAndEdit({
@@ -146,6 +147,11 @@ function Bookmark_newAndEdit({
   // let regexForTitle = /^\w+$/;
   let regexForTags = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
   let regexForTitle = /^\w(\s?\w+)*$/;
+   // https://stackoverflow.com/questions/1500260/detect-urls-in-text-with-javascript
+   const regexForLink =
+   /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+
+
 
   let notesTitlesArr: string[] = [];
   let rssTitlesArr: string[] = [];
@@ -259,26 +265,10 @@ function Bookmark_newAndEdit({
     errors,
     setErrors,
 
-    // tagErrorVis,
-    // setTagErrorVis,
-
-    // tagRepeatErrorVis,
-    // setTagRepeatErrorVis,
-
-    // titleFormatErrorVis,
-    // setTitleFormatErrorVis,
-
-    // titleUniquenessErrorVis,
-    // setTitleUniquenessErrorVis,
-
-    // noteErrorVis,
-    // setNoteErrorVis,
-
-    // rssErrorVis,
-    // setRssErrorVis,
-
+    
     regexForTags,
     regexForTitle,
+    regexForLink
   };
 
   return (
