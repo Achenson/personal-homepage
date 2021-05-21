@@ -99,9 +99,10 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
   const { data, status } = useQuery(`${tabID}`, fetchFeed, {
     // staleTime: 2000,
     // cacheTime: 10,
-    onSuccess: () => console.log("data fetched with no problems"),
+    onSuccess: () => {
+      console.log("data fetched with no problems");
+    },
   });
-  console.log(data);
 
   async function fetchFeed() {
     // let currentTab = tabsData.filter((obj) => obj.id === tabID);
@@ -113,10 +114,23 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
   function mapData() {
     let arrOfObj = [];
 
-    for (let i = 0 + pageNumber * 10; i < itemsPerPage + pageNumber * 10; i++) {
+    let howManyNews = data.items.length;
+
+    // #1(2nd page) 7perPage      1*7                   <7 + 7           [7-13]
+    for (
+      let i = pageNumber * itemsPerPage;
+      i < pageNumber * itemsPerPage + itemsPerPage;
+      i++
+    ) {
+      if (i > howManyNews) {
+        break;
+      }
+
       if (data.items[i]) {
         arrOfObj.push(data.items[i]);
+        continue;
       }
+      break;
     }
 
     function convertRssDate(pubDate: string) {
@@ -198,6 +212,21 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
     ));
   }
 
+ function lastPageNumber() {
+   if (status !== "success") {
+     return 1
+   }
+
+   let howManyNews = data.items.length;
+
+   let maxNumber = howManyNews < 50 ? howManyNews : 50;
+
+   return Math.ceil(maxNumber/itemsPerPage);
+
+
+
+  }
+
   return (
     <div className={``}>
       <div
@@ -220,12 +249,12 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
         />
         <ArrowRight
           className={`h-8 ${
-            pageNumber === 4
+            pageNumber === lastPageNumber()
               ? `text-gray-400`
               : `cursor-pointer text-black hover:bg-gray-200`
           }`}
           onClick={() => {
-            if (pageNumber < 4) {
+            if (pageNumber < lastPageNumber()) {
               setPageNumber(pageNumber + 1);
             }
           }}
