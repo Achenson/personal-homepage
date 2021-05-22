@@ -212,19 +212,33 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
     ));
   }
 
- function lastPageNumber() {
-   if (status !== "success") {
-     return 1
-   }
+  function lastPageNumber() {
+    if (status !== "success") {
+      return 1;
+    }
 
-   let howManyNews = data.items.length;
+    let howManyNews = data.items.length;
 
-   let maxNumber = howManyNews < 50 ? howManyNews : 50;
-
-   return Math.ceil(maxNumber/itemsPerPage);
+    let maxNumber = howManyNews < 50 ? howManyNews : 50;
 
 
 
+    // console.log("how many news");
+    // console.log(howManyNews);
+
+    // console.log("maxNumber");
+    // console.log(maxNumber);
+
+
+    // console.log("items per page");
+    // console.log(itemsPerPage);
+    
+    
+    // rounded up
+    console.log(Math.ceil(maxNumber / itemsPerPage)-1);
+    
+
+    return Math.ceil(maxNumber / itemsPerPage)-1;
   }
 
   return (
