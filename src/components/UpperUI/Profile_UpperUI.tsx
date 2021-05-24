@@ -68,12 +68,16 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
           }}
         >
           <div className="absolute right-0 top-0 mt-1 mr-1">
-            <CancelSVG
-              className="h-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"
+            <button
+              className="h-5 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
               onClick={() => {
                 upperVisDispatch({ type: "PROFILE_TOGGLE" });
               }}
-            />
+            >
+              <CancelSVG className="h-5 w-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900
+              
+              " />
+            </button>
           </div>
 
           <div className="">
@@ -90,7 +94,7 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                       "text-" +
                       finalColorForImgBackgroundMode
                     : "hover:text-opacity-50 cursor-pointer text-gray-400"
-                } text-lg  focus:outline-none focus:ring-1 focus:ring-blueGray-300`}
+                } text-lg  focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100`}
               >
                 <span>Login</span>
               </button>
@@ -103,7 +107,7 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                       " " +
                       "text-" +
                       finalColorForImgBackgroundMode
-                } text-lg focus:outline-none focus:ring-1 focus:ring-blueGray-300`}
+                } text-lg focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100`}
                 onClick={() => {
                   setLoginOrRegister("register");
                 }}
