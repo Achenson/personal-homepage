@@ -35,10 +35,6 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
   // const [descriptionVis, setDescriptionVis] = useState(calcDescriptionVis());
   // const [dateVis, setDateVis] = useState(calcDateVis());
 
-
-
-
-
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function calcItemsPerPage() {
@@ -96,13 +92,9 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
   //   }
   // }, [tabsData, tabID, dateVis, descriptionVis, itemsPerPage]);
 
-
-
   let itemsPerPage = calcItemsPerPage();
   let descriptionVis = calcDescriptionVis();
   let dateVis = calcDateVis();
-
-  
 
   const [pageNumber, setPageNumber] = useState(0);
 
@@ -116,15 +108,27 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
 
   async function fetchFeed() {
     // let currentTab = tabsData.filter((obj) => obj.id === tabID);
-    const response = await parser.parseURL(currentTab.rssLink);
 
-    return response;
+    let extendedRSSurl = `${currentTab.rssLink}?format=xml`;
+    // let response = await parser.parseURL(currentTab.rssLink);
+    try {
+      // let newResponse = await parser.parseURL(extendedRSSurl)
+      let response = await parser.parseURL(currentTab.rssLink);
+      return response;
+    } catch (err) {
+      // console.log(err)
+
+      let newResponse = await parser.parseURL(extendedRSSurl);
+      return newResponse;
+    }
   }
 
   function mapData() {
     let arrOfObj = [];
 
     let howManyNews = data.items.length;
+
+    // console.log(data);
 
     // #1(2nd page) 7perPage      1*7                   <7 + 7           [7-13]
     for (
@@ -241,7 +245,7 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
     // console.log(itemsPerPage);
 
     // rounded up
-    console.log(Math.ceil(maxNumber / itemsPerPage) - 1);
+    // console.log(Math.ceil(maxNumber / itemsPerPage) - 1);
 
     return Math.ceil(maxNumber / itemsPerPage) - 1;
   }

@@ -363,6 +363,8 @@ DONE 284. EditTab: rss & note (&folder)-> make new components! DONE
 DONE 285. rss globalSetting styling DONE
 DONE 286. change many find() by tabID to passing props - eg. in RSS components, editTab, noteInput DONE
 DONE 287. rss error handling: catch error for data and description (cnn rss description crashes the app) DONE
+DONE 288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
+  (try catch logic added)  DONE
 XXX 289. making dragging color more contrastive on certaing backgrounds (grays)/ test on diff img backgrounds XXX
 XXX 290. SingleBookmark don't look good on lightest columns XXX
 DONE 293. upperVisDispatch -> color selectable should be gone when closing all DONE logic moved to upperReducer
@@ -479,7 +481,7 @@ DONE 403. globalSettings -> XXcloseAllTabsXX change rss settings immediately if 
 
 278. background img zooming back after clicking any settings
 
-288. rss: make logic to add ?format=xml at the end if link is not working (worked for sciam)
+
 
 304. react query devtools not working
 
@@ -515,6 +517,7 @@ DONE 403. globalSettings -> XXcloseAllTabsXX change rss settings immediately if 
 405. less ugly editTab edit new bookmark color?,
 406. RSS edit -> "RESET settings to default"?
 407. globalSettings -> cols number too easy to change?
+408. all tabs - wider letter spacing?
 
 
 

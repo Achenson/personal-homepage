@@ -101,8 +101,9 @@ export const tabsDataState = newRidgeState<SingleTabData[]>([
     description: null,
     itemsPerPage: null,
     items: [],
-    // rssLink: "http://rss.sciam.com/basic-science",
-    rssLink: "http://rss.sciam.com/basic-science?format=xml",
+    // !!! RSS_reactQuery should run the second URL in case of error
+    rssLink: "http://rss.sciam.com/basic-science",
+    // rssLink: "http://rss.sciam.com/basic-science?format=xml",
   },
   {
     id: "7",
