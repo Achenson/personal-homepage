@@ -518,7 +518,9 @@ DONE 408. all tabs - wider letter spacing? DONE
 
 404. custom focus rings
 407. globalSettings -> cols number too easy to change?
-
+408. fix error: npx browserslist@latest --update-db
+409. vulnerabilities
+410. auto-focus on lower UI also
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

@@ -551,7 +551,7 @@ Props): JSX.Element {
             </button>
           ) : (
             <button
-              className="h-6 w-6"
+              className="h-6 w-6 btn-focus"
               onClick={() => {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
@@ -567,7 +567,7 @@ Props): JSX.Element {
           <p>Delete</p>
 
           <button
-            className="h-6 w-6"
+            className="h-6 w-6 btn-focus"
             onClick={() => {
               if (!currentTab.deletable) {
                 // setNoDeletionErrorVis(true);
@@ -614,7 +614,7 @@ Props): JSX.Element {
 
       <div className="w-full flex justify-center mt-2">
         <button
-          className="h-5 w-5 mr-6"
+          className="h-5 w-5 mr-6 btn-focus"
           onClick={(e) => {
             e.preventDefault();
 
@@ -631,7 +631,7 @@ Props): JSX.Element {
         </button>
 
         <button
-          className="h-5 w-5"
+          className="h-5 w-5 btn-focus"
           onClick={(e) => {
             e.preventDefault();
             // setEditTabVis((b) => !b);

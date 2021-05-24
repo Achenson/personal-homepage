@@ -650,7 +650,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
         {/* !!! pl-4 in NewLink */}
         <div className="w-full flex justify-center mt-4">
           <button
-            className="h-5 w-5 mr-6"
+            className="h-5 w-5 mr-6 btn-focus"
             onClick={(e) => {
               e.preventDefault();
 
@@ -661,7 +661,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           </button>
 
           <button
-            className="h-5 w-5"
+            className="h-5 w-5 btn-focus"
             onClick={(e) => {
               e.preventDefault();
               // setNewTabVis((b) => !b);

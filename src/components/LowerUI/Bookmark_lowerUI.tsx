@@ -606,7 +606,7 @@ function Bookmark_lowerUI({
         {/* SaveSVG is cut without the <p> - bug? */}
         <div className="mt-5 w-full flex justify-center">
           <button
-            className="h-5 w-5 mr-6"
+            className="h-5 w-5 mr-6 btn-focus"
             onClick={(e) => {
               e.preventDefault();
               saveFunc();
@@ -622,7 +622,7 @@ function Bookmark_lowerUI({
           </button>
 
           <button
-            className="h-5 w-5"
+            className="h-5 w-5 btn-focus"
             onClick={(e) => {
               e.preventDefault();
               // setBookmarkVis((b) => !b);
