@@ -474,6 +474,7 @@ DONE 401. check rss pagination && chevrons (1 page too far) DONE
 DONE 403. globalSettings -> XXcloseAllTabsXX change rss settings immediately if description or date is changed (
   no useState or useEffect in RSS_reactQuery, regular vars insteat
 )DONE
+DONE 408. all tabs - wider letter spacing? DONE
 
 
 1. purgecss at the end of project?
@@ -517,7 +518,6 @@ DONE 403. globalSettings -> XXcloseAllTabsXX change rss settings immediately if 
 405. less ugly editTab edit new bookmark color?,
 406. RSS edit -> "RESET settings to default"?
 407. globalSettings -> cols number too easy to change?
-408. all tabs - wider letter spacing?
 
 
 

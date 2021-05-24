@@ -516,7 +516,7 @@ Props): JSX.Element {
             upperVisDispatch({ type: "CLOSE_ALL" });
           }}
         >
-          <p className={`truncate ${tabID === "ALL_TAGS" ? "font-mono mt-px" : ""} `}>
+          <p className={`truncate ${tabID === "ALL_TAGS" ? "tracking-wider" : ""} `}>
             {tabID === "ALL_TAGS" ? "" : ""}
             {tabTitle}
             {tabID === "ALL_TAGS" ? "" : ""}
