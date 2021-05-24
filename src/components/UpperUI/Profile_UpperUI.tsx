@@ -90,7 +90,7 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                       "text-" +
                       finalColorForImgBackgroundMode
                     : "hover:text-opacity-50 cursor-pointer text-gray-400"
-                } text-lg`}
+                } text-lg  focus:outline-none focus:ring-1 focus:ring-blueGray-300`}
               >
                 <span>Login</span>
               </button>
@@ -103,7 +103,7 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                       " " +
                       "text-" +
                       finalColorForImgBackgroundMode
-                } text-lg`}
+                } text-lg focus:outline-none focus:ring-1 focus:ring-blueGray-300`}
                 onClick={() => {
                   setLoginOrRegister("register");
                 }}
@@ -154,7 +154,8 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             <div className="flex justify-center">
               {loginOrRegister === "login" ? (
                 <button
-                  className={`w-24 border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150`}
+                  className={`w-24 border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150
+                  focus:outline-none focus:ring-1 focus:ring-${uiColorData}`}
                   onClick={() => {
                     if (loggedInData === false) {
                       setLoggedInData(true);
@@ -168,7 +169,9 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 </button>
               ) : (
                 <button
-                  className={`w-24 border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150`}
+                  className={`w-24 border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150
+                  focus:outline-none focus:ring-1 focus:ring-${uiColorData}
+                  `}
                 >
                   Register
                 </button>
