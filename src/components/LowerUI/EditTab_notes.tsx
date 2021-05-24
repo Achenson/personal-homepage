@@ -12,7 +12,7 @@ function EditTab_notes({textAreaValue, setTextAreaValue, setWasAnythingClicked}:
       <div className="mt-2">
       <textarea
         value={textAreaValue as string}
-        className="h-full w-full overflow-visible pl-px pr-px border font-mono resize-none"
+        className="h-full w-full overflow-visible pl-px pr-px border font-mono resize-none input-focus"
         // rows={(currentTab[0].noteInput as string).length / 30}
         rows={4}
         onChange={(e) => {

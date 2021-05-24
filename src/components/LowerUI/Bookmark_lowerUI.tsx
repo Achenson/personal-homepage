@@ -463,7 +463,7 @@ function Bookmark_lowerUI({
 
           <input
             type="text"
-            className="w-full border pl-px"
+            className="w-full border pl-px input-focus"
             value={titleInput}
             placeholder={"new bookmark title"}
             onChange={(e) => {
@@ -482,7 +482,7 @@ function Bookmark_lowerUI({
 
           <input
             type="text"
-            className="w-full border pl-px"
+            className="w-full border pl-px input-focus"
             value={urlInput}
             placeholder={"enter proper URL address"}
             onChange={(e) => {
@@ -502,7 +502,7 @@ function Bookmark_lowerUI({
             <div className="relative">
               <input
                 type="text"
-                className="w-full border pl-px pr-5"
+                className="w-full border pl-px pr-5 input-focus"
                 // @ts-ignore
                 ref={selectablesRef}
                 // value={tagsInput.join(", ")}

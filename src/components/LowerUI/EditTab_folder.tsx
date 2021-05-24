@@ -147,7 +147,7 @@ function EditTab_folder({
           <input
             type="text"
             // min-w-0 !! ??
-            className="border pl-px w-full pr-5"
+            className="border pl-px w-full pr-5 input-focus"
             //@ts-ignore
             ref={selectablesRef}
             value={selectablesInputStr}

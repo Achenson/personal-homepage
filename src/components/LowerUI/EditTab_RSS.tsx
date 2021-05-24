@@ -58,7 +58,7 @@ function EditTab_RSS({
         <input
           type="text"
           // min-w-0 !!
-          className="border w-full max-w-6xl pl-px"
+          className="border w-full max-w-6xl pl-px input-focus"
           value={rssLinkInput}
           onChange={(e) => {
             setRssLinkInput(e.target.value);
@@ -110,7 +110,7 @@ function EditTab_RSS({
           min="5"
           max="15"
           // className="w-full border border-gray-500"
-          className="border w-8 text-center border-gray-300"
+          className="border w-8 text-center border-gray-300 input-focus"
           value={rssItemsPerPage}
           onChange={(e) => {
             setRssItemsPerPage(parseInt(e.target.value));

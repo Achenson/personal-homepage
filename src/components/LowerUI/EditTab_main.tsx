@@ -433,7 +433,7 @@ Props): JSX.Element {
           <input
             type="text"
             // min-w-0 !!
-            className="border w-full max-w-6xl pl-px"
+            className="border w-full max-w-6xl pl-px input-focus"
             value={tabTitleInput}
             onChange={(e) => {
               setTabTitleInput(e.target.value);
