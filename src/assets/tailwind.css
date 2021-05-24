@@ -2,3 +2,9 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@layer base {
+  .input-focus {
+    @apply focus:outline-none focus:ring-1 focus:ring-blueGray-300
+  }
+}
+

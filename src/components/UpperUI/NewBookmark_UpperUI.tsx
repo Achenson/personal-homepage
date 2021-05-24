@@ -347,7 +347,7 @@ Props): JSX.Element {
           <input
             type="text"
             ref={firstFieldRef}
-            className="w-full border pl-px"
+            className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
             value={titleInput}
             placeholder={"new bookmark title"}
             onChange={(e) => setTitleInput(e.target.value)}
@@ -363,7 +363,7 @@ Props): JSX.Element {
 
           <input
             type="text"
-            className="w-full border pl-px"
+            className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
             value={urlInput}
             placeholder={"enter proper URL address"}
             onChange={(e) => setUrlInput(e.target.value)}
@@ -382,7 +382,7 @@ Props): JSX.Element {
             <div className="relative">
               <input
                 type="text"
-                className="w-full border pl-px pr-5"
+                className="w-full border pl-px pr-5 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
                 // @ts-ignore
                 ref={selectablesRef}
                 // value={tagsInput.join(", ")}
@@ -488,7 +488,7 @@ Props): JSX.Element {
 
         <div className="w-full flex justify-center mt-5">
           <button
-            className="h-5 w-5 mr-6"
+            className="h-5 w-5 mr-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-offset-1"
             onClick={(e) => {
               e.preventDefault();
 
@@ -499,7 +499,7 @@ Props): JSX.Element {
           </button>
 
           <button
-            className="h-5 w-5"
+            className="h-5 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-300  ring-offset-1"
             onClick={(e) => {
               e.preventDefault();
               // setBookmarkVis((b) => !b);

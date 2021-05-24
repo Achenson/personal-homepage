@@ -472,7 +472,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           <input
             ref={firstFieldRef}
             type="text"
-            className="w-full border pl-px"
+            className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
             value={tabTitleInput}
             placeholder={
               tabType === "folder"
@@ -507,7 +507,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               <div className="relative">
                 <input
                   type="text"
-                  className="w-full border pl-px pr-5"
+                  className="w-full border pl-px pr-5 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
                   // value={tabLinksInput.join(", ")}
                   value={selectablesInputStr}
                   //@ts-ignore
@@ -578,7 +578,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             <div className="w-full">
               <input
                 type="text"
-                className="w-full border pl-px"
+                className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
                 value={rssLinkInput}
                 placeholder="enter RSS link"
                 onChange={(e) => setRssLinkInput(e.target.value)}
@@ -610,7 +610,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           <div>
             <textarea
               value={textAreaValue as string}
-              className="h-full w-full overflow-visible pl-1 pr-1 border font-mono"
+              className="h-full w-full overflow-visible pl-1 pr-1 border font-mono focus:outline-none focus:ring-1 focus:ring-blueGray-300"
               rows={10}
               onChange={(e) => {
                 setTextAreaValue(e.target.value);
