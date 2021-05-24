@@ -32,12 +32,16 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
 
   const [itemsPerPage, setItemsPerPage] = useState(() => calcItemsPerPage());
 
+  
+
   const [descriptionVis, setDescriptionVis] = useState(() =>
     calcDescriptionVis()
   );
   const [dateVis, setDateVis] = useState(() => calcDateVis());
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+
 
   function calcItemsPerPage() {
     // if currentBookmars itemsPerPage is set, return it, otherwise
@@ -51,7 +55,7 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
   }
 
   function calcDescriptionVis() {
-    if (typeof currentTab.itemsPerPage === "boolean") {
+    if (typeof currentTab.description === "boolean") {
       return currentTab.description;
     }
 
@@ -59,7 +63,7 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
   }
 
   function calcDateVis() {
-    if (typeof currentTab.itemsPerPage === "boolean") {
+    if (typeof currentTab.date === "boolean") {
       return currentTab.date;
     }
 
