@@ -30,18 +30,16 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
   // let currentTab = tabsData.filter((obj) => obj.id === tabID);
 
-  const [itemsPerPage, setItemsPerPage] = useState(() => calcItemsPerPage());
+  // const [itemsPerPage, setItemsPerPage] = useState(calcItemsPerPage());
 
-  
+  // const [descriptionVis, setDescriptionVis] = useState(calcDescriptionVis());
+  // const [dateVis, setDateVis] = useState(calcDateVis());
 
-  const [descriptionVis, setDescriptionVis] = useState(() =>
-    calcDescriptionVis()
-  );
-  const [dateVis, setDateVis] = useState(() => calcDateVis());
+
+
+
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-
-
 
   function calcItemsPerPage() {
     // if currentBookmars itemsPerPage is set, return it, otherwise
@@ -70,33 +68,41 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
     return rssSettingsData.date;
   }
 
-  useEffect(() => {
-    let tabToUpdate = tabsData.find((obj) => obj.id === tabID);
-    if (tabToUpdate) {
-      let tabIndex = tabsData.indexOf(tabToUpdate as SingleTabData);
+  // useEffect(() => {
+  //   let tabToUpdate = tabsData.find((obj) => obj.id === tabID);
+  //   if (tabToUpdate) {
+  //     let tabIndex = tabsData.indexOf(tabToUpdate as SingleTabData);
 
-      if (
-        tabsData[tabIndex].itemsPerPage !== itemsPerPage &&
-        typeof tabsData[tabIndex].itemsPerPage === "number"
-      ) {
-        setItemsPerPage(tabsData[tabIndex].itemsPerPage as number);
-      }
+  //     if (
+  //       tabsData[tabIndex].itemsPerPage !== itemsPerPage &&
+  //       typeof tabsData[tabIndex].itemsPerPage === "number"
+  //     ) {
+  //       setItemsPerPage(tabsData[tabIndex].itemsPerPage as number);
+  //     }
 
-      if (
-        tabsData[tabIndex].description !== descriptionVis &&
-        typeof tabsData[tabIndex].description === "boolean"
-      ) {
-        setDescriptionVis(tabsData[tabIndex].description as boolean);
-      }
+  //     if (
+  //       tabsData[tabIndex].description !== descriptionVis &&
+  //       typeof tabsData[tabIndex].description === "boolean"
+  //     ) {
+  //       setDescriptionVis(tabsData[tabIndex].description as boolean);
+  //     }
 
-      if (
-        tabsData[tabIndex].date !== dateVis &&
-        typeof tabsData[tabIndex].date === "boolean"
-      ) {
-        setDateVis(tabsData[tabIndex].date as boolean);
-      }
-    }
-  }, [tabsData, tabID, dateVis, descriptionVis, itemsPerPage]);
+  //     if (
+  //       tabsData[tabIndex].date !== dateVis &&
+  //       typeof tabsData[tabIndex].date === "boolean"
+  //     ) {
+  //       setDateVis(tabsData[tabIndex].date as boolean);
+  //     }
+  //   }
+  // }, [tabsData, tabID, dateVis, descriptionVis, itemsPerPage]);
+
+
+
+  let itemsPerPage = calcItemsPerPage();
+  let descriptionVis = calcDescriptionVis();
+  let dateVis = calcDateVis();
+
+  
 
   const [pageNumber, setPageNumber] = useState(0);
 
@@ -225,24 +231,19 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
 
     let maxNumber = howManyNews < 50 ? howManyNews : 50;
 
-
-
     // console.log("how many news");
     // console.log(howManyNews);
 
     // console.log("maxNumber");
     // console.log(maxNumber);
 
-
     // console.log("items per page");
     // console.log(itemsPerPage);
-    
-    
-    // rounded up
-    console.log(Math.ceil(maxNumber / itemsPerPage)-1);
-    
 
-    return Math.ceil(maxNumber / itemsPerPage)-1;
+    // rounded up
+    console.log(Math.ceil(maxNumber / itemsPerPage) - 1);
+
+    return Math.ceil(maxNumber / itemsPerPage) - 1;
   }
 
   return (

@@ -469,6 +469,9 @@ DONE 396. gray-100 on Upper UI bg? DONE
 DONE 397. focus on title on upperUI components mount DONE
 DONE 399. make links working!! DONE (direct link has to be copied - hint in an error) DONE
 DONE 401. check rss pagination && chevrons (1 page too far) DONE
+DONE 403. globalSettings -> XXcloseAllTabsXX change rss settings immediately if description or date is changed (
+  no useState or useEffect in RSS_reactQuery, regular vars insteat
+)DONE
 
 
 1. purgecss at the end of project?
@@ -507,7 +510,13 @@ DONE 401. check rss pagination && chevrons (1 page too far) DONE
 
 400. error - text-center?
 402. chrome Tab titles too high?
-403. globalSettings -> closeAllTabs if description or date is changed
+
+404. custom focus rings
+405. less ugly editTab edit new bookmark color?,
+406. RSS edit -> "RESET settings to default"?
+407. globalSettings -> cols number too easy to change?
+
+
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
