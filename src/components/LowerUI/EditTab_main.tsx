@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { useState } from "react";
 
@@ -67,6 +67,14 @@ Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
+
+  let firstFieldRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (firstFieldRef.current !== null) {
+      firstFieldRef.current.focus();
+    }
+  }, []);
 
   // let currentTab = tabsData.find((obj) => obj.id === tabID);
   let tabTitle = currentTab.title;
@@ -432,6 +440,7 @@ Props): JSX.Element {
           </p>
           <input
             type="text"
+            ref={firstFieldRef}
             // min-w-0 !!
             className="border w-full max-w-6xl pl-px input-focus"
             value={tabTitleInput}

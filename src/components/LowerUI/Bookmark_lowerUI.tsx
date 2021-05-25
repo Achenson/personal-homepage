@@ -121,6 +121,14 @@ function Bookmark_lowerUI({
 
   let selectablesRef = useRef();
 
+  let firstFieldRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (firstFieldRef.current !== null) {
+      firstFieldRef.current.focus();
+    }
+  }, []);
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
 
@@ -463,6 +471,7 @@ function Bookmark_lowerUI({
 
           <input
             type="text"
+            ref={firstFieldRef}
             className="w-full border pl-px input-focus"
             value={titleInput}
             placeholder={"new bookmark title"}
