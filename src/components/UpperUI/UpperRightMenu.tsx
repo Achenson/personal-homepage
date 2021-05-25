@@ -56,7 +56,7 @@ function UpperRightMenu({
         {/* <AddLinkSVG */}
 
         <button
-          className="h-7 w-7"
+          className="h-7 w-7 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-inset"
           onClick={() => {
             // setNewBookmarkVis((b) => !b);
             upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
@@ -70,7 +70,7 @@ function UpperRightMenu({
         {/* <AddFolderSVG */}
 
         <button
-          className="h-7 w-7"
+          className="h-7 w-7 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-inset"
           onClick={() => {
             // setNewTabVis((b) => !b);
             upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
@@ -85,7 +85,7 @@ function UpperRightMenu({
         {/* <AddNote */}
 
         <button
-          className="h-6 w-6"
+          className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300"
           style={{ marginTop: "2px" }}
           onClick={() => {
             // setNewTabVis((b) => !b);
@@ -99,7 +99,7 @@ function UpperRightMenu({
           />
         </button>
         <button
-          className="h-7 w-7"
+          className="h-7 w-7 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-inset"
           onClick={() => {
             // setNewTabVis((b) => !b);
             upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
@@ -126,7 +126,7 @@ function UpperRightMenu({
 
       <div className="hidden xs:flex w-24 justify-around items-center mr-0.5">
         <PhotographSVG
-          className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+          className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} `}
           onClick={() => {
             // setBackgroundSettingsVis((b) => !b);
 
@@ -152,7 +152,7 @@ function UpperRightMenu({
         <div style={{ width: "24px", height: "24px" }}>
           {loggedInData ? (
             <button
-              className="h-6 w-6"
+              className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-inset"
               onClick={() => {
                 // upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 setLoggedInData(false);
@@ -165,7 +165,7 @@ function UpperRightMenu({
             </button>
           ) : (
             <button
-              className="h-6 w-6"
+              className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-inset"
               onClick={() => {
                 upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 // setLoggedInData(true);
