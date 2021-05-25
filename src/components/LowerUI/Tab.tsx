@@ -517,7 +517,12 @@ Props): JSX.Element {
           }}
         >
           {tabID === "ALL_TAGS" ? (
-            <button className="focus:outline-none focus:ring-2 focus:ring-blueGray-200 focus-inset mt-0.5">
+            <button
+              className={`focus:outline-none focus:ring-1 focus:ring-${textOrIconColor(
+                finalTabColor,
+                "text"
+              ).slice(5)} focus:ring-opacity-40 focus-inset mt-0.5`}
+            >
               <p className={`truncate tracking-wider`}>{tabTitle}</p>
             </button>
           ) : (
