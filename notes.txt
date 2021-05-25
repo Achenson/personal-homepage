@@ -474,6 +474,7 @@ DONE 401. check rss pagination && chevrons (1 page too far) DONE
 DONE 403. globalSettings -> XXcloseAllTabsXX change rss settings immediately if description or date is changed (
   no useState or useEffect in RSS_reactQuery, regular vars insteat
 )DONE
+DONE 404. custom focus rings DONE
 XXX 405. less ugly editTab edit new bookmark color?, XXX
 XXX 406. RSS edit -> "RESET settings to default"? XXX
 DONE 408. all tabs - wider letter spacing? DONE
@@ -514,9 +515,8 @@ DONE 408. all tabs - wider letter spacing? DONE
 398. ts-ignors -> get rid off, at least for refs
 
 400. error - text-center?
-402. chrome Tab titles too high & Login input not aligned
+402. chrome Tab titles too high & Login input not aligned (make it the same height as ALL_TAGS)
 
-404. custom focus rings
 407. globalSettings -> cols number too easy to change?
 408. fix error: npx browserslist@latest --update-db
 409. vulnerabilities

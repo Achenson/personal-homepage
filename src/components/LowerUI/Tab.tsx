@@ -510,17 +510,19 @@ Props): JSX.Element {
         }}
       >
         <div
-          className="pl-1 w-full truncate cursor-pointer"
+          className="pl-1 w-full h-7 truncate cursor-pointer"
           onClick={() => {
             visDispatch({ type: "TAB_CONTENT_TOGGLE" });
             upperVisDispatch({ type: "CLOSE_ALL" });
           }}
         >
-          <p className={`truncate ${tabID === "ALL_TAGS" ? "tracking-wider" : ""} `}>
-            {tabID === "ALL_TAGS" ? "" : ""}
-            {tabTitle}
-            {tabID === "ALL_TAGS" ? "" : ""}
-          </p>
+          {tabID === "ALL_TAGS" ? (
+            <button className="focus:outline-none focus:ring-2 focus:ring-blueGray-200 focus-inset mt-0.5">
+              <p className={`truncate tracking-wider`}>{tabTitle}</p>
+            </button>
+          ) : (
+            <p className={`truncate `}>{tabTitle}</p>
+          )}
         </div>
 
         <div
