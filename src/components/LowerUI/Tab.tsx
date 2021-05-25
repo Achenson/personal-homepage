@@ -482,7 +482,7 @@ Props): JSX.Element {
     >
       <div
         ref={drag}
-        className={`pl-0 h-8 pr-1 pt-px bg-${
+        className={`pl-0 h-8 pr-1 pt-0.5 bg-${
           // tabColor ? tabColor : finalTabColor
           finalTabColor
         } ${textOrIconColor(
@@ -518,15 +518,15 @@ Props): JSX.Element {
         >
           {tabID === "ALL_TAGS" ? (
             <button
-              className={`focus:outline-none focus:ring-1 focus:ring-${textOrIconColor(
+              className={`flex focus:outline-none focus:ring-1 focus:ring-${textOrIconColor(
                 finalTabColor,
                 "text"
-              ).slice(5)} focus:ring-opacity-40 focus-inset mt-0.5`}
+              ).slice(5)} focus:ring-opacity-40 focus-inset`}
             >
-              <p className={`truncate tracking-wider`}>{tabTitle}</p>
+              <p className={`truncate tracking-wider self-center`}>{tabTitle}</p>
             </button>
           ) : (
-            <p className={`truncate `}>{tabTitle}</p>
+            <p className={`truncate`}>{tabTitle}</p>
           )}
         </div>
 
