@@ -54,9 +54,10 @@ function SingleBookmark({
 
   return (
     <div
-      className={`flex justify-between bg-gray-50 h-10 py-2 border border-t-0 ${
+      className={`flex justify-between bg-gray-50 h-10 pt-2 border border-t-0 ${
         globalSettingsData.picBackground ? "" : "border-black border-opacity-10"
       }`}
+      // style={{height: "40px", paddingTop : "8px"}}
     >
       <div className="flex truncate">
         <div className="h-6 mr-px">
@@ -67,7 +68,7 @@ function SingleBookmark({
             href={singleBookmarkData.URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-gray-600 transition-colors duration-75"
+            className="z-50 hover:text-gray-600 transition-colors duration-75 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-inset py-0.5 px-0.5"
           >
             {singleBookmarkData.title}
           </a>
