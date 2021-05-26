@@ -426,7 +426,7 @@ Props): JSX.Element {
 
   return ReactDOM.createPortal(
     <div
-      className={`absolute z-40 bg-warmGray-100 pb-2 border pl-1 pr-1 shadow-inner`}
+      className={`absolute z-40 bg-warmGray-100 pb-2 border border-warmGray-300 pl-1 pr-1 shadow-inner`}
       style={{
         top: `${top + 32 + document.documentElement.scrollTop}px`,
         left: `${left}px`,

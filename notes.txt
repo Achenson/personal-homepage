@@ -482,6 +482,7 @@ XXX 406. RSS edit -> "RESET settings to default"? XXX
 XXX 407. globalSettings -> cols number too easy to change? XXX
 DONE 408. all tabs - wider letter spacing? DONE
 DONE 410. auto-focus on lower UI also DONE
+DONE 411. new&edit lower UI with longer TAB contetn -> implement contrast to the content? (darker border added) DONE
 
 
 1. purgecss at the end of project?
@@ -515,7 +516,6 @@ DONE 410. auto-focus on lower UI also DONE
 
 408. fix error: npx browserslist@latest --update-db
 409. vulnerabilities
-410. new&edit lower UI with longer TAB contetn -> implement contrast to the content?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
