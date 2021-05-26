@@ -22,7 +22,7 @@ function Profile_input(
     <input
       ref={passedRef}
       type="text"
-      className="pl-px border border-gray-200 h-7 hover:border-gray-300 transition-colors duration-150
+      className="w-full pl-px border border-gray-200 h-7 hover:border-gray-300 transition-colors duration-150
        input-focus"
       style={{
         // borderTopColor: `${inputHover ? "#D1D5DB" : "#9CA3AF"}`,

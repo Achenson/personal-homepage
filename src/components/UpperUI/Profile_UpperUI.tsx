@@ -119,19 +119,19 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
             <div className="mt-3 mb-5 flex flex-col items-center">
               {loginOrRegister === "login" ? (
-                <div className="">
+                <div className="w-48">
                   <p>Email address / username</p>
 
                   <Profile_input ref={firstFieldRef} />
                 </div>
               ) : (
                 <>
-                  <div className="">
+                  <div className="w-48">
                     <p>Username</p>
                     <Profile_input />
                   </div>
 
-                  <div className="mt-1">
+                  <div className="mt-1 w-48">
                     <p>Email address</p>
                     <Profile_input />
                   </div>
@@ -141,13 +141,13 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               <div
                 className={`${loginOrRegister === "register" ? "mt-3" : ""}`}
               >
-                <div className="mt-1">
+                <div className="mt-1 w-48">
                   <p>Password</p>
                   <Profile_input />
                 </div>
 
                 {loginOrRegister === "register" && (
-                  <div className="mt-1">
+                  <div className="mt-1 w-48">
                     <p>Confirm password</p>
                     <Profile_input />
                   </div>
