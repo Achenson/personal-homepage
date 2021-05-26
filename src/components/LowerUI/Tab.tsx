@@ -489,7 +489,7 @@ Props): JSX.Element {
           finalTabColor,
           "text"
         )} border border-t-0 border-r-0 border-l-0 border-gray-700 border-opacity-25 flex justify-between`}
-        style={{ boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)" }}
+        style={{ boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)", paddingTop: "3px" }}
         onTouchStart={() => {
           setTimeout(() => {
             visDispatch({ type: "TOUCH_SCREEN_MODE_ON" });
@@ -518,10 +518,11 @@ Props): JSX.Element {
         >
           {tabID === "ALL_TAGS" ? (
             <button
-              className={`flex focus:outline-none focus:ring-1 focus:ring-${textOrIconColor(
+              className={`mt-px flex focus:outline-none focus:ring-1 focus:ring-${textOrIconColor(
                 finalTabColor,
                 "text"
               ).slice(5)} focus:ring-opacity-40 focus-inset`}
+              style={{height:"22px"}}
             >
               <p className={`truncate tracking-wider self-center`}>{tabTitle}</p>
             </button>
