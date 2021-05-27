@@ -14,6 +14,7 @@ import {
   TabVisAction,
   UpperVisAction,
 } from "../../utils/interfaces";
+import Bookmark_newAndEdit from "../Shared/Bookmark_newAndEdit";
 
 // interface SingleLinkData {
 //   id: number | string;
@@ -25,10 +26,11 @@ import {
 interface Props {
   // setEditBookmarkVis: React.Dispatch<React.SetStateAction<boolean>>;
   singleBookmarkData: SingleBookmarkData;
-
+  bookmarkId: string | number;
   setBookmarkId: React.Dispatch<
     React.SetStateAction<string | number | undefined>
   >;
+  colNumber: number;
   tabID: string | number;
   visDispatch: React.Dispatch<TabVisAction>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
@@ -39,7 +41,9 @@ function SingleBookmark({
   // setEditBookmarkVis,
   singleBookmarkData,
   // setEditSingleLinkData,
+  bookmarkId,
   setBookmarkId,
+  colNumber,
   visDispatch,
   upperVisDispatch,
   tabID,
@@ -53,7 +57,9 @@ function SingleBookmark({
   // let linkURL = new URL(singleBookmarkData.URL)
 
   return (
-    <div
+    
+    <div>
+       <div
       className={`flex justify-between bg-gray-50 h-10 pt-2 border border-t-0 ${
         globalSettingsData.picBackground ? "" : "border-black border-opacity-10"
       }`}
@@ -83,7 +89,7 @@ function SingleBookmark({
           className="h-5 ml-1 transition-colors duration-75 hover:text-black cursor-pointer"
           onClick={() => {
             // setEditBookmarkVis((b) => !b);
-            visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
+            visDispatch({ type: "EDIT_BOOKMARK_TOOGLE"});
             upperVisDispatch({ type: "CLOSE_ALL" });
             setBookmarkId(singleBookmarkData.id);
           }}
@@ -139,6 +145,18 @@ function SingleBookmark({
         />
       </div>
     </div>
+
+    <Bookmark_newAndEdit
+    bookmarkComponentType="edit"
+    visDispatch={visDispatch}
+    colNumber={colNumber}
+    bookmarkId={bookmarkId as string|number}      
+    />
+
+    </div>
+
+
+   
   );
 }
 

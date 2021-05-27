@@ -516,6 +516,8 @@ DONE 411. new&edit lower UI with longer TAB contetn -> implement contrast to the
 
 408. fix error: npx browserslist@latest --update-db
 409. vulnerabilities
+410. bookmark edits: should be opening, not toggling!
+411. bookmark Edit should be shown instead of bookmark, not on top of the tab?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

@@ -677,6 +677,8 @@ Props): JSX.Element {
                   upperVisDispatch={upperVisDispatch}
                   singleBookmarkData={el}
                   // setEditSingleLinkData={setEditSingleBookmarkData}
+                  bookmarkId={el.id as string | number}
+                  colNumber={colNumber}
                   setBookmarkId={setBookmarkId}
                   key={i}
                   tabID={tabID}
