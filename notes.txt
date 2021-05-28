@@ -526,6 +526,17 @@ Why you should do it regularly:
 https://github.com/browserslist/browserslist#browsers-data-updating
 
 
+> myStr: "name"
+~ myFunc() {
+
+  loop i(7, i<10, i => i++ ) {
+
+    log(i)
+
+  }
+
+}
+
 
 App structure:
 Main

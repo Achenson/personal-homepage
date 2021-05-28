@@ -55,6 +55,7 @@ function SingleBookmark({
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   // let linkURL = new URL(singleBookmarkData.URL)
+  
 
   return (
     
@@ -89,7 +90,7 @@ function SingleBookmark({
           className="h-5 ml-1 transition-colors duration-75 hover:text-black cursor-pointer"
           onClick={() => {
             // setEditBookmarkVis((b) => !b);
-            visDispatch({ type: "EDIT_BOOKMARK_TOOGLE"});
+            visDispatch({ type: "EDIT_BOOKMARK_OPEN", payload: bookmarkId});
             upperVisDispatch({ type: "CLOSE_ALL" });
             setBookmarkId(singleBookmarkData.id);
           }}

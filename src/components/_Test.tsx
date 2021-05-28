@@ -6,6 +6,10 @@ interface Props {
 }
 
 function Test({text, number}: Props): JSX.Element{
+
+
+
+
     return (
         <div>
             testtest{text}{number}

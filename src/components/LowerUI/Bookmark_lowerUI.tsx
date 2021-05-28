@@ -448,7 +448,7 @@ function Bookmark_lowerUI({
 
     // setBookmarkVis((b) => !b);
     if (bookmarkComponentType === "edit") {
-      visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
+      visDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
     }
 
     if (bookmarkComponentType === "new_lowerUI") {
@@ -642,7 +642,7 @@ function Bookmark_lowerUI({
                   // setBookmarkVis((b) => !b);
                   // visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
                   if (bookmarkComponentType === "edit") {
-                    visDispatch({ type: "EDIT_BOOKMARK_TOOGLE" });
+                    visDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
                   }
 
                   if (bookmarkComponentType === "new_lowerUI") {

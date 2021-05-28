@@ -74,7 +74,7 @@ interface VisState {
   colorsVis: boolean;
   // tabContentVis: boolean;
   newBookmarkVis: boolean;
-  editBookmarkVis: boolean;
+  editBookmarkVis: null | string | number;
   touchScreenModeOn: boolean;
 }
 
@@ -148,7 +148,7 @@ Props): JSX.Element {
     colorsVis: false,
     // tabContentVis: currentTab?.opened ?? false,
     newBookmarkVis: false,
-    editBookmarkVis: false,
+    editBookmarkVis: null,
     touchScreenModeOn: false,
   };
 
@@ -167,7 +167,7 @@ Props): JSX.Element {
           ...state,
           editTabVis: false,
           newBookmarkVis: false,
-          editBookmarkVis: false,
+          editBookmarkVis: null,
           colorsVis: !state.colorsVis,
         };
       case "COLORS_CLOSE":
@@ -176,7 +176,7 @@ Props): JSX.Element {
           colorsVis: false,
           editTabVis: false,
           newBookmarkVis: false,
-          editBookmarkVis: false,
+          editBookmarkVis: null,
         };
       case "EDIT_TOGGLE":
         if (!state.editTabVis) {
@@ -187,7 +187,7 @@ Props): JSX.Element {
           ...state,
           colorsVis: false,
           newBookmarkVis: false,
-          editBookmarkVis: false,
+          editBookmarkVis: null,
           editTabVis: !state.editTabVis,
         };
 
@@ -197,7 +197,7 @@ Props): JSX.Element {
           editTabVis: false,
           colorsVis: false,
           newBookmarkVis: false,
-          editBookmarkVis: false,
+          editBookmarkVis: null,
         };
       case "TAB_CONTENT_TOGGLE":
         setTabOpenedData(tabID);
@@ -218,7 +218,7 @@ Props): JSX.Element {
           colorsVis: false,
           editTabVis: false,
           newBookmarkVis: false,
-          editBookmarkVis: false,
+          editBookmarkVis: null,
           // tabContentVis: !state.tabContentVis,
         };
       case "TAB_CONTENT_DEFAULT":
@@ -240,7 +240,7 @@ Props): JSX.Element {
           newBookmarkVis: false,
 
           // tabContentVis: currentTab.opened,
-          editBookmarkVis: false,
+          editBookmarkVis: null,
           touchScreenModeOn: false,
         };
       case "TAB_CONTENT_OPEN_AFTER_LOCKING":
@@ -250,7 +250,7 @@ Props): JSX.Element {
           editTabVis: false,
           newBookmarkVis: false,
           tabContentVis: true,
-          editBookmarkVis: false,
+          editBookmarkVis: null,
         };
 
       // similar to tab_content_close, but tabContentVis is not touched (for useEffect)
@@ -261,7 +261,7 @@ Props): JSX.Element {
           editTabVis: false,
           newBookmarkVis: false,
           // tabContentVis: false,
-          editBookmarkVis: false,
+          editBookmarkVis: null,
           touchScreenModeOn: false,
         };
       case "NEW_BOOKMARK_TOOGLE":
@@ -274,10 +274,10 @@ Props): JSX.Element {
           ...state,
           colorsVis: false,
           editTabVis: false,
-          editBookmarkVis: false,
+          editBookmarkVis: null,
           newBookmarkVis: !state.newBookmarkVis,
         };
-      case "EDIT_BOOKMARK_TOOGLE":
+      case "EDIT_BOOKMARK_OPEN":
         if (!state.editBookmarkVis) {
           // setTabEditOpenedData(tabID);
           setTabOpenedData(tabID);
@@ -288,7 +288,16 @@ Props): JSX.Element {
           colorsVis: false,
           editTabVis: false,
           newBookmarkVis: false,
-          editBookmarkVis: !state.editBookmarkVis,
+          editBookmarkVis: action.payload as string | number,
+        };
+
+      case "EDIT_BOOKMARK_CLOSE":
+        return {
+          ...state,
+          colorsVis: false,
+          editTabVis: false,
+          newBookmarkVis: false,
+          editBookmarkVis: null,
         };
 
       case "TOUCH_SCREEN_MODE_ON":
@@ -489,7 +498,10 @@ Props): JSX.Element {
           finalTabColor,
           "text"
         )} border border-t-0 border-r-0 border-l-0 border-gray-700 border-opacity-25 flex justify-between`}
-        style={{ boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)", paddingTop: "3px" }}
+        style={{
+          boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)",
+          paddingTop: "3px",
+        }}
         onTouchStart={() => {
           setTimeout(() => {
             visDispatch({ type: "TOUCH_SCREEN_MODE_ON" });
@@ -522,9 +534,11 @@ Props): JSX.Element {
                 finalTabColor,
                 "text"
               ).slice(5)} focus:ring-opacity-40 focus-inset`}
-              style={{height:"22px"}}
+              style={{ height: "22px" }}
             >
-              <p className={`truncate tracking-wider self-center`}>{tabTitle}</p>
+              <p className={`truncate tracking-wider self-center`}>
+                {tabTitle}
+              </p>
             </button>
           ) : (
             <p className={`truncate`}>{tabTitle}</p>
