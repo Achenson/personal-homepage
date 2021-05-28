@@ -12,6 +12,7 @@ import { globalSettingsState } from "../../state/defaultSettings";
 import {
   SingleBookmarkData,
   TabVisAction,
+  VisState,
   UpperVisAction,
 } from "../../utils/interfaces";
 import Bookmark_newAndEdit from "../Shared/Bookmark_newAndEdit";
@@ -32,6 +33,7 @@ interface Props {
   >;
   colNumber: number;
   tabID: string | number;
+  visState: VisState;
   visDispatch: React.Dispatch<TabVisAction>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleBookmarkData>>;
@@ -44,6 +46,7 @@ function SingleBookmark({
   bookmarkId,
   setBookmarkId,
   colNumber,
+  visState,
   visDispatch,
   upperVisDispatch,
   tabID,
@@ -55,109 +58,115 @@ function SingleBookmark({
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   // let linkURL = new URL(singleBookmarkData.URL)
-  
 
   return (
-    
     <div>
-       <div
-      className={`flex justify-between bg-gray-50 h-10 pt-2 border border-t-0 ${
-        globalSettingsData.picBackground ? "" : "border-black border-opacity-10"
-      }`}
-      // style={{height: "40px", paddingTop : "8px"}}
-    >
-      <div className="flex truncate">
-        <div className="h-6 mr-px">
-          <PhotographSVG className="h-full" />
-        </div>
-        <div className="truncate">
-          <a
-            href={singleBookmarkData.URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="z-50 hover:text-gray-600 transition-colors duration-75 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-inset py-0.5 px-0.5"
-          >
-            {singleBookmarkData.title}
-          </a>
-          {/* <a href="https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death" target="_blank" rel="noopener noreferrer">{singleBookmarkData.title}</a> */}
-        </div>
-      </div>
+
+      {visState.editBookmarkVis !== bookmarkId &&
       <div
-        className="flex fill-current text-gray-500"
-        style={{ marginTop: "2px" }}
+        className={`flex justify-between bg-gray-50 h-10 pt-2 border border-t-0 ${
+          globalSettingsData.picBackground
+            ? ""
+            : "border-black border-opacity-10"
+        }`}
+        // style={{height: "40px", paddingTop : "8px"}}
       >
-        <PencilSmallSVG
-          className="h-5 ml-1 transition-colors duration-75 hover:text-black cursor-pointer"
-          onClick={() => {
-            // setEditBookmarkVis((b) => !b);
-            visDispatch({ type: "EDIT_BOOKMARK_OPEN", payload: bookmarkId});
-            upperVisDispatch({ type: "CLOSE_ALL" });
-            setBookmarkId(singleBookmarkData.id);
-          }}
-        />
-        <TrashSmallSVG
-          className="h-5 ml-1 transition-colors duration-75 hover:text-black cursor-pointer"
-          onClick={() => {
-            // for deleting empty folder
+        <div className="flex truncate">
+          <div className="h-6 mr-px">
+            <PhotographSVG className="h-full" />
+          </div>
+          <div className="truncate">
+            <a
+              href={singleBookmarkData.URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="z-50 hover:text-gray-600 transition-colors duration-75 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-inset py-0.5 px-0.5"
+            >
+              {singleBookmarkData.title}
+            </a>
+            {/* <a href="https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death" target="_blank" rel="noopener noreferrer">{singleBookmarkData.title}</a> */}
+          </div>
+        </div>
+        <div
+          className="flex fill-current text-gray-500"
+          style={{ marginTop: "2px" }}
+        >
+          <PencilSmallSVG
+            className="h-5 ml-1 transition-colors duration-75 hover:text-black cursor-pointer"
+            onClick={() => {
+              // setEditBookmarkVis((b) => !b);
+              visDispatch({ type: "EDIT_BOOKMARK_OPEN", payload: bookmarkId });
+              upperVisDispatch({ type: "CLOSE_ALL" });
+              setBookmarkId(singleBookmarkData.id);
+            }}
+          />
+          <TrashSmallSVG
+            className="h-5 ml-1 transition-colors duration-75 hover:text-black cursor-pointer"
+            onClick={() => {
+              // for deleting empty folder
 
-            let tagsIdsToDelete: (string | number)[] = [];
+              let tagsIdsToDelete: (string | number)[] = [];
 
-            singleBookmarkData.tags.forEach((el) => {
-              let filteredBookmarks = bookmarksData.filter(
-                (obj) => obj.id !== singleBookmarkData.id
-              );
+              singleBookmarkData.tags.forEach((el) => {
+                let filteredBookmarks = bookmarksData.filter(
+                  (obj) => obj.id !== singleBookmarkData.id
+                );
 
-              let isElPresent: boolean = false;
+                let isElPresent: boolean = false;
 
-              filteredBookmarks.forEach((obj) => {
-                if (obj.tags.indexOf(el) > -1) {
-                  isElPresent = true;
-                  return;
+                filteredBookmarks.forEach((obj) => {
+                  if (obj.tags.indexOf(el) > -1) {
+                    isElPresent = true;
+                    return;
+                  }
+                });
+
+                if (!isElPresent && el !== "ALL_TAGS") {
+                  tagsIdsToDelete.push(el);
                 }
               });
 
-              if (!isElPresent && el !== "ALL_TAGS") {
-                tagsIdsToDelete.push(el);
-              }
-            });
+              let bookmarksAllTagsData_new: (string | number)[] = [];
 
-            let bookmarksAllTagsData_new: (string | number)[] = [];
-
-            bookmarksAllTagsData.forEach((el) => {
-              if (tagsIdsToDelete.indexOf(el) === -1) {
-                bookmarksAllTagsData_new.push(el);
-              }
-            });
-
-            setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
-
-            setBookmarksData((previous) =>
-              produce(previous, (updated) => {
-                let bookmarkToDelete = updated.find(
-                  (obj) => obj.id === singleBookmarkData.id
-                );
-                if (bookmarkToDelete) {
-                  let tabIndex = updated.indexOf(bookmarkToDelete);
-                  updated.splice(tabIndex, 1);
+              bookmarksAllTagsData.forEach((el) => {
+                if (tagsIdsToDelete.indexOf(el) === -1) {
+                  bookmarksAllTagsData_new.push(el);
                 }
-              })
-            );
-          }}
-        />
+              });
+
+              setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
+
+              setBookmarksData((previous) =>
+                produce(previous, (updated) => {
+                  let bookmarkToDelete = updated.find(
+                    (obj) => obj.id === singleBookmarkData.id
+                  );
+                  if (bookmarkToDelete) {
+                    let tabIndex = updated.indexOf(bookmarkToDelete);
+                    updated.splice(tabIndex, 1);
+                  }
+                })
+              );
+            }}
+          />
+        </div>
       </div>
+
+
+
+
+}
+
+
+      {visState.editBookmarkVis === bookmarkId && (
+        <Bookmark_newAndEdit
+          bookmarkComponentType="edit"
+          visDispatch={visDispatch}
+          colNumber={colNumber}
+          bookmarkId={bookmarkId as string | number}
+        />
+      )}
     </div>
-
-    <Bookmark_newAndEdit
-    bookmarkComponentType="edit"
-    visDispatch={visDispatch}
-    colNumber={colNumber}
-    bookmarkId={bookmarkId as string|number}      
-    />
-
-    </div>
-
-
-   
   );
 }
 

@@ -458,7 +458,192 @@ function Bookmark_lowerUI({
 
   {
     return bookmarkComponentType === "edit" ? (
-      <div>123456</div>
+      <div className=" bg-warmGray-100 pb-2 pl-1 border border-warmGray-300 shadow-inner">
+        <div className="mt-2">
+          <div className="flex justify-around mb-2 mt-2">
+            <p className="w-10 flex-none">Title</p>
+
+            <input
+              type="text"
+              ref={firstFieldRef}
+              className="w-full border pl-px input-focus"
+              value={titleInput}
+              placeholder={"new bookmark title"}
+              onChange={(e) => {
+                setTitleInput(e.target.value);
+                setWasAnythingChanged(true);
+              }}
+              onFocus={(e) => {
+                setSelectablesListVis(false);
+              }}
+            />
+
+            <div className="invisible flex-none" style={{ width: "18px" }} />
+          </div>
+          <div className="flex justify-around mb-2">
+            <p className="w-10 flex-none">Link</p>
+
+            <input
+              type="text"
+              className="w-full border pl-px input-focus"
+              value={urlInput}
+              placeholder={"enter proper URL address"}
+              onChange={(e) => {
+                setUrlInput(e.target.value);
+                setWasAnythingChanged(true);
+              }}
+              onFocus={(e) => {
+                setSelectablesListVis(false);
+              }}
+            />
+            <div className="invisible flex-none" style={{ width: "18px" }} />
+          </div>
+          <div className="flex justify-start mb-2">
+            <p className="w-10 flex-none">Tags</p>
+
+            <div className="relative w-full">
+              <div className="relative">
+                <input
+                  type="text"
+                  className="w-full border pl-px pr-5 input-focus"
+                  // @ts-ignore
+                  ref={selectablesRef}
+                  // value={tagsInput.join(", ")}
+                  value={selectablesInputStr}
+                  placeholder={"tag1, tag2..."}
+                  onChange={(e) => {
+                    setWasAnythingChanged(true);
+                    if (!selectablesListVis) setSelectablesListVis(true);
+
+                    let target = e.target.value;
+
+                    setSelectablesInputStr(target);
+                  }}
+                  onFocus={(e) => {
+                    setSelectablesListVis(true);
+                  }}
+
+                  // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
+                />
+                {selectablesInputStr.length !== 0 && (
+                  <span
+                    className="absolute h-4 bg-white z-50"
+                    style={{ top: "7px", right: "2px" }}
+                  >
+                    <XsmallSVG
+                      className="h-full text-gray-500 cursor-pointer hover:text-opacity-60"
+                      onClick={() => {
+                        setSelectablesInputStr("");
+                        if ((bookmarkComponentType = "edit")) {
+                          setWasAnythingChanged(true);
+                        }
+                      }}
+                    />
+                  </span>
+                )}
+              </div>
+
+              {selectablesListVis && (
+                <SelectableList
+                  setSelectablesInputStr={setSelectablesInputStr}
+                  selectablesInputStr={selectablesInputStr}
+                  visibleSelectables={visibleTags}
+                  initialSelectables={initialTags}
+                  setSelectablesVis={setSelectablesListVis}
+                  marginTop="0px"
+                  setWasAnythingClicked={setWasAnythingChanged}
+                />
+              )}
+            </div>
+
+            <div
+              style={{ height: "18px", width: "18px", marginTop: "5px" }}
+              className=" flex-none"
+            >
+              {selectablesListVis ? (
+                <ChevronUpSVG
+                  className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
+                  onClick={() => {
+                    setSelectablesListVis((b) => !b);
+                  }}
+                />
+              ) : (
+                <ChevronDownSVG
+                  className="h-full cursor-pointer hover:text-blueGray-500 transition-colors duration-75"
+                  onClick={() => {
+                    setSelectablesListVis((b) => !b);
+                  }}
+                />
+              )}
+            </div>
+          </div>
+
+          {errors.titleFormatErrorVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.titleFormat}</p>
+          )}
+
+          {errors.titleUniquenessErrorVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.titleUniqueness}</p>
+          )}
+
+          {errors.invalidLinkVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.invalidLink}</p>
+          )}
+
+          {errors.tagErrorVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.tagFormat}</p>
+          )}
+
+          {errors.noteErrorVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.noteError}</p>
+          )}
+
+          {errors.rssErrorVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.rssError}</p>
+          )}
+
+          {errors.tagRepeatErrorVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.tagRepeat}</p>
+          )}
+
+          {/* SaveSVG is cut without the <p> - bug? */}
+          <div className="mt-5 w-full flex justify-center">
+            <button
+              className="h-5 w-5 mr-6 btn-focus"
+              onClick={(e) => {
+                e.preventDefault();
+                saveFunc();
+              }}
+            >
+              <SaveSVG
+                className={`h-5 w-5 fill-current text-black transition-colors duration-75 ${
+                  wasAnythingChanged
+                    ? "text-gray-900 hover:text-green-600 cursor-pointer"
+                    : "text-blueGray-400 cursor-default"
+                }`}
+              />
+            </button>
+
+            <button
+              className="h-5 w-5 btn-focus"
+              onClick={(e) => {
+                e.preventDefault();
+                // setBookmarkVis((b) => !b);
+                // visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
+                if (bookmarkComponentType === "edit") {
+                  visDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
+                }
+
+                if (bookmarkComponentType === "new_lowerUI") {
+                  visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+                }
+              }}
+            >
+              <CancelSVG className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75" />
+            </button>
+          </div>
+        </div>
+      </div>
     ) : (
       ReactDOM.createPortal(
         <div

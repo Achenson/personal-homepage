@@ -43,6 +43,7 @@ import {
   TabVisAction,
   SingleTabData,
   UpperVisAction,
+  VisState,
   InitUpperVisState,
 } from "../../utils/interfaces";
 import { current } from "immer";
@@ -69,14 +70,14 @@ interface Props {
   // closeAllTabs: boolean;
 }
 
-interface VisState {
-  editTabVis: boolean;
-  colorsVis: boolean;
-  // tabContentVis: boolean;
-  newBookmarkVis: boolean;
-  editBookmarkVis: null | string | number;
-  touchScreenModeOn: boolean;
-}
+// interface VisState {
+//   editTabVis: boolean;
+//   colorsVis: boolean;
+//   // tabContentVis: boolean;
+//   newBookmarkVis: boolean;
+//   editBookmarkVis: null | string | number;
+//   touchScreenModeOn: boolean;
+// }
 
 function Tab({
   tabID,
@@ -629,7 +630,7 @@ Props): JSX.Element {
           />
         )}
 
-      {visState.editBookmarkVis &&
+      {/* {visState.editBookmarkVis &&
         tabOpenedData === tabID &&
         upperVisState.tabEditablesOpenable && (
           <Bookmark_newAndEdit
@@ -642,7 +643,7 @@ Props): JSX.Element {
             left={rect?.left as number}
             tabWidth={rect?.width as number}
           />
-        )}
+        )} */}
 
       {visState.newBookmarkVis &&
         tabOpenedData === tabID &&
@@ -687,6 +688,7 @@ Props): JSX.Element {
               return (
                 <SingleBookmark
                   // setEditBookmarkVis={setEditBookmarkVis}
+                  visState={visState}
                   visDispatch={visDispatch}
                   upperVisDispatch={upperVisDispatch}
                   singleBookmarkData={el}

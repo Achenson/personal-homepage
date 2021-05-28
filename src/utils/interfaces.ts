@@ -50,6 +50,16 @@ export interface InitUpperVisState {
   tabEditablesOpenable: boolean;
 }
 
+// for Tab
+export interface VisState {
+  editTabVis: boolean;
+  colorsVis: boolean;
+  // tabContentVis: boolean;
+  newBookmarkVis: boolean;
+  editBookmarkVis: null | string | number;
+  touchScreenModeOn: boolean;
+}
+
 export interface UpperVisAction {
   type:
     | "NEW_BOOKMARK_TOGGLE"
