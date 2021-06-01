@@ -5,9 +5,9 @@ import UpperRightMenu from "./UpperRightMenu";
 import UpperLeftMenu from "./UpperLeftMenu";
 
 import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
+import Message_UpperUI from "./Message_UpperUI";
 
 interface Props {
- 
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   upperVisState: InitUpperVisState;
@@ -17,7 +17,6 @@ function UpperUI({
   setTabType,
   upperVisDispatch,
   upperVisState,
-
 }: Props): JSX.Element {
   // const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
 
@@ -33,6 +32,10 @@ function UpperUI({
         setTabType={setTabType}
         upperVisState={upperVisState}
       />
+
+      {upperVisState.messageVis && (
+        <Message_UpperUI upperVisDispatch={upperVisDispatch} />
+      )}
     </div>
   );
 }

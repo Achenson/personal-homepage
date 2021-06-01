@@ -34,6 +34,7 @@ let initUpperVisState: InitUpperVisState = {
   addTagVis_xs: false,
   xsSizing_initial: false,
   tabEditablesOpenable: true,
+  messageVis: true,
 };
 
 function upperVisReducer(
@@ -118,6 +119,18 @@ function upperVisReducer(
       return {
         ...state,
         tabEditablesOpenable: true,
+      };
+
+    case "MESSAGE_OPEN":
+      return {
+        ...state,
+        messageVis: true,
+      };
+
+    case "MESSAGE_CLOSE":
+      return {
+        ...state,
+        messageVis: false,
       };
 
     case "CLOSE_ALL":

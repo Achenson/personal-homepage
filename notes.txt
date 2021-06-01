@@ -536,7 +536,7 @@ Why you should do it regularly:
 https://github.com/browserslist/browserslist#browsers-data-updating
 
 
-> myStr: "name";
+>> str myStr: "name";
 
 ~ myFunc(str myVar)-(
 
@@ -544,12 +544,14 @@ https://github.com/browserslist/browserslist#browsers-data-updating
 
   loop i(7, i<10, i => i++ )-(
   log(i)
-  myArr.push("#(myVar) #(i)") 
-);
+  myArr.push("|myVar| |i|") 
+  )
 
 $$ myArr;
-);
+)
 
+
+>> [str] result: myFunc("some string")
 
 
 
