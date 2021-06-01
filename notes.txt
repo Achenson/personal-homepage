@@ -483,6 +483,8 @@ XXX 407. globalSettings -> cols number too easy to change? XXX
 DONE 408. all tabs - wider letter spacing? DONE
 DONE 410. auto-focus on lower UI also DONE
 DONE 411. new&edit lower UI with longer TAB contetn -> implement contrast to the content? (darker border added) DONE
+DONE 413. bookmark edits: should be opening, not toggling! DONE
+DONE 414. bookmark Edit should be shown instead of bookmark, not on top of the tab? DONE
 
 
 1. purgecss at the end of project?
@@ -516,8 +518,13 @@ DONE 411. new&edit lower UI with longer TAB contetn -> implement contrast to the
 
 408. fix error: npx browserslist@latest --update-db
 409. vulnerabilities
-410. bookmark edits: should be opening, not toggling!
-411. bookmark Edit should be shown instead of bookmark, not on top of the tab?
+
+
+412. bookmark lower UI edit & editTab: make it same color as Tab?
+
+
+
+ 
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
@@ -527,15 +534,18 @@ https://github.com/browserslist/browserslist#browsers-data-updating
 
 
 > myStr: "name"
-~ myFunc() {
+~ myFunc() (
 
-  loop i(7, i<10, i => i++ ) {
+  loop i(7, i<10, i => i++ ) (
 
     log(i)
 
-  }
+)
 
-}
+<<
+
+
+)
 
 
 App structure:

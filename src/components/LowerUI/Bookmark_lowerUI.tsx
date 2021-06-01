@@ -458,8 +458,12 @@ function Bookmark_lowerUI({
 
   {
     return bookmarkComponentType === "edit" ? (
-      <div className=" bg-warmGray-100 pb-2 pl-1 border border-warmGray-300 shadow-inner">
-        <div className="mt-2">
+      <div className=" bg-gray-100 pb-2 pl-1"
+      
+        style={{boxShadow: "inset 11px 11px 4px -10px rgba(0, 0, 0, 0.8), inset -11px -11px 4px -10px rgba(0, 0, 0, 0.05)"}}
+      >
+
+        <div className="pt-2">
           <div className="flex justify-around mb-2 mt-2">
             <p className="w-10 flex-none">Title</p>
 
