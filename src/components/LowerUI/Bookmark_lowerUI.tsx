@@ -651,7 +651,7 @@ function Bookmark_lowerUI({
     ) : (
       ReactDOM.createPortal(
         <div
-          className="absolute z-40 bg-warmGray-100 pb-2 pl-1 border border-warmGray-300 shadow-inner"
+          className="absolute z-40 bg-gray-100 pb-2 pl-1 border border-blueGray-303 shadow-md"
           style={{
             top: `${top + 32 + document.documentElement.scrollTop}px`,
             left: `${left}px`,

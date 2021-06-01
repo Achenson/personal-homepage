@@ -426,7 +426,7 @@ Props): JSX.Element {
 
   return ReactDOM.createPortal(
     <div
-      className={`absolute z-40 bg-warmGray-100 pb-2 border border-warmGray-300 pl-1 pr-1 shadow-inner`}
+      className={`absolute z-40 bg-gray-100 pb-2 border border-blueGray-303 pl-1 pr-1 shadow-md`}
       style={{
         top: `${top + 32 + document.documentElement.scrollTop}px`,
         left: `${left}px`,
@@ -549,7 +549,7 @@ Props): JSX.Element {
 
           {tabOpen ? (
             <button
-              className="h-6 w-6"
+              className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300"
               onClick={() => {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
@@ -560,7 +560,7 @@ Props): JSX.Element {
             </button>
           ) : (
             <button
-              className="h-6 w-6 btn-focus"
+              className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300"
               onClick={() => {
                 setTabOpen((b) => !b);
                 setWasTabOpenClicked(true);
@@ -576,7 +576,7 @@ Props): JSX.Element {
           <p>Delete</p>
 
           <button
-            className="h-6 w-6 btn-focus"
+            className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300"
             onClick={() => {
               if (!currentTab.deletable) {
                 // setNoDeletionErrorVis(true);

@@ -481,8 +481,10 @@ XXX 405. less ugly editTab edit new bookmark color?, XXX
 XXX 406. RSS edit -> "RESET settings to default"? XXX
 XXX 407. globalSettings -> cols number too easy to change? XXX
 DONE 408. all tabs - wider letter spacing? DONE
+DONE 408.5 fix error: npx browserslist@latest --update-db DONE
 DONE 410. auto-focus on lower UI also DONE
 DONE 411. new&edit lower UI with longer TAB contetn -> implement contrast to the content? (darker border added) DONE
+DONE 412. bookmark lower UI edit & editTab: better contrast DONE
 DONE 413. bookmark edits: should be opening, not toggling! DONE
 DONE 414. bookmark Edit should be shown instead of bookmark, not on top of the tab? DONE
 
@@ -516,11 +518,10 @@ DONE 414. bookmark Edit should be shown instead of bookmark, not on top of the t
 
 400. error - text-center?
 
-408. fix error: npx browserslist@latest --update-db
 409. vulnerabilities
 
 
-412. bookmark lower UI edit & editTab: make it same color as Tab?
+413. check if overflow-hidden is needed (flex growth etc.) -> change bookmark_lowerUI
 
 
 

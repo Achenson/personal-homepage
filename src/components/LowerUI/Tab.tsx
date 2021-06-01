@@ -492,7 +492,7 @@ Props): JSX.Element {
     >
       <div
         ref={drag}
-        className={`pl-0 h-8 pr-1 pt-0.5 bg-${
+        className={`pl-0 h-8 pr-1 bg-${
           // tabColor ? tabColor : finalTabColor
           finalTabColor
         } ${textOrIconColor(
@@ -501,7 +501,7 @@ Props): JSX.Element {
         )} border border-t-0 border-r-0 border-l-0 border-gray-700 border-opacity-25 flex justify-between`}
         style={{
           boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)",
-          paddingTop: "3px",
+          paddingTop: "2px",
         }}
         onTouchStart={() => {
           setTimeout(() => {
