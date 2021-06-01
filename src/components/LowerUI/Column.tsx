@@ -122,7 +122,7 @@ function Column({
 
   return (
     <div
-      className={`${
+      className={`h-full flex flex-col ${
         globalSettingsData.picBackground ? "" : bordersIfNoBackground()
       }
        ${calcColumnColor_picBackground(
@@ -138,49 +138,52 @@ function Column({
         ),
       }}
     >
-      <div className="h-full flex flex-col">
-        {tabsData
-          .filter((el) => el.column === colNumber)
-          // lower priority, higher in the column
-          .sort((a, b) => a.priority - b.priority)
-          .map((el, i) => {
-            return (
-              <div key={i} className={`flex flex-col ${isThisLastGap(lastTabId, el.id) ? "flex-grow" : ""}`}>
-                <Tab
-                  tabID={el.id}
-                  tabTitle={el.title}
-                  tabColor={el.color}
-                  tabType={el.type}
-                  colNumber={el.column}
-                  tabOpened={el.opened}
-                  tabOpenedByDefault={el.openedByDefault}
-                  tabIsDeletable={el.deletable}
-                  upperVisDispatch={upperVisDispatch}
-                  upperVisState={upperVisState}
-                />
-                {/* <div className="flex-grow"> */}
-                  <GapAfterTab
-                    colNumber={colNumber}
-                    tabID={el.id}
-                    picBackground={globalSettingsData.picBackground}
-                    isThisLastGap={isThisLastGap(lastTabId, el.id)}
-                  />
-                {/* </div> */}
-              </div>
-            );
-          })}
+      {tabsData
+        .filter((el) => el.column === colNumber)
+        // lower priority, higher in the column
+        .sort((a, b) => a.priority - b.priority)
+        .map((el, i) => {
+          return (
+            <div
+              key={i}
+              className={`flex flex-col ${
+                isThisLastGap(lastTabId, el.id) ? "flex-grow" : ""
+              }`}
+            >
+              <Tab
+                tabID={el.id}
+                tabTitle={el.title}
+                tabColor={el.color}
+                tabType={el.type}
+                colNumber={el.column}
+                tabOpened={el.opened}
+                tabOpenedByDefault={el.openedByDefault}
+                tabIsDeletable={el.deletable}
+                upperVisDispatch={upperVisDispatch}
+                upperVisState={upperVisState}
+              />
+              {/* <div className="flex-grow"> */}
+              <GapAfterTab
+                colNumber={colNumber}
+                tabID={el.id}
+                picBackground={globalSettingsData.picBackground}
+                isThisLastGap={isThisLastGap(lastTabId, el.id)}
+              />
+              {/* </div> */}
+            </div>
+          );
+        })}
 
-        {tabDataLength === 0 ? (
-          <div className="flex-grow">
-            <GapAfterTab
-              colNumber={colNumber}
-              tabID={null}
-              picBackground={globalSettingsData.picBackground}
-              isThisLastGap={true}
-            />
-          </div>
-        ) : null}
-      </div>
+      {tabDataLength === 0 ? (
+        <div className="flex-grow">
+          <GapAfterTab
+            colNumber={colNumber}
+            tabID={null}
+            picBackground={globalSettingsData.picBackground}
+            isThisLastGap={true}
+          />
+        </div>
+      ) : null}
 
       {/* <div
         className={`h-64 lg:bg-${
