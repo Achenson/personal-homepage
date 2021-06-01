@@ -177,9 +177,9 @@ Props): JSX.Element {
   // let regexForTabs = /^\w+(,\s\w+)*$/;
   // let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*$/;
   let regexForBookmarks = /^\w(\s?\w+)*(,\s\w(\s?\w+)*)*,?$/;
-   // https://stackoverflow.com/questions/1500260/detect-urls-in-text-with-javascript
-   const regexForLink =
-   /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+  // https://stackoverflow.com/questions/1500260/detect-urls-in-text-with-javascript
+  const regexForLink =
+    /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
 
   function titleWidth() {
     if (tabType === "note" || tabID === "ALL_TAGS") {
@@ -424,14 +424,14 @@ Props): JSX.Element {
     visDispatch({ type: "EDIT_TOGGLE" });
   }
 
-  return ReactDOM.createPortal(
+  return (
     <div
-      className={`absolute z-40 bg-gray-100 pb-2 border border-blueGray-303 pl-1 pr-1 shadow-md`}
-      style={{
-        top: `${top + 32 + document.documentElement.scrollTop}px`,
-        left: `${left}px`,
-        width: `${tabWidth}px`,
-      }}
+      className={`absolute w-full z-40 bg-gray-100 pb-2 border border-blueGray-303 pl-1 pr-1 shadow-md`}
+      // style={{
+      //   top: `${top + 32 + document.documentElement.scrollTop}px`,
+      //   left: `${left}px`,
+      //   width: `${tabWidth}px`,
+      // }}
     >
       <div className="mb-3">
         <div className={`flex items-center mt-2 justify-between`}>
@@ -534,13 +534,10 @@ Props): JSX.Element {
         )}
 
         {errors.invalidLinkErrorVis && tabType === "rss" && (
-          <p  className={`text-red-600 mt-1 -mb-2`}
-          >
+          <p className={`text-red-600 mt-1 -mb-2`}>
             {tabErrors.invalidLinkError}
           </p>
         )}
-
-
       </div>
 
       <div className={`pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
@@ -652,8 +649,7 @@ Props): JSX.Element {
       </div>
 
       {/* </form> */}
-    </div>,
-    document.body
+    </div>
   );
 }
 
