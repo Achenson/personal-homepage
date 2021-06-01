@@ -19,21 +19,21 @@ import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
 interface Props {
   colNumber: number;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: InitUpperVisState
+  upperVisState: InitUpperVisState;
 }
 
 // const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
-function Column({ colNumber, upperVisDispatch, upperVisState }: Props): JSX.Element {
+function Column({
+  colNumber,
+  upperVisDispatch,
+  upperVisState,
+}: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
-  const [
-    columnsColorsImg_Data,
-    setColumnsColorsImg_Data,
-  ] = columnsColorsImg_State.use();
+  const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
+    columnsColorsImg_State.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-  const [
-    backgroundColorData,
-    setbackgroundColorData,
-  ] = backgroundColorState.use();
+  const [backgroundColorData, setbackgroundColorData] =
+    backgroundColorState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
 
   function calcColumnColor(
@@ -98,7 +98,7 @@ function Column({ colNumber, upperVisDispatch, upperVisState }: Props): JSX.Elem
     lastTabId = null;
   }
 
-  let tabDataLength = tabsData.filter((el) => el.column === colNumber).length
+  let tabDataLength = tabsData.filter((el) => el.column === colNumber).length;
 
   function isThisLastGap(
     lastTabId: number | string | null,
@@ -115,12 +115,16 @@ function Column({ colNumber, upperVisDispatch, upperVisState }: Props): JSX.Elem
   }
 
   function bordersIfNoBackground() {
-    return `border-black border-opacity-10 border-b ${tabDataLength === 0 ? "border-t" : ""}`
+    return `border-black border-opacity-10 border-b ${
+      tabDataLength === 0 ? "border-t" : ""
+    }`;
   }
 
   return (
     <div
-      className={`flex flex-col justify-between overflow-hidden ${globalSettingsData.picBackground ? "" : bordersIfNoBackground()}
+      className={`${
+        globalSettingsData.picBackground ? "" : bordersIfNoBackground()
+      }
        ${calcColumnColor_picBackground(
          colNumber,
          globalSettingsData.picBackground,
@@ -134,14 +138,14 @@ function Column({ colNumber, upperVisDispatch, upperVisState }: Props): JSX.Elem
         ),
       }}
     >
-      <div>
+      <div className="h-full flex flex-col">
         {tabsData
           .filter((el) => el.column === colNumber)
           // lower priority, higher in the column
           .sort((a, b) => a.priority - b.priority)
           .map((el, i) => {
             return (
-              <div key={i} className="">
+              <div key={i} className={`flex flex-col ${isThisLastGap(lastTabId, el.id) ? "flex-grow" : ""}`}>
                 <Tab
                   tabID={el.id}
                   tabTitle={el.title}
@@ -153,25 +157,28 @@ function Column({ colNumber, upperVisDispatch, upperVisState }: Props): JSX.Elem
                   tabIsDeletable={el.deletable}
                   upperVisDispatch={upperVisDispatch}
                   upperVisState={upperVisState}
-                 
                 />
-                <GapAfterTab
-                  colNumber={colNumber}
-                  tabID={el.id}
-                  picBackground={globalSettingsData.picBackground}
-                  isThisLastGap={isThisLastGap(lastTabId, el.id)}
-                />
+                {/* <div className="flex-grow"> */}
+                  <GapAfterTab
+                    colNumber={colNumber}
+                    tabID={el.id}
+                    picBackground={globalSettingsData.picBackground}
+                    isThisLastGap={isThisLastGap(lastTabId, el.id)}
+                  />
+                {/* </div> */}
               </div>
             );
           })}
 
         {tabDataLength === 0 ? (
-          <GapAfterTab
-            colNumber={colNumber}
-            tabID={null}
-            picBackground={globalSettingsData.picBackground}
-            isThisLastGap={true}
-          />
+          <div className="flex-grow">
+            <GapAfterTab
+              colNumber={colNumber}
+              tabID={null}
+              picBackground={globalSettingsData.picBackground}
+              isThisLastGap={true}
+            />
+          </div>
         ) : null}
       </div>
 
@@ -180,7 +187,6 @@ function Column({ colNumber, upperVisDispatch, upperVisState }: Props): JSX.Elem
           globalSettingsData.picBackground ? "" : backgroundColorData
         }`}
       ></div> */}
-     
     </div>
   );
 }

@@ -178,7 +178,7 @@ function GapAfterTab({
   return (
     <>
       {isThisLastGap ? (
-        <div ref={drop} className="relative">
+        <div ref={drop} className="h-full flex flex-col">
           <div
             className={`h-6 ${
               globalSettingsData.picBackground ? "" : bordersIfNoBackground()
@@ -189,12 +189,12 @@ function GapAfterTab({
             // style={{ backgroundColor: singleColumnColor }}
           ></div>
           <div
-            className={`w-full absolute ${
+            className={`w-full flex-grow ${
               globalSettingsData.picBackground ? "" : bordersIfNoBackground()
             }
             ${isOver ? "opacity-30 bg-blueGray-200" : ""}
           `}
-            style={{ height: "10000vh" }}
+            // style={{ height: "10000vh" }}
           ></div>
         </div>
       ) : (
