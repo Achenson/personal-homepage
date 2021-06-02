@@ -437,6 +437,7 @@ DONE 369. initial colors in global state -> import instead of hardcoding DONE
 XXX 370. change colors data to objects? XXX
 DONE 371. is there a way to do less repeats in if( || || ||)? typescript? no - fixed wrong use of || || DONE
 DONE 372. svg for loginOut? DONE
+DONE 372.5 popoup for messages for user (eg. logged out, tab created etc.) DONE
 DONE 373. xs screen expendable svg to aligned well DONE
 XXX 376. selectables "x" center vertically?XXX
 DONE 374. make upperUI adding component work same as settings -> close when clicking on gray background & hide scrollbar DONE
@@ -513,7 +514,6 @@ DONE 414. bookmark Edit should be shown instead of bookmark, not on top of the t
 
 371. fixed position of upperMenu?
 371. UppperUI should be higher on small screens? (remember to adjust UpperLeftUI colors to not cause flickering)
-372. popoup for messages for user (eg. logged out, tab created etc.)
 
 392. div spanning rest of the parent div but without overflow-hidden?
 398. ts-ignors -> get rid off, at least for refs
@@ -525,7 +525,9 @@ DONE 414. bookmark Edit should be shown instead of bookmark, not on top of the t
 
 414. styling last gap if short (column color visible) and empty column color visible when draggin sth on it
 415. newBookmark and editTab color too dirty  when background on?
-416. 
+416. action.types - not be interface?
+417. saving to localStorage?
+
 
 
 

@@ -24,7 +24,7 @@ function Message_UpperUI({
   return (
     <div
       className="absolute flex justify-center items-center right-0 h-16 w-48 bg-white bg-opacity-80 rounded-md border border-gray-700"
-      style={{ top: "12px", animation: `${close ? "fadeOut" : "fadeIn"} 1s` }}
+      style={{ top: "12px", animation: `${close ? "fadeOut" : "fadeIn"} 2s` }}
       onAnimationEnd={() => {
         // runs after fadeIn
         if (!close) {

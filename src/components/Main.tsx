@@ -34,7 +34,7 @@ let initUpperVisState: InitUpperVisState = {
   addTagVis_xs: false,
   xsSizing_initial: false,
   tabEditablesOpenable: true,
-  messagePopup: "test",
+  messagePopup: null,
 };
 
 function upperVisReducer(

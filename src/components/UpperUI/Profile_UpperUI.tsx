@@ -167,6 +167,7 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                     }
 
                     upperVisDispatch({ type: "PROFILE_TOGGLE" });
+                    upperVisDispatch({type: "MESSAGE_OPEN_LOGIN"})
                   }}
                 >
                   Login

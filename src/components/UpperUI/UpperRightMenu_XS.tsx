@@ -178,6 +178,7 @@ function UpperRightMenu({
               onClick={() => {
                 // upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 setLoggedInData(false);
+                upperVisDispatch({type: "MESSAGE_OPEN_LOGOUT"})
               }}
             >
               <LogoutSVG
