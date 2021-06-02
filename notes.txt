@@ -523,9 +523,7 @@ DONE 415. newBookmark and editTab color too dirty  when background on? DONE
 
 409. vulnerabilities
 
-
 414. styling last gap if short (column color visible) and empty column color visible when draggin sth on it
-416. action.types - not be interface?
 417. saving to localStorage?
 
 

@@ -80,6 +80,7 @@ export interface UpperVisAction {
     | "MESSAGE_OPEN_LOGIN"
     | "MESSAGE_OPEN_LOGOUT"
     | "MESSAGE_CLOSE"
+    // for COLORS_COLUMN_OPEN
   payload?: number;
 }
 
@@ -97,5 +98,6 @@ export interface TabVisAction {
     | "EDIT_BOOKMARK_OPEN"
     | "EDIT_BOOKMARK_CLOSE"
     | "TOUCH_SCREEN_MODE_ON"
+    // for EDIT_BOOKMARK_OPEN (settin id)
   payload?: string | number;
 }

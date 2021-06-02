@@ -33,9 +33,7 @@ interface Props {
   // noteInput: string | null;
   tabID: string | number;
   currentTab: SingleTabData;
-  top: number;
-  left: number;
-  tabWidth: number;
+ 
   setTabOpened_local: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -55,9 +53,7 @@ function EditTab({
   visDispatch,
   tabType,
   currentTab,
-  top,
-  left,
-  tabWidth,
+
   setTabOpened_local,
 }: // setEditTabVis,
 // noteInput,

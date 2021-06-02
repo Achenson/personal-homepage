@@ -10,9 +10,9 @@ interface Props {
   tabID: string | number;
   tabColor: string | null;
   tabType: "folder" | "note" | "rss";
-  top: number;
-  left: number;
-  tabWidth: number;
+  // top: number;
+  // left: number;
+  // tabWidth: number;
 }
 
 function ColorsToChoose_Tab({
@@ -20,10 +20,10 @@ function ColorsToChoose_Tab({
   tabID,
   tabColor,
   tabType,
-  top,
-  left,
-  tabWidth,
-}: Props): JSX.Element {
+}: // top,
+// left,
+// tabWidth,
+Props): JSX.Element {
   // useEffect(() => {
   //   console.log(document.documentElement.scrollTop);
 
@@ -48,14 +48,14 @@ function ColorsToChoose_Tab({
       );
     });
   }
-  // @ts-ignore
-  return ReactDOM.createPortal(
+
+  return (
     <div
       className={`absolute bg-gray-100 mr-px mt-px z-40`}
-      style={{
-        top: `${(top + 32 + document.documentElement.scrollTop)}px`,
-        left: `${(left + (tabWidth - 187))}px`,
-      }}
+      // style={{
+      //   top: `${(top + 32 + document.documentElement.scrollTop)}px`,
+      //   left: `${(left + (tabWidth - 187))}px`,
+      // }}
       onMouseEnter={() => {
         setIconsVis(true);
       }}
@@ -66,8 +66,7 @@ function ColorsToChoose_Tab({
       {mappingColors(tabColors)}
 
       {/* scroll:{document.body.scrollHeight} */}
-    </div>,
-    document.body
+    </div>
   );
 }
 

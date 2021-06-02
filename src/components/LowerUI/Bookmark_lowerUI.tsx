@@ -67,9 +67,9 @@ interface Props {
   regexForTitle: RegExp;
   regexForLink: RegExp;
 
-  top: number;
-  left: number;
-  tabWidth: number;
+  // top: number;
+  // left: number;
+  // tabWidth: number;
 }
 
 const errorsAllFalse = {
@@ -109,9 +109,9 @@ function Bookmark_lowerUI({
   regexForTitle,
   regexForLink,
 
-  top,
-  left,
-  tabWidth,
+  // top,
+  // left,
+  // tabWidth,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [bookmarksAllTagsData, setBookmarksAllTagsData] =

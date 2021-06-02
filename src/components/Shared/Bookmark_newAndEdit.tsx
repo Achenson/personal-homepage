@@ -26,9 +26,9 @@ interface Props {
   bookmarkId?: string | number | undefined;
   // for lowerUI newBookmark only
   tabTitle?: string;
-  top?: number;
-  left?: number;
-  tabWidth?: number;
+  // top?: number;
+  // left?: number;
+  // tabWidth?: number;
 }
 
 const errorsAllFalse = {
@@ -49,9 +49,7 @@ function Bookmark_newAndEdit({
   visDispatch,
   upperVisDispatch,
   colNumber,
-  top,
-  left,
-  tabWidth,
+
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [
@@ -285,9 +283,9 @@ function Bookmark_newAndEdit({
           bookmarkId={bookmarkId as string | number}
           visDispatch={visDispatch as React.Dispatch<TabVisAction>}
           colNumber={colNumber as number}
-          top={top as number}
-          left={left as number}
-          tabWidth={tabWidth as number}
+          // top={top as number}
+          // left={left as number}
+          // tabWidth={tabWidth as number}
         />
       )}
     </>

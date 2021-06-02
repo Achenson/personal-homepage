@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useReducer, useCallback } from "react";
 
-import Rect, { useRect } from "@reach/rect";
+// import Rect, { useRect } from "@reach/rect";
 
 import { produce } from "immer";
 
@@ -110,7 +110,7 @@ Props): JSX.Element {
   }, [tabOpened]);
 
   const reachRef = React.useRef();
-  const rect = useRect(reachRef);
+  // const rect = useRect(reachRef);
 
   /* 
   {
@@ -624,9 +624,9 @@ Props): JSX.Element {
             tabID={tabID}
             tabColor={tabColor}
             tabType={tabType}
-            top={rect?.top as number}
-            left={rect?.left as number}
-            tabWidth={rect?.width as number}
+            // top={rect?.top as number}
+            // left={rect?.left as number}
+            // tabWidth={rect?.width as number}
           />
         )}
 
@@ -656,9 +656,9 @@ Props): JSX.Element {
             visDispatch={visDispatch}
             colNumber={colNumber}
             tabTitle={tabTitle as string}
-            top={rect?.top as number}
-            left={rect?.left as number}
-            tabWidth={rect?.width as number}
+            // top={rect?.top as number}
+            // left={rect?.left as number}
+            // tabWidth={rect?.width as number}
           />
         )}
 
@@ -672,10 +672,9 @@ Props): JSX.Element {
             visDispatch={visDispatch}
             currentTab={currentTab as SingleTabData}
             // noteInput={noteInput}
-
-            top={rect?.top as number}
-            left={rect?.left as number}
-            tabWidth={rect?.width as number}
+            // top={rect?.top as number}
+            // left={rect?.left as number}
+            // tabWidth={rect?.width as number}
             setTabOpened_local={setTabOpened_local}
           />
         )}
