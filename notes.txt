@@ -490,6 +490,7 @@ DONE 413. bookmark edits: should be opening, not toggling! DONE
 DONE 413.5 check if overflow-hidden is needed (flex growth etc.) -> 
 change bookmark_lowerUI (flex-grow!) DONE
 DONE 414. bookmark Edit should be shown instead of bookmark, not on top of the tab? DONE
+DONE 415. newBookmark and editTab color too dirty  when background on? DONE
 
 
 1. purgecss at the end of project?
@@ -524,7 +525,6 @@ DONE 414. bookmark Edit should be shown instead of bookmark, not on top of the t
 
 
 414. styling last gap if short (column color visible) and empty column color visible when draggin sth on it
-415. newBookmark and editTab color too dirty  when background on?
 416. action.types - not be interface?
 417. saving to localStorage?
 

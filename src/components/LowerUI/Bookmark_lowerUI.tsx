@@ -652,7 +652,7 @@ function Bookmark_lowerUI({
       </div>
     ) : (
       <div
-        className="absolute w-full z-40 bg-gray-100 pb-2 pl-1 border border-blueGray-303 shadow-md"
+        className="absolute w-full z-40 bg-gray-50 pb-2 pl-1 border border-blueGray-303 shadow-md"
         // style={{
         //   top: `${top + 32 + document.documentElement.scrollTop}px`,
         //   left: `${left}px`,
