@@ -51,7 +51,7 @@ Props): JSX.Element {
 
   return (
     <div
-      className={`absolute bg-gray-100 mr-px mt-px z-40`}
+      className={`absolute right-0 bg-gray-100 mr-px mt-px z-40`}
       // style={{
       //   top: `${(top + 32 + document.documentElement.scrollTop)}px`,
       //   left: `${(left + (tabWidth - 187))}px`,
