@@ -116,7 +116,7 @@ function Column({
 
   function bordersIfNoBackground() {
     return `border-black border-opacity-10 border-b ${
-      tabDataLength === 0 ? "border-t" : ""
+      tabDataLength === 0 ? "" : ""
     }`;
   }
 
@@ -168,6 +168,7 @@ function Column({
                 tabID={el.id}
                 picBackground={globalSettingsData.picBackground}
                 isThisLastGap={isThisLastGap(lastTabId, el.id)}
+                isThisTheOnlyGap={false}
               />
               {/* </div> */}
             </div>
@@ -181,6 +182,7 @@ function Column({
             tabID={null}
             picBackground={globalSettingsData.picBackground}
             isThisLastGap={true}
+            isThisTheOnlyGap={true}
           />
         </div>
       ) : null}

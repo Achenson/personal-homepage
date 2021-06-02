@@ -22,6 +22,8 @@ interface Props {
   tabID: number | string | null;
   picBackground: boolean;
   isThisLastGap: boolean;
+  // for proper top border display
+  isThisTheOnlyGap: boolean;
 }
 
 function GapAfterTab({
@@ -29,6 +31,7 @@ function GapAfterTab({
   tabID,
   picBackground,
   isThisLastGap,
+  isThisTheOnlyGap
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -181,7 +184,11 @@ function GapAfterTab({
         <div ref={drop} className="h-full flex flex-col">
           <div
             className={`h-6 ${
-              globalSettingsData.picBackground ? "" : bordersIfNoBackground()
+              globalSettingsData.picBackground
+                ? ""
+                : `${bordersIfNoBackground()} ${
+                    isThisTheOnlyGap ? "border-t" : ""
+                  }`
             }
              ${isOver ? calcOpacityOnDrop(picBackground) : ""}
         
