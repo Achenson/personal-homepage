@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import { UpperVisAction } from "../../utils/interfaces";
+import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
 import "../../utils/fade.css";
 
 interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
+  upperVisState: InitUpperVisState;
 }
 
-function Message_UpperUI({ upperVisDispatch }: Props): JSX.Element {
+function Message_UpperUI({ upperVisDispatch, upperVisState }: Props): JSX.Element {
   const [close, setClose] = useState(false);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ function Message_UpperUI({ upperVisDispatch }: Props): JSX.Element {
         }
       }}
     >
-      <p className="">Login successful</p>
+      <p className="">{upperVisState.messagePopup}</p>
       {/* <p>Logout successful</p> */}
     </div>
   );

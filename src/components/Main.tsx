@@ -34,7 +34,7 @@ let initUpperVisState: InitUpperVisState = {
   addTagVis_xs: false,
   xsSizing_initial: false,
   tabEditablesOpenable: true,
-  messageVis: true,
+  messagePopup: "test",
 };
 
 function upperVisReducer(
@@ -121,16 +121,22 @@ function upperVisReducer(
         tabEditablesOpenable: true,
       };
 
-    case "MESSAGE_OPEN":
+    case "MESSAGE_OPEN_LOGIN":
       return {
         ...state,
-        messageVis: true,
+        messagePopup: "Login successful",
+      };
+
+    case "MESSAGE_OPEN_LOGOUT":
+      return {
+        ...state,
+        messagePopup: "Logout successful",
       };
 
     case "MESSAGE_CLOSE":
       return {
         ...state,
-        messageVis: false,
+        messagePopup: null,
       };
 
     case "CLOSE_ALL":

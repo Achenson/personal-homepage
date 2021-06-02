@@ -33,8 +33,10 @@ function UpperUI({
         upperVisState={upperVisState}
       />
 
-      {upperVisState.messageVis && (
-        <Message_UpperUI upperVisDispatch={upperVisDispatch} />
+      {upperVisState.messagePopup && (
+        <Message_UpperUI upperVisDispatch={upperVisDispatch}
+        upperVisState={upperVisState}
+        />
       )}
     </div>
   );

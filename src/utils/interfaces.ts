@@ -48,7 +48,7 @@ export interface InitUpperVisState {
   addTagVis_xs: boolean;
   xsSizing_initial: boolean;
   tabEditablesOpenable: boolean;
-  messageVis: boolean;
+  messagePopup: null | string;
 }
 
 // for Tab
@@ -77,7 +77,8 @@ export interface UpperVisAction {
     | "XS_SIZING_TRUE"
     | "XS_SIZING_FALSE"
     | "TAB_EDITABLES_OPENABLE_DEFAULT"
-    | "MESSAGE_OPEN"
+    | "MESSAGE_OPEN_LOGIN"
+    | "MESSAGE_OPEN_LOGOUT"
     | "MESSAGE_CLOSE"
   payload?: number;
 }

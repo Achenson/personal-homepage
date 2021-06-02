@@ -524,7 +524,10 @@ DONE 414. bookmark Edit should be shown instead of bookmark, not on top of the t
 
 
 414. styling last gap if short (column color visible) and empty column color visible when draggin sth on it
-415. newBookmark and editTab to dirty color when background on?
+415. newBookmark and editTab color too dirty  when background on?
+416. 
+
+
 
 
  
@@ -536,18 +539,18 @@ Why you should do it regularly:
 https://github.com/browserslist/browserslist#browsers-data-updating
 
 
->> str myStr: "name";
+| $ myStr: "name";
 
-~ myFunc(str myVar)-(
+~ myFunc($ myVar)-(
 
-  > myArr: str[];
+| [$] myArr;
 
   loop i(7, i<10, i => i++ )-(
   log(i)
   myArr.push("|myVar| |i|") 
   )
 
-$$ myArr;
+>> myArr;
 )
 
 
