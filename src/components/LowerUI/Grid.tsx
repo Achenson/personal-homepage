@@ -28,7 +28,11 @@ interface Props {
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
 }
 
-function Grid({ upperVisDispatch, upperVisState, setTabType }: Props): JSX.Element {
+function Grid({
+  upperVisDispatch,
+  upperVisState,
+  setTabType,
+}: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   const [bookmarksAllTagsData, setBookmarksAllTagsData] =
     bookmarksAllTagsState.use();
@@ -39,8 +43,8 @@ function Grid({ upperVisDispatch, upperVisState, setTabType }: Props): JSX.Eleme
 
   const windowSize = useWindowSize();
 
-  const [breakpoint, setBreakpoint] = useState<0 | 1 | 2 | 3>(
- () =>   calcBreakpoint()
+  const [breakpoint, setBreakpoint] = useState<1 | 2 | 3 | 4>(() =>
+    calcBreakpoint()
   );
 
   function calcBreakpoint() {
@@ -50,19 +54,19 @@ function Grid({ upperVisDispatch, upperVisState, setTabType }: Props): JSX.Eleme
       // }
 
       if (windowSize.width >= 1024) {
-        return 3;
+        return 4;
       }
 
       if (windowSize.width >= 768) {
-        return 2;
+        return 3;
       }
 
       if (windowSize.width >= 640) {
-        return 1;
+        return 2;
       }
     }
 
-    return 0;
+    return 1;
   }
 
   useEffect(() => {
@@ -73,21 +77,21 @@ function Grid({ upperVisDispatch, upperVisState, setTabType }: Props): JSX.Eleme
       // }
 
       if (windowSize.width >= 1024) {
-        setBreakpoint(3);
+        setBreakpoint(4);
         return;
       }
 
       if (windowSize.width >= 768) {
-        setBreakpoint(2);
+        setBreakpoint(3);
         return;
       }
 
       if (windowSize.width >= 640) {
-        setBreakpoint(1);
+        setBreakpoint(2);
         return;
       }
 
-      setBreakpoint(0);
+      setBreakpoint(1);
     }
   }, [windowSize.width]);
 
@@ -166,83 +170,47 @@ function Grid({ upperVisDispatch, upperVisState, setTabType }: Props): JSX.Eleme
   }, [globalSettingsData.numberOfCols, setTabsData]);
 
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
+    let columnProps = {
+      upperVisDispatch,
+      upperVisState,
+      setTabType,
+      breakpoint,
+    };
+
     switch (numberOfCols) {
       case 1:
         return (
           <Column
+            {...columnProps}
             colNumber={1}
-            upperVisDispatch={upperVisDispatch}
-            upperVisState={upperVisState}
-            setTabType={setTabType}
+            // upperVisDispatch={upperVisDispatch}
+            // upperVisState={upperVisState}
+            // setTabType={setTabType}
+            // breakpoint={breakpoint}
           />
         );
       case 2:
         return (
           <>
-            <Column
-              colNumber={1}
-              upperVisDispatch={upperVisDispatch}
-              upperVisState={upperVisState}
-              setTabType={setTabType}
-            />
-            <Column
-              colNumber={2}
-              upperVisDispatch={upperVisDispatch}
-              upperVisState={upperVisState}
-              setTabType={setTabType}
-            />
+            <Column {...columnProps} colNumber={1} />
+            <Column {...columnProps} colNumber={2} />
           </>
         );
       case 3:
         return (
           <>
-            <Column
-              colNumber={1}
-              upperVisDispatch={upperVisDispatch}
-              upperVisState={upperVisState}
-              setTabType={setTabType}
-            />
-            <Column
-              colNumber={2}
-              upperVisDispatch={upperVisDispatch}
-              upperVisState={upperVisState}
-              setTabType={setTabType}
-            />
-            <Column
-              colNumber={3}
-              upperVisDispatch={upperVisDispatch}
-              upperVisState={upperVisState}
-              setTabType={setTabType}
-            />
+            <Column {...columnProps} colNumber={1} />
+            <Column {...columnProps} colNumber={2} />
+            <Column {...columnProps} colNumber={3} />
           </>
         );
       case 4:
         return (
           <>
-            <Column
-              colNumber={1}
-              upperVisDispatch={upperVisDispatch}
-              upperVisState={upperVisState}
-              setTabType={setTabType}
-            />
-            <Column
-              colNumber={2}
-              upperVisDispatch={upperVisDispatch}
-              upperVisState={upperVisState}
-              setTabType={setTabType}
-            />
-            <Column
-              colNumber={3}
-              upperVisDispatch={upperVisDispatch}
-              upperVisState={upperVisState}
-              setTabType={setTabType}
-            />
-            <Column
-              colNumber={4}
-              upperVisDispatch={upperVisDispatch}
-              upperVisState={upperVisState}
-              setTabType={setTabType}
-            />
+            <Column {...columnProps} colNumber={1} />
+            <Column {...columnProps} colNumber={2} />
+            <Column {...columnProps} colNumber={3} />
+            <Column {...columnProps} colNumber={4} />
           </>
         );
     }
@@ -261,39 +229,42 @@ function Grid({ upperVisDispatch, upperVisState, setTabType }: Props): JSX.Eleme
   //   }
   // }
 
-  function gridSettings(numberOfCols: 1 | 2 | 3 | 4, breakpoint: 0 | 1 | 2 | 3) {
+  function gridSettings(
+    numberOfCols: 1 | 2 | 3 | 4,
+    breakpoint: 1 | 2 | 3 | 4
+  ) {
     switch (numberOfCols) {
       case 1:
         return `repeat(1, minmax(0, 800px))`;
 
       case 2:
         // return `repeat(2, minmax(0, 800px)) `;
-        if (breakpoint >= 1) {
+        if (breakpoint >= 2) {
           return `repeat(2, minmax(0, 800px))`;
         }
         return `repeat(1, minmax(0, 800px))`;
 
       case 3:
-        if (breakpoint >= 2) {
+        if (breakpoint >= 3) {
           return `repeat(3, minmax(0, 800px))`;
         }
 
-        if (breakpoint >= 1) {
+        if (breakpoint >= 2) {
           return `repeat(2, minmax(0, 800px))`;
         }
 
         return `repeat(1, minmax(0, 800px))`;
 
       case 4:
-        if (breakpoint >= 3) {
+        if (breakpoint >= 4) {
           return `repeat(4, minmax(0, 800px))`;
         }
 
-        if (breakpoint >= 2) {
+        if (breakpoint >= 3) {
           return `repeat(3, minmax(0, 800px))`;
         }
 
-        if (breakpoint >=1) {
+        if (breakpoint >= 2) {
           return `repeat(2, minmax(0, 800px))`;
         }
 

@@ -24,6 +24,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   upperVisState: InitUpperVisState;
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
+  breakpoint: 1|2|3|4;
 }
 
 // const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
@@ -31,7 +32,8 @@ function Column({
   colNumber,
   upperVisDispatch,
   upperVisState,
-  setTabType
+  setTabType,
+  breakpoint
 }: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
