@@ -8,6 +8,9 @@ import {
 } from "../../state/colorsState";
 import { globalSettingsState } from "../../state/defaultSettings";
 
+import UpperLeftMenu from "../UpperUI/UpperLeftMenu";
+import UpperRightMenu from "../UpperUI/UpperRightMenu";
+
 import { backgroundColorState } from "../../state/colorsState";
 
 import Tab from "./Tab";
@@ -20,6 +23,7 @@ interface Props {
   colNumber: number;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   upperVisState: InitUpperVisState;
+  setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
 }
 
 // const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
@@ -27,6 +31,7 @@ function Column({
   colNumber,
   upperVisDispatch,
   upperVisState,
+  setTabType
 }: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
@@ -122,7 +127,7 @@ function Column({
 
   return (
     <div
-      className={`h-full flex flex-col ${
+      className={`h-full relative flex flex-col ${
         globalSettingsData.picBackground ? "" : bordersIfNoBackground()
       }
        ${calcColumnColor_picBackground(
@@ -192,6 +197,38 @@ function Column({
           globalSettingsData.picBackground ? "" : backgroundColorData
         }`}
       ></div> */}
+
+{/* if this is the last columns */}
+      {colNumber ===  1 && (
+        <div
+          className="absolute"
+          style={{
+            top: "-32px",
+            // zIndex: 9999
+          }}
+        >
+          <UpperLeftMenu
+            upperVisDispatch={upperVisDispatch}
+            upperVisState={upperVisState}
+          />
+        </div>
+      )}
+
+      {colNumber ===  globalSettingsData.numberOfCols && (
+        <div
+          className="absolute"
+          style={{
+            top: "-32px",
+            right: "0px"
+          }}
+        >
+          <UpperRightMenu
+            upperVisDispatch={upperVisDispatch}
+            upperVisState={upperVisState}
+            setTabType={setTabType}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -25,9 +25,10 @@ import Column from "./Column";
 interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   upperVisState: InitUpperVisState;
+  setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
 }
 
-function Grid({ upperVisDispatch, upperVisState }: Props): JSX.Element {
+function Grid({ upperVisDispatch, upperVisState, setTabType }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   const [bookmarksAllTagsData, setBookmarksAllTagsData] =
     bookmarksAllTagsState.use();
@@ -172,6 +173,7 @@ function Grid({ upperVisDispatch, upperVisState }: Props): JSX.Element {
             colNumber={1}
             upperVisDispatch={upperVisDispatch}
             upperVisState={upperVisState}
+            setTabType={setTabType}
           />
         );
       case 2:
@@ -181,11 +183,13 @@ function Grid({ upperVisDispatch, upperVisState }: Props): JSX.Element {
               colNumber={1}
               upperVisDispatch={upperVisDispatch}
               upperVisState={upperVisState}
+              setTabType={setTabType}
             />
             <Column
               colNumber={2}
               upperVisDispatch={upperVisDispatch}
               upperVisState={upperVisState}
+              setTabType={setTabType}
             />
           </>
         );
@@ -196,16 +200,19 @@ function Grid({ upperVisDispatch, upperVisState }: Props): JSX.Element {
               colNumber={1}
               upperVisDispatch={upperVisDispatch}
               upperVisState={upperVisState}
+              setTabType={setTabType}
             />
             <Column
               colNumber={2}
               upperVisDispatch={upperVisDispatch}
               upperVisState={upperVisState}
+              setTabType={setTabType}
             />
             <Column
               colNumber={3}
               upperVisDispatch={upperVisDispatch}
               upperVisState={upperVisState}
+              setTabType={setTabType}
             />
           </>
         );
@@ -216,21 +223,25 @@ function Grid({ upperVisDispatch, upperVisState }: Props): JSX.Element {
               colNumber={1}
               upperVisDispatch={upperVisDispatch}
               upperVisState={upperVisState}
+              setTabType={setTabType}
             />
             <Column
               colNumber={2}
               upperVisDispatch={upperVisDispatch}
               upperVisState={upperVisState}
+              setTabType={setTabType}
             />
             <Column
               colNumber={3}
               upperVisDispatch={upperVisDispatch}
               upperVisState={upperVisState}
+              setTabType={setTabType}
             />
             <Column
               colNumber={4}
               upperVisDispatch={upperVisDispatch}
               upperVisState={upperVisState}
+              setTabType={setTabType}
             />
           </>
         );
@@ -291,7 +302,7 @@ function Grid({ upperVisDispatch, upperVisState }: Props): JSX.Element {
   }
 
   return (
-    <div className="overflow-hidden mx-2 xs:mx-4">
+    <div className="mx-2 xs:mx-4">
       <div
         className={`grid justify-center gap-x-2 gap-y-6`}
         style={{

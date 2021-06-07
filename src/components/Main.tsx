@@ -277,7 +277,7 @@ function Main({}: Props): JSX.Element {
         upperVisDispatch={upperVisDispatch}
         setTabType={setTabType}
       />
-      <Grid upperVisDispatch={upperVisDispatch} upperVisState={upperVisState} />
+      <Grid upperVisDispatch={upperVisDispatch} upperVisState={upperVisState} setTabType={setTabType} />
     </div>
   );
 }

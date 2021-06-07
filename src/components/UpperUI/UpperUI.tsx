@@ -22,7 +22,9 @@ function UpperUI({
 
   return (
     <div className="h-36 relative mx-2 xs:mx-4 flex justify-between items-end">
-      <UpperLeftMenu
+
+
+      {/* <UpperLeftMenu
         upperVisDispatch={upperVisDispatch}
         upperVisState={upperVisState}
       />
@@ -31,7 +33,7 @@ function UpperUI({
         upperVisDispatch={upperVisDispatch}
         setTabType={setTabType}
         upperVisState={upperVisState}
-      />
+      /> */}
 
       {upperVisState.messagePopup && (
         <Message_UpperUI upperVisDispatch={upperVisDispatch}
