@@ -164,7 +164,7 @@ function GapAfterTab({
     );
   }
 
-  function calcOpacityOnDrop(picBackground: boolean) {
+  function calcOpacityOnDrop() {
     // if (picBackground) {
     //   return "bg-black opacity-50";
     // } else {
@@ -178,10 +178,15 @@ function GapAfterTab({
     return `border-black border-opacity-10 border-l border-r`;
   }
 
+  /* 
+  
+  
+  */
+
   return (
     <>
       {isThisLastGap ? (
-        <div ref={drop} className="h-full flex flex-col">
+        <div ref={drop} className="h-full relative flex flex-col">
           <div
             className={`h-6 ${
               globalSettingsData.picBackground
@@ -190,11 +195,17 @@ function GapAfterTab({
                     isThisTheOnlyGap ? "border-t" : ""
                   }`
             }
-             ${isOver ? calcOpacityOnDrop(picBackground) : ""}
+             ${isOver ? calcOpacityOnDrop() : ""}
         
          `}
             // style={{ backgroundColor: singleColumnColor }}
           ></div>
+          
+          <div className={`absolute h-px w-full ${isOver ? calcOpacityOnDrop() : ""}`}
+          style={{top: "24px"}}
+          ></div>
+
+
           <div
             className={`w-full flex-grow ${
               globalSettingsData.picBackground ? "" : bordersIfNoBackground()
@@ -208,7 +219,7 @@ function GapAfterTab({
         <div
           className={`h-6 ${
             globalSettingsData.picBackground ? "" : bordersIfNoBackground()
-          } ${isOver ? calcOpacityOnDrop(picBackground) : ""}
+          } ${isOver ? calcOpacityOnDrop() : ""}
      
      `}
           // style={{ backgroundColor: singleColumnColor }}
