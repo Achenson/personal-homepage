@@ -122,7 +122,7 @@ function Column({
   }
 
   function bordersIfNoBackground() {
-    return `border-black border-opacity-10 border-b ${
+    return `border-black border-opacity-10 ${
       tabDataLength === 0 ? "" : ""
     }`;
   }

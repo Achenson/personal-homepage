@@ -208,7 +208,7 @@ function GapAfterTab({
 
           <div
             className={`w-full flex-grow ${
-              globalSettingsData.picBackground ? "" : bordersIfNoBackground()
+              globalSettingsData.picBackground ? "" : `${bordersIfNoBackground()} border-b`
             }
             ${isOver ? "opacity-30 bg-blueGray-200" : ""}
           `}
