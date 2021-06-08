@@ -31,7 +31,7 @@ function GapAfterTab({
   tabID,
   picBackground,
   isThisLastGap,
-  isThisTheOnlyGap
+  isThisTheOnlyGap,
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -175,7 +175,7 @@ function GapAfterTab({
   }
 
   function bordersIfNoBackground() {
-    return `border-black border-opacity-10 border-l border-r`;
+    return `border-black border-opacity-10`;
   }
 
   /* 
@@ -191,24 +191,40 @@ function GapAfterTab({
             className={`h-6 ${
               globalSettingsData.picBackground
                 ? ""
-                : `${bordersIfNoBackground()} ${
-                    isThisTheOnlyGap ? "border-t" : ""
-                  }`
+                : `${bordersIfNoBackground()} `
             }
-             ${isOver ? calcOpacityOnDrop() : ""}
+             ${
+               isOver
+                 ? `${calcOpacityOnDrop()}`
+                 : ` ${
+                     !globalSettingsData.picBackground
+                       ? "border-r border-l"
+                       : ""
+                   } ${
+                     isThisTheOnlyGap && !globalSettingsData.picBackground
+                       ? "border-t"
+                       : ""
+                   }`
+             }
         
          `}
             // style={{ backgroundColor: singleColumnColor }}
           ></div>
-          
-          <div className={`absolute h-px w-full ${isOver ? calcOpacityOnDrop() : ""}`}
-          style={{top: "24px"}}
-          ></div>
 
+          {!globalSettingsData.picBackground && (
+            <div
+              className={`absolute h-px w-full ${
+                isOver ? calcOpacityOnDrop() : ""
+              }`}
+              style={{ top: "24px" }}
+            ></div>
+          )}
 
           <div
             className={`w-full flex-grow ${
-              globalSettingsData.picBackground ? "" : `${bordersIfNoBackground()} border-b`
+              globalSettingsData.picBackground
+                ? ""
+                : `${bordersIfNoBackground()} border-b border-l border-r`
             }
             ${isOver ? "opacity-30 bg-blueGray-200" : ""}
           `}
@@ -218,7 +234,9 @@ function GapAfterTab({
       ) : (
         <div
           className={`h-6 ${
-            globalSettingsData.picBackground ? "" : bordersIfNoBackground()
+            globalSettingsData.picBackground
+              ? ""
+              : `${bordersIfNoBackground()} border-l border-r`
           } ${isOver ? calcOpacityOnDrop() : ""}
      
      `}
