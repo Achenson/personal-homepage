@@ -529,6 +529,7 @@ DONE 415. newBookmark and editTab color too dirty  when background on? DONE
 (half-done) 414. styling last gap if short (column color visible) and empty column color visible when draggin sth on it
 417. saving to localStorage?
 418. app structure notes
+419. logout animation wheh login anmiation is still on
 
 
 

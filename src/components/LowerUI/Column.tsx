@@ -264,7 +264,7 @@ function Column({
         <div
           className="absolute"
           style={{
-            top: "-30px",
+            top: upperVisState.addTagVis_xs  ? "-58px" : "-30px",
             right: "0px",
           }}
         >

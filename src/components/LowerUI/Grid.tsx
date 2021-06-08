@@ -259,7 +259,7 @@ function Grid({
         }
 
         if (breakpoint >= 2) {
-          return `repeat(2, minmax(0, ${maxColWidth}))`;
+          return `repeat(${breakpoint}, minmax(0, ${maxColWidth}))`;
         }
 
         return `repeat(1, minmax(0, ${maxColWidth}))`;
@@ -278,7 +278,14 @@ function Grid({
         }
 
         return `repeat(1, minmax(0, ${maxColWidth}))`;
-    }
+
+        
+        
+      }
+      
+      // return `repeat(${breakpoint}, minmax(0, ${maxColWidth}))`
+
+
   }
 
   return (
