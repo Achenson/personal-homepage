@@ -24,7 +24,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   upperVisState: InitUpperVisState;
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
-  breakpoint: 1|2|3|4;
+  breakpoint: 1 | 2 | 3 | 4;
 }
 
 // const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
@@ -33,7 +33,7 @@ function Column({
   upperVisDispatch,
   upperVisState,
   setTabType,
-  breakpoint
+  breakpoint,
 }: Props): JSX.Element {
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
@@ -127,6 +127,48 @@ function Column({
     }`;
   }
 
+  function shouldRightUiRender(breakpoint: 1 | 2 | 3 | 4): boolean {
+    // let result: boolean = false;
+
+    let nrOfCols = globalSettingsData.numberOfCols;
+
+    switch (breakpoint) {
+      case 4:
+        return nrOfCols === colNumber ? true : false;
+      case 3:
+        // return ((nrOfCols === 4 || nrOfCols === 3) && colNumber === 3) ||
+        return (nrOfCols >= 3 && colNumber === 3) ||
+          (nrOfCols === 2 && colNumber === 2) ||
+          (nrOfCols === 1 && colNumber === 1)
+          ? true
+          : false;
+      case 2:
+        return (nrOfCols >= 2 && colNumber === 2) ||
+          (nrOfCols === 1 && colNumber === 1)
+          ? true
+          : false;
+      case 1:
+        return colNumber === 1 ? true : false;
+    }
+
+    /* 
+    breakpoint - 4:
+    IV: 4, III: 3 II:2 I:1 (roman: nr of cols) (arabic: col with rightUirendered)
+
+    breakpoint - 3:
+    IV: 3, III: 3 II:2 I:1 
+
+    breakpoint - 2:
+    IV: 2, III: 2 II:2 I:1 
+
+    breakpoint - 1:
+    IV: 1, III: 1 II:1 I:1 
+    
+    */
+
+    // return result;
+  }
+
   return (
     <div
       className={`h-full relative flex flex-col ${
@@ -200,8 +242,8 @@ function Column({
         }`}
       ></div> */}
 
-{/* if this is the last columns */}
-      {colNumber ===  1 && (
+      {/* if this is the last columns */}
+      {colNumber === 1 && (
         <div
           className="absolute"
           style={{
@@ -216,12 +258,12 @@ function Column({
         </div>
       )}
 
-      {colNumber ===  globalSettingsData.numberOfCols && (
+      {shouldRightUiRender(breakpoint) && (
         <div
           className="absolute"
           style={{
             top: "-32px",
-            right: "0px"
+            right: "0px",
           }}
         >
           <UpperRightMenu
