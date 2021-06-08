@@ -24,7 +24,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   upperVisState: InitUpperVisState;
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
-  breakpoint: 1 | 2 | 3 | 4;
+  breakpoint: 1 | 2 | 3 | 4 | null;
 }
 
 // const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
@@ -127,8 +127,8 @@ function Column({
     }`;
   }
 
-  function shouldRightUiRender(breakpoint: 1 | 2 | 3 | 4): boolean {
-    // let result: boolean = false;
+  function shouldRightUiRender(breakpoint: 1 | 2 | 3 | 4| null): boolean {
+    
 
     let nrOfCols = globalSettingsData.numberOfCols;
 
@@ -150,6 +150,8 @@ function Column({
       case 1:
         return colNumber === 1 ? true : false;
     }
+
+    return false;
 
     /* 
     breakpoint - 4:

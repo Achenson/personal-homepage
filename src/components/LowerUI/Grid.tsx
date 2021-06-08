@@ -43,7 +43,7 @@ function Grid({
 
   const windowSize = useWindowSize();
 
-  const [breakpoint, setBreakpoint] = useState<1 | 2 | 3 | 4>(() =>
+  const [breakpoint, setBreakpoint] = useState<1 | 2 | 3 | 4 | null>(() =>
     calcBreakpoint()
   );
 
@@ -66,7 +66,7 @@ function Grid({
       }
     }
 
-    return 1;
+    return null;
   }
 
   useEffect(() => {
@@ -231,44 +231,53 @@ function Grid({
 
   function gridSettings(
     numberOfCols: 1 | 2 | 3 | 4,
-    breakpoint: 1 | 2 | 3 | 4
+    breakpoint: 1 | 2 | 3 | 4| null
   ) {
+
+    if(!breakpoint) {
+      return;
+    }
+    // same as XS sizing breakpoint
+    const maxColWidth = "490px"
+
     switch (numberOfCols) {
+
+      
       case 1:
-        return `repeat(1, minmax(0, 800px))`;
+        return `repeat(1, minmax(0, ${maxColWidth}))`;
 
       case 2:
         // return `repeat(2, minmax(0, 800px)) `;
         if (breakpoint >= 2) {
-          return `repeat(2, minmax(0, 800px))`;
+          return `repeat(2, minmax(0, ${maxColWidth}))`;
         }
-        return `repeat(1, minmax(0, 800px))`;
+        return `repeat(1, minmax(0, ${maxColWidth}))`;
 
       case 3:
         if (breakpoint >= 3) {
-          return `repeat(3, minmax(0, 800px))`;
+          return `repeat(3, minmax(0, ${maxColWidth}))`;
         }
 
         if (breakpoint >= 2) {
-          return `repeat(2, minmax(0, 800px))`;
+          return `repeat(2, minmax(0, ${maxColWidth}))`;
         }
 
-        return `repeat(1, minmax(0, 800px))`;
+        return `repeat(1, minmax(0, ${maxColWidth}))`;
 
       case 4:
         if (breakpoint >= 4) {
-          return `repeat(4, minmax(0, 800px))`;
+          return `repeat(4, minmax(0, ${maxColWidth}))`;
         }
 
         if (breakpoint >= 3) {
-          return `repeat(3, minmax(0, 800px))`;
+          return `repeat(3, minmax(0, ${maxColWidth}))`;
         }
 
         if (breakpoint >= 2) {
-          return `repeat(2, minmax(0, 800px))`;
+          return `repeat(2, minmax(0, ${maxColWidth}))`;
         }
 
-        return `repeat(1, minmax(0, 800px))`;
+        return `repeat(1, minmax(0, ${maxColWidth}))`;
     }
   }
 
@@ -285,7 +294,7 @@ function Grid({
         }}
         // className={`grid gap-x-2 gap-y-6 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`}
       >
-        {renderColumns(globalSettingsData.numberOfCols)}
+        {breakpoint && renderColumns(globalSettingsData.numberOfCols)}
       </div>
       <div className="h-72"></div>
     </div>
