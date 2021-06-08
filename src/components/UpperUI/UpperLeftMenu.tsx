@@ -23,9 +23,10 @@ function UpperLeftMenu({
 }: Props): JSX.Element {
   // const [columnSelected, setColumnSelected] = useState<number | null>(null);
 
-  const [defaultColorsFor, setDefaultColorsFor] = useState<
-    "column_1" | "column_2" | "column_3" | "column_4" | "unselected"
-  >("unselected");
+  const [defaultColorsFor, setDefaultColorsFor] =
+    useState<"column_1" | "column_2" | "column_3" | "column_4" | "unselected">(
+      "unselected"
+    );
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
@@ -83,7 +84,8 @@ function UpperLeftMenu({
         >
           {columnsRendering(4, globalSettingsData.oneColorForAllCols)}
         </div>
-        {globalSettingsData.picBackground ? null : (
+
+        {/* {globalSettingsData.picBackground ? null : (
           <div className="absolute hidden" style={{bottom: "20px"}}>
              <BackgroundColor_UpperUI
             // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
@@ -91,32 +93,34 @@ function UpperLeftMenu({
           />
           </div>
          
-        )}
-
+        )} */}
       </div>
       <div className="flex justify-between w-16 ml-2">
         {globalSettingsData.picBackground ? null : (
           <div className="">
-              <BackgroundColor_UpperUI
-            // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
-            upperVisDispatch={upperVisDispatch}
-          />
+            <BackgroundColor_UpperUI
+              // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
+              upperVisDispatch={upperVisDispatch}
+            />
           </div>
-        
         )}
         <EyeOff_UpperUI upperVisDispatch={upperVisDispatch} />
       </div>
 
       {/* <div className="absolute left-0" style={{ bottom: "104px" }}> */}
-      <div className="absolute left-0 top-3">
+      <div>
         {upperVisState.colorsColumnVis && (
-          <ColorsToChoose_DefaultAndColumns
-            defaultColorsFor={defaultColorsFor}
-            leftPositioning={"0px"}
-          />
+          <div className="absolute left-0 bottom-32">
+            <ColorsToChoose_DefaultAndColumns
+              defaultColorsFor={defaultColorsFor}
+              leftPositioning={"0px"}
+            />
+          </div>
         )}
         {upperVisState.colorsBackgroundVis && (
-          <div className="absolute left-60 top-7">
+          <div className="absolute left-60"
+          style={{bottom: "104px"}}
+          >
             <ColorsToChoose_Background />
           </div>
         )}

@@ -262,7 +262,7 @@ function Column({
         <div
           className="absolute"
           style={{
-            top: "-32px",
+            top: "-30px",
             right: "0px",
           }}
         >
