@@ -174,14 +174,17 @@ function GapAfterTab({
     return `bg-${tabBeingDraggedColor_Data.tabColor} opacity-60`;
   }
 
-  function bordersIfNoBackground() {
-    return `border-black border-opacity-10`;
-  }
+  function upperLastGapBorderDrag(): string {
+    if (isOver) {
+      return calcOpacityOnDrop();
+    }
 
-  /* 
-  
-  
-  */
+    if (globalSettingsData.picBackground) {
+      return "";
+    }
+
+    return `border-r border-l ${isThisTheOnlyGap ? "border-t" : ""}`;
+  }
 
   return (
     <>
@@ -191,26 +194,13 @@ function GapAfterTab({
             className={`h-6 ${
               globalSettingsData.picBackground
                 ? ""
-                : `${bordersIfNoBackground()} `
+                : `border-black border-opacity-10 `
             }
-             ${
-               isOver
-                 ? `${calcOpacityOnDrop()}`
-                 : ` ${
-                     !globalSettingsData.picBackground
-                       ? "border-r border-l"
-                       : ""
-                   } ${
-                     isThisTheOnlyGap && !globalSettingsData.picBackground
-                       ? "border-t"
-                       : ""
-                   }`
-             }
-        
-         `}
+            ${upperLastGapBorderDrag()} `}
             // style={{ backgroundColor: singleColumnColor }}
           ></div>
 
+          {/* 1px height to cover bottom of the column when draggind */}
           {!globalSettingsData.picBackground && (
             <div
               className={`absolute h-px w-full ${
@@ -224,7 +214,7 @@ function GapAfterTab({
             className={`w-full flex-grow ${
               globalSettingsData.picBackground
                 ? ""
-                : `${bordersIfNoBackground()} border-b border-l border-r`
+                : `border-black border-opacity-10 border-l border-r border-b`
             }
             ${isOver ? "opacity-30 bg-blueGray-200" : ""}
           `}
@@ -236,7 +226,7 @@ function GapAfterTab({
           className={`h-6 ${
             globalSettingsData.picBackground
               ? ""
-              : `${bordersIfNoBackground()} border-l border-r`
+              : `border-black border-opacity-10 border-l border-r`
           } ${isOver ? calcOpacityOnDrop() : ""}
      
      `}

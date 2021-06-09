@@ -415,6 +415,8 @@ DONE 350. can't access tab options with touch DONE
 DONE 351. ColorsToChoose_Default - control positioning by props, not inside components DONE
 DONE 352. clear svgs DONE
 DONE 353. SingleColor_DefaultAndColumn SingleColor_Column_Img unify? DONE
+DONE 354. limit column width? -> make UpperLeftUI part of 1st col, UpperRightMenu part of last col,
+    in Grid: justify-content center & set Cols to repeat minmax(0,<maxwidth>) DONE
 XXX 355. upperRightUI: Note to close to the lower svgs?XXX
 DONE 356. selectables bug: no list if string lenght will be 0 DONE (now opens on change, or with arrow down)
 DONE 356.5 newTab newBookmark EditTab bookmark_lowerUI -> change bookmarks/tags naming to selectables, extract functions DONE
@@ -489,8 +491,9 @@ DONE 411. new&edit lower UI with longer TAB contetn -> implement contrast to the
 DONE 412. bookmark lower UI edit & editTab: better contrast DONE
 DONE 413. bookmark edits: should be opening, not toggling! DONE
 DONE 413.5 check if overflow-hidden is needed (flex growth etc.) -> 
+DONE 414. styling last gap if short (column color visible) and empty column color visible when draggin sth on it DONE
 change bookmark_lowerUI (flex-grow!) DONE
-DONE 414. bookmark Edit should be shown instead of bookmark, not on top of the tab? DONE
+DONE 414.5 bookmark Edit should be shown instead of bookmark, not on top of the tab? DONE
 DONE 415. newBookmark and editTab color too dirty  when background on? DONE
 
 
@@ -511,11 +514,6 @@ DONE 415. newBookmark and editTab color too dirty  when background on? DONE
 341. bookmark_lowerUI -> divide function to new & edit
 346. error in console.log if empty tag auto deletes itself
 
-354. limit column width? -> make UpperLeftUI part of 1st col, UpperRightMenu part of last col,
-    in Grid: justify-content center & set Cols to repeat minmax(0,<maxwidth>)
-
-
-
 371. fixed position of upperMenu?
 371. UppperUI should be higher on small screens? (remember to adjust UpperLeftUI colors to not cause flickering)
 
@@ -526,13 +524,9 @@ DONE 415. newBookmark and editTab color too dirty  when background on? DONE
 
 409. vulnerabilities
 
-(half-done) 414. styling last gap if short (column color visible) and empty column color visible when draggin sth on it
 417. saving to localStorage?
 418. app structure notes
 419. logout animation wheh login anmiation is still on
-
-
-
 
  
 
