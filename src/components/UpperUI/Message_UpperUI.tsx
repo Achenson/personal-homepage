@@ -21,6 +21,15 @@ function Message_UpperUI({
     }
   }, [fadeInEnd, setClose]);
 
+  // instant animation change when message changes:
+  //  setting state to initial
+  useEffect(() => {
+    if (upperVisState.messagePopup) {
+      setClose(false);
+      setFadeInEnd(false);
+    }
+  }, [upperVisState.messagePopup, setClose, setFadeInEnd]);
+
   return (
     <div
       className="absolute flex justify-center items-center right-0 h-16 w-48 bg-white bg-opacity-80 rounded-md border border-gray-700"

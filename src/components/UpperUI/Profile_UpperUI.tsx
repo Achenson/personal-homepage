@@ -74,9 +74,11 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 upperVisDispatch({ type: "PROFILE_TOGGLE" });
               }}
             >
-              <CancelSVG className="h-5 w-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900
+              <CancelSVG
+                className="h-5 w-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900
               
-              " />
+              "
+              />
             </button>
           </div>
 
@@ -167,7 +169,7 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                     }
 
                     upperVisDispatch({ type: "PROFILE_TOGGLE" });
-                    upperVisDispatch({type: "MESSAGE_OPEN_LOGIN"})
+                    upperVisDispatch({ type: "MESSAGE_OPEN_LOGIN" });
                   }}
                 >
                   Login
