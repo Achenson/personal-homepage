@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
+import { backgroundColorState } from "../../state/colorsState";
+import { globalSettingsState } from "../../state/defaultSettings";
+import { backgroundColors } from "../../utils/colors_background";
+
 import "../../utils/fade.css";
 
 interface Props {
@@ -14,6 +18,10 @@ function Message_UpperUI({
 }: Props): JSX.Element {
   const [close, setClose] = useState(false);
   const [fadeInEnd, setFadeInEnd] = useState(false);
+
+  const [backgroundColorData, setBackgroundColorData] =
+    backgroundColorState.use();
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   useEffect(() => {
     if (fadeInEnd) {
@@ -30,9 +38,21 @@ function Message_UpperUI({
     }
   }, [upperVisState.messagePopup, setClose, setFadeInEnd]);
 
+  function backgroundColor(): string {
+    if (globalSettingsData.picBackground) {
+      return "white";
+    }
+
+    if (backgroundColorData === backgroundColors[0][0]) {
+      return "blueGray-50";
+    }
+
+    return "white";
+  }
+
   return (
     <div
-      className="absolute flex justify-center items-center right-0 h-16 w-48 bg-white bg-opacity-80 rounded-md border border-gray-700"
+      className={`absolute flex justify-center items-center right-0 h-16 w-48 bg-${backgroundColor()} bg-opacity-80 rounded-md `}
       style={{ top: "12px", animation: `${close ? "fadeOut" : "fadeIn"} 2s` }}
       onAnimationEnd={() => {
         // runs after fadeIn

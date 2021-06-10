@@ -496,6 +496,7 @@ change bookmark_lowerUI (flex-grow!) DONE
 DONE 414.5 bookmark Edit should be shown instead of bookmark, not on top of the tab? DONE
 DONE 415. newBookmark and editTab color too dirty  when background on? DONE
 DONE 419. logout animation wheh login anmiation is still on DONE
+DONE 420. message popup better styling DONE
 
 
 1. purgecss at the end of project?
@@ -527,7 +528,7 @@ DONE 419. logout animation wheh login anmiation is still on DONE
 
 417. saving to localStorage?
 418. app structure notes
-420. message popup better styling
+421. make max col width smaller
 
  
 
