@@ -498,6 +498,7 @@ DONE 415. newBookmark and editTab color too dirty  when background on? DONE
 DONE 419. logout animation wheh login anmiation is still on DONE
 DONE 420. message popup better styling DONE
 DONE 423. bg colors wrong position when less than 4 cols are set DONE
+DONE 424. message - make it smaller on xs DONE
 DONE 425. rightUI wrong positioning if going from small to bigger screen! DONE
 
 
@@ -532,7 +533,6 @@ DONE 425. rightUI wrong positioning if going from small to bigger screen! DONE
 418. app structure notes
 421. make max col width smaller
 422. different accountin for right scroll on small scrren
-424. message - make it smaller on xs
 
  
 

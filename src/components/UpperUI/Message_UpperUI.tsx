@@ -47,13 +47,17 @@ function Message_UpperUI({
       return "blueGray-50";
     }
 
+    if (backgroundColorData === backgroundColors[0][1]) {
+      return "blueGray-100";
+    }
+
     return "white";
   }
 
   return (
     <div
-      className={`absolute flex justify-center items-center right-0 h-16 w-48 bg-${backgroundColor()} bg-opacity-80 rounded-md `}
-      style={{ top: "12px", animation: `${close ? "fadeOut" : "fadeIn"} 2s` }}
+      className={`absolute flex justify-center items-center right-0 h-16 w-28 xs:w-40 top-4 text-center bg-${backgroundColor()} bg-opacity-80 rounded-md `}
+      style={{ animation: `${close ? "fadeOut" : "fadeIn"} 2s` }}
       onAnimationEnd={() => {
         // runs after fadeIn
         if (!close) {
