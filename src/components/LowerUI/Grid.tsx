@@ -43,31 +43,31 @@ function Grid({
 
   const windowSize = useWindowSize();
 
-  const [breakpoint, setBreakpoint] = useState<1 | 2 | 3 | 4 | null>(() =>
-    calcBreakpoint()
+  const [breakpoint, setBreakpoint] = useState<0 | 1 | 2 | 3 | 4 | null>(
+    null
   );
 
-  function calcBreakpoint() {
-    if (windowSize.width) {
-      // if (windowSize.width >= 1280) {
-      //   return "xl";
-      // }
+  // function calcBreakpoint() {
+  //   if (windowSize.width) {
+  //     // if (windowSize.width >= 1280) {
+  //     //   return "xl";
+  //     // }
 
-      if (windowSize.width >= 1024) {
-        return 4;
-      }
+  //     if (windowSize.width >= 1024) {
+  //       return 4;
+  //     }
 
-      if (windowSize.width >= 768) {
-        return 3;
-      }
+  //     if (windowSize.width >= 768) {
+  //       return 3;
+  //     }
 
-      if (windowSize.width >= 640) {
-        return 2;
-      }
-    }
+  //     if (windowSize.width >= 640) {
+  //       return 2;
+  //     }
+  //   }
 
-    return null;
-  }
+  //   return null;
+  // }
 
   useEffect(() => {
     if (windowSize.width) {
@@ -91,7 +91,13 @@ function Grid({
         return;
       }
 
-      setBreakpoint(1);
+      if (windowSize.width >= 490) {
+        setBreakpoint(1);
+        return;
+      }
+
+
+      setBreakpoint(0);
     }
   }, [windowSize.width]);
 
@@ -231,10 +237,10 @@ function Grid({
 
   function gridSettings(
     numberOfCols: 1 | 2 | 3 | 4,
-    breakpoint: 1 | 2 | 3 | 4| null
+    breakpoint: 0 | 1 | 2 | 3 | 4| null
   ) {
 
-    if(!breakpoint) {
+    if(typeof breakpoint !== "number") {
       return;
     }
     // same as XS sizing breakpoint
@@ -301,7 +307,7 @@ function Grid({
         }}
         // className={`grid gap-x-2 gap-y-6 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`}
       >
-        {breakpoint && renderColumns(globalSettingsData.numberOfCols)}
+        {typeof breakpoint === "number" && renderColumns(globalSettingsData.numberOfCols)}
       </div>
       <div className="h-72"></div>
     </div>

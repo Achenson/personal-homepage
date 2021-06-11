@@ -497,6 +497,7 @@ DONE 414.5 bookmark Edit should be shown instead of bookmark, not on top of the 
 DONE 415. newBookmark and editTab color too dirty  when background on? DONE
 DONE 419. logout animation wheh login anmiation is still on DONE
 DONE 420. message popup better styling DONE
+DONE 425. rightUI wrong positioning if going from small to bigger screen! DONE
 
 
 1. purgecss at the end of project?
@@ -529,6 +530,9 @@ DONE 420. message popup better styling DONE
 417. saving to localStorage?
 418. app structure notes
 421. make max col width smaller
+422. different accountin for right scroll on small scrren
+423. bg colors wrong position on small screen
+424. message - make it smaller on xs
 
  
 

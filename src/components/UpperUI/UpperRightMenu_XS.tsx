@@ -35,6 +35,13 @@ function UpperRightMenu({
   return (
     <>
       {upperVisState.addTagVis_xs && (
+
+
+
+
+
+
+
         <div className="flex xs:hidden justify-around">
           <button
             className="h-7 w-7 focus:outline-none focus:ring-2 focus:ring-blueGray-400 ring-inset"
@@ -88,39 +95,7 @@ function UpperRightMenu({
         </div>
       )}
 
-      {/* {upperVisState.settingsVis_xs && (
-        <div className="flex xs:hidden items-center justify-around">
-          <BookmarkSVG
-            className={`invisible h-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} mr-1`}
-          />
-          <PhotographSVG
-            className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            style={{ marginLeft: "-5px" }}
-            onClick={() => {
-              // setBackgroundSettingsVis((b) => !b);
-
-              upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
-            }}
-          />
-          <ColorSVG
-            className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
-            style={{ marginLeft: "-1px" }}
-            onClick={() => {
-              upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
-              // setColorsVis((b) => !b);
-            }}
-          />
-          <SettingsSVG
-            className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} -ml-1`}
-            onClick={() => {
-              // setTabOpenedData(null)
-
-              // setCloseAllTabsData(true);
-              upperVisDispatch({ type: "SETTINGS_TOGGLE" });
-            }}
-          />
-        </div>
-      )} */}
+    
 
       <div
         className="flex xs:hidden justify-around"

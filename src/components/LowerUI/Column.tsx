@@ -24,7 +24,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   upperVisState: InitUpperVisState;
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
-  breakpoint: 1 | 2 | 3 | 4 | null;
+  breakpoint: 0| 1 | 2 | 3 | 4 | null;
 }
 
 // const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
@@ -122,14 +122,10 @@ function Column({
   }
 
   function bordersIfNoBackground() {
-    return `border-black border-opacity-10 ${
-      tabDataLength === 0 ? "" : ""
-    }`;
+    return `border-black border-opacity-10 ${tabDataLength === 0 ? "" : ""}`;
   }
 
-  function shouldRightUiRender(breakpoint: 1 | 2 | 3 | 4| null): boolean {
-    
-
+  function shouldRightUiRender(breakpoint: 0 | 1 | 2 | 3 | 4 | null): boolean {
     let nrOfCols = globalSettingsData.numberOfCols;
 
     switch (breakpoint) {
@@ -148,6 +144,8 @@ function Column({
           ? true
           : false;
       case 1:
+        return colNumber === 1 ? true : false;
+      case 0:
         return colNumber === 1 ? true : false;
     }
 
@@ -264,7 +262,11 @@ function Column({
         <div
           className="absolute"
           style={{
-            top: upperVisState.addTagVis_xs  ? "-58px" : "-30px",
+            // top: upperVisState.addTagVis_xs  ? "-58px" : "-30px",
+            top:
+              upperVisState.addTagVis_xs && breakpoint === 0
+                ? `-58px`
+                : "-30px",
             right: "0px",
           }}
         >
