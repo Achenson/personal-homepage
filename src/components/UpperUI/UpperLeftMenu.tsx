@@ -65,7 +65,7 @@ function UpperLeftMenu({
   }
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex relative items-center justify-between">
       {/* <div className="absolute left-0 bottom-0"> */}
       <div className="flex relative justify-between items-center mb-2 mt-2">
         {/* <p className="w-32">Columns</p> */}
@@ -101,6 +101,7 @@ function UpperLeftMenu({
             <BackgroundColor_UpperUI
               // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
               upperVisDispatch={upperVisDispatch}
+              upperVisState={upperVisState}
             />
           </div>
         )}
@@ -117,13 +118,14 @@ function UpperLeftMenu({
             />
           </div>
         )}
-        {upperVisState.colorsBackgroundVis && (
+
+        {/* {upperVisState.colorsBackgroundVis && (
           <div className="absolute left-60"
           style={{bottom: "104px"}}
           >
             <ColorsToChoose_Background />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

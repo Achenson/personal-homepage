@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
+import ColorsToChoose_Background from "../Colors/ColorsToChoose_Background";
+
 import { backgroundColorState } from "../../state/colorsState";
-import {UpperVisAction} from "../../utils/interfaces"
+import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
 
 import { closeAllTabsState, tabOpenedState } from "../../state/defaultSettings";
 
@@ -9,18 +11,17 @@ import { ReactComponent as DocumentSVG } from "../../svgs/document.svg";
 
 interface Props {
   // setBackgroundColorsToChooseVis: React.Dispatch<React.SetStateAction<boolean>>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
+  upperVisState: InitUpperVisState;
 }
 
 function BackgroundColor_upperUI({
   // setBackgroundColorsToChooseVis,
-  upperVisDispatch
+  upperVisDispatch,
+  upperVisState,
 }: Props): JSX.Element {
-
-  const [
-    backgroundColorData,
-    setBackgroundColorState,
-  ] = backgroundColorState.use();
+  const [backgroundColorData, setBackgroundColorState] =
+    backgroundColorState.use();
 
   // const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
@@ -48,18 +49,26 @@ function BackgroundColor_upperUI({
   return (
     // <div className={`h-8 w-6 bg-${backgroundColorData} ${selected ? "border-2" : "border"} border-black cursor-pointer hover:border-gray-400`}
 
-    <DocumentSVG
-      // className={`h-7 bg-${calcIconBackground(backgroundColorData)} opacity-80 border border-black rounded-lg cursor-pointer fill-current text-${backgroundColorData} hover:border-gray-500`}
-      className={`h-7 transition-colors duration-75 ${calcIconBackground(
-        backgroundColorData
-      )} opacity-80 border border-black rounded-lg cursor-pointer  hover:border-gray-500`}
-      onClick={() => {
-        // setTabOpenedData(null)
-        // setCloseAllTabsData(true);
-        setSelected((b) => !b);
-        upperVisDispatch({type: "COLORS_BACKGROUND_TOGGLE"})
-      }}
-    />
+    <div className="relative">
+      <DocumentSVG
+        // className={`h-7 bg-${calcIconBackground(backgroundColorData)} opacity-80 border border-black rounded-lg cursor-pointer fill-current text-${backgroundColorData} hover:border-gray-500`}
+        className={`h-7 transition-colors duration-75 ${calcIconBackground(
+          backgroundColorData
+        )} opacity-80 border border-black rounded-lg cursor-pointer  hover:border-gray-500`}
+        onClick={() => {
+          // setTabOpenedData(null)
+          // setCloseAllTabsData(true);
+          setSelected((b) => !b);
+          upperVisDispatch({ type: "COLORS_BACKGROUND_TOGGLE" });
+        }}
+      />
+
+      {upperVisState.colorsBackgroundVis && (
+        <div className="absolute" style={{ bottom: "102px", left: "104px" }}>
+          <ColorsToChoose_Background />
+        </div>
+      )}
+    </div>
   );
 }
 
