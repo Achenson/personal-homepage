@@ -43,9 +43,7 @@ function Grid({
 
   const windowSize = useWindowSize();
 
-  const [breakpoint, setBreakpoint] = useState<0 | 1 | 2 | 3 | 4 | null>(
-    null
-  );
+  const [breakpoint, setBreakpoint] = useState<0 | 1 | 2 | 3 | 4 | null>(null);
 
   // function calcBreakpoint() {
   //   if (windowSize.width) {
@@ -95,7 +93,6 @@ function Grid({
         setBreakpoint(1);
         return;
       }
-
 
       setBreakpoint(0);
     }
@@ -237,27 +234,25 @@ function Grid({
 
   function gridSettings(
     numberOfCols: 1 | 2 | 3 | 4,
-    breakpoint: 0 | 1 | 2 | 3 | 4| null
+    breakpoint: 0 | 1 | 2 | 3 | 4 | null
   ) {
-
-    if(typeof breakpoint !== "number") {
+    if (typeof breakpoint !== "number") {
       return;
     }
-    // same as XS sizing breakpoint
-    const maxColWidth = "490px"
+    // lowest possible so sm version of UpperRightMenu still don't crash with left side
+    const maxColWidth_1col = "450px";
+    const maxColWidth = "350px"
 
     switch (numberOfCols) {
-
-      
       case 1:
-        return `repeat(1, minmax(0, ${maxColWidth}))`;
+        return `repeat(1, minmax(0, ${maxColWidth_1col}))`;
 
       case 2:
         // return `repeat(2, minmax(0, 800px)) `;
         if (breakpoint >= 2) {
           return `repeat(2, minmax(0, ${maxColWidth}))`;
         }
-        return `repeat(1, minmax(0, ${maxColWidth}))`;
+        return `repeat(1, minmax(0, ${maxColWidth_1col}))`;
 
       case 3:
         if (breakpoint >= 3) {
@@ -268,7 +263,7 @@ function Grid({
           return `repeat(${breakpoint}, minmax(0, ${maxColWidth}))`;
         }
 
-        return `repeat(1, minmax(0, ${maxColWidth}))`;
+        return `repeat(1, minmax(0, ${maxColWidth_1col}))`;
 
       case 4:
         if (breakpoint >= 4) {
@@ -283,15 +278,10 @@ function Grid({
           return `repeat(2, minmax(0, ${maxColWidth}))`;
         }
 
-        return `repeat(1, minmax(0, ${maxColWidth}))`;
+        return `repeat(1, minmax(0, ${maxColWidth_1col}))`;
+    }
 
-        
-        
-      }
-      
-      // return `repeat(${breakpoint}, minmax(0, ${maxColWidth}))`
-
-
+    // return `repeat(${breakpoint}, minmax(0, ${maxColWidth}))`
   }
 
   return (
@@ -307,7 +297,8 @@ function Grid({
         }}
         // className={`grid gap-x-2 gap-y-6 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`}
       >
-        {typeof breakpoint === "number" && renderColumns(globalSettingsData.numberOfCols)}
+        {typeof breakpoint === "number" &&
+          renderColumns(globalSettingsData.numberOfCols)}
       </div>
       <div className="h-72"></div>
     </div>
