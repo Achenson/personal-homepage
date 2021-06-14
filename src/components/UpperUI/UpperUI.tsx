@@ -8,15 +8,15 @@ import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
 import Message_UpperUI from "./Message_UpperUI";
 
 interface Props {
-  setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: InitUpperVisState;
+  // setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: InitUpperVisState;
 }
 
 function UpperUI({
-  setTabType,
-  upperVisDispatch,
-  upperVisState,
+  // setTabType,
+  // upperVisDispatch,
+  // upperVisState,
 }: Props): JSX.Element {
   // const [newLinkVis, setNewLinkVis] = useState<boolean>(false);
 
@@ -35,11 +35,11 @@ function UpperUI({
         upperVisState={upperVisState}
       /> */}
 
-      {upperVisState.messagePopup && (
+      {/* {upperVisState.messagePopup && (
         <Message_UpperUI upperVisDispatch={upperVisDispatch}
         upperVisState={upperVisState}
         />
-      )}
+      )} */}
 
       
     </div>

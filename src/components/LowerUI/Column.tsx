@@ -10,6 +10,7 @@ import { globalSettingsState } from "../../state/defaultSettings";
 
 import UpperLeftMenu from "../UpperUI/UpperLeftMenu";
 import UpperRightMenu from "../UpperUI/UpperRightMenu";
+import Message_UpperUI from "../UpperUI/Message_UpperUI";
 
 import { backgroundColorState } from "../../state/colorsState";
 
@@ -24,7 +25,7 @@ interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   upperVisState: InitUpperVisState;
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
-  breakpoint: 0| 1 | 2 | 3 | 4 | null;
+  breakpoint: 0 | 1 | 2 | 3 | 4 | null;
 }
 
 // const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
@@ -259,22 +260,31 @@ function Column({
       )}
 
       {shouldRightUiRender(breakpoint) && (
-        <div
-          className="absolute"
-          style={{
-            // top: upperVisState.addTagVis_xs  ? "-58px" : "-30px",
-            top:
-              upperVisState.addTagVis_xs && breakpoint === 0
-                ? `-58px`
-                : "-30px",
-            right: "0px",
-          }}
-        >
-          <UpperRightMenu
-            upperVisDispatch={upperVisDispatch}
-            upperVisState={upperVisState}
-            setTabType={setTabType}
-          />
+        <div>
+          <div
+            className="absolute"
+            style={{
+              // top: upperVisState.addTagVis_xs  ? "-58px" : "-30px",
+              top:
+                upperVisState.addTagVis_xs && breakpoint === 0
+                  ? `-58px`
+                  : "-30px",
+              right: "0px",
+            }}
+          >
+            <UpperRightMenu
+              upperVisDispatch={upperVisDispatch}
+              upperVisState={upperVisState}
+              setTabType={setTabType}
+            />
+          </div>
+          {upperVisState.messagePopup && (
+            <Message_UpperUI
+              upperVisDispatch={upperVisDispatch}
+              upperVisState={upperVisState}
+            />
+           
+          )}
         </div>
       )}
     </div>

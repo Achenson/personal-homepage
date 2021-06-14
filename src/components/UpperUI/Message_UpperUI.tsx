@@ -56,7 +56,7 @@ function Message_UpperUI({
 
   return (
     <div
-      className={`absolute flex justify-center items-center right-0 h-16 w-28 xs:w-40 top-4 text-center bg-${backgroundColor()} bg-opacity-80 rounded-md `}
+      className={`absolute flex justify-center items-center right-0 h-16 w-28 xs:w-40 -top-32 text-center bg-${backgroundColor()} bg-opacity-80 rounded-md `}
       style={{ animation: `${close ? "fadeOut" : "fadeIn"} 2s` }}
       onAnimationEnd={() => {
         // runs after fadeIn
