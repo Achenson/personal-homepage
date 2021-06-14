@@ -173,7 +173,7 @@ function Main({}: Props): JSX.Element {
 
   useEffect(() => {
     if (windowSize.width) {
-      if (windowSize.width < 490) {
+      if (windowSize.width < 505) {
         upperVisDispatch({ type: "XS_SIZING_TRUE" });
       } else {
         upperVisDispatch({ type: "XS_SIZING_FALSE" });

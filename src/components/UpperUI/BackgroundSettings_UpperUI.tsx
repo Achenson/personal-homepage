@@ -30,7 +30,7 @@ function BackgroundSettings_UpperUI({ upperVisDispatch, upperVisState }: Props):
 
   useEffect(() => {
     if (windowSize.width) {
-      if (windowSize.width < 490) {
+      if (windowSize.width < 505) {
         setXsScreen(true);
       } else {
         setXsScreen(false);
