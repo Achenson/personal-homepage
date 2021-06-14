@@ -504,6 +504,7 @@ DONE 424. message - make it smaller on xs DONE
 DONE 425. rightUI wrong positioning if going from small to bigger screen! DONE
 DONE 427. make limit column growth option DONE
 DONE 429. UpperRightUI not resizing down on chrome on browser DONE (xs breakpoint changed to 505)
+DONE 430. 5 globalSettings upperRight svg without border DONE
 
 
 1. purgecss at the end of project?
@@ -537,7 +538,9 @@ DONE 429. UpperRightUI not resizing down on chrome on browser DONE (xs breakpoin
 422. different accountin for right scroll on small scrren
 426. message position matching upperRightUI ??
 428. make it possible to resize down single col width
+
 430. declutter globalSettings
+
 431. noteSVG position !?
  
 

@@ -22,9 +22,10 @@ function Settings_inner_xs({
   return (
     
       <div
-        className="xs:hidden absolute left-0 top-0 ml-4 mt-5 w-20
-        flex items-center justify-around
-         bg-gray-100 border border-black rounded-md"
+        className="xs:hidden absolute top-5
+        flex items-center justify-between
+         "
+         style={{width: "75px", left: "14px"}}
       >
         <PhotographSVG
             className={`h-6 w-6  transition-colors duration-75 
