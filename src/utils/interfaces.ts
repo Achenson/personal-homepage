@@ -28,6 +28,7 @@ export interface GlobalSettingsState {
   picBackground: boolean;
   defaultImage: string;
   oneColorForAllCols: boolean;
+  limitColGrowth: boolean;
   hideNonDeletable: boolean;
   numberOfCols: 1 | 2 | 3 | 4;
   // rssDescription: boolean;

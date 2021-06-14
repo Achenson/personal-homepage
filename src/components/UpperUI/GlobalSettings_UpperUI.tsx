@@ -97,7 +97,7 @@ function GlobalSettings_UpperUI({ upperVisDispatch, upperVisState}: Props): JSX.
       >
         <div
           className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
-          style={{ width: `${xsScreen ? "350px" : "417px"}`, height: "225px" }}
+          style={{ width: `${xsScreen ? "350px" : "417px"}`, height: "255px" }}
         >
 
         <Settings_inner_xs
@@ -136,6 +136,28 @@ function GlobalSettings_UpperUI({ upperVisDispatch, upperVisState}: Props): JSX.
               }}
             ></div>
           </div>
+          <div className="flex justify-between items-center mb-2 mt-2">
+            <p className="">Limit column width growth</p>
+            <div
+              className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                globalSettingsData.limitColGrowth
+                  ? // ? `bg-${uiColorData} hover:bg-opacity-50`
+                    // : `hover:bg-${uiColorData} hover:bg-opacity-50`
+                    `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                  : `hover:border-opacity-50`
+              } `}
+              onClick={() => {
+                setGlobalSettingsData({
+                  ...globalSettingsData,
+                  // oneColorForAllCols: !globalSettingsData.oneColorForAllCols,
+                  limitColGrowth: !globalSettingsData.limitColGrowth
+                });
+              }}
+            ></div>
+          </div>
+
+
+
           <div className="flex justify-between items-center mb-2 mt-2">
             <p className="">Hide folder containing all bookmarks</p>
             <div

@@ -14,6 +14,7 @@ export const globalSettingsState = newRidgeState<GlobalSettingsState>({
     picBackground: false,
     defaultImage: "defaultBackground",
     oneColorForAllCols: false,
+    limitColGrowth: false,
     hideNonDeletable: false,
     numberOfCols: 4,
     // rssDate: true,

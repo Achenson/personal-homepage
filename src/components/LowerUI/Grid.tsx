@@ -7,7 +7,10 @@ import {
   bookmarksAllTagsState,
 } from "../../state/tabsAndBookmarks";
 
-import { closeAllTabsState } from "../../state/defaultSettings";
+import {
+  closeAllTabsState,
+  globalSettingsState,
+} from "../../state/defaultSettings";
 
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 
@@ -15,8 +18,6 @@ import {
   backgroundColorState,
   resetColorsState,
 } from "../../state/colorsState";
-
-import { globalSettingsState } from "../../state/defaultSettings";
 
 import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
 
@@ -240,8 +241,10 @@ function Grid({
       return;
     }
     // lowest possible so sm version of UpperRightMenu still don't crash with left side
-    const maxColWidth_1col = "450px";
-    const maxColWidth = "350px"
+    const maxColWidth_1col = `${
+      globalSettingsData.limitColGrowth ? "450px" : "9999px"
+    }`;
+    const maxColWidth = `${globalSettingsData.limitColGrowth ? "350px" : "9999px"}`;
 
     switch (numberOfCols) {
       case 1:
