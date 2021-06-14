@@ -90,7 +90,7 @@ function Grid({
         return;
       }
 
-      if (windowSize.width >= 490) {
+      if (windowSize.width >= 505) {
         setBreakpoint(1);
         return;
       }

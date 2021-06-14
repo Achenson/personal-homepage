@@ -79,7 +79,7 @@ module.exports = {
         "-23": "-23deg",
       },
       screens: {
-        xs: "490px",
+        xs: "505px",
       },
     },
   },
