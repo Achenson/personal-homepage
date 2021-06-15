@@ -93,7 +93,7 @@ function GapAfterTab({
           }
         });
 
-        let itemToUpdatePriority_initial = itemToUpdate?.priority;
+        let itemToUpdatePriority_initial = itemToUpdate?.priority as number;
 
         let draggedIntoPriority = tabsData[draggedIntoIndex].priority;
 
@@ -138,16 +138,13 @@ function GapAfterTab({
                   } else {
                     // DO NOT UPDATE TABS further down then tab being dragged if tab is being dragged up
                     if (
-                      // @ts-ignore
                       draggedIntoPriority < itemToUpdatePriority_initial &&
-                      // @ts-ignore
                       tabToUpdate.priority > itemToUpdatePriority_initial
                     ) {
                       return;
                     }
                     // DO NOT UPDATE TABS further down then tab being dragged INTO if tab is being dragged down
                     if (
-                      // @ts-ignore
                       draggedIntoPriority > itemToUpdatePriority_initial &&
                       tabToUpdate.priority > draggedIntoPriority
                     ) {

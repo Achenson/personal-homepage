@@ -109,7 +109,7 @@ Props): JSX.Element {
     setTabOpened_local(tabOpened);
   }, [tabOpened]);
 
-  const reachRef = React.useRef();
+  // const reachRef = React.useRef();
   // const rect = useRect(reachRef);
 
   /* 
@@ -417,8 +417,8 @@ Props): JSX.Element {
   const [mouseOverTab, setMouseOverTab] = useState(false);
 
   useEffect(() => {
-    // @ts-ignore
-    let iconsTimeout;
+    
+    let iconsTimeout: ReturnType<typeof setTimeout>;
 
     if (mouseOverTab) {
       iconsTimeout = setTimeout(() => {
@@ -433,7 +433,7 @@ Props): JSX.Element {
       // }
     }
     return () => {
-      // @ts-ignore
+    
       clearTimeout(iconsTimeout);
     };
   }, [mouseOverTab]);
@@ -487,8 +487,8 @@ Props): JSX.Element {
           ? "hidden"
           : ""
       }`}
-      // @ts-ignore
-      ref={reachRef}
+      
+      // ref={reachRef}
     >
       <div
         ref={drag}

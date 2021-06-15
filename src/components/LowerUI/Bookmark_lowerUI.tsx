@@ -119,7 +119,7 @@ function Bookmark_lowerUI({
 
   const [tabsData, setTabsData] = tabsDataState.use();
 
-  let selectablesRef = useRef();
+  let selectablesRef = useRef<HTMLInputElement>(null);
 
   let firstFieldRef = useRef<HTMLInputElement>(null);
 
@@ -512,7 +512,6 @@ function Bookmark_lowerUI({
                 <input
                   type="text"
                   className="w-full border pl-px pr-5 input-focus"
-                  // @ts-ignore
                   ref={selectablesRef}
                   // value={tagsInput.join(", ")}
                   value={selectablesInputStr}
@@ -706,7 +705,6 @@ function Bookmark_lowerUI({
                 <input
                   type="text"
                   className="w-full border pl-px pr-5 input-focus"
-                  // @ts-ignore
                   ref={selectablesRef}
                   // value={tagsInput.join(", ")}
                   value={selectablesInputStr}

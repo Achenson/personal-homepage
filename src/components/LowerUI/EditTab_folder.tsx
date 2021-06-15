@@ -29,7 +29,7 @@ function EditTab_folder({
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
-  let selectablesRef = useRef();
+  let selectablesRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -148,7 +148,6 @@ function EditTab_folder({
             type="text"
             // min-w-0 !! ??
             className="border pl-px w-full pr-5 input-focus"
-            //@ts-ignore
             ref={selectablesRef}
             value={selectablesInputStr}
             onChange={(e) => {

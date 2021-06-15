@@ -107,7 +107,7 @@ Props): JSX.Element {
     bookmarksAllTagsState.use();
   const [uiColorData, setUiColorData] = uiColorState.use();
 
-  let selectablesRef = useRef();
+  let selectablesRef = useRef<HTMLInputElement>(null);
   let firstFieldRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -383,7 +383,6 @@ Props): JSX.Element {
               <input
                 type="text"
                 className="w-full border pl-px pr-5 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
-                // @ts-ignore
                 ref={selectablesRef}
                 // value={tagsInput.join(", ")}
                 value={selectablesInputStr}

@@ -5,7 +5,8 @@ export function handleKeyDown_inner(
   selectablesListVis: boolean,
   setSelectablesListVis: React.Dispatch<React.SetStateAction<boolean>>,
   setSelectablesInputStr: React.Dispatch<React.SetStateAction<string>>,
-  selectablesRef: React.MutableRefObject<undefined>,
+  // selectablesRef: React.MutableRefObject<undefined>,
+  selectablesRef: React.RefObject<HTMLInputElement>,
   saveFunc: () => void,
   // for NewTab upperUI, so Enter will work only for newFolder
   saveFunc_disabled: boolean = false,
@@ -15,8 +16,7 @@ export function handleKeyDown_inner(
       event.preventDefault();
       if (!selectablesListVis) {
         setSelectablesListVis(true);
-        // @ts-ignore
-        selectablesRef.current.focus();
+        (selectablesRef.current as HTMLInputElement).focus();
       }
       return;
     case "ArrowUp":

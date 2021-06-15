@@ -68,7 +68,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     };
   });
 
-  let selectablesRef = useRef();
+  let selectablesRef = useRef<HTMLInputElement>(null);
   let firstFieldRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -510,7 +510,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                   className="w-full border pl-px pr-5 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
                   // value={tabLinksInput.join(", ")}
                   value={selectablesInputStr}
-                  //@ts-ignore
                   ref={selectablesRef}
                   onChange={(e) => {
                     if (!selectablesListVis) setSelectablesListVis(true);

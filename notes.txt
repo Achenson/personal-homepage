@@ -474,6 +474,7 @@ DONE 395. tab with "ALL_TAG" special look? (mono font) DONE
    (h-full inseatd of h-screen) DONE
 DONE 396. gray-100 on Upper UI bg? DONE
 DONE 397. focus on title on upperUI components mount DONE
+DONE 398. ts-ignors -> get rid off, at least for refs (left only for react-dnd in App) DONE
 DONE 399. make links working!! DONE (direct link has to be copied - hint in an error) DONE
 DONE 401. check rss pagination && chevrons (1 page too far) DONE
 DONE 402. chrome Tab titles too high (better) DONE
@@ -533,7 +534,6 @@ DONE 432. no uiCompmementary color for black DONE
 371. fixed position of upperMenu?
 371. UppperUI should be higher on small screens? (remember to adjust UpperLeftUI colors to not cause flickering)
 
-398. ts-ignors -> get rid off, at least for refs
 
 400. error - text-center?
 
