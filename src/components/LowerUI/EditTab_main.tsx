@@ -33,7 +33,7 @@ interface Props {
   // noteInput: string | null;
   tabID: string | number;
   currentTab: SingleTabData;
- 
+
   setTabOpened_local: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -493,47 +493,49 @@ Props): JSX.Element {
           />
         )}
 
-        {errors.titleFormatErrorVis && (
-          <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.titleFormat}</p>
-        )}
+        <div className={`${tabType === "rss" ? "mt-1.5" : ""}`}>
+          {errors.titleFormatErrorVis && (
+            <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.titleFormat}</p>
+          )}
 
-        {errors.titleUniquenessErrorVis && (
-          <p className={`text-red-600 mt-1 -mb-2`}>
-            {tabErrors.titleUniqueness}
-          </p>
-        )}
+          {errors.titleUniquenessErrorVis && (
+            <p className={`text-red-600 mt-1 -mb-2`}>
+              {tabErrors.titleUniqueness}
+            </p>
+          )}
 
-        {errors.textAreaErrorVis && tabType === "note" && (
-          <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.textArea}</p>
-        )}
+          {errors.textAreaErrorVis && tabType === "note" && (
+            <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.textArea}</p>
+          )}
 
-        {errors.bookmarksErrorVis && tabType === "folder" && (
-          <p className={`text-red-600 mt-1 -mb-2`}>
-            {tabErrors.bookmarksFormat}
-          </p>
-        )}
+          {errors.bookmarksErrorVis && tabType === "folder" && (
+            <p className={`text-red-600 mt-1 -mb-2`}>
+              {tabErrors.bookmarksFormat}
+            </p>
+          )}
 
-        {errors.bookmarkExistenceErrorVis && tabType === "folder" && (
-          <p className={`text-red-600 mt-1 -mb-2`}>
-            {tabErrors.bookmarkExistence}
-          </p>
-        )}
+          {errors.bookmarkExistenceErrorVis && tabType === "folder" && (
+            <p className={`text-red-600 mt-1 -mb-2`}>
+              {tabErrors.bookmarkExistence}
+            </p>
+          )}
 
-        {errors.bookmarksRepeatErrorVis && tabType === "folder" && (
-          <p className={`text-red-600 mt-1 -mb-2`}>
-            {tabErrors.bookmarksRepeat}
-          </p>
-        )}
+          {errors.bookmarksRepeatErrorVis && tabType === "folder" && (
+            <p className={`text-red-600 mt-1 -mb-2`}>
+              {tabErrors.bookmarksRepeat}
+            </p>
+          )}
 
-        {errors.noDeletionErrorVis && (
-          <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.noDeletion}</p>
-        )}
+          {errors.noDeletionErrorVis && (
+            <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.noDeletion}</p>
+          )}
 
-        {errors.invalidLinkErrorVis && tabType === "rss" && (
-          <p className={`text-red-600 mt-1 -mb-2`}>
-            {tabErrors.invalidLinkError}
-          </p>
-        )}
+          {errors.invalidLinkErrorVis && tabType === "rss" && (
+            <p className={`text-red-600 mt-1 -mb-2`}>
+              {tabErrors.invalidLinkError}
+            </p>
+          )}
+        </div>
       </div>
 
       <div className={`pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
