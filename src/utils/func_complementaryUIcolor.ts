@@ -1,7 +1,13 @@
-export function setComplementaryUiColor(color: string, setUiColorData: (newState: string | ((prev: string) => string), ac?: ((newState: string) => any) | undefined) => any) {
+export function setComplementaryUiColor(
+  color: string,
+  setUiColorData: (
+    newState: string | ((prev: string) => string),
+    ac?: ((newState: string) => any) | undefined
+  ) => any
+) {
 
-  function colorRgx(color: string) {
-      return new RegExp(`${color}-`)
+  if (color === "black") {
+   setUiColorData("blueGray-400");
   }
 
   if (colorRgx("gray").test(color) || colorRgx("Gray").test(color)) {
@@ -21,7 +27,8 @@ export function setComplementaryUiColor(color: string, setUiColorData: (newState
   }
 
   if (
-    colorRgx("lime").test(color) || colorRgx("green").test(color) ||
+    colorRgx("lime").test(color) ||
+    colorRgx("green").test(color) ||
     colorRgx("emarald").test(color) ||
     colorRgx("teal").test(color)
   ) {
@@ -50,5 +57,9 @@ export function setComplementaryUiColor(color: string, setUiColorData: (newState
 
   if (colorRgx("pink").test(color)) {
     setUiColorData("pink-400");
+  }
+
+  function colorRgx(color: string) {
+    return new RegExp(`${color}-`);
   }
 }
