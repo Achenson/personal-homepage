@@ -266,7 +266,10 @@ function Column({
             style={{
               // top: upperVisState.addTagVis_xs  ? "-58px" : "-30px",
               top:
-                upperVisState.addTagVis_xs && breakpoint === 0
+                upperVisState.addTagVis_xs &&
+                (breakpoint === 0 ||
+                // when col growth is limited, UpperRightMenu_XS is both on xs: and sm: breakpoints
+                  (breakpoint === 1 && globalSettingsData.limitColGrowth))
                   ? `-58px`
                   : "-30px",
               right: "0px",
@@ -283,7 +286,6 @@ function Column({
               upperVisDispatch={upperVisDispatch}
               upperVisState={upperVisState}
             />
-           
           )}
         </div>
       )}

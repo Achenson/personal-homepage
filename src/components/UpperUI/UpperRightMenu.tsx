@@ -24,6 +24,7 @@ import {
   closeAllTabsState,
   tabOpenedState,
   loggedInState,
+  globalSettingsState,
 } from "../../state/defaultSettings";
 
 interface Props {
@@ -43,16 +44,20 @@ function UpperRightMenu({
 
   // const [loggedIn, setLoggedIn] = useState(false);
   const [loggedInData, setLoggedInData] = loggedInState.use();
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  const colLimit = globalSettingsData.limitColGrowth;
 
   return (
     // <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
     <div
-      className={`${
-        upperVisState.addTagVis_xs ? "h-14" : "h-7"
-      } xs:h-7 w-28 xs:w-56  block xs:flex justify-between items-center bg-white bg-opacity-80 rounded-md border border-gray-700 `}
+      className={`${upperVisState.addTagVis_xs ? "h-14" : "h-7"} ${
+        colLimit ? "sm:h-7" : "xs:h-7"
+      }  w-28 ${colLimit ? "sm:w-56" : "xs:w-56"} block ${
+        colLimit ? "sm:flex" : "xs:flex"
+      }  justify-between items-center bg-white bg-opacity-80 rounded-md border border-gray-700 `}
       style={{ marginBottom: "2px" }}
     >
-      <div className="hidden xs:flex w-28 justify-around">
+      <div className={`hidden ${ colLimit ? "sm:flex" : "xs:flex"} w-28 justify-around`}>
         {/* <AddLinkSVG */}
 
         <button
@@ -124,7 +129,7 @@ function UpperRightMenu({
       />
       {/* xs ============================^ */}
 
-      <div className="hidden xs:flex w-24 justify-around items-center mr-0.5">
+      <div className={`hidden ${colLimit ? "sm:flex" : "xs:flex"}  w-24 justify-around items-center mr-0.5`}>
         <PhotographSVG
           className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} `}
           onClick={() => {
@@ -156,7 +161,7 @@ function UpperRightMenu({
               onClick={() => {
                 // upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 setLoggedInData(false);
-                upperVisDispatch({type: "MESSAGE_OPEN_LOGOUT"})
+                upperVisDispatch({ type: "MESSAGE_OPEN_LOGOUT" });
               }}
             >
               <LogoutSVG
@@ -167,7 +172,6 @@ function UpperRightMenu({
           ) : (
             <button
               className="h-6 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-400"
-           
               onClick={() => {
                 upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 // setLoggedInData(true);

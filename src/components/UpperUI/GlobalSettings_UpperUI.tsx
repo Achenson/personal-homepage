@@ -175,7 +175,7 @@ function GlobalSettings_UpperUI({
           </div>
 
           <div className="my-0">
-            <div className={`flex items-center mb-2 mt-2 justify-between border-${uiColorData} border-t`}>
+            <div className={`flex items-center mb-2 mt-2 justify-between border-${uiColorData} border-t border-opacity-40`}>
               <p className="whitespace-nowrap w-32">RSS Display</p>
 
               <div className="flex">
@@ -225,7 +225,7 @@ function GlobalSettings_UpperUI({
               </div>
             </div>
 
-            <div className={`flex items-center mt-2 pb-1 justify-between border-${uiColorData} border-b`}>
+            <div className={`flex items-center mt-2 pb-1 justify-between border-${uiColorData} border-b border-opacity-40`}>
               <p className="whitespace-nowrap w-32">RSS Items per page</p>
               <input
                 type="number"

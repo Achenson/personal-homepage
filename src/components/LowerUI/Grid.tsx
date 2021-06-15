@@ -241,21 +241,21 @@ function Grid({
       return;
     }
     // lowest possible so sm version of UpperRightMenu still don't crash with left side
-    const maxColWidth_1col = `${
-      globalSettingsData.limitColGrowth ? "450px" : "9999px"
-    }`;
+    // const maxColWidth_1col = `${
+    //   globalSettingsData.limitColGrowth ? "350px" : "9999px"
+    // }`;
     const maxColWidth = `${globalSettingsData.limitColGrowth ? "350px" : "9999px"}`;
 
     switch (numberOfCols) {
       case 1:
-        return `repeat(1, minmax(0, ${maxColWidth_1col}))`;
+        return `repeat(1, minmax(0, ${maxColWidth}))`;
 
       case 2:
         // return `repeat(2, minmax(0, 800px)) `;
         if (breakpoint >= 2) {
           return `repeat(2, minmax(0, ${maxColWidth}))`;
         }
-        return `repeat(1, minmax(0, ${maxColWidth_1col}))`;
+        return `repeat(1, minmax(0, ${maxColWidth}))`;
 
       case 3:
         if (breakpoint >= 3) {
@@ -266,7 +266,7 @@ function Grid({
           return `repeat(${breakpoint}, minmax(0, ${maxColWidth}))`;
         }
 
-        return `repeat(1, minmax(0, ${maxColWidth_1col}))`;
+        return `repeat(1, minmax(0, ${maxColWidth}))`;
 
       case 4:
         if (breakpoint >= 4) {
@@ -281,7 +281,7 @@ function Grid({
           return `repeat(2, minmax(0, ${maxColWidth}))`;
         }
 
-        return `repeat(1, minmax(0, ${maxColWidth_1col}))`;
+        return `repeat(1, minmax(0, ${maxColWidth}))`;
     }
 
     // return `repeat(${breakpoint}, minmax(0, ${maxColWidth}))`

@@ -16,6 +16,10 @@ import { uiColorState } from "../../state/colorsState";
 
 import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
 
+import {
+  globalSettingsState,
+} from "../../state/defaultSettings";
+
 interface Props {
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
@@ -32,17 +36,16 @@ function UpperRightMenu({
   setLoggedInData,
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
+
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  const colLimit = globalSettingsData.limitColGrowth;
+
+
   return (
     <>
       {upperVisState.addTagVis_xs && (
 
-
-
-
-
-
-
-        <div className="flex xs:hidden justify-around">
+        <div className={`flex ${colLimit ? "sm:hidden" : "xs:hidden" } justify-around`}>
           <button
             className="h-7 w-7 focus:outline-none focus:ring-2 focus:ring-blueGray-400 ring-inset"
             style={{ marginLeft: "1px" }}
@@ -98,7 +101,7 @@ function UpperRightMenu({
     
 
       <div
-        className="flex xs:hidden justify-around"
+        className={`flex ${colLimit ? "sm:hidden" : "xs:hidden"} justify-around`}
         style={{ marginTop: "-1px" }}
       >
         {/* <AddLinkSVG */}
