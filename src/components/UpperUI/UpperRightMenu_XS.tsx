@@ -48,7 +48,7 @@ function UpperRightMenu({
         <div className={`flex ${colLimit ? "sm:hidden" : "xs:hidden" } justify-around`}>
           <button
             className="h-7 w-7 focus:outline-none focus:ring-2 focus:ring-blueGray-400 ring-inset"
-            style={{ marginLeft: "1px" }}
+            style={{ marginLeft: "0px" }}
             onClick={() => {
               // setNewTabVis((b) => !b);
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
@@ -63,7 +63,7 @@ function UpperRightMenu({
           {/* <AddNote */}
           <button
             className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-400"
-            style={{ marginTop: "2px", marginLeft: "1px" }}
+            style={{ marginTop: "2px", marginLeft: "0px" }}
             onClick={() => {
               // setNewTabVis((b) => !b);
 
