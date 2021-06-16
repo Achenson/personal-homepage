@@ -507,6 +507,7 @@ DONE 415. newBookmark and editTab color too dirty  when background on? DONE
 DONE 419. logout animation wheh login anmiation is still on DONE
 DONE 420. message popup better styling DONE
 DONE 421. make max col width smaller DONE
+DONE 422. different accountin for right scroll on small scrren DONE
 DONE 423. bg colors wrong position when less than 4 cols are set DONE
 DONE 424. message - make it smaller on xs DONE
 DONE 425. rightUI wrong positioning if going from small to bigger screen! DONE
@@ -538,12 +539,11 @@ DONE 432. no uiCompmementary color for black DONE
 409. vulnerabilities
 
 418. app structure notes
-422. different accountin for right scroll on small scrren
 
 433. test with Lighthouse
-434. Settings -> make it controlable by keyboard also??
+434. Settings -> make it controlable by keyboard also?? colors also?
 435. seperate types for different actions
- 
+436. right scroll flickering when disappearing problem
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

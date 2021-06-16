@@ -181,6 +181,23 @@ function Main({}: Props): JSX.Element {
     }
   }, [windowSize.width]);
 
+  const [scrollbarWidth, setScrollbarWidth] = useState(
+    (windowSize.width as number) >= 400 ? 17 : 0
+  );
+
+  useEffect(() => {
+    if (document.body.style.overflow === "visible") {
+      setScrollbarWidth(
+        window.innerWidth - document.documentElement.clientWidth
+      );
+    }
+  }, [
+    document.body.style.overflow,
+    setScrollbarWidth,
+    window.innerWidth,
+    document.documentElement.clientWidth,
+  ]);
+
   //
   useEffect(() => {
     if (
@@ -228,6 +245,12 @@ function Main({}: Props): JSX.Element {
   //     console.log(document.body.offsetHeight);
   // }, [document.body.scrollHeight, document.body.clientHeight, document.body.offsetHeight])
 
+  // let scrollbarWidth = document.body.offsetWidth - document.body.clientWidth
+
+  // let scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+  // console.log("scrollbarWidth");
+  // console.log(scrollbarWidth);
+
   return (
     // <div className="relative h-screen bg-testBackground bg-cover">
     <div
@@ -236,7 +259,8 @@ function Main({}: Props): JSX.Element {
           ? `bg-${globalSettingsData.defaultImage}`
           : `bg-${backgroundColorData}`
       } bg-cover bg-fixed`}
-      style={{ paddingRight: `${paddingRight ? "17px" : ""}` }}
+      // style={{ paddingRight: `${paddingRight ? "17px" : ""}` }}
+      style={{ paddingRight: `${paddingRight ? `${scrollbarWidth}px` : ""}` }}
       onScroll={(e) => {
         e.preventDefault();
         return;
@@ -273,11 +297,15 @@ function Main({}: Props): JSX.Element {
       )}
 
       <UpperUI
-        // upperVisState={upperVisState}
-        // upperVisDispatch={upperVisDispatch}
-        // setTabType={setTabType}
+      // upperVisState={upperVisState}
+      // upperVisDispatch={upperVisDispatch}
+      // setTabType={setTabType}
       />
-      <Grid upperVisDispatch={upperVisDispatch} upperVisState={upperVisState} setTabType={setTabType} />
+      <Grid
+        upperVisDispatch={upperVisDispatch}
+        upperVisState={upperVisState}
+        setTabType={setTabType}
+      />
     </div>
   );
 }
