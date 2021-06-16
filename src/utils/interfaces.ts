@@ -62,7 +62,7 @@ export interface VisState {
   touchScreenModeOn: boolean;
 }
 
-export interface UpperVisAction {
+interface UpperVisAction_noPayload {
   type:
     | "NEW_BOOKMARK_TOGGLE"
     | "NEW_TAB_TOGGLE"
@@ -71,7 +71,6 @@ export interface UpperVisAction {
     | "COLORS_SETTINGS_TOGGLE"
     | "COLORS_BACKGROUND_TOGGLE"
     | "COLORS_COLUMN_TOGGLE"
-    | "COLORS_COLUMN_OPEN"
     | "CLOSE_ALL"
     | "ADD_TAG_XS_TOGGLE"
     | "PROFILE_TOGGLE"
@@ -80,12 +79,19 @@ export interface UpperVisAction {
     | "TAB_EDITABLES_OPENABLE_DEFAULT"
     | "MESSAGE_OPEN_LOGIN"
     | "MESSAGE_OPEN_LOGOUT"
-    | "MESSAGE_CLOSE"
-    // for COLORS_COLUMN_OPEN
-  payload?: number;
+    | "MESSAGE_CLOSE";
 }
 
-export interface TabVisAction {
+interface UpperVisAction_COLORS_COLUMN_OPEN {
+  type: "COLORS_COLUMN_OPEN";
+  payload: number;
+}
+
+export type UpperVisAction =
+  | UpperVisAction_noPayload
+  | UpperVisAction_COLORS_COLUMN_OPEN;
+
+interface TabVisAction_noPayload {
   type:
     | "COLORS_CLOSE"
     | "EDIT_CLOSE"
@@ -96,9 +102,13 @@ export interface TabVisAction {
     | "TAB_CONTENT_OPEN_AFTER_LOCKING"
     | "TAB_EDITABLES_CLOSE"
     | "NEW_BOOKMARK_TOOGLE"
-    | "EDIT_BOOKMARK_OPEN"
     | "EDIT_BOOKMARK_CLOSE"
-    | "TOUCH_SCREEN_MODE_ON"
-    // for EDIT_BOOKMARK_OPEN (settin id)
-  payload?: string | number;
+    | "TOUCH_SCREEN_MODE_ON";
 }
+
+interface TabVisAction_EDIT_BOOKMARK_OPEN {
+  type: "EDIT_BOOKMARK_OPEN",
+  payload: string | number
+}
+
+export type TabVisAction = TabVisAction_noPayload | TabVisAction_EDIT_BOOKMARK_OPEN

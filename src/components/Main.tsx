@@ -96,7 +96,7 @@ function upperVisReducer(
     case "COLORS_COLUMN_OPEN":
       return {
         ...upperVisStateMostlyFalse,
-        columnSelected: action.payload as number,
+        columnSelected: action.payload,
         colorsColumnVis: true,
       };
     case "ADD_TAG_XS_TOGGLE":

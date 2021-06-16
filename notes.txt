@@ -356,6 +356,7 @@ DONE 274. title & RSS link: smaller right margin! DONE
 DONE 275. newTab (& newBookmark & bookmark_lowerUI) upperUI margin above btns is too big DONE
 XXX 276. tab editing -> should opening it increase columns size also as a side effect? (check after background img problems are fixed) XXX
 XXX 277. background img setting -> revert to aligning to left XXX
+??? 278. background img zooming back after clicking any settings (not a problem anymore?) ???
 DONE 279. color setting -> rename to tab setting/ "reset tab colors to default" DONE
 DONE 280. responsive upperUI settings size DONE
 XXX 283. errors reducers? XXX
@@ -520,12 +521,12 @@ DONE 430. 5 globalSettings upperRight svg without border DONE
 DONE 430.5  declutter globalSettings DONE
 DONE 431. noteSVG position DONE
 DONE 432. no uiCompmementary color for black DONE
+DONE 435. seperate types for different actions DONE
 
 
 1. purgecss at the end of project?
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-278. background img zooming back after clicking any settings
 
 329. code order (useEffect, func itp) eg. in 
 331. unmounted component error (err mentioned alread?)
@@ -542,8 +543,7 @@ DONE 432. no uiCompmementary color for black DONE
 
 433. test with Lighthouse
 434. Settings -> make it controlable by keyboard also?? colors also?
-435. seperate types for different actions
-436. right scroll flickering when disappearing problem
+436. right scroll flickering when disappearing problem?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

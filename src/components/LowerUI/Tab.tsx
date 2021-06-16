@@ -289,7 +289,7 @@ Props): JSX.Element {
           colorsVis: false,
           editTabVis: false,
           newBookmarkVis: false,
-          editBookmarkVis: action.payload as string | number,
+          editBookmarkVis: action.payload,
         };
 
       case "EDIT_BOOKMARK_CLOSE":
