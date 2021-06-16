@@ -417,7 +417,6 @@ Props): JSX.Element {
   const [mouseOverTab, setMouseOverTab] = useState(false);
 
   useEffect(() => {
-    
     let iconsTimeout: ReturnType<typeof setTimeout>;
 
     if (mouseOverTab) {
@@ -433,7 +432,6 @@ Props): JSX.Element {
       // }
     }
     return () => {
-    
       clearTimeout(iconsTimeout);
     };
   }, [mouseOverTab]);
@@ -487,7 +485,7 @@ Props): JSX.Element {
           ? "hidden"
           : ""
       }`}
-      
+
       // ref={reachRef}
     >
       <div
@@ -529,21 +527,21 @@ Props): JSX.Element {
             upperVisDispatch({ type: "CLOSE_ALL" });
           }}
         >
-          {tabID === "ALL_TAGS" ? (
-            <button
-              className={`mt-px flex focus:outline-none focus:ring-1 focus:ring-${textOrIconColor(
-                finalTabColor,
-                "text"
-              ).slice(5)} focus:ring-opacity-40 focus-inset`}
-              style={{ height: "22px" }}
+          <button
+            className={`mt-px flex focus:outline-none focus:ring-1 focus:ring-${textOrIconColor(
+              finalTabColor,
+              "text"
+            ).slice(5)} focus:ring-opacity-40 focus-inset`}
+            style={{ height: "22px" }}
+          >
+            <p
+              className={`truncate ${
+                tabID === "ALL_TAGS" ? "tracking-wider self-center" : ""
+              }`}
             >
-              <p className={`truncate tracking-wider self-center`}>
-                {tabTitle}
-              </p>
-            </button>
-          ) : (
-            <p className={`truncate`}>{tabTitle}</p>
-          )}
+              {tabTitle}
+            </p>
+          </button>
         </div>
 
         <div
@@ -571,16 +569,23 @@ Props): JSX.Element {
           </div>
 
           {tabType === "folder" && (
-            <PlusSVG
-              className={`h-8 transition-colors duration-75 hover:${hoverText(
-                finalTabColor
-              )} cursor-pointer`}
+            <button
+              className={`h-8 focus:outline-none focus:ring-2 focus:ring-${textOrIconColor(
+                finalTabColor,
+                "text"
+              ).slice(5)} focus:ring-opacity-40 focus:ring-inset   `}
               style={{ marginTop: "-6px" }}
               onClick={() => {
                 visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
                 upperVisDispatch({ type: "CLOSE_ALL" });
               }}
-            />
+            >
+              <PlusSVG
+                className={`h-full transition-colors duration-75 hover:${hoverText(
+                  finalTabColor
+                )} cursor-pointer`}
+              />
+            </button>
           )}
 
           <ColorSmallSVG
@@ -602,17 +607,23 @@ Props): JSX.Element {
             }}
           />
 
-          <PencilSmallSVG
-            className={`h-5 -ml-px transition-colors duration-75 hover:${hoverText(
-              finalTabColor
-            )} cursor-pointer`}
+          <button
+            className={`h-5 focus:outline-none focus:ring-2 focus:ring-${textOrIconColor(
+              finalTabColor,
+              "text"
+            ).slice(5)} focus:ring-opacity-40 `}
             onClick={() => {
               visDispatch({ type: "EDIT_TOGGLE" });
               upperVisDispatch({ type: "CLOSE_ALL" });
             }}
-
-            // }}
-          />
+          >
+            <PencilSmallSVG
+              className={`h-full -ml-px transition-colors duration-75 hover:${hoverText(
+                finalTabColor
+              )} cursor-pointer`}
+              // }}
+            />
+          </button>
         </div>
       </div>
 

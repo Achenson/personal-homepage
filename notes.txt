@@ -525,25 +525,24 @@ DONE 432. no uiCompmementary color for black DONE
 DONE 435. seperate types for different actions DONE
 
 
-1. purgecss at the end of project?
+1. tailwind - purgecss at the end of the project
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
-
 329. code order (useEffect, func itp) eg. in 
-331. unmounted component error (err mentioned alread?)
+331. unmounted component error (err mentioned alread?) / error in console.log if empty tag auto deletes itself
 332. make biggest components smaller/extaract more funcions out? (max 500 lines of code)
 
 333. clean tailwind files in the end
 
 341. bookmark_lowerUI -> divide function to new & edit
-346. error in console.log if empty tag auto deletes itself
 
 409. vulnerabilities
-
 
 433. test with Lighthouse
 434. Settings -> make it controlable by keyboard also?? colors also?
 436. right scroll flickering when disappearing problem?
+437. Tab SVGs not visible when in touch mode
+438. clean unused deps
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
