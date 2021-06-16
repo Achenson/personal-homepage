@@ -505,6 +505,7 @@ DONE 414. styling last gap if short (column color visible) and empty column colo
 change bookmark_lowerUI (flex-grow!) DONE
 DONE 414.5 bookmark Edit should be shown instead of bookmark, not on top of the tab? DONE
 DONE 415. newBookmark and editTab color too dirty  when background on? DONE
+DONE 418. app structure notes DONE
 DONE 419. logout animation wheh login anmiation is still on DONE
 DONE 420. message popup better styling DONE
 DONE 421. make max col width smaller DONE
@@ -539,7 +540,6 @@ DONE 435. seperate types for different actions DONE
 
 409. vulnerabilities
 
-418. app structure notes
 
 433. test with Lighthouse
 434. Settings -> make it controlable by keyboard also?? colors also?
@@ -552,54 +552,65 @@ Why you should do it regularly:
 https://github.com/browserslist/browserslist#browsers-data-updating
 
 
-| myStr :: "name";
-
-~ myFunc(str myVar)-(
-
-  | [str] myArr;
-
-  loop i(7, i<10, i => i++ )-(
-  log(i)
-  myArr.push("$|myVar| $|i|") 
-  )
-
-  >> myArr;
-)
-
-
-| [str] result :: myFunc("some string")
-
-
-
-
 App structure:
 Main
-    ?newBookmark
-    ?newLink
-    ?Colors_UpperUI *
-        ?DefaultColorsToChoose
-            DefaultSingleColor
     Upper_UI
-        UpperLeftMenu
-            SingleColumnColors/SingleColumnColors_Img
-            ?DefaultColorsToChoose
-                DefaultSingleColor
-        UpperRightMenu *
+    ?NewTab_UpperUI
+        SelectableList
+    ?Bookmark_newAndEdit
+        NewBookmark_UpperUI
+            SelectableList
+    ?BackgroundSettings_UpperUI
+        ?Settings_inner_xs (menu for lowest screen width)
+    ?ColorsSettings_UpperUI
+        ?Settings_inner_xs
+        ?ColorsToChoose_DefaultAndColumns
+            (SingleColor_DefaultAndColumn)
+    ?GlobalSettings_Upper_UI
+        ?Settings_inner_xs
+    ?Profile_UpperUI
+        Profile_input
     Grid
         Column
-            Bookmark
-                SingleLink |
-                NoteInput |
-                RSS       |
-            GapAfterBookmark
-                ?ColorsToChoose
-                    SingleColor
-                ?EditLink
-                ?NewLink
-                ?EditBookmarkTitle
+            UpperLeftMenu (most left column only)
+                ColumnColor_UpperUI
+                    ?ColorsToChoose_DefaultAndColumns
+                        (SingleColor_DefaultAndColumn)
+                Background_UpperUI (only if background pic is enabled)
+                    ?ColorsToChoose_Background
+                        (SingleColor_Background)
+                EyeOff
+            UpperRightMenu (most right column only)
+                ?UpperRightMenu_XS
+            ?Message_UpperUI
+            (Tab)
+                ?Bookmark_newAndEdit
+                    Bookmark_lowerUI (for new bookmark)
+                        SelectableList
+                ?ColorsToChoose_Tab
+                    (SingleColor_Tab)
+                ?EditTab_main
+                    ?EditTab_folder
+                        SelectableList
+                    ?EditTab_notes
+                    ?EditTab_RSS
+                ?RSS_reactQuery
+                    (SingleRssNews)
+                ?NoteInput
+                ?(SingleBookmark)
+                    ?Bookmark_newAndEdit
+                        Bookmark_lowerUI (for edit bookmark)
+                            SelectableList
+            (GapAfterTab)
 
+           
 
       
+? - togglable / optional
+() - 2 or more repeats possible
+
+
+
       
       
       ${isOver ? "opacity-50" : ""}`
