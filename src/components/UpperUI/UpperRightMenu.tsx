@@ -57,7 +57,11 @@ function UpperRightMenu({
       }  justify-between items-center bg-white bg-opacity-80 rounded-md border border-gray-700 `}
       style={{ marginBottom: "2px" }}
     >
-      <div className={`hidden ${ colLimit ? "sm:flex" : "xs:flex"} w-28 justify-around`}>
+      <div
+        className={`hidden ${
+          colLimit ? "sm:flex" : "xs:flex"
+        } w-28 justify-around`}
+      >
         {/* <AddLinkSVG */}
 
         <button
@@ -129,31 +133,49 @@ function UpperRightMenu({
       />
       {/* xs ============================^ */}
 
-      <div className={`hidden ${colLimit ? "sm:flex" : "xs:flex"}  w-24 justify-around items-center mr-0.5`}>
-        <PhotographSVG
-          className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} `}
+      <div
+        className={`hidden ${
+          colLimit ? "sm:flex" : "xs:flex"
+        }  w-24 justify-around items-center mr-0.5`}
+      >
+        <button
+          className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-400"
           onClick={() => {
             // setBackgroundSettingsVis((b) => !b);
-
             upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
           }}
-        />
-        <ColorSVG
-          className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+        >
+          <PhotographSVG
+            className={`h-full w-full cursor-pointer transition-colors duration-75 hover:text-${uiColorData} `}
+          />
+        </button>
+
+        <button
+          className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-400"
           onClick={() => {
             upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
             // setColorsVis((b) => !b);
           }}
-        />
-        <SettingsSVG
-          className={`h-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+        >
+          <ColorSVG
+            className={`h-full w-full cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+          />
+        </button>
+
+        <button
+          className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-400"
           onClick={() => {
             // setTabOpenedData(null)
 
             // setCloseAllTabsData(true);
             upperVisDispatch({ type: "SETTINGS_TOGGLE" });
           }}
-        />
+        >
+          <SettingsSVG
+            className={`h-full w-full cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+          />
+        </button>
+
         <div style={{ width: "24px", height: "24px" }}>
           {loggedInData ? (
             <button

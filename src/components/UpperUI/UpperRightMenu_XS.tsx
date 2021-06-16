@@ -16,9 +16,7 @@ import { uiColorState } from "../../state/colorsState";
 
 import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
 
-import {
-  globalSettingsState,
-} from "../../state/defaultSettings";
+import { globalSettingsState } from "../../state/defaultSettings";
 
 interface Props {
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
@@ -40,12 +38,14 @@ function UpperRightMenu({
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const colLimit = globalSettingsData.limitColGrowth;
 
-
   return (
     <>
       {upperVisState.addTagVis_xs && (
-
-        <div className={`flex ${colLimit ? "sm:hidden" : "xs:hidden" } justify-around`}>
+        <div
+          className={`flex ${
+            colLimit ? "sm:hidden" : "xs:hidden"
+          } justify-around`}
+        >
           <button
             className="h-7 w-7 focus:outline-none focus:ring-2 focus:ring-blueGray-400 ring-inset"
             style={{ marginLeft: "0px" }}
@@ -98,10 +98,10 @@ function UpperRightMenu({
         </div>
       )}
 
-    
-
       <div
-        className={`flex ${colLimit ? "sm:hidden" : "xs:hidden"} justify-around`}
+        className={`flex ${
+          colLimit ? "sm:hidden" : "xs:hidden"
+        } justify-around`}
         style={{ marginTop: "-1px" }}
       >
         {/* <AddLinkSVG */}
@@ -122,7 +122,7 @@ function UpperRightMenu({
 
         <button
           className="h-6 w-5 self-center focus:outline-none focus:ring-2 focus:ring-blueGray-400"
-          style={{width: "22px"}}
+          style={{ width: "22px" }}
           onClick={() => {
             upperVisDispatch({ type: "ADD_TAG_XS_TOGGLE" });
           }}
@@ -133,13 +133,17 @@ function UpperRightMenu({
         </button>
 
         {/* <AddNote */}
-        <CogSVG
-          className={`h-6 cursor-pointer transition-colors duration-75  hover:text-${uiColorData} ml-0.5`}
+        <button
+          className="h-6 w-6 ml-0.5 focus:outline-none focus:ring-2 focus:ring-blueGray-400"
           style={{ marginTop: "2px" }}
           onClick={() => {
             upperVisDispatch({ type: "SETTINGS_TOGGLE" });
           }}
-        />
+        >
+          <CogSVG
+            className={`h-full w-full cursor-pointer transition-colors duration-75  hover:text-${uiColorData}`}
+          />
+        </button>
 
         {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
         {/* <UserSVG
@@ -152,11 +156,11 @@ function UpperRightMenu({
           {loggedInData ? (
             <button
               className="h-6 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-400"
-              style={{width: "22px"}}
+              style={{ width: "22px" }}
               onClick={() => {
                 // upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 setLoggedInData(false);
-                upperVisDispatch({type: "MESSAGE_OPEN_LOGOUT"})
+                upperVisDispatch({ type: "MESSAGE_OPEN_LOGOUT" });
               }}
             >
               <LogoutSVG
@@ -167,7 +171,7 @@ function UpperRightMenu({
           ) : (
             <button
               className="h-6 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-400"
-              style={{width: "18px"}}
+              style={{ width: "18px" }}
               onClick={() => {
                 upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 // setLoggedInData(true);
