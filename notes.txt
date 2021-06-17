@@ -543,6 +543,7 @@ DONE 435. seperate types for different actions DONE
 436. right scroll flickering when disappearing problem?
 437. Tab SVGs not visible when in touch mode
 438. clean unused deps
+439. central styles for focus expand and clean
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
