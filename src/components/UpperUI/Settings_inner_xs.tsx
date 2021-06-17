@@ -20,15 +20,23 @@ function Settings_inner_xs({
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   return (
-    
-      <div
-        className="xs:hidden absolute top-5
+    <div
+      className="xs:hidden absolute top-5
         flex items-center justify-between
          "
-         style={{width: "75px", left: "14px"}}
+      style={{ width: "75px", left: "14px" }}
+    >
+      <button
+        className="h-6 w-6 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+        onClick={() => {
+          // setBackgroundSettingsVis((b) => !b);
+          if (currentSettings === "background") return;
+
+          upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
+        }}
       >
         <PhotographSVG
-            className={`h-6 w-6  transition-colors duration-75 
+          className={`h-full w-full transition-colors duration-75 
             ${
               currentSettings === "background"
                 ? "text-gray-800"
@@ -36,15 +44,20 @@ function Settings_inner_xs({
             }
             `}
           // style={{ marginLeft: "-5px" }}
-          onClick={() => {
-            // setBackgroundSettingsVis((b) => !b);
-            if (currentSettings === "background") return;
-
-            upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
-          }}
         />
+      </button>
+
+      <button
+        className="h-6 w-6 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+        onClick={() => {
+          if (currentSettings === "colors") return;
+
+          upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
+          // setColorsVis((b) => !b);
+        }}
+      >
         <ColorSVG
-          className={`h-6 w-6  transition-colors duration-75 
+          className={`h-full w-full  transition-colors duration-75 
             ${
               currentSettings === "colors"
                 ? "text-gray-800"
@@ -52,32 +65,30 @@ function Settings_inner_xs({
             }
             `}
           style={{ marginRight: "-1px" }}
-          onClick={() => {
-
-            if (currentSettings === "colors") return;
-
-            upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
-            // setColorsVis((b) => !b);
-          }}
         />
+      </button>
+
+      <button
+        className="h-6 w-6 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+        onClick={() => {
+          if (currentSettings === "global") return;
+          // setTabOpenedData(null)
+
+          // setCloseAllTabsData(true);
+          upperVisDispatch({ type: "SETTINGS_TOGGLE" });
+        }}
+      >
         <SettingsSVG
-            className={`h-6 w-6  transition-colors duration-75 
+          className={`h-full w-full transition-colors duration-75 
             ${
               currentSettings === "global"
                 ? "text-gray-800"
                 : `text-blueGray-400 cursor-pointer hover:text-${uiColorData}`
             }
             `}
-          onClick={() => {
-            if (currentSettings === "global") return;
-            // setTabOpenedData(null)
-
-            // setCloseAllTabsData(true);
-            upperVisDispatch({ type: "SETTINGS_TOGGLE" });
-          }}
         />
-      </div>
-   
+      </button>
+    </div>
   );
 }
 

@@ -522,6 +522,7 @@ DONE 430. 5 globalSettings upperRight svg without border DONE
 DONE 430.5  declutter globalSettings DONE
 DONE 431. noteSVG position DONE
 DONE 432. no uiCompmementary color for black DONE
+DONE 434. Settings -> make it controlable by keyboard DONE
 DONE 435. seperate types for different actions DONE
 
 
@@ -539,7 +540,6 @@ DONE 435. seperate types for different actions DONE
 409. vulnerabilities
 
 433. test with Lighthouse
-434. Settings -> make it controlable by keyboard also?? colors also?
 436. right scroll flickering when disappearing problem?
 437. Tab SVGs not visible when in touch mode
 438. clean unused deps
