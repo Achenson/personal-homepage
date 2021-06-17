@@ -496,6 +496,7 @@ XXX 406. RSS edit -> "RESET settings to default"? XXX
 XXX 407. globalSettings -> cols number too easy to change? XXX
 DONE 408. all tabs - wider letter spacing? DONE
 DONE 408.5 fix error: npx browserslist@latest --update-db DONE
+DONE 409. vulnerabilities DONE
 DONE 410. auto-focus on lower UI also DONE
 DONE 411. new&edit lower UI with longer TAB contetn -> implement contrast to the content? (darker border added) DONE
 DONE 412. bookmark lower UI edit & editTab: better contrast DONE
@@ -538,7 +539,6 @@ DONE 438. clean unused deps ("@reach/rect" use before for measuring elements) DO
 
 341. bookmark_lowerUI -> divide function to new & edit
 
-409. vulnerabilities
 
 433. test with Lighthouse
 436. right scroll flickering when disappearing problem?
