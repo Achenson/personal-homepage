@@ -115,21 +115,20 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
           style={{ width: `350px`, height: "200px" }}
           // style={{ width: "350px", height: "200px" }}
         >
+          <Settings_inner_xs
+            upperVisDispatch={upperVisDispatch}
+            currentSettings={"colors"}
+          />
 
-
-        <Settings_inner_xs
-        upperVisDispatch={upperVisDispatch}
-        currentSettings={"colors"}
-        />
-
-
-          <div className="absolute right-0 top-0 mt-1 mr-1">
-            <CancelSVG
-              className="h-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"
+          <div className="absolute right-0 top-0 mt-1 mr-1 ">
+            <button
               onClick={() => {
                 upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
               }}
-            />
+              className="h-5 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+            >
+              <CancelSVG className="h-full w-full fill-current text-gray-600 cursor-pointer hover:text-gray-900" />
+            </button>
           </div>
 
           <p className="text-center">Default tab colors</p>
@@ -211,17 +210,21 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
 
           <p className={`text-center mt-5`}>
             {" "}
-            <span
-              className={`text-red-600 hover:underline cursor-pointer
-              `}
+            <button
               onClick={() => {
                 // setFolderColorData("teal-500");
                 // setNoteColorData("yellow-500");
                 setResetColorsData(true);
               }}
+              className="focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
             >
-              RESET
-            </span>{" "}
+              <span
+                className={`text-red-600 hover:underline cursor-pointer
+              `}
+              >
+                RESET
+              </span>
+            </button>{" "}
             tabs to default
           </p>
         </div>

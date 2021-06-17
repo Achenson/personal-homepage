@@ -544,6 +544,7 @@ DONE 435. seperate types for different actions DONE
 437. Tab SVGs not visible when in touch mode
 438. clean unused deps
 439. central styles for focus expand and clean
+440. focus outlines shouldn't be working with clicking?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
