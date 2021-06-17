@@ -541,10 +541,12 @@ DONE 435. seperate types for different actions DONE
 
 433. test with Lighthouse
 436. right scroll flickering when disappearing problem?
-437. Tab SVGs not visible when in touch mode
 438. clean unused deps
 439. central styles for focus expand and clean
 440. focus outlines shouldn't be working with clicking?
+441. focus shouldn't be possible when settings popup are visible
+442. tab titles are cut ! (g's)
+443. settings popups - initial focus should be set?
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

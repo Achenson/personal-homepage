@@ -79,7 +79,7 @@ function SingleBookmark({
                 href={singleBookmarkData.URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="z-50 hover:text-gray-600 transition-colors duration-75 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-inset py-0.5 px-0.5"
+                className="z-50 hover:text-gray-600 transition-colors duration-75 focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-inset px-0.5"
               >
                 {singleBookmarkData.title}
               </a>

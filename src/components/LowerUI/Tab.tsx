@@ -531,12 +531,12 @@ Props): JSX.Element {
             className={`mt-px flex focus:outline-none focus:ring-1 focus:ring-${textOrIconColor(
               finalTabColor,
               "text"
-            ).slice(5)} focus:ring-opacity-40 focus-inset`}
-            style={{ height: "22px" }}
+            ).slice(5)} focus:ring-opacity-40`}
+            style={{ height: "23px" }}
           >
             <p
               className={`truncate ${
-                tabID === "ALL_TAGS" ? "tracking-wider self-center" : ""
+                tabID === "ALL_TAGS" ? "tracking-wider" : ""
               }`}
             >
               {tabTitle}
