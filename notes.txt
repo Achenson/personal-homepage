@@ -524,6 +524,7 @@ DONE 431. noteSVG position DONE
 DONE 432. no uiCompmementary color for black DONE
 DONE 434. Settings -> make it controlable by keyboard DONE
 DONE 435. seperate types for different actions DONE
+DONE 438. clean unused deps ("@reach/rect" use before for measuring elements) DONE
 
 
 1. tailwind - purgecss at the end of the project
@@ -541,7 +542,6 @@ DONE 435. seperate types for different actions DONE
 
 433. test with Lighthouse
 436. right scroll flickering when disappearing problem?
-438. clean unused deps
 439. central styles for focus expand and clean
 440. focus outlines shouldn't be working with clicking?
 441. focus shouldn't be possible when settings popup are visible
