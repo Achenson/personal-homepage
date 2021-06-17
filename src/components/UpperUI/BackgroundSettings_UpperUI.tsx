@@ -6,7 +6,7 @@ import { globalSettingsState } from "../../state/defaultSettings";
 
 import { uiColorState } from "../../state/colorsState";
 
-import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
+import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 
 import Settings_inner_xs from "./Settings_inner_xs";
@@ -15,7 +15,7 @@ interface Props {
   // backgroundSettingsVis: boolean;
   // setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: InitUpperVisState;
+  upperVisState: UpperVisState;
 }
 
 function BackgroundSettings_UpperUI({

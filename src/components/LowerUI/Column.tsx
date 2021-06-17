@@ -18,12 +18,12 @@ import Tab from "./Tab";
 
 import GapAfterTab from "./GapAfterTab";
 
-import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
+import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 interface Props {
   colNumber: number;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: InitUpperVisState;
+  upperVisState: UpperVisState;
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
   breakpoint: 0 | 1 | 2 | 3 | 4 | null;
 }

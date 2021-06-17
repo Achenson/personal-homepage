@@ -13,6 +13,7 @@ import {
   SingleBookmarkData,
   TabVisAction,
   VisState,
+  UpperVisState,
   UpperVisAction,
 } from "../../utils/interfaces";
 import Bookmark_newAndEdit from "../Shared/Bookmark_newAndEdit";
@@ -34,6 +35,7 @@ interface Props {
   colNumber: number;
   tabID: string | number;
   visState: VisState;
+  upperVisState: UpperVisState;
   visDispatch: React.Dispatch<TabVisAction>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleBookmarkData>>;
@@ -47,6 +49,7 @@ function SingleBookmark({
   setBookmarkId,
   colNumber,
   visState,
+  upperVisState,
   visDispatch,
   upperVisDispatch,
   tabID,
@@ -58,6 +61,21 @@ function SingleBookmark({
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   // let linkURL = new URL(singleBookmarkData.URL)
+
+  function areButtonsDisabled(): boolean {
+    if (
+      upperVisState.backgroundSettingsVis ||
+      upperVisState.colorsSettingsVis ||
+      upperVisState.settingsVis ||
+      upperVisState.profileVis ||
+      upperVisState.newBookmarkVis ||
+      upperVisState.newTabVis
+    ) {
+      return true;
+    }
+
+    return false;
+  }
 
   return (
     <div>
@@ -75,14 +93,21 @@ function SingleBookmark({
               <PhotographSVG className="h-full" />
             </div>
             <div className="truncate">
-              <a
-                href={singleBookmarkData.URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="z-50 hover:text-gray-600 transition-colors duration-75 focus:outline-none focus:ring-1 focus:ring-blueGray-300 mx-0.5"
-              >
-                {singleBookmarkData.title}
-              </a>
+              {areButtonsDisabled() ? (
+                <p className="z-50 hover:text-gray-600 mx-0.5">
+                  {singleBookmarkData.title}
+                </p>
+              ) : (
+                <a
+                  href={singleBookmarkData.URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="z-50 hover:text-gray-600 transition-colors duration-75 focus:outline-none focus:ring-1 focus:ring-blueGray-300 mx-0.5"
+                >
+                  {singleBookmarkData.title}
+                </a>
+              )}
+
               {/* <a href="https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death" target="_blank" rel="noopener noreferrer">{singleBookmarkData.title}</a> */}
             </div>
           </div>
@@ -101,6 +126,7 @@ function SingleBookmark({
                 upperVisDispatch({ type: "CLOSE_ALL" });
                 setBookmarkId(singleBookmarkData.id);
               }}
+              disabled={areButtonsDisabled()}
             >
               <PencilSmallSVG className="h-full w-full transition-colors duration-75 hover:text-black cursor-pointer" />
             </button>
@@ -153,6 +179,7 @@ function SingleBookmark({
                   })
                 );
               }}
+              disabled={areButtonsDisabled()}
             >
               <TrashSmallSVG className="h-full w-full transition-colors duration-75 hover:text-black cursor-pointer" />
             </button>

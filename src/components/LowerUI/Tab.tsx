@@ -44,7 +44,7 @@ import {
   SingleTabData,
   UpperVisAction,
   VisState,
-  InitUpperVisState,
+  UpperVisState,
 } from "../../utils/interfaces";
 import { current } from "immer";
 
@@ -61,7 +61,7 @@ interface Props {
   tabType: "folder" | "note" | "rss";
   colNumber: number;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: InitUpperVisState;
+  upperVisState: UpperVisState;
   tabOpened: boolean;
   tabOpenedByDefault: boolean;
   tabIsDeletable: boolean;
@@ -476,6 +476,21 @@ Props): JSX.Element {
     return "text-black";
   }
 
+  function areButtonsDisabled(): boolean {
+    if (
+      upperVisState.backgroundSettingsVis ||
+      upperVisState.colorsSettingsVis ||
+      upperVisState.settingsVis ||
+      upperVisState.profileVis ||
+      upperVisState.newBookmarkVis ||
+      upperVisState.newTabVis
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
   return (
     <div
       className={`relative ${
@@ -533,6 +548,7 @@ Props): JSX.Element {
               "text"
             ).slice(5)} focus:ring-opacity-40`}
             style={{ height: "23px" }}
+            disabled={areButtonsDisabled()}
           >
             <p
               className={`truncate ${
@@ -579,6 +595,7 @@ Props): JSX.Element {
                 visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
                 upperVisDispatch({ type: "CLOSE_ALL" });
               }}
+              disabled={areButtonsDisabled()}
             >
               <PlusSVG
                 className={`h-full transition-colors duration-75 hover:${hoverText(
@@ -616,6 +633,7 @@ Props): JSX.Element {
               visDispatch({ type: "EDIT_TOGGLE" });
               upperVisDispatch({ type: "CLOSE_ALL" });
             }}
+            disabled={areButtonsDisabled()}
           >
             <PencilSmallSVG
               className={`h-full -ml-px transition-colors duration-75 hover:${hoverText(
@@ -699,6 +717,7 @@ Props): JSX.Element {
                 <SingleBookmark
                   // setEditBookmarkVis={setEditBookmarkVis}
                   visState={visState}
+                  upperVisState={upperVisState}
                   visDispatch={visDispatch}
                   upperVisDispatch={upperVisDispatch}
                   singleBookmarkData={el}

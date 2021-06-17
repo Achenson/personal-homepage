@@ -19,13 +19,13 @@ import {
   resetColorsState,
 } from "../../state/colorsState";
 
-import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
+import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import Column from "./Column";
 
 interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: InitUpperVisState;
+  upperVisState: UpperVisState;
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
 }
 

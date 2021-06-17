@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import UpperRightMenu from "./UpperRightMenu";
 import UpperLeftMenu from "./UpperLeftMenu";
 
-import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
+// import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 import Message_UpperUI from "./Message_UpperUI";
 
 interface Props {

@@ -36,7 +36,7 @@ export interface GlobalSettingsState {
   // rssItemsPerPage: number;
 }
 
-export interface InitUpperVisState {
+export interface UpperVisState {
   newBookmarkVis: boolean;
   newTabVis: boolean;
   backgroundSettingsVis: boolean;

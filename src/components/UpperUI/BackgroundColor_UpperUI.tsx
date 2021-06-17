@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ColorsToChoose_Background from "../Colors/ColorsToChoose_Background";
 
 import { backgroundColorState } from "../../state/colorsState";
-import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
+import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import { closeAllTabsState, tabOpenedState } from "../../state/defaultSettings";
 
@@ -12,7 +12,7 @@ import { ReactComponent as DocumentSVG } from "../../svgs/document.svg";
 interface Props {
   // setBackgroundColorsToChooseVis: React.Dispatch<React.SetStateAction<boolean>>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: InitUpperVisState;
+  upperVisState: UpperVisState;
 }
 
 function BackgroundColor_upperUI({

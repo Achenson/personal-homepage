@@ -11,7 +11,7 @@ import {
   tabOpenedState,
 } from "../../state/defaultSettings";
 
-import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
+import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 import { tabsDataState } from "../../state/tabsAndBookmarks";
@@ -21,7 +21,7 @@ interface Props {
   // settingsVis: boolean;
   // setSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: InitUpperVisState;
+  upperVisState: UpperVisState;
   // xsSizing: boolean;
 }
 

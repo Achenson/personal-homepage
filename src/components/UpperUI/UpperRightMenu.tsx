@@ -18,7 +18,7 @@ import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 import { uiColorState } from "../../state/colorsState";
 
-import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
+import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import {
   closeAllTabsState,
@@ -30,7 +30,7 @@ import {
 interface Props {
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: InitUpperVisState;
+  upperVisState: UpperVisState;
 }
 
 function UpperRightMenu({
@@ -46,6 +46,21 @@ function UpperRightMenu({
   const [loggedInData, setLoggedInData] = loggedInState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const colLimit = globalSettingsData.limitColGrowth;
+
+  function areButtonsDisabled(): boolean {
+    if (
+      upperVisState.backgroundSettingsVis ||
+      upperVisState.colorsSettingsVis ||
+      upperVisState.settingsVis ||
+      upperVisState.profileVis ||
+      upperVisState.newBookmarkVis ||
+      upperVisState.newTabVis
+    ) {
+      return true;
+    }
+
+    return false;
+  }
 
   return (
     // <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
@@ -70,6 +85,7 @@ function UpperRightMenu({
             // setNewBookmarkVis((b) => !b);
             upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
           }}
+          disabled={areButtonsDisabled()}
         >
           <BookmarkSVG
             className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -85,6 +101,7 @@ function UpperRightMenu({
             upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
             setTabType("folder");
           }}
+          disabled={areButtonsDisabled()}
         >
           <FolderSVG
             className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} mr-1`}
@@ -102,6 +119,7 @@ function UpperRightMenu({
             upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
             setTabType("note");
           }}
+          disabled={areButtonsDisabled()}
         >
           <NoteSVG
             className={`h-6 w-6 cursor-pointer fill-current transition-colors duration-75 text-black hover:text-${uiColorData}`}
@@ -114,6 +132,7 @@ function UpperRightMenu({
             upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
             setTabType("rss");
           }}
+          disabled={areButtonsDisabled()}
         >
           <AddRssSVG
             className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -144,6 +163,7 @@ function UpperRightMenu({
             // setBackgroundSettingsVis((b) => !b);
             upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
           }}
+          disabled={areButtonsDisabled()}
         >
           <PhotographSVG
             className={`h-full w-full cursor-pointer transition-colors duration-75 hover:text-${uiColorData} `}
@@ -156,6 +176,7 @@ function UpperRightMenu({
             upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
             // setColorsVis((b) => !b);
           }}
+          disabled={areButtonsDisabled()}
         >
           <ColorSVG
             className={`h-full w-full cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -170,6 +191,7 @@ function UpperRightMenu({
             // setCloseAllTabsData(true);
             upperVisDispatch({ type: "SETTINGS_TOGGLE" });
           }}
+          disabled={areButtonsDisabled()}
         >
           <SettingsSVG
             className={`h-full w-full cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -185,6 +207,7 @@ function UpperRightMenu({
                 setLoggedInData(false);
                 upperVisDispatch({ type: "MESSAGE_OPEN_LOGOUT" });
               }}
+              disabled={areButtonsDisabled()}
             >
               <LogoutSVG
                 className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -198,6 +221,7 @@ function UpperRightMenu({
                 upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 // setLoggedInData(true);
               }}
+              disabled={areButtonsDisabled()}
             >
               <UserSVG
                 className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}

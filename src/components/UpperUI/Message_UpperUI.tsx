@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
+import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 import { backgroundColorState } from "../../state/colorsState";
 import { globalSettingsState } from "../../state/defaultSettings";
 import { backgroundColors } from "../../utils/colors_background";
@@ -9,7 +9,7 @@ import "../../utils/fade.css";
 
 interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: InitUpperVisState;
+  upperVisState: UpperVisState;
 }
 
 function Message_UpperUI({

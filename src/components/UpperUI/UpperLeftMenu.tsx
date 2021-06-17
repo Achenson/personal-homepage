@@ -10,10 +10,10 @@ import ColorsToChoose_Background from "../Colors/ColorsToChoose_Background";
 
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
 
-import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
+import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 interface Props {
-  upperVisState: InitUpperVisState;
+  upperVisState: UpperVisState;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 

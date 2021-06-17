@@ -15,13 +15,13 @@ import Profile_UpperUI from "./UpperUI/Profile_UpperUI";
 
 import {
   UpperVisAction,
-  InitUpperVisState,
+  UpperVisState,
   TabVisAction,
 } from "../utils/interfaces";
 
 interface Props {}
 
-let initUpperVisState: InitUpperVisState = {
+let initUpperVisState: UpperVisState = {
   newBookmarkVis: false,
   newTabVis: false,
   backgroundSettingsVis: false,
@@ -38,14 +38,14 @@ let initUpperVisState: InitUpperVisState = {
 };
 
 function upperVisReducer(
-  state: InitUpperVisState,
+  state: UpperVisState,
   action: UpperVisAction
-): InitUpperVisState {
-  const upperVisStateAllFalse: InitUpperVisState = {
+): UpperVisState {
+  const upperVisStateAllFalse: UpperVisState = {
     ...initUpperVisState,
   };
 
-  let upperVisStateMostlyFalse: InitUpperVisState = {
+  let upperVisStateMostlyFalse: UpperVisState = {
     ...initUpperVisState,
     addTagVis_xs: state.addTagVis_xs,
     xsSizing_initial: state.xsSizing_initial,

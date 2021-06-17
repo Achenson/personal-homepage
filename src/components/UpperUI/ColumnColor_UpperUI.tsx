@@ -4,7 +4,7 @@ import {
   columnsColorsImg_State,
 } from "../../state/colorsState";
 
-import { UpperVisAction, InitUpperVisState } from "../../utils/interfaces";
+import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import {
   globalSettingsState,
@@ -27,7 +27,7 @@ interface Props {
   // setColorsToChooseVis: React.Dispatch<React.SetStateAction<boolean>>;
 
   upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: InitUpperVisState;
+  upperVisState: UpperVisState;
   arrIndex: number;
   columnType: "NO_BACKGROUND_IMG" | "BACKGROUND_IMG";
   isHoverOnAnyColumn: boolean;
