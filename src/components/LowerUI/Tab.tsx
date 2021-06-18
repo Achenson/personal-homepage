@@ -741,6 +741,7 @@ Props): JSX.Element {
           currentTab={currentTab as SingleTabData}
           // setEditTabVis={setEditTabVis}
           visDispatch={visDispatch}
+          upperVisState={upperVisState}
         />
       )}
 
