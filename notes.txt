@@ -529,6 +529,7 @@ DONE 438. clean unused deps ("@reach/rect" use before for measuring elements) DO
 DONE 441. focus shouldn't be possible when settings popup are visible - disable btn's conditionally? DONE
 DONE 442. tab titles are cut ! (g's) DONE
 XXX 443. settings popups - initial focus should be set?  441. already fixed thisXXX
+DONE 445. RSS  focus outlines & disable it conditionally DONE
 
 
 1. tailwind - purgecss at the end of the project
@@ -547,9 +548,12 @@ XXX 443. settings popups - initial focus should be set?  441. already fixed this
 439. central styles for focus expand and clean
 
 444. make plusSVG smaller?
-445. RSS focus outlines
+445.5 note focus outlines  & disable it conditionally?
 446. FAQ note
 447. proper starting links etc
+448. check tailwind way of outlines for keyboard only
+449. disable all btn conditionally??
+550. custom.css check
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db

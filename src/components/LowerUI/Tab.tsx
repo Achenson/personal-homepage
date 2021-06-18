@@ -748,6 +748,7 @@ Props): JSX.Element {
         <RSS_reactQuery
           tabID={tabID}
           currentTab={currentTab as SingleTabData}
+          upperVisState={upperVisState}
         />
       )}
     </div>

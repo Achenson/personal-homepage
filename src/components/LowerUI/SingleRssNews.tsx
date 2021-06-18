@@ -1,6 +1,9 @@
 import React from "react";
 
 import { globalSettingsState } from "../../state/defaultSettings";
+
+import { UpperVisState } from "../../utils/interfaces";
+
 interface Props {
   title: string;
   link: string;
@@ -9,6 +12,7 @@ interface Props {
   // to change types?
   descriptionVis: boolean | null | undefined;
   dateVis: boolean | null | undefined;
+  upperVisState: UpperVisState;
 }
 
 function SingeRssNews({
@@ -18,6 +22,7 @@ function SingeRssNews({
   description,
   descriptionVis,
   dateVis,
+  upperVisState,
 }: Props): JSX.Element {
   // if (title === "loading data...") {
   //   return <div>{title}</div>;
@@ -29,9 +34,8 @@ function SingeRssNews({
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function renderDescription(descripion: string) {
-
-    if(!description) {
-      return "short description unavailable"
+    if (!description) {
+      return "short description unavailable";
     }
 
     let descriptionSplitted = descripion.split(" ");
@@ -45,6 +49,21 @@ function SingeRssNews({
     return newArr.join(" ") + "...";
   }
 
+  function areButtonsDisabled(): boolean {
+    if (
+      upperVisState.backgroundSettingsVis ||
+      upperVisState.colorsSettingsVis ||
+      upperVisState.settingsVis ||
+      upperVisState.profileVis ||
+      upperVisState.newBookmarkVis ||
+      upperVisState.newTabVis
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
   return (
     <div
       className={`bg-gray-50 py-1 px-2
@@ -52,16 +71,23 @@ function SingeRssNews({
     ${globalSettingsData.picBackground ? "" : "border-black border-opacity-10"}
      `}
     >
-      <a
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="hover:underline text-lightBlue-700"
-        // style={{lineHeight: "-50px"}}
-      >
-       <p className="leading-snug">{title}</p> 
-      </a>
-      <p className="text-sm mt-0.5 leading-snug">{descriptionVis && renderDescription(description)}</p>
+      {areButtonsDisabled() ? (
+        <p className="text-lightBlue-700">{title}</p>
+      ) : (
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline text-lightBlue-700 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+          // style={{lineHeight: "-50px"}}
+        >
+          {title}
+        </a>
+      )}
+
+      <p className="text-sm mt-0.5 leading-snug">
+        {descriptionVis && renderDescription(description)}
+      </p>
       <p className="text-xs mt-0.5 text-gray-700">{dateVis && pubDate}</p>
     </div>
   );

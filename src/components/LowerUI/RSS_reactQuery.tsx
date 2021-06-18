@@ -12,6 +12,10 @@ import { ReactComponent as ArrowRight } from "../../svgs/arrowRight.svg";
 
 import { globalSettingsState } from "../../state/defaultSettings";
 
+import {
+  UpperVisState,
+} from "../../utils/interfaces";
+
 let Parser = require("rss-parser");
 let parser = new Parser();
 //   {
@@ -23,9 +27,10 @@ let parser = new Parser();
 interface Props {
   tabID: string | number;
   currentTab: SingleTabData;
+  upperVisState: UpperVisState;
 }
 
-function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
+function ReactQuery({ currentTab, tabID, upperVisState }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
   // let currentTab = tabsData.filter((obj) => obj.id === tabID);
@@ -222,6 +227,7 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
         key={i}
         // pubDate={el.pubDate}
         pubDate={convertRssDate(el.pubDate)}
+        upperVisState={upperVisState}
       />
     ));
   }
@@ -235,19 +241,25 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
 
     let maxNumber = howManyNews < 50 ? howManyNews : 50;
 
-    // console.log("how many news");
-    // console.log(howManyNews);
-
-    // console.log("maxNumber");
-    // console.log(maxNumber);
-
-    // console.log("items per page");
-    // console.log(itemsPerPage);
-
     // rounded up
     // console.log(Math.ceil(maxNumber / itemsPerPage) - 1);
 
     return Math.ceil(maxNumber / itemsPerPage) - 1;
+  }
+
+  function areButtonsDisabled(): boolean {
+    if (
+      upperVisState.backgroundSettingsVis ||
+      upperVisState.colorsSettingsVis ||
+      upperVisState.settingsVis ||
+      upperVisState.profileVis ||
+      upperVisState.newBookmarkVis ||
+      upperVisState.newTabVis
+    ) {
+      return true;
+    }
+
+    return false;
   }
 
   return (
@@ -258,30 +270,41 @@ function ReactQuery({ currentTab, tabID }: Props): JSX.Element {
       globalSettingsData.picBackground ? "" : "border-black border-opacity-10"
     }`}
       >
-        <ArrowLeft
-          className={`h-8 ${
-            pageNumber === 0
-              ? `text-gray-400`
-              : `cursor-pointer text-black hover:bg-gray-200`
-          }`}
+        <button
+          className="focus:outline-none focus:ring-2 focus:ring-blueGray-300 focus:ring-inset"
           onClick={() => {
             if (pageNumber > 0) {
               setPageNumber(pageNumber - 1);
             }
           }}
-        />
-        <ArrowRight
-          className={`h-8 ${
-            pageNumber === lastPageNumber()
-              ? `text-gray-400`
-              : `cursor-pointer text-black hover:bg-gray-200`
-          }`}
+          disabled={areButtonsDisabled()}
+        >
+          <ArrowLeft
+            className={`h-8 ${
+              pageNumber === 0
+                ? `text-gray-400`
+                : `cursor-pointer text-black hover:bg-gray-200`
+            }`}
+          />
+        </button>
+
+        <button
+          className="focus:outline-none focus:ring-2 focus:ring-blueGray-300 focus:ring-inset"
           onClick={() => {
             if (pageNumber < lastPageNumber()) {
               setPageNumber(pageNumber + 1);
             }
           }}
-        />
+          disabled={areButtonsDisabled()}
+        >
+          <ArrowRight
+            className={`h-8 ${
+              pageNumber === lastPageNumber()
+                ? `text-gray-400`
+                : `cursor-pointer text-black hover:bg-gray-200`
+            }`}
+          />
+        </button>
       </div>
       <div
         className={`text-center
