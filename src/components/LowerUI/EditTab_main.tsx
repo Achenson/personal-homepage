@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from "react";
+import FocusLock from "react-focus-lock";
+
 import ReactDOM from "react-dom";
 import { useState } from "react";
 
@@ -421,233 +423,239 @@ Props): JSX.Element {
   }
 
   return (
-    <div
-      className={`absolute w-full z-40 bg-gray-50 pb-2 border border-blueGray-303 pl-1 pr-1 shadow-md`}
-      // style={{
-      //   top: `${top + 32 + document.documentElement.scrollTop}px`,
-      //   left: `${left}px`,
-      //   width: `${tabWidth}px`,
-      // }}
-    >
-      <div className="mb-3">
-        <div className={`flex items-center mt-2 justify-between`}>
-          <p className="flex-none" style={{ width: `${titleWidth()}` }}>
-            Title
-          </p>
-          <input
-            type="text"
-            ref={firstFieldRef}
-            // min-w-0 !!
-            className="border w-full max-w-6xl pl-px input-focus"
-            value={tabTitleInput}
-            onChange={(e) => {
-              setTabTitleInput(e.target.value);
-              setWasAnythingClicked(true);
-            }}
-            onFocus={(e) => {
-              setSelectablesListVis(false);
-            }}
-          />
+    <FocusLock>
+      <div
+        className={`absolute w-full z-40 bg-gray-50 pb-2 border border-blueGray-303 pl-1 pr-1 shadow-md`}
+        // style={{
+        //   top: `${top + 32 + document.documentElement.scrollTop}px`,
+        //   left: `${left}px`,
+        //   width: `${tabWidth}px`,
+        // }}
+      >
+        <div className="mb-3">
+          <div className={`flex items-center mt-2 justify-between`}>
+            <p className="flex-none" style={{ width: `${titleWidth()}` }}>
+              Title
+            </p>
+            <input
+              type="text"
+              ref={firstFieldRef}
+              // min-w-0 !!
+              className="border w-full max-w-6xl pl-px input-focus"
+              value={tabTitleInput}
+              onChange={(e) => {
+                setTabTitleInput(e.target.value);
+                setWasAnythingClicked(true);
+              }}
+              onFocus={(e) => {
+                setSelectablesListVis(false);
+              }}
+            />
+            {tabType === "folder" && tabID !== "ALL_TAGS" && (
+              <div
+                style={{ height: "18px", width: "18px" }}
+                className="flex-none -mr-1"
+              ></div>
+            )}
+          </div>
+
           {tabType === "folder" && tabID !== "ALL_TAGS" && (
-            <div
-              style={{ height: "18px", width: "18px" }}
-              className="flex-none -mr-1"
-            ></div>
+            <EditTab_folder
+              selectablesListVis={selectablesListVis}
+              setSelectablesListVis={setSelectablesListVis}
+              setWasAnythingClicked={setWasAnythingClicked}
+              selectablesInputStr={selectablesInputStr}
+              setSelectablesInputStr={setSelectablesInputStr}
+              saveFunc={saveFunc}
+            />
           )}
+
+          {tabType === "note" && (
+            <EditTab_notes
+              textAreaValue={textAreaValue}
+              setTextAreaValue={setTextAreaValue}
+              setWasAnythingClicked={setWasAnythingClicked}
+            />
+          )}
+
+          {tabType === "rss" && (
+            <EditTab_RSS
+              dateCheckbox={dateCheckbox}
+              descriptionCheckbox={descriptionCheckbox}
+              rssItemsPerPage={rssItemsPerPage}
+              setDateCheckbox={setDateCheckbox}
+              setDescriptionCheckbox={setDescriptionCheckbox}
+              setRssItemsPerPage={setRssItemsPerPage}
+              setWasAnythingClicked={setWasAnythingClicked}
+              setWasCheckboxClicked={setWasCheckboxClicked}
+              setWasItemsPerPageClicked={setWasItemsPerPageClicked}
+              setWasTabOpenClicked={setWasTabOpenClicked}
+              tabID={tabID}
+              rssLinkInput={rssLinkInput}
+              setRssLinkInput={setRssLinkInput}
+            />
+          )}
+
+          <div className={`${tabType === "rss" ? "mt-1.5" : ""}`}>
+            {errors.titleFormatErrorVis && (
+              <p className={`text-red-600 mt-1 -mb-2`}>
+                {tabErrors.titleFormat}
+              </p>
+            )}
+
+            {errors.titleUniquenessErrorVis && (
+              <p className={`text-red-600 mt-1 -mb-2`}>
+                {tabErrors.titleUniqueness}
+              </p>
+            )}
+
+            {errors.textAreaErrorVis && tabType === "note" && (
+              <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.textArea}</p>
+            )}
+
+            {errors.bookmarksErrorVis && tabType === "folder" && (
+              <p className={`text-red-600 mt-1 -mb-2`}>
+                {tabErrors.bookmarksFormat}
+              </p>
+            )}
+
+            {errors.bookmarkExistenceErrorVis && tabType === "folder" && (
+              <p className={`text-red-600 mt-1 -mb-2`}>
+                {tabErrors.bookmarkExistence}
+              </p>
+            )}
+
+            {errors.bookmarksRepeatErrorVis && tabType === "folder" && (
+              <p className={`text-red-600 mt-1 -mb-2`}>
+                {tabErrors.bookmarksRepeat}
+              </p>
+            )}
+
+            {errors.noDeletionErrorVis && (
+              <p className={`text-red-600 mt-1 -mb-2`}>
+                {tabErrors.noDeletion}
+              </p>
+            )}
+
+            {errors.invalidLinkErrorVis && tabType === "rss" && (
+              <p className={`text-red-600 mt-1 -mb-2`}>
+                {tabErrors.invalidLinkError}
+              </p>
+            )}
+          </div>
         </div>
 
-        {tabType === "folder" && tabID !== "ALL_TAGS" && (
-          <EditTab_folder
-            selectablesListVis={selectablesListVis}
-            setSelectablesListVis={setSelectablesListVis}
-            setWasAnythingClicked={setWasAnythingClicked}
-            selectablesInputStr={selectablesInputStr}
-            setSelectablesInputStr={setSelectablesInputStr}
-            saveFunc={saveFunc}
-          />
-        )}
+        <div className={`pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
+          <div className="flex justify-between items-center">
+            <p>Lock as opened by default</p>
 
-        {tabType === "note" && (
-          <EditTab_notes
-            textAreaValue={textAreaValue}
-            setTextAreaValue={setTextAreaValue}
-            setWasAnythingClicked={setWasAnythingClicked}
-          />
-        )}
+            {tabOpen ? (
+              <button
+                className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300"
+                onClick={() => {
+                  setTabOpen((b) => !b);
+                  setWasTabOpenClicked(true);
+                  setSelectablesListVis(false);
+                }}
+              >
+                <LockClosedSVG className="text-gray-700 transition-colors duration-75 hover:text-black cursor-pointer" />
+              </button>
+            ) : (
+              <button
+                className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300"
+                onClick={() => {
+                  setTabOpen((b) => !b);
+                  setWasTabOpenClicked(true);
+                  setSelectablesListVis(false);
+                }}
+              >
+                <LockOpenSVG className="h-6 w-6 text-gray-700 transition-colors duration-75 hover:text-black cursor-pointer" />
+              </button>
+            )}
+          </div>
 
-        {tabType === "rss" && (
-          <EditTab_RSS
-            dateCheckbox={dateCheckbox}
-            descriptionCheckbox={descriptionCheckbox}
-            rssItemsPerPage={rssItemsPerPage}
-            setDateCheckbox={setDateCheckbox}
-            setDescriptionCheckbox={setDescriptionCheckbox}
-            setRssItemsPerPage={setRssItemsPerPage}
-            setWasAnythingClicked={setWasAnythingClicked}
-            setWasCheckboxClicked={setWasCheckboxClicked}
-            setWasItemsPerPageClicked={setWasItemsPerPageClicked}
-            setWasTabOpenClicked={setWasTabOpenClicked}
-            tabID={tabID}
-            rssLinkInput={rssLinkInput}
-            setRssLinkInput={setRssLinkInput}
-          />
-        )}
+          <div className="flex justify-between items-center mt-2">
+            <p>Delete</p>
 
-        <div className={`${tabType === "rss" ? "mt-1.5" : ""}`}>
-          {errors.titleFormatErrorVis && (
-            <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.titleFormat}</p>
-          )}
-
-          {errors.titleUniquenessErrorVis && (
-            <p className={`text-red-600 mt-1 -mb-2`}>
-              {tabErrors.titleUniqueness}
-            </p>
-          )}
-
-          {errors.textAreaErrorVis && tabType === "note" && (
-            <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.textArea}</p>
-          )}
-
-          {errors.bookmarksErrorVis && tabType === "folder" && (
-            <p className={`text-red-600 mt-1 -mb-2`}>
-              {tabErrors.bookmarksFormat}
-            </p>
-          )}
-
-          {errors.bookmarkExistenceErrorVis && tabType === "folder" && (
-            <p className={`text-red-600 mt-1 -mb-2`}>
-              {tabErrors.bookmarkExistence}
-            </p>
-          )}
-
-          {errors.bookmarksRepeatErrorVis && tabType === "folder" && (
-            <p className={`text-red-600 mt-1 -mb-2`}>
-              {tabErrors.bookmarksRepeat}
-            </p>
-          )}
-
-          {errors.noDeletionErrorVis && (
-            <p className={`text-red-600 mt-1 -mb-2`}>{tabErrors.noDeletion}</p>
-          )}
-
-          {errors.invalidLinkErrorVis && tabType === "rss" && (
-            <p className={`text-red-600 mt-1 -mb-2`}>
-              {tabErrors.invalidLinkError}
-            </p>
-          )}
-        </div>
-      </div>
-
-      <div className={`pt-2`} style={{ borderTop: "solid lightGray 1px" }}>
-        <div className="flex justify-between items-center">
-          <p>Lock as opened by default</p>
-
-          {tabOpen ? (
             <button
               className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300"
               onClick={() => {
-                setTabOpen((b) => !b);
-                setWasTabOpenClicked(true);
-                setSelectablesListVis(false);
-              }}
-            >
-              <LockClosedSVG className="text-gray-700 transition-colors duration-75 hover:text-black cursor-pointer" />
-            </button>
-          ) : (
-            <button
-              className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300"
-              onClick={() => {
-                setTabOpen((b) => !b);
-                setWasTabOpenClicked(true);
-                setSelectablesListVis(false);
-              }}
-            >
-              <LockOpenSVG className="h-6 w-6 text-gray-700 transition-colors duration-75 hover:text-black cursor-pointer" />
-            </button>
-          )}
-        </div>
-
-        <div className="flex justify-between items-center mt-2">
-          <p>Delete</p>
-
-          <button
-            className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300"
-            onClick={() => {
-              if (!currentTab.deletable) {
-                // setNoDeletionErrorVis(true);
-                setErrors({
-                  ...errorsAllFalse,
-                  noDeletionErrorVis: true,
-                });
-                return;
-              }
-
-              // setDeletedTab(tabID);
-
-              setTabsData((previous) =>
-                produce(previous, (updated) => {
-                  let tabToDelete = updated.find((obj) => obj.id == tabID);
-                  if (tabToDelete) {
-                    let tabIndex = updated.indexOf(tabToDelete);
-                    updated.splice(tabIndex, 1);
-                  }
-                })
-              );
-
-              // setEditTabVis((b) => !b);
-              visDispatch({ type: "EDIT_TOGGLE" });
-              // removing deleted tab(tag) for bookmarks
-              bookmarksData.forEach((obj, i) => {
-                if (obj.tags.indexOf(tabTitle as string) > -1) {
-                  setBookmarksData((previous) =>
-                    produce(previous, (updated) => {
-                      updated[i].tags.splice(
-                        obj.tags.indexOf(tabTitle as string),
-                        1
-                      );
-                    })
-                  );
+                if (!currentTab.deletable) {
+                  // setNoDeletionErrorVis(true);
+                  setErrors({
+                    ...errorsAllFalse,
+                    noDeletionErrorVis: true,
+                  });
+                  return;
                 }
-              });
+
+                // setDeletedTab(tabID);
+
+                setTabsData((previous) =>
+                  produce(previous, (updated) => {
+                    let tabToDelete = updated.find((obj) => obj.id == tabID);
+                    if (tabToDelete) {
+                      let tabIndex = updated.indexOf(tabToDelete);
+                      updated.splice(tabIndex, 1);
+                    }
+                  })
+                );
+
+                // setEditTabVis((b) => !b);
+                visDispatch({ type: "EDIT_TOGGLE" });
+                // removing deleted tab(tag) for bookmarks
+                bookmarksData.forEach((obj, i) => {
+                  if (obj.tags.indexOf(tabTitle as string) > -1) {
+                    setBookmarksData((previous) =>
+                      produce(previous, (updated) => {
+                        updated[i].tags.splice(
+                          obj.tags.indexOf(tabTitle as string),
+                          1
+                        );
+                      })
+                    );
+                  }
+                });
+              }}
+            >
+              <TrashSVG className="h-6 w-6 text-gray-500 transition-colors duration-75 hover:text-black cursor-pointer" />
+            </button>
+          </div>
+        </div>
+
+        <div className="w-full flex justify-center mt-2">
+          <button
+            className="h-5 w-5 mr-6 btn-focus"
+            onClick={(e) => {
+              e.preventDefault();
+
+              saveFunc();
             }}
           >
-            <TrashSVG className="h-6 w-6 text-gray-500 transition-colors duration-75 hover:text-black cursor-pointer" />
+            <SaveSVG
+              className={`h-5 w-5 fill-current transition-colors duration-75 ${
+                wasAnythingClicked
+                  ? "text-gray-900 hover:text-green-600 cursor-pointer"
+                  : "text-blueGray-400 cursor-default"
+              }`}
+            />
+          </button>
+
+          <button
+            className="h-5 w-5 btn-focus"
+            onClick={(e) => {
+              e.preventDefault();
+              // setEditTabVis((b) => !b);
+              visDispatch({ type: "EDIT_TOGGLE" });
+            }}
+          >
+            <CancelSVG className="h-5 w-5 fill-current text-gray-900 hover:text-red-600 cursor-pointer transition-colors duration-75" />
           </button>
         </div>
+
+        {/* </form> */}
       </div>
-
-      <div className="w-full flex justify-center mt-2">
-        <button
-          className="h-5 w-5 mr-6 btn-focus"
-          onClick={(e) => {
-            e.preventDefault();
-
-            saveFunc();
-          }}
-        >
-          <SaveSVG
-            className={`h-5 w-5 fill-current transition-colors duration-75 ${
-              wasAnythingClicked
-                ? "text-gray-900 hover:text-green-600 cursor-pointer"
-                : "text-blueGray-400 cursor-default"
-            }`}
-          />
-        </button>
-
-        <button
-          className="h-5 w-5 btn-focus"
-          onClick={(e) => {
-            e.preventDefault();
-            // setEditTabVis((b) => !b);
-            visDispatch({ type: "EDIT_TOGGLE" });
-          }}
-        >
-          <CancelSVG className="h-5 w-5 fill-current text-gray-900 hover:text-red-600 cursor-pointer transition-colors duration-75" />
-        </button>
-      </div>
-
-      {/* </form> */}
-    </div>
+    </FocusLock>
   );
 }
 
