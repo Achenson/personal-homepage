@@ -54,6 +54,15 @@ function SelectableList({
           );
         }
         return;
+        case "NumpadEnter":
+          if (selectableToHighlight !== null) {
+            chooseCurrent(
+              visibleSelectables_sorted[selectableToHighlight],
+              "keyboard"
+            );
+          }
+          return;
+
       case "Delete":
         setSelectablesInputStr("");
         return;
