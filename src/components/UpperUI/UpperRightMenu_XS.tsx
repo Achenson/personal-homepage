@@ -40,20 +40,7 @@ function UpperRightMenu({
 
 
 
-  function areButtonsDisabled(): boolean {
-    if (
-      upperVisState.backgroundSettingsVis ||
-      upperVisState.colorsSettingsVis ||
-      upperVisState.settingsVis ||
-      upperVisState.profileVis ||
-      upperVisState.newBookmarkVis ||
-      upperVisState.newTabVis
-    ) {
-      return true;
-    }
 
-    return false;
-  }
 
   return (
     <>
@@ -71,7 +58,7 @@ function UpperRightMenu({
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               setTabType("folder");
             }}
-            disabled={areButtonsDisabled()}
+            // disabled={areButtonsDisabled()}
           >
             <FolderSVG
               className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -88,7 +75,7 @@ function UpperRightMenu({
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               setTabType("note");
             }}
-            disabled={areButtonsDisabled()}
+            // disabled={areButtonsDisabled()}
           >
             <NoteSVG
               className={`h-6 w-6 cursor-pointer fill-current transition-colors duration-75 text-black hover:text-${uiColorData}`}
@@ -105,7 +92,7 @@ function UpperRightMenu({
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               setTabType("rss");
             }}
-            disabled={areButtonsDisabled()}
+            // disabled={areButtonsDisabled()}
           >
             <AddRssSVG
               className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -132,7 +119,7 @@ function UpperRightMenu({
             // setNewBookmarkVis((b) => !b);
             upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
           }}
-          disabled={areButtonsDisabled()}
+          // disabled={areButtonsDisabled()}
         >
           <BookmarkSVG
             className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -147,7 +134,7 @@ function UpperRightMenu({
           onClick={() => {
             upperVisDispatch({ type: "ADD_TAG_XS_TOGGLE" });
           }}
-          disabled={areButtonsDisabled()}
+          // disabled={areButtonsDisabled()}
         >
           <PlusSquareSVG
             className={`h-5 w-5 cursor-pointer transition-colors duration-75 fill-current hover:text-${uiColorData} ml-px`}
@@ -161,7 +148,7 @@ function UpperRightMenu({
           onClick={() => {
             upperVisDispatch({ type: "SETTINGS_TOGGLE" });
           }}
-          disabled={areButtonsDisabled()}
+          // disabled={areButtonsDisabled()}
         >
           <CogSVG
             className={`h-full w-full cursor-pointer transition-colors duration-75  hover:text-${uiColorData}`}
@@ -185,7 +172,7 @@ function UpperRightMenu({
                 setLoggedInData(false);
                 upperVisDispatch({ type: "MESSAGE_OPEN_LOGOUT" });
               }}
-              disabled={areButtonsDisabled()}
+              // disabled={areButtonsDisabled()}
             >
               <LogoutSVG
                 className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -200,7 +187,7 @@ function UpperRightMenu({
                 upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 // setLoggedInData(true);
               }}
-              disabled={areButtonsDisabled()}
+              // disabled={areButtonsDisabled()}
             >
               <UserSVG
                 // -ml-1

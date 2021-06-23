@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
+import FocusLock from "react-focus-lock";
+
 import { produce } from "immer";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
@@ -90,182 +92,187 @@ function GlobalSettings_UpperUI({
     });
   }
   return (
-    <div
-      className="flex flex-col z-50 fixed h-full w-screen justify-center items-center"
-      style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
-      onClick={() => {
-        upperVisDispatch({ type: "SETTINGS_TOGGLE" });
-      }}
-    >
+    <FocusLock>
       <div
-        className="md:mb-40 relative"
-        onClick={(e) => {
-          e.stopPropagation();
-          return;
+        className="flex flex-col z-50 fixed h-full w-screen justify-center items-center"
+        style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
+        onClick={() => {
+          upperVisDispatch({ type: "SETTINGS_TOGGLE" });
         }}
       >
         <div
-          className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
-          style={{ width: `${xsScreen ? "350px" : "417px"}`, height: "255px" }}
+          className="md:mb-40 relative"
+          onClick={(e) => {
+            e.stopPropagation();
+            return;
+          }}
         >
-          <Settings_inner_xs
-            upperVisDispatch={upperVisDispatch}
-            currentSettings="global"
-          />
+          <div
+            className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
+            style={{
+              width: `${xsScreen ? "350px" : "417px"}`,
+              height: "255px",
+            }}
+          >
+            <Settings_inner_xs
+              upperVisDispatch={upperVisDispatch}
+              currentSettings="global"
+            />
 
-          <div className="absolute right-0 top-0 mt-1 mr-1">
-            <button
-              className="h-5 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
-              onClick={() => {
-                upperVisDispatch({ type: "SETTINGS_TOGGLE" });
-              }}
-            >
-              <CancelSVG className="h-full w-full fill-current text-gray-600 cursor-pointer hover:text-gray-900" />
-            </button>
-          </div>
+            <div className="absolute right-0 top-0 mt-1 mr-1">
+              <button
+                className="h-5 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                onClick={() => {
+                  upperVisDispatch({ type: "SETTINGS_TOGGLE" });
+                }}
+              >
+                <CancelSVG className="h-full w-full fill-current text-gray-600 cursor-pointer hover:text-gray-900" />
+              </button>
+            </div>
 
-          <p className="text-center">Global settings</p>
-          <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="">One color for all columns</p>
-            <button
-              className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
-                globalSettingsData.oneColorForAllCols
-                  ? // ? `bg-${uiColorData} hover:bg-opacity-50`
-                    // : `hover:bg-${uiColorData} hover:bg-opacity-50`
-                    `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
-                  : `hover:border-opacity-50`
-              } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100 `}
-              onClick={() => {
-                setGlobalSettingsData({
-                  ...globalSettingsData,
-                  oneColorForAllCols: !globalSettingsData.oneColorForAllCols,
-                });
-              }}
-            ></button>
-          </div>
-          <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="">Limit column width growth</p>
-            <button
-              className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
-                globalSettingsData.limitColGrowth
-                  ? // ? `bg-${uiColorData} hover:bg-opacity-50`
-                    // : `hover:bg-${uiColorData} hover:bg-opacity-50`
-                    `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
-                  : `hover:border-opacity-50`
-              } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100  `}
-              onClick={() => {
-                setGlobalSettingsData({
-                  ...globalSettingsData,
-                  // oneColorForAllCols: !globalSettingsData.oneColorForAllCols,
-                  limitColGrowth: !globalSettingsData.limitColGrowth,
-                });
-              }}
-            ></button>
-          </div>
+            <p className="text-center">Global settings</p>
+            <div className="flex justify-between items-center mb-2 mt-2">
+              <p className="">One color for all columns</p>
+              <button
+                className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                  globalSettingsData.oneColorForAllCols
+                    ? // ? `bg-${uiColorData} hover:bg-opacity-50`
+                      // : `hover:bg-${uiColorData} hover:bg-opacity-50`
+                      `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                    : `hover:border-opacity-50`
+                } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100 `}
+                onClick={() => {
+                  setGlobalSettingsData({
+                    ...globalSettingsData,
+                    oneColorForAllCols: !globalSettingsData.oneColorForAllCols,
+                  });
+                }}
+              ></button>
+            </div>
+            <div className="flex justify-between items-center mb-2 mt-2">
+              <p className="">Limit column width growth</p>
+              <button
+                className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                  globalSettingsData.limitColGrowth
+                    ? // ? `bg-${uiColorData} hover:bg-opacity-50`
+                      // : `hover:bg-${uiColorData} hover:bg-opacity-50`
+                      `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                    : `hover:border-opacity-50`
+                } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100  `}
+                onClick={() => {
+                  setGlobalSettingsData({
+                    ...globalSettingsData,
+                    // oneColorForAllCols: !globalSettingsData.oneColorForAllCols,
+                    limitColGrowth: !globalSettingsData.limitColGrowth,
+                  });
+                }}
+              ></button>
+            </div>
 
-          <div className="flex justify-between items-center mb-2 mt-2">
-            <p className="">Hide folder containing all bookmarks</p>
-            <button
-              className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
-                globalSettingsData.hideNonDeletable
-                  ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
-                  : `hover:border-opacity-50`
-              } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100  `}
-              onClick={() => {
-                setGlobalSettingsData({
-                  ...globalSettingsData,
-                  hideNonDeletable: !globalSettingsData.hideNonDeletable,
-                });
-              }}
-            ></button>
-          </div>
+            <div className="flex justify-between items-center mb-2 mt-2">
+              <p className="">Hide folder containing all bookmarks</p>
+              <button
+                className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                  globalSettingsData.hideNonDeletable
+                    ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                    : `hover:border-opacity-50`
+                } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100  `}
+                onClick={() => {
+                  setGlobalSettingsData({
+                    ...globalSettingsData,
+                    hideNonDeletable: !globalSettingsData.hideNonDeletable,
+                  });
+                }}
+              ></button>
+            </div>
 
-          <div className="my-0">
-            <div
-              className={`flex items-center mb-2 mt-2 justify-between border-${uiColorData} border-t border-opacity-40`}
-            >
-              <p className="whitespace-nowrap w-32">RSS Display</p>
+            <div className="my-0">
+              <div
+                className={`flex items-center mb-2 mt-2 justify-between border-${uiColorData} border-t border-opacity-40`}
+              >
+                <p className="whitespace-nowrap w-32">RSS Display</p>
 
-              <div className="flex">
-                <div className="flex items-center mr-2">
-                  <button
-                    className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
-                      rssSettingsData.description
-                        ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
-                        : `hover:border-opacity-50`
-                    } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100  `}
-                    style={{ marginTop: "2px" }}
-                    onClick={() => {
-                      // setDescriptionCheckbox((b) => !b);
-                      // setWasCheckboxClicked(true);
-                      setRssSettingsData({
-                        ...rssSettingsData,
-                        description: !rssSettingsData.description,
-                      });
+                <div className="flex">
+                  <div className="flex items-center mr-2">
+                    <button
+                      className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                        rssSettingsData.description
+                          ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                          : `hover:border-opacity-50`
+                      } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100  `}
+                      style={{ marginTop: "2px" }}
+                      onClick={() => {
+                        // setDescriptionCheckbox((b) => !b);
+                        // setWasCheckboxClicked(true);
+                        setRssSettingsData({
+                          ...rssSettingsData,
+                          description: !rssSettingsData.description,
+                        });
 
-                      setTabOpenedData(null);
-                    }}
-                  />
-                  <span className="ml-1 ">Description</span>
+                        setTabOpenedData(null);
+                      }}
+                    />
+                    <span className="ml-1 ">Description</span>
+                  </div>
+
+                  <div className="flex items-center">
+                    <button
+                      className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                        rssSettingsData.date
+                          ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                          : `hover:border-opacity-50`
+                      } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100 `}
+                      style={{ marginTop: "2px" }}
+                      onClick={() => {
+                        // setDateCheckbox((b) => !b);
+                        // setWasCheckboxClicked(true);
+                        setRssSettingsData({
+                          ...rssSettingsData,
+                          date: !rssSettingsData.date,
+                        });
+
+                        setTabOpenedData(null);
+                      }}
+                    />
+                    <span className="ml-1">Date</span>
+                  </div>
                 </div>
+              </div>
 
-                <div className="flex items-center">
-                  <button
-                    className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
-                      rssSettingsData.date
-                        ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
-                        : `hover:border-opacity-50`
-                    } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100 `}
-                    style={{ marginTop: "2px" }}
-                    onClick={() => {
-                      // setDateCheckbox((b) => !b);
-                      // setWasCheckboxClicked(true);
-                      setRssSettingsData({
-                        ...rssSettingsData,
-                        date: !rssSettingsData.date,
-                      });
-
-                      setTabOpenedData(null);
-                    }}
-                  />
-                  <span className="ml-1">Date</span>
-                </div>
+              <div
+                className={`flex items-center mt-2 pb-1 justify-between border-${uiColorData} border-b border-opacity-40`}
+              >
+                <p className="whitespace-nowrap w-32">RSS Items per page</p>
+                <input
+                  type="number"
+                  min="5"
+                  max="15"
+                  className="border w-8 text-center border-gray-300 bg-gray-50
+                focus:outline-none focus:ring-1 focus:ring-blueGray-300 
+                "
+                  value={rssSettingsData.itemsPerPage}
+                  onChange={(e) => {
+                    // setRssItemsPerPage(parseInt(e.target.value));
+                    setRssSettingsData({
+                      ...rssSettingsData,
+                      itemsPerPage: parseInt(e.target.value),
+                    });
+                    // setWasItemsPerPageClicked(true);
+                    setTabOpenedData(null);
+                  }}
+                />
               </div>
             </div>
 
-            <div
-              className={`flex items-center mt-2 pb-1 justify-between border-${uiColorData} border-b border-opacity-40`}
-            >
-              <p className="whitespace-nowrap w-32">RSS Items per page</p>
-              <input
-                type="number"
-                min="5"
-                max="15"
-                className="border w-8 text-center border-gray-300 bg-gray-50
-                focus:outline-none focus:ring-1 focus:ring-blueGray-300 
-                "
-                value={rssSettingsData.itemsPerPage}
-                onChange={(e) => {
-                  // setRssItemsPerPage(parseInt(e.target.value));
-                  setRssSettingsData({
-                    ...rssSettingsData,
-                    itemsPerPage: parseInt(e.target.value),
-                  });
-                  // setWasItemsPerPageClicked(true);
-                  setTabOpenedData(null);
-                }}
-              />
+            <div className="flex justify-between items-center mb-2 mt-1">
+              <p className="">Number of columns</p>
+
+              <div className="flex">{renderColsNumberControls()}</div>
             </div>
-          </div>
-
-          <div className="flex justify-between items-center mb-2 mt-1">
-            <p className="">Number of columns</p>
-
-            <div className="flex">{renderColsNumberControls()}</div>
           </div>
         </div>
       </div>
-    </div>
+    </FocusLock>
   );
 }
 

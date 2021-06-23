@@ -38,20 +38,7 @@ function NoteInput({ visDispatch, currentTab, upperVisState }: Props): JSX.Eleme
     }
   }
 
-  function areButtonsDisabled(): boolean {
-    if (
-      upperVisState.backgroundSettingsVis ||
-      upperVisState.colorsSettingsVis ||
-      upperVisState.settingsVis ||
-      upperVisState.profileVis ||
-      upperVisState.newBookmarkVis ||
-      upperVisState.newTabVis
-    ) {
-      return true;
-    }
 
-    return false;
-  }
 
   return (
     <div
@@ -69,7 +56,8 @@ function NoteInput({ visDispatch, currentTab, upperVisState }: Props): JSX.Eleme
           // setEditTabVis(true);
           visDispatch({ type: "EDIT_TOGGLE" });
         }}
-        tabIndex={areButtonsDisabled() ? undefined : 0}
+        // tabIndex={areButtonsDisabled() ? undefined : 0}
+        tabIndex={0}
         onFocus={() => setFocusOnNote(true)}
         onBlur={() => setFocusOnNote(false)}
       >

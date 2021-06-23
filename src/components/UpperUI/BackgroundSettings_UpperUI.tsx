@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import FocusLock from "react-focus-lock";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
@@ -59,186 +60,188 @@ function BackgroundSettings_UpperUI({
   }
 
   return (
-    <div
-      className="flex flex-col z-50 fixed h-full w-screen justify-center items-center"
-      style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
-      onClick={() => {
-        upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
-      }}
-    >
+    <FocusLock>
       <div
-        className="md:mb-40 relative"
-        onClick={(e) => {
-          e.stopPropagation();
-          return;
+        className="flex flex-col z-50 fixed h-full w-screen justify-center items-center"
+        style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
+        onClick={() => {
+          upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
         }}
       >
         <div
-          className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
-          style={{
-            width: `${xsScreen ? "350px" : "417px"}`,
-            height: `${xsScreen ? "238px" : "205px"}`,
+          className="md:mb-40 relative"
+          onClick={(e) => {
+            e.stopPropagation();
+            return;
           }}
-          // style={{ width: "350px", height: "250px" }}
         >
-          <Settings_inner_xs
-            currentSettings={"background"}
-            upperVisDispatch={upperVisDispatch}
-          />
-          <div className="absolute right-0 top-0 mt-1 mr-1">
-            <button
-              className="h-5 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
-              onClick={() => {
-                // if (backgroundSettingsVis) {
-                //   setBackgroundSettingsVis(false);
-                // }
-                upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
-              }}
-            >
-              <CancelSVG className="h-full w-full fill-current text-gray-600 cursor-pointer hover:text-gray-900" />
-            </button>
-          </div>
-
-          <div className="mx-0 xs:mx-2">
-            <p className="text-center mb-3">Background mode</p>
-            <div className="mb-3 text-center">
-              <span className="text-lg">Background image:</span>
+          <div
+            className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
+            style={{
+              width: `${xsScreen ? "350px" : "417px"}`,
+              height: `${xsScreen ? "238px" : "205px"}`,
+            }}
+            // style={{ width: "350px", height: "250px" }}
+          >
+            <Settings_inner_xs
+              currentSettings={"background"}
+              upperVisDispatch={upperVisDispatch}
+            />
+            <div className="absolute right-0 top-0 mt-1 mr-1">
               <button
-                className="ml-2 focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                className="h-5 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
                 onClick={() => {
-                  if (!globalSettingsData.picBackground) {
-                    // setImgBackgroundMode(true);
-                    setGlobalSettingsData({
-                      ...globalSettingsData,
-                      picBackground: true,
-                    });
-                  }
+                  // if (backgroundSettingsVis) {
+                  //   setBackgroundSettingsVis(false);
+                  // }
+                  upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
                 }}
               >
-                <span
-                  className={`${
-                    globalSettingsData.picBackground
-                      ? "cursor-default" +
-                        " " +
-                        "text-" +
-                        finalColorForImgBackgroundMode
-                      : "hover:text-opacity-50 cursor-pointer text-gray-400"
-                  } text-lg`}
-                >
-                  ON
-                </span>
-              </button>
-
-              {/* <p>|</p> */}
-              <button
-                className="ml-1.5 focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
-                onClick={() => {
-                  if (globalSettingsData.picBackground) {
-                    // setImgBackgroundMode(false);
-                    setGlobalSettingsData({
-                      ...globalSettingsData,
-                      picBackground: false,
-                    });
-                  }
-                }}
-              >
-                <span
-                  className={`${
-                    globalSettingsData.picBackground
-                      ? "hover:text-opacity-50 cursor-pointer text-gray-400"
-                      : "cursor-default" +
-                        " " +
-                        "text-" +
-                        finalColorForImgBackgroundMode
-                  } text-lg`}
-                >
-                  OFF
-                </span>
+                <CancelSVG className="h-full w-full fill-current text-gray-600 cursor-pointer hover:text-gray-900" />
               </button>
             </div>
 
-            {globalSettingsData.picBackground ? (
-              <div className="text-center">
-                <p className={`mb-2 xs:mb-0`}>{imgDescription_1}</p>
-                <div className={`mb-3`}>
-                  <p className="block xs:inline-block">{imgDescription_2}</p>
-                  <span> </span>
-                  <button
-                    onClick={() => {
+            <div className="mx-0 xs:mx-2">
+              <p className="text-center mb-3">Background mode</p>
+              <div className="mb-3 text-center">
+                <span className="text-lg">Background image:</span>
+                <button
+                  className="ml-2 focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                  onClick={() => {
+                    if (!globalSettingsData.picBackground) {
+                      // setImgBackgroundMode(true);
                       setGlobalSettingsData({
                         ...globalSettingsData,
-                        defaultImage: "defaultBackground",
+                        picBackground: true,
                       });
-                    }}
-                    className="focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                    }
+                  }}
+                >
+                  <span
+                    className={`${
+                      globalSettingsData.picBackground
+                        ? "cursor-default" +
+                          " " +
+                          "text-" +
+                          finalColorForImgBackgroundMode
+                        : "hover:text-opacity-50 cursor-pointer text-gray-400"
+                    } text-lg`}
                   >
-                    <span
-                      className={`text-${uiColorData} cursor-pointer hover:underline`}
-                    >
-                      1
-                    </span>
-                  </button>
+                    ON
+                  </span>
+                </button>
 
-                  <span> </span>
-                  <button
-                    onClick={() => {
+                {/* <p>|</p> */}
+                <button
+                  className="ml-1.5 focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                  onClick={() => {
+                    if (globalSettingsData.picBackground) {
+                      // setImgBackgroundMode(false);
                       setGlobalSettingsData({
                         ...globalSettingsData,
-                        defaultImage: "defaultBackground_2",
+                        picBackground: false,
                       });
-                    }}
-                    className="focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                    }
+                  }}
+                >
+                  <span
+                    className={`${
+                      globalSettingsData.picBackground
+                        ? "hover:text-opacity-50 cursor-pointer text-gray-400"
+                        : "cursor-default" +
+                          " " +
+                          "text-" +
+                          finalColorForImgBackgroundMode
+                    } text-lg`}
                   >
-                    <span
-                      className={`text-${uiColorData} cursor-pointer hover:underline`}
-                    >
-                      2
-                    </span>
-                  </button>
-
-                  <span> </span>
-                  <button
-                    className="focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
-                    onClick={() => {
-                      setGlobalSettingsData({
-                        ...globalSettingsData,
-                        defaultImage: "defaultBackground_3",
-                      });
-                    }}
-                  >
-                    <span
-                      className={`text-${uiColorData} cursor-pointer hover:underline`}
-                    >
-                      3
-                    </span>
-                  </button>
-                </div>
+                    OFF
+                  </span>
+                </button>
               </div>
-            ) : (
-              <p className="text-center mb-3">{noImgDescription}</p>
-            )}
 
-            <div
-              className={`flex justify-between items-center ${
-                globalSettingsData.picBackground ? "" : "hidden"
-              }`}
-            >
+              {globalSettingsData.picBackground ? (
+                <div className="text-center">
+                  <p className={`mb-2 xs:mb-0`}>{imgDescription_1}</p>
+                  <div className={`mb-3`}>
+                    <p className="block xs:inline-block">{imgDescription_2}</p>
+                    <span> </span>
+                    <button
+                      onClick={() => {
+                        setGlobalSettingsData({
+                          ...globalSettingsData,
+                          defaultImage: "defaultBackground",
+                        });
+                      }}
+                      className="focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                    >
+                      <span
+                        className={`text-${uiColorData} cursor-pointer hover:underline`}
+                      >
+                        1
+                      </span>
+                    </button>
+
+                    <span> </span>
+                    <button
+                      onClick={() => {
+                        setGlobalSettingsData({
+                          ...globalSettingsData,
+                          defaultImage: "defaultBackground_2",
+                        });
+                      }}
+                      className="focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                    >
+                      <span
+                        className={`text-${uiColorData} cursor-pointer hover:underline`}
+                      >
+                        2
+                      </span>
+                    </button>
+
+                    <span> </span>
+                    <button
+                      className="focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                      onClick={() => {
+                        setGlobalSettingsData({
+                          ...globalSettingsData,
+                          defaultImage: "defaultBackground_3",
+                        });
+                      }}
+                    >
+                      <span
+                        className={`text-${uiColorData} cursor-pointer hover:underline`}
+                      >
+                        3
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-center mb-3">{noImgDescription}</p>
+              )}
+
               <div
-                className={`bg-blueGray-50 h-6 ${
-                  xsScreen ? "w-48" : "w-60"
-                } border border-gray-300`}
-              ></div>
-              <button
-                className={`border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150
-                focus:outline-none focus:ring-1 focus:ring-${uiColorData}`}
+                className={`flex justify-between items-center ${
+                  globalSettingsData.picBackground ? "" : "hidden"
+                }`}
               >
-                Upload image
-              </button>
+                <div
+                  className={`bg-blueGray-50 h-6 ${
+                    xsScreen ? "w-48" : "w-60"
+                  } border border-gray-300`}
+                ></div>
+                <button
+                  className={`border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150
+                focus:outline-none focus:ring-1 focus:ring-${uiColorData}`}
+                >
+                  Upload image
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </FocusLock>
   );
 }
 

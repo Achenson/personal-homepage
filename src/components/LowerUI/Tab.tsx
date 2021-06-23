@@ -476,20 +476,7 @@ Props): JSX.Element {
     return "text-black";
   }
 
-  function areButtonsDisabled(): boolean {
-    if (
-      upperVisState.backgroundSettingsVis ||
-      upperVisState.colorsSettingsVis ||
-      upperVisState.settingsVis ||
-      upperVisState.profileVis ||
-      upperVisState.newBookmarkVis ||
-      upperVisState.newTabVis
-    ) {
-      return true;
-    }
 
-    return false;
-  }
 
   return (
     <div
@@ -548,7 +535,7 @@ Props): JSX.Element {
               "text"
             ).slice(5)} focus:ring-opacity-40`}
             style={{ height: "23px" }}
-            disabled={areButtonsDisabled()}
+            // disabled={areButtonsDisabled()}
           >
             <p
               className={`truncate ${
@@ -595,7 +582,7 @@ Props): JSX.Element {
                 visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
                 upperVisDispatch({ type: "CLOSE_ALL" });
               }}
-              disabled={areButtonsDisabled()}
+              // disabled={areButtonsDisabled()}
             >
               <PlusSVG
                 className={`h-full transition-colors duration-75 hover:${hoverText(
@@ -633,7 +620,7 @@ Props): JSX.Element {
               visDispatch({ type: "EDIT_TOGGLE" });
               upperVisDispatch({ type: "CLOSE_ALL" });
             }}
-            disabled={areButtonsDisabled()}
+            // disabled={areButtonsDisabled()}
           >
             <PencilSmallSVG
               className={`h-full -ml-px transition-colors duration-75 hover:${hoverText(

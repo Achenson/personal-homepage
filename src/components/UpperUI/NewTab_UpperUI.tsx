@@ -1,5 +1,7 @@
 import React from "react";
 
+import FocusLock from "react-focus-lock";
+
 import { useState, useEffect, useRef } from "react";
 
 import { uiColorState } from "../../state/colorsState";
@@ -437,241 +439,246 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
   }
 
   return (
-    // opacity cannot be used, because children will inherit it and the text won't be readable
-    <div
-      className="flex z-50 fixed h-full w-screen items-center justify-center"
-      style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
-      onClick={() => {
-        upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-      }}
-    >
+    <FocusLock>
+      {/* 
+        // opacity cannot be used, because children will inherit it and the text
+      won't be readable
+      */}
       <div
-        className={`bg-warmGray-100 pb-2 pt-3 pl-2 pr-0.5 border-2 border-${uiColorData} rounded-sm md:mb-48`}
-        style={{ width: "350px" }}
-        onClick={(e) => {
-          e.stopPropagation();
-          return;
+        className="flex z-50 fixed h-full w-screen items-center justify-center"
+        style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
+        onClick={() => {
+          upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
         }}
       >
-        <p className="text-center">
-          New{" "}
-          {tabType === "folder"
-            ? "folder"
-            : tabType === "note"
-            ? "note"
-            : "RSS channel"}
-        </p>
-        <div className="flex justify-around mb-2 mt-3">
-          <p
-            className="flex-none"
-            style={{ width: `${tabType === "folder" ? "87px" : "66px"}` }}
-          >
-            Title
+        <div
+          className={`bg-warmGray-100 pb-2 pt-3 pl-2 pr-0.5 border-2 border-${uiColorData} rounded-sm md:mb-48`}
+          style={{ width: "350px" }}
+          onClick={(e) => {
+            e.stopPropagation();
+            return;
+          }}
+        >
+          <p className="text-center">
+            New{" "}
+            {tabType === "folder"
+              ? "folder"
+              : tabType === "note"
+              ? "note"
+              : "RSS channel"}
           </p>
-          {/* <div className="w-full pl-2"> */}
-          <input
-            ref={firstFieldRef}
-            type="text"
-            className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
-            value={tabTitleInput}
-            placeholder={
-              tabType === "folder"
-                ? "new folder title"
-                : tabType === "note"
-                ? "new note title"
-                : "new RSS title"
-            }
-            onChange={(e) => {
-              setTabTitleInput(e.target.value);
-            }}
-            onFocus={(e) => {
-              setSelectablesListVis(false);
-            }}
-          />
-          {/* </div> */}
-          {/* <div className="w-5 h-5"> */}
-          {/* <ChevronDownSVG className="h-full invisible" /> */}
-          <div className="w-5 flex-none"></div>
-          {/* </div> */}
-          {/* <ChevronDownSVG className="h-6 invisible" /> */}
-        </div>
-
-        {tabType === "folder" && (
-          <div className="flex justify-around mb-2 mt-2">
-            <p className="flex-none" style={{ width: "87px" }}>
-              Bookmarks
+          <div className="flex justify-around mb-2 mt-3">
+            <p
+              className="flex-none"
+              style={{ width: `${tabType === "folder" ? "87px" : "66px"}` }}
+            >
+              Title
             </p>
             {/* <div className="w-full pl-2"> */}
-
-            <div className="relative w-full">
-              <div className="relative">
-                <input
-                  type="text"
-                  className="w-full border pl-px pr-5 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
-                  // value={tabLinksInput.join(", ")}
-                  value={selectablesInputStr}
-                  ref={selectablesRef}
-                  onChange={(e) => {
-                    if (!selectablesListVis) setSelectablesListVis(true);
-                    let target = e.target.value;
-
-                    setSelectablesInputStr(target);
-                  }}
-                  onFocus={(e) => {
-                    setSelectablesListVis(true);
-                  }}
-                  // onBlur={}
-
-                  placeholder={"Choose at least one"}
-                />
-                {selectablesInputStr.length !== 0 && (
-                  <span
-                    className="absolute h-4 bg-white z-50"
-                    style={{ top: "7px", right: "2px" }}
-                  >
-                    <XsmallSVG
-                      className="h-full text-gray-500 cursor-pointer hover:text-opacity-60"
-                      onClick={() => setSelectablesInputStr("")}
-                    />
-                  </span>
-                )}
-              </div>
-
-              {selectablesListVis && (
-                <SelectableList
-                  setSelectablesInputStr={setSelectablesInputStr}
-                  selectablesInputStr={selectablesInputStr}
-                  visibleSelectables={visibleBookmarks}
-                  initialSelectables={initialBookmarks}
-                  setSelectablesVis={setSelectablesListVis}
-                  marginTop="0px"
-                />
-              )}
-            </div>
-
-            <div className="flex-none w-5 h-5 mt-1">
-              {selectablesListVis ? (
-                <ChevronUpSVG
-                  className="h-full cursor-pointer hover:text-blueGray-500"
-                  onClick={() => {
-                    setSelectablesListVis((b) => !b);
-                  }}
-                />
-              ) : (
-                <ChevronDownSVG
-                  className="h-full cursor-pointer hover:text-blueGray-500"
-                  onClick={() => {
-                    setSelectablesListVis((b) => !b);
-                  }}
-                />
-              )}
-            </div>
-          </div>
-        )}
-
-        {tabType === "rss" && (
-          <div className="flex justify-around mb-2 mt-2">
-            <p className="flex-none" style={{ width: "66px" }}>
-              RSS link
-            </p>
-            <div className="w-full">
-              <input
-                type="text"
-                className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
-                value={rssLinkInput}
-                placeholder="enter RSS link"
-                onChange={(e) => setRssLinkInput(e.target.value)}
-              />
-            </div>
-            {/* <div className="w-5 h-5 mt-1"> */}
-            {/* <ChevronDownSVG className="h-full invisible" /> */}
-            <div className="w-5 flex-none"></div>
+            <input
+              ref={firstFieldRef}
+              type="text"
+              className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+              value={tabTitleInput}
+              placeholder={
+                tabType === "folder"
+                  ? "new folder title"
+                  : tabType === "note"
+                  ? "new note title"
+                  : "new RSS title"
+              }
+              onChange={(e) => {
+                setTabTitleInput(e.target.value);
+              }}
+              onFocus={(e) => {
+                setSelectablesListVis(false);
+              }}
+            />
             {/* </div> */}
-          </div>
-        )}
-
-        <div className="flex justify-between mb-2 mt-2">
-          <p className="w-32">Column</p>
-          {/* <div className="w-full pl-2"> */}
-
-          <div className="flex">
-            {renderColsNumberControls()}
             {/* <div className="w-5 h-5"> */}
             {/* <ChevronDownSVG className="h-full invisible" /> */}
             <div className="w-5 flex-none"></div>
             {/* </div> */}
+            {/* <ChevronDownSVG className="h-6 invisible" /> */}
           </div>
 
-          {/* </div> */}
-        </div>
+          {tabType === "folder" && (
+            <div className="flex justify-around mb-2 mt-2">
+              <p className="flex-none" style={{ width: "87px" }}>
+                Bookmarks
+              </p>
+              {/* <div className="w-full pl-2"> */}
 
-        {tabType === "note" && (
-          <div>
-            <textarea
-              value={textAreaValue as string}
-              className="h-full w-full overflow-visible pl-1 pr-1 border font-mono focus:outline-none focus:ring-1 focus:ring-blueGray-300"
-              rows={10}
-              onChange={(e) => {
-                setTextAreaValue(e.target.value);
+              <div className="relative w-full">
+                <div className="relative">
+                  <input
+                    type="text"
+                    className="w-full border pl-px pr-5 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+                    // value={tabLinksInput.join(", ")}
+                    value={selectablesInputStr}
+                    ref={selectablesRef}
+                    onChange={(e) => {
+                      if (!selectablesListVis) setSelectablesListVis(true);
+                      let target = e.target.value;
+
+                      setSelectablesInputStr(target);
+                    }}
+                    onFocus={(e) => {
+                      setSelectablesListVis(true);
+                    }}
+                    // onBlur={}
+
+                    placeholder={"Choose at least one"}
+                  />
+                  {selectablesInputStr.length !== 0 && (
+                    <span
+                      className="absolute h-4 bg-white z-50"
+                      style={{ top: "7px", right: "2px" }}
+                    >
+                      <XsmallSVG
+                        className="h-full text-gray-500 cursor-pointer hover:text-opacity-60"
+                        onClick={() => setSelectablesInputStr("")}
+                      />
+                    </span>
+                  )}
+                </div>
+
+                {selectablesListVis && (
+                  <SelectableList
+                    setSelectablesInputStr={setSelectablesInputStr}
+                    selectablesInputStr={selectablesInputStr}
+                    visibleSelectables={visibleBookmarks}
+                    initialSelectables={initialBookmarks}
+                    setSelectablesVis={setSelectablesListVis}
+                    marginTop="0px"
+                  />
+                )}
+              </div>
+
+              <div className="flex-none w-5 h-5 mt-1">
+                {selectablesListVis ? (
+                  <ChevronUpSVG
+                    className="h-full cursor-pointer hover:text-blueGray-500"
+                    onClick={() => {
+                      setSelectablesListVis((b) => !b);
+                    }}
+                  />
+                ) : (
+                  <ChevronDownSVG
+                    className="h-full cursor-pointer hover:text-blueGray-500"
+                    onClick={() => {
+                      setSelectablesListVis((b) => !b);
+                    }}
+                  />
+                )}
+              </div>
+            </div>
+          )}
+
+          {tabType === "rss" && (
+            <div className="flex justify-around mb-2 mt-2">
+              <p className="flex-none" style={{ width: "66px" }}>
+                RSS link
+              </p>
+              <div className="w-full">
+                <input
+                  type="text"
+                  className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+                  value={rssLinkInput}
+                  placeholder="enter RSS link"
+                  onChange={(e) => setRssLinkInput(e.target.value)}
+                />
+              </div>
+              {/* <div className="w-5 h-5 mt-1"> */}
+              {/* <ChevronDownSVG className="h-full invisible" /> */}
+              <div className="w-5 flex-none"></div>
+              {/* </div> */}
+            </div>
+          )}
+
+          <div className="flex justify-between mb-2 mt-2">
+            <p className="w-32">Column</p>
+            {/* <div className="w-full pl-2"> */}
+
+            <div className="flex">
+              {renderColsNumberControls()}
+              {/* <div className="w-5 h-5"> */}
+              {/* <ChevronDownSVG className="h-full invisible" /> */}
+              <div className="w-5 flex-none"></div>
+              {/* </div> */}
+            </div>
+
+            {/* </div> */}
+          </div>
+
+          {tabType === "note" && (
+            <div>
+              <textarea
+                value={textAreaValue as string}
+                className="h-full w-full overflow-visible pl-1 pr-1 border font-mono focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+                rows={10}
+                onChange={(e) => {
+                  setTextAreaValue(e.target.value);
+                }}
+              ></textarea>
+            </div>
+          )}
+
+          {errors.titleFormatErrorVis && (
+            <p className={`text-red-600`}>{tabErrors.titleFormat}</p>
+          )}
+
+          {errors.titleUniquenessErrorVis && (
+            <p className={`text-red-600`}>{tabErrors.titleUniqueness}</p>
+          )}
+
+          {errors.bookmarksErrorVis && tabType === "folder" && (
+            <p className={`text-red-600`}>{tabErrors.bookmarksFormat}</p>
+          )}
+
+          {errors.bookmarkExistenceErrorVis && tabType === "folder" && (
+            <p className={`text-red-600`}>{tabErrors.bookmarkExistence}</p>
+          )}
+
+          {errors.bookmarksRepeatErrorVis && tabType === "folder" && (
+            <p className={`text-red-600`}>{tabErrors.bookmarksRepeat}</p>
+          )}
+
+          {errors.textAreaErrorVis && tabType === "note" && (
+            <p className={`text-red-600`}>{tabErrors.textArea}</p>
+          )}
+
+          {errors.invalidLinkErrorVis && tabType === "rss" && (
+            <p className={`text-red-600`}>{tabErrors.invalidLinkError}</p>
+          )}
+
+          {/* !!! pl-4 in NewLink */}
+          <div className="w-full flex justify-center mt-4">
+            <button
+              className="h-5 w-5 mr-6 btn-focus"
+              onClick={(e) => {
+                e.preventDefault();
+
+                saveFunc();
               }}
-            ></textarea>
+            >
+              <SaveSVG className="h-5 w-5 fill-current text-black mr-6 hover:text-green-600 cursor-pointer transition-colors duration-75" />
+            </button>
+
+            <button
+              className="h-5 w-5 btn-focus"
+              onClick={(e) => {
+                e.preventDefault();
+                // setNewTabVis((b) => !b);
+                upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+              }}
+            >
+              <CancelSVG className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75" />
+            </button>
           </div>
-        )}
-
-        {errors.titleFormatErrorVis && (
-          <p className={`text-red-600`}>{tabErrors.titleFormat}</p>
-        )}
-
-        {errors.titleUniquenessErrorVis && (
-          <p className={`text-red-600`}>{tabErrors.titleUniqueness}</p>
-        )}
-
-        {errors.bookmarksErrorVis && tabType === "folder" && (
-          <p className={`text-red-600`}>{tabErrors.bookmarksFormat}</p>
-        )}
-
-        {errors.bookmarkExistenceErrorVis && tabType === "folder" && (
-          <p className={`text-red-600`}>{tabErrors.bookmarkExistence}</p>
-        )}
-
-        {errors.bookmarksRepeatErrorVis && tabType === "folder" && (
-          <p className={`text-red-600`}>{tabErrors.bookmarksRepeat}</p>
-        )}
-
-        {errors.textAreaErrorVis && tabType === "note" && (
-          <p className={`text-red-600`}>{tabErrors.textArea}</p>
-        )}
-
-        {errors.invalidLinkErrorVis && tabType === "rss" && (
-          <p className={`text-red-600`}>{tabErrors.invalidLinkError}</p>
-        )}
-
-        {/* !!! pl-4 in NewLink */}
-        <div className="w-full flex justify-center mt-4">
-          <button
-            className="h-5 w-5 mr-6 btn-focus"
-            onClick={(e) => {
-              e.preventDefault();
-
-              saveFunc();
-            }}
-          >
-            <SaveSVG className="h-5 w-5 fill-current text-black mr-6 hover:text-green-600 cursor-pointer transition-colors duration-75" />
-          </button>
-
-          <button
-            className="h-5 w-5 btn-focus"
-            onClick={(e) => {
-              e.preventDefault();
-              // setNewTabVis((b) => !b);
-              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-            }}
-          >
-            <CancelSVG className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75" />
-          </button>
         </div>
       </div>
-    </div>
+    </FocusLock>
   );
 }
 

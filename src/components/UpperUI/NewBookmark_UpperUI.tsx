@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import FocusLock from "react-focus-lock";
 
 import { produce } from "immer";
 
@@ -324,192 +325,197 @@ Props): JSX.Element {
   }
 
   return (
-    // opacity cannot be used, because children will inherit it and the text won't be readable
-    <div
-      className="flex z-50 fixed h-full w-screen items-center justify-center"
-      style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
-      onClick={() => {
-        upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
-      }}
-    >
+    <FocusLock>
+     {/* 
+      opacity cannot be used, because children will inherit it and the text
+     won't be readable
+     */}
       <div
-        className={`bg-warmGray-100 pb-2 pt-3 pl-2 pr-0.5 border-2 border-${uiColorData} rounded-sm md:mb-48`}
-        style={{ width: "350px" }}
-        onClick={(e) => {
-          e.stopPropagation();
-          return;
+        className="flex z-50 fixed h-full w-screen items-center justify-center"
+        style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
+        onClick={() => {
+          upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
         }}
       >
-        <p className="text-center">New bookmark</p>
-        <div className="flex justify-around mb-2 mt-3">
-          <p className="w-11 flex-none">Title</p>
+        <div
+          className={`bg-warmGray-100 pb-2 pt-3 pl-2 pr-0.5 border-2 border-${uiColorData} rounded-sm md:mb-48`}
+          style={{ width: "350px" }}
+          onClick={(e) => {
+            e.stopPropagation();
+            return;
+          }}
+        >
+          <p className="text-center">New bookmark</p>
+          <div className="flex justify-around mb-2 mt-3">
+            <p className="w-11 flex-none">Title</p>
 
-          <input
-            type="text"
-            ref={firstFieldRef}
-            className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
-            value={titleInput}
-            placeholder={"new bookmark title"}
-            onChange={(e) => setTitleInput(e.target.value)}
-            onFocus={(e) => {
-              setSelectablesListVis(false);
-            }}
-          />
-          {/* <ChevronDownSVG className="h-6 invisible" /> */}
-          <div className="w-5 flex-none"></div>
-        </div>
-        <div className="flex justify-around mb-2">
-          <p className="w-11 flex-none">Link</p>
+            <input
+              type="text"
+              ref={firstFieldRef}
+              className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+              value={titleInput}
+              placeholder={"new bookmark title"}
+              onChange={(e) => setTitleInput(e.target.value)}
+              onFocus={(e) => {
+                setSelectablesListVis(false);
+              }}
+            />
+            {/* <ChevronDownSVG className="h-6 invisible" /> */}
+            <div className="w-5 flex-none"></div>
+          </div>
+          <div className="flex justify-around mb-2">
+            <p className="w-11 flex-none">Link</p>
 
-          <input
-            type="text"
-            className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
-            value={urlInput}
-            placeholder={"enter proper URL address"}
-            onChange={(e) => setUrlInput(e.target.value)}
-            onFocus={(e) => {
-              setSelectablesListVis(false);
-            }}
-          />
-          {/* <ChevronDownSVG className="h-6 invisible" /> */}
-          <div className="w-5 flex-none"></div>
-        </div>
-        <div className="flex justify-start mb-2">
-          <p className="w-11 flex-none">Tags</p>
+            <input
+              type="text"
+              className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+              value={urlInput}
+              placeholder={"enter proper URL address"}
+              onChange={(e) => setUrlInput(e.target.value)}
+              onFocus={(e) => {
+                setSelectablesListVis(false);
+              }}
+            />
+            {/* <ChevronDownSVG className="h-6 invisible" /> */}
+            <div className="w-5 flex-none"></div>
+          </div>
+          <div className="flex justify-start mb-2">
+            <p className="w-11 flex-none">Tags</p>
 
-          <div className="relative w-full">
-            {/* focus-within:ring-1 focus-within:ring-gray-400 pr-1 */}
-            <div className="relative">
-              <input
-                type="text"
-                className="w-full border pl-px pr-5 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
-                ref={selectablesRef}
-                // value={tagsInput.join(", ")}
-                value={selectablesInputStr}
-                placeholder={'tag1, tag2... ("all" tag auto-added)'}
-                onChange={(e) => {
-                  if (!selectablesListVis) setSelectablesListVis(true);
+            <div className="relative w-full">
+              {/* focus-within:ring-1 focus-within:ring-gray-400 pr-1 */}
+              <div className="relative">
+                <input
+                  type="text"
+                  className="w-full border pl-px pr-5 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+                  ref={selectablesRef}
+                  // value={tagsInput.join(", ")}
+                  value={selectablesInputStr}
+                  placeholder={'tag1, tag2... ("all" tag auto-added)'}
+                  onChange={(e) => {
+                    if (!selectablesListVis) setSelectablesListVis(true);
 
-                  let target = e.target.value;
+                    let target = e.target.value;
 
-                  setSelectablesInputStr(target);
+                    setSelectablesInputStr(target);
 
-                  // let tagsInputArr = target.split(", ");
-                  // // setTagsInputArr(selectablesInputStr.split(" ,"))
-                  // // let newVisibleTags = [...visibleTags];
-                  // let newVisibleTags: string[] = [];
+                    // let tagsInputArr = target.split(", ");
+                    // // setTagsInputArr(selectablesInputStr.split(" ,"))
+                    // // let newVisibleTags = [...visibleTags];
+                    // let newVisibleTags: string[] = [];
 
-                  // visibleTags.forEach((el) => {
-                  //   if (tagsInputArr.indexOf(el) === -1) {
-                  //     newVisibleTags.push(el);
-                  //   }
-                  // });
+                    // visibleTags.forEach((el) => {
+                    //   if (tagsInputArr.indexOf(el) === -1) {
+                    //     newVisibleTags.push(el);
+                    //   }
+                    // });
 
-                  // setVisibleTags([...newVisibleTags]);
-                }}
-                onFocus={(e) => {
-                  setSelectablesListVis(true);
-                }}
+                    // setVisibleTags([...newVisibleTags]);
+                  }}
+                  onFocus={(e) => {
+                    setSelectablesListVis(true);
+                  }}
 
-                // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
-              />
-              {selectablesInputStr.length !== 0 && (
-                <span
-                  className="absolute h-4 bg-white z-50"
-                  style={{ top: "7px", right: "2px" }}
-                >
-                  <XsmallSVG
-                    className="h-full text-gray-500 cursor-pointer hover:text-opacity-60"
-                    onClick={() => setSelectablesInputStr("")}
-                  />
-                </span>
+                  // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
+                />
+                {selectablesInputStr.length !== 0 && (
+                  <span
+                    className="absolute h-4 bg-white z-50"
+                    style={{ top: "7px", right: "2px" }}
+                  >
+                    <XsmallSVG
+                      className="h-full text-gray-500 cursor-pointer hover:text-opacity-60"
+                      onClick={() => setSelectablesInputStr("")}
+                    />
+                  </span>
+                )}
+              </div>
+
+              {selectablesListVis && (
+                <SelectableList
+                  setSelectablesInputStr={setSelectablesInputStr}
+                  selectablesInputStr={selectablesInputStr}
+                  visibleSelectables={visibleTags}
+                  initialSelectables={initialTags}
+                  setSelectablesVis={setSelectablesListVis}
+                  marginTop="0px"
+                />
               )}
             </div>
 
-            {selectablesListVis && (
-              <SelectableList
-                setSelectablesInputStr={setSelectablesInputStr}
-                selectablesInputStr={selectablesInputStr}
-                visibleSelectables={visibleTags}
-                initialSelectables={initialTags}
-                setSelectablesVis={setSelectablesListVis}
-                marginTop="0px"
-              />
-            )}
+            <div className="w-5 h-5 mt-1 flex-none">
+              {selectablesListVis ? (
+                <ChevronUpSVG
+                  className="h-full cursor-pointer hover:text-blueGray-500"
+                  onClick={() => {
+                    setSelectablesListVis((b) => !b);
+                  }}
+                />
+              ) : (
+                <ChevronDownSVG
+                  className="h-full cursor-pointer hover:text-blueGray-500"
+                  onClick={() => {
+                    setSelectablesListVis((b) => !b);
+                  }}
+                />
+              )}
+            </div>
           </div>
 
-          <div className="w-5 h-5 mt-1 flex-none">
-            {selectablesListVis ? (
-              <ChevronUpSVG
-                className="h-full cursor-pointer hover:text-blueGray-500"
-                onClick={() => {
-                  setSelectablesListVis((b) => !b);
-                }}
-              />
-            ) : (
-              <ChevronDownSVG
-                className="h-full cursor-pointer hover:text-blueGray-500"
-                onClick={() => {
-                  setSelectablesListVis((b) => !b);
-                }}
-              />
-            )}
+          {errors.titleFormatErrorVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.titleFormat}</p>
+          )}
+
+          {errors.titleUniquenessErrorVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.titleUniqueness}</p>
+          )}
+
+          {errors.invalidLinkVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.invalidLink}</p>
+          )}
+
+          {errors.tagErrorVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.tagFormat}</p>
+          )}
+
+          {errors.noteErrorVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.noteError}</p>
+          )}
+
+          {errors.rssErrorVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.rssError}</p>
+          )}
+
+          {errors.tagRepeatErrorVis && (
+            <p className={`text-red-600`}>{bookmarkErrors.tagRepeat}</p>
+          )}
+
+          <div className="w-full flex justify-center mt-5">
+            <button
+              className="h-5 w-5 mr-6 btn-focus"
+              onClick={(e) => {
+                e.preventDefault();
+
+                saveFunc();
+              }}
+            >
+              <SaveSVG className="h-5 w-5 fill-current text-black hover:text-green-600 cursor-pointer transition-colors duration-75" />
+            </button>
+
+            <button
+              className="h-5 w-5 btn-focus"
+              onClick={(e) => {
+                e.preventDefault();
+                // setBookmarkVis((b) => !b);
+                upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+              }}
+            >
+              <CancelSVG className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75" />
+            </button>
           </div>
-        </div>
-
-        {errors.titleFormatErrorVis && (
-          <p className={`text-red-600`}>{bookmarkErrors.titleFormat}</p>
-        )}
-
-        {errors.titleUniquenessErrorVis && (
-          <p className={`text-red-600`}>{bookmarkErrors.titleUniqueness}</p>
-        )}
-
-        {errors.invalidLinkVis && (
-          <p className={`text-red-600`}>{bookmarkErrors.invalidLink}</p>
-        )}
-
-        {errors.tagErrorVis && (
-          <p className={`text-red-600`}>{bookmarkErrors.tagFormat}</p>
-        )}
-
-        {errors.noteErrorVis && (
-          <p className={`text-red-600`}>{bookmarkErrors.noteError}</p>
-        )}
-
-        {errors.rssErrorVis && (
-          <p className={`text-red-600`}>{bookmarkErrors.rssError}</p>
-        )}
-
-        {errors.tagRepeatErrorVis && (
-          <p className={`text-red-600`}>{bookmarkErrors.tagRepeat}</p>
-        )}
-
-        <div className="w-full flex justify-center mt-5">
-          <button
-            className="h-5 w-5 mr-6 btn-focus"
-            onClick={(e) => {
-              e.preventDefault();
-
-              saveFunc();
-            }}
-          >
-            <SaveSVG className="h-5 w-5 fill-current text-black hover:text-green-600 cursor-pointer transition-colors duration-75" />
-          </button>
-
-          <button
-            className="h-5 w-5 btn-focus"
-            onClick={(e) => {
-              e.preventDefault();
-              // setBookmarkVis((b) => !b);
-              upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
-            }}
-          >
-            <CancelSVG className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75" />
-          </button>
         </div>
       </div>
-    </div>
+    </FocusLock>
   );
 }
 

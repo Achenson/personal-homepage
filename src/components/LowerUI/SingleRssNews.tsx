@@ -49,20 +49,7 @@ function SingeRssNews({
     return newArr.join(" ") + "...";
   }
 
-  function areButtonsDisabled(): boolean {
-    if (
-      upperVisState.backgroundSettingsVis ||
-      upperVisState.colorsSettingsVis ||
-      upperVisState.settingsVis ||
-      upperVisState.profileVis ||
-      upperVisState.newBookmarkVis ||
-      upperVisState.newTabVis
-    ) {
-      return true;
-    }
 
-    return false;
-  }
 
   return (
     <div
@@ -71,9 +58,9 @@ function SingeRssNews({
     ${globalSettingsData.picBackground ? "" : "border-black border-opacity-10"}
      `}
     >
-      {areButtonsDisabled() ? (
+    {/*   {areButtonsDisabled() ? (
         <p className="text-lightBlue-700">{title}</p>
-      ) : (
+      ) : ( */}
         <a
           href={link}
           target="_blank"
@@ -83,7 +70,7 @@ function SingeRssNews({
         >
           {title}
         </a>
-      )}
+      {/* )} */}
 
       <p className="text-sm mt-0.5 leading-snug">
         {descriptionVis && renderDescription(description)}

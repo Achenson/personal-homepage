@@ -62,20 +62,20 @@ function SingleBookmark({
 
   // let linkURL = new URL(singleBookmarkData.URL)
 
-  function areButtonsDisabled(): boolean {
-    if (
-      upperVisState.backgroundSettingsVis ||
-      upperVisState.colorsSettingsVis ||
-      upperVisState.settingsVis ||
-      upperVisState.profileVis ||
-      upperVisState.newBookmarkVis ||
-      upperVisState.newTabVis
-    ) {
-      return true;
-    }
+  // function areButtonsDisabled(): boolean {
+  //   if (
+  //     upperVisState.backgroundSettingsVis ||
+  //     upperVisState.colorsSettingsVis ||
+  //     upperVisState.settingsVis ||
+  //     upperVisState.profileVis ||
+  //     upperVisState.newBookmarkVis ||
+  //     upperVisState.newTabVis
+  //   ) {
+  //     return true;
+  //   }
 
-    return false;
-  }
+  //   return false;
+  // }
 
   return (
     <div>
@@ -93,11 +93,11 @@ function SingleBookmark({
               <PhotographSVG className="h-full" />
             </div>
             <div className="truncate">
-              {areButtonsDisabled() ? (
+              {/* {areButtonsDisabled() ? (
                 <p className="z-50 hover:text-gray-600 mx-0.5">
                   {singleBookmarkData.title}
                 </p>
-              ) : (
+              ) : ( */}
                 <a
                   href={singleBookmarkData.URL}
                   target="_blank"
@@ -106,7 +106,7 @@ function SingleBookmark({
                 >
                   {singleBookmarkData.title}
                 </a>
-              )}
+              {/* )} */}
 
               {/* <a href="https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death" target="_blank" rel="noopener noreferrer">{singleBookmarkData.title}</a> */}
             </div>
@@ -126,7 +126,7 @@ function SingleBookmark({
                 upperVisDispatch({ type: "CLOSE_ALL" });
                 setBookmarkId(singleBookmarkData.id);
               }}
-              disabled={areButtonsDisabled()}
+              // disabled={areButtonsDisabled()}
             >
               <PencilSmallSVG className="h-full w-full transition-colors duration-75 hover:text-black cursor-pointer" />
             </button>
@@ -179,7 +179,7 @@ function SingleBookmark({
                   })
                 );
               }}
-              disabled={areButtonsDisabled()}
+              // disabled={areButtonsDisabled()}
             >
               <TrashSmallSVG className="h-full w-full transition-colors duration-75 hover:text-black cursor-pointer" />
             </button>

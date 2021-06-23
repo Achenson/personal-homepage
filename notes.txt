@@ -531,6 +531,7 @@ DONE 442. tab titles are cut ! (g's) DONE
 XXX 443. settings popups - initial focus should be set?  441. already fixed thisXXX
 DONE 445. RSS  focus outlines & disable it conditionally DONE
 DONE 445.5 note focus outlines  & disable it conditionally (tabIndex attibute!) DONE
+DONE 552. react-focus-lock for settings etc.? DONE
 
 
 1. tailwind - purgecss at the end of the project
@@ -555,7 +556,6 @@ DONE 445.5 note focus outlines  & disable it conditionally (tabIndex attibute!) 
 449. disable all btn conditionally??
 550. custom.css check
 551. event codes: Enter | NumpadEnter ! 
-552. react-focus-lock for settings etc.?
 553. editSingle bookmark z-index problem when setting popus are on, check others
 
 Browserslist: caniuse-lite is outdated. Please run:

@@ -247,20 +247,7 @@ function ReactQuery({ currentTab, tabID, upperVisState }: Props): JSX.Element {
     return Math.ceil(maxNumber / itemsPerPage) - 1;
   }
 
-  function areButtonsDisabled(): boolean {
-    if (
-      upperVisState.backgroundSettingsVis ||
-      upperVisState.colorsSettingsVis ||
-      upperVisState.settingsVis ||
-      upperVisState.profileVis ||
-      upperVisState.newBookmarkVis ||
-      upperVisState.newTabVis
-    ) {
-      return true;
-    }
 
-    return false;
-  }
 
   return (
     <div className={``}>
@@ -277,7 +264,7 @@ function ReactQuery({ currentTab, tabID, upperVisState }: Props): JSX.Element {
               setPageNumber(pageNumber - 1);
             }
           }}
-          disabled={areButtonsDisabled()}
+          // disabled={areButtonsDisabled()}
         >
           <ArrowLeft
             className={`h-8 ${
@@ -295,7 +282,7 @@ function ReactQuery({ currentTab, tabID, upperVisState }: Props): JSX.Element {
               setPageNumber(pageNumber + 1);
             }
           }}
-          disabled={areButtonsDisabled()}
+          // disabled={areButtonsDisabled()}
         >
           <ArrowRight
             className={`h-8 ${
