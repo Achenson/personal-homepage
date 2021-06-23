@@ -535,7 +535,7 @@ Props): JSX.Element {
                   />
                   {selectablesInputStr.length !== 0 && (
                     <span
-                      className="absolute h-4 bg-white z-50"
+                      className="absolute h-4"
                       style={{ top: "7px", right: "2px" }}
                     >
                       <XsmallSVG
@@ -730,7 +730,7 @@ Props): JSX.Element {
                   />
                   {selectablesInputStr.length !== 0 && (
                     <span
-                      className="absolute h-4 bg-white z-50"
+                      className="absolute h-4"
                       style={{ top: "7px", right: "2px" }}
                     >
                       <XsmallSVG

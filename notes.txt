@@ -534,6 +534,7 @@ DONE 445.5 note focus outlines  & disable it conditionally (tabIndex attibute!) 
 XXX 449. disable all btn conditionally?? (react-focus-lock used instead) XXX
 DONE 551. event codes: Enter | NumpadEnter ! DONE
 DONE 552. react-focus-lock for settings etc.? DONE
+DONE 553. editSingle bookmark z-index problem when setting popus are on, check others DONE
 
 
 1. tailwind - purgecss at the end of the project
@@ -551,12 +552,11 @@ DONE 552. react-focus-lock for settings etc.? DONE
 436. right scroll flickering when disappearing problem?
 439. central styles for focus expand and clean
 
-444. make plusSVG smaller?
+444. make plusSVG smaller so better focus look? 
 446. FAQ note
 447. proper starting links etc
 448. check tailwind way of outlines for keyboard only
-550. custom.css check
-553. editSingle bookmark z-index problem when setting popus are on, check others
+
 
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
