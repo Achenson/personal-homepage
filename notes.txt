@@ -533,6 +533,7 @@ XXX 443. settings popups - initial focus should be set?  441. already fixed this
 DONE 445. RSS  focus outlines & disable it conditionally DONE
 DONE 445.5 note focus outlines  & disable it conditionally (tabIndex attibute!) DONE
 XXX 449. disable all btn conditionally?? (react-focus-lock used instead) XXX
+DONE 449.5 new Folder col focus selection DONE
 DONE 451. event codes: Enter | NumpadEnter ! DONE
 DONE 452. react-focus-lock for settings etc.? DONE
 DONE 453. editSingle bookmark z-index problem when setting popus are on, check others DONE
@@ -556,7 +557,6 @@ DONE 453. editSingle bookmark z-index problem when setting popus are on, check o
 446. FAQ note
 447. proper starting links etc
 448. check tailwind way of outlines for keyboard only
-449. new Folder col focus selection
 450. Tab svgs should be selectable on focus
 
 

@@ -190,17 +190,21 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       return (
         <div className="flex items-center ml-2 justify-end w-full" key={i}>
           <p className="mr-px">{colsNumbering[el]}</p>
-          <div
-            className={`h-4 w-4 ml-px mt-px cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
-              tabColumnInput === el
-                ? `bg-${uiColorData} hover:bg-opacity-50`
-                : `hover:bg-${uiColorData} hover:bg-opacity-50`
-            } `}
+          <button
+            className="ml-0.5 mt-px focus-1-offset"
             onClick={() => {
               setTabColumnInput(el);
               setSelectablesListVis(false);
             }}
-          ></div>
+          >
+            <div
+              className={`h-4 w-4  cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                tabColumnInput === el
+                  ? `bg-${uiColorData} hover:bg-opacity-50`
+                  : `hover:bg-${uiColorData} hover:bg-opacity-50`
+              } `}
+            ></div>
+          </button>
         </div>
       );
     });
