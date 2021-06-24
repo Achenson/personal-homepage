@@ -51,7 +51,7 @@ function UpperRightMenu({
           } justify-around`}
         >
           <button
-            className="h-7 w-7 focus:outline-none focus:ring-2 focus:ring-blueGray-400 ring-inset"
+            className="h-7 w-7 focus-2-inset-dark"
             style={{ marginLeft: "0px" }}
             onClick={() => {
               // setNewTabVis((b) => !b);
@@ -67,7 +67,7 @@ function UpperRightMenu({
 
           {/* <AddNote */}
           <button
-            className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-400"
+            className="h-6 w-6 focus-2-dark"
             style={{ marginTop: "2px", marginLeft: "0px" }}
             onClick={() => {
               // setNewTabVis((b) => !b);
@@ -85,7 +85,7 @@ function UpperRightMenu({
           {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
 
           <button
-            className="h-7 w-7 focus:outline-none focus:ring-2 focus:ring-blueGray-400 ring-inset"
+            className="h-7 w-7 focus-2-inset-dark"
             style={{ marginRight: "-2px" }}
             onClick={() => {
               // setNewTabVis((b) => !b);
@@ -114,7 +114,7 @@ function UpperRightMenu({
         {/* <AddLinkSVG */}
 
         <button
-          className="h-7 w-7 focus:outline-none focus:ring-2 focus:ring-blueGray-400 ring-inset"
+          className="h-7 w-7 focus-2-inset-dark"
           onClick={() => {
             // setNewBookmarkVis((b) => !b);
             upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
@@ -129,7 +129,7 @@ function UpperRightMenu({
         {/* <AddFolderSVG */}
 
         <button
-          className="h-6 w-5 self-center focus:outline-none focus:ring-2 focus:ring-blueGray-400"
+          className="h-6 w-5 self-center focus-2-dark"
           style={{ width: "22px" }}
           onClick={() => {
             upperVisDispatch({ type: "ADD_TAG_XS_TOGGLE" });
@@ -143,7 +143,7 @@ function UpperRightMenu({
 
         {/* <AddNote */}
         <button
-          className="h-6 w-6 ml-0.5 focus:outline-none focus:ring-2 focus:ring-blueGray-400"
+          className="h-6 w-6 ml-0.5 focus-2-dark"
           style={{ marginTop: "2px" }}
           onClick={() => {
             upperVisDispatch({ type: "SETTINGS_TOGGLE" });
@@ -165,7 +165,7 @@ function UpperRightMenu({
         <div className="self-center" style={{ width: "24px", height: "24px" }}>
           {loggedInData ? (
             <button
-              className="h-6 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-400"
+              className="h-6 w-5 focus-2-dark"
               style={{ width: "22px" }}
               onClick={() => {
                 // upperVisDispatch({ type: "PROFILE_TOGGLE" });
@@ -181,7 +181,7 @@ function UpperRightMenu({
             </button>
           ) : (
             <button
-              className="h-6 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-400"
+              className="h-6 w-5 focus-2-dark"
               style={{ width: "18px" }}
               onClick={() => {
                 upperVisDispatch({ type: "PROFILE_TOGGLE" });

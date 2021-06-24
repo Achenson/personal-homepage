@@ -3,12 +3,35 @@
 @import "tailwindcss/utilities";
 
 @layer base {
-  .input-focus {
-    @apply focus:outline-none focus:ring-1 focus:ring-blueGray-300
+  .focus-1 {
+    @apply focus:outline-none focus:ring-1 focus:ring-blueGray-300;
   }
 
-  .btn-focus {
-    @apply focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-offset-1
+  .focus-1-inset {
+    @apply focus-1 focus:ring-inset;
+  }
+
+  .focus-1-offset {
+    @apply focus-1 ring-offset-1 ring-offset-gray-100;
+  }
+
+  .focus-2 {
+    @apply focus:outline-none focus:ring-2 focus:ring-blueGray-300;
+  }
+
+  .focus-2-dark {
+    @apply focus:outline-none focus:ring-2 focus:ring-blueGray-400;
+  }
+
+  .focus-2-inset {
+    @apply focus-2 focus:ring-inset;
+  }
+
+  .focus-2-inset-dark {
+    @apply focus-2-dark focus:ring-inset;
+  }
+
+  .focus-2-offset {
+    @apply focus-2 ring-offset-1 ring-offset-gray-50;
   }
 }
-

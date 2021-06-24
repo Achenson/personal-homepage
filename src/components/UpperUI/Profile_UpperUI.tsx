@@ -72,7 +72,7 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
           >
             <div className="absolute right-0 top-0 mt-1 mr-1">
               <button
-                className="h-5 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                className="h-5 w-5 focus-2-offset"
                 onClick={() => {
                   upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 }}
@@ -99,7 +99,7 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                         "text-" +
                         finalColorForImgBackgroundMode
                       : "hover:text-opacity-50 cursor-pointer text-gray-400"
-                  } text-lg  focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100`}
+                  } text-lg  focus-1-offset`}
                 >
                   <span>Login</span>
                 </button>
@@ -112,7 +112,7 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                         " " +
                         "text-" +
                         finalColorForImgBackgroundMode
-                  } text-lg focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100`}
+                  } text-lg focus-1-offset`}
                   onClick={() => {
                     setLoginOrRegister("register");
                   }}

@@ -475,7 +475,7 @@ Props): JSX.Element {
               <input
                 type="text"
                 ref={firstFieldRef}
-                className="w-full border pl-px input-focus"
+                className="w-full border pl-px focus-1"
                 value={titleInput}
                 placeholder={"new bookmark title"}
                 onChange={(e) => {
@@ -494,7 +494,7 @@ Props): JSX.Element {
 
               <input
                 type="text"
-                className="w-full border pl-px input-focus"
+                className="w-full border pl-px focus-1"
                 value={urlInput}
                 placeholder={"enter proper URL address"}
                 onChange={(e) => {
@@ -514,7 +514,7 @@ Props): JSX.Element {
                 <div className="relative">
                   <input
                     type="text"
-                    className="w-full border pl-px pr-5 input-focus"
+                    className="w-full border pl-px pr-5 focus-1"
                     ref={selectablesRef}
                     // value={tagsInput.join(", ")}
                     value={selectablesInputStr}
@@ -617,7 +617,7 @@ Props): JSX.Element {
             {/* SaveSVG is cut without the <p> - bug? */}
             <div className="mt-5 w-full flex justify-center">
               <button
-                className="h-5 w-5 mr-6 btn-focus"
+                className="h-5 w-5 mr-6 focus-2-offset"
                 onClick={(e) => {
                   e.preventDefault();
                   saveFunc();
@@ -633,7 +633,7 @@ Props): JSX.Element {
               </button>
 
               <button
-                className="h-5 w-5 btn-focus"
+                className="h-5 w-5 focus-2-offset"
                 onClick={(e) => {
                   e.preventDefault();
                   // setBookmarkVis((b) => !b);
@@ -670,7 +670,7 @@ Props): JSX.Element {
               <input
                 type="text"
                 ref={firstFieldRef}
-                className="w-full border pl-px input-focus"
+                className="w-full border pl-px focus-1"
                 value={titleInput}
                 placeholder={"new bookmark title"}
                 onChange={(e) => {
@@ -689,7 +689,7 @@ Props): JSX.Element {
 
               <input
                 type="text"
-                className="w-full border pl-px input-focus"
+                className="w-full border pl-px focus-1"
                 value={urlInput}
                 placeholder={"enter proper URL address"}
                 onChange={(e) => {
@@ -709,7 +709,7 @@ Props): JSX.Element {
                 <div className="relative">
                   <input
                     type="text"
-                    className="w-full border pl-px pr-5 input-focus"
+                    className="w-full border pl-px pr-5 focus-1"
                     ref={selectablesRef}
                     // value={tagsInput.join(", ")}
                     value={selectablesInputStr}
@@ -812,7 +812,7 @@ Props): JSX.Element {
             {/* SaveSVG is cut without the <p> - bug? */}
             <div className="mt-5 w-full flex justify-center">
               <button
-                className="h-5 w-5 mr-6 btn-focus"
+                className="h-5 w-5 mr-6 focus-2-offset"
                 onClick={(e) => {
                   e.preventDefault();
                   saveFunc();
@@ -829,7 +829,7 @@ Props): JSX.Element {
               </button>
 
               <button
-                className="h-5 w-5 btn-focus"
+                className="h-5 w-5 focus-2-offset"
                 onClick={(e) => {
                   e.preventDefault();
                   // setBookmarkVis((b) => !b);

@@ -127,7 +127,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 onClick={() => {
                   upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
                 }}
-                className="h-5 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                className="h-5 w-5 focus-2-offset"
               >
                 <CancelSVG className="h-full w-full fill-current text-gray-600 cursor-pointer hover:text-gray-900" />
               </button>
@@ -218,7 +218,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                   // setNoteColorData("yellow-500");
                   setResetColorsData(true);
                 }}
-                className="focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                className="focus-1-offset"
               >
                 <span
                   className={`text-red-600 hover:underline cursor-pointer

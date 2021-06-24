@@ -441,7 +441,7 @@ Props): JSX.Element {
               type="text"
               ref={firstFieldRef}
               // min-w-0 !!
-              className="border w-full max-w-6xl pl-px input-focus"
+              className="border w-full max-w-6xl pl-px focus-1"
               value={tabTitleInput}
               onChange={(e) => {
                 setTabTitleInput(e.target.value);
@@ -551,7 +551,7 @@ Props): JSX.Element {
 
             {tabOpen ? (
               <button
-                className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300"
+                className="h-6 w-6 focus-2"
                 onClick={() => {
                   setTabOpen((b) => !b);
                   setWasTabOpenClicked(true);
@@ -562,7 +562,7 @@ Props): JSX.Element {
               </button>
             ) : (
               <button
-                className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300"
+                className="h-6 w-6 focus-2"
                 onClick={() => {
                   setTabOpen((b) => !b);
                   setWasTabOpenClicked(true);
@@ -578,7 +578,7 @@ Props): JSX.Element {
             <p>Delete</p>
 
             <button
-              className="h-6 w-6 focus:outline-none focus:ring-2 focus:ring-blueGray-300"
+              className="h-6 w-6 focus-2"
               onClick={() => {
                 if (!currentTab.deletable) {
                   // setNoDeletionErrorVis(true);
@@ -625,7 +625,7 @@ Props): JSX.Element {
 
         <div className="w-full flex justify-center mt-2">
           <button
-            className="h-5 w-5 mr-6 btn-focus"
+            className="h-5 w-5 mr-6 focus-2-offset"
             onClick={(e) => {
               e.preventDefault();
 
@@ -642,7 +642,7 @@ Props): JSX.Element {
           </button>
 
           <button
-            className="h-5 w-5 btn-focus"
+            className="h-5 w-5 focus-2-offset"
             onClick={(e) => {
               e.preventDefault();
               // setEditTabVis((b) => !b);

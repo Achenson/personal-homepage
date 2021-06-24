@@ -73,7 +73,7 @@ function GlobalSettings_UpperUI({
                 numberOfCols: el,
               });
             }}
-            className="focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+            className="focus-1-offset"
           >
             <p
               className={` ${
@@ -121,7 +121,7 @@ function GlobalSettings_UpperUI({
 
             <div className="absolute right-0 top-0 mt-1 mr-1">
               <button
-                className="h-5 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                className="h-5 w-5 focus-2-offset"
                 onClick={() => {
                   upperVisDispatch({ type: "SETTINGS_TOGGLE" });
                 }}
@@ -140,7 +140,7 @@ function GlobalSettings_UpperUI({
                       // : `hover:bg-${uiColorData} hover:bg-opacity-50`
                       `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                     : `hover:border-opacity-50`
-                } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100 `}
+                } focus-1-offset`}
                 onClick={() => {
                   setGlobalSettingsData({
                     ...globalSettingsData,
@@ -158,7 +158,7 @@ function GlobalSettings_UpperUI({
                       // : `hover:bg-${uiColorData} hover:bg-opacity-50`
                       `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                     : `hover:border-opacity-50`
-                } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100  `}
+                } focus-1-offset  `}
                 onClick={() => {
                   setGlobalSettingsData({
                     ...globalSettingsData,
@@ -176,7 +176,7 @@ function GlobalSettings_UpperUI({
                   globalSettingsData.hideNonDeletable
                     ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                     : `hover:border-opacity-50`
-                } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100  `}
+                } focus-1-offset `}
                 onClick={() => {
                   setGlobalSettingsData({
                     ...globalSettingsData,
@@ -199,7 +199,7 @@ function GlobalSettings_UpperUI({
                         rssSettingsData.description
                           ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                           : `hover:border-opacity-50`
-                      } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100  `}
+                      } focus-1-offset `}
                       style={{ marginTop: "2px" }}
                       onClick={() => {
                         // setDescriptionCheckbox((b) => !b);
@@ -221,7 +221,7 @@ function GlobalSettings_UpperUI({
                         rssSettingsData.date
                           ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                           : `hover:border-opacity-50`
-                      } focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100 `}
+                      } focus-1-offset`}
                       style={{ marginTop: "2px" }}
                       onClick={() => {
                         // setDateCheckbox((b) => !b);
@@ -248,7 +248,7 @@ function GlobalSettings_UpperUI({
                   min="5"
                   max="15"
                   className="border w-8 text-center border-gray-300 bg-gray-50
-                focus:outline-none focus:ring-1 focus:ring-blueGray-300 
+                focus-1
                 "
                   value={rssSettingsData.itemsPerPage}
                   onChange={(e) => {

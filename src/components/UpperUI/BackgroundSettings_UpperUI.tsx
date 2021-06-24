@@ -89,7 +89,7 @@ function BackgroundSettings_UpperUI({
             />
             <div className="absolute right-0 top-0 mt-1 mr-1">
               <button
-                className="h-5 w-5 focus:outline-none focus:ring-2 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                className="h-5 w-5 focus-2-offset"
                 onClick={() => {
                   // if (backgroundSettingsVis) {
                   //   setBackgroundSettingsVis(false);
@@ -106,7 +106,7 @@ function BackgroundSettings_UpperUI({
               <div className="mb-3 text-center">
                 <span className="text-lg">Background image:</span>
                 <button
-                  className="ml-2 focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                  className="ml-2 focus-1-offset"
                   onClick={() => {
                     if (!globalSettingsData.picBackground) {
                       // setImgBackgroundMode(true);
@@ -133,7 +133,7 @@ function BackgroundSettings_UpperUI({
 
                 {/* <p>|</p> */}
                 <button
-                  className="ml-1.5 focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                  className="ml-1.5 focus-1-offset"
                   onClick={() => {
                     if (globalSettingsData.picBackground) {
                       // setImgBackgroundMode(false);
@@ -172,7 +172,7 @@ function BackgroundSettings_UpperUI({
                           defaultImage: "defaultBackground",
                         });
                       }}
-                      className="focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                      className="focus-1-offset"
                     >
                       <span
                         className={`text-${uiColorData} cursor-pointer hover:underline`}
@@ -189,7 +189,7 @@ function BackgroundSettings_UpperUI({
                           defaultImage: "defaultBackground_2",
                         });
                       }}
-                      className="focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                      className="focus-1-offset"
                     >
                       <span
                         className={`text-${uiColorData} cursor-pointer hover:underline`}
@@ -200,7 +200,7 @@ function BackgroundSettings_UpperUI({
 
                     <span> </span>
                     <button
-                      className="focus:outline-none focus:ring-1 focus:ring-blueGray-300 ring-offset-1 ring-offset-gray-100"
+                      className="focus-1-offset"
                       onClick={() => {
                         setGlobalSettingsData({
                           ...globalSettingsData,

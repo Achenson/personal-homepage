@@ -258,7 +258,7 @@ function ReactQuery({ currentTab, tabID, upperVisState }: Props): JSX.Element {
     }`}
       >
         <button
-          className="focus:outline-none focus:ring-2 focus:ring-blueGray-300 focus:ring-inset"
+          className="focus-2-inset"
           onClick={() => {
             if (pageNumber > 0) {
               setPageNumber(pageNumber - 1);
@@ -276,7 +276,7 @@ function ReactQuery({ currentTab, tabID, upperVisState }: Props): JSX.Element {
         </button>
 
         <button
-          className="focus:outline-none focus:ring-2 focus:ring-blueGray-300 focus:ring-inset"
+          className="focus-2-inset"
           onClick={() => {
             if (pageNumber < lastPageNumber()) {
               setPageNumber(pageNumber + 1);

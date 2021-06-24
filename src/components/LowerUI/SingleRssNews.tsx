@@ -65,7 +65,7 @@ function SingeRssNews({
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:underline text-lightBlue-700 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+          className="hover:underline text-lightBlue-700 focus-1"
           // style={{lineHeight: "-50px"}}
         >
           {title}

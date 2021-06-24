@@ -478,7 +478,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             <input
               ref={firstFieldRef}
               type="text"
-              className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+              className="w-full border pl-px focus-1"
               value={tabTitleInput}
               placeholder={
                 tabType === "folder"
@@ -513,7 +513,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 <div className="relative">
                   <input
                     type="text"
-                    className="w-full border pl-px pr-5 focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+                    className="w-full border pl-px pr-5 focus-1"
                     // value={tabLinksInput.join(", ")}
                     value={selectablesInputStr}
                     ref={selectablesRef}
@@ -583,7 +583,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               <div className="w-full">
                 <input
                   type="text"
-                  className="w-full border pl-px focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+                  className="w-full border pl-px focus-1"
                   value={rssLinkInput}
                   placeholder="enter RSS link"
                   onChange={(e) => setRssLinkInput(e.target.value)}
@@ -615,7 +615,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             <div>
               <textarea
                 value={textAreaValue as string}
-                className="h-full w-full overflow-visible pl-1 pr-1 border font-mono focus:outline-none focus:ring-1 focus:ring-blueGray-300"
+                className="h-full w-full overflow-visible pl-1 pr-1 border font-mono focus-1"
                 rows={10}
                 onChange={(e) => {
                   setTextAreaValue(e.target.value);
@@ -655,7 +655,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           {/* !!! pl-4 in NewLink */}
           <div className="w-full flex justify-center mt-4">
             <button
-              className="h-5 w-5 mr-6 btn-focus"
+              className="h-5 w-5 mr-6 focus-2-offset"
               onClick={(e) => {
                 e.preventDefault();
 
@@ -666,7 +666,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             </button>
 
             <button
-              className="h-5 w-5 btn-focus"
+              className="h-5 w-5 focus-2-offset"
               onClick={(e) => {
                 e.preventDefault();
                 // setNewTabVis((b) => !b);
