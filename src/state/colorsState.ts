@@ -11,7 +11,7 @@ export const rssColorState = newRidgeState<string>(tabColors[9][2]);
 export const uiColorState = newRidgeState<string>(tabColors[7][2]);
 // export const folderColorState = newRidgeState<string>("teal-500");
 // export const noteColorState = newRidgeState<string>("yellow-400");
-// export const rssColorState = newRidgeState<string>("lightBlue-500");
+// export const rssColorState = newRidgeState<string>("sky-500");
 // export const uiColorState = newRidgeState<string>("teal-500");
 
 export const resetColorsState = newRidgeState<boolean>(false);

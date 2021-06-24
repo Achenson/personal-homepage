@@ -35,8 +35,8 @@ export function setComplementaryUiColor(
     setUiColorData("teal-500");
   }
 
-  if (colorRgx("cyan").test(color) || colorRgx("lightBlue").test(color)) {
-    setUiColorData("lightBlue-500");
+  if (colorRgx("cyan").test(color) || colorRgx("sky").test(color)) {
+    setUiColorData("sky-500");
   }
 
   if (colorRgx("blue").test(color) || colorRgx("indigo").test(color)) {

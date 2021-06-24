@@ -538,6 +538,7 @@ DONE 449.5 new Folder col focus selection DONE
 DONE 451. event codes: Enter | NumpadEnter ! DONE
 DONE 452. react-focus-lock for settings etc.? DONE
 DONE 453. editSingle bookmark z-index problem when setting popus are on, check others DONE
+DONE 454. lightBlue to sky renaming? how to update color palette DONE
 
 
 1. tailwind - purgecss at the end of the project
@@ -558,7 +559,6 @@ DONE 453. editSingle bookmark z-index problem when setting popus are on, check o
 446. FAQ note
 447. proper starting links etc
 450. Tab svgs should be selectable on focus
-454. lightBlue to sky renaming? how to update color palette
 455. when adding new bookmark to all bookmarks: selectables don't auto complete?
 
 

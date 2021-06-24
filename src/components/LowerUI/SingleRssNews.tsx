@@ -59,13 +59,13 @@ function SingeRssNews({
      `}
     >
     {/*   {areButtonsDisabled() ? (
-        <p className="text-lightBlue-700">{title}</p>
+        <p className="text-sky-700">{title}</p>
       ) : ( */}
         <a
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:underline text-lightBlue-700 focus-1"
+          className="hover:underline text-sky-700 focus-1"
           // style={{lineHeight: "-50px"}}
         >
           {title}
