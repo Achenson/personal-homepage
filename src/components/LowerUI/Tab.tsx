@@ -476,8 +476,6 @@ Props): JSX.Element {
     return "text-black";
   }
 
-
-
   return (
     <div
       className={`relative ${
@@ -592,24 +590,31 @@ Props): JSX.Element {
             </button>
           )}
 
-          <ColorSmallSVG
-            className={`h-5 mr-2 transition-colors duration-75 hover:${hoverText(
-              finalTabColor
-            )} cursor-pointer `}
-            // ${
-            //   tabType === "note" || tabType === "rss" ? "ml-1" : ""
-            // }
-            // `}
+          <button
+            className={`h-5 w-5 mr-2 focus:outline-none focus-visible:ring-2 ring-${textOrIconColor(
+              finalTabColor,
+              "text"
+            ).slice(5)} ring-opacity-40`}
             style={{
               marginLeft: `${
                 tabType === "note" || tabType === "rss" ? "7px" : ""
               }`,
-            }}
+            }}  
             onClick={() => {
               visDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
               upperVisDispatch({ type: "CLOSE_ALL" });
             }}
-          />
+          >
+            <ColorSmallSVG
+              className={`h-full w-full transition-colors duration-75 hover:${hoverText(
+                finalTabColor
+              )} cursor-pointer `}
+              // ${
+              //   tabType === "note" || tabType === "rss" ? "ml-1" : ""
+              // }
+              // `}
+            />
+          </button>
 
           <button
             className={`h-5 focus:outline-none focus-visible:ring-2 ring-${textOrIconColor(

@@ -1,5 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+
+import FocusLock from "react-focus-lock";
+
 import SingleColor_Tab from "./SingleColor_Tab";
 
 import { tabColors } from "../../utils/colors_tab";
@@ -29,6 +32,8 @@ Props): JSX.Element {
 
   // }, [document.documentElement.scrollTop])
 
+  
+
   function mappingColors(colors: string[][]) {
     return tabColors.map((row, i) => {
       return (
@@ -41,6 +46,7 @@ Props): JSX.Element {
                 tabColor={tabColor}
                 tabType={tabType}
                 key={j}
+                
               />
             );
           })}
@@ -50,23 +56,25 @@ Props): JSX.Element {
   }
 
   return (
-    <div
-      className={`absolute right-0 bg-gray-100 mr-px mt-px z-40`}
-      // style={{
-      //   top: `${(top + 32 + document.documentElement.scrollTop)}px`,
-      //   left: `${(left + (tabWidth - 187))}px`,
-      // }}
-      onMouseEnter={() => {
-        setIconsVis(true);
-      }}
-      // onMouseLeave={() => {
-      //   setIconsVisibility(false)
-      // }}
-    >
-      {mappingColors(tabColors)}
+    <FocusLock>
+      <div
+        className={`absolute right-0 bg-gray-100 mr-px mt-px z-40`}
+        // style={{
+        //   top: `${(top + 32 + document.documentElement.scrollTop)}px`,
+        //   left: `${(left + (tabWidth - 187))}px`,
+        // }}
+        onMouseEnter={() => {
+          setIconsVis(true);
+        }}
+        // onMouseLeave={() => {
+        //   setIconsVisibility(false)
+        // }}
+      >
+        {mappingColors(tabColors)}
 
-      {/* scroll:{document.body.scrollHeight} */}
-    </div>
+        {/* scroll:{document.body.scrollHeight} */}
+      </div>
+    </FocusLock>
   );
 }
 

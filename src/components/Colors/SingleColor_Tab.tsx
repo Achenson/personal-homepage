@@ -1,4 +1,6 @@
 import React from "react";
+
+
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 import { produce } from "immer";
 import {
@@ -7,12 +9,14 @@ import {
   rssColorState,
 } from "../../state/colorsState";
 
+
 interface Props {
   color: string;
   // tabTitle: string;
   tabID: number | string;
   tabColor: string | null;
   tabType: "folder" | "note" | "rss";
+  
 }
 
 function SingleColor_Tab({
@@ -20,6 +24,7 @@ function SingleColor_Tab({
   tabID,
   tabColor,
   tabType,
+  
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -55,8 +60,10 @@ function SingleColor_Tab({
   }
 
   return (
-    <div
-      className={`h-4 w-8 -mr-px -mt-px bg-${color} cursor-pointer ${borderMaker()} hover:border-2 hover:border-gray-500 hover:z-50`}
+    <button
+      className={`h-4 w-8 -mr-px -mt-px bg-${color} cursor-pointer ${borderMaker()} hover:border-2 hover:border-gray-500 hover:z-50
+      focus:outline-none focus-visible:ring-2 ring-${color === "violet-500" || color === "green-505" ? "gray-600" : "gray-500"} ring-inset
+      `}
       onClick={() => {
         setTabsData((previous) =>
           produce(previous, (updated) => {
@@ -68,7 +75,7 @@ function SingleColor_Tab({
           })
         );
       }}
-    ></div>
+    ></button>
   );
 }
 
