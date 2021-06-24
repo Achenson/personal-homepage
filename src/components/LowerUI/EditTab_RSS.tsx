@@ -70,35 +70,44 @@ function EditTab_RSS({
         <p className="whitespace-nowrap w-32">Display</p>
         <div className="flex">
           <div className="flex items-center mr-2">
-            <div
+            <button
               style={{ marginTop: "2px" }}
-              className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-blueGray-400 ${
-                descriptionCheckbox
-                  ? `bg-blueGray-400 bg-opacity-50 hover:border-opacity-30`
-                  : `hover:border-opacity-50`
-              } `}
+              className="focus-1-offset"
               onClick={() => {
                 setDescriptionCheckbox((b) => !b);
                 setWasCheckboxClicked(true);
               }}
-            />
+            >
+              <div
+                className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-blueGray-400 ${
+                  descriptionCheckbox
+                    ? `bg-blueGray-400 bg-opacity-50 hover:border-opacity-30`
+                    : `hover:border-opacity-50`
+                } `}
+              ></div>
+            </button>
+
             <span className="ml-1">Description</span>
           </div>
 
           <div className="flex items-center">
-            <div
+            <button
               style={{ marginTop: "2px" }}
-              className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-blueGray-400 ${
-                dateCheckbox
-                  ? `bg-blueGray-400 bg-opacity-50 hover:border-opacity-30`
-                  : `hover:border-opacity-50`
-              } `}
+              className="focus-1-offset"
               onClick={() => {
                 setDateCheckbox((b) => !b);
                 setWasCheckboxClicked(true);
               }}
+            >
+              <div
+                className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-blueGray-400 ${
+                  dateCheckbox
+                    ? `bg-blueGray-400 bg-opacity-50 hover:border-opacity-30`
+                    : `hover:border-opacity-50`
+                } `}
+              ></div>
+            </button>
 
-            />
             <span className="ml-1">Date</span>
           </div>
         </div>
