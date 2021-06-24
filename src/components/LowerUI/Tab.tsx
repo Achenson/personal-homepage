@@ -530,10 +530,10 @@ Props): JSX.Element {
           }}
         >
           <button
-            className={`mt-px flex focus:outline-none focus:ring-1 focus:ring-${textOrIconColor(
+            className={`mt-px flex focus:outline-none focus-visible:ring-1 ring-${textOrIconColor(
               finalTabColor,
               "text"
-            ).slice(5)} focus:ring-opacity-40`}
+            ).slice(5)} ring-opacity-40`}
             style={{ height: "23px" }}
             // disabled={areButtonsDisabled()}
           >
@@ -573,10 +573,10 @@ Props): JSX.Element {
 
           {tabType === "folder" && (
             <button
-              className={`h-8 focus:outline-none focus:ring-2 focus:ring-${textOrIconColor(
+              className={`h-8 focus:outline-none focus-visible:ring-2 ring-${textOrIconColor(
                 finalTabColor,
                 "text"
-              ).slice(5)} focus:ring-opacity-40 focus:ring-inset   `}
+              ).slice(5)} ring-opacity-40 ring-inset   `}
               style={{ marginTop: "-6px" }}
               onClick={() => {
                 visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
@@ -612,10 +612,10 @@ Props): JSX.Element {
           />
 
           <button
-            className={`h-5 focus:outline-none focus:ring-2 focus:ring-${textOrIconColor(
+            className={`h-5 focus:outline-none focus-visible:ring-2 ring-${textOrIconColor(
               finalTabColor,
               "text"
-            ).slice(5)} focus:ring-opacity-40 `}
+            ).slice(5)} ring-opacity-40 `}
             onClick={() => {
               visDispatch({ type: "EDIT_TOGGLE" });
               upperVisDispatch({ type: "CLOSE_ALL" });

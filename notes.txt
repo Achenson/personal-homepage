@@ -532,6 +532,7 @@ DONE 442. tab titles are cut ! (g's) DONE
 XXX 443. settings popups - initial focus should be set?  441. already fixed thisXXX
 DONE 445. RSS  focus outlines & disable it conditionally DONE
 DONE 445.5 note focus outlines  & disable it conditionally (tabIndex attibute!) DONE
+DONE 448. check tailwind way of outlines for keyboard only (works on edge, firefox and chrome) DONE
 XXX 449. disable all btn conditionally?? (react-focus-lock used instead) XXX
 DONE 449.5 new Folder col focus selection DONE
 DONE 451. event codes: Enter | NumpadEnter ! DONE
@@ -556,8 +557,12 @@ DONE 453. editSingle bookmark z-index problem when setting popus are on, check o
 444. make plusSVG smaller so better focus look? 
 446. FAQ note
 447. proper starting links etc
-448. check tailwind way of outlines for keyboard only
 450. Tab svgs should be selectable on focus
+454. lightBlue to sky renaming? how to update color palette
+455. when adding new bookmark to all bookmarks: selectables don't auto complete?
+
+
+tailwind 2.0.2
 
 
 Browserslist: caniuse-lite is outdated. Please run:

@@ -232,7 +232,7 @@ function BackgroundSettings_UpperUI({
                 ></div>
                 <button
                   className={`border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150
-                focus:outline-none focus:ring-1 focus:ring-${uiColorData}`}
+                focus:outline-none focus-visible:ring-1 ring-${uiColorData}`}
                 >
                   Upload image
                 </button>

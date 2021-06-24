@@ -4,7 +4,7 @@
 
 @layer base {
   .focus-1 {
-    @apply focus:outline-none focus:ring-1 ring-blueGray-300;
+    @apply focus:outline-none focus-visible:ring-1 ring-blueGray-300;
   }
 
   .focus-1-inset {
@@ -16,11 +16,11 @@
   }
 
   .focus-2 {
-    @apply focus:outline-none focus:ring-2 ring-blueGray-300;
+    @apply focus:outline-none focus-visible:ring-2 ring-blueGray-300;
   }
 
   .focus-2-dark {
-    @apply focus:outline-none focus:ring-2 ring-blueGray-400;
+    @apply focus:outline-none focus-visible:ring-2 ring-blueGray-400;
   }
 
   .focus-2-inset {

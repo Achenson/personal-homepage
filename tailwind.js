@@ -87,6 +87,7 @@ module.exports = {
     extend: {
       borderWidth: ["hover"],
       zIndex: ["hover"],
+      ringWidth: ['focus-visible'],
     },
   },
   plugins: [],

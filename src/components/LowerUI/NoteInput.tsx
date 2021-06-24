@@ -50,7 +50,7 @@ function NoteInput({ visDispatch, currentTab, upperVisState }: Props): JSX.Eleme
     >
       <div
         className={`p-2 rounded-md overflow-hidden border border-black border-opacity-10
-        focus:outline-none focus:ring-2 focus:ring-${globalSettingsData.picBackground ? "gray-50" : "gray-300"} focus:border-opacity-0`}
+        focus:outline-none focus-visible:ring-2 ring-${globalSettingsData.picBackground ? "gray-50" : "gray-300"} focus:border-opacity-0`}
         style={{ backgroundColor: "rgb(247, 243, 132)" }}
         onClick={() => {
           // setEditTabVis(true);
