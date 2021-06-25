@@ -122,7 +122,7 @@ function SingleColor_DefaultAndColumn({
   }
 
   return (
-    <div
+    <button
       className={`h-4 ${
         defaultColorsFor === "folders" ||
         defaultColorsFor === "rss" ||
@@ -132,7 +132,13 @@ function SingleColor_DefaultAndColumn({
       } -mr-px -mt-px bg-${color} cursor-pointer ${
         // isThisSelected(defaultColorsFor) ? "border-2" : "border"
         borderMaker(defaultColorsFor)
-      } hover:border-2 hover:border-gray-500 hover:z-50`}
+      } hover:border-2 hover:border-gray-500 hover:z-50
+      focus:outline-none focus-visible:ring-2 ring-${
+        color === "violet-500" || color === "green-505"
+          ? "gray-600"
+          : "gray-500"
+      } ring-inset
+      `}
       // for columns with background img only
       style={{ backgroundColor: `${colsForBackgroundImg ? color : ""}` }}
       onClick={() => {
@@ -190,7 +196,7 @@ function SingleColor_DefaultAndColumn({
           );
         }
       }}
-    ></div>
+    ></button>
   );
 }
 

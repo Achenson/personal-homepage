@@ -539,6 +539,7 @@ DONE 451. event codes: Enter | NumpadEnter ! DONE
 DONE 452. react-focus-lock for settings etc.? DONE
 DONE 453. editSingle bookmark z-index problem when setting popus are on, check others DONE
 DONE 454. lightBlue to sky renaming? how to update color palette DONE
+?? 457. ColorsToChoose_Tab: lines not parallel! (ilusion?) ???
 
 
 1. tailwind - purgecss at the end of the project
@@ -560,7 +561,6 @@ DONE 454. lightBlue to sky renaming? how to update color palette DONE
 447. proper starting links etc
 450. Tab svgs should be selectable on focus
 455. when adding new bookmark to all bookmarks: selectables don't auto complete?
-457. ColorsToChoose_Tab: lines not parallel!?
 
 
 tailwind 2.0.2

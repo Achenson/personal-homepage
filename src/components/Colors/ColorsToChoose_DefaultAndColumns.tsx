@@ -1,7 +1,8 @@
 import React from "react";
 
-import SingleColor_DefaultAndColumn from "./SingleColor_DefaultAndColumn";
+import FocusLock from "react-focus-lock";
 
+import SingleColor_DefaultAndColumn from "./SingleColor_DefaultAndColumn";
 
 import { tabColors } from "../../utils/colors_tab";
 import { columnColors, imageColumnColors } from "../../utils/colors_column";
@@ -71,34 +72,36 @@ function ColorsToChoose_DefaultAndColumns({
   }
 
   return (
-    <div className="z-50 relative">
-      {/* <div className="absolute bg-white" style={{ left: "-93px", top: "0px" }}> */}
-      <div
-        className="absolute bg-white"
-        style={{
-          // left: `${
-          //   defaultColorsFor === "folders" ||
-          //   defaultColorsFor === "rss" ||
-          //   defaultColorsFor === "notes"
-          //     ? "8px"
-          //     : "0px"
-          // }`,
-          left: leftPositioning,
-          top: "1px",
-        }}
-      >
-        {defaultColorsFor === "column_1" ||
-        defaultColorsFor === "column_2" ||
-        defaultColorsFor === "column_3" ||
-        defaultColorsFor === "column_4"
-          ? mapColumnColors(
-              globalSettingsData.picBackground
-                ? imageColumnColors
-                : columnColors
-            )
-          : mapTabColors()}
+    <FocusLock>
+      <div className="z-50 relative">
+        {/* <div className="absolute bg-white" style={{ left: "-93px", top: "0px" }}> */}
+        <div
+          className="absolute bg-white"
+          style={{
+            // left: `${
+            //   defaultColorsFor === "folders" ||
+            //   defaultColorsFor === "rss" ||
+            //   defaultColorsFor === "notes"
+            //     ? "8px"
+            //     : "0px"
+            // }`,
+            left: leftPositioning,
+            top: "1px",
+          }}
+        >
+          {defaultColorsFor === "column_1" ||
+          defaultColorsFor === "column_2" ||
+          defaultColorsFor === "column_3" ||
+          defaultColorsFor === "column_4"
+            ? mapColumnColors(
+                globalSettingsData.picBackground
+                  ? imageColumnColors
+                  : columnColors
+              )
+            : mapTabColors()}
+        </div>
       </div>
-    </div>
+    </FocusLock>
   );
 }
 

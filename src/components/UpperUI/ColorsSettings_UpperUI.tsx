@@ -136,7 +136,7 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
             <p className="text-center">Default tab colors</p>
             <div className="flex justify-between items-center mb-2 mt-2">
               <p className="w-32">Folders</p>
-              <div
+              <button
                 onClick={() => {
                   setDefaultColorsFor("folders");
 
@@ -154,12 +154,12 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 }}
                 className={`h-4 w-8 bg-${folderColorData} cursor-pointer ${
                   foldersSelected ? "border-2" : "border"
-                } border-black hover:border-gray-500`}
-              ></div>
+                } border-black hover:border-gray-500 focus-2-offset`}
+              ></button>
             </div>
             <div className="flex justify-between items-center mb-2 mt-2">
               <p className="w-32">Notes</p>
-              <div
+              <button
                 onClick={() => {
                   setDefaultColorsFor("notes");
 
@@ -177,12 +177,12 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 }}
                 className={`h-4 w-8 bg-${noteColorData} cursor-pointer ${
                   notesSelected ? "border-2" : "border"
-                } border-black hover:border-gray-500`}
-              ></div>
+                } border-black hover:border-gray-500 focus-2-offset`}
+              ></button>
             </div>
             <div className="flex justify-between items-center mb-2 mt-2">
               <p className="w-32">RSS</p>
-              <div
+              <button
                 onClick={() => {
                   setDefaultColorsFor("rss");
 
@@ -201,8 +201,8 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 }}
                 className={`h-4 w-8 bg-${rssColorData} cursor-pointer ${
                   rssSelected ? "border-2" : "border"
-                } border-black hover:border-gray-500`}
-              ></div>
+                } border-black hover:border-gray-500 focus-2-offset`}
+              ></button>
             </div>
 
             {/* <div className="flex justify-between items-center mb-2 mt-2">
