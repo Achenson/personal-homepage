@@ -121,6 +121,25 @@ function SingleColor_DefaultAndColumn({
     }
   }
 
+  function focusColor(): string {
+    if (/column/.test(defaultColorsFor)) {
+      if (colsForBackgroundImg) {
+        return "gray-500";
+      }
+      return "gray-400";
+    }
+
+    if (color === "violet-500" || color === "green-505") {
+      return "gray-600";
+    }
+
+    if (color === "blueGray-600") {
+      return "gray-400";
+    }
+
+    return "gray-500";
+  }
+
   return (
     <button
       className={`h-4 ${
@@ -133,11 +152,7 @@ function SingleColor_DefaultAndColumn({
         // isThisSelected(defaultColorsFor) ? "border-2" : "border"
         borderMaker(defaultColorsFor)
       } hover:border-2 hover:border-gray-500 hover:z-50
-      focus:outline-none focus-visible:ring-2 ring-${
-        color === "violet-500" || color === "green-505"
-          ? "gray-600"
-          : "gray-500"
-      } ring-inset
+      focus:outline-none focus-visible:ring-2 ring-${focusColor()} ring-inset
       `}
       // for columns with background img only
       style={{ backgroundColor: `${colsForBackgroundImg ? color : ""}` }}
