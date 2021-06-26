@@ -124,7 +124,7 @@ function SingleColor_DefaultAndColumn({
   function focusColor(): string {
     if (/column/.test(defaultColorsFor)) {
       if (colsForBackgroundImg) {
-        return "gray-500";
+        return "blueGray-500";
       }
       return "gray-400";
     }
