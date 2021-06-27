@@ -44,10 +44,8 @@ function ColumnColor_UpperUI({
 }: Props): JSX.Element {
   const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
-  const [
-    columnsColorImg_Data,
-    setColumnsColorImg_Data,
-  ] = columnsColorsImg_State.use();
+  const [columnsColorImg_Data, setColumnsColorImg_Data] =
+    columnsColorsImg_State.use();
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   // const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
@@ -126,7 +124,11 @@ function ColumnColor_UpperUI({
           }
           ${isHoverOnAnyColumn ? "shadow-inner_lg" : ""}
           cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg
-          focus-2-inset-dark
+          focus-2-inset-dark ${
+            columnType === "BACKGROUND_IMG"
+              ? "focus:outline-none focus-visible:ring-2 ring-blueGray-600 ring-inset"
+              : "focus-2-inset-dark"
+          }
           `}
           style={{
             backgroundColor: `${
