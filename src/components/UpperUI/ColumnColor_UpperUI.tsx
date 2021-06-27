@@ -102,9 +102,9 @@ function ColumnColor_UpperUI({
   }
 
   return (
-    <div>
+    <>
       {arrIndex + 1 <= globalSettingsData.numberOfCols ? (
-        <div
+        <button
           onClick={() => {
             setDefaultColorsFor(`column_${colNumber}` as any);
             setTabOpenedData(null);
@@ -125,13 +125,15 @@ function ColumnColor_UpperUI({
             columnType === "NO_BACKGROUND_IMG" ? columnsColor(colNumber) : ""
           }
           ${isHoverOnAnyColumn ? "shadow-inner_lg" : ""}
-          cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg`}
+          cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg
+          focus-2-inset-dark
+          `}
           style={{
             backgroundColor: `${
               columnType === "BACKGROUND_IMG" ? columnsColor(colNumber) : ""
             }`,
           }}
-        ></div>
+        ></button>
       ) : // <div
       //   className={`relative overflow-hidden h-4 w-8 bg-white ${borderStyle()} border-black`}
       // >
@@ -141,7 +143,7 @@ function ColumnColor_UpperUI({
       //   ></div>
       // </div>
       null}
-    </div>
+    </>
   );
 }
 
