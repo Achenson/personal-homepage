@@ -97,13 +97,11 @@ function UpperLeftMenu({
       </div>
       <div className="flex justify-between w-16 ml-2">
         {globalSettingsData.picBackground ? null : (
-          <div className="">
             <BackgroundColor_UpperUI
               // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
               upperVisDispatch={upperVisDispatch}
               upperVisState={upperVisState}
             />
-          </div>
         )}
         <EyeOff_UpperUI upperVisDispatch={upperVisDispatch} />
       </div>

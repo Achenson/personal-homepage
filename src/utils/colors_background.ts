@@ -246,3 +246,30 @@ export const backgroundColorsLightFocus = [
   "fuchsia-500",
   "fuchsia-600",
 ];
+
+
+export const backgroundColorsDarkFocus = [
+
+  "blueGray-400",
+  "lime-700",
+  "green-600",
+  "green-700",
+  "emerald-600",
+  "emerald-700",
+  "teal-600",
+  "teal-700",
+  "cyan-600",
+  "cyan-700",
+  "sky-600",
+  "sky-700",
+  "indigo-500",
+  "violet-500",
+  "violet-600",
+  "purple-500",
+  "purple-600",
+  "fuchsia-500",
+  "fuchsia-600",
+
+
+
+]

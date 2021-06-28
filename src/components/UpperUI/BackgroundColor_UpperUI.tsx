@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import ColorsToChoose_Background from "../Colors/ColorsToChoose_Background";
 
+import {backgroundColorsDarkFocus} from "../../utils/colors_background"
+
 import { backgroundColorState } from "../../state/colorsState";
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
@@ -46,21 +48,32 @@ function BackgroundColor_upperUI({
     }
   }
 
+  function focusColor(): string {
+  
+    if (backgroundColorsDarkFocus.indexOf(backgroundColorData) > -1) {
+      return "blueGray-300";
+    }
+
+    return "blueGray-400";
+  }
+
   return (
     // <div className={`h-8 w-6 bg-${backgroundColorData} ${selected ? "border-2" : "border"} border-black cursor-pointer hover:border-gray-400`}
 
-    <div className="relative">
+    <button
+      className={`relative focus:outline-none focus-visible:ring-2 ring-${focusColor()} ring-inset`}
+      onClick={() => {
+        // setTabOpenedData(null)
+        // setCloseAllTabsData(true);
+        setSelected((b) => !b);
+        upperVisDispatch({ type: "COLORS_BACKGROUND_TOGGLE" });
+      }}
+    >
       <DocumentSVG
         // className={`h-7 bg-${calcIconBackground(backgroundColorData)} opacity-80 border border-black rounded-lg cursor-pointer fill-current text-${backgroundColorData} hover:border-gray-500`}
         className={`h-7 transition-colors duration-75 ${calcIconBackground(
           backgroundColorData
         )} opacity-80 border border-black rounded-lg cursor-pointer  hover:border-gray-500`}
-        onClick={() => {
-          // setTabOpenedData(null)
-          // setCloseAllTabsData(true);
-          setSelected((b) => !b);
-          upperVisDispatch({ type: "COLORS_BACKGROUND_TOGGLE" });
-        }}
       />
 
       {upperVisState.colorsBackgroundVis && (
@@ -68,7 +81,7 @@ function BackgroundColor_upperUI({
           <ColorsToChoose_Background upperVisDispatch={upperVisDispatch} />
         </div>
       )}
-    </div>
+    </button>
   );
 }
 
