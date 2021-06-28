@@ -65,7 +65,7 @@ function BackgroundColor_upperUI({
 
       {upperVisState.colorsBackgroundVis && (
         <div className="absolute" style={{ bottom: "102px", left: "104px" }}>
-          <ColorsToChoose_Background />
+          <ColorsToChoose_Background upperVisDispatch={upperVisDispatch} />
         </div>
       )}
     </div>

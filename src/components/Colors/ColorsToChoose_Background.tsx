@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import FocusLock from "react-focus-lock";
 
 import { backgroundColors } from "../../utils/colors_background";
 
+import { UpperVisAction } from "../../utils/interfaces";
+
 import SingleColor_Background from "./SingleColor_Background";
 
-interface Props {}
+interface Props {
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
+}
 
-function ColorsToChoose_Background({}: Props): JSX.Element {
+function ColorsToChoose_Background({ upperVisDispatch }: Props): JSX.Element {
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
+
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.code === "Escape") {
+      upperVisDispatch({type: "COLORS_BACKGROUND_TOGGLE"})
+    }
+  }
+
   function mapBackgroundColors() {
     return backgroundColors.map((row, i) => {
       return (
