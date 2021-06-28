@@ -289,7 +289,10 @@ function Main({}: Props): JSX.Element {
       )}
 
       {upperVisState.colorsSettingsVis && (
-        <Colors_UpperUI upperVisDispatch={upperVisDispatch} />
+        <Colors_UpperUI
+          upperVisDispatch={upperVisDispatch}
+          upperVisState={upperVisState}
+        />
       )}
 
       {upperVisState.profileVis && (

@@ -7,12 +7,14 @@ import SingleColor_Tab from "./SingleColor_Tab";
 
 import { tabColors } from "../../utils/colors_tab";
 // import {columnColors} from "../../utils/columnColors";
+import { TabVisAction } from "../../utils/interfaces";
 
 interface Props {
   setIconsVis: (value: React.SetStateAction<boolean>) => void;
   tabID: string | number;
   tabColor: string | null;
   tabType: "folder" | "note" | "rss";
+  visDispatch: React.Dispatch<TabVisAction>;
   // top: number;
   // left: number;
   // tabWidth: number;
@@ -23,6 +25,7 @@ function ColorsToChoose_Tab({
   tabID,
   tabColor,
   tabType,
+  visDispatch,
 }: // top,
 // left,
 // tabWidth,
@@ -32,7 +35,19 @@ Props): JSX.Element {
 
   // }, [document.documentElement.scrollTop])
 
-  
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
+
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.code === "Escape") {
+      visDispatch({ type: "COLORS_CLOSE" });
+    }
+  }
 
   function mappingColors(colors: string[][]) {
     return tabColors.map((row, i) => {
@@ -46,7 +61,6 @@ Props): JSX.Element {
                 tabColor={tabColor}
                 tabType={tabType}
                 key={j}
-                
               />
             );
           })}

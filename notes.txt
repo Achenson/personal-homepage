@@ -530,6 +530,7 @@ DONE 439. central styles in tailwind.css for focus expand and clean DONE
 DONE 441. focus shouldn't be possible when settings popup are visible - disable btn's conditionally? DONE
 DONE 442. tab titles are cut ! (g's) DONE
 XXX 443. settings popups - initial focus should be set?  441. already fixed thisXXX
+X 444. make plusSVG smaller so better focus look? X
 DONE 445. RSS  focus outlines & disable it conditionally DONE
 DONE 445.5 note focus outlines  & disable it conditionally (tabIndex attibute!) DONE
 DONE 448. check tailwind way of outlines for keyboard only (works on edge, firefox and chrome) DONE
@@ -558,7 +559,6 @@ XX 459. first render: problem with single colors for columns focus selection (no
 433. test with Lighthouse
 436. right scroll flickering when disappearing problem?
 
-444. make plusSVG smaller so better focus look? 
 446. FAQ note
 447. proper starting links etc
 450. Tab svgs should be selectable on focus
@@ -566,6 +566,7 @@ XX 459. first render: problem with single colors for columns focus selection (no
 456. unify SingleColor_DefaultAndColumn and SingleColor_Tab
 458. diff focus order - Upper Left Menu first
 460. make focus outlines more visible
+461. focus should start on already selected color - tabs & columns color
 
 tailwind 2.0.2
 

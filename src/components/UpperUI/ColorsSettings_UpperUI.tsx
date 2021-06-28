@@ -19,7 +19,7 @@ import {
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
-import { UpperVisAction } from "../../utils/interfaces";
+import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 
@@ -27,20 +27,23 @@ interface Props {
   // colorsVis: boolean;
   // setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
+  upperVisState: UpperVisState;
 }
 
-function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
-  const [defaultColorsFor, setDefaultColorsFor] =
-    useState<
-      | "folders"
-      | "notes"
-      | "rss"
-      // | "column_1"
-      // | "column_2"
-      // | "column_3"
-      // | "column_4"
-      | "unselected"
-    >("unselected");
+function ColorsSettings_UpperUI({
+  upperVisDispatch,
+  upperVisState,
+}: Props): JSX.Element {
+  const [defaultColorsFor, setDefaultColorsFor] = useState<
+    | "folders"
+    | "notes"
+    | "rss"
+    // | "column_1"
+    // | "column_2"
+    // | "column_3"
+    // | "column_4"
+    | "unselected"
+  >("unselected");
 
   const [colorsToChooseVis, setColorsToChooseVis] = useState<boolean>(false);
 
@@ -246,6 +249,8 @@ function ColorsSettings_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 <ColorsToChoose_Default
                   defaultColorsFor={defaultColorsFor}
                   leftPositioning={`-60px`}
+                  upperVisDispatch={upperVisDispatch}
+                  upperVisState={upperVisState}
                 />
               </div>
             )}

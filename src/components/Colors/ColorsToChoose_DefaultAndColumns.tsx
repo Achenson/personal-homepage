@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import FocusLock from "react-focus-lock";
 
@@ -8,6 +8,8 @@ import { tabColors } from "../../utils/colors_tab";
 import { columnColors, imageColumnColors } from "../../utils/colors_column";
 
 import { globalSettingsState } from "../../state/defaultSettings";
+
+import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 interface Props {
   // setIconsVisibility: (value: React.SetStateAction<boolean>) => void;
@@ -23,13 +25,34 @@ interface Props {
     | "column_4"
     | "unselected";
   leftPositioning: string;
+  upperVisState: UpperVisState;
+  upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
 function ColorsToChoose_DefaultAndColumns({
   defaultColorsFor,
   leftPositioning,
+  upperVisDispatch,
+  upperVisState,
 }: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
+
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.code === "Escape") {
+      if (upperVisState.columnSelected !== null) {
+        upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
+        // setColumnSelected(null);
+      }
+    }
+  }
 
   function mapTabColors() {
     return tabColors.map((row, i) => {

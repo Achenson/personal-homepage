@@ -645,6 +645,7 @@ Props): JSX.Element {
             tabID={tabID}
             tabColor={tabColor}
             tabType={tabType}
+            visDispatch={visDispatch}
             // top={rect?.top as number}
             // left={rect?.left as number}
             // tabWidth={rect?.width as number}

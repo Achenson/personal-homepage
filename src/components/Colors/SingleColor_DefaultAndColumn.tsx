@@ -13,6 +13,8 @@ import { setComplementaryUiColor } from "../../utils/func_complementaryUIcolor";
 
 import { tabColorsLightFocus } from "../../utils/colors_tab";
 
+import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
+
 import { produce } from "immer";
 
 interface Props {
@@ -45,6 +47,12 @@ function SingleColor_DefaultAndColumn({
     columnsColorsImg_State.use();
 
   const [uiColorData, setUiColorData] = uiColorState.use();
+
+ 
+
+
+
+
 
   function borderMaker(
     defaultColorsFor:
