@@ -11,6 +11,8 @@ import { uiColorState } from "../../state/colorsState";
 
 import { setComplementaryUiColor } from "../../utils/func_complementaryUIcolor";
 
+import { tabColorsLightFocus } from "../../utils/colors_tab";
+
 import { produce } from "immer";
 
 interface Props {
@@ -129,11 +131,7 @@ function SingleColor_DefaultAndColumn({
       return "gray-400";
     }
 
-    if (color === "violet-500" || color === "green-505") {
-      return "gray-600";
-    }
-
-    if (color === "blueGray-600") {
+    if (tabColorsLightFocus.indexOf(color) > -1) {
       return "gray-400";
     }
 

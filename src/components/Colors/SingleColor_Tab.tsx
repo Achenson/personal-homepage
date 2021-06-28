@@ -8,6 +8,9 @@ import {
   rssColorState,
 } from "../../state/colorsState";
 
+
+import {tabColorsLightFocus} from "../../utils/colors_tab"
+
 interface Props {
   color: string;
   // tabTitle: string;
@@ -56,11 +59,8 @@ function SingleColor_Tab({
   }
 
   function focusColor(): string {
-    if (color === "violet-500" || color === "green-505") {
-      return "gray-600";
-    }
-
-    if (color === "blueGray-600") {
+  
+    if (tabColorsLightFocus.indexOf(color) > -1) {
       return "gray-400";
     }
 

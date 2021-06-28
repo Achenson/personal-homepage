@@ -46,17 +46,9 @@ export const tabColors: string[][] = [
   ],
   ["teal-300", "teal-400", "teal-500", "teal-600", "teal-700", "teal-800"],
   ["cyan-300", "cyan-400", "cyan-500", "cyan-600", "cyan-700", "cyan-800"],
-  [
-    "sky-300",
-    "sky-400",
-    "sky-500",
-    "sky-600",
-    "sky-700",
-    "sky-800",
-  ],
+  ["sky-300", "sky-400", "sky-500", "sky-600", "sky-700", "sky-800"],
   ["blue-300", "blue-400", "blue-500", "blue-600", "blue-700", "blue-800"],
   [
-    
     // "sky-400",
     // "sky-600",
     // "sky-700",
@@ -75,7 +67,6 @@ export const tabColors: string[][] = [
     "violet-600",
     "violet-700",
     "violet-800",
-
   ],
 
   // [
@@ -87,7 +78,6 @@ export const tabColors: string[][] = [
   //   "purple-800",
 
   // ],
-
 
   [
     "purple-300",
@@ -111,4 +101,42 @@ export const tabColors: string[][] = [
     // "rose-300",
     // "rose-800",
   ],
+];
+
+export const tabColorsLightFocus: string[] = [
+  "violet-500",
+  "green-505",
+  "blueGray-600",
+  "emerald-600",
+  "emerald-700",
+  "emerald-800",
+  "teal-600",
+  "teal-700",
+  "teal-800",
+  "cyan-600",
+  "cyan-700",
+  "cyan-800",
+  "sky-600",
+  "sky-700",
+  "sky-800",
+  "blue-500",
+  "blue-600",
+  "blue-700",
+  "blue-800",
+  "indigo-600",
+  "indigo-800",
+  "blue-707",
+  "blue-770",
+  "blue-777",
+  "violet-500",
+  "violet-600",
+  "violet-700",
+  "violet-800",
+  "purple-600",
+  "purple-700",
+  "fuchsia-600",
+  "fuchsia-700",
+  "rose-600",
+  "rose-700",
+  "pink-600",
 ];
