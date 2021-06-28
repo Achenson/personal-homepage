@@ -1,18 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import { backgroundColors} from "../../utils/colors_background";
+import FocusLock from "react-focus-lock";
 
+import { backgroundColors } from "../../utils/colors_background";
 
-import SingleColor_Background from './SingleColor_Background';
+import SingleColor_Background from "./SingleColor_Background";
 
-interface Props {
+interface Props {}
 
-}
-
-function ColorsToChoose_Background({}: Props): JSX.Element{
-   
-  
-  
+function ColorsToChoose_Background({}: Props): JSX.Element {
   function mapBackgroundColors() {
     return backgroundColors.map((row, i) => {
       return (
@@ -31,15 +27,19 @@ function ColorsToChoose_Background({}: Props): JSX.Element{
       );
     });
   }
-  
-  
+
   return (
+    <FocusLock>
       <div className="z-50 relative">
-      <div className="absolute bg-white" style={{ left: "-98px", top: "105px" }}>
+        <div
+          className="absolute bg-white"
+          style={{ left: "-98px", top: "105px" }}
+        >
           {mapBackgroundColors()}
+        </div>
       </div>
-    </div>
-    )
-};
+    </FocusLock>
+  );
+}
 
 export default ColorsToChoose_Background;
