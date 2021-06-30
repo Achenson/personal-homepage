@@ -223,7 +223,7 @@ export const backgroundColors: string[][] = [
   ],
 ];
 
-
+// for ColorsToChoose_Background
 export const backgroundColorsLightFocus = [
   "blueGray-500",
   "blueGray-600",
@@ -247,29 +247,28 @@ export const backgroundColorsLightFocus = [
   "fuchsia-600",
 ];
 
-
-export const backgroundColorsDarkFocus = [
-
+// for upperLeftUI
+export const backgroundColorsUpperUiFocus = [
   "blueGray-400",
-  "lime-700",
+  "lime-500",
+  "lime-600",
+  "green-500",
   "green-600",
-  "green-700",
-  "emerald-600",
-  "emerald-700",
-  "teal-600",
-  "teal-700",
-  "cyan-600",
-  "cyan-700",
+  "emerald-500",
+  "teal-500",
+  "cyan-500",
+  "sky-400",
+  "sky-500",
   "sky-600",
-  "sky-700",
+  "blue-300",
+  "blue-400",
+  "blue-500",
+  "indigo-300",
+  "indigo-400",
   "indigo-500",
+  "violet-300",
+  "violet-400",
   "violet-500",
-  "violet-600",
-  "purple-500",
-  "purple-600",
-  "fuchsia-500",
-  "fuchsia-600",
+  "fuchsia-100",
 
-
-
-]
+];

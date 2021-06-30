@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import ColorsToChoose_Background from "../Colors/ColorsToChoose_Background";
 
-import {backgroundColorsDarkFocus} from "../../utils/colors_background"
+import {backgroundColorsUpperUiFocus} from "../../utils/colors_background"
 
 import { backgroundColorState } from "../../state/colorsState";
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
@@ -50,7 +50,7 @@ function BackgroundColor_upperUI({
 
   function focusColor(): string {
   
-    if (backgroundColorsDarkFocus.indexOf(backgroundColorData) > -1) {
+    if (backgroundColorsUpperUiFocus.indexOf(backgroundColorData) > -1) {
       return "blueGray-300";
     }
 
