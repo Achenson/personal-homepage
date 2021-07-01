@@ -102,7 +102,7 @@ function SingleBookmark({
                   href={singleBookmarkData.URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="z-50 hover:text-gray-600 transition-colors duration-75 focus-1 mx-0.5"
+                  className="z-50 hover:text-gray-600 transition-colors duration-75 focus-1-darkGray mx-0.5"
                 >
                   {singleBookmarkData.title}
                 </a>
@@ -116,7 +116,7 @@ function SingleBookmark({
             style={{ marginTop: "2px" }}
           >
             <button
-              className="h-5 w-5 ml-1 focus-1-inset"
+              className="h-5 w-5 ml-1 focus-1-inset-darkGray"
               onClick={() => {
                 // setEditBookmarkVis((b) => !b);
                 visDispatch({
@@ -132,7 +132,7 @@ function SingleBookmark({
             </button>
 
             <button
-              className="h-5 w-5 ml-1 focus-1-inset"
+              className="h-5 w-5 ml-1 focus-1-inset-darkGray"
               onClick={() => {
                 // for deleting empty folder
 

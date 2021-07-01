@@ -27,7 +27,7 @@ function Settings_inner_xs({
       style={{ width: "75px", left: "14px" }}
     >
       <button
-        className="h-6 w-6 focus-1"
+        className="h-6 w-6 focus-1-dark"
         onClick={() => {
           // setBackgroundSettingsVis((b) => !b);
           if (currentSettings === "background") return;
@@ -48,7 +48,7 @@ function Settings_inner_xs({
       </button>
 
       <button
-        className="h-6 w-6 focus-1"
+        className="h-6 w-6 focus-1-dark"
         onClick={() => {
           if (currentSettings === "colors") return;
 
@@ -69,7 +69,7 @@ function Settings_inner_xs({
       </button>
 
       <button
-        className="h-6 w-6 focus-1"
+        className="h-6 w-6 focus-1-dark"
         onClick={() => {
           if (currentSettings === "global") return;
           // setTabOpenedData(null)

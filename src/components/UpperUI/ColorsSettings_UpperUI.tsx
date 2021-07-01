@@ -130,7 +130,7 @@ function ColorsSettings_UpperUI({
                 onClick={() => {
                   upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
                 }}
-                className="h-5 w-5 focus-2-offset"
+                className="h-5 w-5 focus-2-offset-dark"
               >
                 <CancelSVG className="h-full w-full fill-current text-gray-600 cursor-pointer hover:text-gray-900" />
               </button>
@@ -157,7 +157,7 @@ function ColorsSettings_UpperUI({
                 }}
                 className={`h-4 w-8 bg-${folderColorData} cursor-pointer ${
                   foldersSelected ? "border-2" : "border"
-                } border-black hover:border-gray-500 focus-2-offset`}
+                } border-black hover:border-gray-500 focus-1-offset-dark`}
               ></button>
             </div>
             <div className="flex justify-between items-center mb-2 mt-2">
@@ -180,7 +180,7 @@ function ColorsSettings_UpperUI({
                 }}
                 className={`h-4 w-8 bg-${noteColorData} cursor-pointer ${
                   notesSelected ? "border-2" : "border"
-                } border-black hover:border-gray-500 focus-2-offset`}
+                } border-black hover:border-gray-500 focus-1-offset-dark`}
               ></button>
             </div>
             <div className="flex justify-between items-center mb-2 mt-2">
@@ -204,7 +204,7 @@ function ColorsSettings_UpperUI({
                 }}
                 className={`h-4 w-8 bg-${rssColorData} cursor-pointer ${
                   rssSelected ? "border-2" : "border"
-                } border-black hover:border-gray-500 focus-2-offset`}
+                } border-black hover:border-gray-500 focus-1-offset-dark`}
               ></button>
             </div>
 

@@ -191,7 +191,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
         <div className="flex items-center ml-2 justify-end w-full" key={i}>
           <p className="mr-px">{colsNumbering[el]}</p>
           <button
-            className="ml-0.5 mt-px focus-1-offset"
+            className="ml-0.5 mt-px focus-1-offset-dark"
             onClick={() => {
               setTabColumnInput(el);
               setSelectablesListVis(false);
@@ -659,7 +659,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
           {/* !!! pl-4 in NewLink */}
           <div className="w-full flex justify-center mt-4">
             <button
-              className="h-5 w-5 mr-6 focus-2-offset"
+              className="h-5 w-5 mr-6 focus-2-offset-dark"
               onClick={(e) => {
                 e.preventDefault();
 
@@ -670,7 +670,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
             </button>
 
             <button
-              className="h-5 w-5 focus-2-offset"
+              className="h-5 w-5 focus-2-offset-dark"
               onClick={(e) => {
                 e.preventDefault();
                 // setNewTabVis((b) => !b);

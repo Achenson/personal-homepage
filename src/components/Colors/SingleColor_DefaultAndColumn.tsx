@@ -132,13 +132,15 @@ function SingleColor_DefaultAndColumn({
   }
 
   function focusColor(): string {
+    // for column colors
     if (/column/.test(defaultColorsFor)) {
       if (colsForBackgroundImg) {
         return "blueGray-500";
       }
-      return "gray-400";
+      return "blueGray-400";
     }
 
+    // for tab defuault colors
     if (tabColorsLightFocus.indexOf(color) > -1) {
       return "gray-400";
     }

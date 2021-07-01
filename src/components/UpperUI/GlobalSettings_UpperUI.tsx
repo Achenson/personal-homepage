@@ -121,7 +121,7 @@ function GlobalSettings_UpperUI({
 
             <div className="absolute right-0 top-0 mt-1 mr-1">
               <button
-                className="h-5 w-5 focus-2-offset"
+                className="h-5 w-5 focus-2-offset-dark"
                 onClick={() => {
                   upperVisDispatch({ type: "SETTINGS_TOGGLE" });
                 }}
@@ -140,7 +140,7 @@ function GlobalSettings_UpperUI({
                       // : `hover:bg-${uiColorData} hover:bg-opacity-50`
                       `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                     : `hover:border-opacity-50`
-                } focus-1-offset`}
+                } focus-1-offset-dark`}
                 onClick={() => {
                   setGlobalSettingsData({
                     ...globalSettingsData,
@@ -158,7 +158,7 @@ function GlobalSettings_UpperUI({
                       // : `hover:bg-${uiColorData} hover:bg-opacity-50`
                       `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                     : `hover:border-opacity-50`
-                } focus-1-offset  `}
+                } focus-1-offset-dark  `}
                 onClick={() => {
                   setGlobalSettingsData({
                     ...globalSettingsData,
@@ -176,7 +176,7 @@ function GlobalSettings_UpperUI({
                   globalSettingsData.hideNonDeletable
                     ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                     : `hover:border-opacity-50`
-                } focus-1-offset `}
+                } focus-1-offset-dark `}
                 onClick={() => {
                   setGlobalSettingsData({
                     ...globalSettingsData,
@@ -199,7 +199,7 @@ function GlobalSettings_UpperUI({
                         rssSettingsData.description
                           ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                           : `hover:border-opacity-50`
-                      } focus-1-offset `}
+                      } focus-1-offset-dark `}
                       style={{ marginTop: "2px" }}
                       onClick={() => {
                         // setDescriptionCheckbox((b) => !b);
@@ -221,7 +221,7 @@ function GlobalSettings_UpperUI({
                         rssSettingsData.date
                           ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                           : `hover:border-opacity-50`
-                      } focus-1-offset`}
+                      } focus-1-offset-dark`}
                       style={{ marginTop: "2px" }}
                       onClick={() => {
                         // setDateCheckbox((b) => !b);
