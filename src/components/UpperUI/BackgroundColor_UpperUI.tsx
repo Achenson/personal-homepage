@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
 import ColorsToChoose_Background from "../Colors/ColorsToChoose_Background";
+import { globalSettingsState } from "../../state/defaultSettings";
+
+
 
 import {backgroundColorsUpperUiFocus} from "../../utils/colors_background"
 
@@ -30,6 +33,8 @@ function BackgroundColor_upperUI({
 
   const [selected, setSelected] = useState(false);
 
+  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
   function calcIconBackground(pageBackgroundColor: string) {
     if (pageBackgroundColor === "white") {
       return `$bg-${pageBackgroundColor}`;
@@ -49,6 +54,10 @@ function BackgroundColor_upperUI({
   }
 
   function focusColor(): string {
+
+    if(globalSettingsData.picBackground) {
+      return "blueGray-400"
+    }
   
     if (backgroundColorsUpperUiFocus.indexOf(backgroundColorData) > -1) {
       return "blueGray-300";

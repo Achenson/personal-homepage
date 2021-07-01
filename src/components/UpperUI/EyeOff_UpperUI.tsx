@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import { backgroundColorState } from "../../state/colorsState";
 
+import { backgroundColorsUpperUiFocus } from "../../utils/colors_background";
+
 import {
   closeAllTabsState,
   globalSettingsState,
@@ -44,8 +46,17 @@ function EyeOff_UpperUI({ upperVisDispatch }: Props): JSX.Element {
     }
   }
 
+  function focusColor(): string {
+    if (globalSettingsData.picBackground) {
+      return "blueGray-400";
+    }
 
-  
+    if (backgroundColorsUpperUiFocus.indexOf(backgroundColorData) > -1) {
+      return "blueGray-300";
+    }
+
+    return "blueGray-400";
+  }
 
   return (
     // <div className={`h-8 w-6 bg-${backgroundColorData} ${selected ? "border-2" : "border"} border-black cursor-pointer hover:border-gray-400`}
@@ -57,7 +68,7 @@ function EyeOff_UpperUI({ upperVisDispatch }: Props): JSX.Element {
         upperVisDispatch({ type: "CLOSE_ALL" });
         setCloseAllTabsData(true);
       }}
-      className={`focus:outline-none focus-visible:ring-2 ring-blueGray-400 ring-inset`}
+      className={`focus:outline-none focus-visible:ring-2 ring-${focusColor()} ring-inset`}
     >
       <EyeOffSVG
         // className={`h-7 bg-${calcIconBackground(backgroundColorData)} opacity-80 border border-black rounded-lg cursor-pointer fill-current text-${backgroundColorData} hover:border-gray-500`}
