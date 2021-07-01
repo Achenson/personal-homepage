@@ -66,7 +66,7 @@ function UpperRightMenu({
         {/* <AddLinkSVG */}
 
         <button
-          className="h-7 w-7 focus-2-inset-dark"
+          className="h-7 w-7 focus-2-inset-veryDark"
           onClick={() => {
             // setNewBookmarkVis((b) => !b);
             upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
@@ -81,7 +81,7 @@ function UpperRightMenu({
         {/* <AddFolderSVG */}
 
         <button
-          className="h-7 w-7 focus-2-inset-dark"
+          className="h-7 w-7 focus-2-inset-veryDark"
           onClick={() => {
             // setNewTabVis((b) => !b);
             upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
@@ -97,7 +97,7 @@ function UpperRightMenu({
         {/* <AddNote */}
 
         <button
-          className="h-6 w-6 focus-2-dark"
+          className="h-6 w-6 focus-2-veryDark"
           style={{ marginTop: "2px" }}
           onClick={() => {
             // setNewTabVis((b) => !b);
@@ -112,7 +112,7 @@ function UpperRightMenu({
           />
         </button>
         <button
-          className="h-7 w-7 focus-2-inset-dark"
+          className="h-7 w-7 focus-2-inset-veryDark"
           onClick={() => {
             // setNewTabVis((b) => !b);
             upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
@@ -144,7 +144,7 @@ function UpperRightMenu({
         }  w-24 justify-around items-center mr-0.5`}
       >
         <button
-          className="h-6 w-6 focus-2-dark"
+          className="h-6 w-6 focus-2-veryDark"
           onClick={() => {
             // setBackgroundSettingsVis((b) => !b);
             upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
@@ -157,7 +157,7 @@ function UpperRightMenu({
         </button>
 
         <button
-          className="h-6 w-6 focus-2-dark"
+          className="h-6 w-6 focus-2-veryDark"
           onClick={() => {
             upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
             // setColorsVis((b) => !b);
@@ -170,7 +170,7 @@ function UpperRightMenu({
         </button>
 
         <button
-          className="h-6 w-6 focus-2-dark"
+          className="h-6 w-6 focus-2-veryDark"
           onClick={() => {
             // setTabOpenedData(null)
 
@@ -187,7 +187,7 @@ function UpperRightMenu({
         <div style={{ width: "24px", height: "24px" }}>
           {loggedInData ? (
             <button
-              className="h-6 w-6 focus-2-inset-dark"
+              className="h-6 w-6 focus-2-inset-veryDark"
               onClick={() => {
                 // upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 setLoggedInData(false);
@@ -202,7 +202,7 @@ function UpperRightMenu({
             </button>
           ) : (
             <button
-              className="h-6 w-5 focus-2-dark"
+              className="h-6 w-5 focus-2-veryDark"
               onClick={() => {
                 upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 // setLoggedInData(true);

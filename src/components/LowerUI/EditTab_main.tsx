@@ -625,7 +625,7 @@ Props): JSX.Element {
 
         <div className="w-full flex justify-center mt-2">
           <button
-            className="h-5 w-5 mr-6 focus-2-offset"
+            className="h-5 w-5 mr-6 focus-2-offset-dark"
             onClick={(e) => {
               e.preventDefault();
 
@@ -642,7 +642,7 @@ Props): JSX.Element {
           </button>
 
           <button
-            className="h-5 w-5 focus-2-offset"
+            className="h-5 w-5 focus-2-offset-dark"
             onClick={(e) => {
               e.preventDefault();
               // setEditTabVis((b) => !b);

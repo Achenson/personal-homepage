@@ -43,12 +43,20 @@
     @apply focus:outline-none focus-visible:ring-2 ring-blueGray-400;
   }
 
+  .focus-2-veryDark {
+    @apply focus:outline-none focus-visible:ring-2 ring-blueGray-800;
+  }
+
   .focus-2-inset {
     @apply focus-2 ring-inset;
   }
 
   .focus-2-inset-dark {
     @apply focus-2-dark ring-inset;
+  }
+
+  .focus-2-inset-veryDark {
+    @apply focus-2-veryDark ring-inset;
   }
 
   .focus-2-offset {

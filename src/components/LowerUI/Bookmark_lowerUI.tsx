@@ -617,7 +617,7 @@ Props): JSX.Element {
             {/* SaveSVG is cut without the <p> - bug? */}
             <div className="mt-5 w-full flex justify-center">
               <button
-                className="h-5 w-5 mr-6 focus-2-offset"
+                className="h-5 w-5 mr-6 focus-2-offset-dark"
                 onClick={(e) => {
                   e.preventDefault();
                   saveFunc();
@@ -633,7 +633,7 @@ Props): JSX.Element {
               </button>
 
               <button
-                className="h-5 w-5 focus-2-offset"
+                className="h-5 w-5 focus-2-offset-dark"
                 onClick={(e) => {
                   e.preventDefault();
                   // setBookmarkVis((b) => !b);
@@ -812,7 +812,7 @@ Props): JSX.Element {
             {/* SaveSVG is cut without the <p> - bug? */}
             <div className="mt-5 w-full flex justify-center">
               <button
-                className="h-5 w-5 mr-6 focus-2-offset"
+                className="h-5 w-5 mr-6 focus-2-offset-dark"
                 onClick={(e) => {
                   e.preventDefault();
                   saveFunc();
@@ -829,7 +829,7 @@ Props): JSX.Element {
               </button>
 
               <button
-                className="h-5 w-5 focus-2-offset"
+                className="h-5 w-5 focus-2-offset-dark"
                 onClick={(e) => {
                   e.preventDefault();
                   // setBookmarkVis((b) => !b);

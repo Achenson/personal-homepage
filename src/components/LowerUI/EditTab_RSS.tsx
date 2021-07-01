@@ -72,7 +72,7 @@ function EditTab_RSS({
           <div className="flex items-center mr-2">
             <button
               style={{ marginTop: "2px" }}
-              className="focus-1-offset"
+              className="focus-1-offset-dark"
               onClick={() => {
                 setDescriptionCheckbox((b) => !b);
                 setWasCheckboxClicked(true);
@@ -93,7 +93,7 @@ function EditTab_RSS({
           <div className="flex items-center">
             <button
               style={{ marginTop: "2px" }}
-              className="focus-1-offset"
+              className="focus-1-offset-dark"
               onClick={() => {
                 setDateCheckbox((b) => !b);
                 setWasCheckboxClicked(true);
