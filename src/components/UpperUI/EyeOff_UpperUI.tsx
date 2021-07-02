@@ -7,6 +7,7 @@ import { backgroundColorsUpperUiFocus } from "../../utils/colors_background";
 import {
   closeAllTabsState,
   globalSettingsState,
+  tabOpenedState
 } from "../../state/defaultSettings";
 
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
@@ -22,6 +23,7 @@ function EyeOff_UpperUI({ upperVisDispatch }: Props): JSX.Element {
     backgroundColorState.use();
 
   const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
+  const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function calcIconBackground(pageBackgroundColor: string) {
@@ -67,6 +69,7 @@ function EyeOff_UpperUI({ upperVisDispatch }: Props): JSX.Element {
         // setBackgroundColorsToChooseVis((b) => !b);
         upperVisDispatch({ type: "CLOSE_ALL" });
         setCloseAllTabsData(true);
+        setTabOpenedData(null)
       }}
       className={`focus:outline-none focus-visible:ring-2 ring-${focusColor()} ring-inset`}
     >

@@ -101,7 +101,9 @@ function Grid({
 
   useEffect(() => {
     if (closeAllTabsData) {
-      setCloseAllTabsData(false);
+      setTimeout(() => {
+        setCloseAllTabsData(false);
+      }, 500);
     }
   }, [closeAllTabsData, setCloseAllTabsData]);
 
@@ -244,7 +246,9 @@ function Grid({
     // const maxColWidth_1col = `${
     //   globalSettingsData.limitColGrowth ? "350px" : "9999px"
     // }`;
-    const maxColWidth = `${globalSettingsData.limitColGrowth ? "350px" : "9999px"}`;
+    const maxColWidth = `${
+      globalSettingsData.limitColGrowth ? "350px" : "9999px"
+    }`;
 
     switch (numberOfCols) {
       case 1:
