@@ -3,7 +3,7 @@ import FocusLock from "react-focus-lock";
 
 import Settings_inner_xs from "./Settings_inner_xs";
 
-import ColorsToChoose_Default from "../Colors/ColorsToChoose_DefaultAndColumns";
+import ColorsToChoose_DefaultAndColumns from "../Colors/ColorsToChoose_DefaultAndColumns";
 
 // import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 // import { ReactComponent as ColorSVG } from "../../svgs/beaker.svg";
@@ -246,11 +246,12 @@ function ColorsSettings_UpperUI({
                 className="absolute right-32 bottom-8"
                 style={{ right: "140px", bottom: "32px" }}
               >
-                <ColorsToChoose_Default
+                <ColorsToChoose_DefaultAndColumns
                   defaultColorsFor={defaultColorsFor}
                   leftPositioning={`-60px`}
                   upperVisDispatch={upperVisDispatch}
                   upperVisState={upperVisState}
+                  setColorsToChooseVis={setColorsToChooseVis}
                 />
               </div>
             )}

@@ -548,7 +548,7 @@ DONE 460. make focus outlines more visible (better contrast) DONE
  DONE 463. ColorToChoose_Background should not close after selecting, only after interaction with other components
 (<button> cannot appear as a descendant of <button>.) DONE
 DONE 464. all features controlable by keyboard DONE 
-
+DONE 466. Close Default Tab Colors by Escape DONE
 
 
 1. tailwind - purgecss at the end of the project
@@ -573,8 +573,8 @@ DONE 464. all features controlable by keyboard DONE
 458. diff focus order - Upper Left Menu first
 461. focus should start on already selected color - tabs & columns color & background colors
 465. explanation how the EyeOff works somewhere
-466. Close Default Tab Colors by Escape
-
+467. unify ColorsToChoose_DefaultAndColumn and ColorsToChoose_Tab
+468. visDispatch rename to tabVisDispatch
 
 tailwind 2.0.2
 

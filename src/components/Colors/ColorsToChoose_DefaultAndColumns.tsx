@@ -27,6 +27,7 @@ interface Props {
   leftPositioning: string;
   upperVisState: UpperVisState;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
+  setColorsToChooseVis?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ColorsToChoose_DefaultAndColumns({
@@ -34,6 +35,7 @@ function ColorsToChoose_DefaultAndColumns({
   leftPositioning,
   upperVisDispatch,
   upperVisState,
+  setColorsToChooseVis,
 }: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
@@ -47,9 +49,15 @@ function ColorsToChoose_DefaultAndColumns({
 
   function handleKeyDown(event: KeyboardEvent) {
     if (event.code === "Escape") {
-      if (upperVisState.columnSelected !== null) {
-        upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
-        // setColumnSelected(null);
+      if (/column/.test(defaultColorsFor)) {
+        if (upperVisState.columnSelected !== null) {
+          upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
+          // setColumnSelected(null);
+        }
+      }
+
+      if (setColorsToChooseVis) {
+        setColorsToChooseVis(false);
       }
     }
   }
@@ -112,16 +120,19 @@ function ColorsToChoose_DefaultAndColumns({
             top: "1px",
           }}
         >
-          {defaultColorsFor === "column_1" ||
-          defaultColorsFor === "column_2" ||
-          defaultColorsFor === "column_3" ||
-          defaultColorsFor === "column_4"
-            ? mapColumnColors(
-                globalSettingsData.picBackground
-                  ? imageColumnColors
-                  : columnColors
-              )
-            : mapTabColors()}
+          {
+            // defaultColorsFor === "column_1" ||
+            // defaultColorsFor === "column_2" ||
+            // defaultColorsFor === "column_3" ||
+            // defaultColorsFor === "column_4"
+            /column/.test(defaultColorsFor)
+              ? mapColumnColors(
+                  globalSettingsData.picBackground
+                    ? imageColumnColors
+                    : columnColors
+                )
+              : mapTabColors()
+          }
         </div>
       </div>
     </FocusLock>
