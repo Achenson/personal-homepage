@@ -545,6 +545,8 @@ XX 459. first render: problem with single colors for columns focus selection (no
 DONE 460. make focus outlines more visible (better contrast) DONE
 ?DONE 462. EyeOff doesn't work properly, only on first Tab!
  DONE ? (fixed by setting delay on Grid useEffect)
+ DONE 463. ColorToChoose_Background should not close after selecting, only after interaction with other components
+(<button> cannot appear as a descendant of <button>.) DONE
 DONE 464. all features controlable by keyboard DONE 
 
 
@@ -570,8 +572,6 @@ DONE 464. all features controlable by keyboard DONE
 456. unify SingleColor_DefaultAndColumn and SingleColor_Tab
 458. diff focus order - Upper Left Menu first
 461. focus should start on already selected color - tabs & columns color & background colors
-463. ColorToChoose_Background should not close after selecting, only after interaction with other components
-464. React context for Tab reducer and Main reducer
 465. explanation how the EyeOff works somewhere
 466. Close Default Tab Colors by Escape
 
