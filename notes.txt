@@ -549,6 +549,7 @@ DONE 460. make focus outlines more visible (better contrast) DONE
 (<button> cannot appear as a descendant of <button>.) DONE
 DONE 464. all features controlable by keyboard DONE 
 DONE 466. Close Default Tab Colors by Escape DONE
+DONE 468. visDispatch rename to tabVisDispatch DONE
 
 
 1. tailwind - purgecss at the end of the project
@@ -574,7 +575,6 @@ DONE 466. Close Default Tab Colors by Escape DONE
 461. focus should start on already selected color - tabs & columns color & background colors
 465. explanation how the EyeOff works somewhere
 467. unify ColorsToChoose_DefaultAndColumn and ColorsToChoose_Tab
-468. visDispatch rename to tabVisDispatch
 
 tailwind 2.0.2
 

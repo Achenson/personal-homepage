@@ -319,11 +319,11 @@ Props): JSX.Element {
 
   const [iconsVis, setIconsVis] = useState<boolean>(false);
 
-  const [visState, visDispatch] = useReducer(visReducer, initVisState);
+  const [visState, tabVisDispatch] = useReducer(visReducer, initVisState);
 
   useEffect(() => {
     if (tabOpenedData !== tabID) {
-      visDispatch({ type: "TAB_EDITABLES_CLOSE" });
+      tabVisDispatch({ type: "TAB_EDITABLES_CLOSE" });
     }
   }, [tabOpenedData, tabID]);
 
@@ -333,8 +333,8 @@ Props): JSX.Element {
 
   useEffect(() => {
     if (closeAllTabsData) {
-      // visDispatch({ type: "TAB_EDITABLES_CLOSE" });
-      visDispatch({ type: "TAB_CONTENT_DEFAULT" });
+      // tabVisDispatch({ type: "TAB_EDITABLES_CLOSE" });
+      tabVisDispatch({ type: "TAB_CONTENT_DEFAULT" });
     }
   }, [closeAllTabsData]);
 
@@ -385,7 +385,7 @@ Props): JSX.Element {
   useEffect(() => {
     if (isDragging) {
       setTabBeingDraggedColor_Data({ tabColor: finalTabColor });
-      visDispatch({ type: "TAB_EDITABLES_CLOSE" });
+      tabVisDispatch({ type: "TAB_EDITABLES_CLOSE" });
       setTabOpenedData(null);
     }
   }, [
@@ -438,7 +438,7 @@ Props): JSX.Element {
 
   useEffect(() => {
     if (!upperVisState.tabEditablesOpenable) {
-      visDispatch({ type: "TAB_EDITABLES_CLOSE" });
+      tabVisDispatch({ type: "TAB_EDITABLES_CLOSE" });
       upperVisDispatch({ type: "TAB_EDITABLES_OPENABLE_DEFAULT" });
     }
   }, [upperVisState.tabEditablesOpenable, upperVisDispatch]);
@@ -503,7 +503,7 @@ Props): JSX.Element {
         }}
         onTouchStart={() => {
           setTimeout(() => {
-            visDispatch({ type: "TOUCH_SCREEN_MODE_ON" });
+            tabVisDispatch({ type: "TOUCH_SCREEN_MODE_ON" });
             // setTouchScreenMode(true);
           }, 200);
         }}
@@ -523,7 +523,7 @@ Props): JSX.Element {
         <div
           className="pl-1 w-full h-7 truncate cursor-pointer"
           onClick={() => {
-            visDispatch({ type: "TAB_CONTENT_TOGGLE" });
+            tabVisDispatch({ type: "TAB_CONTENT_TOGGLE" });
             upperVisDispatch({ type: "CLOSE_ALL" });
           }}
         >
@@ -577,7 +577,7 @@ Props): JSX.Element {
               ).slice(5)} ring-opacity-40 ring-inset   `}
               style={{ marginTop: "-6px" }}
               onClick={() => {
-                visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+                tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
                 upperVisDispatch({ type: "CLOSE_ALL" });
               }}
               // disabled={areButtonsDisabled()}
@@ -601,7 +601,7 @@ Props): JSX.Element {
               }`,
             }}  
             onClick={() => {
-              visDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
+              tabVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
               upperVisDispatch({ type: "CLOSE_ALL" });
             }}
           >
@@ -622,7 +622,7 @@ Props): JSX.Element {
               "text"
             ).slice(5)} ring-opacity-40 `}
             onClick={() => {
-              visDispatch({ type: "EDIT_TOGGLE" });
+              tabVisDispatch({ type: "EDIT_TOGGLE" });
               upperVisDispatch({ type: "CLOSE_ALL" });
             }}
             // disabled={areButtonsDisabled()}
@@ -645,7 +645,7 @@ Props): JSX.Element {
             tabID={tabID}
             tabColor={tabColor}
             tabType={tabType}
-            visDispatch={visDispatch}
+            tabVisDispatch={tabVisDispatch}
             // top={rect?.top as number}
             // left={rect?.left as number}
             // tabWidth={rect?.width as number}
@@ -659,7 +659,7 @@ Props): JSX.Element {
             // setBookmarkVis={setEditBookmarkVis}
             bookmarkComponentType={"edit"}
             bookmarkId={bookmarkId}
-            visDispatch={visDispatch}
+            tabVisDispatch={tabVisDispatch}
             colNumber={colNumber}
             top={rect?.top as number}
             left={rect?.left as number}
@@ -675,7 +675,7 @@ Props): JSX.Element {
           <Bookmark_newAndEdit
             // setBookmarkVis={setNewBookmarkVis}
             bookmarkComponentType={"new_lowerUI"}
-            visDispatch={visDispatch}
+            tabVisDispatch={tabVisDispatch}
             colNumber={colNumber}
             tabTitle={tabTitle as string}
             // top={rect?.top as number}
@@ -691,7 +691,7 @@ Props): JSX.Element {
             tabID={tabID}
             tabType={tabType}
             // setEditTabVis={setEditTabVis}
-            visDispatch={visDispatch}
+            tabVisDispatch={tabVisDispatch}
             currentTab={currentTab as SingleTabData}
             // noteInput={noteInput}
             // top={rect?.top as number}
@@ -711,7 +711,7 @@ Props): JSX.Element {
                   // setEditBookmarkVis={setEditBookmarkVis}
                   visState={visState}
                   upperVisState={upperVisState}
-                  visDispatch={visDispatch}
+                  tabVisDispatch={tabVisDispatch}
                   upperVisDispatch={upperVisDispatch}
                   singleBookmarkData={el}
                   // setEditSingleLinkData={setEditSingleBookmarkData}
@@ -733,7 +733,7 @@ Props): JSX.Element {
           //  noteInput={noteInput}
           currentTab={currentTab as SingleTabData}
           // setEditTabVis={setEditTabVis}
-          visDispatch={visDispatch}
+          tabVisDispatch={tabVisDispatch}
           upperVisState={upperVisState}
         />
       )}

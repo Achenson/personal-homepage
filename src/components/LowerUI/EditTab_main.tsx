@@ -31,7 +31,7 @@ import EditTab_RSS from "./EditTab_RSS";
 interface Props {
   tabType: "folder" | "note" | "rss";
   // setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
-  visDispatch: React.Dispatch<TabVisAction>;
+  tabVisDispatch: React.Dispatch<TabVisAction>;
   // noteInput: string | null;
   tabID: string | number;
   currentTab: SingleTabData;
@@ -52,7 +52,7 @@ const errorsAllFalse = {
 
 function EditTab({
   tabID,
-  visDispatch,
+  tabVisDispatch,
   tabType,
   currentTab,
 
@@ -414,12 +414,12 @@ Props): JSX.Element {
     editTab();
 
     // if (tabOpen) {
-    //   visDispatch({ type: "TAB_CONTENT_OPEN_AFTER_LOCKING" });
+    //   tabVisDispatch({ type: "TAB_CONTENT_OPEN_AFTER_LOCKING" });
     // } else {
-    //    visDispatch({ type: "EDIT_TOGGLE" });
+    //    tabVisDispatch({ type: "EDIT_TOGGLE" });
     //   }
 
-    visDispatch({ type: "EDIT_TOGGLE" });
+    tabVisDispatch({ type: "EDIT_TOGGLE" });
   }
 
   return (
@@ -602,7 +602,7 @@ Props): JSX.Element {
                 );
 
                 // setEditTabVis((b) => !b);
-                visDispatch({ type: "EDIT_TOGGLE" });
+                tabVisDispatch({ type: "EDIT_TOGGLE" });
                 // removing deleted tab(tag) for bookmarks
                 bookmarksData.forEach((obj, i) => {
                   if (obj.tags.indexOf(tabTitle as string) > -1) {
@@ -646,7 +646,7 @@ Props): JSX.Element {
             onClick={(e) => {
               e.preventDefault();
               // setEditTabVis((b) => !b);
-              visDispatch({ type: "EDIT_TOGGLE" });
+              tabVisDispatch({ type: "EDIT_TOGGLE" });
             }}
           >
             <CancelSVG className="h-5 w-5 fill-current text-gray-900 hover:text-red-600 cursor-pointer transition-colors duration-75" />

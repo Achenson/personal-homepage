@@ -42,7 +42,7 @@ interface Props {
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   bookmarkId: string | number;
   currentBookmark: SingleBookmarkData | undefined;
-  visDispatch: React.Dispatch<TabVisAction>;
+  tabVisDispatch: React.Dispatch<TabVisAction>;
   colNumber: number;
 
   errors: {
@@ -102,7 +102,7 @@ function Bookmark_lowerUI({
   bookmarkComponentType,
   bookmarkId,
   currentBookmark,
-  visDispatch,
+  tabVisDispatch,
   colNumber,
 
   errors,
@@ -450,11 +450,11 @@ Props): JSX.Element {
 
     // setBookmarkVis((b) => !b);
     if (bookmarkComponentType === "edit") {
-      visDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
+      tabVisDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
     }
 
     if (bookmarkComponentType === "new_lowerUI") {
-      visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+      tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
     }
   }
 
@@ -637,13 +637,13 @@ Props): JSX.Element {
                 onClick={(e) => {
                   e.preventDefault();
                   // setBookmarkVis((b) => !b);
-                  // visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
+                  // tabVisDispatch({type: "NEW_BOOKMARK_TOOGLE"})
                   if (bookmarkComponentType === "edit") {
-                    visDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
+                    tabVisDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
                   }
 
                   if (bookmarkComponentType === "new_lowerUI") {
-                    visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+                    tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
                   }
                 }}
               >
@@ -833,13 +833,13 @@ Props): JSX.Element {
                 onClick={(e) => {
                   e.preventDefault();
                   // setBookmarkVis((b) => !b);
-                  // visDispatch({type: "NEW_BOOKMARK_TOOGLE"})
+                  // tabVisDispatch({type: "NEW_BOOKMARK_TOOGLE"})
                   if (bookmarkComponentType === "edit") {
-                    visDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
+                    tabVisDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
                   }
 
                   if (bookmarkComponentType === "new_lowerUI") {
-                    visDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+                    tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
                   }
                 }}
               >

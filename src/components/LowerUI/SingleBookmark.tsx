@@ -36,7 +36,7 @@ interface Props {
   tabID: string | number;
   visState: VisState;
   upperVisState: UpperVisState;
-  visDispatch: React.Dispatch<TabVisAction>;
+  tabVisDispatch: React.Dispatch<TabVisAction>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleBookmarkData>>;
 }
@@ -50,7 +50,7 @@ function SingleBookmark({
   colNumber,
   visState,
   upperVisState,
-  visDispatch,
+  tabVisDispatch,
   upperVisDispatch,
   tabID,
 }: Props): JSX.Element {
@@ -119,7 +119,7 @@ function SingleBookmark({
               className="h-5 w-5 ml-1 focus-1-inset-darkGray"
               onClick={() => {
                 // setEditBookmarkVis((b) => !b);
-                visDispatch({
+                tabVisDispatch({
                   type: "EDIT_BOOKMARK_OPEN",
                   payload: bookmarkId,
                 });
@@ -190,7 +190,7 @@ function SingleBookmark({
       {visState.editBookmarkVis === bookmarkId && (
         <Bookmark_newAndEdit
           bookmarkComponentType="edit"
-          visDispatch={visDispatch}
+          tabVisDispatch={tabVisDispatch}
           colNumber={colNumber}
           bookmarkId={bookmarkId as string | number}
         />

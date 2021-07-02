@@ -8,12 +8,12 @@ import { globalSettingsState } from "../../state/defaultSettings";
 interface Props {
   //  noteInput: string | null;
   // setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
-  visDispatch: React.Dispatch<TabVisAction>;
+  tabVisDispatch: React.Dispatch<TabVisAction>;
   currentTab: SingleTabData;
   upperVisState: UpperVisState;
 }
 
-function NoteInput({ visDispatch, currentTab, upperVisState }: Props): JSX.Element {
+function NoteInput({ tabVisDispatch, currentTab, upperVisState }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
@@ -34,7 +34,7 @@ function NoteInput({ visDispatch, currentTab, upperVisState }: Props): JSX.Eleme
       (event.code === "Enter" || event.code === "NumpadEnter") &&
       focusOnNote
     ) {
-      visDispatch({ type: "EDIT_TOGGLE" });
+      tabVisDispatch({ type: "EDIT_TOGGLE" });
     }
   }
 
@@ -54,7 +54,7 @@ function NoteInput({ visDispatch, currentTab, upperVisState }: Props): JSX.Eleme
         style={{ backgroundColor: "rgb(247, 243, 132)" }}
         onClick={() => {
           // setEditTabVis(true);
-          visDispatch({ type: "EDIT_TOGGLE" });
+          tabVisDispatch({ type: "EDIT_TOGGLE" });
         }}
         // tabIndex={areButtonsDisabled() ? undefined : 0}
         tabIndex={0}

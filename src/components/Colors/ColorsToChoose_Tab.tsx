@@ -14,7 +14,7 @@ interface Props {
   tabID: string | number;
   tabColor: string | null;
   tabType: "folder" | "note" | "rss";
-  visDispatch: React.Dispatch<TabVisAction>;
+  tabVisDispatch: React.Dispatch<TabVisAction>;
   // top: number;
   // left: number;
   // tabWidth: number;
@@ -25,7 +25,7 @@ function ColorsToChoose_Tab({
   tabID,
   tabColor,
   tabType,
-  visDispatch,
+  tabVisDispatch,
 }: // top,
 // left,
 // tabWidth,
@@ -45,7 +45,7 @@ Props): JSX.Element {
 
   function handleKeyDown(event: KeyboardEvent) {
     if (event.code === "Escape") {
-      visDispatch({ type: "COLORS_CLOSE" });
+      tabVisDispatch({ type: "COLORS_CLOSE" });
     }
   }
 

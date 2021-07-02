@@ -19,7 +19,7 @@ interface Props {
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
 
   upperVisDispatch?: React.Dispatch<UpperVisAction>;
-  visDispatch?: React.Dispatch<TabVisAction>;
+  tabVisDispatch?: React.Dispatch<TabVisAction>;
   colNumber?: number;
 
   // for "edit" type only
@@ -46,7 +46,7 @@ function Bookmark_newAndEdit({
   bookmarkComponentType,
   bookmarkId,
   tabTitle,
-  visDispatch,
+  tabVisDispatch,
   upperVisDispatch,
   colNumber,
 
@@ -281,7 +281,7 @@ function Bookmark_newAndEdit({
           {...bookmark_props}
           currentBookmark={currentBookmark}
           bookmarkId={bookmarkId as string | number}
-          visDispatch={visDispatch as React.Dispatch<TabVisAction>}
+          tabVisDispatch={tabVisDispatch as React.Dispatch<TabVisAction>}
           colNumber={colNumber as number}
           // top={top as number}
           // left={left as number}
