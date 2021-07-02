@@ -570,10 +570,10 @@ DONE 464. all features controlable by keyboard DONE
 456. unify SingleColor_DefaultAndColumn and SingleColor_Tab
 458. diff focus order - Upper Left Menu first
 461. focus should start on already selected color - tabs & columns color & background colors
-
 463. ColorToChoose_Background should not close after selecting, only after interaction with other components
 464. React context for Tab reducer and Main reducer
 465. explanation how the EyeOff works somewhere
+466. Close Default Tab Colors by Escape
 
 
 tailwind 2.0.2

@@ -124,11 +124,11 @@ function ColumnColor_UpperUI({
           }
           ${isHoverOnAnyColumn ? "shadow-inner_lg" : ""}
           cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg
-          focus-2-inset-dark ${
+          focus:outline-none focus-visible:ring-2   ${
             columnType === "BACKGROUND_IMG"
-              ? "focus:outline-none focus-visible:ring-2 ring-blueGray-600 ring-inset"
-              : "focus-2-inset-dark"
-          }
+              ? " ring-blueGray-600 "
+              : "ring-blueGray-500"
+          } ring-inset
           `}
           style={{
             backgroundColor: `${

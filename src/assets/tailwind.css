@@ -44,7 +44,7 @@
   }
 
   .focus-2-veryDark {
-    @apply focus:outline-none focus-visible:ring-2 ring-blueGray-800;
+    @apply focus:outline-none focus-visible:ring-2 ring-blueGray-700;
   }
 
   .focus-2-inset {
