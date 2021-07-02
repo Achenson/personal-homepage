@@ -9,6 +9,12 @@ import { tabColors } from "../../utils/colors_tab";
 // import {columnColors} from "../../utils/columnColors";
 import { TabVisAction } from "../../utils/interfaces";
 
+import {
+  folderColorState,
+  noteColorState,
+  rssColorState,
+} from "../../state/colorsState";
+
 interface Props {
   setIconsVis: (value: React.SetStateAction<boolean>) => void;
   tabID: string | number;
@@ -35,6 +41,11 @@ Props): JSX.Element {
 
   // }, [document.documentElement.scrollTop])
 
+
+  const [folderColorData, setFolderColorData] = folderColorState.use();
+  const [noteColorData, setNoteColorData] = noteColorState.use();
+  const [rssColorData, setRssColorData] = rssColorState.use();
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
 
@@ -49,6 +60,33 @@ Props): JSX.Element {
     }
   }
 
+  function isSelected(color: string, tabColor: string|null) {
+
+ 
+    if (tabColor) {
+      if (color == tabColor) {
+        return true;
+      }
+    }
+
+    if (!tabColor) {
+      if (tabType === "folder" && color === folderColorData) {
+        return true;
+      }
+
+      if (tabType === "note" && color === noteColorData) {
+        return true;
+      }
+
+      if (tabType === "rss" && color === rssColorData) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+
   function mappingColors(colors: string[][]) {
     return tabColors.map((row, i) => {
       return (
@@ -59,6 +97,9 @@ Props): JSX.Element {
                 color={el}
                 tabID={tabID}
                 tabColor={tabColor}
+                // tabNumber
+                // selectedTabNumber
+                isSelected={isSelected(el, tabColor)}
                 tabType={tabType}
                 key={j}
               />

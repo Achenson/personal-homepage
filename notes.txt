@@ -572,9 +572,12 @@ DONE 468. visDispatch rename to tabVisDispatch DONE
 455. when adding new bookmark to all bookmarks: selectables don't auto complete?
 456. unify SingleColor_DefaultAndColumn and SingleColor_Tab
 458. diff focus order - Upper Left Menu first
+
 461. focus should start on already selected color - tabs & columns color & background colors
+
 465. explanation how the EyeOff works somewhere
-467. unify ColorsToChoose_DefaultAndColumn and ColorsToChoose_Tab
+467. unify ColorsToChoose_DefaultAndColumn and ColorsToChoose_Tab+
+468. change excessive if statements (columns...) to RegEx
 
 tailwind 2.0.2
 
