@@ -67,7 +67,18 @@ function SingleColor_Tab({
   //   return defaultBorder;
   // }
 
+  let tabIndex = calcTabIndex()
+
   function calcTabIndex() {
+
+    let indexToReturn = colorNumber - selectedNumber +1;
+
+   if (indexToReturn >= 1) {
+     return indexToReturn;
+   }
+
+   return 90 - selectedNumber + colorNumber +1;
+
 
 
     
@@ -101,7 +112,8 @@ function SingleColor_Tab({
         setSelectedNumber(colorNumber)
       }}
       // tabIndex={ borderMaker() === "border-2 border-white z-50" ? 1 : undefined}
-    >{colorNumber}</button>
+      tabIndex={tabIndex}
+    >{tabIndex}</button>
   );
 }
 
