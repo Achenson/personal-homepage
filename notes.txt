@@ -578,6 +578,7 @@ DONE 468. visDispatch rename to tabVisDispatch DONE
 465. explanation how the EyeOff works somewhere
 467. unify ColorsToChoose_DefaultAndColumn and ColorsToChoose_Tab+
 468. change excessive if statements (columns...) to RegEx
+469. close tabColors when clicking color in colors settings (should be same as in globalSettings)
 
 tailwind 2.0.2
 
@@ -589,6 +590,20 @@ Why you should do it regularly:
 https://github.com/browserslist/browserslist#browsers-data-updating
 
 
+const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
+
+
+  function calcSelectedNumber(): number {
+    let selectedNumber: number = 0;
+
+    tabColorsConcat.map((color, i) => {
+      if (color === tabColor) {
+        selectedNumber = i + 1;
+      }
+    });
+
+    return selectedNumber;
+  }
 
 
 

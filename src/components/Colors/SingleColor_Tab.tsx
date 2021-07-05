@@ -17,8 +17,9 @@ interface Props {
   tabID: number | string;
   tabColor: string | null;
   tabType: "folder" | "note" | "rss";
-  isSelected: boolean;
-  colorTabNumbering: number;
+  selectedNumber: number;
+  colorNumber: number;
+  setSelectedNumber: React.Dispatch<React.SetStateAction<number>>
 }
 
 function SingleColor_Tab({
@@ -26,8 +27,9 @@ function SingleColor_Tab({
   tabID,
   tabColor,
   tabType,
-  isSelected,
-  colorTabNumbering
+  selectedNumber,
+  colorNumber,
+  setSelectedNumber
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -65,6 +67,12 @@ function SingleColor_Tab({
   //   return defaultBorder;
   // }
 
+  function calcTabIndex() {
+
+
+    
+  }
+
 
   function focusColor(): string {
   
@@ -77,7 +85,7 @@ function SingleColor_Tab({
 
   return (
     <button
-      className={`h-4 w-8 -mr-px -mt-px bg-${color} cursor-pointer ${isSelected ? "border-2 border-white z-50" : "border border-black"} hover:border-2 hover:border-gray-500 hover:z-50
+      className={`h-4 w-8 -mr-px -mt-px bg-${color} cursor-pointer ${colorNumber === selectedNumber ? "border-2 border-white z-50" : "border border-black"} hover:border-2 hover:border-gray-500 hover:z-50
       focus:outline-none focus-visible:ring-2 ring-${focusColor()} ring-inset
       `}
       onClick={() => {
@@ -90,9 +98,10 @@ function SingleColor_Tab({
             }
           })
         );
+        setSelectedNumber(colorNumber)
       }}
       // tabIndex={ borderMaker() === "border-2 border-white z-50" ? 1 : undefined}
-    >{colorTabNumbering}</button>
+    >{colorNumber}</button>
   );
 }
 

@@ -41,10 +41,11 @@ Props): JSX.Element {
 
   // }, [document.documentElement.scrollTop])
 
-
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
   const [rssColorData, setRssColorData] = rssColorState.use();
+
+  const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -60,39 +61,38 @@ Props): JSX.Element {
     }
   }
 
-  function isSelected(color: string, tabColor: string|null) {
+  function calcSelectedNumber(): number {
+    let selectedNumber: number = 0;
 
- 
     if (tabColor) {
-      if (color == tabColor) {
-        return true;
-      }
+      tabColorsConcat.map((color, i) => {
+        if (color === tabColor) {
+          selectedNumber = calcColorNumbering(color);
+        }
+      });
     }
 
     if (!tabColor) {
-      if (tabType === "folder" && color === folderColorData) {
-        return true;
+      if (tabType === "folder") {
+        selectedNumber = calcColorNumbering(folderColorData);
       }
 
-      if (tabType === "note" && color === noteColorData) {
-        return true;
+      if (tabType === "note") {
+        selectedNumber = calcColorNumbering(noteColorData);
       }
 
-      if (tabType === "rss" && color === rssColorData) {
-        return true;
+      if (tabType === "rss") {
+        selectedNumber = calcColorNumbering(rssColorData);
       }
     }
 
-    return false;
+    return selectedNumber;
   }
 
-  function calcColorNumbering(tabColorsConcat: string[], color: string): number {
-
+  function calcColorNumbering(color: string): number {
     // +1 because tabIndex for focus starts with one
-    return tabColorsConcat.indexOf(color)+1
-
+    return tabColorsConcat.indexOf(color) + 1;
   }
-
 
   function mappingColors(colors: string[][]) {
     return tabColors.map((row, i) => {
@@ -105,12 +105,13 @@ Props): JSX.Element {
                 tabID={tabID}
                 tabColor={tabColor}
                 // tabNumber
-                // selectedTabNumber
-                isSelected={isSelected(el, tabColor)}
+                selectedNumber={selectedNumber}
+                // isSelected={isSelected(el, tabColor)}
                 tabType={tabType}
                 key={j}
                 // !!!!!!
-                colorTabNumbering={calcColorNumbering(tabColorsConcat, el)}
+                colorNumber={calcColorNumbering(el)}
+                setSelectedNumber={setSelectedNumber}
               />
             );
           })}
@@ -119,13 +120,10 @@ Props): JSX.Element {
     });
   }
 
-
-    useEffect(() => {
-      console.log(tabColorsConcat);
-      console.log(tabColors);
-      
-     
-    }, [tabColorsConcat, tabColors])
+  useEffect(() => {
+    console.log(tabColorsConcat);
+    console.log(tabColors);
+  }, [tabColorsConcat, tabColors]);
 
   return (
     <FocusLock>
