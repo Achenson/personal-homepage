@@ -19,7 +19,9 @@ interface Props {
   tabType: "folder" | "note" | "rss";
   selectedNumber: number;
   colorNumber: number;
-  setSelectedNumber: React.Dispatch<React.SetStateAction<number>>
+  setSelectedNumber: React.Dispatch<React.SetStateAction<number>>;
+  colorArrLength: number;
+
 }
 
 function SingleColor_Tab({
@@ -29,7 +31,8 @@ function SingleColor_Tab({
   tabType,
   selectedNumber,
   colorNumber,
-  setSelectedNumber
+  setSelectedNumber,
+  colorArrLength
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -77,7 +80,7 @@ function SingleColor_Tab({
      return indexToReturn;
    }
 
-   return 90 - selectedNumber + colorNumber +1;
+   return colorArrLength - selectedNumber + colorNumber +1;
 
 
 

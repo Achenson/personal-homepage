@@ -112,6 +112,7 @@ Props): JSX.Element {
                 // !!!!!!
                 colorNumber={calcColorNumbering(el)}
                 setSelectedNumber={setSelectedNumber}
+                colorArrLength={tabColorsConcat.length}
               />
             );
           })}
