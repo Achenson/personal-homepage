@@ -5,7 +5,7 @@ import FocusLock from "react-focus-lock";
 
 import SingleColor_Tab from "./SingleColor_Tab";
 
-import { tabColors } from "../../utils/colors_tab";
+import { tabColors, tabColorsConcat } from "../../utils/colors_tab";
 // import {columnColors} from "../../utils/columnColors";
 import { TabVisAction } from "../../utils/interfaces";
 
@@ -86,6 +86,13 @@ Props): JSX.Element {
     return false;
   }
 
+  function calcColorNumbering(tabColorsConcat: string[], color: string): number {
+
+    // +1 because tabIndex for focus starts with one
+    return tabColorsConcat.indexOf(color)+1
+
+  }
+
 
   function mappingColors(colors: string[][]) {
     return tabColors.map((row, i) => {
@@ -102,6 +109,8 @@ Props): JSX.Element {
                 isSelected={isSelected(el, tabColor)}
                 tabType={tabType}
                 key={j}
+                // !!!!!!
+                colorTabNumbering={calcColorNumbering(tabColorsConcat, el)}
               />
             );
           })}
@@ -109,6 +118,14 @@ Props): JSX.Element {
       );
     });
   }
+
+
+    useEffect(() => {
+      console.log(tabColorsConcat);
+      console.log(tabColors);
+      
+     
+    }, [tabColorsConcat, tabColors])
 
   return (
     <FocusLock>

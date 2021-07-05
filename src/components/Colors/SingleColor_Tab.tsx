@@ -18,6 +18,7 @@ interface Props {
   tabColor: string | null;
   tabType: "folder" | "note" | "rss";
   isSelected: boolean;
+  colorTabNumbering: number;
 }
 
 function SingleColor_Tab({
@@ -25,7 +26,8 @@ function SingleColor_Tab({
   tabID,
   tabColor,
   tabType,
-  isSelected
+  isSelected,
+  colorTabNumbering
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -90,7 +92,7 @@ function SingleColor_Tab({
         );
       }}
       // tabIndex={ borderMaker() === "border-2 border-white z-50" ? 1 : undefined}
-    ></button>
+    >{colorTabNumbering}</button>
   );
 }
 

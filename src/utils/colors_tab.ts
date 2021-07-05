@@ -103,6 +103,20 @@ export const tabColors: string[][] = [
   ],
 ];
 
+// let tabColorsToConcat: string[] = []
+
+export const tabColorsConcat: string[] = concatColors(tabColors);
+
+function concatColors(tabColors: string[][]): string[] {
+  let concatArr: string[] = [];
+
+  tabColors.map((el, i) => {
+    concatArr.push(...tabColors[i]);
+  });
+
+  return concatArr;
+}
+
 export const tabColorsLightFocus: string[] = [
   "violet-500",
   "green-505",
