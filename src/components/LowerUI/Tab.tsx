@@ -20,6 +20,7 @@ import {
   // tabEditOpenedState,
   tabOpenedState,
   globalSettingsState,
+  focusedTabState,
 } from "../../state/defaultSettings";
 
 import { ReactComponent as ColorSmallSVG } from "../../svgs/beakerSmall.svg";
@@ -96,6 +97,8 @@ function Tab({
 // rssLink
 Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  const [focusedTabData, setFocusedTabData] = focusedTabState.use();
+
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
@@ -319,7 +322,16 @@ Props): JSX.Element {
 
   const [iconsVis, setIconsVis] = useState<boolean>(false);
 
-  const [visState, tabVisDispatch] = useReducer(visReducer, initVisState);
+  useEffect(() => {
+    if (focusedTabData === tabID) {
+      setIconsVis(true);
+      console.log("test");
+    } else {
+      setIconsVis(false);
+    }
+  }, [focusedTabData]);
+
+  const [tabVisState, tabVisDispatch] = useReducer(visReducer, initVisState);
 
   useEffect(() => {
     if (tabOpenedData !== tabID) {
@@ -534,6 +546,9 @@ Props): JSX.Element {
             ).slice(5)} ring-opacity-40`}
             style={{ height: "23px" }}
             // disabled={areButtonsDisabled()}
+            onFocus={() => {
+              setFocusedTabData(tabID);
+            }}
           >
             <p
               className={`truncate ${
@@ -547,7 +562,7 @@ Props): JSX.Element {
 
         <div
           className={`pt-1 flex ${
-            iconsVis || visState.touchScreenModeOn ? "visible" : "invisible"
+            iconsVis || tabVisState.touchScreenModeOn ? "visible" : "invisible"
           } fill-current ${textOrIconColor(finalTabColor, "icon")} `}
         >
           <div
@@ -599,7 +614,7 @@ Props): JSX.Element {
               marginLeft: `${
                 tabType === "note" || tabType === "rss" ? "7px" : ""
               }`,
-            }}  
+            }}
             onClick={() => {
               tabVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
               upperVisDispatch({ type: "CLOSE_ALL" });
@@ -637,7 +652,7 @@ Props): JSX.Element {
         </div>
       </div>
 
-      {visState.colorsVis &&
+      {tabVisState.colorsVis &&
         tabOpenedData === tabID &&
         upperVisState.tabEditablesOpenable && (
           <ColorsToChoose_Tab
@@ -652,7 +667,7 @@ Props): JSX.Element {
           />
         )}
 
-      {/* {visState.editBookmarkVis &&
+      {/* {tabVisState.editBookmarkVis &&
         tabOpenedData === tabID &&
         upperVisState.tabEditablesOpenable && (
           <Bookmark_newAndEdit
@@ -667,7 +682,7 @@ Props): JSX.Element {
           />
         )} */}
 
-      {visState.newBookmarkVis &&
+      {tabVisState.newBookmarkVis &&
         tabOpenedData === tabID &&
         upperVisState.tabEditablesOpenable && (
           // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
@@ -684,7 +699,7 @@ Props): JSX.Element {
           />
         )}
 
-      {visState.editTabVis &&
+      {tabVisState.editTabVis &&
         tabOpenedData === tabID &&
         upperVisState.tabEditablesOpenable && (
           <EditTab_main
@@ -709,7 +724,7 @@ Props): JSX.Element {
               return (
                 <SingleBookmark
                   // setEditBookmarkVis={setEditBookmarkVis}
-                  visState={visState}
+                  tabVisState={tabVisState}
                   upperVisState={upperVisState}
                   tabVisDispatch={tabVisDispatch}
                   upperVisDispatch={upperVisDispatch}

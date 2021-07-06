@@ -34,7 +34,7 @@ interface Props {
   >;
   colNumber: number;
   tabID: string | number;
-  visState: VisState;
+  tabVisState: VisState;
   upperVisState: UpperVisState;
   tabVisDispatch: React.Dispatch<TabVisAction>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
@@ -48,7 +48,7 @@ function SingleBookmark({
   bookmarkId,
   setBookmarkId,
   colNumber,
-  visState,
+  tabVisState,
   upperVisState,
   tabVisDispatch,
   upperVisDispatch,
@@ -79,7 +79,7 @@ function SingleBookmark({
 
   return (
     <div>
-      {visState.editBookmarkVis !== bookmarkId && (
+      {tabVisState.editBookmarkVis !== bookmarkId && (
         <div
           className={`flex justify-between bg-gray-50 h-10 pt-2 border border-t-0 ${
             globalSettingsData.picBackground
@@ -187,7 +187,7 @@ function SingleBookmark({
         </div>
       )}
 
-      {visState.editBookmarkVis === bookmarkId && (
+      {tabVisState.editBookmarkVis === bookmarkId && (
         <Bookmark_newAndEdit
           bookmarkComponentType="edit"
           tabVisDispatch={tabVisDispatch}
