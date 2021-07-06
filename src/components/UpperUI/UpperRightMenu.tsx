@@ -25,6 +25,7 @@ import {
   tabOpenedState,
   loggedInState,
   globalSettingsState,
+  focusedTabState,
 } from "../../state/defaultSettings";
 
 interface Props {
@@ -45,12 +46,16 @@ function UpperRightMenu({
   // const [loggedIn, setLoggedIn] = useState(false);
   const [loggedInData, setLoggedInData] = loggedInState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-  const colLimit = globalSettingsData.limitColGrowth;
+  const [focusedTabData, setFocusedTabData] = focusedTabState.use();
 
+  const colLimit = globalSettingsData.limitColGrowth;
 
   return (
     // <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
     <div
+      onFocus={() => {
+        setFocusedTabData(null);
+      }}
       className={`${upperVisState.addTagVis_xs ? "h-14" : "h-7"} ${
         colLimit ? "sm:h-7" : "xs:h-7"
       }  w-28 ${colLimit ? "sm:w-56" : "xs:w-56"} block ${

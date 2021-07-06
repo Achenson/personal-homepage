@@ -536,6 +536,7 @@ DONE 445.5 note focus outlines  & disable it conditionally (tabIndex attibute!) 
 DONE 448. check tailwind way of outlines for keyboard only (works on edge, firefox and chrome) DONE
 XXX 449. disable all btn conditionally?? (react-focus-lock used instead) XXX
 DONE 449.5 new Folder col focus selection DONE
+DONE 450. Tab svgs should be selectable on focus (with the use ofglobalState) DONE
 DONE 451. event codes: Enter | NumpadEnter ! DONE
 DONE 452. react-focus-lock for settings etc.? DONE
 DONE 453. editSingle bookmark z-index problem when setting popus are on, check others DONE
@@ -570,7 +571,6 @@ DONE 469. close tabColors when clicking color in colors settings (should be same
 
 446. FAQ note
 447. proper starting links etc
-450. Tab svgs should be selectable on focus
 455. when adding new bookmark to all bookmarks: selectables don't auto complete?
 456. unify SingleColor_DefaultAndColumn and SingleColor_Tab
 458. diff focus order - Upper Left Menu first

@@ -7,7 +7,7 @@ import { ReactComponent as TrashSmallSVG } from "../../svgs/trashSmall.svg";
 import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 import { bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
-import { globalSettingsState } from "../../state/defaultSettings";
+import { globalSettingsState, focusedTabState } from "../../state/defaultSettings";
 
 import {
   SingleBookmarkData,
@@ -60,6 +60,8 @@ function SingleBookmark({
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
+  const [focusedTabData, setFocusedTabData] = focusedTabState.use();
+
   // let linkURL = new URL(singleBookmarkData.URL)
 
   // function areButtonsDisabled(): boolean {
@@ -78,7 +80,11 @@ function SingleBookmark({
   // }
 
   return (
-    <div>
+    <div
+    onFocus={() => {
+      setFocusedTabData(null)
+    }}
+    >
       {tabVisState.editBookmarkVis !== bookmarkId && (
         <div
           className={`flex justify-between bg-gray-50 h-10 pt-2 border border-t-0 ${

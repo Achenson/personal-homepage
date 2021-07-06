@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ColumnColor_UpperUI from "./ColumnColor_UpperUI";
 import ColorsToChoose_DefaultAndColumns from "../Colors/ColorsToChoose_DefaultAndColumns";
 
-import { globalSettingsState } from "../../state/defaultSettings";
+import { globalSettingsState, focusedTabState } from "../../state/defaultSettings";
 import BackgroundColor_UpperUI from "./BackgroundColor_UpperUI";
 import EyeOff_UpperUI from "./EyeOff_UpperUI";
 import ColorsToChoose_Background from "../Colors/ColorsToChoose_Background";
@@ -31,6 +31,8 @@ function UpperLeftMenu({
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   const [isHoverOnAnyColumn, setIsHoverOnAnyColumn] = useState(false);
+
+  const [focusedTabData, setFocusedTabData] = focusedTabState.use();
 
   function columnsRendering(howMany: number, oneColorForAllCols: boolean) {
     let arrOfColumns = [];
@@ -65,7 +67,11 @@ function UpperLeftMenu({
   }
 
   return (
-    <div className="flex relative items-center justify-between">
+    <div className="flex relative items-center justify-between"
+    onFocus={() => {
+      setFocusedTabData(null)
+    }}
+    >
       {/* <div className="absolute left-0 bottom-0"> */}
       <div className="flex relative justify-between items-center mb-2 mt-2">
         {/* <p className="w-32">Columns</p> */}
