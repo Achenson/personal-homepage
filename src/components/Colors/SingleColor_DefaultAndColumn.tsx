@@ -43,7 +43,7 @@ function SingleColor_DefaultAndColumn({
   selectedNumber,
   colorNumber,
   setSelectedNumber,
-  colorArrLength
+  colorArrLength,
 }: Props): JSX.Element {
   // const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -55,12 +55,6 @@ function SingleColor_DefaultAndColumn({
     columnsColorsImg_State.use();
 
   const [uiColorData, setUiColorData] = uiColorState.use();
-
- 
-
-
-
-
 
   function borderMaker(
     defaultColorsFor:
@@ -79,60 +73,31 @@ function SingleColor_DefaultAndColumn({
 
     // const arrForLightSelect = ["blueGray-303", "blueGray-404", "gray-404", "yellow-300", "yellow-330", "yellow-400", "lime-400", "orange-300"];
 
+    if (colorNumber !== selectedNumber) {
+      return unselected;
+    }
+
     switch (defaultColorsFor) {
       case "folders":
-        if (color === folderColorData) {
-          return selectedWhite;
-        }
-        return unselected;
+        return selectedWhite;
 
       case "notes":
-        if (color === noteColorData) {
-          return selectedWhite;
-        }
-        return unselected;
+        return selectedWhite;
 
       case "rss":
-        if (color === rssColorData) {
-          return selectedWhite;
-        }
-        return unselected;
+        return selectedWhite;
 
       case "column_1":
-        if (
-          (color === columnsColorsData.column_1 && !colsForBackgroundImg) ||
-          (color === columnsColorsImg_Data.column_1 && colsForBackgroundImg)
-        ) {
-          return selectedBlack;
-        }
-        return unselected;
+        return selectedBlack;
 
       case "column_2":
-        if (
-          (color === columnsColorsData.column_2 && !colsForBackgroundImg) ||
-          (color === columnsColorsImg_Data.column_2 && colsForBackgroundImg)
-        ) {
-          return selectedBlack;
-        }
-        return unselected;
+        return selectedBlack;
 
       case "column_3":
-        if (
-          (color === columnsColorsData.column_3 && !colsForBackgroundImg) ||
-          (color === columnsColorsImg_Data.column_3 && colsForBackgroundImg)
-        ) {
-          return selectedBlack;
-        }
-        return unselected;
+        return selectedBlack;
 
       case "column_4":
-        if (
-          (color === columnsColorsData.column_4 && !colsForBackgroundImg) ||
-          (color === columnsColorsImg_Data.column_4 && colsForBackgroundImg)
-        ) {
-          return selectedBlack;
-        }
-        return unselected;
+        return selectedBlack;
 
       default:
         return unselected;
@@ -154,6 +119,18 @@ function SingleColor_DefaultAndColumn({
     }
 
     return "gray-500";
+  }
+
+  let tabIndex = calcTabIndex();
+
+  function calcTabIndex() {
+    let indexToReturn = colorNumber - selectedNumber + 1;
+
+    if (indexToReturn >= 1) {
+      return indexToReturn;
+    }
+
+    return colorArrLength - selectedNumber + colorNumber + 1;
   }
 
   return (
@@ -226,8 +203,12 @@ function SingleColor_DefaultAndColumn({
             })
           );
         }
+
+        setSelectedNumber(colorNumber);
       }}
-    ></button>
+      tabIndex={tabIndex}
+    >
+    </button>
   );
 }
 

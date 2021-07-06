@@ -67,6 +67,12 @@ function ColorsToChoose_DefaultAndColumns({
   const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
 
   useEffect(() => {
+  
+    setSelectedNumber(calcSelectedNumber())
+
+  }, [defaultColorsFor])
+
+  useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
 
     return () => {
@@ -95,60 +101,75 @@ function ColorsToChoose_DefaultAndColumns({
     if (/column/.test(defaultColorsFor)) {
       // if (globalSettingsData.picBackground) {
 
-      columnColorsConcat.map((color, i) => {
-        switch (defaultColorsFor) {
-          case "column_1":
-            if (
-              (color === columnsColorsData.column_1 &&
-                !globalSettingsData.picBackground) ||
-              (color === columnsColorsImg_Data.column_1 &&
-                globalSettingsData.picBackground)
-            ) {
-              selectedNumber = globalSettingsData.picBackground
-                ? calcColorNumbering(color, imageColumnColorsConcat)
-                : calcColorNumbering(color, columnColorsConcat);
-            }
+      if (globalSettingsData.picBackground) {
+        imageColumnColorsConcat.map((color, i) => {
+          switch (defaultColorsFor) {
+            case "column_1":
+              if (color === columnsColorsImg_Data.column_1) {
+                selectedNumber = calcColorNumbering(
+                  color,
+                  imageColumnColorsConcat
+                );
+              }
+              break;
+            case "column_2":
+              if (color === columnsColorsImg_Data.column_2) {
+                selectedNumber = calcColorNumbering(
+                  color,
+                  imageColumnColorsConcat
+                );
+              }
+              break;
+            case "column_3":
+              if (color === columnsColorsImg_Data.column_3) {
+                selectedNumber = calcColorNumbering(
+                  color,
+                  imageColumnColorsConcat
+                );
+              }
+              break;
+            case "column_4":
+              if (color === columnsColorsImg_Data.column_4) {
+                selectedNumber = calcColorNumbering(
+                  color,
+                  imageColumnColorsConcat
+                );
+              }
+              break;
+            default:
+              selectedNumber = 0;
+          }
+        });
+      }
 
-          case "column_2":
-            if (
-              (color === columnsColorsData.column_2 &&
-                !globalSettingsData.picBackground) ||
-              (color === columnsColorsImg_Data.column_2 &&
-                globalSettingsData.picBackground)
-            ) {
-              selectedNumber = globalSettingsData.picBackground
-                ? calcColorNumbering(color, imageColumnColorsConcat)
-                : calcColorNumbering(color, columnColorsConcat);
-            }
-
-          case "column_3":
-            if (
-              (color === columnsColorsData.column_3 &&
-                !globalSettingsData.picBackground) ||
-              (color === columnsColorsImg_Data.column_3 &&
-                globalSettingsData.picBackground)
-            ) {
-              selectedNumber = globalSettingsData.picBackground
-                ? calcColorNumbering(color, imageColumnColorsConcat)
-                : calcColorNumbering(color, columnColorsConcat);
-            }
-
-          case "column_4":
-            if (
-              (color === columnsColorsData.column_4 &&
-                !globalSettingsData.picBackground) ||
-              (color === columnsColorsImg_Data.column_4 &&
-                globalSettingsData.picBackground)
-            ) {
-              selectedNumber = globalSettingsData.picBackground
-                ? calcColorNumbering(color, imageColumnColorsConcat)
-                : calcColorNumbering(color, columnColorsConcat);
-            }
-
-          default:
-            selectedNumber = 0;
-        }
-      });
+      if (!globalSettingsData.picBackground) {
+        columnColorsConcat.map((color, i) => {
+          switch (defaultColorsFor) {
+            case "column_1":
+              if (color === columnsColorsData.column_1) {
+                selectedNumber = calcColorNumbering(color, columnColorsConcat);
+              }
+              break;
+            case "column_2":
+              if (color === columnsColorsData.column_2) {
+                selectedNumber = calcColorNumbering(color, columnColorsConcat);
+              }
+              break;
+            case "column_3":
+              if (color === columnsColorsData.column_3) {
+                selectedNumber = calcColorNumbering(color, columnColorsConcat);
+              }
+              break;
+            case "column_4":
+              if (color === columnsColorsData.column_4) {
+                selectedNumber = calcColorNumbering(color, columnColorsConcat);
+              }
+              break;
+            default:
+              selectedNumber = 0;
+          }
+        });
+      }
 
       // }
       return selectedNumber;
@@ -160,17 +181,18 @@ function ColorsToChoose_DefaultAndColumns({
           if (color === folderColorData) {
             selectedNumber = calcColorNumbering(color, tabColorsConcat);
           }
+          break;
 
         case "notes":
           if (color === noteColorData) {
             selectedNumber = calcColorNumbering(color, tabColorsConcat);
           }
-
+          break;
         case "rss":
           if (color === rssColorData) {
             selectedNumber = calcColorNumbering(color, tabColorsConcat);
           }
-
+          break;
         default:
           selectedNumber = 0;
       }
