@@ -1,18 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import FocusLock from "react-focus-lock";
 
-import { backgroundColors } from "../../utils/colors_background";
+import {
+  backgroundColors,
+  backgroundColorsConcat,
+} from "../../utils/colors_background";
 
 import { UpperVisAction } from "../../utils/interfaces";
 
 import SingleColor_Background from "./SingleColor_Background";
+
+import { backgroundColorState } from "../../state/colorsState";
 
 interface Props {
   upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
 function ColorsToChoose_Background({ upperVisDispatch }: Props): JSX.Element {
+  const [backgroundColorData, setBackgroundColorData] =
+    backgroundColorState.use();
+  const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
+
+
+  useEffect(() => {
+    setSelectedNumber(calcSelectedNumber())
+  }, [backgroundColorData])
+ 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
 
@@ -23,8 +37,25 @@ function ColorsToChoose_Background({ upperVisDispatch }: Props): JSX.Element {
 
   function handleKeyDown(event: KeyboardEvent) {
     if (event.code === "Escape") {
-      upperVisDispatch({type: "COLORS_BACKGROUND_TOGGLE"})
+      upperVisDispatch({ type: "COLORS_BACKGROUND_TOGGLE" });
     }
+  }
+
+  function calcSelectedNumber(): number {
+    let selectedNumber: number = 0;
+
+    backgroundColorsConcat.map((color, i) => {
+      if (color === backgroundColorData) {
+        selectedNumber = calcColorNumbering(color);
+      }
+    });
+
+    return selectedNumber;
+  }
+
+  function calcColorNumbering(color: string): number {
+    // +1 because tabIndex for focus starts with one
+    return backgroundColorsConcat.indexOf(color) + 1;
   }
 
   function mapBackgroundColors() {
@@ -38,6 +69,10 @@ function ColorsToChoose_Background({ upperVisDispatch }: Props): JSX.Element {
                 color={el}
                 key={j}
                 colorCol={j}
+                colorArrLength={backgroundColorsConcat.length}
+                colorNumber={calcColorNumbering(el)}
+                selectedNumber={selectedNumber}
+                setSelectedNumber={setSelectedNumber}
               />
             );
           })}

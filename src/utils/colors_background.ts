@@ -223,6 +223,18 @@ export const backgroundColors: string[][] = [
   ],
 ];
 
+export const backgroundColorsConcat: string[] = concatColors(backgroundColors);
+
+function concatColors(tabColors: string[][]): string[] {
+  let concatArr: string[] = [];
+
+  tabColors.map((el, i) => {
+    concatArr.push(...tabColors[i]);
+  });
+
+  return concatArr;
+}
+
 // for ColorsToChoose_Background
 export const backgroundColorsLightFocus = [
   "blueGray-500",
@@ -270,5 +282,4 @@ export const backgroundColorsUpperUiFocus = [
   "violet-400",
   "violet-500",
   "fuchsia-100",
-
 ];

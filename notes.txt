@@ -543,6 +543,7 @@ DONE 454. lightBlue to sky renaming? how to update color palette DONE
 ?? 457. ColorsToChoose_Tab: lines not parallel! (ilusion?) ???
 XX 459. first render: problem with single colors for columns focus selection (not a problem: it doesn't happen on click) XX
 DONE 460. make focus outlines more visible (better contrast) DONE
+DONE 461. focus should start on already selected color - tabs & columns color & background colors DONE
 ?DONE 462. EyeOff doesn't work properly, only on first Tab!
  DONE ? (fixed by setting delay on Grid useEffect)
  DONE 463. ColorToChoose_Background should not close after selecting, only after interaction with other components
@@ -573,7 +574,6 @@ DONE 468. visDispatch rename to tabVisDispatch DONE
 456. unify SingleColor_DefaultAndColumn and SingleColor_Tab
 458. diff focus order - Upper Left Menu first
 
-461. focus should start on already selected color - tabs & columns color & background colors
 
 465. explanation how the EyeOff works somewhere
 467. unify ColorsToChoose_DefaultAndColumn and ColorsToChoose_Tab+

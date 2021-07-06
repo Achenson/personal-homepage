@@ -8,14 +8,27 @@ import { backgroundColorsLightFocus } from "../../utils/colors_background";
 interface Props {
   color: string;
   colorCol: number;
+
+  selectedNumber: number;
+  colorNumber: number;
+  setSelectedNumber: React.Dispatch<React.SetStateAction<number>>;
+  colorArrLength: number;
 }
 
-function SingleColor_Background({ color, colorCol }: Props): JSX.Element {
+function SingleColor_Background({
+  color,
+  colorCol,
+  selectedNumber,
+  colorNumber,
+  setSelectedNumber,
+  colorArrLength,
+}: Props): JSX.Element {
   const [backgroundColorData, setBackgroundColorData] =
     backgroundColorState.use();
 
   function borderMaker() {
-    if (color !== backgroundColorData) {
+    // if (color !== backgroundColorData) {
+    if (colorNumber !== selectedNumber) {
       return "border border-black";
     }
 
@@ -38,6 +51,19 @@ function SingleColor_Background({ color, colorCol }: Props): JSX.Element {
     return "gray-500";
   }
 
+  let tabIndex = calcTabIndex();
+
+  function calcTabIndex() {
+    let indexToReturn = colorNumber - selectedNumber + 1;
+
+    if (indexToReturn >= 1) {
+      return indexToReturn;
+    }
+
+    return colorArrLength - selectedNumber + colorNumber + 1;
+  }
+
+
   return (
     <button
       className={`h-4 w-4 -mr-px -mt-px bg-${color} cursor-pointer
@@ -47,8 +73,13 @@ function SingleColor_Background({ color, colorCol }: Props): JSX.Element {
       `}
       onClick={() => {
         setBackgroundColorData(color);
+        setSelectedNumber(colorNumber)
       }}
-    ></button>
+      tabIndex={tabIndex}
+    >
+      {/* {colorNumber} */}
+      {/* {selectedNumber} */}
+    </button>
   );
 }
 
