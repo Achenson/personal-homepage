@@ -551,6 +551,7 @@ DONE 461. focus should start on already selected color - tabs & columns color & 
 DONE 464. all features controlable by keyboard DONE 
 DONE 466. Close Default Tab Colors by Escape DONE
 DONE 468. visDispatch rename to tabVisDispatch DONE
+DONE 469. close tabColors when clicking color in colors settings (should be same as in globalSettings) DONE
 
 
 1. tailwind - purgecss at the end of the project
@@ -574,11 +575,9 @@ DONE 468. visDispatch rename to tabVisDispatch DONE
 456. unify SingleColor_DefaultAndColumn and SingleColor_Tab
 458. diff focus order - Upper Left Menu first
 
-
 465. explanation how the EyeOff works somewhere
 467. unify ColorsToChoose_DefaultAndColumn and ColorsToChoose_Tab+
 468. change excessive if statements (columns...) to RegEx
-469. close tabColors when clicking color in colors settings (should be same as in globalSettings)
 
 tailwind 2.0.2
 

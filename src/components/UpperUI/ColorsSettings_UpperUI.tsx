@@ -17,6 +17,8 @@ import {
   resetColorsState,
 } from "../../state/colorsState";
 
+import { tabOpenedState } from "../../state/defaultSettings";
+
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
@@ -58,6 +60,8 @@ function ColorsSettings_UpperUI({
   const [rssColorData, setRssColorData] = rssColorState.use();
   const [uiColorData, setUiColorData] = uiColorState.use();
   const [resetColorsData, setResetColorsData] = resetColorsState.use();
+
+  const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
   // const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
   // const windowSize = useWindowSize();
@@ -154,6 +158,8 @@ function ColorsSettings_UpperUI({
                   // setColumnSelected(null);
 
                   setFoldersSelected((b) => !b);
+
+                  setTabOpenedData(null);
                 }}
                 className={`h-4 w-8 bg-${folderColorData} cursor-pointer ${
                   foldersSelected ? "border-2" : "border"
@@ -177,6 +183,8 @@ function ColorsSettings_UpperUI({
                   // setColumnSelected(null);
 
                   setNotesSelected((b) => !b);
+
+                  setTabOpenedData(null);
                 }}
                 className={`h-4 w-8 bg-${noteColorData} cursor-pointer ${
                   notesSelected ? "border-2" : "border"
@@ -201,6 +209,7 @@ function ColorsSettings_UpperUI({
                   // setColumnSelected(null);
 
                   setRssSelected((b) => !b);
+                  setTabOpenedData(null);
                 }}
                 className={`h-4 w-8 bg-${rssColorData} cursor-pointer ${
                   rssSelected ? "border-2" : "border"
