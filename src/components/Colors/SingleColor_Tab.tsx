@@ -8,8 +8,7 @@ import {
   rssColorState,
 } from "../../state/colorsState";
 
-
-import {tabColorsLightFocus} from "../../utils/colors_tab"
+import { tabColorsLightFocus } from "../../utils/colors_tab";
 
 interface Props {
   color: string;
@@ -21,7 +20,6 @@ interface Props {
   colorNumber: number;
   setSelectedNumber: React.Dispatch<React.SetStateAction<number>>;
   colorArrLength: number;
-
 }
 
 function SingleColor_Tab({
@@ -32,7 +30,7 @@ function SingleColor_Tab({
   selectedNumber,
   colorNumber,
   setSelectedNumber,
-  colorArrLength
+  colorArrLength,
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -41,55 +39,19 @@ function SingleColor_Tab({
   const [rssColorData, setRssColorData] = rssColorState.use();
 
 
-
-
-  // function borderMaker() {
-  //   const selectedBorder = "border-2 border-white z-50";
-  //   const defaultBorder = "border border-black";
-
-  //   if (tabColor) {
-  //     if (color == tabColor) {
-  //       return selectedBorder;
-  //     }
-  //   }
-
-  //   if (!tabColor) {
-  //     if (tabType === "folder" && color === folderColorData) {
-  //       return selectedBorder;
-  //     }
-
-  //     if (tabType === "note" && color === noteColorData) {
-  //       return selectedBorder;
-  //     }
-
-  //     if (tabType === "rss" && color === rssColorData) {
-  //       return selectedBorder;
-  //     }
-  //   }
-
-  //   return defaultBorder;
-  // }
-
-  let tabIndex = calcTabIndex()
+  let tabIndex = calcTabIndex();
 
   function calcTabIndex() {
+    let indexToReturn = colorNumber - selectedNumber + 1;
 
-    let indexToReturn = colorNumber - selectedNumber +1;
+    if (indexToReturn >= 1) {
+      return indexToReturn;
+    }
 
-   if (indexToReturn >= 1) {
-     return indexToReturn;
-   }
-
-   return colorArrLength - selectedNumber + colorNumber +1;
-
-
-
-    
+    return colorArrLength - selectedNumber + colorNumber + 1;
   }
 
-
   function focusColor(): string {
-  
     if (tabColorsLightFocus.indexOf(color) > -1) {
       return "gray-400";
     }
@@ -99,7 +61,11 @@ function SingleColor_Tab({
 
   return (
     <button
-      className={`h-4 w-8 -mr-px -mt-px bg-${color} cursor-pointer ${colorNumber === selectedNumber ? "border-2 border-white z-50" : "border border-black"} hover:border-2 hover:border-gray-500 hover:z-50
+      className={`h-4 w-8 -mr-px -mt-px bg-${color} cursor-pointer ${
+        colorNumber === selectedNumber
+          ? "border-2 border-white z-50"
+          : "border border-black"
+      } hover:border-2 hover:border-gray-500 hover:z-50
       focus:outline-none focus-visible:ring-2 ring-${focusColor()} ring-inset
       `}
       onClick={() => {
@@ -112,11 +78,11 @@ function SingleColor_Tab({
             }
           })
         );
-        setSelectedNumber(colorNumber)
+        setSelectedNumber(colorNumber);
       }}
-      // tabIndex={ borderMaker() === "border-2 border-white z-50" ? 1 : undefined}
+
       tabIndex={tabIndex}
-    >{tabIndex}</button>
+    ></button>
   );
 }
 

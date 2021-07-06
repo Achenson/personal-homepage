@@ -30,12 +30,20 @@ interface Props {
     | "column_4"
     | "unselected";
   colsForBackgroundImg?: boolean;
+  selectedNumber: number;
+  colorNumber: number;
+  setSelectedNumber: React.Dispatch<React.SetStateAction<number>>;
+  colorArrLength: number;
 }
 
 function SingleColor_DefaultAndColumn({
   color,
   defaultColorsFor,
   colsForBackgroundImg,
+  selectedNumber,
+  colorNumber,
+  setSelectedNumber,
+  colorArrLength
 }: Props): JSX.Element {
   // const [tabsData, setTabsData] = tabsDataState.use();
 

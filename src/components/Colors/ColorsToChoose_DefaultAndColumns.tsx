@@ -1,11 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import FocusLock from "react-focus-lock";
 
 import SingleColor_DefaultAndColumn from "./SingleColor_DefaultAndColumn";
 
-import { tabColors } from "../../utils/colors_tab";
-import { columnColors, imageColumnColors } from "../../utils/colors_column";
+import { tabColors, tabColorsConcat } from "../../utils/colors_tab";
+import {
+  columnColors,
+  imageColumnColors,
+  columnColorsConcat,
+  imageColumnColorsConcat,
+} from "../../utils/colors_column";
+
+import {
+  folderColorState,
+  noteColorState,
+  rssColorState,
+} from "../../state/colorsState";
+
+import {
+  columnsColorsState,
+  columnsColorsImg_State,
+} from "../../state/colorsState";
 
 import { globalSettingsState } from "../../state/defaultSettings";
 
@@ -39,6 +55,16 @@ function ColorsToChoose_DefaultAndColumns({
 }: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
+  const [folderColorData, setFolderColorData] = folderColorState.use();
+  const [noteColorData, setNoteColorData] = noteColorState.use();
+  const [rssColorData, setRssColorData] = rssColorState.use();
+
+  const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
+  const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
+    columnsColorsImg_State.use();
+
+  const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
 
@@ -62,6 +88,93 @@ function ColorsToChoose_DefaultAndColumns({
     }
   }
 
+  function calcSelectedNumber(): number {
+    let selectedNumber: number = 0;
+
+    if (/column/.test(defaultColorsFor)) {
+      // if (globalSettingsData.picBackground) {
+
+      columnColorsConcat.map((color, i) => {
+        switch (defaultColorsFor) {
+          case "column_1":
+            if (
+              (color === columnsColorsData.column_1 &&
+                !globalSettingsData.picBackground) ||
+              (color === columnsColorsImg_Data.column_1 &&
+                globalSettingsData.picBackground)
+            ) {
+              selectedNumber = calcColorNumbering(color);
+            }
+
+          case "column_2":
+            if (
+              (color === columnsColorsData.column_2 &&
+                !globalSettingsData.picBackground) ||
+              (color === columnsColorsImg_Data.column_2 &&
+                globalSettingsData.picBackground)
+            ) {
+              selectedNumber = calcColorNumbering(color);
+            }
+
+          case "column_3":
+            if (
+              (color === columnsColorsData.column_3 &&
+                !globalSettingsData.picBackground) ||
+              (color === columnsColorsImg_Data.column_3 &&
+                globalSettingsData.picBackground)
+            ) {
+              selectedNumber = calcColorNumbering(color);
+            }
+
+          case "column_4":
+            if (
+              (color === columnsColorsData.column_4 &&
+                !globalSettingsData.picBackground) ||
+              (color === columnsColorsImg_Data.column_4 &&
+                globalSettingsData.picBackground)
+            ) {
+              selectedNumber = calcColorNumbering(color);
+            }
+
+          default:
+            selectedNumber = 0;
+        }
+      });
+
+      // }
+      return selectedNumber;
+    }
+
+    tabColorsConcat.map((color, i) => {
+      switch (defaultColorsFor) {
+        case "folders":
+          if (color === folderColorData) {
+            selectedNumber = calcColorNumbering(color);
+          }
+
+        case "notes":
+          if (color === noteColorData) {
+            selectedNumber = calcColorNumbering(color);
+          }
+
+        case "rss":
+          if (color === rssColorData) {
+            selectedNumber = calcColorNumbering(color);
+          }
+
+        default:
+          selectedNumber = 0;
+      }
+    });
+
+    return selectedNumber;
+  }
+
+  function calcColorNumbering(color: string): number {
+    // +1 because tabIndex for focus starts with one
+    return tabColorsConcat.indexOf(color) + 1;
+  }
+
   function mapTabColors() {
     return tabColors.map((row, i) => {
       return (
@@ -72,6 +185,10 @@ function ColorsToChoose_DefaultAndColumns({
                 color={el}
                 defaultColorsFor={defaultColorsFor}
                 key={j}
+                colorNumber={calcColorNumbering(el)}
+                selectedNumber={selectedNumber}
+                setSelectedNumber={setSelectedNumber}
+                colorArrLength={tabColorsConcat.length}
               />
             );
           })}
@@ -94,6 +211,10 @@ function ColorsToChoose_DefaultAndColumns({
                 colsForBackgroundImg={
                   globalSettingsData.picBackground ? true : false
                 }
+                colorNumber={calcColorNumbering(el)}
+                selectedNumber={selectedNumber}
+                setSelectedNumber={setSelectedNumber}
+                colorArrLength={tabColorsConcat.length}
               />
             );
           })}
@@ -109,30 +230,17 @@ function ColorsToChoose_DefaultAndColumns({
         <div
           className="absolute bg-white"
           style={{
-            // left: `${
-            //   defaultColorsFor === "folders" ||
-            //   defaultColorsFor === "rss" ||
-            //   defaultColorsFor === "notes"
-            //     ? "8px"
-            //     : "0px"
-            // }`,
             left: leftPositioning,
             top: "1px",
           }}
         >
-          {
-            // defaultColorsFor === "column_1" ||
-            // defaultColorsFor === "column_2" ||
-            // defaultColorsFor === "column_3" ||
-            // defaultColorsFor === "column_4"
-            /column/.test(defaultColorsFor)
-              ? mapColumnColors(
-                  globalSettingsData.picBackground
-                    ? imageColumnColors
-                    : columnColors
-                )
-              : mapTabColors()
-          }
+          {/column/.test(defaultColorsFor)
+            ? mapColumnColors(
+                globalSettingsData.picBackground
+                  ? imageColumnColors
+                  : columnColors
+              )
+            : mapTabColors()}
         </div>
       </div>
     </FocusLock>

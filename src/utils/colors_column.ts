@@ -82,6 +82,10 @@ export const columnColors: string[][] = [
   ],
 ];
 
+
+export const columnColorsConcat: string[] = concatColors(columnColors);
+
+
 export const imageColumnColors: string[][] = [
   [
     "rgba(0,0,0,0)",
@@ -150,3 +154,16 @@ export const imageColumnColors: string[][] = [
     "rgba(127,0,127,0.4)",
   ],
 ];
+
+export const imageColumnColorsConcat: string[] = concatColors(imageColumnColors);
+
+
+function concatColors(tabColors: string[][]): string[] {
+  let concatArr: string[] = [];
+
+  tabColors.map((el, i) => {
+    concatArr.push(...tabColors[i]);
+  });
+
+  return concatArr;
+}
