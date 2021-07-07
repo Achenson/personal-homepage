@@ -76,6 +76,7 @@ function UpperRightMenu({
             // setNewBookmarkVis((b) => !b);
             upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
           }}
+          tabIndex={7}
           // disabled={areButtonsDisabled()}
         >
           <BookmarkSVG
@@ -92,6 +93,7 @@ function UpperRightMenu({
             upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
             setTabType("folder");
           }}
+          tabIndex={8}
           // disabled={areButtonsDisabled()}
         >
           <FolderSVG
@@ -110,6 +112,7 @@ function UpperRightMenu({
             upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
             setTabType("note");
           }}
+          tabIndex={9}
           // disabled={areButtonsDisabled()}
         >
           <NoteSVG
@@ -123,6 +126,7 @@ function UpperRightMenu({
             upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
             setTabType("rss");
           }}
+          tabIndex={10}
           // disabled={areButtonsDisabled()}
         >
           <AddRssSVG
@@ -154,6 +158,7 @@ function UpperRightMenu({
             // setBackgroundSettingsVis((b) => !b);
             upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
           }}
+          tabIndex={11}
           // disabled={areButtonsDisabled()}
         >
           <PhotographSVG
@@ -167,6 +172,7 @@ function UpperRightMenu({
             upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
             // setColorsVis((b) => !b);
           }}
+          tabIndex={12}
           // disabled={areButtonsDisabled()}
         >
           <ColorSVG
@@ -182,6 +188,7 @@ function UpperRightMenu({
             // setCloseAllTabsData(true);
             upperVisDispatch({ type: "SETTINGS_TOGGLE" });
           }}
+          tabIndex={13}
           // disabled={areButtonsDisabled()}
         >
           <SettingsSVG
@@ -198,6 +205,8 @@ function UpperRightMenu({
                 setLoggedInData(false);
                 upperVisDispatch({ type: "MESSAGE_OPEN_LOGOUT" });
               }}
+
+              tabIndex={14}
               // disabled={areButtonsDisabled()}
             >
               <LogoutSVG
@@ -212,6 +221,7 @@ function UpperRightMenu({
                 upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 // setLoggedInData(true);
               }}
+              tabIndex={14}
               // disabled={areButtonsDisabled()}
             >
               <UserSVG

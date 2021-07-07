@@ -31,6 +31,7 @@ interface Props {
   arrIndex: number;
   columnType: "NO_BACKGROUND_IMG" | "BACKGROUND_IMG";
   isHoverOnAnyColumn: boolean;
+  tabIndex: number;
 }
 
 function ColumnColor_UpperUI({
@@ -41,6 +42,7 @@ function ColumnColor_UpperUI({
   arrIndex,
   columnType,
   isHoverOnAnyColumn,
+  tabIndex
 }: Props): JSX.Element {
   const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
@@ -135,6 +137,7 @@ function ColumnColor_UpperUI({
               columnType === "BACKGROUND_IMG" ? columnsColor(colNumber) : ""
             }`,
           }}
+          tabIndex={tabIndex}
         ></button>
       ) : // <div
       //   className={`relative overflow-hidden h-4 w-8 bg-white ${borderStyle()} border-black`}

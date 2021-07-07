@@ -72,6 +72,7 @@ function EyeOff_UpperUI({ upperVisDispatch }: Props): JSX.Element {
         setTabOpenedData(null)
       }}
       className={`focus:outline-none focus-visible:ring-2 ring-${focusColor()} ring-inset`}
+      tabIndex={6}
     >
       <EyeOffSVG
         // className={`h-7 bg-${calcIconBackground(backgroundColorData)} opacity-80 border border-black rounded-lg cursor-pointer fill-current text-${backgroundColorData} hover:border-gray-500`}

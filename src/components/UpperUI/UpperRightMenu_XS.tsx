@@ -58,6 +58,7 @@ function UpperRightMenu({
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               setTabType("folder");
             }}
+            tabIndex={7}
             // disabled={areButtonsDisabled()}
           >
             <FolderSVG
@@ -75,6 +76,7 @@ function UpperRightMenu({
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               setTabType("note");
             }}
+            tabIndex={8}
             // disabled={areButtonsDisabled()}
           >
             <NoteSVG
@@ -92,6 +94,7 @@ function UpperRightMenu({
               upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               setTabType("rss");
             }}
+            tabIndex={9}
             // disabled={areButtonsDisabled()}
           >
             <AddRssSVG
@@ -119,6 +122,7 @@ function UpperRightMenu({
             // setNewBookmarkVis((b) => !b);
             upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
           }}
+          tabIndex={10}
           // disabled={areButtonsDisabled()}
         >
           <BookmarkSVG
@@ -134,6 +138,7 @@ function UpperRightMenu({
           onClick={() => {
             upperVisDispatch({ type: "ADD_TAG_XS_TOGGLE" });
           }}
+          tabIndex={11}
           // disabled={areButtonsDisabled()}
         >
           <PlusSquareSVG
@@ -148,6 +153,7 @@ function UpperRightMenu({
           onClick={() => {
             upperVisDispatch({ type: "SETTINGS_TOGGLE" });
           }}
+          tabIndex={12}
           // disabled={areButtonsDisabled()}
         >
           <CogSVG
@@ -172,6 +178,7 @@ function UpperRightMenu({
                 setLoggedInData(false);
                 upperVisDispatch({ type: "MESSAGE_OPEN_LOGOUT" });
               }}
+              tabIndex={13}
               // disabled={areButtonsDisabled()}
             >
               <LogoutSVG
@@ -187,6 +194,7 @@ function UpperRightMenu({
                 upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 // setLoggedInData(true);
               }}
+              tabIndex={13}
               // disabled={areButtonsDisabled()}
             >
               <UserSVG

@@ -542,6 +542,7 @@ DONE 452. react-focus-lock for settings etc.? DONE
 DONE 453. editSingle bookmark z-index problem when setting popus are on, check others DONE
 DONE 454. lightBlue to sky renaming? how to update color palette DONE
 ?? 457. ColorsToChoose_Tab: lines not parallel! (ilusion?) ???
+DONE 458. diff focus order - Upper Left Menu first DONE
 XX 459. first render: problem with single colors for columns focus selection (not a problem: it doesn't happen on click) XX
 DONE 460. make focus outlines more visible (better contrast) DONE
 DONE 461. focus should start on already selected color - tabs & columns color & background colors DONE
@@ -573,7 +574,6 @@ DONE 469. close tabColors when clicking color in colors settings (should be same
 447. proper starting links etc
 455. when adding new bookmark to all bookmarks: selectables don't auto complete?
 456. unify SingleColor_DefaultAndColumn and SingleColor_Tab
-458. diff focus order - Upper Left Menu first
 
 465. explanation how the EyeOff works somewhere
 467. unify ColorsToChoose_DefaultAndColumn and ColorsToChoose_Tab+

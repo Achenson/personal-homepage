@@ -61,6 +61,7 @@ function UpperLeftMenu({
               : "NO_BACKGROUND_IMG"
           }
           isHoverOnAnyColumn={isHoverOnAnyColumn}
+          tabIndex={index + 1}
         />
       );
     });
