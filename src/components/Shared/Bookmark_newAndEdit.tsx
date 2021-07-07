@@ -94,7 +94,10 @@ function Bookmark_newAndEdit({
     }
 
     if (bookmarkComponentType === "new_lowerUI") {
-      return tabTitle as string;
+      
+      if (tabTitle !== tabsData.find(obj=> obj.id === "ALL_TAGS")?.title) {
+        return tabTitle as string;
+      } else return ""
     }
 
     let arrOut: string[] = [];

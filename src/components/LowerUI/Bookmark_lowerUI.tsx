@@ -713,7 +713,7 @@ Props): JSX.Element {
                     ref={selectablesRef}
                     // value={tagsInput.join(", ")}
                     value={selectablesInputStr}
-                    placeholder={"tag1, tag2..."}
+                    placeholder={"tag1, tag2... [optional]"}
                     onChange={(e) => {
                       setWasAnythingChanged(true);
                       if (!selectablesListVis) setSelectablesListVis(true);
@@ -724,6 +724,9 @@ Props): JSX.Element {
                     }}
                     onFocus={(e) => {
                       setSelectablesListVis(true);
+                      // let target = e.target.value;
+
+                      // setSelectablesInputStr(target);
                     }}
 
                     // onChange={(e) => setTagsInput([...e.target.value.split(", ")])}
