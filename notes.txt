@@ -556,6 +556,7 @@ DONE 464. all features controlable by keyboard DONE
 DONE 466. Close Default Tab Colors by Escape DONE
 DONE 468. visDispatch rename to tabVisDispatch DONE
 DONE 469. close tabColors when clicking color in colors settings (should be same as in globalSettings) DONE
+DONE 470. change excessive if statements (columns...) to RegEx DONE
 
 
 1. tailwind - purgecss at the end of the project
@@ -579,7 +580,7 @@ DONE 469. close tabColors when clicking color in colors settings (should be same
 
 465. explanation how the EyeOff works somewhere
 467. unify ColorsToChoose_DefaultAndColumn and ColorsToChoose_Tab+
-468. change excessive if statements (columns...) to RegEx
+71. enums instead of literal types?
 
 tailwind 2.0.2
 

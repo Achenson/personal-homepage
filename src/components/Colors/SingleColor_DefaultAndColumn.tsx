@@ -165,10 +165,12 @@ function SingleColor_DefaultAndColumn({
         }
 
         if (
-          (defaultColorsFor === "column_1" ||
-            defaultColorsFor === "column_2" ||
-            defaultColorsFor === "column_3" ||
-            defaultColorsFor === "column_4") &&
+          // (defaultColorsFor === "column_1" ||
+          //   defaultColorsFor === "column_2" ||
+          //   defaultColorsFor === "column_3" ||
+          //   defaultColorsFor === "column_4") &&
+
+          /column/.test(defaultColorsFor) &&
           !colsForBackgroundImg
         ) {
           setColumnsColorsData((previous) =>
@@ -185,10 +187,11 @@ function SingleColor_DefaultAndColumn({
         }
 
         if (
-          (defaultColorsFor === "column_1" ||
-            defaultColorsFor === "column_2" ||
-            defaultColorsFor === "column_3" ||
-            defaultColorsFor === "column_4") &&
+          // (defaultColorsFor === "column_1" ||
+          //   defaultColorsFor === "column_2" ||
+          //   defaultColorsFor === "column_3" ||
+          //   defaultColorsFor === "column_4")
+          /column/.test(defaultColorsFor) &&
           colsForBackgroundImg
         ) {
           setColumnsColorsImg_Data((previous) =>
@@ -207,8 +210,7 @@ function SingleColor_DefaultAndColumn({
         setSelectedNumber(colorNumber);
       }}
       tabIndex={tabIndex}
-    >
-    </button>
+    ></button>
   );
 }
 
