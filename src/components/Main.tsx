@@ -253,7 +253,7 @@ function Main({}: Props): JSX.Element {
 
   return (
     // <div className="relative h-screen bg-testBackground bg-cover">
-    <div
+    <main
       className={`relative min-h-screen ${
         globalSettingsData.picBackground
           ? `bg-${globalSettingsData.defaultImage}`
@@ -309,7 +309,7 @@ function Main({}: Props): JSX.Element {
         upperVisState={upperVisState}
         setTabType={setTabType}
       />
-    </div>
+    </main>
   );
 }
 

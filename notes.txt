@@ -523,6 +523,7 @@ DONE 430. 5 globalSettings upperRight svg without border DONE
 DONE 430.5  declutter globalSettings DONE
 DONE 431. noteSVG position DONE
 DONE 432. no uiCompmementary color for black DONE
+DONE 433. test with Lighthouse (acccessibility improved, with exception to tabIndices, performance - for backend) DONE
 DONE 434. Settings -> make it controlable by keyboard DONE
 DONE 435. seperate types for different actions DONE
 DONE 438. clean unused deps ("@reach/rect" use before for measuring elements) DONE
@@ -571,7 +572,6 @@ DONE 470. change excessive if statements (columns...) to RegEx DONE
 
 341. bookmark_lowerUI -> divide function to new & edit
 
-433. test with Lighthouse
 436. right scroll flickering when disappearing problem?
 
 446. FAQ note
