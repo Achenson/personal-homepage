@@ -12,7 +12,7 @@ import { globalSettingsState, focusedTabState } from "../../state/defaultSetting
 import {
   SingleBookmarkData,
   TabVisAction,
-  VisState,
+  TabVisState,
   UpperVisState,
   UpperVisAction,
 } from "../../utils/interfaces";
@@ -34,7 +34,7 @@ interface Props {
   >;
   colNumber: number;
   tabID: string | number;
-  tabVisState: VisState;
+  tabVisState: TabVisState;
   upperVisState: UpperVisState;
   tabVisDispatch: React.Dispatch<TabVisAction>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;

@@ -582,6 +582,7 @@ DONE 470. change excessive if statements (columns...) to RegEx DONE
 465. explanation how the EyeOff works somewhere
 467. unify ColorsToChoose_DefaultAndColumn and ColorsToChoose_Tab+
 472. app title instead of react App
+473. react context for upperVis & tabVis?
 
 
 tailwind 2.0.2

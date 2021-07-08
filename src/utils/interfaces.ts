@@ -53,7 +53,7 @@ export interface UpperVisState {
 }
 
 // for Tab
-export interface VisState {
+export interface TabVisState {
   editTabVis: boolean;
   colorsVis: boolean;
   // tabContentVis: boolean;

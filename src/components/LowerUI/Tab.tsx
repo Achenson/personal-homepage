@@ -44,7 +44,7 @@ import {
   TabVisAction,
   SingleTabData,
   UpperVisAction,
-  VisState,
+  TabVisState,
   UpperVisState,
 } from "../../utils/interfaces";
 import { current } from "immer";
@@ -146,7 +146,7 @@ Props): JSX.Element {
   // let tabIndex: number = 0;
   //   tabIndex = tabsData.indexOf(currentTab);
 
-  const initVisState: VisState = {
+  const initVisState: TabVisState = {
     // newBookmarkVis: false,
     editTabVis: false,
     colorsVis: false,
@@ -160,7 +160,7 @@ Props): JSX.Element {
   // after clicking current Tab or its editables, tabOpenedData will be set to current tab's tabID
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
-  function visReducer(state: VisState, action: TabVisAction) {
+  function tabVisReducer(state: TabVisState, action: TabVisAction) {
     switch (action.type) {
       case "COLORS_SETTINGS_TOGGLE":
         if (!state.colorsVis) {
@@ -331,7 +331,7 @@ Props): JSX.Element {
     }
   }, [focusedTabData]);
 
-  const [tabVisState, tabVisDispatch] = useReducer(visReducer, initVisState);
+  const [tabVisState, tabVisDispatch] = useReducer(tabVisReducer, initVisState);
 
   useEffect(() => {
     if (tabOpenedData !== tabID) {
