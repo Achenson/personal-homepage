@@ -76,9 +76,11 @@ function SingleColor_Background({
         setSelectedNumber(colorNumber)
       }}
       tabIndex={tabIndex}
+      aria-label={"Choose color"}
     >
       {/* {colorNumber} */}
       {/* {selectedNumber} */}
+     
     </button>
   );
 }

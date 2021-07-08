@@ -82,6 +82,7 @@ function SingleColor_Tab({
       }}
 
       tabIndex={tabIndex}
+      aria-label={"Choose color"}
     ></button>
   );
 }

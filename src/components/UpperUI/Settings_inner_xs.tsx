@@ -34,6 +34,7 @@ function Settings_inner_xs({
 
           upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
         }}
+
       >
         <PhotographSVG
           className={`h-full w-full transition-colors duration-75 
@@ -44,6 +45,7 @@ function Settings_inner_xs({
             }
             `}
           // style={{ marginLeft: "-5px" }}
+          aria-label={"Background mode"}
         />
       </button>
 
@@ -55,6 +57,7 @@ function Settings_inner_xs({
           upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
           // setColorsVis((b) => !b);
         }}
+        aria-label={"Default tab colors"}
       >
         <ColorSVG
           className={`h-full w-full  transition-colors duration-75 
@@ -77,6 +80,7 @@ function Settings_inner_xs({
           // setCloseAllTabsData(true);
           upperVisDispatch({ type: "SETTINGS_TOGGLE" });
         }}
+        aria-label={"Global settings"}
       >
         <SettingsSVG
           className={`h-full w-full transition-colors duration-75 

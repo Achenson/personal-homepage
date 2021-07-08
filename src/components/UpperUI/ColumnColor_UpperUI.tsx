@@ -138,6 +138,7 @@ function ColumnColor_UpperUI({
             }`,
           }}
           tabIndex={tabIndex}
+          aria-label={"Column color menu"}
         ></button>
       ) : // <div
       //   className={`relative overflow-hidden h-4 w-8 bg-white ${borderStyle()} border-black`}

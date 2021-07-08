@@ -557,7 +557,7 @@ DONE 466. Close Default Tab Colors by Escape DONE
 DONE 468. visDispatch rename to tabVisDispatch DONE
 DONE 469. close tabColors when clicking color in colors settings (should be same as in globalSettings) DONE
 DONE 470. change excessive if statements (columns...) to RegEx DONE
-XX 471. enums instead of literal types? XX 
+
 
 
 1. tailwind - purgecss at the end of the project

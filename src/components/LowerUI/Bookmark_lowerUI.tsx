@@ -622,6 +622,7 @@ Props): JSX.Element {
                   e.preventDefault();
                   saveFunc();
                 }}
+                aria-label={"Save"}
               >
                 <SaveSVG
                   className={`h-5 w-5 fill-current text-black transition-colors duration-75 ${
@@ -646,6 +647,7 @@ Props): JSX.Element {
                     tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
                   }
                 }}
+                aria-label={"Close"}
               >
                 <CancelSVG className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75" />
               </button>
@@ -820,6 +822,7 @@ Props): JSX.Element {
                   e.preventDefault();
                   saveFunc();
                 }}
+                aria-label={"Save"}
               >
                 <SaveSVG
                   className={`h-5 w-5 fill-current text-black transition-colors duration-75 ${
@@ -845,6 +848,7 @@ Props): JSX.Element {
                     tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
                   }
                 }}
+                aria-label={"Close"}
               >
                 <CancelSVG className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75" />
               </button>

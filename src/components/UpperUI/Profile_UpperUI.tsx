@@ -76,11 +76,10 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                 onClick={() => {
                   upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 }}
+                aria-label={"Close"}
               >
                 <CancelSVG
-                  className="h-5 w-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900
-              
-              "
+                  className="h-5 w-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"
                 />
               </button>
             </div>

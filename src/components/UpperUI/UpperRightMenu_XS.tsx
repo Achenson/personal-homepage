@@ -60,6 +60,7 @@ function UpperRightMenu({
             }}
             tabIndex={7}
             // disabled={areButtonsDisabled()}
+            aria-label={"New folder"}
           >
             <FolderSVG
               className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -78,6 +79,7 @@ function UpperRightMenu({
             }}
             tabIndex={8}
             // disabled={areButtonsDisabled()}
+            aria-label={"New note"}
           >
             <NoteSVG
               className={`h-6 w-6 cursor-pointer fill-current transition-colors duration-75 text-black hover:text-${uiColorData}`}
@@ -96,6 +98,7 @@ function UpperRightMenu({
             }}
             tabIndex={9}
             // disabled={areButtonsDisabled()}
+            aria-label={"New rss"}
           >
             <AddRssSVG
               className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -124,6 +127,7 @@ function UpperRightMenu({
           }}
           tabIndex={10}
           // disabled={areButtonsDisabled()}
+          aria-label={"New bookmark"}
         >
           <BookmarkSVG
             className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -140,6 +144,7 @@ function UpperRightMenu({
           }}
           tabIndex={11}
           // disabled={areButtonsDisabled()}
+          aria-label={"New tab menu"}
         >
           <PlusSquareSVG
             className={`h-5 w-5 cursor-pointer transition-colors duration-75 fill-current hover:text-${uiColorData} ml-px`}
@@ -155,6 +160,7 @@ function UpperRightMenu({
           }}
           tabIndex={12}
           // disabled={areButtonsDisabled()}
+          aria-label={"Settings"}
         >
           <CogSVG
             className={`h-full w-full cursor-pointer transition-colors duration-75  hover:text-${uiColorData}`}
@@ -180,6 +186,7 @@ function UpperRightMenu({
               }}
               tabIndex={13}
               // disabled={areButtonsDisabled()}
+              aria-label={"Logout"}
             >
               <LogoutSVG
                 className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
@@ -196,6 +203,7 @@ function UpperRightMenu({
               }}
               tabIndex={13}
               // disabled={areButtonsDisabled()}
+              aria-label={"Login/register"}
             >
               <UserSVG
                 // -ml-1

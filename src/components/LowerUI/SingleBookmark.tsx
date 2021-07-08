@@ -132,6 +132,7 @@ function SingleBookmark({
                 upperVisDispatch({ type: "CLOSE_ALL" });
                 setBookmarkId(singleBookmarkData.id);
               }}
+              aria-label={"Edit bookmark"}
               // disabled={areButtonsDisabled()}
             >
               <PencilSmallSVG className="h-full w-full transition-colors duration-75 hover:text-black cursor-pointer" />
@@ -186,6 +187,7 @@ function SingleBookmark({
                 );
               }}
               // disabled={areButtonsDisabled()}
+              aria-label={"Delete bookmark"}
             >
               <TrashSmallSVG className="h-full w-full transition-colors duration-75 hover:text-black cursor-pointer" />
             </button>

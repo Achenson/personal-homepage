@@ -96,6 +96,7 @@ function BackgroundSettings_UpperUI({
                   // }
                   upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
                 }}
+                aria-label={"Close"}
               >
                 <CancelSVG className="h-full w-full fill-current text-gray-600 cursor-pointer hover:text-gray-900" />
               </button>
@@ -116,6 +117,7 @@ function BackgroundSettings_UpperUI({
                       });
                     }
                   }}
+                  aria-label={"Background image on"}
                 >
                   <span
                     className={`${
@@ -143,6 +145,7 @@ function BackgroundSettings_UpperUI({
                       });
                     }
                   }}
+                  aria-label={"Background image off"}
                 >
                   <span
                     className={`${
@@ -173,6 +176,7 @@ function BackgroundSettings_UpperUI({
                         });
                       }}
                       className="focus-1-offset"
+                      aria-label={"Background image one"}
                     >
                       <span
                         className={`text-${uiColorData} cursor-pointer hover:underline`}
@@ -190,6 +194,7 @@ function BackgroundSettings_UpperUI({
                         });
                       }}
                       className="focus-1-offset"
+                      aria-label={"Background image two"}
                     >
                       <span
                         className={`text-${uiColorData} cursor-pointer hover:underline`}
@@ -207,6 +212,7 @@ function BackgroundSettings_UpperUI({
                           defaultImage: "defaultBackground_3",
                         });
                       }}
+                      aria-label={"Background image three"}
                     >
                       <span
                         className={`text-${uiColorData} cursor-pointer hover:underline`}

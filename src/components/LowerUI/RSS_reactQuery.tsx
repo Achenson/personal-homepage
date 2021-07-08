@@ -265,6 +265,7 @@ function ReactQuery({ currentTab, tabID, upperVisState }: Props): JSX.Element {
             }
           }}
           // disabled={areButtonsDisabled()}
+          aria-label={"Previous page"}
         >
           <ArrowLeft
             className={`h-8 ${
@@ -282,6 +283,7 @@ function ReactQuery({ currentTab, tabID, upperVisState }: Props): JSX.Element {
               setPageNumber(pageNumber + 1);
             }
           }}
+          aria-label={"Next page"}
           // disabled={areButtonsDisabled()}
         >
           <ArrowRight

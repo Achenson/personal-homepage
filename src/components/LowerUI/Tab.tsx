@@ -549,6 +549,7 @@ Props): JSX.Element {
             onFocus={() => {
               setFocusedTabData(tabID);
             }}
+            aria-label={"Tab open/close"}
           >
             <p
               className={`truncate ${
@@ -595,6 +596,7 @@ Props): JSX.Element {
                 tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
                 upperVisDispatch({ type: "CLOSE_ALL" });
               }}
+              aria-label={"Add new bookmark"}
               // disabled={areButtonsDisabled()}
             >
               <PlusSVG
@@ -619,6 +621,7 @@ Props): JSX.Element {
               tabVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
               upperVisDispatch({ type: "CLOSE_ALL" });
             }}
+            aria-label={"Tab color menu"}
           >
             <ColorSmallSVG
               className={`h-full w-full transition-colors duration-75 hover:${hoverText(
@@ -641,6 +644,7 @@ Props): JSX.Element {
               upperVisDispatch({ type: "CLOSE_ALL" });
             }}
             // disabled={areButtonsDisabled()}
+            aria-label={"Edit tab"}
           >
             <PencilSmallSVG
               className={`h-full -ml-px transition-colors duration-75 hover:${hoverText(

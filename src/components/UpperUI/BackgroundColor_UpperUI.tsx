@@ -75,6 +75,7 @@ function BackgroundColor_upperUI({
           upperVisDispatch({ type: "COLORS_BACKGROUND_TOGGLE" });
         }}
         tabIndex={5}
+        aria-label={"Background color menu"}
       >
         <DocumentSVG
           // className={`h-7 bg-${calcIconBackground(backgroundColorData)} opacity-80 border border-black rounded-lg cursor-pointer fill-current text-${backgroundColorData} hover:border-gray-500`}

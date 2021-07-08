@@ -557,6 +557,7 @@ Props): JSX.Element {
                   setWasTabOpenClicked(true);
                   setSelectablesListVis(false);
                 }}
+                aria-label={"Disable lock as opened be default"}
               >
                 <LockClosedSVG className="text-gray-700 transition-colors duration-75 hover:text-black cursor-pointer" />
               </button>
@@ -568,6 +569,7 @@ Props): JSX.Element {
                   setWasTabOpenClicked(true);
                   setSelectablesListVis(false);
                 }}
+                aria-label={"Lock as opened by default"}
               >
                 <LockOpenSVG className="h-6 w-6 text-gray-700 transition-colors duration-75 hover:text-black cursor-pointer" />
               </button>
@@ -617,6 +619,7 @@ Props): JSX.Element {
                   }
                 });
               }}
+              aria-label={"Delete tab"}
             >
               <TrashSVG className="h-6 w-6 text-gray-500 transition-colors duration-75 hover:text-black cursor-pointer" />
             </button>
@@ -638,6 +641,7 @@ Props): JSX.Element {
                   ? "text-gray-900 hover:text-green-600 cursor-pointer"
                   : "text-blueGray-400 cursor-default"
               }`}
+              aria-label={"Save"}
             />
           </button>
 
@@ -648,6 +652,7 @@ Props): JSX.Element {
               // setEditTabVis((b) => !b);
               tabVisDispatch({ type: "EDIT_TOGGLE" });
             }}
+            aria-label={"Close"}
           >
             <CancelSVG className="h-5 w-5 fill-current text-gray-900 hover:text-red-600 cursor-pointer transition-colors duration-75" />
           </button>

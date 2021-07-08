@@ -186,6 +186,14 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       4: "IV",
     };
 
+    let colsNumberingForAria = {
+      1: "First",
+      2: "Second",
+      3: "Third",
+      4: "Fourth",
+    };
+
+
     return arrOfColsNumbers.map((el, i) => {
       return (
         <div className="flex items-center ml-2 justify-end w-full" key={i}>
@@ -196,6 +204,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               setTabColumnInput(el);
               setSelectablesListVis(false);
             }}
+            aria-label={`${colsNumberingForAria[el]} column`}
           >
             <div
               className={`h-4 w-4  cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
@@ -665,6 +674,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
                 saveFunc();
               }}
+            aria-label={"Save"}
             >
               <SaveSVG className="h-5 w-5 fill-current text-black mr-6 hover:text-green-600 cursor-pointer transition-colors duration-75" />
             </button>
@@ -676,6 +686,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
                 // setNewTabVis((b) => !b);
                 upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               }}
+              aria-label={"Close"}
             >
               <CancelSVG className="h-5 w-5 fill-current text-black hover:text-red-600 cursor-pointer transition-colors duration-75" />
             </button>

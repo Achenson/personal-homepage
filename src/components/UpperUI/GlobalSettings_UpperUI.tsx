@@ -125,6 +125,7 @@ function GlobalSettings_UpperUI({
                 onClick={() => {
                   upperVisDispatch({ type: "SETTINGS_TOGGLE" });
                 }}
+                aria-label={"Close"}
               >
                 <CancelSVG className="h-full w-full fill-current text-gray-600 cursor-pointer hover:text-gray-900" />
               </button>
@@ -147,6 +148,7 @@ function GlobalSettings_UpperUI({
                     oneColorForAllCols: !globalSettingsData.oneColorForAllCols,
                   });
                 }}
+                aria-label={"One color for all columns"}
               ></button>
             </div>
             <div className="flex justify-between items-center mb-2 mt-2">
@@ -166,6 +168,7 @@ function GlobalSettings_UpperUI({
                     limitColGrowth: !globalSettingsData.limitColGrowth,
                   });
                 }}
+                aria-label={"Limit column width growth"}
               ></button>
             </div>
 
@@ -183,6 +186,7 @@ function GlobalSettings_UpperUI({
                     hideNonDeletable: !globalSettingsData.hideNonDeletable,
                   });
                 }}
+                aria-label={"Hide folder containing all bookmarks"}
               ></button>
             </div>
 
@@ -211,7 +215,8 @@ function GlobalSettings_UpperUI({
 
                         setTabOpenedData(null);
                       }}
-                    />
+                      aria-label={"RSS description on by default"}
+                    ></button>
                     <span className="ml-1 ">Description</span>
                   </div>
 
@@ -233,7 +238,8 @@ function GlobalSettings_UpperUI({
 
                         setTabOpenedData(null);
                       }}
-                    />
+                      aria-label={"RSS date on by default"}
+                    ></button>
                     <span className="ml-1">Date</span>
                   </div>
                 </div>

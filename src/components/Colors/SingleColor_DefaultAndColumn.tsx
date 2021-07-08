@@ -210,6 +210,7 @@ function SingleColor_DefaultAndColumn({
         setSelectedNumber(colorNumber);
       }}
       tabIndex={tabIndex}
+      aria-label={"Choose color"}
     ></button>
   );
 }

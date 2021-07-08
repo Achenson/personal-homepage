@@ -135,6 +135,7 @@ function ColorsSettings_UpperUI({
                   upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
                 }}
                 className="h-5 w-5 focus-2-offset-dark"
+                aria-label={"Close"}
               >
                 <CancelSVG className="h-full w-full fill-current text-gray-600 cursor-pointer hover:text-gray-900" />
               </button>
@@ -164,6 +165,7 @@ function ColorsSettings_UpperUI({
                 className={`h-4 w-8 bg-${folderColorData} cursor-pointer ${
                   foldersSelected ? "border-2" : "border"
                 } border-black hover:border-gray-500 focus-1-offset-dark`}
+                aria-label={"Default folders color menu"}
               ></button>
             </div>
             <div className="flex justify-between items-center mb-2 mt-2">
@@ -189,6 +191,7 @@ function ColorsSettings_UpperUI({
                 className={`h-4 w-8 bg-${noteColorData} cursor-pointer ${
                   notesSelected ? "border-2" : "border"
                 } border-black hover:border-gray-500 focus-1-offset-dark`}
+                aria-label={"Default notes color menu"}
               ></button>
             </div>
             <div className="flex justify-between items-center mb-2 mt-2">
@@ -214,6 +217,7 @@ function ColorsSettings_UpperUI({
                 className={`h-4 w-8 bg-${rssColorData} cursor-pointer ${
                   rssSelected ? "border-2" : "border"
                 } border-black hover:border-gray-500 focus-1-offset-dark`}
+                aria-label={"Default RSS color menu"}
               ></button>
             </div>
 
@@ -231,6 +235,7 @@ function ColorsSettings_UpperUI({
                   setResetColorsData(true);
                 }}
                 className="focus-1-offset"
+                aria-label={"Reset colors to default"}
               >
                 <span
                   className={`text-red-600 hover:underline cursor-pointer
