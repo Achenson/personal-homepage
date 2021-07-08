@@ -110,7 +110,7 @@ export const tabColorsConcat: string[] = concatColors(tabColors);
 function concatColors(tabColors: string[][]): string[] {
   let concatArr: string[] = [];
 
-  tabColors.map((el, i) => {
+  tabColors.forEach((el, i) => {
     concatArr.push(...tabColors[i]);
   });
 
