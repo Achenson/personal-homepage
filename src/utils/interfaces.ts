@@ -60,6 +60,7 @@ export interface TabVisState {
   newBookmarkVis: boolean;
   editBookmarkVis: null | string | number;
   touchScreenModeOn: boolean;
+ 
 }
 
 interface UpperVisAction_noPayload {

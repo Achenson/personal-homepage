@@ -8,7 +8,7 @@ import SingleColor_Tab from "./SingleColor_Tab";
 import { tabColors, tabColorsConcat } from "../../utils/colors_tab";
 // import {columnColors} from "../../utils/columnColors";
 import { TabVisAction } from "../../utils/interfaces";
-import TabContext from "../../utils/tabContext"
+import {useTabContext} from "../../utils/tabContext"
 
 import {
   folderColorState,
@@ -48,8 +48,9 @@ Props): JSX.Element {
 
   const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
 
-  // @ts-ignore
-  const tabContext = useContext(TabContext)
+  
+  // const tabContext = useContext(TabContext)
+  const tabContext = useTabContext()
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -62,7 +63,7 @@ Props): JSX.Element {
   function handleKeyDown(event: KeyboardEvent) {
     if (event.code === "Escape") {
       // tabVisDispatch({ type: "COLORS_CLOSE" });
-      // @ts-ignore
+    
       tabContext.tabVisDispatch({type: "COLORS_CLOSE"})
     }
   }

@@ -40,7 +40,7 @@ import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "../../utils/itemsDnd";
 
-import TabContext from "../../utils/tabContext";
+import {TabContext} from "../../utils/tabContext";
 
 import {
   TabVisAction,
@@ -48,6 +48,7 @@ import {
   UpperVisAction,
   TabVisState,
   UpperVisState,
+  
 } from "../../utils/interfaces";
 import { current } from "immer";
 
@@ -158,13 +159,14 @@ Props): JSX.Element {
     newBookmarkVis: false,
     editBookmarkVis: null,
     touchScreenModeOn: false,
+    // tabContentVis: false
   };
 
   //  if tabOpenedData is not equall to tabID, editables (eg. tabEdit) will not render & useEffect will close all editables
   // after clicking current Tab or its editables, tabOpenedData will be set to current tab's tabID
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
-  function tabVisReducer(state: TabVisState, action: TabVisAction) {
+  function tabVisReducer(state: TabVisState, action: TabVisAction): TabVisState {
     switch (action.type) {
       case "COLORS_SETTINGS_TOGGLE":
         if (!state.colorsVis) {
@@ -257,7 +259,7 @@ Props): JSX.Element {
           colorsVis: false,
           editTabVis: false,
           newBookmarkVis: false,
-          tabContentVis: true,
+          // tabContentVis: true,
           editBookmarkVis: null,
         };
 
