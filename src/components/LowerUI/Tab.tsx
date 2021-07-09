@@ -333,6 +333,13 @@ Props): JSX.Element {
 
   const [tabVisState, tabVisDispatch] = useReducer(tabVisReducer, initVisState);
 
+  let tabContextValue = {tabVisState, tabVisDispatch}
+
+  const TabContext = React.createContext(tabContextValue);
+
+  // const TabStateContext = React.createContext(tabVisState);
+  // const TabDispatchContext = React.createContext(tabVisDispatch);
+
   useEffect(() => {
     if (tabOpenedData !== tabID) {
       tabVisDispatch({ type: "TAB_EDITABLES_CLOSE" });
@@ -489,189 +496,192 @@ Props): JSX.Element {
   }
 
   return (
-    <div
-      className={`relative ${
-        globalSettingsData.hideNonDeletable &&
-        // (!(currentTab as SingleTabData).deletable as boolean)
-        !tabIsDeletable
-          ? "hidden"
-          : ""
-      }`}
-
-      // ref={reachRef}
-    >
+    <TabContext.Provider value={tabContextValue}>
       <div
-        ref={drag}
-        className={`pl-0 h-8 pr-1 bg-${
-          // tabColor ? tabColor : finalTabColor
-          finalTabColor
-        } ${textOrIconColor(
-          finalTabColor,
-          "text"
-        )} border border-t-0 border-r-0 border-l-0 border-gray-700 border-opacity-25 flex justify-between`}
-        style={{
-          boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)",
-          paddingTop: "2px",
-        }}
-        onTouchStart={() => {
-          setTimeout(() => {
-            tabVisDispatch({ type: "TOUCH_SCREEN_MODE_ON" });
-            // setTouchScreenMode(true);
-          }, 200);
-        }}
-        // old style
+        className={`relative ${
+          globalSettingsData.hideNonDeletable &&
+          // (!(currentTab as SingleTabData).deletable as boolean)
+          !tabIsDeletable
+            ? "hidden"
+            : ""
+        }`}
 
-        // )} border border-t-0 border-r-0 border-l-0 border-gray-400 flex justify-between`}
-        // style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)"}}
-
-        onMouseEnter={() => {
-          setMouseOverTab(true);
-        }}
-        onMouseLeave={() => {
-          // setIconsVis(false);
-          setMouseOverTab(false);
-        }}
+        // ref={reachRef}
       >
         <div
-          className="pl-1 w-full h-7 truncate cursor-pointer"
-          onClick={() => {
-            tabVisDispatch({ type: "TAB_CONTENT_TOGGLE" });
-            upperVisDispatch({ type: "CLOSE_ALL" });
+          ref={drag}
+          className={`pl-0 h-8 pr-1 bg-${
+            // tabColor ? tabColor : finalTabColor
+            finalTabColor
+          } ${textOrIconColor(
+            finalTabColor,
+            "text"
+          )} border border-t-0 border-r-0 border-l-0 border-gray-700 border-opacity-25 flex justify-between`}
+          style={{
+            boxShadow: "0px -1px inset rgba(0, 0, 0, 0.05)",
+            paddingTop: "2px",
+          }}
+          onTouchStart={() => {
+            setTimeout(() => {
+              tabVisDispatch({ type: "TOUCH_SCREEN_MODE_ON" });
+              // setTouchScreenMode(true);
+            }, 200);
+          }}
+          // old style
+
+          // )} border border-t-0 border-r-0 border-l-0 border-gray-400 flex justify-between`}
+          // style={{boxShadow: "0px -1px inset rgba(0, 0, 0, 0.3)"}}
+
+          onMouseEnter={() => {
+            setMouseOverTab(true);
+          }}
+          onMouseLeave={() => {
+            // setIconsVis(false);
+            setMouseOverTab(false);
           }}
         >
-          <button
-            className={`mt-px flex focus:outline-none focus-visible:ring-1 ring-${textOrIconColor(
-              finalTabColor,
-              "text"
-            ).slice(5)} ring-opacity-40`}
-            style={{ height: "23px" }}
-            // disabled={areButtonsDisabled()}
-            onFocus={() => {
-              setFocusedTabData(tabID);
-            }}
-            aria-label={"Tab open/close"}
-          >
-            <p
-              className={`truncate ${
-                tabID === "ALL_TAGS" ? "tracking-wider" : ""
-              }`}
-            >
-              {tabTitle}
-            </p>
-          </button>
-        </div>
-
-        <div
-          className={`pt-1 flex ${
-            iconsVis || tabVisState.touchScreenModeOn ? "visible" : "invisible"
-          } fill-current ${textOrIconColor(finalTabColor, "icon")} `}
-        >
           <div
-            className={`w-6 -mt-1 pt-1 cursor-move `}
-            style={{ height: "29px" }}
-            onMouseEnter={() => {
-              setCrossVis(false);
-            }}
-            onMouseLeave={() => {
-              setCrossVis(true);
+            className="pl-1 w-full h-7 truncate cursor-pointer"
+            onClick={() => {
+              tabVisDispatch({ type: "TAB_CONTENT_TOGGLE" });
+              upperVisDispatch({ type: "CLOSE_ALL" });
             }}
           >
-            {crossVis && (
-              <CrossArrowsSVG
-                // className="h-6  hover:text-black hover:invisible"
-                className="h-6"
-                style={{ marginTop: "-2px" }}
-              />
-            )}
-          </div>
-
-          {tabType === "folder" && (
             <button
-              className={`h-8 focus:outline-none focus-visible:ring-2 ring-${textOrIconColor(
+              className={`mt-px flex focus:outline-none focus-visible:ring-1 ring-${textOrIconColor(
                 finalTabColor,
                 "text"
-              ).slice(5)} ring-opacity-40 ring-inset   `}
-              style={{ marginTop: "-6px" }}
+              ).slice(5)} ring-opacity-40`}
+              style={{ height: "23px" }}
+              // disabled={areButtonsDisabled()}
+              onFocus={() => {
+                setFocusedTabData(tabID);
+              }}
+              aria-label={"Tab open/close"}
+            >
+              <p
+                className={`truncate ${
+                  tabID === "ALL_TAGS" ? "tracking-wider" : ""
+                }`}
+              >
+                {tabTitle}
+              </p>
+            </button>
+          </div>
+
+          <div
+            className={`pt-1 flex ${
+              iconsVis || tabVisState.touchScreenModeOn
+                ? "visible"
+                : "invisible"
+            } fill-current ${textOrIconColor(finalTabColor, "icon")} `}
+          >
+            <div
+              className={`w-6 -mt-1 pt-1 cursor-move `}
+              style={{ height: "29px" }}
+              onMouseEnter={() => {
+                setCrossVis(false);
+              }}
+              onMouseLeave={() => {
+                setCrossVis(true);
+              }}
+            >
+              {crossVis && (
+                <CrossArrowsSVG
+                  // className="h-6  hover:text-black hover:invisible"
+                  className="h-6"
+                  style={{ marginTop: "-2px" }}
+                />
+              )}
+            </div>
+
+            {tabType === "folder" && (
+              <button
+                className={`h-8 focus:outline-none focus-visible:ring-2 ring-${textOrIconColor(
+                  finalTabColor,
+                  "text"
+                ).slice(5)} ring-opacity-40 ring-inset   `}
+                style={{ marginTop: "-6px" }}
+                onClick={() => {
+                  tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+                  upperVisDispatch({ type: "CLOSE_ALL" });
+                }}
+                aria-label={"Add new bookmark"}
+                // disabled={areButtonsDisabled()}
+              >
+                <PlusSVG
+                  className={`h-full transition-colors duration-75 hover:${hoverText(
+                    finalTabColor
+                  )} cursor-pointer`}
+                />
+              </button>
+            )}
+
+            <button
+              className={`h-5 w-5 mr-2 focus:outline-none focus-visible:ring-2 ring-${textOrIconColor(
+                finalTabColor,
+                "text"
+              ).slice(5)} ring-opacity-40`}
+              style={{
+                marginLeft: `${
+                  tabType === "note" || tabType === "rss" ? "7px" : ""
+                }`,
+              }}
               onClick={() => {
-                tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+                tabVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
                 upperVisDispatch({ type: "CLOSE_ALL" });
               }}
-              aria-label={"Add new bookmark"}
-              // disabled={areButtonsDisabled()}
+              aria-label={"Tab color menu"}
             >
-              <PlusSVG
-                className={`h-full transition-colors duration-75 hover:${hoverText(
+              <ColorSmallSVG
+                className={`h-full w-full transition-colors duration-75 hover:${hoverText(
                   finalTabColor
-                )} cursor-pointer`}
+                )} cursor-pointer `}
+                // ${
+                //   tabType === "note" || tabType === "rss" ? "ml-1" : ""
+                // }
+                // `}
               />
             </button>
+
+            <button
+              className={`h-5 focus:outline-none focus-visible:ring-2 ring-${textOrIconColor(
+                finalTabColor,
+                "text"
+              ).slice(5)} ring-opacity-40 `}
+              onClick={() => {
+                tabVisDispatch({ type: "EDIT_TOGGLE" });
+                upperVisDispatch({ type: "CLOSE_ALL" });
+              }}
+              // disabled={areButtonsDisabled()}
+              aria-label={"Edit tab"}
+            >
+              <PencilSmallSVG
+                className={`h-full -ml-px transition-colors duration-75 hover:${hoverText(
+                  finalTabColor
+                )} cursor-pointer`}
+                // }}
+              />
+            </button>
+          </div>
+        </div>
+
+        {tabVisState.colorsVis &&
+          tabOpenedData === tabID &&
+          upperVisState.tabEditablesOpenable && (
+            <ColorsToChoose_Tab
+              setIconsVis={setIconsVis}
+              tabID={tabID}
+              tabColor={tabColor}
+              tabType={tabType}
+              tabVisDispatch={tabVisDispatch}
+              // top={rect?.top as number}
+              // left={rect?.left as number}
+              // tabWidth={rect?.width as number}
+            />
           )}
 
-          <button
-            className={`h-5 w-5 mr-2 focus:outline-none focus-visible:ring-2 ring-${textOrIconColor(
-              finalTabColor,
-              "text"
-            ).slice(5)} ring-opacity-40`}
-            style={{
-              marginLeft: `${
-                tabType === "note" || tabType === "rss" ? "7px" : ""
-              }`,
-            }}
-            onClick={() => {
-              tabVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
-              upperVisDispatch({ type: "CLOSE_ALL" });
-            }}
-            aria-label={"Tab color menu"}
-          >
-            <ColorSmallSVG
-              className={`h-full w-full transition-colors duration-75 hover:${hoverText(
-                finalTabColor
-              )} cursor-pointer `}
-              // ${
-              //   tabType === "note" || tabType === "rss" ? "ml-1" : ""
-              // }
-              // `}
-            />
-          </button>
-
-          <button
-            className={`h-5 focus:outline-none focus-visible:ring-2 ring-${textOrIconColor(
-              finalTabColor,
-              "text"
-            ).slice(5)} ring-opacity-40 `}
-            onClick={() => {
-              tabVisDispatch({ type: "EDIT_TOGGLE" });
-              upperVisDispatch({ type: "CLOSE_ALL" });
-            }}
-            // disabled={areButtonsDisabled()}
-            aria-label={"Edit tab"}
-          >
-            <PencilSmallSVG
-              className={`h-full -ml-px transition-colors duration-75 hover:${hoverText(
-                finalTabColor
-              )} cursor-pointer`}
-              // }}
-            />
-          </button>
-        </div>
-      </div>
-
-      {tabVisState.colorsVis &&
-        tabOpenedData === tabID &&
-        upperVisState.tabEditablesOpenable && (
-          <ColorsToChoose_Tab
-            setIconsVis={setIconsVis}
-            tabID={tabID}
-            tabColor={tabColor}
-            tabType={tabType}
-            tabVisDispatch={tabVisDispatch}
-            // top={rect?.top as number}
-            // left={rect?.left as number}
-            // tabWidth={rect?.width as number}
-          />
-        )}
-
-      {/* {tabVisState.editBookmarkVis &&
+        {/* {tabVisState.editBookmarkVis &&
         tabOpenedData === tabID &&
         upperVisState.tabEditablesOpenable && (
           <Bookmark_newAndEdit
@@ -686,85 +696,86 @@ Props): JSX.Element {
           />
         )} */}
 
-      {tabVisState.newBookmarkVis &&
-        tabOpenedData === tabID &&
-        upperVisState.tabEditablesOpenable && (
-          // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
+        {tabVisState.newBookmarkVis &&
+          tabOpenedData === tabID &&
+          upperVisState.tabEditablesOpenable && (
+            // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
 
-          <Bookmark_newAndEdit
-            // setBookmarkVis={setNewBookmarkVis}
-            bookmarkComponentType={"new_lowerUI"}
-            tabVisDispatch={tabVisDispatch}
-            colNumber={colNumber}
-            tabTitle={tabTitle as string}
-            // top={rect?.top as number}
-            // left={rect?.left as number}
-            // tabWidth={rect?.width as number}
-          />
+            <Bookmark_newAndEdit
+              // setBookmarkVis={setNewBookmarkVis}
+              bookmarkComponentType={"new_lowerUI"}
+              tabVisDispatch={tabVisDispatch}
+              colNumber={colNumber}
+              tabTitle={tabTitle as string}
+              // top={rect?.top as number}
+              // left={rect?.left as number}
+              // tabWidth={rect?.width as number}
+            />
+          )}
+
+        {tabVisState.editTabVis &&
+          tabOpenedData === tabID &&
+          upperVisState.tabEditablesOpenable && (
+            <EditTab_main
+              tabID={tabID}
+              tabType={tabType}
+              // setEditTabVis={setEditTabVis}
+              tabVisDispatch={tabVisDispatch}
+              currentTab={currentTab as SingleTabData}
+              // noteInput={noteInput}
+              // top={rect?.top as number}
+              // left={rect?.left as number}
+              // tabWidth={rect?.width as number}
+              setTabOpened_local={setTabOpened_local}
+            />
+          )}
+
+        {tabOpened_local && tabType === "folder" && (
+          <div>
+            {bookmarksData
+              .filter((el) => el.tags.indexOf(tabID) > -1)
+              .map((el, i) => {
+                return (
+                  <SingleBookmark
+                    // setEditBookmarkVis={setEditBookmarkVis}
+                    tabVisState={tabVisState}
+                    upperVisState={upperVisState}
+                    tabVisDispatch={tabVisDispatch}
+                    upperVisDispatch={upperVisDispatch}
+                    singleBookmarkData={el}
+                    // setEditSingleLinkData={setEditSingleBookmarkData}
+                    bookmarkId={el.id as string | number}
+                    colNumber={colNumber}
+                    setBookmarkId={setBookmarkId}
+                    key={i}
+                    tabID={tabID}
+                  />
+                );
+              })}
+
+            {/* <SingleLink setEditLinkVis={setEditBookmarkVis} /> */}
+          </div>
         )}
 
-      {tabVisState.editTabVis &&
-        tabOpenedData === tabID &&
-        upperVisState.tabEditablesOpenable && (
-          <EditTab_main
-            tabID={tabID}
-            tabType={tabType}
+        {tabOpened_local && tabType === "note" && (
+          <NoteInput
+            //  noteInput={noteInput}
+            currentTab={currentTab as SingleTabData}
             // setEditTabVis={setEditTabVis}
             tabVisDispatch={tabVisDispatch}
-            currentTab={currentTab as SingleTabData}
-            // noteInput={noteInput}
-            // top={rect?.top as number}
-            // left={rect?.left as number}
-            // tabWidth={rect?.width as number}
-            setTabOpened_local={setTabOpened_local}
+            upperVisState={upperVisState}
           />
         )}
 
-      {tabOpened_local && tabType === "folder" && (
-        <div>
-          {bookmarksData
-            .filter((el) => el.tags.indexOf(tabID) > -1)
-            .map((el, i) => {
-              return (
-                <SingleBookmark
-                  // setEditBookmarkVis={setEditBookmarkVis}
-                  tabVisState={tabVisState}
-                  upperVisState={upperVisState}
-                  tabVisDispatch={tabVisDispatch}
-                  upperVisDispatch={upperVisDispatch}
-                  singleBookmarkData={el}
-                  // setEditSingleLinkData={setEditSingleBookmarkData}
-                  bookmarkId={el.id as string | number}
-                  colNumber={colNumber}
-                  setBookmarkId={setBookmarkId}
-                  key={i}
-                  tabID={tabID}
-                />
-              );
-            })}
-
-          {/* <SingleLink setEditLinkVis={setEditBookmarkVis} /> */}
-        </div>
-      )}
-
-      {tabOpened_local && tabType === "note" && (
-        <NoteInput
-          //  noteInput={noteInput}
-          currentTab={currentTab as SingleTabData}
-          // setEditTabVis={setEditTabVis}
-          tabVisDispatch={tabVisDispatch}
-          upperVisState={upperVisState}
-        />
-      )}
-
-      {tabOpened_local && tabType === "rss" && (
-        <RSS_reactQuery
-          tabID={tabID}
-          currentTab={currentTab as SingleTabData}
-          upperVisState={upperVisState}
-        />
-      )}
-    </div>
+        {tabOpened_local && tabType === "rss" && (
+          <RSS_reactQuery
+            tabID={tabID}
+            currentTab={currentTab as SingleTabData}
+            upperVisState={upperVisState}
+          />
+        )}
+      </div>
+    </TabContext.Provider>
   );
 }
 
