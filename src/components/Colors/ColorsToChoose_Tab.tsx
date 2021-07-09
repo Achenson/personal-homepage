@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ReactDOM from "react-dom";
 
 import FocusLock from "react-focus-lock";
@@ -8,6 +8,7 @@ import SingleColor_Tab from "./SingleColor_Tab";
 import { tabColors, tabColorsConcat } from "../../utils/colors_tab";
 // import {columnColors} from "../../utils/columnColors";
 import { TabVisAction } from "../../utils/interfaces";
+import TabContext from "../../utils/tabContext"
 
 import {
   folderColorState,
@@ -20,7 +21,7 @@ interface Props {
   tabID: string | number;
   tabColor: string | null;
   tabType: "folder" | "note" | "rss";
-  tabVisDispatch: React.Dispatch<TabVisAction>;
+  // tabVisDispatch: React.Dispatch<TabVisAction>;
   // top: number;
   // left: number;
   // tabWidth: number;
@@ -31,7 +32,7 @@ function ColorsToChoose_Tab({
   tabID,
   tabColor,
   tabType,
-  tabVisDispatch,
+  // tabVisDispatch,
 }: // top,
 // left,
 // tabWidth,
@@ -47,6 +48,9 @@ Props): JSX.Element {
 
   const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
 
+  // @ts-ignore
+  const tabContext = useContext(TabContext)
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
 
@@ -57,7 +61,9 @@ Props): JSX.Element {
 
   function handleKeyDown(event: KeyboardEvent) {
     if (event.code === "Escape") {
-      tabVisDispatch({ type: "COLORS_CLOSE" });
+      // tabVisDispatch({ type: "COLORS_CLOSE" });
+      // @ts-ignore
+      tabContext.tabVisDispatch({type: "COLORS_CLOSE"})
     }
   }
 
