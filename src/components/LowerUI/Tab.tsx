@@ -723,18 +723,20 @@ Props): JSX.Element {
       {tabVisState.editTabVis &&
         tabOpenedData === tabID &&
         upperVisState.tabEditablesOpenable && (
-          <EditTab_main
-            tabID={tabID}
-            tabType={tabType}
-            // setEditTabVis={setEditTabVis}
-            tabVisDispatch={tabVisDispatch}
-            currentTab={currentTab as SingleTabData}
-            // noteInput={noteInput}
-            // top={rect?.top as number}
-            // left={rect?.left as number}
-            // tabWidth={rect?.width as number}
-            setTabOpened_local={setTabOpened_local}
-          />
+          <TabContext.Provider value={tabContextValue}>
+            <EditTab_main
+              tabID={tabID}
+              tabType={tabType}
+              // setEditTabVis={setEditTabVis}
+              // tabVisDispatch={tabVisDispatch}
+              currentTab={currentTab as SingleTabData}
+              // noteInput={noteInput}
+              // top={rect?.top as number}
+              // left={rect?.left as number}
+              // tabWidth={rect?.width as number}
+              setTabOpened_local={setTabOpened_local}
+            />
+          </TabContext.Provider>
         )}
 
       {tabOpened_local && tabType === "folder" && (
@@ -746,9 +748,9 @@ Props): JSX.Element {
                 return (
                   <SingleBookmark
                     // setEditBookmarkVis={setEditBookmarkVis}
-                    tabVisState={tabVisState}
                     upperVisState={upperVisState}
-                    tabVisDispatch={tabVisDispatch}
+                    // tabVisState={tabVisState}
+                    // tabVisDispatch={tabVisDispatch}
                     upperVisDispatch={upperVisDispatch}
                     singleBookmarkData={el}
                     // setEditSingleLinkData={setEditSingleBookmarkData}
@@ -767,13 +769,15 @@ Props): JSX.Element {
       )}
 
       {tabOpened_local && tabType === "note" && (
-        <NoteInput
-          //  noteInput={noteInput}
-          currentTab={currentTab as SingleTabData}
-          // setEditTabVis={setEditTabVis}
-          tabVisDispatch={tabVisDispatch}
-          upperVisState={upperVisState}
-        />
+        <TabContext.Provider value={tabContextValue}>
+          <NoteInput
+            //  noteInput={noteInput}
+            currentTab={currentTab as SingleTabData}
+            // setEditTabVis={setEditTabVis}
+            // tabVisDispatch={tabVisDispatch}
+            upperVisState={upperVisState}
+          />
+        </TabContext.Provider>
       )}
 
       {tabOpened_local && tabType === "rss" && (

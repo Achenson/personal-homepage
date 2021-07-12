@@ -21,6 +21,7 @@ import {
 } from "../../state/tabsAndBookmarks";
 
 import { rssSettingsState } from "../../state/defaultSettings";
+import {useTabContext} from "../../utils/tabContext"
 
 import { SingleTabData, TabVisAction } from "../../utils/interfaces";
 import { tabErrors } from "../../utils/errors";
@@ -31,7 +32,7 @@ import EditTab_RSS from "./EditTab_RSS";
 interface Props {
   tabType: "folder" | "note" | "rss";
   // setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
-  tabVisDispatch: React.Dispatch<TabVisAction>;
+  // tabVisDispatch: React.Dispatch<TabVisAction>;
   // noteInput: string | null;
   tabID: string | number;
   currentTab: SingleTabData;
@@ -52,7 +53,7 @@ const errorsAllFalse = {
 
 function EditTab({
   tabID,
-  tabVisDispatch,
+  // tabVisDispatch,
   tabType,
   currentTab,
 
@@ -65,6 +66,8 @@ Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
+
+  const tabContext = useTabContext()
 
   let firstFieldRef = useRef<HTMLInputElement>(null);
 
@@ -419,7 +422,8 @@ Props): JSX.Element {
     //    tabVisDispatch({ type: "EDIT_TOGGLE" });
     //   }
 
-    tabVisDispatch({ type: "EDIT_TOGGLE" });
+    // tabVisDispatch({ type: "EDIT_TOGGLE" });
+    tabContext.tabVisDispatch({type: "EDIT_TOGGLE"})
   }
 
   return (
@@ -604,7 +608,8 @@ Props): JSX.Element {
                 );
 
                 // setEditTabVis((b) => !b);
-                tabVisDispatch({ type: "EDIT_TOGGLE" });
+                // tabVisDispatch({ type: "EDIT_TOGGLE" });
+                tabContext.tabVisDispatch({type: "EDIT_TOGGLE"})
                 // removing deleted tab(tag) for bookmarks
                 bookmarksData.forEach((obj, i) => {
                   if (obj.tags.indexOf(tabTitle as string) > -1) {
@@ -650,7 +655,8 @@ Props): JSX.Element {
             onClick={(e) => {
               e.preventDefault();
               // setEditTabVis((b) => !b);
-              tabVisDispatch({ type: "EDIT_TOGGLE" });
+              // tabVisDispatch({ type: "EDIT_TOGGLE" });
+              tabContext.tabVisDispatch({type: "EDIT_TOGGLE"})
             }}
             aria-label={"Close"}
           >

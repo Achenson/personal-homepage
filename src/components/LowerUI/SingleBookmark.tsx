@@ -9,6 +9,8 @@ import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 import { bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
 import { globalSettingsState, focusedTabState } from "../../state/defaultSettings";
 
+import {useTabContext} from "../../utils/tabContext"
+
 import {
   SingleBookmarkData,
   TabVisAction,
@@ -34,9 +36,9 @@ interface Props {
   >;
   colNumber: number;
   tabID: string | number;
-  tabVisState: TabVisState;
+  // tabVisState: TabVisState;
   upperVisState: UpperVisState;
-  tabVisDispatch: React.Dispatch<TabVisAction>;
+  // tabVisDispatch: React.Dispatch<TabVisAction>;
   upperVisDispatch: React.Dispatch<UpperVisAction>;
   // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleBookmarkData>>;
 }
@@ -48,9 +50,9 @@ function SingleBookmark({
   bookmarkId,
   setBookmarkId,
   colNumber,
-  tabVisState,
+  // tabVisState,
   upperVisState,
-  tabVisDispatch,
+  // tabVisDispatch,
   upperVisDispatch,
   tabID,
 }: Props): JSX.Element {
@@ -59,6 +61,8 @@ function SingleBookmark({
     bookmarksAllTagsState.use();
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+  const tabContext = useTabContext()
 
   const [focusedTabData, setFocusedTabData] = focusedTabState.use();
 
@@ -85,7 +89,7 @@ function SingleBookmark({
       setFocusedTabData(null)
     }}
     >
-      {tabVisState.editBookmarkVis !== bookmarkId && (
+      {tabContext.tabVisState.editBookmarkVis !== bookmarkId && (
         <div
           className={`flex justify-between bg-gray-50 h-10 pt-2 border border-t-0 ${
             globalSettingsData.picBackground
@@ -125,10 +129,11 @@ function SingleBookmark({
               className="h-5 w-5 ml-1 focus-1-inset-darkGray"
               onClick={() => {
                 // setEditBookmarkVis((b) => !b);
-                tabVisDispatch({
-                  type: "EDIT_BOOKMARK_OPEN",
-                  payload: bookmarkId,
-                });
+                // tabVisDispatch({
+                //   type: "EDIT_BOOKMARK_OPEN",
+                //   payload: bookmarkId,
+                // });
+                tabContext.tabVisDispatch({type: "EDIT_BOOKMARK_OPEN", payload: bookmarkId})
                 upperVisDispatch({ type: "CLOSE_ALL" });
                 setBookmarkId(singleBookmarkData.id);
               }}
@@ -195,7 +200,7 @@ function SingleBookmark({
         </div>
       )}
 
-      {tabVisState.editBookmarkVis === bookmarkId && (
+      {tabContext.tabVisState.editBookmarkVis === bookmarkId && (
         <Bookmark_newAndEdit
           bookmarkComponentType="edit"
           // tabVisDispatch={tabVisDispatch}

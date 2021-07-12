@@ -1,21 +1,31 @@
 import React, { useEffect, useState } from "react";
 
 import { tabsDataState } from "../../state/tabsAndBookmarks";
-import { SingleTabData, TabVisAction, UpperVisState } from "../../utils/interfaces";
+import {
+  SingleTabData,
+  TabVisAction,
+  UpperVisState,
+} from "../../utils/interfaces";
 import { globalSettingsState } from "../../state/defaultSettings";
-
+import {useTabContext} from "../../utils/tabContext"
 
 interface Props {
   //  noteInput: string | null;
   // setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
-  tabVisDispatch: React.Dispatch<TabVisAction>;
+  // tabVisDispatch: React.Dispatch<TabVisAction>;
   currentTab: SingleTabData;
   upperVisState: UpperVisState;
 }
 
-function NoteInput({ tabVisDispatch, currentTab, upperVisState }: Props): JSX.Element {
+function NoteInput({
+  // tabVisDispatch,
+  currentTab,
+  upperVisState,
+}: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+  const tabContext = useTabContext()
 
   // let currentTab = tabsData.filter((obj) => obj.id === tabID);
   const [focusOnNote, setFocusOnNote] = useState(false);
@@ -34,11 +44,10 @@ function NoteInput({ tabVisDispatch, currentTab, upperVisState }: Props): JSX.El
       (event.code === "Enter" || event.code === "NumpadEnter") &&
       focusOnNote
     ) {
-      tabVisDispatch({ type: "EDIT_TOGGLE" });
+      // tabVisDispatch({ type: "EDIT_TOGGLE" });
+      tabContext.tabVisDispatch({type: "EDIT_TOGGLE"})
     }
   }
-
-
 
   return (
     <div
@@ -50,11 +59,14 @@ function NoteInput({ tabVisDispatch, currentTab, upperVisState }: Props): JSX.El
     >
       <div
         className={`p-2 rounded-md overflow-hidden border border-black border-opacity-10
-        focus:outline-none focus-visible:ring-2 ring-${globalSettingsData.picBackground ? "gray-50" : "gray-300"} focus:border-opacity-0`}
+        focus:outline-none focus-visible:ring-2 ring-${
+          globalSettingsData.picBackground ? "gray-50" : "gray-300"
+        } focus:border-opacity-0`}
         style={{ backgroundColor: "rgb(247, 243, 132)" }}
         onClick={() => {
           // setEditTabVis(true);
-          tabVisDispatch({ type: "EDIT_TOGGLE" });
+          // tabVisDispatch({ type: "EDIT_TOGGLE" });
+          tabContext.tabVisDispatch({type: "EDIT_TOGGLE"});
         }}
         // tabIndex={areButtonsDisabled() ? undefined : 0}
         tabIndex={0}
