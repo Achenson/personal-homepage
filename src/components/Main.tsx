@@ -19,6 +19,8 @@ import {
   TabVisAction,
 } from "../utils/interfaces";
 
+import { UpperUiContext } from "../utils/upperUiContext";
+
 interface Props {}
 
 let initUpperVisState: UpperVisState = {
@@ -161,6 +163,8 @@ function Main({}: Props): JSX.Element {
     initUpperVisState
   );
 
+  let upperUiValue = { upperVisState, upperVisDispatch };
+
   const [tabType, setTabType] = useState<"folder" | "note" | "rss">("folder");
 
   function dispatchTabAction(visDispatch: (value: TabVisAction) => void) {
@@ -253,63 +257,68 @@ function Main({}: Props): JSX.Element {
 
   return (
     // <div className="relative h-screen bg-testBackground bg-cover">
-    <main
-      className={`relative min-h-screen ${
-        globalSettingsData.picBackground
-          ? `bg-${globalSettingsData.defaultImage}`
-          : `bg-${backgroundColorData}`
-      } bg-cover bg-fixed`}
-      // style={{ paddingRight: `${paddingRight ? "17px" : ""}` }}
-      style={{ paddingRight: `${paddingRight ? `${scrollbarWidth}px` : ""}` }}
-      onScroll={(e) => {
-        e.preventDefault();
-        return;
-      }}
-    >
-      {upperVisState.newTabVis && (
-        <NewTab_UpperUI upperVisDispatch={upperVisDispatch} tabType={tabType} />
-      )}
-      {upperVisState.newBookmarkVis && (
-        <Bookmark_newAndEdit
-          upperVisDispatch={upperVisDispatch}
-          bookmarkComponentType={"new_upperUI"}
+    <UpperUiContext.Provider value={upperUiValue}>
+      <main
+        className={`relative min-h-screen ${
+          globalSettingsData.picBackground
+            ? `bg-${globalSettingsData.defaultImage}`
+            : `bg-${backgroundColorData}`
+        } bg-cover bg-fixed`}
+        // style={{ paddingRight: `${paddingRight ? "17px" : ""}` }}
+        style={{ paddingRight: `${paddingRight ? `${scrollbarWidth}px` : ""}` }}
+        onScroll={(e) => {
+          e.preventDefault();
+          return;
+        }}
+      >
+        {upperVisState.newTabVis && (
+          <NewTab_UpperUI
+            upperVisDispatch={upperVisDispatch}
+            tabType={tabType}
+          />
+        )}
+        {upperVisState.newBookmarkVis && (
+          <Bookmark_newAndEdit
+            // upperVisDispatch={upperVisDispatch}
+            bookmarkComponentType={"new_upperUI"}
+          />
+        )}
+        {upperVisState.backgroundSettingsVis && (
+          <Background_UpperUI
+            upperVisDispatch={upperVisDispatch}
+            upperVisState={upperVisState}
+          />
+        )}
+        {upperVisState.settingsVis && (
+          <Settings_UpperUI
+            upperVisDispatch={upperVisDispatch}
+            upperVisState={upperVisState}
+          />
+        )}
+
+        {upperVisState.colorsSettingsVis && (
+          <Colors_UpperUI
+            upperVisDispatch={upperVisDispatch}
+            upperVisState={upperVisState}
+          />
+        )}
+
+        {upperVisState.profileVis && (
+          <Profile_UpperUI upperVisDispatch={upperVisDispatch} />
+        )}
+
+        <UpperUI
+        // upperVisState={upperVisState}
+        // upperVisDispatch={upperVisDispatch}
+        // setTabType={setTabType}
         />
-      )}
-      {upperVisState.backgroundSettingsVis && (
-        <Background_UpperUI
+        <Grid
           upperVisDispatch={upperVisDispatch}
           upperVisState={upperVisState}
+          setTabType={setTabType}
         />
-      )}
-      {upperVisState.settingsVis && (
-        <Settings_UpperUI
-          upperVisDispatch={upperVisDispatch}
-          upperVisState={upperVisState}
-        />
-      )}
-
-      {upperVisState.colorsSettingsVis && (
-        <Colors_UpperUI
-          upperVisDispatch={upperVisDispatch}
-          upperVisState={upperVisState}
-        />
-      )}
-
-      {upperVisState.profileVis && (
-        <Profile_UpperUI upperVisDispatch={upperVisDispatch} />
-      )}
-
-      <UpperUI
-      // upperVisState={upperVisState}
-      // upperVisDispatch={upperVisDispatch}
-      // setTabType={setTabType}
-      />
-      <Grid
-        upperVisDispatch={upperVisDispatch}
-        upperVisState={upperVisState}
-        setTabType={setTabType}
-      />
-    </main>
+      </main>
+    </UpperUiContext.Provider>
   );
 }
 

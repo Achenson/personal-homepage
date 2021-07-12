@@ -18,6 +18,8 @@ import {
   bookmarksAllTagsState,
 } from "../../state/tabsAndBookmarks";
 
+import {useUpperUiContext} from "../../utils/upperUiContext"
+
 import { UpperVisAction } from "../../utils/interfaces";
 import { bookmarkErrors } from "../../utils/errors";
 import { handleKeyDown_inner } from "../../utils/func_handleKeyDown_inner";
@@ -38,7 +40,7 @@ interface Props {
   notesTitlesArr: string[];
   rssTitlesArr: string[];
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
 
   errors: {
     tagErrorVis: boolean;
@@ -91,7 +93,7 @@ function NewBookmark_UpperUI({
   setSelectablesListVis,
   notesTitlesArr,
   rssTitlesArr,
-  upperVisDispatch,
+  // upperVisDispatch,
   bookmarkComponentType,
 
   errors,
@@ -107,6 +109,8 @@ Props): JSX.Element {
   const [bookmarksAllTagsData, setBookmarksAllTagsData] =
     bookmarksAllTagsState.use();
   const [uiColorData, setUiColorData] = uiColorState.use();
+
+  const upperUiContext = useUpperUiContext()
 
   let selectablesRef = useRef<HTMLInputElement>(null);
   let firstFieldRef = useRef<HTMLInputElement>(null);
@@ -321,7 +325,8 @@ Props): JSX.Element {
 
     // 1. adding bookmark  2. adding folder/s if some tags do not correspond to existing folders
     addBookmark();
-    upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+    // upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+    upperUiContext.upperVisDispatch({type: "NEW_BOOKMARK_TOGGLE"})
   }
 
   return (
@@ -334,7 +339,8 @@ Props): JSX.Element {
         className="flex z-50 fixed h-full w-screen items-center justify-center"
         style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
         onClick={() => {
-          upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+          // upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+          upperUiContext.upperVisDispatch({type: "NEW_BOOKMARK_TOGGLE"})
         }}
       >
         <div
@@ -508,7 +514,8 @@ Props): JSX.Element {
               onClick={(e) => {
                 e.preventDefault();
                 // setBookmarkVis((b) => !b);
-                upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+                // upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+                upperUiContext.upperVisDispatch({type: "NEW_BOOKMARK_TOGGLE"})
               }}
               aria-label={"Close"}
             >
