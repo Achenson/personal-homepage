@@ -273,7 +273,7 @@ function Main({}: Props): JSX.Element {
       >
         {upperVisState.newTabVis && (
           <NewTab_UpperUI
-            upperVisDispatch={upperVisDispatch}
+            // upperVisDispatch={upperVisDispatch}
             tabType={tabType}
           />
         )}

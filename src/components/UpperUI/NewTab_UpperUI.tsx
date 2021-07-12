@@ -32,11 +32,13 @@ import {
 import { UpperVisAction } from "../../utils/interfaces";
 import { tabErrors } from "../../utils/errors";
 
+import {useUpperUiContext} from "../../utils/upperUiContext"
+
 import SelectableList from "../Shared/SelectableList";
 
 interface Props {
   // setNewTabVis: React.Dispatch<React.SetStateAction<boolean>>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
   tabType: "folder" | "note" | "rss";
 }
 
@@ -50,7 +52,10 @@ const errorsAllFalse = {
   invalidLinkErrorVis: false,
 };
 
-function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
+function NewTab_UpperUI({
+  tabType,
+}: //  upperVisDispatch
+Props): JSX.Element {
   // console.log("rendered");
 
   const [tabsData, setTabsData] = tabsDataState.use();
@@ -61,6 +66,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
     bookmarksAllTagsState.use();
 
   const [uiColorData, setUiColorData] = uiColorState.use();
+
+  const upperUiContext = useUpperUiContext()
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -192,7 +199,6 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
       3: "Third",
       4: "Fourth",
     };
-
 
     return arrOfColsNumbers.map((el, i) => {
       return (
@@ -448,7 +454,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
     // 1. adding Tab(Folder/RSS?Notes) 2.updating Bookmarks with tags (same as new folder title)
     addTab();
-    upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+    // upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+    upperUiContext.upperVisDispatch({type: "NEW_TAB_TOGGLE"})
   }
 
   return (
@@ -461,7 +468,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
         className="flex z-50 fixed h-full w-screen items-center justify-center"
         style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
         onClick={() => {
-          upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+          // upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+          upperUiContext.upperVisDispatch({type: "NEW_TAB_TOGGLE"})
         }}
       >
         <div
@@ -674,7 +682,7 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
 
                 saveFunc();
               }}
-            aria-label={"Save"}
+              aria-label={"Save"}
             >
               <SaveSVG className="h-5 w-5 fill-current text-black mr-6 hover:text-green-600 cursor-pointer transition-colors duration-75" />
             </button>
@@ -684,7 +692,8 @@ function NewTab_UpperUI({ tabType, upperVisDispatch }: Props): JSX.Element {
               onClick={(e) => {
                 e.preventDefault();
                 // setNewTabVis((b) => !b);
-                upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+                // upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+                upperUiContext.upperVisDispatch({type: "NEW_TAB_TOGGLE"})
               }}
               aria-label={"Close"}
             >
