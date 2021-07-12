@@ -391,7 +391,7 @@ Props): JSX.Element {
                   ref={selectablesRef}
                   // value={tagsInput.join(", ")}
                   value={selectablesInputStr}
-                  placeholder={'tag1, tag2... ("all" tag auto-added)'}
+                  placeholder={'tag1, tag2... [optional]'}
                   onChange={(e) => {
                     if (!selectablesListVis) setSelectablesListVis(true);
 

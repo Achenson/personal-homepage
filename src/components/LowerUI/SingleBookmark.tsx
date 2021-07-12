@@ -198,7 +198,7 @@ function SingleBookmark({
       {tabVisState.editBookmarkVis === bookmarkId && (
         <Bookmark_newAndEdit
           bookmarkComponentType="edit"
-          tabVisDispatch={tabVisDispatch}
+          // tabVisDispatch={tabVisDispatch}
           colNumber={colNumber}
           bookmarkId={bookmarkId as string | number}
         />

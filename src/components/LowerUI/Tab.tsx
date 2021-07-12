@@ -40,7 +40,7 @@ import RSS_reactQuery from "./RSS_reactQuery";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "../../utils/itemsDnd";
 
-import {TabContext} from "../../utils/tabContext";
+import { TabContext } from "../../utils/tabContext";
 
 import {
   TabVisAction,
@@ -48,11 +48,8 @@ import {
   UpperVisAction,
   TabVisState,
   UpperVisState,
-  
 } from "../../utils/interfaces";
 import { current } from "immer";
-
-
 
 interface SingleBookmarkData {
   title: string;
@@ -166,7 +163,10 @@ Props): JSX.Element {
   // after clicking current Tab or its editables, tabOpenedData will be set to current tab's tabID
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
-  function tabVisReducer(state: TabVisState, action: TabVisAction): TabVisState {
+  function tabVisReducer(
+    state: TabVisState,
+    action: TabVisAction
+  ): TabVisState {
     switch (action.type) {
       case "COLORS_SETTINGS_TOGGLE":
         if (!state.colorsVis) {
@@ -706,16 +706,18 @@ Props): JSX.Element {
         upperVisState.tabEditablesOpenable && (
           // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
 
-          <Bookmark_newAndEdit
-            // setBookmarkVis={setNewBookmarkVis}
-            bookmarkComponentType={"new_lowerUI"}
-            tabVisDispatch={tabVisDispatch}
-            colNumber={colNumber}
-            tabTitle={tabTitle as string}
-            // top={rect?.top as number}
-            // left={rect?.left as number}
-            // tabWidth={rect?.width as number}
-          />
+          <TabContext.Provider value={tabContextValue}>
+            <Bookmark_newAndEdit
+              // setBookmarkVis={setNewBookmarkVis}
+              bookmarkComponentType={"new_lowerUI"}
+              // tabVisDispatch={tabVisDispatch}
+              colNumber={colNumber}
+              tabTitle={tabTitle as string}
+              // top={rect?.top as number}
+              // left={rect?.left as number}
+              // tabWidth={rect?.width as number}
+            />
+          </TabContext.Provider>
         )}
 
       {tabVisState.editTabVis &&
@@ -736,30 +738,32 @@ Props): JSX.Element {
         )}
 
       {tabOpened_local && tabType === "folder" && (
-        <div>
-          {bookmarksData
-            .filter((el) => el.tags.indexOf(tabID) > -1)
-            .map((el, i) => {
-              return (
-                <SingleBookmark
-                  // setEditBookmarkVis={setEditBookmarkVis}
-                  tabVisState={tabVisState}
-                  upperVisState={upperVisState}
-                  tabVisDispatch={tabVisDispatch}
-                  upperVisDispatch={upperVisDispatch}
-                  singleBookmarkData={el}
-                  // setEditSingleLinkData={setEditSingleBookmarkData}
-                  bookmarkId={el.id as string | number}
-                  colNumber={colNumber}
-                  setBookmarkId={setBookmarkId}
-                  key={i}
-                  tabID={tabID}
-                />
-              );
-            })}
+        <TabContext.Provider value={tabContextValue}>
+          <div>
+            {bookmarksData
+              .filter((el) => el.tags.indexOf(tabID) > -1)
+              .map((el, i) => {
+                return (
+                  <SingleBookmark
+                    // setEditBookmarkVis={setEditBookmarkVis}
+                    tabVisState={tabVisState}
+                    upperVisState={upperVisState}
+                    tabVisDispatch={tabVisDispatch}
+                    upperVisDispatch={upperVisDispatch}
+                    singleBookmarkData={el}
+                    // setEditSingleLinkData={setEditSingleBookmarkData}
+                    bookmarkId={el.id as string | number}
+                    colNumber={colNumber}
+                    setBookmarkId={setBookmarkId}
+                    key={i}
+                    tabID={tabID}
+                  />
+                );
+              })}
 
-          {/* <SingleLink setEditLinkVis={setEditBookmarkVis} /> */}
-        </div>
+            {/* <SingleLink setEditLinkVis={setEditBookmarkVis} /> */}
+          </div>
+        </TabContext.Provider>
       )}
 
       {tabOpened_local && tabType === "note" && (

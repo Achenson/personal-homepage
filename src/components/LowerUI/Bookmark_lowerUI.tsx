@@ -6,7 +6,8 @@ import ReactDOM from "react-dom";
 
 import { produce } from "immer";
 
-import { createBookmark, createFolderTab } from "../../utils/objCreators";
+import { createBookmark, createFolderTab} from "../../utils/objCreators";
+import {useTabContext} from "../../utils/tabContext"
 
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
@@ -42,7 +43,7 @@ interface Props {
   bookmarkComponentType: "new_upperUI" | "new_lowerUI" | "edit";
   bookmarkId: string | number;
   currentBookmark: SingleBookmarkData | undefined;
-  tabVisDispatch: React.Dispatch<TabVisAction>;
+  // tabVisDispatch: React.Dispatch<TabVisAction>;
   colNumber: number;
 
   errors: {
@@ -102,7 +103,7 @@ function Bookmark_lowerUI({
   bookmarkComponentType,
   bookmarkId,
   currentBookmark,
-  tabVisDispatch,
+  // tabVisDispatch,
   colNumber,
 
   errors,
@@ -120,6 +121,8 @@ Props): JSX.Element {
     bookmarksAllTagsState.use();
 
   const [tabsData, setTabsData] = tabsDataState.use();
+
+  const tabContext = useTabContext()
 
   let selectablesRef = useRef<HTMLInputElement>(null);
 
@@ -450,11 +453,13 @@ Props): JSX.Element {
 
     // setBookmarkVis((b) => !b);
     if (bookmarkComponentType === "edit") {
-      tabVisDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
+      // tabVisDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
+      tabContext.tabVisDispatch({type: "EDIT_BOOKMARK_CLOSE"})
     }
 
     if (bookmarkComponentType === "new_lowerUI") {
-      tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+      // tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+      tabContext.tabVisDispatch({type: "NEW_BOOKMARK_TOOGLE"})
     }
   }
 
@@ -640,11 +645,13 @@ Props): JSX.Element {
                   // setBookmarkVis((b) => !b);
                   // tabVisDispatch({type: "NEW_BOOKMARK_TOOGLE"})
                   if (bookmarkComponentType === "edit") {
-                    tabVisDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
+                    // tabVisDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
+                    tabContext.tabVisDispatch({type: "EDIT_BOOKMARK_CLOSE"})
                   }
 
                   if (bookmarkComponentType === "new_lowerUI") {
-                    tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+                    // tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+                    tabContext.tabVisDispatch({type: "NEW_BOOKMARK_TOOGLE"})
                   }
                 }}
                 aria-label={"Close"}
@@ -841,11 +848,13 @@ Props): JSX.Element {
                   // setBookmarkVis((b) => !b);
                   // tabVisDispatch({type: "NEW_BOOKMARK_TOOGLE"})
                   if (bookmarkComponentType === "edit") {
-                    tabVisDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
+                    // tabVisDispatch({ type: "EDIT_BOOKMARK_CLOSE" });
+                    tabContext.tabVisDispatch({type: "EDIT_BOOKMARK_CLOSE"})
                   }
 
                   if (bookmarkComponentType === "new_lowerUI") {
-                    tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+                    // tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
+                    tabContext.tabVisDispatch({type: "NEW_BOOKMARK_TOOGLE"})
                   }
                 }}
                 aria-label={"Close"}
