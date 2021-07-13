@@ -48,7 +48,7 @@ function ReactQuery({ currentTab, tabID,
     // if currentBookmars itemsPerPage is set, return it, otherwise
     // return defaul option for RSS setting
 
-    if (typeof currentTab.itemsPerPage === "number") {
+    if (typeof currentTab?.itemsPerPage === "number") {
       return currentTab.itemsPerPage;
     }
 
@@ -56,7 +56,7 @@ function ReactQuery({ currentTab, tabID,
   }
 
   function calcDescriptionVis() {
-    if (typeof currentTab.description === "boolean") {
+    if (typeof currentTab?.description === "boolean") {
       return currentTab.description;
     }
 
@@ -64,7 +64,7 @@ function ReactQuery({ currentTab, tabID,
   }
 
   function calcDateVis() {
-    if (typeof currentTab.date === "boolean") {
+    if (typeof currentTab?.date === "boolean") {
       return currentTab.date;
     }
 
@@ -116,11 +116,11 @@ function ReactQuery({ currentTab, tabID,
   async function fetchFeed() {
     // let currentTab = tabsData.filter((obj) => obj.id === tabID);
 
-    let extendedRSSurl = `${currentTab.rssLink}?format=xml`;
+    let extendedRSSurl = `${currentTab?.rssLink}?format=xml`;
     // let response = await parser.parseURL(currentTab.rssLink);
     try {
       // let newResponse = await parser.parseURL(extendedRSSurl)
-      let response = await parser.parseURL(currentTab.rssLink);
+      let response = await parser.parseURL(currentTab?.rssLink);
       return response;
     } catch (err) {
       // console.log(err)

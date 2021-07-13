@@ -73,7 +73,7 @@ function NoteInput({
         onFocus={() => setFocusOnNote(true)}
         onBlur={() => setFocusOnNote(false)}
       >
-        <p className="whitespace-pre-wrap">{currentTab.noteInput}</p>
+        <p className="whitespace-pre-wrap">{currentTab?.noteInput}</p>
       </div>
     </div>
   );
