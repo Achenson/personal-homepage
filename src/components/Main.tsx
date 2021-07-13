@@ -298,8 +298,8 @@ function Main({}: Props): JSX.Element {
 
         {upperVisState.colorsSettingsVis && (
           <Colors_UpperUI
-            upperVisDispatch={upperVisDispatch}
-            upperVisState={upperVisState}
+            // upperVisDispatch={upperVisDispatch}
+            // upperVisState={upperVisState}
           />
         )}
 

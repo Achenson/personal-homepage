@@ -24,6 +24,7 @@ import {
 } from "../../state/colorsState";
 
 import { globalSettingsState } from "../../state/defaultSettings";
+import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 import { backgroundColorsUpperUiFocus } from "../../utils/colors_background";
@@ -42,16 +43,16 @@ interface Props {
     | "column_4"
     | "unselected";
   leftPositioning: string;
-  upperVisState: UpperVisState;
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: UpperVisState;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
   setColorsToChooseVis?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ColorsToChoose_DefaultAndColumns({
   defaultColorsFor,
   leftPositioning,
-  upperVisDispatch,
-  upperVisState,
+  // upperVisDispatch,
+  // upperVisState,
   setColorsToChooseVis,
 }: Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
@@ -65,6 +66,8 @@ function ColorsToChoose_DefaultAndColumns({
     columnsColorsImg_State.use();
 
   const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
+
+  const upperUiContext = useUpperUiContext()
 
   useEffect(() => {
   
@@ -83,8 +86,9 @@ function ColorsToChoose_DefaultAndColumns({
   function handleKeyDown(event: KeyboardEvent) {
     if (event.code === "Escape") {
       if (/column/.test(defaultColorsFor)) {
-        if (upperVisState.columnSelected !== null) {
-          upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
+        if (upperUiContext.upperVisState.columnSelected !== null) {
+          upperUiContext.upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
+          
           // setColumnSelected(null);
         }
       }

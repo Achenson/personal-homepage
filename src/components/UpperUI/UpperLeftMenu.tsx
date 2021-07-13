@@ -120,8 +120,8 @@ function UpperLeftMenu({
             <ColorsToChoose_DefaultAndColumns
               defaultColorsFor={defaultColorsFor}
               leftPositioning={"0px"}
-              upperVisDispatch={upperVisDispatch}
-              upperVisState={upperVisState}
+              // upperVisDispatch={upperVisDispatch}
+              // upperVisState={upperVisState}
             />
           </div>
         )}

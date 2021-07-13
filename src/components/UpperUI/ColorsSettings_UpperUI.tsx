@@ -18,6 +18,7 @@ import {
 } from "../../state/colorsState";
 
 import { tabOpenedState } from "../../state/defaultSettings";
+import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
@@ -28,13 +29,13 @@ import { useWindowSize } from "../../utils/hook_useWindowSize";
 interface Props {
   // colorsVis: boolean;
   // setColorsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: UpperVisState;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: UpperVisState;
 }
 
 function ColorsSettings_UpperUI({
-  upperVisDispatch,
-  upperVisState,
+  // upperVisDispatch,
+  // upperVisState,
 }: Props): JSX.Element {
   const [defaultColorsFor, setDefaultColorsFor] = useState<
     | "folders"
@@ -62,6 +63,8 @@ function ColorsSettings_UpperUI({
   const [resetColorsData, setResetColorsData] = resetColorsState.use();
 
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
+
+  const upperUiContext = useUpperUiContext()
   // const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
   // const windowSize = useWindowSize();
@@ -109,7 +112,8 @@ function ColorsSettings_UpperUI({
         className="flex flex-col z-50 fixed h-full w-screen justify-center items-center"
         style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
         onClick={() => {
-          upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
+          // upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
+          upperUiContext.upperVisDispatch({type: "COLORS_SETTINGS_TOGGLE"})
         }}
       >
         <div
@@ -132,7 +136,9 @@ function ColorsSettings_UpperUI({
             <div className="absolute right-0 top-0 mt-1 mr-1 ">
               <button
                 onClick={() => {
-                  upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
+                  // upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
+                  upperUiContext.upperVisDispatch({type: "COLORS_SETTINGS_TOGGLE"})
+                 
                 }}
                 className="h-5 w-5 focus-2-offset-dark"
                 aria-label={"Close"}
@@ -263,8 +269,8 @@ function ColorsSettings_UpperUI({
                 <ColorsToChoose_DefaultAndColumns
                   defaultColorsFor={defaultColorsFor}
                   leftPositioning={`-60px`}
-                  upperVisDispatch={upperVisDispatch}
-                  upperVisState={upperVisState}
+                  // upperVisDispatch={upperVisDispatch}
+                  // upperVisState={upperVisState}
                   setColorsToChooseVis={setColorsToChooseVis}
                 />
               </div>
