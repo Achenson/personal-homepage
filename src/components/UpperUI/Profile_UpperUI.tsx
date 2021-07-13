@@ -12,21 +12,27 @@ import { uiColorState } from "../../state/colorsState";
 
 import { UpperVisAction } from "../../utils/interfaces";
 
+import { useUpperUiContext } from "../../utils/upperUiContext";
+
 interface Props {
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
-function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
+function Profile_UpperUI({}: //  upperVisDispatch
+Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  const [loginOrRegister, setLoginOrRegister] =
-    useState<"login" | "register">("login");
+  const [loginOrRegister, setLoginOrRegister] = useState<"login" | "register">(
+    "login"
+  );
 
   const [loggedInData, setLoggedInData] = loggedInState.use();
 
   const [inputHover, setInputHover] = useState(false);
+
+  const upperUiContext = useUpperUiContext();
 
   let firstFieldRef = useRef<HTMLInputElement>(null);
 
@@ -53,7 +59,8 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
         className="flex flex-col z-50 fixed h-full w-screen items-center"
         style={{ backgroundColor: "rgba(90, 90, 90, 0.4)", paddingTop: "30vh" }}
         onClick={() => {
-          upperVisDispatch({ type: "PROFILE_TOGGLE" });
+          // upperVisDispatch({ type: "PROFILE_TOGGLE" });
+          upperUiContext.upperVisDispatch({ type: "PROFILE_TOGGLE" });
         }}
       >
         <div
@@ -74,13 +81,12 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
               <button
                 className="h-5 w-5 focus-2-offset-dark"
                 onClick={() => {
-                  upperVisDispatch({ type: "PROFILE_TOGGLE" });
+                  // upperVisDispatch({ type: "PROFILE_TOGGLE" });
+                  upperUiContext.upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 }}
                 aria-label={"Close"}
               >
-                <CancelSVG
-                  className="h-5 w-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900"
-                />
+                <CancelSVG className="h-5 w-5 fill-current text-gray-600 cursor-pointer hover:text-gray-900" />
               </button>
             </div>
 
@@ -170,8 +176,14 @@ function Profile_UpperUI({ upperVisDispatch }: Props): JSX.Element {
                         console.log("sthh");
                       }
 
-                      upperVisDispatch({ type: "PROFILE_TOGGLE" });
-                      upperVisDispatch({ type: "MESSAGE_OPEN_LOGIN" });
+                      // upperVisDispatch({ type: "PROFILE_TOGGLE" });
+                      // upperVisDispatch({ type: "MESSAGE_OPEN_LOGIN" });
+                      upperUiContext.upperVisDispatch({
+                        type: "PROFILE_TOGGLE",
+                      });
+                      upperUiContext.upperVisDispatch({
+                        type: "MESSAGE_OPEN_LOGIN",
+                      });
                     }}
                   >
                     Login

@@ -285,26 +285,28 @@ function Main({}: Props): JSX.Element {
         )}
         {upperVisState.backgroundSettingsVis && (
           <Background_UpperUI
-            // upperVisDispatch={upperVisDispatch}
-            // upperVisState={upperVisState}
+          // upperVisDispatch={upperVisDispatch}
+          // upperVisState={upperVisState}
           />
         )}
         {upperVisState.settingsVis && (
           <Settings_UpperUI
-            // upperVisDispatch={upperVisDispatch}
-            // upperVisState={upperVisState}
+          // upperVisDispatch={upperVisDispatch}
+          // upperVisState={upperVisState}
           />
         )}
 
         {upperVisState.colorsSettingsVis && (
           <Colors_UpperUI
-            // upperVisDispatch={upperVisDispatch}
-            // upperVisState={upperVisState}
+          // upperVisDispatch={upperVisDispatch}
+          // upperVisState={upperVisState}
           />
         )}
 
         {upperVisState.profileVis && (
-          <Profile_UpperUI upperVisDispatch={upperVisDispatch} />
+          <Profile_UpperUI
+          //  upperVisDispatch={upperVisDispatch}
+          />
         )}
 
         <UpperUI
