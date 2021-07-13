@@ -7,6 +7,7 @@ import {
   columnsColorsImg_State,
 } from "../../state/colorsState";
 import { globalSettingsState } from "../../state/defaultSettings";
+import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import UpperLeftMenu from "../UpperUI/UpperLeftMenu";
 import UpperRightMenu from "../UpperUI/UpperRightMenu";
@@ -22,8 +23,8 @@ import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 interface Props {
   colNumber: number;
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: UpperVisState;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: UpperVisState;
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
   breakpoint: 0 | 1 | 2 | 3 | 4 | null;
 }
@@ -31,8 +32,8 @@ interface Props {
 // const Column = React.forwardRef(({ colNumber, closeAllTabs }: Props, ref) => {
 function Column({
   colNumber,
-  upperVisDispatch,
-  upperVisState,
+  // upperVisDispatch,
+  // upperVisState,
   setTabType,
   breakpoint,
 }: Props): JSX.Element {
@@ -43,6 +44,7 @@ function Column({
   const [backgroundColorData, setbackgroundColorData] =
     backgroundColorState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
+  const upperUiContext = useUpperUiContext()
 
   function calcColumnColor(
     colNumber: number,
@@ -209,8 +211,8 @@ function Column({
                 tabOpened={el.opened}
                 tabOpenedByDefault={el.openedByDefault}
                 tabIsDeletable={el.deletable}
-                upperVisDispatch={upperVisDispatch}
-                upperVisState={upperVisState}
+                // upperVisDispatch={upperVisDispatch}
+                // upperVisState={upperVisState}
               />
               {/* <div className="flex-grow"> */}
               <GapAfterTab
@@ -253,8 +255,8 @@ function Column({
           }}
         >
           <UpperLeftMenu
-            upperVisDispatch={upperVisDispatch}
-            upperVisState={upperVisState}
+            // upperVisDispatch={upperVisDispatch}
+            // upperVisState={upperVisState}
           />
         </div>
       )}
@@ -266,7 +268,7 @@ function Column({
             style={{
               // top: upperVisState.addTagVis_xs  ? "-58px" : "-30px",
               top:
-                upperVisState.addTagVis_xs &&
+                upperUiContext.upperVisState.addTagVis_xs &&
                 (breakpoint === 0 ||
                 // when col growth is limited, UpperRightMenu_XS is both on xs: and sm: breakpoints
                   (breakpoint === 1 && globalSettingsData.limitColGrowth))
@@ -276,15 +278,15 @@ function Column({
             }}
           >
             <UpperRightMenu
-              upperVisDispatch={upperVisDispatch}
-              upperVisState={upperVisState}
+              // upperVisDispatch={upperVisDispatch}
+              // upperVisState={upperVisState}
               setTabType={setTabType}
             />
           </div>
-          {upperVisState.messagePopup && (
+          {upperUiContext.upperVisState.messagePopup && (
             <Message_UpperUI
-              upperVisDispatch={upperVisDispatch}
-              upperVisState={upperVisState}
+              // upperVisDispatch={upperVisDispatch}
+              // upperVisState={upperVisState}
             />
           )}
         </div>

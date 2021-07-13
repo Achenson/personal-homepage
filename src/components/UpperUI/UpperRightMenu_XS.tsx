@@ -17,18 +17,19 @@ import { uiColorState } from "../../state/colorsState";
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import { globalSettingsState } from "../../state/defaultSettings";
+import { useUpperUiContext } from "../../utils/upperUiContext";
 
 interface Props {
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: UpperVisState;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: UpperVisState;
   loggedInData: boolean;
   setLoggedInData: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function UpperRightMenu({
-  upperVisDispatch,
-  upperVisState,
+  // upperVisDispatch,
+  // upperVisState,
   setTabType,
   loggedInData,
   setLoggedInData,
@@ -38,13 +39,11 @@ function UpperRightMenu({
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const colLimit = globalSettingsData.limitColGrowth;
 
-
-
-
+  const upperUiContext = useUpperUiContext();
 
   return (
     <>
-      {upperVisState.addTagVis_xs && (
+      {upperUiContext.upperVisState.addTagVis_xs && (
         <div
           className={`flex ${
             colLimit ? "sm:hidden" : "xs:hidden"
@@ -55,7 +54,7 @@ function UpperRightMenu({
             style={{ marginLeft: "0px" }}
             onClick={() => {
               // setNewTabVis((b) => !b);
-              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+              upperUiContext.upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               setTabType("folder");
             }}
             tabIndex={7}
@@ -74,7 +73,7 @@ function UpperRightMenu({
             onClick={() => {
               // setNewTabVis((b) => !b);
 
-              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+              upperUiContext.upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               setTabType("note");
             }}
             tabIndex={8}
@@ -93,7 +92,7 @@ function UpperRightMenu({
             style={{ marginRight: "-2px" }}
             onClick={() => {
               // setNewTabVis((b) => !b);
-              upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+              upperUiContext.upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               setTabType("rss");
             }}
             tabIndex={9}
@@ -123,7 +122,7 @@ function UpperRightMenu({
           className="h-7 w-7 focus-2-inset-veryDark"
           onClick={() => {
             // setNewBookmarkVis((b) => !b);
-            upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+            upperUiContext.upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
           }}
           tabIndex={10}
           // disabled={areButtonsDisabled()}
@@ -140,7 +139,7 @@ function UpperRightMenu({
           className="h-6 w-5 self-center focus-2-veryDark"
           style={{ width: "22px" }}
           onClick={() => {
-            upperVisDispatch({ type: "ADD_TAG_XS_TOGGLE" });
+            upperUiContext.upperVisDispatch({ type: "ADD_TAG_XS_TOGGLE" });
           }}
           tabIndex={11}
           // disabled={areButtonsDisabled()}
@@ -156,7 +155,7 @@ function UpperRightMenu({
           className="h-6 w-6 ml-0.5 focus-2-veryDark"
           style={{ marginTop: "2px" }}
           onClick={() => {
-            upperVisDispatch({ type: "SETTINGS_TOGGLE" });
+            upperUiContext.upperVisDispatch({ type: "SETTINGS_TOGGLE" });
           }}
           tabIndex={12}
           // disabled={areButtonsDisabled()}
@@ -182,7 +181,9 @@ function UpperRightMenu({
               onClick={() => {
                 // upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 setLoggedInData(false);
-                upperVisDispatch({ type: "MESSAGE_OPEN_LOGOUT" });
+                upperUiContext.upperVisDispatch({
+                  type: "MESSAGE_OPEN_LOGOUT",
+                });
               }}
               tabIndex={13}
               // disabled={areButtonsDisabled()}
@@ -198,7 +199,7 @@ function UpperRightMenu({
               className="h-6 w-5 focus-2-veryDark"
               style={{ width: "18px" }}
               onClick={() => {
-                upperVisDispatch({ type: "PROFILE_TOGGLE" });
+                upperUiContext.upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 // setLoggedInData(true);
               }}
               tabIndex={13}

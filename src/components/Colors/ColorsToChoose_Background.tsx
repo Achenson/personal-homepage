@@ -13,20 +13,24 @@ import SingleColor_Background from "./SingleColor_Background";
 
 import { backgroundColorState } from "../../state/colorsState";
 
+import { useUpperUiContext } from "../../utils/upperUiContext";
+
 interface Props {
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
-function ColorsToChoose_Background({ upperVisDispatch }: Props): JSX.Element {
+function ColorsToChoose_Background({}: //  upperVisDispatch
+Props): JSX.Element {
   const [backgroundColorData, setBackgroundColorData] =
     backgroundColorState.use();
   const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
 
+  const upperUiContext = useUpperUiContext();
 
   useEffect(() => {
-    setSelectedNumber(calcSelectedNumber())
-  }, [backgroundColorData])
- 
+    setSelectedNumber(calcSelectedNumber());
+  }, [backgroundColorData]);
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
 
@@ -37,7 +41,8 @@ function ColorsToChoose_Background({ upperVisDispatch }: Props): JSX.Element {
 
   function handleKeyDown(event: KeyboardEvent) {
     if (event.code === "Escape") {
-      upperVisDispatch({ type: "COLORS_BACKGROUND_TOGGLE" });
+      upperUiContext.upperVisDispatch({ type: "COLORS_BACKGROUND_TOGGLE" });
+
     }
   }
 

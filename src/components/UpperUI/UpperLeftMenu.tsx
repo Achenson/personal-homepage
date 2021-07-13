@@ -4,6 +4,7 @@ import ColumnColor_UpperUI from "./ColumnColor_UpperUI";
 import ColorsToChoose_DefaultAndColumns from "../Colors/ColorsToChoose_DefaultAndColumns";
 
 import { globalSettingsState, focusedTabState } from "../../state/defaultSettings";
+import {useUpperUiContext} from "../../utils/upperUiContext"
 import BackgroundColor_UpperUI from "./BackgroundColor_UpperUI";
 import EyeOff_UpperUI from "./EyeOff_UpperUI";
 import ColorsToChoose_Background from "../Colors/ColorsToChoose_Background";
@@ -13,13 +14,13 @@ import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 interface Props {
-  upperVisState: UpperVisState;
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: UpperVisState;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
 function UpperLeftMenu({
-  upperVisDispatch,
-  upperVisState,
+  // upperVisDispatch,
+  // upperVisState,
 }: Props): JSX.Element {
   // const [columnSelected, setColumnSelected] = useState<number | null>(null);
 
@@ -33,6 +34,8 @@ function UpperLeftMenu({
   const [isHoverOnAnyColumn, setIsHoverOnAnyColumn] = useState(false);
 
   const [focusedTabData, setFocusedTabData] = focusedTabState.use();
+
+  const upperUiContext = useUpperUiContext()
 
   function columnsRendering(howMany: number, oneColorForAllCols: boolean) {
     let arrOfColumns = [];
@@ -53,8 +56,8 @@ function UpperLeftMenu({
           // setNotesSelected={setNotesSelected}
           key={index}
           arrIndex={index}
-          upperVisDispatch={upperVisDispatch}
-          upperVisState={upperVisState}
+          // upperVisDispatch={upperVisDispatch}
+          // upperVisState={upperVisState}
           columnType={
             globalSettingsData.picBackground
               ? "BACKGROUND_IMG"
@@ -106,16 +109,18 @@ function UpperLeftMenu({
         {globalSettingsData.picBackground ? null : (
             <BackgroundColor_UpperUI
               // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
-              upperVisDispatch={upperVisDispatch}
-              upperVisState={upperVisState}
+              // upperVisDispatch={upperVisDispatch}
+              // upperVisState={upperVisState}
             />
         )}
-        <EyeOff_UpperUI upperVisDispatch={upperVisDispatch} />
+        <EyeOff_UpperUI 
+        // upperVisDispatch={upperVisDispatch} 
+        />
       </div>
 
       {/* <div className="absolute left-0" style={{ bottom: "104px" }}> */}
       <div>
-        {upperVisState.colorsColumnVis && (
+        {upperUiContext.upperVisState.colorsColumnVis && (
           <div className="absolute left-0 bottom-32">
             <ColorsToChoose_DefaultAndColumns
               defaultColorsFor={defaultColorsFor}

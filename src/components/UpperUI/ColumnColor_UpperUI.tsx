@@ -5,6 +5,7 @@ import {
 } from "../../state/colorsState";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
+import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import {
   globalSettingsState,
@@ -26,8 +27,8 @@ interface Props {
   >;
   // setColorsToChooseVis: React.Dispatch<React.SetStateAction<boolean>>;
 
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: UpperVisState;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: UpperVisState;
   arrIndex: number;
   columnType: "NO_BACKGROUND_IMG" | "BACKGROUND_IMG";
   isHoverOnAnyColumn: boolean;
@@ -37,8 +38,8 @@ interface Props {
 function ColumnColor_UpperUI({
   colNumber,
   setDefaultColorsFor,
-  upperVisDispatch,
-  upperVisState,
+  // upperVisDispatch,
+  // upperVisState,
   arrIndex,
   columnType,
   isHoverOnAnyColumn,
@@ -52,6 +53,9 @@ function ColumnColor_UpperUI({
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   // const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
+
+  const upperUiContext = useUpperUiContext()
+
 
   function columnsColor(colNumber: number) {
     if (columnType === "NO_BACKGROUND_IMG") {
@@ -85,7 +89,7 @@ function ColumnColor_UpperUI({
 
   function borderStyle() {
     // unselected column
-    if (upperVisState.columnSelected !== colNumber) {
+    if (upperUiContext.upperVisState.columnSelected !== colNumber) {
       if (arrIndex > 0) {
         return "border border-l-0";
       }
@@ -110,11 +114,11 @@ function ColumnColor_UpperUI({
             setTabOpenedData(null);
             // setCloseAllTabsData(true);
 
-            if (upperVisState.columnSelected === colNumber) {
-              upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
+            if (upperUiContext.upperVisState.columnSelected === colNumber) {
+              upperUiContext.upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
               // setColumnSelected(null);
             } else {
-              upperVisDispatch({
+              upperUiContext.upperVisDispatch({
                 type: "COLORS_COLUMN_OPEN",
                 payload: colNumber,
               });

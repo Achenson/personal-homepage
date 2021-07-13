@@ -12,7 +12,7 @@ interface Props {
   // to change types?
   descriptionVis: boolean | null | undefined;
   dateVis: boolean | null | undefined;
-  upperVisState: UpperVisState;
+  // upperVisState: UpperVisState;
 }
 
 function SingeRssNews({
@@ -22,7 +22,7 @@ function SingeRssNews({
   description,
   descriptionVis,
   dateVis,
-  upperVisState,
+  // upperVisState,
 }: Props): JSX.Element {
   // if (title === "loading data...") {
   //   return <div>{title}</div>;

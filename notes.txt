@@ -558,6 +558,7 @@ DONE 466. Close Default Tab Colors by Escape DONE
 DONE 468. visDispatch rename to tabVisDispatch DONE
 DONE 469. close tabColors when clicking color in colors settings (should be same as in globalSettings) DONE
 DONE 470. change excessive if statements (columns...) to RegEx DONE
+DONE 473. react context for upperVis & tabVis DONE
 
 
 
@@ -582,10 +583,12 @@ DONE 470. change excessive if statements (columns...) to RegEx DONE
 465. explanation how the EyeOff works somewhere
 467. unify ColorsToChoose_DefaultAndColumn and ColorsToChoose_Tab+
 472. app title instead of react App
-473. react context for upperVis & tabVis?
 474. bug: cannot delete note & RSS when they are open
 
 tailwind 2.0.2
+
+import {useUpperUiContext} from "../../utils/upperUiContext"
+const upperUiContext = useUpperUiContext()
 
 
 Browserslist: caniuse-lite is outdated. Please run:

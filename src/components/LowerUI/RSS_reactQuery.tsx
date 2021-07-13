@@ -27,10 +27,12 @@ let parser = new Parser();
 interface Props {
   tabID: string | number;
   currentTab: SingleTabData;
-  upperVisState: UpperVisState;
+  // upperVisState: UpperVisState;
 }
 
-function ReactQuery({ currentTab, tabID, upperVisState }: Props): JSX.Element {
+function ReactQuery({ currentTab, tabID, 
+  // upperVisState 
+}: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
   // let currentTab = tabsData.filter((obj) => obj.id === tabID);
@@ -227,7 +229,7 @@ function ReactQuery({ currentTab, tabID, upperVisState }: Props): JSX.Element {
         key={i}
         // pubDate={el.pubDate}
         pubDate={convertRssDate(el.pubDate)}
-        upperVisState={upperVisState}
+        // upperVisState={upperVisState}
       />
     ));
   }

@@ -9,19 +9,20 @@ import { backgroundColorState } from "../../state/colorsState";
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import { closeAllTabsState, tabOpenedState } from "../../state/defaultSettings";
+import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import { ReactComponent as DocumentSVG } from "../../svgs/document.svg";
 
 interface Props {
   // setBackgroundColorsToChooseVis: React.Dispatch<React.SetStateAction<boolean>>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: UpperVisState;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: UpperVisState;
 }
 
 function BackgroundColor_upperUI({
   // setBackgroundColorsToChooseVis,
-  upperVisDispatch,
-  upperVisState,
+  // upperVisDispatch,
+  // upperVisState,
 }: Props): JSX.Element {
   const [backgroundColorData, setBackgroundColorState] =
     backgroundColorState.use();
@@ -32,6 +33,8 @@ function BackgroundColor_upperUI({
   const [selected, setSelected] = useState(false);
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+  const upperUiContext = useUpperUiContext()
 
   function calcIconBackground(pageBackgroundColor: string) {
     if (pageBackgroundColor === "white") {
@@ -72,7 +75,7 @@ function BackgroundColor_upperUI({
           // setTabOpenedData(null)
           // setCloseAllTabsData(true);
           setSelected((b) => !b);
-          upperVisDispatch({ type: "COLORS_BACKGROUND_TOGGLE" });
+        upperUiContext.upperVisDispatch({ type: "COLORS_BACKGROUND_TOGGLE" });
         }}
         tabIndex={5}
         aria-label={"Background color menu"}
@@ -84,9 +87,11 @@ function BackgroundColor_upperUI({
           )} opacity-80 border border-black rounded-lg cursor-pointer  hover:border-gray-500`}
         />
       </button>
-      {upperVisState.colorsBackgroundVis && (
+      {upperUiContext.upperVisState.colorsBackgroundVis && (
         <div className="absolute" style={{ bottom: "104px", left: "240px" }}>
-          <ColorsToChoose_Background upperVisDispatch={upperVisDispatch} />
+          <ColorsToChoose_Background 
+          // upperVisDispatch={upperVisDispatch}
+           />
         </div>
       )}
     </>

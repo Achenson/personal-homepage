@@ -4,6 +4,8 @@ import { backgroundColorState } from "../../state/colorsState";
 
 import { backgroundColorsUpperUiFocus } from "../../utils/colors_background";
 
+import {useUpperUiContext} from "../../utils/upperUiContext"
+
 import {
   closeAllTabsState,
   globalSettingsState,
@@ -15,16 +17,19 @@ import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
 import { UpperVisAction } from "../../utils/interfaces";
 
 interface Props {
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
-function EyeOff_UpperUI({ upperVisDispatch }: Props): JSX.Element {
+function EyeOff_UpperUI({ 
+  // upperVisDispatch
+ }: Props): JSX.Element {
   const [backgroundColorData, setBackgroundColorState] =
     backgroundColorState.use();
 
   const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  const upperUiContext = useUpperUiContext()
 
   function calcIconBackground(pageBackgroundColor: string) {
     if (pageBackgroundColor === "white") {
@@ -67,7 +72,7 @@ function EyeOff_UpperUI({ upperVisDispatch }: Props): JSX.Element {
       onClick={() => {
         // setSelected((b) => !b);
         // setBackgroundColorsToChooseVis((b) => !b);
-        upperVisDispatch({ type: "CLOSE_ALL" });
+       upperUiContext.upperVisDispatch({ type: "CLOSE_ALL" });
         setCloseAllTabsData(true);
         setTabOpenedData(null)
       }}

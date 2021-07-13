@@ -24,14 +24,14 @@ import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 import Column from "./Column";
 
 interface Props {
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: UpperVisState;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: UpperVisState;
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
 }
 
 function Grid({
-  upperVisDispatch,
-  upperVisState,
+  // upperVisDispatch,
+  // upperVisState,
   setTabType,
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
@@ -177,8 +177,8 @@ function Grid({
 
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
     let columnProps = {
-      upperVisDispatch,
-      upperVisState,
+      // upperVisDispatch,
+      // upperVisState,
       setTabType,
       breakpoint,
     };

@@ -14,13 +14,13 @@ interface Props {
   // setEditTabVis: React.Dispatch<React.SetStateAction<boolean>>;
   // tabVisDispatch: React.Dispatch<TabVisAction>;
   currentTab: SingleTabData;
-  upperVisState: UpperVisState;
+  // upperVisState: UpperVisState;
 }
 
 function NoteInput({
   // tabVisDispatch,
   currentTab,
-  upperVisState,
+  // upperVisState,
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();

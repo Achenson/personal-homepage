@@ -14,6 +14,8 @@ import {
   tabBeingDraggedColor_State,
 } from "../../state/colorsState";
 
+import {useUpperUiContext} from "../../utils/upperUiContext"
+
 import {
   closeAllTabsState,
   // tabColorOpenedState,
@@ -63,8 +65,8 @@ interface Props {
   tabColor: string | null;
   tabType: "folder" | "note" | "rss";
   colNumber: number;
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: UpperVisState;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: UpperVisState;
   tabOpened: boolean;
   tabOpenedByDefault: boolean;
   tabIsDeletable: boolean;
@@ -88,8 +90,8 @@ function Tab({
   tabColor,
   tabType,
   colNumber,
-  upperVisDispatch,
-  upperVisState,
+  // upperVisDispatch,
+  // upperVisState,
   tabOpened,
   tabOpenedByDefault,
   tabIsDeletable,
@@ -109,6 +111,8 @@ Props): JSX.Element {
 
   // needed for immediate tab content opening/closing after locking/unlocking
   const [tabOpened_local, setTabOpened_local] = useState(tabOpened);
+
+  const upperUiContext = useUpperUiContext()
 
   useEffect(() => {
     setTabOpened_local(tabOpened);
@@ -462,11 +466,11 @@ Props): JSX.Element {
   }, [mouseOverTab]);
 
   useEffect(() => {
-    if (!upperVisState.tabEditablesOpenable) {
+    if (!upperUiContext.upperVisState.tabEditablesOpenable) {
       tabVisDispatch({ type: "TAB_EDITABLES_CLOSE" });
-      upperVisDispatch({ type: "TAB_EDITABLES_OPENABLE_DEFAULT" });
+      upperUiContext.upperVisDispatch({ type: "TAB_EDITABLES_OPENABLE_DEFAULT" });
     }
-  }, [upperVisState.tabEditablesOpenable, upperVisDispatch]);
+  }, [upperUiContext.upperVisState.tabEditablesOpenable, upperUiContext.upperVisDispatch]);
 
   function textOrIconColor(finalTabColor: string, textOrIcon: "text" | "icon") {
     // exceptions
@@ -550,7 +554,7 @@ Props): JSX.Element {
             className="pl-1 w-full h-7 truncate cursor-pointer"
             onClick={() => {
               tabVisDispatch({ type: "TAB_CONTENT_TOGGLE" });
-              upperVisDispatch({ type: "CLOSE_ALL" });
+              upperUiContext.upperVisDispatch({ type: "CLOSE_ALL" });
             }}
           >
             <button
@@ -610,7 +614,7 @@ Props): JSX.Element {
                 style={{ marginTop: "-6px" }}
                 onClick={() => {
                   tabVisDispatch({ type: "NEW_BOOKMARK_TOOGLE" });
-                  upperVisDispatch({ type: "CLOSE_ALL" });
+                  upperUiContext.upperVisDispatch({ type: "CLOSE_ALL" });
                 }}
                 aria-label={"Add new bookmark"}
                 // disabled={areButtonsDisabled()}
@@ -635,7 +639,7 @@ Props): JSX.Element {
               }}
               onClick={() => {
                 tabVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
-                upperVisDispatch({ type: "CLOSE_ALL" });
+                upperUiContext.upperVisDispatch({ type: "CLOSE_ALL" });
               }}
               aria-label={"Tab color menu"}
             >
@@ -657,7 +661,7 @@ Props): JSX.Element {
               ).slice(5)} ring-opacity-40 `}
               onClick={() => {
                 tabVisDispatch({ type: "EDIT_TOGGLE" });
-                upperVisDispatch({ type: "CLOSE_ALL" });
+                upperUiContext.upperVisDispatch({ type: "CLOSE_ALL" });
               }}
               // disabled={areButtonsDisabled()}
               aria-label={"Edit tab"}
@@ -674,7 +678,7 @@ Props): JSX.Element {
 
         {tabVisState.colorsVis &&
           tabOpenedData === tabID &&
-          upperVisState.tabEditablesOpenable && (
+          upperUiContext.upperVisState.tabEditablesOpenable && (
             <ColorsToChoose_Tab
               setIconsVis={setIconsVis}
               tabID={tabID}
@@ -704,7 +708,7 @@ Props): JSX.Element {
 
         {tabVisState.newBookmarkVis &&
           tabOpenedData === tabID &&
-          upperVisState.tabEditablesOpenable && (
+          upperUiContext.upperVisState.tabEditablesOpenable && (
             // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
 
             <Bookmark_newAndEdit
@@ -721,7 +725,7 @@ Props): JSX.Element {
 
         {tabVisState.editTabVis &&
           tabOpenedData === tabID &&
-          upperVisState.tabEditablesOpenable && (
+          upperUiContext.upperVisState.tabEditablesOpenable && (
             <EditTab_main
               tabID={tabID}
               tabType={tabType}
@@ -744,10 +748,10 @@ Props): JSX.Element {
                 return (
                   <SingleBookmark
                     // setEditBookmarkVis={setEditBookmarkVis}
-                    upperVisState={upperVisState}
+                    // upperVisState={upperVisState}
                     // tabVisState={tabVisState}
                     // tabVisDispatch={tabVisDispatch}
-                    upperVisDispatch={upperVisDispatch}
+                    // upperVisDispatch={upperVisDispatch}
                     singleBookmarkData={el}
                     // setEditSingleLinkData={setEditSingleBookmarkData}
                     bookmarkId={el.id as string | number}
@@ -769,7 +773,7 @@ Props): JSX.Element {
             currentTab={currentTab as SingleTabData}
             // setEditTabVis={setEditTabVis}
             // tabVisDispatch={tabVisDispatch}
-            upperVisState={upperVisState}
+            // upperVisState={upperVisState}
           />
         )}
 
@@ -777,7 +781,7 @@ Props): JSX.Element {
           <RSS_reactQuery
             tabID={tabID}
             currentTab={currentTab as SingleTabData}
-            upperVisState={upperVisState}
+            // upperVisState={upperVisState}
           />
         )}
       </div>

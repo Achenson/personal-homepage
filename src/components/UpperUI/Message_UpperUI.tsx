@@ -4,24 +4,25 @@ import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 import { backgroundColorState } from "../../state/colorsState";
 import { globalSettingsState } from "../../state/defaultSettings";
 import { backgroundColors } from "../../utils/colors_background";
+import { useUpperUiContext } from "../../utils/upperUiContext";
 
 import "../../utils/fade.css";
 
 interface Props {
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: UpperVisState;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: UpperVisState;
 }
 
-function Message_UpperUI({
-  upperVisDispatch,
-  upperVisState,
-}: Props): JSX.Element {
+function Message_UpperUI({}: // upperVisDispatch,
+// upperVisState,
+Props): JSX.Element {
   const [close, setClose] = useState(false);
   const [fadeInEnd, setFadeInEnd] = useState(false);
 
   const [backgroundColorData, setBackgroundColorData] =
     backgroundColorState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  const upperUiContext = useUpperUiContext();
 
   useEffect(() => {
     if (fadeInEnd) {
@@ -32,11 +33,11 @@ function Message_UpperUI({
   // instant animation change when message changes:
   //  setting state to initial
   useEffect(() => {
-    if (upperVisState.messagePopup) {
+    if (upperUiContext.upperVisState.messagePopup) {
       setClose(false);
       setFadeInEnd(false);
     }
-  }, [upperVisState.messagePopup, setClose, setFadeInEnd]);
+  }, [upperUiContext.upperVisState.messagePopup, setClose, setFadeInEnd]);
 
   function backgroundColor(): string {
     if (globalSettingsData.picBackground) {
@@ -65,11 +66,11 @@ function Message_UpperUI({
         }
         // runs after fadeOut
         if (close) {
-          upperVisDispatch({ type: "MESSAGE_CLOSE" });
+          upperUiContext.upperVisDispatch({ type: "MESSAGE_CLOSE" });
         }
       }}
     >
-      <p className="">{upperVisState.messagePopup}</p>
+      <p className="">{upperUiContext.upperVisState.messagePopup}</p>
       {/* <p>Logout successful</p> */}
     </div>
   );

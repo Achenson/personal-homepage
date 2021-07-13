@@ -9,6 +9,8 @@ import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 import { bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
 import { globalSettingsState, focusedTabState } from "../../state/defaultSettings";
 
+import {useUpperUiContext} from "../../utils/upperUiContext"
+
 import {useTabContext} from "../../utils/tabContext"
 
 import {
@@ -37,9 +39,9 @@ interface Props {
   colNumber: number;
   tabID: string | number;
   // tabVisState: TabVisState;
-  upperVisState: UpperVisState;
+  // upperVisState: UpperVisState;
   // tabVisDispatch: React.Dispatch<TabVisAction>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
   // setEditSingleLinkData: React.Dispatch<React.SetStateAction<SingleBookmarkData>>;
 }
 
@@ -51,9 +53,9 @@ function SingleBookmark({
   setBookmarkId,
   colNumber,
   // tabVisState,
-  upperVisState,
+  // upperVisState,
   // tabVisDispatch,
-  upperVisDispatch,
+  // upperVisDispatch,
   tabID,
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
@@ -65,6 +67,8 @@ function SingleBookmark({
   const tabContext = useTabContext()
 
   const [focusedTabData, setFocusedTabData] = focusedTabState.use();
+
+  const upperUiContext = useUpperUiContext()
 
   // let linkURL = new URL(singleBookmarkData.URL)
 
@@ -134,7 +138,7 @@ function SingleBookmark({
                 //   payload: bookmarkId,
                 // });
                 tabContext.tabVisDispatch({type: "EDIT_BOOKMARK_OPEN", payload: bookmarkId})
-                upperVisDispatch({ type: "CLOSE_ALL" });
+                upperUiContext.upperVisDispatch({ type: "CLOSE_ALL" });
                 setBookmarkId(singleBookmarkData.id);
               }}
               aria-label={"Edit bookmark"}

@@ -28,17 +28,19 @@ import {
   focusedTabState,
 } from "../../state/defaultSettings";
 
+import { useUpperUiContext } from "../../utils/upperUiContext";
+
 interface Props {
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: UpperVisState;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: UpperVisState;
 }
 
 function UpperRightMenu({
   setTabType,
-  upperVisDispatch,
-  upperVisState,
-}: Props): JSX.Element {
+}: // upperVisDispatch,
+// upperVisState,
+Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
   // const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
@@ -47,6 +49,7 @@ function UpperRightMenu({
   const [loggedInData, setLoggedInData] = loggedInState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [focusedTabData, setFocusedTabData] = focusedTabState.use();
+  const upperUiContext = useUpperUiContext();
 
   const colLimit = globalSettingsData.limitColGrowth;
 
@@ -56,9 +59,11 @@ function UpperRightMenu({
       onFocus={() => {
         setFocusedTabData(null);
       }}
-      className={`${upperVisState.addTagVis_xs ? "h-14" : "h-7"} ${
-        colLimit ? "sm:h-7" : "xs:h-7"
-      }  w-28 ${colLimit ? "sm:w-56" : "xs:w-56"} block ${
+      className={`${
+        upperUiContext.upperVisState.addTagVis_xs ? "h-14" : "h-7"
+      } ${colLimit ? "sm:h-7" : "xs:h-7"}  w-28 ${
+        colLimit ? "sm:w-56" : "xs:w-56"
+      } block ${
         colLimit ? "sm:flex" : "xs:flex"
       }  justify-between items-center bg-white bg-opacity-80 rounded-md border border-gray-700 `}
       style={{ marginBottom: "2px" }}
@@ -74,7 +79,8 @@ function UpperRightMenu({
           className="h-7 w-7 focus-2-inset-veryDark"
           onClick={() => {
             // setNewBookmarkVis((b) => !b);
-            upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+            // upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
+            upperUiContext.upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
           }}
           tabIndex={7}
           // disabled={areButtonsDisabled()}
@@ -91,7 +97,7 @@ function UpperRightMenu({
           className="h-7 w-7 focus-2-inset-veryDark"
           onClick={() => {
             // setNewTabVis((b) => !b);
-            upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+            upperUiContext.upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
             setTabType("folder");
           }}
           tabIndex={8}
@@ -111,7 +117,7 @@ function UpperRightMenu({
           onClick={() => {
             // setNewTabVis((b) => !b);
 
-            upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+            upperUiContext.upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
             setTabType("note");
           }}
           tabIndex={9}
@@ -126,7 +132,7 @@ function UpperRightMenu({
           className="h-7 w-7 focus-2-inset-veryDark"
           onClick={() => {
             // setNewTabVis((b) => !b);
-            upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
+            upperUiContext.upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
             setTabType("rss");
           }}
           tabIndex={10}
@@ -144,8 +150,8 @@ function UpperRightMenu({
 
       <UpperRightMenu_XS
         setTabType={setTabType}
-        upperVisDispatch={upperVisDispatch}
-        upperVisState={upperVisState}
+        // upperVisDispatch={upperVisDispatch}
+        // upperVisState={upperVisState}
         loggedInData={loggedInData}
         setLoggedInData={setLoggedInData}
       />
@@ -160,7 +166,9 @@ function UpperRightMenu({
           className="h-6 w-6 focus-2-veryDark"
           onClick={() => {
             // setBackgroundSettingsVis((b) => !b);
-            upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
+            upperUiContext.upperVisDispatch({
+              type: "BACKGROUND_SETTINGS_TOGGLE",
+            });
           }}
           tabIndex={11}
           // disabled={areButtonsDisabled()}
@@ -174,7 +182,7 @@ function UpperRightMenu({
         <button
           className="h-6 w-6 focus-2-veryDark"
           onClick={() => {
-            upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
+            upperUiContext.upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
             // setColorsVis((b) => !b);
           }}
           tabIndex={12}
@@ -192,7 +200,7 @@ function UpperRightMenu({
             // setTabOpenedData(null)
 
             // setCloseAllTabsData(true);
-            upperVisDispatch({ type: "SETTINGS_TOGGLE" });
+            upperUiContext.upperVisDispatch({ type: "SETTINGS_TOGGLE" });
           }}
           tabIndex={13}
           // disabled={areButtonsDisabled()}
@@ -210,9 +218,10 @@ function UpperRightMenu({
               onClick={() => {
                 // upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 setLoggedInData(false);
-                upperVisDispatch({ type: "MESSAGE_OPEN_LOGOUT" });
+                upperUiContext.upperVisDispatch({
+                  type: "MESSAGE_OPEN_LOGOUT",
+                });
               }}
-
               tabIndex={14}
               // disabled={areButtonsDisabled()}
               aria-label={"Logout"}
@@ -226,7 +235,7 @@ function UpperRightMenu({
             <button
               className="h-6 w-5 focus-2-veryDark"
               onClick={() => {
-                upperVisDispatch({ type: "PROFILE_TOGGLE" });
+                upperUiContext.upperVisDispatch({ type: "PROFILE_TOGGLE" });
                 // setLoggedInData(true);
               }}
               tabIndex={14}
