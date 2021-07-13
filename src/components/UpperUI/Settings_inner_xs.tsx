@@ -6,18 +6,23 @@ import { ReactComponent as SettingsSVG } from "../../svgs/settingsAlt.svg";
 
 import { UpperVisAction } from "../../utils/interfaces";
 
+import {useUpperUiContext} from "../../utils/upperUiContext"
+
 import { uiColorState } from "../../state/colorsState";
 
 interface Props {
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
   currentSettings: "background" | "colors" | "global";
 }
 
 function Settings_inner_xs({
-  upperVisDispatch,
+  // upperVisDispatch,
   currentSettings,
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
+
+  
+  const upperUiContext = useUpperUiContext()
 
   return (
     <div
@@ -32,7 +37,8 @@ function Settings_inner_xs({
           // setBackgroundSettingsVis((b) => !b);
           if (currentSettings === "background") return;
 
-          upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
+          // upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
+          upperUiContext.upperVisDispatch({type: "BACKGROUND_SETTINGS_TOGGLE"})
         }}
 
       >
@@ -54,7 +60,8 @@ function Settings_inner_xs({
         onClick={() => {
           if (currentSettings === "colors") return;
 
-          upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
+          // upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
+          upperUiContext.upperVisDispatch({type: "COLORS_SETTINGS_TOGGLE"})
           // setColorsVis((b) => !b);
         }}
         aria-label={"Default tab colors"}
@@ -78,7 +85,8 @@ function Settings_inner_xs({
           // setTabOpenedData(null)
 
           // setCloseAllTabsData(true);
-          upperVisDispatch({ type: "SETTINGS_TOGGLE" });
+          // upperVisDispatch({ type: "SETTINGS_TOGGLE" });
+          upperUiContext.upperVisDispatch({type: "SETTINGS_TOGGLE"})
         }}
         aria-label={"Global settings"}
       >

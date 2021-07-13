@@ -125,7 +125,7 @@ function ColorsSettings_UpperUI({
             // style={{ width: "350px", height: "200px" }}
           >
             <Settings_inner_xs
-              upperVisDispatch={upperVisDispatch}
+              // upperVisDispatch={upperVisDispatch}
               currentSettings={"colors"}
             />
 

@@ -8,6 +8,8 @@ import { globalSettingsState } from "../../state/defaultSettings";
 import { uiColorState } from "../../state/colorsState";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
+import {useUpperUiContext} from "../../utils/upperUiContext"
+
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 
 import Settings_inner_xs from "./Settings_inner_xs";
@@ -15,13 +17,13 @@ import Settings_inner_xs from "./Settings_inner_xs";
 interface Props {
   // backgroundSettingsVis: boolean;
   // setBackgroundSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: UpperVisState;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: UpperVisState;
 }
 
 function BackgroundSettings_UpperUI({
-  upperVisDispatch,
-  upperVisState,
+  // upperVisDispatch,
+  // upperVisState,
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
@@ -29,9 +31,11 @@ function BackgroundSettings_UpperUI({
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
+  const upperUiContext = useUpperUiContext()
+
   const windowSize = useWindowSize();
   const [xsScreen, setXsScreen] = useState(
-    () => upperVisState.xsSizing_initial
+    () => upperUiContext.upperVisState.xsSizing_initial
   );
 
   useEffect(() => {
@@ -65,7 +69,8 @@ function BackgroundSettings_UpperUI({
         className="flex flex-col z-50 fixed h-full w-screen justify-center items-center"
         style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
         onClick={() => {
-          upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
+          // upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
+          upperUiContext.upperVisDispatch({type: "BACKGROUND_SETTINGS_TOGGLE"})
         }}
       >
         <div
@@ -85,7 +90,7 @@ function BackgroundSettings_UpperUI({
           >
             <Settings_inner_xs
               currentSettings={"background"}
-              upperVisDispatch={upperVisDispatch}
+              // upperVisDispatch={upperVisDispatch}
             />
             <div className="absolute right-0 top-0 mt-1 mr-1">
               <button
@@ -94,7 +99,8 @@ function BackgroundSettings_UpperUI({
                   // if (backgroundSettingsVis) {
                   //   setBackgroundSettingsVis(false);
                   // }
-                  upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
+                  // upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
+                  upperUiContext.upperVisDispatch({type: "BACKGROUND_SETTINGS_TOGGLE"})
                 }}
                 aria-label={"Close"}
               >

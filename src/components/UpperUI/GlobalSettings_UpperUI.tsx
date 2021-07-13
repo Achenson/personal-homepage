@@ -6,6 +6,7 @@ import { produce } from "immer";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
 import { uiColorState } from "../../state/colorsState";
+import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import {
   rssSettingsState,
@@ -22,14 +23,14 @@ import Settings_inner_xs from "./Settings_inner_xs";
 interface Props {
   // settingsVis: boolean;
   // setSettingsVis: React.Dispatch<React.SetStateAction<boolean>>;
-  upperVisDispatch: React.Dispatch<UpperVisAction>;
-  upperVisState: UpperVisState;
+  // upperVisDispatch: React.Dispatch<UpperVisAction>;
+  // upperVisState: UpperVisState;
   // xsSizing: boolean;
 }
 
 function GlobalSettings_UpperUI({
-  upperVisDispatch,
-  upperVisState,
+  // upperVisDispatch,
+  // upperVisState,
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
@@ -37,10 +38,11 @@ function GlobalSettings_UpperUI({
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
+  const upperUiContext = useUpperUiContext()
 
   const windowSize = useWindowSize();
   const [xsScreen, setXsScreen] = useState(
-    () => upperVisState.xsSizing_initial
+    () => upperUiContext.upperVisState.xsSizing_initial
   );
 
   useEffect(() => {
@@ -97,7 +99,8 @@ function GlobalSettings_UpperUI({
         className="flex flex-col z-50 fixed h-full w-screen justify-center items-center"
         style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
         onClick={() => {
-          upperVisDispatch({ type: "SETTINGS_TOGGLE" });
+          // upperVisDispatch({ type: "SETTINGS_TOGGLE" });
+          upperUiContext.upperVisDispatch({type: "SETTINGS_TOGGLE"})
         }}
       >
         <div
@@ -115,7 +118,7 @@ function GlobalSettings_UpperUI({
             }}
           >
             <Settings_inner_xs
-              upperVisDispatch={upperVisDispatch}
+              // upperVisDispatch={upperVisDispatch}
               currentSettings="global"
             />
 
@@ -123,7 +126,8 @@ function GlobalSettings_UpperUI({
               <button
                 className="h-5 w-5 focus-2-offset-dark"
                 onClick={() => {
-                  upperVisDispatch({ type: "SETTINGS_TOGGLE" });
+                  // upperVisDispatch({ type: "SETTINGS_TOGGLE" });
+                  upperUiContext.upperVisDispatch({type: "SETTINGS_TOGGLE"})
                 }}
                 aria-label={"Close"}
               >

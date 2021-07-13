@@ -285,14 +285,14 @@ function Main({}: Props): JSX.Element {
         )}
         {upperVisState.backgroundSettingsVis && (
           <Background_UpperUI
-            upperVisDispatch={upperVisDispatch}
-            upperVisState={upperVisState}
+            // upperVisDispatch={upperVisDispatch}
+            // upperVisState={upperVisState}
           />
         )}
         {upperVisState.settingsVis && (
           <Settings_UpperUI
-            upperVisDispatch={upperVisDispatch}
-            upperVisState={upperVisState}
+            // upperVisDispatch={upperVisDispatch}
+            // upperVisState={upperVisState}
           />
         )}
 
