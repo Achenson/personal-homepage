@@ -568,6 +568,12 @@ DONE 474. bug: cannot delete note & RSS when they are open (fixed with optional 
 
 329. code order (useEffect, func itp) eg. in 
 331. unmounted component error (err mentioned alread?) / error in console.log if empty tag auto deletes itself
+also when dragging tabs to empty cols!
+
+Warning: Can't perform a React state update on an unmounted component. This is a no-op,
+ but it indicates a memory leak in your application.
+ To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+ 
 332. make biggest components smaller/extaract more funcions out? (max 500 lines of code)
 
 333. clean tailwind files in the end
@@ -579,16 +585,15 @@ DONE 474. bug: cannot delete note & RSS when they are open (fixed with optional 
 446. FAQ note
 447. proper starting links etc
 
-456. unify SingleColor_DefaultAndColumn and SingleColor_Tab
+456. unify SingleColor_DefaultAndColumn and SingleColor_Tab & SingleBackground?
 
 465. explanation how the EyeOff works somewhere
 467. unify ColorsToChoose_DefaultAndColumn and ColorsToChoose_Tab+
 472. app title instead of react App
 
-tailwind 2.0.2
 
-import {useUpperUiContext} from "../../utils/upperUiContext"
-const upperUiContext = useUpperUiContext()
+
+
 
 
 Browserslist: caniuse-lite is outdated. Please run:
