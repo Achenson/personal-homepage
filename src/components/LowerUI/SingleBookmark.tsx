@@ -1,6 +1,7 @@
 import React from "react";
 import { produce } from "immer";
 import { bookmarksDataState } from "../../state/tabsAndBookmarks";
+import {useBookmarksStore} from "../../state/zustandStore"
 
 import { ReactComponent as PencilSmallSVG } from "../../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../../svgs/trashSmall.svg";
@@ -69,6 +70,12 @@ function SingleBookmark({
   const [focusedTabData, setFocusedTabData] = focusedTabState.use();
 
   const upperUiContext = useUpperUiContext()
+
+
+
+  const bookmarks = useBookmarksStore(state => state.bookmarks)
+
+  const deleteBookmark = useBookmarksStore(state => state.deleteBookmark)
 
   // let linkURL = new URL(singleBookmarkData.URL)
 
@@ -183,19 +190,29 @@ function SingleBookmark({
 
                 setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
 
-                setBookmarksData((previous) =>
-                  produce(previous, (updated) => {
-                    let bookmarkToDelete = updated.find(
-                      (obj) => obj.id === singleBookmarkData.id
-                    );
-                    if (bookmarkToDelete) {
-                      let tabIndex = updated.indexOf(bookmarkToDelete);
-                      updated.splice(tabIndex, 1);
-                    }
-                  })
-                );
 
+
+                // setBookmarksData((previous) =>
+                //   produce(previous, (updated) => {
+                //     let bookmarkToDelete = updated.find(
+                //       (obj) => obj.id === singleBookmarkData.id
+                //     );
+                //     if (bookmarkToDelete) {
+                //       let tabIndex = updated.indexOf(bookmarkToDelete);
+                //       updated.splice(tabIndex, 1);
+                //     }
+                //   })
+                // );
+
+                let bookmarkToDelete = bookmarks.find((obj) => obj.id === bookmarkId)
                 
+                if (bookmarkToDelete) {
+                  deleteBookmark(bookmarkId)
+                }
+
+
+
+
               }}
               // disabled={areButtonsDisabled()}
               aria-label={"Delete bookmark"}

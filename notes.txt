@@ -591,6 +591,8 @@ Warning: Can't perform a React state update on an unmounted component. This is a
 467. unify ColorsToChoose_DefaultAndColumn and ColorsToChoose_Tab+
 472. app title instead of react App
 473. multiTouch backend: requires react 16?
+474. ColorsToChoose_DefaultAndColumns: useEffect deps?
+475. transition to zustand
 
 
 
