@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useReducer, useCallback } from "react";
 
+import {useBookmarksStore} from "../../state/zustandStore"
+
 // import Rect, { useRect } from "@reach/rect";
 
 import { produce } from "immer";
@@ -111,6 +113,8 @@ Props): JSX.Element {
 
   // needed for immediate tab content opening/closing after locking/unlocking
   const [tabOpened_local, setTabOpened_local] = useState(tabOpened);
+
+  const bookmarks = useBookmarksStore(state => state.bookmarks)
 
   const upperUiContext = useUpperUiContext()
 
@@ -742,7 +746,8 @@ Props): JSX.Element {
 
         {tabOpened_local && tabType === "folder" && (
           <div>
-            {bookmarksData
+            {bookmarks
+            // {bookmarksData
               .filter((el) => el.tags.indexOf(tabID) > -1)
               .map((el, i) => {
                 return (
