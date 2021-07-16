@@ -1,6 +1,7 @@
 import React from "react";
 
 import { tabsDataState } from "../../state/tabsAndBookmarks";
+import {useTabsStore} from "../../state/zustandStore"
 
 import {
   columnsColorsState,
@@ -43,7 +44,10 @@ function Column({
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [backgroundColorData, setbackgroundColorData] =
     backgroundColorState.use();
-  const [tabsData, setTabsData] = tabsDataState.use();
+  // const [tabsData, setTabsData] = tabsDataState.use();
+
+  const tabs = useTabsStore(store => store.tabs)
+
   const upperUiContext = useUpperUiContext()
 
   function calcColumnColor(
@@ -96,7 +100,7 @@ function Column({
     }
   }
 
-  let sortedTabs = tabsData
+  let sortedTabs = tabs
     .filter((el) => el.column === colNumber)
     .sort((a, b) => a.priority - b.priority);
 
@@ -108,7 +112,7 @@ function Column({
     lastTabId = null;
   }
 
-  let tabDataLength = tabsData.filter((el) => el.column === colNumber).length;
+  let tabDataLength = tabs.filter((el) => el.column === colNumber).length;
 
   function isThisLastGap(
     lastTabId: number | string | null,
@@ -190,7 +194,7 @@ function Column({
         ),
       }}
     >
-      {tabsData
+      {tabs
         .filter((el) => el.column === colNumber)
         // lower priority, higher in the column
         .sort((a, b) => a.priority - b.priority)
