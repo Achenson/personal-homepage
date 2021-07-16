@@ -7,6 +7,9 @@ import {useBookmarksStore} from "../../state/zustandStore"
 import { produce } from "immer";
 
 import { tabsDataState } from "../../state/tabsAndBookmarks";
+
+import {useTabsStore} from "../../state/zustandStore"
+
 import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 import { deletedTabState } from "../../state/tabsAndBookmarks";
 import {
@@ -116,6 +119,9 @@ Props): JSX.Element {
 
   const bookmarks = useBookmarksStore(state => state.bookmarks)
 
+  const tabs = useTabsStore(store => store.tabs)
+  const toggleTab = useTabsStore(store => store.toggleTab)
+
   const upperUiContext = useUpperUiContext()
 
   useEffect(() => {
@@ -218,18 +224,23 @@ Props): JSX.Element {
           editBookmarkVis: null,
         };
       case "TAB_CONTENT_TOGGLE":
-        setTabOpenedData(tabID);
+      // !!!!!! to change 
+      setTabOpenedData(tabID);
 
-        setTabsData((previous) =>
-          produce(previous, (updated) => {
-            let tabToUpdate = updated.find((obj) => obj.id === tabID);
+        // setTabsData((previous) =>
+        //   produce(previous, (updated) => {
+        //     let tabToUpdate = updated.find((obj) => obj.id === tabID);
 
-            if (tabToUpdate) {
-              let tabIndex = updated.indexOf(tabToUpdate);
-              updated[tabIndex].opened = !tabOpened;
-            }
-          })
-        );
+        //     if (tabToUpdate) {
+        //       let tabIndex = updated.indexOf(tabToUpdate);
+        //       updated[tabIndex].opened = !tabOpened;
+        //     }
+        //   })
+        // );
+
+        toggleTab(tabID, tabOpened)
+
+        
 
         return {
           ...state,

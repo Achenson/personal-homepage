@@ -1,6 +1,10 @@
 // import { newRidgeState } from "react-ridge-state";
 
+
+
 import create from "zustand";
+import produce from 'immer'
+
 
 import { SingleTabData } from "../utils/interfaces";
 import { SingleBookmarkData } from "../utils/interfaces";
@@ -8,6 +12,7 @@ import { SingleBookmarkData } from "../utils/interfaces";
 // this can be used everywhere in your application
 export const useTabsStore = create<{
   tabs: SingleTabData[];
+  toggleTab: (tabID: string | number, tabOpened: boolean) => void;
 }>((set) => ({
   tabs: [
     {
@@ -173,6 +178,10 @@ export const useTabsStore = create<{
       rssLink: "http://rss.cnn.com/rss/edition.rss",
     },
   ],
+  toggleTab: (tabID: string | number, tabOpened: boolean) => set(produce(state => {
+    let tabToUpdate = state.tabs.find((obj: SingleTabData ) => obj.id === tabID);
+    state.tabs[state.tabs.indexOf(tabToUpdate)].opened = !tabOpened
+  }))
 }));
 
 export const useBookmarksStore = create<{
