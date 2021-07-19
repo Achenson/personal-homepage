@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useReducer, useCallback } from "react";
 
-import {useBookmarksStore} from "../../state/zustandStore"
+import {useBookmarks} from "../../state/useBookmarks"
 
 // import Rect, { useRect } from "@reach/rect";
 
@@ -8,7 +8,7 @@ import { produce } from "immer";
 
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 
-import {useTabsStore} from "../../state/zustandStore"
+import {useTabs} from "../../state/useTabs"
 
 import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 import { deletedTabState } from "../../state/tabsAndBookmarks";
@@ -117,10 +117,10 @@ Props): JSX.Element {
   // needed for immediate tab content opening/closing after locking/unlocking
   const [tabOpened_local, setTabOpened_local] = useState(tabOpened);
 
-  const bookmarks = useBookmarksStore(state => state.bookmarks)
+  const bookmarks = useBookmarks(state => state.bookmarks)
 
-  const tabs = useTabsStore(store => store.tabs)
-  const toggleTab = useTabsStore(store => store.toggleTab)
+  const tabs = useTabs(store => store.tabs)
+  const toggleTab = useTabs(store => store.toggleTab)
 
   const upperUiContext = useUpperUiContext()
 

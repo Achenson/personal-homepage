@@ -1,7 +1,7 @@
 import React from "react";
 
 import { tabsDataState } from "../../state/tabsAndBookmarks";
-import {useTabsStore} from "../../state/zustandStore"
+import {useTabs} from "../../state/useTabs"
 
 import {
   columnsColorsState,
@@ -46,7 +46,7 @@ function Column({
     backgroundColorState.use();
   // const [tabsData, setTabsData] = tabsDataState.use();
 
-  const tabs = useTabsStore(store => store.tabs)
+  const tabs = useTabs(store => store.tabs)
 
   const upperUiContext = useUpperUiContext()
 

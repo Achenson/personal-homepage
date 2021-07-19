@@ -1,7 +1,7 @@
 import React from "react";
 import { produce } from "immer";
 import { bookmarksDataState } from "../../state/tabsAndBookmarks";
-import {useBookmarksStore} from "../../state/zustandStore"
+import {useBookmarks} from "../../state/useBookmarks"
 
 import { ReactComponent as PencilSmallSVG } from "../../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../../svgs/trashSmall.svg";
@@ -73,9 +73,9 @@ function SingleBookmark({
 
 
 
-  const bookmarks = useBookmarksStore(state => state.bookmarks)
+  const bookmarks = useBookmarks(state => state.bookmarks)
 
-  const deleteBookmark = useBookmarksStore(state => state.deleteBookmark)
+  const deleteBookmark = useBookmarks(state => state.deleteBookmark)
 
   // let linkURL = new URL(singleBookmarkData.URL)
 
