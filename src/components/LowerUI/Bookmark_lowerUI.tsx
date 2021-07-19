@@ -118,10 +118,12 @@ function Bookmark_lowerUI({
 // left,
 // tabWidth,
 Props): JSX.Element {
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   // const [bookmarksAllTagsData, setBookmarksAllTagsData] =
   //   bookmarksAllTagsState.use();
 
+  const addBookmark = useBookmarks(store => store.addBookmark);
+  const editBookmark = useBookmarks(store => store.editBookmark);
   const bookmarks = useBookmarks(store => store.bookmarks)  
   const bookmarksAllTags = useBookmarks(store => store.bookmarksAllTags)  
   const setBookmarksAllTags = useBookmarks(store => store.setBookmarksAllTags)  
@@ -310,7 +312,7 @@ Props): JSX.Element {
     function titleUniquenessCheck() {
       let isUnique: boolean = true;
 
-      bookmarksData.forEach((obj, i) => {
+      bookmarks.forEach((obj, i) => {
         if (obj.title === titleInput) {
           isUnique = false;
         }
@@ -368,17 +370,20 @@ Props): JSX.Element {
     });
 
     if (bookmarkComponentType === "edit") {
-      setBookmarksData((previous) =>
-        produce(previous, (updated) => {
-          let bookmarkToUpdate = updated.find((obj) => obj.id === bookmarkId);
-          //"if" to get rid of ts error
-          if (bookmarkToUpdate) {
-            bookmarkToUpdate.title = titleInput;
-            bookmarkToUpdate.URL = urlInput;
-            bookmarkToUpdate.tags = [...tagsInputArr_ToIds];
-          }
-        })
-      );
+      // setBookmarksData((previous) =>
+      //   produce(previous, (updated) => {
+      //     let bookmarkToUpdate = updated.find((obj) => obj.id === bookmarkId);
+      //     //"if" to get rid of ts error
+      //     if (bookmarkToUpdate) {
+      //       bookmarkToUpdate.title = titleInput;
+      //       bookmarkToUpdate.URL = urlInput;
+      //       bookmarkToUpdate.tags = [...tagsInputArr_ToIds];
+      //     }
+      //   })
+      // );
+
+        editBookmark(bookmarkId, titleInput, urlInput, tagsInputArr_ToIds)
+
 
       // for deleting empty folder
 
@@ -388,7 +393,7 @@ Props): JSX.Element {
         // if the tag was present in initial tags, but is not present in the end
         if (tagsInputArr_ToIds.indexOf(el) === -1) {
           // all bookmarks except for curren
-          let filteredBookmarks = bookmarksData.filter(
+          let filteredBookmarks = bookmarks.filter(
             (obj) => obj.id !== (currentBookmark as SingleBookmarkData).id
           );
 
@@ -422,13 +427,18 @@ Props): JSX.Element {
 
       setBookmarksAllTags([...bookmarksAllTagsData_new]);
     } else {
-      setBookmarksData((previous) =>
-        produce(previous, (updated) => {
-          updated.push(
-            createBookmark(titleInput, urlInput, tagsInputArr_ToIds)
-          );
-        })
-      );
+
+      addBookmark(createBookmark(titleInput, urlInput, tagsInputArr_ToIds))
+
+      // setBookmarksData((previous) =>
+      //   produce(previous, (updated) => {
+      //     updated.push(
+      //       createBookmark(titleInput, urlInput, tagsInputArr_ToIds)
+      //     );
+      //   })
+      // );
+
+
     }
   }
 

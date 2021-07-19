@@ -17,8 +17,10 @@ import { produce } from "immer";
 
 import {
   tabsDataState,
-  bookmarksDataState,
+  // bookmarksDataState,
 } from "../../state/tabsAndBookmarks";
+
+import {useBookmarks} from "../../state/useBookmarks"
 
 import { rssSettingsState } from "../../state/defaultSettings";
 import {useTabContext} from "../../utils/tabContext"
@@ -87,7 +89,11 @@ Props): JSX.Element {
     rssLink = currentTab.rssLink;
   }
 
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  const bookmarks = useBookmarks(state => state.bookmarks);
+  const editTag = useBookmarks(state => state.editTag)
+  const deleteTag = useBookmarks(state => state.deleteTag);
+
   // for note only
   const [textAreaValue, setTextAreaValue] = useState<string | null>(
     currentTab.noteInput as string | null
@@ -140,7 +146,7 @@ Props): JSX.Element {
 
   function calcArrOfBookmarksNames() {
     // filtered lknks
-    let filteredBookmarks = bookmarksData.filter(
+    let filteredBookmarks = bookmarks.filter(
       (obj) => obj.tags.indexOf(currentTab.id) > -1
     );
 
@@ -289,7 +295,7 @@ Props): JSX.Element {
     function bookmarkExistenceCheck() {
       let bookmarksArr: string[] = [];
 
-      bookmarksData.forEach((obj) => {
+      bookmarks.forEach((obj) => {
         bookmarksArr.push(obj.title);
       });
 
@@ -369,38 +375,96 @@ Props): JSX.Element {
     );
 
     if (tabType === "folder") {
+
+
       // changing tags in bookmarks
-      setBookmarksData((previous) =>
-        produce(previous, (updated) => {
-          updated.forEach((obj) => {
-            // let bookmarksInputArr = selectablesInputStr.split(", ");
+      // setBookmarksData((previous) =>
+      //   produce(previous, (updated) => {
+      //     updated.forEach((obj) => {
+      //       // let bookmarksInputArr = selectablesInputStr.split(", ");
 
-            // make array of missing bookmarks
-            let missingBookmarks: string[] = [];
+      //       // make array of missing bookmarks
+      //       let missingBookmarks: string[] = [];
 
-            arrOfBookmarksNames.forEach((el, i) => {
-              if (bookmarksInputArr.indexOf(el) === -1) {
-                missingBookmarks.push(el);
-              }
-            });
+      //       arrOfBookmarksNames.forEach((el, i) => {
+      //         if (bookmarksInputArr.indexOf(el) === -1) {
+      //           missingBookmarks.push(el);
+      //         }
+      //       });
 
-            // if this bookmarks' title is inside missing bookmarks
-            // cut out tabID (current folder) from tags
-            if (missingBookmarks.indexOf(obj.title) > -1) {
-              obj.tags.splice(obj.tags.indexOf(tabID), 1);
-            }
+      //       // if this bookmarks' title is inside missing bookmarks
+      //       // cut out tabID (current folder) from tags
+      //       if (missingBookmarks.indexOf(obj.title) > -1) {
+      //         obj.tags.splice(obj.tags.indexOf(tabID), 1);
+      //       }
 
-            //  if link title is present in folder's new input for tags & if folder title wasn't already in tags
-            // add new tag
-            if (
-              bookmarksInputArr.indexOf(obj.title) > -1 &&
-              obj.tags.indexOf(tabID) === -1
-            ) {
-              obj.tags.push(tabID);
-            }
-          });
-        })
-      );
+      //       //  if link title is present in folder's new input for tags & if folder title wasn't already in tags
+      //       // add new tag
+      //       if (
+      //         bookmarksInputArr.indexOf(obj.title) > -1 &&
+      //         obj.tags.indexOf(tabID) === -1
+      //       ) {
+      //         obj.tags.push(tabID);
+      //       }
+      //     });
+      //   })
+      // );
+
+
+          // changing tags in bookmarks
+          // setBookmarksData((previous) =>
+          // produce(previous, (updated) => {
+
+
+
+            // bookmarks.forEach((obj) => {
+            //   // let bookmarksInputArr = selectablesInputStr.split(", ");
+  
+            //   // make array of missing bookmarks
+            //   let missingBookmarks: string[] = [];
+  
+            //   arrOfBookmarksNames.forEach((el, i) => {
+            //     if (bookmarksInputArr.indexOf(el) === -1) {
+            //       missingBookmarks.push(el);
+            //     }
+            //   });
+  
+            //   // if this bookmarks' title is inside missing bookmarks
+            //   // cut out tabID (current folder) from tags
+            //   if (missingBookmarks.indexOf(obj.title) > -1) {
+            //     obj.tags.splice(obj.tags.indexOf(tabID), 1);
+            //   }
+
+
+
+  
+            //   //  if link title is present in folder's new input for tags & if folder title wasn't already in tags
+            //   // add new tag
+            //   if (
+            //     bookmarksInputArr.indexOf(obj.title) > -1 &&
+            //     obj.tags.indexOf(tabID) === -1
+            //   ) {
+            //     obj.tags.push(tabID);
+            //   }
+            // });
+
+             // changing a tag in bookmarks
+            editTag(tabID, arrOfBookmarksNames, bookmarksInputArr);
+
+
+
+
+          // })
+        // );
+
+
+
+
+
+
+
+
+
     }
   }
 
@@ -610,19 +674,28 @@ Props): JSX.Element {
                 // setEditTabVis((b) => !b);
                 // tabVisDispatch({ type: "EDIT_TOGGLE" });
                 tabContext.tabVisDispatch({type: "EDIT_TOGGLE"})
+
                 // removing deleted tab(tag) for bookmarks
-                bookmarksData.forEach((obj, i) => {
-                  if (obj.tags.indexOf(tabTitle as string) > -1) {
-                    setBookmarksData((previous) =>
-                      produce(previous, (updated) => {
-                        updated[i].tags.splice(
-                          obj.tags.indexOf(tabTitle as string),
-                          1
-                        );
-                      })
-                    );
-                  }
-                });
+                
+                // bookmarks.forEach((obj, i) => {
+                  //   if (obj.tags.indexOf(tabTitle as string) > -1) {
+                    //     setBookmarksData((previous) =>
+                    //       produce(previous, (updated) => {
+                      //         updated[i].tags.splice(
+                //           obj.tags.indexOf(tabTitle as string),
+                //           1
+                //         );
+                //       })
+                //     );
+                //   }
+                // });
+                
+                // removing deleted tab(tag) for bookmarks
+                deleteTag(tabTitle);
+
+
+
+
               }}
               aria-label={"Delete tab"}
             >

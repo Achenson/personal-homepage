@@ -112,6 +112,7 @@ Props): JSX.Element {
 
   const bookmarksAllTags = useBookmarks(store => store.bookmarksAllTags)  
   const setBookmarksAllTags = useBookmarks(store => store.setBookmarksAllTags)  
+  const addBookmark = useBookmarks(store => store.addBookmark)  
 
   // const [bookmarksAllTagsData, setBookmarksAllTagsData] =
   //   bookmarksAllTagsState.use();
@@ -267,7 +268,7 @@ Props): JSX.Element {
     }
   }
 
-  function addBookmark() {
+  function addBookmarkWrapper() {
     // !!! diff in Link_lower_JSX
     // all tags always being added
     let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
@@ -308,11 +309,13 @@ Props): JSX.Element {
       }
     });
 
-    setBookmarksData((previous) =>
-      produce(previous, (updated) => {
-        updated.push(createBookmark(titleInput, urlInput, tagsInputArr_ToIds));
-      })
-    );
+    // setBookmarksData((previous) =>
+    //   produce(previous, (updated) => {
+    //     updated.push(createBookmark(titleInput, urlInput, tagsInputArr_ToIds));
+    //   })
+    // );
+
+    addBookmark(createBookmark(titleInput, urlInput, tagsInputArr_ToIds))
   }
 
   function handleKeyDown(event: KeyboardEvent) {
@@ -332,7 +335,7 @@ Props): JSX.Element {
     if (isThereAnError) return;
 
     // 1. adding bookmark  2. adding folder/s if some tags do not correspond to existing folders
-    addBookmark();
+    addBookmarkWrapper();
     // upperVisDispatch({ type: "NEW_BOOKMARK_TOGGLE" });
     upperUiContext.upperVisDispatch({type: "NEW_BOOKMARK_TOGGLE"})
   }

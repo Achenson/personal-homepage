@@ -6,7 +6,8 @@ import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 import { ReactComponent as XsmallSVG } from "../../svgs/x-small.svg";
 
-import { bookmarksDataState } from "../../state/tabsAndBookmarks";
+// import { bookmarksDataState } from "../../state/tabsAndBookmarks";
+import { useBookmarks } from "../../state/useBookmarks";
 
 import { handleKeyDown_inner } from "../../utils/func_handleKeyDown_inner";
 
@@ -27,7 +28,9 @@ function EditTab_folder({
   setSelectablesInputStr,
   saveFunc,
 }: Props): JSX.Element {
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+
+  const bookmarks = useBookmarks(state => state.bookmarks)
 
   let selectablesRef = useRef<HTMLInputElement>(null);
 
@@ -114,13 +117,13 @@ function EditTab_folder({
   ]);
 
   function makeInitialBookmarks(): string[] {
-    let bookmarks: string[] = [];
+    let bookmarksInitial: string[] = [];
 
-    bookmarksData.forEach((obj) => {
-      bookmarks.push(obj.title);
+    bookmarks.forEach((obj) => {
+      bookmarksInitial.push(obj.title);
     });
 
-    return bookmarks;
+    return bookmarksInitial;
   }
 
   function handleKeyDown(event: KeyboardEvent) {
