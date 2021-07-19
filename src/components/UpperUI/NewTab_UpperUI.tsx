@@ -34,7 +34,7 @@ import { useBookmarks } from "../../state/useBookmarks";
 import { UpperVisAction } from "../../utils/interfaces";
 import { tabErrors } from "../../utils/errors";
 
-import {useUpperUiContext} from "../../utils/upperUiContext"
+import { useUpperUiContext } from "../../utils/upperUiContext";
 
 import SelectableList from "../Shared/SelectableList";
 
@@ -62,17 +62,22 @@ Props): JSX.Element {
 
   const [tabsData, setTabsData] = tabsDataState.use();
 
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+
+  const bookmarks = useBookmarks((state) => state.bookmarks);
+  const addTag = useBookmarks((state) => state.addTag);
 
   // const [bookmarksAllTagsData, setBookmarksAllTagsData] =
   //   bookmarksAllTagsState.use();
 
-  const bookmarksAllTags = useBookmarks(store => store.bookmarksAllTags)  
-  const setBookmarksAllTags = useBookmarks(store => store.setBookmarksAllTags)  
+  const bookmarksAllTags = useBookmarks((store) => store.bookmarksAllTags);
+  const setBookmarksAllTags = useBookmarks(
+    (store) => store.setBookmarksAllTags
+  );
 
   const [uiColorData, setUiColorData] = uiColorState.use();
 
-  const upperUiContext = useUpperUiContext()
+  const upperUiContext = useUpperUiContext();
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -179,13 +184,13 @@ Props): JSX.Element {
   ]);
 
   function makeInitialBookmarks(): string[] {
-    let bookmarks: string[] = [];
+    let bookmarksInitial: string[] = [];
 
-    bookmarksData.forEach((obj) => {
-      bookmarks.push(obj.title);
+    bookmarks.forEach((obj) => {
+      bookmarksInitial.push(obj.title);
     });
 
-    return bookmarks;
+    return bookmarksInitial;
   }
 
   function renderColsNumberControls() {
@@ -321,7 +326,7 @@ Props): JSX.Element {
     function bookmarkExistenceCheck() {
       let bookmarksArr: string[] = [];
 
-      bookmarksData.forEach((obj) => {
+      bookmarks.forEach((obj) => {
         bookmarksArr.push(obj.title);
       });
 
@@ -410,18 +415,21 @@ Props): JSX.Element {
       );
 
       // updating links data (tags array)
-      setBookmarksData((previous) =>
-        produce(previous, (updated) => {
-          updated.forEach((obj) => {
-            if (
-              bookmarksInputArr.indexOf(obj.title) > -1 &&
-              obj.tags.indexOf(newFolderTab.id) === -1
-            ) {
-              obj.tags.push(newFolderTab.id);
-            }
-          });
-        })
-      );
+      // setBookmarksData((previous) =>
+      // produce(previous, (updated) => {
+      //   updated.forEach((obj) => {
+      //     if (
+      //       bookmarksInputArr.indexOf(obj.title) > -1 &&
+      //       obj.tags.indexOf(newFolderTab.id) === -1
+      //       ) {
+      //         obj.tags.push(newFolderTab.id);
+      //       }
+      //     });
+      //   })
+      //   );
+
+      // updating links data (tags array)
+      addTag(newFolderTab.id, bookmarksInputArr);
     }
 
     if (tabType === "rss") {
@@ -460,7 +468,7 @@ Props): JSX.Element {
     // 1. adding Tab(Folder/RSS?Notes) 2.updating Bookmarks with tags (same as new folder title)
     addTab();
     // upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-    upperUiContext.upperVisDispatch({type: "NEW_TAB_TOGGLE"})
+    upperUiContext.upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
   }
 
   return (
@@ -474,7 +482,7 @@ Props): JSX.Element {
         style={{ backgroundColor: "rgba(90, 90, 90, 0.4)" }}
         onClick={() => {
           // upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-          upperUiContext.upperVisDispatch({type: "NEW_TAB_TOGGLE"})
+          upperUiContext.upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
         }}
       >
         <div
@@ -698,7 +706,7 @@ Props): JSX.Element {
                 e.preventDefault();
                 // setNewTabVis((b) => !b);
                 // upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
-                upperUiContext.upperVisDispatch({type: "NEW_TAB_TOGGLE"})
+                upperUiContext.upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
               }}
               aria-label={"Close"}
             >

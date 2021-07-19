@@ -107,9 +107,10 @@ function NewBookmark_UpperUI({
   regexForLink,
 }: // setBookmarkVis,
 Props): JSX.Element {
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
 
+  const bookmarks = useBookmarks(store => store.bookmarks)
   const bookmarksAllTags = useBookmarks(store => store.bookmarksAllTags)  
   const setBookmarksAllTags = useBookmarks(store => store.setBookmarksAllTags)  
   const addBookmark = useBookmarks(store => store.addBookmark)  
@@ -258,7 +259,7 @@ Props): JSX.Element {
     function titleUniquenessCheck() {
       let isUnique: boolean = true;
 
-      bookmarksData.forEach((obj, i) => {
+      bookmarks.forEach((obj, i) => {
         if (obj.title === titleInput) {
           isUnique = false;
         }

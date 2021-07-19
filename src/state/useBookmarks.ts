@@ -17,8 +17,13 @@ interface UseBookmarks {
     removeId: string | number,
     singleBookmarkData: SingleBookmarkData
   ) => void;
+  addTag: (newFolderTabId: string, bookmarksInputArr: string[]) => void;
   // changing or adding a tag in all bookmarks
-  editTag: (tabID: string | number, arrOfBookmarksNames: string[], bookmarksInputArr: string[]) => void;
+  editTag: (
+    tabID: string | number,
+    arrOfBookmarksNames: string[],
+    bookmarksInputArr: string[]
+  ) => void;
   // delete tag in all bookmarks
   deleteTag: (tabTitle: string) => void;
   setBookmarksAllTags: (newTags: (string | number)[]) => void;
@@ -99,6 +104,21 @@ export const useBookmarks = create<UseBookmarks>((set, get) => ({
     }));
   },
 
+  addTag: (newFolderTabId, bookmarksInputArr) => {
+    // updating links data (tags array)
+    set(
+      produce((state: UseBookmarks) => {
+        state.bookmarks.forEach((obj) => {
+          if (
+            bookmarksInputArr.indexOf(obj.title) > -1 &&
+            obj.tags.indexOf(newFolderTabId) === -1
+          ) {
+            obj.tags.push(newFolderTabId);
+          }
+        });
+      })
+    );
+  },
   editTag: (tabID, arrOfBookmarksNames, bookmarksInputArr) => {
     set(
       produce((state: UseBookmarks) => {
@@ -134,27 +154,32 @@ export const useBookmarks = create<UseBookmarks>((set, get) => ({
   },
 
   deleteTag: (tabTitle) => {
-    get().bookmarks.forEach((obj, i) => {
-      if (obj.tags.indexOf(tabTitle as string) > -1) {
-        set(
-          produce((state: UseBookmarks) => {
+    // get().bookmarks.forEach((obj, i) => {
+    // if (obj.tags.indexOf(tabTitle as string) > -1) {
+
+    set(
+      produce((state: UseBookmarks) => {
+        state.bookmarks.forEach((obj, i) => {
+          if (obj.tags.indexOf(tabTitle as string) > -1) {
             state.bookmarks[i].tags.splice(
               obj.tags.indexOf(tabTitle as string),
               1
             );
-          })
-        );
+          }
+        });
+      })
+    );
 
-        // setBookmarksData((previous) =>
-        //   produce(previous, (updated) => {
-        //     updated[i].tags.splice(
-        //       obj.tags.indexOf(tabTitle as string),
-        //       1
-        //     );
-        //   })
-        // );
-      }
-    });
+    // setBookmarksData((previous) =>
+    //   produce(previous, (updated) => {
+    //     updated[i].tags.splice(
+    //       obj.tags.indexOf(tabTitle as string),
+    //       1
+    //     );
+    //   })
+    // );
+    // }
+    // });
   },
 
   setBookmarksAllTags: (newTags) => {
