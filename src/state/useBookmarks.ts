@@ -5,11 +5,61 @@ import produce from "immer";
 
 import { SingleBookmarkData } from "../utils/interfaces";
 
-
 export const useBookmarks = create<{
+  deleteBookmark: (
+    removeId: string | number,
+    singleBookmarkData: SingleBookmarkData
+  ) => void;
+  setBookmarksAllTags: (newTags: (string|number)[]) => void;
+  bookmarksAllTags: (string | number)[];
   bookmarks: SingleBookmarkData[];
-  deleteBookmark: (removeId: string | number) => void;
-}>((set) => ({
+}>((set, get) => ({
+  deleteBookmark: (removeId, singleBookmarkData) => {
+    let tagsIdsToDelete: (string | number)[] = [];
+
+    singleBookmarkData.tags.forEach((el) => {
+      let filteredBookmarks = get().bookmarks.filter(
+        (obj) => obj.id !== singleBookmarkData.id
+      );
+
+      let isElPresent: boolean = false;
+
+      filteredBookmarks.forEach((obj) => {
+        if (obj.tags.indexOf(el) > -1) {
+          isElPresent = true;
+          return;
+        }
+      });
+
+      if (!isElPresent && el !== "ALL_TAGS") {
+        tagsIdsToDelete.push(el);
+      }
+    });
+
+    let bookmarksAllTagsData_new: (string | number)[] = [];
+
+    get().bookmarksAllTags.forEach((el) => {
+      if (tagsIdsToDelete.indexOf(el) === -1) {
+        bookmarksAllTagsData_new.push(el);
+      }
+    });
+
+    // setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
+
+    set((state) => ({
+      ...state,
+      bookmarks: state.bookmarks.filter(({ id }) => id !== removeId),
+      bookmarksAllTags: [...bookmarksAllTagsData_new],
+    }));
+  },
+  
+  setBookmarksAllTags: (newTags) => {
+    set((state) => ({
+      ...state,
+      bookmarksAllTags: [...newTags],
+    }));
+  },
+  bookmarksAllTags: ["ALL_TAGS", "2", "3"],
   bookmarks: [
     {
       id: 1,
@@ -47,14 +97,12 @@ export const useBookmarks = create<{
       tags: ["ALL_TAGS"],
     },
   ],
-  deleteBookmark: (removeId: string | number) =>
-    set((state) => ({
-      ...state,
-      bookmarks: state.bookmarks.filter(({ id }) => id !== removeId),
-    })),
 }));
 
-
-// let bookmarksAllTagsState = <(string | number)[]>["ALL_TAGS", "2", "3"];
+export const bookmarksAllTagsState = <(string | number)[]>[
+  "ALL_TAGS",
+  "2",
+  "3",
+];
 
 // let deletedTabState = <string | number>"";

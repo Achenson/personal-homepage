@@ -9,6 +9,8 @@ import { produce } from "immer";
 import { createBookmark, createFolderTab} from "../../utils/objCreators";
 import {useTabContext} from "../../utils/tabContext"
 
+import { useBookmarks } from "../../state/useBookmarks";
+
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 import { ReactComponent as XsmallSVG } from "../../svgs/x-small.svg";
@@ -117,8 +119,12 @@ function Bookmark_lowerUI({
 // tabWidth,
 Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-  const [bookmarksAllTagsData, setBookmarksAllTagsData] =
-    bookmarksAllTagsState.use();
+  // const [bookmarksAllTagsData, setBookmarksAllTagsData] =
+  //   bookmarksAllTagsState.use();
+
+  const bookmarks = useBookmarks(store => store.bookmarks)  
+  const bookmarksAllTags = useBookmarks(store => store.bookmarksAllTags)  
+  const setBookmarksAllTags = useBookmarks(store => store.setBookmarksAllTags)  
 
   const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -342,13 +348,13 @@ Props): JSX.Element {
 
         //... and add new folder tab to the main tags list
 
-        let newBookmarksAllTagsData = [...bookmarksAllTagsData];
+        let newBookmarksAllTagsData = [...bookmarksAllTags];
 
         newBookmarksAllTagsData.push(newTab.id);
 
         console.log(newBookmarksAllTagsData);
 
-        setBookmarksAllTagsData([...newBookmarksAllTagsData]);
+        setBookmarksAllTags([...newBookmarksAllTagsData]);
         setTabsData((previous) =>
           produce(previous, (updated) => {
             updated.push(newTab);
@@ -408,13 +414,13 @@ Props): JSX.Element {
         bookmarksAllTagsData_new.push(newTabId);
       }
 
-      bookmarksAllTagsData.forEach((el) => {
+      bookmarksAllTags.forEach((el) => {
         if (tagsIdsToDelete.indexOf(el) === -1) {
           bookmarksAllTagsData_new.push(el);
         }
       });
 
-      setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
+      setBookmarksAllTags([...bookmarksAllTagsData_new]);
     } else {
       setBookmarksData((previous) =>
         produce(previous, (updated) => {

@@ -29,6 +29,8 @@ import {
   bookmarksAllTagsState,
 } from "../../state/tabsAndBookmarks";
 
+import { useBookmarks } from "../../state/useBookmarks";
+
 import { UpperVisAction } from "../../utils/interfaces";
 import { tabErrors } from "../../utils/errors";
 
@@ -62,8 +64,11 @@ Props): JSX.Element {
 
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
-  const [bookmarksAllTagsData, setBookmarksAllTagsData] =
-    bookmarksAllTagsState.use();
+  // const [bookmarksAllTagsData, setBookmarksAllTagsData] =
+  //   bookmarksAllTagsState.use();
+
+  const bookmarksAllTags = useBookmarks(store => store.bookmarksAllTags)  
+  const setBookmarksAllTags = useBookmarks(store => store.setBookmarksAllTags)  
 
   const [uiColorData, setUiColorData] = uiColorState.use();
 
@@ -391,9 +396,9 @@ Props): JSX.Element {
         newTabPriority
       );
 
-      let newBookmarksAllTagsData = [...bookmarksAllTagsData];
+      let newBookmarksAllTagsData = [...bookmarksAllTags];
       newBookmarksAllTagsData.push(newFolderTab.id);
-      setBookmarksAllTagsData([...newBookmarksAllTagsData]);
+      setBookmarksAllTags([...newBookmarksAllTagsData]);
 
       setTabsData((previous) =>
         produce(previous, (updated) => {

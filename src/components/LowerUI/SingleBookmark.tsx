@@ -1,18 +1,21 @@
 import React from "react";
 import { produce } from "immer";
-import { bookmarksDataState } from "../../state/tabsAndBookmarks";
-import {useBookmarks} from "../../state/useBookmarks"
+// import { bookmarksDataState } from "../../state/tabsAndBookmarks";
+import { useBookmarks } from "../../state/useBookmarks";
 
 import { ReactComponent as PencilSmallSVG } from "../../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../../svgs/trashSmall.svg";
 import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 import { bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
-import { globalSettingsState, focusedTabState } from "../../state/defaultSettings";
+import {
+  globalSettingsState,
+  focusedTabState,
+} from "../../state/defaultSettings";
 
-import {useUpperUiContext} from "../../utils/upperUiContext"
+import { useUpperUiContext } from "../../utils/upperUiContext";
 
-import {useTabContext} from "../../utils/tabContext"
+import { useTabContext } from "../../utils/tabContext";
 
 import {
   SingleBookmarkData,
@@ -59,23 +62,24 @@ function SingleBookmark({
   // upperVisDispatch,
   tabID,
 }: Props): JSX.Element {
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-  const [bookmarksAllTagsData, setBookmarksAllTagsData] =
-    bookmarksAllTagsState.use();
+
+  // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  // const [bookmarksAllTagsData, setBookmarksAllTagsData] =
+  //   bookmarksAllTagsState.use();
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  const tabContext = useTabContext()
+  const tabContext = useTabContext();
 
   const [focusedTabData, setFocusedTabData] = focusedTabState.use();
 
-  const upperUiContext = useUpperUiContext()
+  const upperUiContext = useUpperUiContext();
 
+  const bookmarks = useBookmarks((state) => state.bookmarks);
 
+  const bookmarksAllTags = useBookmarks( (state) => state.bookmarksAllTags)
 
-  const bookmarks = useBookmarks(state => state.bookmarks)
-
-  const deleteBookmark = useBookmarks(state => state.deleteBookmark)
+  const deleteBookmark = useBookmarks((state) => state.deleteBookmark);
 
   // let linkURL = new URL(singleBookmarkData.URL)
 
@@ -96,9 +100,9 @@ function SingleBookmark({
 
   return (
     <div
-    onFocus={() => {
-      setFocusedTabData(null)
-    }}
+      onFocus={() => {
+        setFocusedTabData(null);
+      }}
     >
       {tabContext.tabVisState.editBookmarkVis !== bookmarkId && (
         <div
@@ -119,14 +123,14 @@ function SingleBookmark({
                   {singleBookmarkData.title}
                 </p>
               ) : ( */}
-                <a
-                  href={singleBookmarkData.URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="z-50 hover:text-gray-600 transition-colors duration-75 focus-1-darkGray mx-0.5"
-                >
-                  {singleBookmarkData.title}
-                </a>
+              <a
+                href={singleBookmarkData.URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="z-50 hover:text-gray-600 transition-colors duration-75 focus-1-darkGray mx-0.5"
+              >
+                {singleBookmarkData.title}
+              </a>
               {/* )} */}
 
               {/* <a href="https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death" target="_blank" rel="noopener noreferrer">{singleBookmarkData.title}</a> */}
@@ -144,7 +148,10 @@ function SingleBookmark({
                 //   type: "EDIT_BOOKMARK_OPEN",
                 //   payload: bookmarkId,
                 // });
-                tabContext.tabVisDispatch({type: "EDIT_BOOKMARK_OPEN", payload: bookmarkId})
+                tabContext.tabVisDispatch({
+                  type: "EDIT_BOOKMARK_OPEN",
+                  payload: bookmarkId,
+                });
                 upperUiContext.upperVisDispatch({ type: "CLOSE_ALL" });
                 setBookmarkId(singleBookmarkData.id);
               }}
@@ -159,38 +166,36 @@ function SingleBookmark({
               onClick={() => {
                 // for deleting empty folder
 
-                let tagsIdsToDelete: (string | number)[] = [];
+                // let tagsIdsToDelete: (string | number)[] = [];
 
-                singleBookmarkData.tags.forEach((el) => {
-                  let filteredBookmarks = bookmarksData.filter(
-                    (obj) => obj.id !== singleBookmarkData.id
-                  );
+                // singleBookmarkData.tags.forEach((el) => {
+                //   let filteredBookmarks = bookmarks.filter(
+                //     (obj) => obj.id !== singleBookmarkData.id
+                //   );
 
-                  let isElPresent: boolean = false;
+                //   let isElPresent: boolean = false;
 
-                  filteredBookmarks.forEach((obj) => {
-                    if (obj.tags.indexOf(el) > -1) {
-                      isElPresent = true;
-                      return;
-                    }
-                  });
+                //   filteredBookmarks.forEach((obj) => {
+                //     if (obj.tags.indexOf(el) > -1) {
+                //       isElPresent = true;
+                //       return;
+                //     }
+                //   });
 
-                  if (!isElPresent && el !== "ALL_TAGS") {
-                    tagsIdsToDelete.push(el);
-                  }
-                });
+                //   if (!isElPresent && el !== "ALL_TAGS") {
+                //     tagsIdsToDelete.push(el);
+                //   }
+                // });
 
-                let bookmarksAllTagsData_new: (string | number)[] = [];
+                // let bookmarksAllTagsData_new: (string | number)[] = [];
 
-                bookmarksAllTagsData.forEach((el) => {
-                  if (tagsIdsToDelete.indexOf(el) === -1) {
-                    bookmarksAllTagsData_new.push(el);
-                  }
-                });
+                // bookmarksAllTags.forEach((el) => {
+                //   if (tagsIdsToDelete.indexOf(el) === -1) {
+                //     bookmarksAllTagsData_new.push(el);
+                //   }
+                // });
 
-                setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
-
-
+                // setBookmarksAllTagsData([...bookmarksAllTagsData_new]);
 
                 // setBookmarksData((previous) =>
                 //   produce(previous, (updated) => {
@@ -204,15 +209,13 @@ function SingleBookmark({
                 //   })
                 // );
 
-                let bookmarkToDelete = bookmarks.find((obj) => obj.id === bookmarkId)
-                
+                let bookmarkToDelete = bookmarks.find(
+                  (obj) => obj.id === bookmarkId
+                );
+
                 if (bookmarkToDelete) {
-                  deleteBookmark(bookmarkId)
+                  deleteBookmark(bookmarkId, singleBookmarkData);
                 }
-
-
-
-
               }}
               // disabled={areButtonsDisabled()}
               aria-label={"Delete bookmark"}

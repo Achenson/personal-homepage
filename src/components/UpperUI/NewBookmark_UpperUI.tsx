@@ -18,6 +18,9 @@ import {
   bookmarksAllTagsState,
 } from "../../state/tabsAndBookmarks";
 
+
+import { useBookmarks } from "../../state/useBookmarks";
+
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import { UpperVisAction } from "../../utils/interfaces";
@@ -106,8 +109,13 @@ function NewBookmark_UpperUI({
 Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   const [tabsData, setTabsData] = tabsDataState.use();
-  const [bookmarksAllTagsData, setBookmarksAllTagsData] =
-    bookmarksAllTagsState.use();
+
+  const bookmarksAllTags = useBookmarks(store => store.bookmarksAllTags)  
+  const setBookmarksAllTags = useBookmarks(store => store.setBookmarksAllTags)  
+
+  // const [bookmarksAllTagsData, setBookmarksAllTagsData] =
+  //   bookmarksAllTagsState.use();
+
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   const upperUiContext = useUpperUiContext()
@@ -281,11 +289,11 @@ Props): JSX.Element {
 
         // adding new folder in there was no folder with title as a tag befere
 
-        let newBookmarksAllTagsData = [...bookmarksAllTagsData];
+        let newBookmarksAllTagsData = [...bookmarksAllTags];
 
         newBookmarksAllTagsData.push(newTab.id);
 
-        setBookmarksAllTagsData([...newBookmarksAllTagsData]);
+        setBookmarksAllTags([...newBookmarksAllTagsData]);
 
         setTabsData((previous) =>
           produce(previous, (updated) => {

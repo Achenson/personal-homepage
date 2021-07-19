@@ -12,6 +12,8 @@ import {
   globalSettingsState,
 } from "../../state/defaultSettings";
 
+import { useBookmarks } from "../../state/useBookmarks";
+
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 
 import {
@@ -35,8 +37,12 @@ function Grid({
   setTabType,
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
-  const [bookmarksAllTagsData, setBookmarksAllTagsData] =
-    bookmarksAllTagsState.use();
+  // const [bookmarksAllTagsData, setBookmarksAllTagsData] =
+  //   bookmarksAllTagsState.use();
+
+  const bookmarksAllTags = useBookmarks(store => store.bookmarksAllTags)  
+  // const setBookmarksAllTags = useBookmarks(store => store.setBookmarksAllTags) 
+
   const [resetColorsData, setResetColorsData] = resetColorsState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
@@ -131,10 +137,10 @@ function Grid({
 
     tabsData.forEach((obj, i) => {
       if (
-        bookmarksAllTagsData.indexOf(obj.id) === -1 &&
+        bookmarksAllTags.indexOf(obj.id) === -1 &&
         obj.type === "folder"
       ) {
-        console.log(bookmarksAllTagsData);
+        console.log(bookmarksAllTags);
 
         console.log("cut");
 
@@ -145,7 +151,7 @@ function Grid({
         );
       }
     });
-  }, [tabsData, setTabsData, bookmarksAllTagsData]);
+  }, [tabsData, setTabsData, bookmarksAllTags]);
 
   useEffect(() => {
     createLessColumns(globalSettingsData.numberOfCols);

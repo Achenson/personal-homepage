@@ -7,6 +7,7 @@ import {
   bookmarksAllTagsState,
 } from "../../state/tabsAndBookmarks";
 
+
 import NewBookmark_UpperUI from "../UpperUI/NewBookmark_UpperUI";
 import Bookmark_lowerUI from "../LowerUI/Bookmark_lowerUI";
 
@@ -52,10 +53,12 @@ function Bookmark_newAndEdit({
 
 }: Props): JSX.Element {
   const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-  const [
-    bookmarksAllTagsData,
-    setBookmarksAllTagsData,
-  ] = bookmarksAllTagsState.use();
+  // const [
+  //   bookmarksAllTagsData,
+  //   setBookmarksAllTagsData,
+  // ] = bookmarksAllTagsState.use();
+
+ 
 
   let currentBookmark: SingleBookmarkData | undefined;
 
