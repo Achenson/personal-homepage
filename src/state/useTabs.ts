@@ -7,6 +7,7 @@ import { SingleTabData } from "../utils/interfaces";
 import { SingleBookmarkData } from "../utils/interfaces";
 
 interface UseTabs {
+  addTab: (singleTabData: SingleTabData) => void;
   setTabColor: (color: string, tabID: string | number) => void;
   toggleTab: (tabID: string | number, tabOpened: boolean) => void;
   tabs: SingleTabData[];
@@ -14,6 +15,13 @@ interface UseTabs {
 
 // this can be used everywhere in your application
 export const useTabs = create<UseTabs>((set) => ({
+  addTab: (singleTabData) => {
+    set(
+      produce((state: UseTabs) => {
+        state.tabs.push(singleTabData);
+      })
+    );
+  },
   setTabColor: (color, tabID) =>
     set(
       produce((state: UseTabs) => {

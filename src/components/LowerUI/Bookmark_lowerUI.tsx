@@ -10,6 +10,7 @@ import { createBookmark, createFolderTab} from "../../utils/objCreators";
 import {useTabContext} from "../../utils/tabContext"
 
 import { useBookmarks } from "../../state/useBookmarks";
+import { useTabs } from "../../state/useTabs";
 
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
@@ -128,7 +129,10 @@ Props): JSX.Element {
   const bookmarksAllTags = useBookmarks(store => store.bookmarksAllTags)  
   const setBookmarksAllTags = useBookmarks(store => store.setBookmarksAllTags)  
 
-  const [tabsData, setTabsData] = tabsDataState.use();
+  const addTab = useTabs(store => store.addTab);
+  const tabs = useTabs(store => store.tabs);
+
+  // const [tabsData, setTabsData] = tabsDataState.use();
 
   const tabContext = useTabContext()
 
@@ -166,7 +170,7 @@ Props): JSX.Element {
     let arrOut: (string | number)[] = [];
 
     selectablesInputStr.split(", ").forEach((el) => {
-      let currentTab = tabsData.find((obj) => obj.title === el);
+      let currentTab = tabs.find((obj) => obj.title === el);
       if (currentTab) {
         arrOut.push(currentTab.id);
       }
@@ -331,9 +335,9 @@ Props): JSX.Element {
     let newTabId: undefined | string | number;
 
     tagsInputArr.forEach((el) => {
-      let tabForCurrentTag = tabsData.find((obj) => obj.title === el);
+      let tabForCurrentTag = tabs.find((obj) => obj.title === el);
 
-      let sortedTabsInCol = tabsData
+      let sortedTabsInCol = tabs
         .filter((obj) => obj.column === colNumber)
         .sort((a, b) => a.priority - b.priority);
 
@@ -357,11 +361,19 @@ Props): JSX.Element {
         console.log(newBookmarksAllTagsData);
 
         setBookmarksAllTags([...newBookmarksAllTagsData]);
-        setTabsData((previous) =>
-          produce(previous, (updated) => {
-            updated.push(newTab);
-          })
-        );
+
+        // setTabsData((previous) =>
+        //   produce(previous, (updated) => {
+        //     updated.push(newTab);
+        //   })
+        // );
+
+        addTab(newTab);
+
+
+
+
+
       } else {
         if (selectablesInputStr !== "" && tabForCurrentTag) {
           tagsInputArr_ToIds.push(tabForCurrentTag.id);
