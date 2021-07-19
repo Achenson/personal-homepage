@@ -6,18 +6,34 @@ import produce from "immer";
 import { SingleTabData } from "../utils/interfaces";
 import { SingleBookmarkData } from "../utils/interfaces";
 
-// this can be used everywhere in your application
-export const useTabs = create<{
+interface UseTabs {
+  setTabColor: (color: string, tabID: string | number) => void;
   toggleTab: (tabID: string | number, tabOpened: boolean) => void;
   tabs: SingleTabData[];
-}>((set) => ({
-  toggleTab: (tabID: string | number, tabOpened: boolean) =>
+}
+
+// this can be used everywhere in your application
+export const useTabs = create<UseTabs>((set) => ({
+  setTabColor: (color, tabID) =>
     set(
-      produce((state) => {
+      produce((state: UseTabs) => {
+        let tabToChange = state.tabs.find((obj) => obj.id === tabID);
+
+        if (tabToChange) {
+          tabToChange.color = `${color}`;
+        }
+      })
+    ),
+
+  toggleTab: (tabID, tabOpened) =>
+    set(
+      produce((state: UseTabs) => {
         let tabToUpdate = state.tabs.find(
           (obj: SingleTabData) => obj.id === tabID
         );
-        state.tabs[state.tabs.indexOf(tabToUpdate)].opened = !tabOpened;
+        if (tabToUpdate) {
+          state.tabs[state.tabs.indexOf(tabToUpdate)].opened = !tabOpened;
+        }
       })
     ),
   tabs: [
@@ -233,8 +249,6 @@ export const useTabs = create<{
 //       bookmarks: state.bookmarks.filter(({ id }) => id !== removeId),
 //     })),
 // }));
-
-
 
 // let bookmarksAllTagsState = <(string | number)[]>["ALL_TAGS", "2", "3"];
 

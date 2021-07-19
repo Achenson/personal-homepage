@@ -8,7 +8,10 @@ import {
   rssColorState,
 } from "../../state/colorsState";
 
+import {} from "../../state/useTabs"
+
 import { tabColorsLightFocus } from "../../utils/colors_tab";
+import { useTabs } from "../../state/useTabs";
 
 interface Props {
   color: string;
@@ -32,7 +35,10 @@ function SingleColor_Tab({
   setSelectedNumber,
   colorArrLength,
 }: Props): JSX.Element {
-  const [tabsData, setTabsData] = tabsDataState.use();
+
+  // const [tabsData, setTabsData] = tabsDataState.use();
+
+  const setTabColor = useTabs(state => state.setTabColor)
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
@@ -69,16 +75,24 @@ function SingleColor_Tab({
       focus:outline-none focus-visible:ring-2 ring-${focusColor()} ring-inset
       `}
       onClick={() => {
-        setTabsData((previous) =>
-          produce(previous, (updated) => {
-            let tabToChange = updated.find((obj) => obj.id === tabID);
 
-            if (tabToChange) {
-              tabToChange.color = `${color}`;
-            }
-          })
-        );
+
+        // setTabsData((previous) =>
+        //   produce(previous, (updated) => {
+        //     let tabToChange = updated.find((obj) => obj.id === tabID);
+
+        //     if (tabToChange) {
+        //       tabToChange.color = `${color}`;
+        //     }
+        //   })
+        // );
+        setTabColor(color, tabID);
+
+
+
         setSelectedNumber(colorNumber);
+
+
       }}
 
       tabIndex={tabIndex}
