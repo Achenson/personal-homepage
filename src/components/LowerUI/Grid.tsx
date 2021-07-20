@@ -13,6 +13,7 @@ import {
 } from "../../state/defaultSettings";
 
 import { useBookmarks } from "../../state/useBookmarks";
+import { useTabs } from "../../state/useTabs";
 
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 
@@ -36,9 +37,13 @@ function Grid({
   // upperVisState,
   setTabType,
 }: Props): JSX.Element {
-  const [tabsData, setTabsData] = tabsDataState.use();
+  // const [tabsData, setTabsData] = tabsDataState.use();
   // const [bookmarksAllTagsData, setBookmarksAllTagsData] =
   //   bookmarksAllTagsState.use();
+
+  const tabs = useTabs(store => store.tabs)
+  const deleteEmptyTab = useTabs(store => store.deleteEmptyTab)
+  const resetAllTabColors = useTabs(store => store.resetAllTabColors)
 
   const bookmarksAllTags = useBookmarks(store => store.bookmarksAllTags)  
   // const setBookmarksAllTags = useBookmarks(store => store.setBookmarksAllTags) 
@@ -117,17 +122,21 @@ function Grid({
     if (resetColorsData) {
       // tabsData.forEach((obj, i) => {});
 
-      setTabsData((previous) =>
-        produce(previous, (updated) => {
-          updated.forEach((obj, i) => {
-            obj.color = null;
-          });
-        })
-      );
+      // setTabsData((previous) =>
+      //   produce(previous, (updated) => {
+      //     updated.forEach((obj, i) => {
+      //       obj.color = null;
+      //     });
+      //   })
+      // );
+
+      resetAllTabColors()
+
+
 
       setResetColorsData(false);
     }
-  }, [resetColorsData, setTabsData, setResetColorsData]);
+  }, [resetColorsData, setResetColorsData]);
 
   useEffect(() => {
     // console.log(bookmarksAllTagsData);
@@ -135,23 +144,33 @@ function Grid({
     // deleting an empty folderTab
     // deleting a tab if there is no tags with the same name in bookmarks
 
-    tabsData.forEach((obj, i) => {
-      if (
-        bookmarksAllTags.indexOf(obj.id) === -1 &&
-        obj.type === "folder"
-      ) {
-        console.log(bookmarksAllTags);
+    // tabs.forEach((obj, i) => {
+    //   if (
+    //     bookmarksAllTags.indexOf(obj.id) === -1 &&
+    //     obj.type === "folder"
+    //   ) {
+    //     console.log(bookmarksAllTags);
 
-        console.log("cut");
+    //     console.log("cut");
 
-        setTabsData((previous) =>
-          produce(previous, (updated) => {
-            updated.splice(i, 1);
-          })
-        );
-      }
-    });
-  }, [tabsData, setTabsData, bookmarksAllTags]);
+    //     setTabsData((previous) =>
+    //       produce(previous, (updated) => {
+    //         updated.splice(i, 1);
+    //       })
+    //     );
+
+
+    //   }
+    // });
+
+    // deleting an empty folderTab
+    // deleting a tab if there is no tags with the same name in bookmarks
+    deleteEmptyTab(bookmarksAllTags)
+
+
+
+
+  }, [tabs, bookmarksAllTags]);
 
   useEffect(() => {
     createLessColumns(globalSettingsData.numberOfCols);

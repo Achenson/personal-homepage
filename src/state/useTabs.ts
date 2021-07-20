@@ -8,6 +8,8 @@ import { SingleBookmarkData } from "../utils/interfaces";
 
 interface UseTabs {
   addTab: (singleTabData: SingleTabData) => void;
+  // deleting tab if there are no bookmarks with this tag (tab's name)
+  deleteEmptyTab: (bookmarksAllTags: (string | number)[]) => void;
   deleteTab: (tabID: string | number) => void;
   editTab: (
     tabID: string | number,
@@ -69,6 +71,7 @@ interface UseTabs {
     
     */
   ) => void;
+  resetAllTabColors: () => void;
   setTabColor: (color: string, tabID: string | number) => void;
   toggleTab: (tabID: string | number, tabOpened: boolean) => void;
   tabs: SingleTabData[];
@@ -83,15 +86,35 @@ export const useTabs = create<UseTabs>((set) => ({
       })
     );
   },
-  deleteTab: (tabID) => {
-    produce((state: UseTabs) => {
-      let tabToDelete = state.tabs.find((obj) => obj.id == tabID);
-      if (tabToDelete) {
-        let tabIndex = state.tabs.indexOf(tabToDelete);
-        state.tabs.splice(tabIndex, 1);
-      }
-    });
-  },
+  deleteEmptyTab: (bookmarksAllTags) =>
+    set(
+      produce((state: UseTabs) => {
+        state.tabs.forEach((obj, i) => {
+          if (
+            bookmarksAllTags.indexOf(obj.id) === -1 &&
+            obj.type === "folder"
+          ) {
+
+            // setTabsData((previous) =>
+            //   produce(previous, (updated) => {
+            state.tabs.splice(i, 1);
+            //   })
+            // );
+          }
+        });
+      })
+    ),
+  deleteTab: (tabID) =>
+    set(
+      produce((state: UseTabs) => {
+        let tabToDelete = state.tabs.find((obj) => obj.id == tabID);
+        if (tabToDelete) {
+          let tabIndex = state.tabs.indexOf(tabToDelete);
+          state.tabs.splice(tabIndex, 1);
+        }
+      })
+    ),
+
   editTab: (
     tabID,
     tabTitleInput,
@@ -142,6 +165,14 @@ export const useTabs = create<UseTabs>((set) => ({
       })
     );
   },
+  resetAllTabColors: () =>
+    set(
+      produce((state: UseTabs) => {
+        state.tabs.forEach((obj, i) => {
+          obj.color = null;
+        });
+      })
+    ),
   setTabColor: (color, tabID) =>
     set(
       produce((state: UseTabs) => {
