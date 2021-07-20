@@ -2,6 +2,7 @@ import React from "react";
 import { produce } from "immer";
 // import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 import { useBookmarks } from "../../state/useBookmarks";
+import { useTabs } from "../../state/useTabs";
 
 import { ReactComponent as PencilSmallSVG } from "../../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../../svgs/trashSmall.svg";
@@ -71,7 +72,8 @@ function SingleBookmark({
 
   const tabContext = useTabContext();
 
-  const [focusedTabData, setFocusedTabData] = focusedTabState.use();
+  // const [focusedTabData, setFocusedTabData] = focusedTabState.use();
+  const setFocusedTabState = useTabs(state => state.setFocusedTabState);
 
   const upperUiContext = useUpperUiContext();
 
@@ -101,7 +103,7 @@ function SingleBookmark({
   return (
     <div
       onFocus={() => {
-        setFocusedTabData(null);
+        setFocusedTabState(null);
       }}
     >
       {tabContext.tabVisState.editBookmarkVis !== bookmarkId && (

@@ -48,6 +48,7 @@ interface UseTabs {
   closeAllTabsState: boolean;
   setCloseAllTabsState: (trueOrFalse: boolean) => void;
   focusedTabState: null | (string | number);
+  setFocusedTabState: (nullOrID: null | (string | number)) => void;
   tabOpenedState: null | (string | number);
   setTabOpenedState: (nullOrID: null | (string | number)) => void;
 }
@@ -320,6 +321,12 @@ export const useTabs = create<UseTabs>((set) => ({
     }));
   },
   focusedTabState: null,
+  setFocusedTabState: (nullOrID) => {
+    set((state: UseTabs) => ({
+      ...state,
+      focusedTabState: nullOrID,
+    }));
+  },
   tabOpenedState: null,
   setTabOpenedState: (nullOrID) => {
     set((state: UseTabs) => ({
