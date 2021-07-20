@@ -6,6 +6,8 @@ import { useState, useEffect, useRef } from "react";
 
 import { uiColorState } from "../../state/colorsState";
 
+import { useTabs } from "../../state/useTabs";
+
 import { v4 as uuidv4 } from "uuid";
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
@@ -60,9 +62,12 @@ function NewTab_UpperUI({
 Props): JSX.Element {
   // console.log("rendered");
 
-  const [tabsData, setTabsData] = tabsDataState.use();
+  // const [tabsData, setTabsData] = tabsDataState.use();
 
   // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+
+  const tabs = useTabs((state) => state.tabs);
+  const addTab = useTabs((state) => state.addTab);
 
   const bookmarks = useBookmarks((state) => state.bookmarks);
   const addTag = useBookmarks((state) => state.addTag);
@@ -358,7 +363,7 @@ Props): JSX.Element {
     function titleUniquenessCheck() {
       let isUnique: boolean = true;
 
-      tabsData.forEach((obj, i) => {
+      tabs.forEach((obj, i) => {
         if (obj.title === tabTitleInput) {
           isUnique = false;
         }
@@ -368,8 +373,8 @@ Props): JSX.Element {
     }
   }
 
-  function addTab() {
-    let sortedTabsInCol = tabsData
+  function addTabWrapper() {
+    let sortedTabsInCol = tabs
       .filter((obj) => obj.column === tabColumnInput)
       .sort((a, b) => a.priority - b.priority);
 
@@ -380,18 +385,27 @@ Props): JSX.Element {
     }
 
     if (tabType === "note") {
-      setTabsData((previous) =>
-        produce(previous, (updated) => {
-          updated.push({
-            ...createNote(
-              tabTitleInput,
-              tabColumnInput,
-              newTabPriority,
-              textAreaValue
-            ),
-          });
-        })
-      );
+      // setTabsData((previous) =>
+      //   produce(previous, (updated) => {
+      //     updated.push({
+      //       ...createNote(
+      //         tabTitleInput,
+      //         tabColumnInput,
+      //         newTabPriority,
+      //         textAreaValue
+      //       ),
+      //     });
+      //   })
+      // );
+
+      addTab({
+        ...createNote(
+          tabTitleInput,
+          tabColumnInput,
+          newTabPriority,
+          textAreaValue
+        ),
+      });
     }
 
     if (tabType === "folder") {
@@ -405,14 +419,16 @@ Props): JSX.Element {
       newBookmarksAllTagsData.push(newFolderTab.id);
       setBookmarksAllTags([...newBookmarksAllTagsData]);
 
-      setTabsData((previous) =>
-        produce(previous, (updated) => {
-          updated.push(
-            // ...createFolderTab(tabTitleInput, tabColumnInput, 0),
-            newFolderTab
-          );
-        })
-      );
+      // setTabsData((previous) =>
+      //   produce(previous, (updated) => {
+      //     updated.push(
+      //       // ...createFolderTab(tabTitleInput, tabColumnInput, 0),
+      //       newFolderTab
+      //     );
+      //   })
+      // );
+
+      addTab(newFolderTab);
 
       // updating links data (tags array)
       // setBookmarksData((previous) =>
@@ -433,18 +449,27 @@ Props): JSX.Element {
     }
 
     if (tabType === "rss") {
-      setTabsData((previous) =>
-        produce(previous, (updated) => {
-          updated.push({
-            ...createRSS(
-              tabTitleInput,
-              tabColumnInput,
-              newTabPriority,
-              rssLinkInput
-            ),
-          });
-        })
-      );
+      // setTabsData((previous) =>
+      //   produce(previous, (updated) => {
+      //     updated.push({
+      //       ...createRSS(
+      //         tabTitleInput,
+      //         tabColumnInput,
+      //         newTabPriority,
+      //         rssLinkInput
+      //       ),
+      //     });
+      //   })
+      // );
+
+      addTab({
+        ...createRSS(
+          tabTitleInput,
+          tabColumnInput,
+          newTabPriority,
+          rssLinkInput
+        ),
+      });
     }
   }
 
@@ -466,7 +491,7 @@ Props): JSX.Element {
     if (isThereAnError) return;
 
     // 1. adding Tab(Folder/RSS?Notes) 2.updating Bookmarks with tags (same as new folder title)
-    addTab();
+    addTabWrapper();
     // upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
     upperUiContext.upperVisDispatch({ type: "NEW_TAB_TOGGLE" });
   }
