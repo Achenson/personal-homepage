@@ -11,7 +11,7 @@ import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 import { bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
 import {
   globalSettingsState,
-  focusedTabState,
+  // focusedTabState,
 } from "../../state/defaultSettings";
 
 import { useUpperUiContext } from "../../utils/upperUiContext";

@@ -27,7 +27,7 @@ import {
   // tabEditOpenedState,
   // tabOpenedState,
   globalSettingsState,
-  focusedTabState,
+  // focusedTabState,
 } from "../../state/defaultSettings";
 
 import { ReactComponent as ColorSmallSVG } from "../../svgs/beakerSmall.svg";
@@ -106,7 +106,7 @@ function Tab({
 // rssLink
 Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-  const [focusedTabData, setFocusedTabData] = focusedTabState.use();
+  // const [focusedTabData, setFocusedTabData] = focusedTabState.use();
 
   // const [tabsData, setTabsData] = tabsDataState.use();
 
@@ -122,6 +122,8 @@ Props): JSX.Element {
   const tabs = useTabs((store) => store.tabs);
   const closeAllTabsState = useTabs((store) => store.closeAllTabsState);
   const tabOpenedState = useTabs((store) => store.tabOpenedState);
+  const focusedTabState = useTabs(store => store.focusedTabState)
+  const setFocusedTabState = useTabs(store => store.setFocusedTabState)
   const setTabOpenedState = useTabs((store) => store.setTabOpenedState);
 
   const defaultTabContent = useTabs((store) => store.defaultTabContent);
@@ -353,13 +355,13 @@ Props): JSX.Element {
   const [iconsVis, setIconsVis] = useState<boolean>(false);
 
   useEffect(() => {
-    if (focusedTabData === tabID) {
+    if (focusedTabState === tabID) {
       setIconsVis(true);
       console.log("test");
     } else {
       setIconsVis(false);
     }
-  }, [focusedTabData]);
+  }, [focusedTabState]);
 
   const [tabVisState, tabVisDispatch] = useReducer(tabVisReducer, initVisState);
 
@@ -590,7 +592,7 @@ Props): JSX.Element {
               style={{ height: "23px" }}
               // disabled={areButtonsDisabled()}
               onFocus={() => {
-                setFocusedTabData(tabID);
+                setFocusedTabState(tabID);
               }}
               aria-label={"Tab open/close"}
             >

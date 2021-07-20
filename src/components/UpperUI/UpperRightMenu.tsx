@@ -18,6 +18,8 @@ import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 import { uiColorState } from "../../state/colorsState";
 
+
+
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import {
@@ -25,8 +27,10 @@ import {
   // tabOpenedState,
   loggedInState,
   globalSettingsState,
-  focusedTabState,
+  // focusedTabState,
 } from "../../state/defaultSettings";
+
+import { useTabs } from "../../state/useTabs";
 
 import { useUpperUiContext } from "../../utils/upperUiContext";
 
@@ -48,7 +52,10 @@ Props): JSX.Element {
   // const [loggedIn, setLoggedIn] = useState(false);
   const [loggedInData, setLoggedInData] = loggedInState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-  const [focusedTabData, setFocusedTabData] = focusedTabState.use();
+  // const [focusedTabData, setFocusedTabData] = focusedTabState.use();
+
+  const setFocusedTabState = useTabs(state => state.setFocusedTabState)
+
   const upperUiContext = useUpperUiContext();
 
   const colLimit = globalSettingsData.limitColGrowth;
@@ -57,7 +64,7 @@ Props): JSX.Element {
     // <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">
     <div
       onFocus={() => {
-        setFocusedTabData(null);
+        setFocusedTabState(null);
       }}
       className={`${
         upperUiContext.upperVisState.addTagVis_xs ? "h-14" : "h-7"

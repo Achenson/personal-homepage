@@ -47,8 +47,10 @@ interface UseTabs {
   // setting all tabs to default setting (open/close state) after clicking EyeOff
   closeAllTabsState: boolean;
   setCloseAllTabsState: (trueOrFalse: boolean) => void;
+  // displaying tab controls when using keyboard (Tab key) 
   focusedTabState: null | (string | number);
   setFocusedTabState: (nullOrID: null | (string | number)) => void;
+  // id (or empty) of a only tab that is currently being edited(eg. colors to choose are on )
   tabOpenedState: null | (string | number);
   setTabOpenedState: (nullOrID: null | (string | number)) => void;
 }

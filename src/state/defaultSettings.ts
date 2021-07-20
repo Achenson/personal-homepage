@@ -27,4 +27,4 @@ export const globalSettingsState = newRidgeState<GlobalSettingsState>({
 
 export const loggedInState = newRidgeState(false);
 
-export const focusedTabState = newRidgeState<null | (string | number)>(null);
+// export const focusedTabState = newRidgeState<null | (string | number)>(null);
