@@ -20,6 +20,8 @@ export const globalSettingsState = newRidgeState<GlobalSettingsState>({
   // rssItemsPerPage: 9
 });
 
+
+
 // export const closeAllTabsState = newRidgeState(false);
 
 // export const tabOpenedState = newRidgeState<null | (string | number)>(null);

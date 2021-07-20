@@ -6,10 +6,12 @@ import shallow from "zustand/shallow"
 import { SingleTabData } from "../../utils/interfaces";
 
 // import { rssSettingsState } from "../../state/defaultSettings";
-import { tabsDataState } from "../../state/tabsAndBookmarks";
+// import { tabsDataState } from "../../state/tabsAndBookmarks";
 
 import { uiColorState } from "../../state/colorsState";
 import { useRssSettings } from "../../state/defaultSettingsHooks";
+import { useTabs } from "../../state/useTabs";
+
 
 interface Props {
   setWasAnythingClicked: React.Dispatch<React.SetStateAction<boolean>>;
@@ -42,13 +44,14 @@ function EditTab_RSS({
   rssLinkInput,
   setRssLinkInput,
 }: Props): JSX.Element {
-  const [tabsData, setTabsData] = tabsDataState.use();
+  // const [tabsData, setTabsData] = tabsDataState.use();
 
   // const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
 
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   const rssSettingsState = useRssSettings(state => state, shallow)
+  const resetTabRssSettings = useTabs (state => state.resetTabRssSettings)
 
   // let rssLink: string | null | undefined = "no bookmark";
   // rssLink = currentTab.rssLink;
@@ -149,18 +152,25 @@ function EditTab_RSS({
             setWasItemsPerPageClicked(false);
             setWasTabOpenClicked(false);
 
-            setTabsData((previous) =>
-              produce(previous, (updated) => {
-                let currentTab = updated.find((obj) => obj.id == tabID);
-                if (currentTab) {
-                  // let tabIndex = updated.indexOf(tabToDelete);
-                  // updated.splice(tabIndex, 1);
-                  currentTab.date = null;
-                  currentTab.description = null;
-                  currentTab.itemsPerPage = null;
-                }
-              })
-            );
+            // setTabsData((previous) =>
+            //   produce(previous, (updated) => {
+            //     let currentTab = updated.find((obj) => obj.id == tabID);
+            //     if (currentTab) {
+            //       // let tabIndex = updated.indexOf(tabToDelete);
+            //       // updated.splice(tabIndex, 1);
+            //       currentTab.date = null;
+            //       currentTab.description = null;
+            //       currentTab.itemsPerPage = null;
+            //     }
+            //   })
+            // );
+
+            resetTabRssSettings(tabID);
+
+
+
+
+
           }}
         >
           RESET

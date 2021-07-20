@@ -19,8 +19,8 @@ import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
 import {
-  tabsDataState,
-  bookmarksDataState,
+  // tabsDataState,
+  // bookmarksDataState,
   bookmarksAllTagsState,
 } from "../../state/tabsAndBookmarks";
 

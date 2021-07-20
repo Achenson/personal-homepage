@@ -17,10 +17,10 @@ import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
 import { produce } from "immer";
 
-import {
-  tabsDataState,
-  // bookmarksDataState,
-} from "../../state/tabsAndBookmarks";
+// import {
+//   tabsDataState,
+//   // bookmarksDataState,
+// } from "../../state/tabsAndBookmarks";
 
 import { useBookmarks } from "../../state/useBookmarks";
 import { useTabs } from "../../state/useTabs";

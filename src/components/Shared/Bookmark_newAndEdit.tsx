@@ -2,8 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 import {
-  bookmarksDataState,
-  tabsDataState,
+  // bookmarksDataState,
+  // tabsDataState,
   bookmarksAllTagsState,
 } from "../../state/tabsAndBookmarks";
 

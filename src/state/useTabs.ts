@@ -42,12 +42,13 @@ interface UseTabs {
   ) => void;
   resetAllTabColors: () => void;
   setTabColor: (color: string, tabID: string | number) => void;
+  resetTabRssSettings: (tabID: string | number) => void;
   toggleTab: (tabID: string | number, tabOpened: boolean) => void;
   tabs: SingleTabData[];
   // setting all tabs to default setting (open/close state) after clicking EyeOff
   closeAllTabsState: boolean;
   setCloseAllTabsState: (trueOrFalse: boolean) => void;
-  // displaying tab controls when using keyboard (Tab key) 
+  // displaying tab controls when using keyboard (Tab key)
   focusedTabState: null | (string | number);
   setFocusedTabState: (nullOrID: null | (string | number)) => void;
   // id (or empty) of a only tab that is currently being edited(eg. colors to choose are on )
@@ -302,7 +303,19 @@ export const useTabs = create<UseTabs>((set) => ({
         }
       })
     ),
-
+  resetTabRssSettings: (tabID: string | number) =>
+    set((state) =>
+      produce((state: UseTabs) => {
+        let currentTab = state.tabs.find((obj) => obj.id == tabID);
+        if (currentTab) {
+          // let tabIndex = updated.indexOf(tabToDelete);
+          // updated.splice(tabIndex, 1);
+          currentTab.date = null;
+          currentTab.description = null;
+          currentTab.itemsPerPage = null;
+        }
+      })
+    ),
   toggleTab: (tabID, tabOpened) =>
     set(
       produce((state: UseTabs) => {

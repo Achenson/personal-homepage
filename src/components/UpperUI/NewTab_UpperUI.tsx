@@ -25,9 +25,9 @@ import { handleKeyDown_inner } from "../../utils/func_handleKeyDown_inner";
 
 import { produce } from "immer";
 
-import { tabsDataState } from "../../state/tabsAndBookmarks";
+// import { tabsDataState } from "../../state/tabsAndBookmarks";
 import {
-  bookmarksDataState,
+  // bookmarksDataState,
   bookmarksAllTagsState,
 } from "../../state/tabsAndBookmarks";
 

@@ -4,7 +4,7 @@ import { SingleTabData } from "../utils/interfaces";
 import { SingleBookmarkData } from "../utils/interfaces";
 
 // this can be used everywhere in your application
-export const tabsDataState = newRidgeState<SingleTabData[]>([
+const tabsDataState = newRidgeState<SingleTabData[]>([
   {
     id: "ALL_TAGS",
     title: "all bookmarks",
@@ -180,7 +180,7 @@ export const tabsDataState = newRidgeState<SingleTabData[]>([
 
 ]);
 
-export const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
+const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
   {
     id: 1,
     title: "facebook",

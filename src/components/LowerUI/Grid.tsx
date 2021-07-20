@@ -2,10 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { produce } from "immer";
 
-import {
-  tabsDataState,
-  bookmarksAllTagsState,
-} from "../../state/tabsAndBookmarks";
+// import {
+//   tabsDataState,
+//   bookmarksAllTagsState,
+// } from "../../state/tabsAndBookmarks";
 
 import {
   

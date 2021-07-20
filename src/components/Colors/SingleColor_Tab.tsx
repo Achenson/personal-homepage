@@ -1,6 +1,6 @@
 import React from "react";
 
-import { tabsDataState } from "../../state/tabsAndBookmarks";
+// import { tabsDataState } from "../../state/tabsAndBookmarks";
 import { produce } from "immer";
 import {
   folderColorState,

@@ -599,6 +599,7 @@ Warning: Can't perform a React state update on an unmounted component. This is a
 475. transition to zustand
 479. tabID, bookmarkID - unify types!
 480. GapAfterTab dragWrapper change to tabDrag from zustand
+482. cannot save after reseting rss settings to default: check if it worked with ridge state
 
 
 

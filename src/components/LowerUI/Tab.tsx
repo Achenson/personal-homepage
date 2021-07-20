@@ -6,11 +6,11 @@ import { useBookmarks } from "../../state/useBookmarks";
 
 import { produce } from "immer";
 
-import { tabsDataState } from "../../state/tabsAndBookmarks";
+// import { tabsDataState } from "../../state/tabsAndBookmarks";
 
 import { useTabs } from "../../state/useTabs";
 
-import { bookmarksDataState } from "../../state/tabsAndBookmarks";
+// import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 import { deletedTabState } from "../../state/tabsAndBookmarks";
 import {
   noteColorState,
@@ -350,7 +350,7 @@ Props): JSX.Element {
         return state;
     }
   }
-  const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
+  // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const [iconsVis, setIconsVis] = useState<boolean>(false);
 
