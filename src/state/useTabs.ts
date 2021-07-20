@@ -5,6 +5,8 @@ import { SingleTabData } from "../utils/interfaces";
 import { SingleBookmarkData } from "../utils/interfaces";
 
 import { tabsData } from "./tabsData";
+import { isDoStatement } from "typescript";
+import { closeAllTabsState } from "./defaultSettings";
 
 interface UseTabs {
   addTab: (singleTabData: SingleTabData) => void;
@@ -44,6 +46,10 @@ interface UseTabs {
   setTabColor: (color: string, tabID: string | number) => void;
   toggleTab: (tabID: string | number, tabOpened: boolean) => void;
   tabs: SingleTabData[];
+  closeAllTabsState: boolean;
+  setCloseAllTabsState: (trueOrFalse: boolean) => void;
+  focusedTabState: null | (string | number);
+  tabOpenedState: null | (string | number);
 }
 
 // this can be used everywhere in your application
@@ -306,6 +312,15 @@ export const useTabs = create<UseTabs>((set) => ({
       })
     ),
   tabs: [...tabsData],
+  closeAllTabsState: false,
+  setCloseAllTabsState: (trueOrFalse) => {
+    set((state: UseTabs) => ({
+      ...state,
+      closeAllTabsState: trueOrFalse,
+    }));
+  },
+  focusedTabState: null,
+  tabOpenedState: null,
 }));
 
 // let bookmarksAllTagsState = <(string | number)[]>["ALL_TAGS", "2", "3"];

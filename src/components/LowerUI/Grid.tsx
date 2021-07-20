@@ -50,10 +50,13 @@ function Grid({
   const bookmarksAllTags = useBookmarks((store) => store.bookmarksAllTags);
   // const setBookmarksAllTags = useBookmarks(store => store.setBookmarksAllTags)
 
+  const closeAllTabsState = useTabs(store => store.closeAllTabsState);
+  const setCloseAllTabsState = useTabs(store => store.setCloseAllTabsState);
+
   const [resetColorsData, setResetColorsData] = resetColorsState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
+  // const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
 
   const windowSize = useWindowSize();
 
@@ -113,12 +116,12 @@ function Grid({
   }, [windowSize.width]);
 
   useEffect(() => {
-    if (closeAllTabsData) {
+    if (closeAllTabsState) {
       setTimeout(() => {
-        setCloseAllTabsData(false);
+        setCloseAllTabsState(false);
       }, 500);
     }
-  }, [closeAllTabsData, setCloseAllTabsData]);
+  }, [closeAllTabsState]);
 
   useEffect(() => {
     if (resetColorsData) {
