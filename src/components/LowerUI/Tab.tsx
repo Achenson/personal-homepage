@@ -121,6 +121,8 @@ Props): JSX.Element {
 
   const tabs = useTabs((store) => store.tabs);
   const closeAllTabsState = useTabs((store) => store.closeAllTabsState);
+  const tabOpenedState = useTabs((store) => store.tabOpenedState);
+  const setTabOpenedState = useTabs((store) => store.setTabOpenedState);
 
   const defaultTabContent = useTabs((store) => store.defaultTabContent);
   const toggleTab = useTabs((store) => store.toggleTab);
@@ -178,7 +180,7 @@ Props): JSX.Element {
 
   //  if tabOpenedData is not equall to tabID, editables (eg. tabEdit) will not render & useEffect will close all editables
   // after clicking current Tab or its editables, tabOpenedData will be set to current tab's tabID
-  const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
+  // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   function tabVisReducer(
     state: TabVisState,
@@ -187,7 +189,7 @@ Props): JSX.Element {
     switch (action.type) {
       case "COLORS_SETTINGS_TOGGLE":
         if (!state.colorsVis) {
-          setTabOpenedData(tabID);
+          setTabOpenedState(tabID);
         }
 
         return {
@@ -207,7 +209,7 @@ Props): JSX.Element {
         };
       case "EDIT_TOGGLE":
         if (!state.editTabVis) {
-          setTabOpenedData(tabID);
+          setTabOpenedState(tabID);
         }
 
         return {
@@ -227,8 +229,8 @@ Props): JSX.Element {
           editBookmarkVis: null,
         };
       case "TAB_CONTENT_TOGGLE":
-        // !!!!!! to change
-        setTabOpenedData(tabID);
+    
+        setTabOpenedState(tabID);
 
         // setTabsData((previous) =>
         //   produce(previous, (updated) => {
@@ -299,7 +301,7 @@ Props): JSX.Element {
       case "NEW_BOOKMARK_TOOGLE":
         if (!state.newBookmarkVis) {
           // setTabEditOpenedData(tabID);
-          setTabOpenedData(tabID);
+          setTabOpenedState(tabID);
         }
 
         return {
@@ -312,7 +314,7 @@ Props): JSX.Element {
       case "EDIT_BOOKMARK_OPEN":
         if (!state.editBookmarkVis) {
           // setTabEditOpenedData(tabID);
-          setTabOpenedData(tabID);
+          setTabOpenedState(tabID);
         }
 
         return {
@@ -334,7 +336,7 @@ Props): JSX.Element {
 
       case "TOUCH_SCREEN_MODE_ON":
         if (!state.touchScreenModeOn) {
-          setTabOpenedData(tabID);
+          setTabOpenedState(tabID);
         }
 
         return {
@@ -369,10 +371,10 @@ Props): JSX.Element {
   // const TabDispatchContext = React.createContext(tabVisDispatch);
 
   useEffect(() => {
-    if (tabOpenedData !== tabID) {
+    if (tabOpenedState !== tabID) {
       tabVisDispatch({ type: "TAB_EDITABLES_CLOSE" });
     }
-  }, [tabOpenedData, tabID]);
+  }, [tabOpenedState, tabID]);
 
   const [bookmarkId, setBookmarkId] = useState<number | string>();
 
@@ -433,13 +435,13 @@ Props): JSX.Element {
     if (isDragging) {
       setTabBeingDraggedColor_Data({ tabColor: finalTabColor });
       tabVisDispatch({ type: "TAB_EDITABLES_CLOSE" });
-      setTabOpenedData(null);
+      setTabOpenedState(null);
     }
   }, [
     isDragging,
     finalTabColor,
     setTabBeingDraggedColor_Data,
-    setTabOpenedData,
+    setTabOpenedState,
   ]);
 
   const colorsForLightText: string[] = [
@@ -700,7 +702,7 @@ Props): JSX.Element {
         </div>
 
         {tabVisState.colorsVis &&
-          tabOpenedData === tabID &&
+          tabOpenedState === tabID &&
           upperUiContext.upperVisState.tabEditablesOpenable && (
             <ColorsToChoose_Tab
               setIconsVis={setIconsVis}
@@ -730,7 +732,7 @@ Props): JSX.Element {
         )} */}
 
         {tabVisState.newBookmarkVis &&
-          tabOpenedData === tabID &&
+          tabOpenedState === tabID &&
           upperUiContext.upperVisState.tabEditablesOpenable && (
             // <NewLink setNewLinkVis={setNewBookmarkVis} tabTitle={tabTitle} />
 
@@ -747,7 +749,7 @@ Props): JSX.Element {
           )}
 
         {tabVisState.editTabVis &&
-          tabOpenedData === tabID &&
+          tabOpenedState === tabID &&
           upperUiContext.upperVisState.tabEditablesOpenable && (
             <EditTab_main
               tabID={tabID}

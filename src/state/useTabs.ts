@@ -6,7 +6,6 @@ import { SingleBookmarkData } from "../utils/interfaces";
 
 import { tabsData } from "./tabsData";
 
-
 interface UseTabs {
   addTab: (singleTabData: SingleTabData) => void;
 
@@ -50,6 +49,7 @@ interface UseTabs {
   setCloseAllTabsState: (trueOrFalse: boolean) => void;
   focusedTabState: null | (string | number);
   tabOpenedState: null | (string | number);
+  setTabOpenedState: (nullOrID: null | (string | number)) => void;
 }
 
 // this can be used everywhere in your application
@@ -321,6 +321,12 @@ export const useTabs = create<UseTabs>((set) => ({
   },
   focusedTabState: null,
   tabOpenedState: null,
+  setTabOpenedState: (nullOrID) => {
+    set((state: UseTabs) => ({
+      ...state,
+      tabOpenedState: nullOrID,
+    }));
+  },
 }));
 
 // let bookmarksAllTagsState = <(string | number)[]>["ALL_TAGS", "2", "3"];
