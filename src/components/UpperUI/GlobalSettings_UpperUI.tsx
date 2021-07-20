@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import FocusLock from "react-focus-lock";
+import shallow from "zustand/shallow"
 
 import { produce } from "immer";
 
@@ -9,9 +10,10 @@ import { uiColorState } from "../../state/colorsState";
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import {useTabs} from "../../state/useTabs"
+import {useRssSettings} from "../../state/defaultSettingsHooks"
 
 import {
-  rssSettingsState,
+  // rssSettingsState,
   globalSettingsState,
   // tabOpenedState,
 } from "../../state/defaultSettings";
@@ -36,12 +38,17 @@ function GlobalSettings_UpperUI({
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
-  const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
+  // const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+
   // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
   // const [tabsData, setTabsData] = tabsDataState.use();
 
   const setTabOpenedState = useTabs(state => state.setTabOpenedState);
+  // shallow option enables updates when any of the object keys changes!
+  const rssSettingsState = useRssSettings(state => state, shallow);
+  const setRssSettingsState = useRssSettings(state => state.setRssSettings);
 
 
   const upperUiContext = useUpperUiContext()
@@ -210,7 +217,7 @@ function GlobalSettings_UpperUI({
                   <div className="flex items-center mr-2">
                     <button
                       className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
-                        rssSettingsData.description
+                        rssSettingsState.description
                           ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                           : `hover:border-opacity-50`
                       } focus-1-offset-dark `}
@@ -218,10 +225,19 @@ function GlobalSettings_UpperUI({
                       onClick={() => {
                         // setDescriptionCheckbox((b) => !b);
                         // setWasCheckboxClicked(true);
-                        setRssSettingsData({
-                          ...rssSettingsData,
-                          description: !rssSettingsData.description,
-                        });
+
+                        // setRssSettingsData({
+                        //   ...rssSettingsData,
+                        //   description: !rssSettingsState.description,
+                        // });
+
+                        setRssSettingsState({
+                          ...rssSettingsState,
+                          description: !rssSettingsState.description
+                        })
+
+
+
 
                         setTabOpenedState(null);
                       }}
@@ -233,7 +249,7 @@ function GlobalSettings_UpperUI({
                   <div className="flex items-center">
                     <button
                       className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
-                        rssSettingsData.date
+                        rssSettingsState.date
                           ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                           : `hover:border-opacity-50`
                       } focus-1-offset-dark`}
@@ -241,10 +257,18 @@ function GlobalSettings_UpperUI({
                       onClick={() => {
                         // setDateCheckbox((b) => !b);
                         // setWasCheckboxClicked(true);
-                        setRssSettingsData({
-                          ...rssSettingsData,
-                          date: !rssSettingsData.date,
-                        });
+
+                        // setRssSettingsData({
+                        //   ...rssSettingsData,
+                        //   date: !rssSettingsData.date,
+                        // });
+
+
+                        setRssSettingsState({
+                          ...rssSettingsState,
+                          date: !rssSettingsState.date
+                        })
+
 
                         setTabOpenedState(null);
                       }}
@@ -266,13 +290,21 @@ function GlobalSettings_UpperUI({
                   className="border w-8 text-center border-gray-300 bg-gray-50
                 focus-1
                 "
-                  value={rssSettingsData.itemsPerPage}
+                  value={rssSettingsState.itemsPerPage}
                   onChange={(e) => {
                     // setRssItemsPerPage(parseInt(e.target.value));
-                    setRssSettingsData({
-                      ...rssSettingsData,
-                      itemsPerPage: parseInt(e.target.value),
-                    });
+
+                    // setRssSettingsData({
+                    //   ...rssSettingsState,
+                    //   itemsPerPage: parseInt(e.target.value),
+                    // });
+
+                    setRssSettingsState({
+                      ...rssSettingsState,
+                      itemsPerPage: parseInt(e.target.value)
+                    })
+
+
                     // setWasItemsPerPageClicked(true);
                     setTabOpenedState(null);
                   }}

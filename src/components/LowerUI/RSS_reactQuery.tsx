@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import SingleRssNews from "./SingleRssNews";
 
+import shallow from "zustand/shallow"
+
 // import { tabsDataState } from "../../state/tabsAndBookmarks";
-import { rssSettingsState } from "../../state/defaultSettings";
+// import { rssSettingsState } from "../../state/defaultSettings";
+import { useRssSettings } from "../../state/defaultSettingsHooks";
+
 
 import { SingleTabData } from "../../utils/interfaces";
 
@@ -34,7 +38,13 @@ function ReactQuery({ currentTab, tabID,
   // upperVisState 
 }: Props): JSX.Element {
   // const [tabsData, setTabsData] = tabsDataState.use();
-  const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
+
+
+  // const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
+
+const rssSettingsState = useRssSettings(state => state, shallow)
+
+
   // let currentTab = tabsData.filter((obj) => obj.id === tabID);
 
   // const [itemsPerPage, setItemsPerPage] = useState(calcItemsPerPage());
@@ -52,7 +62,7 @@ function ReactQuery({ currentTab, tabID,
       return currentTab.itemsPerPage;
     }
 
-    return rssSettingsData.itemsPerPage;
+    return rssSettingsState.itemsPerPage;
   }
 
   function calcDescriptionVis() {
@@ -60,7 +70,7 @@ function ReactQuery({ currentTab, tabID,
       return currentTab.description;
     }
 
-    return rssSettingsData.description;
+    return rssSettingsState.description;
   }
 
   function calcDateVis() {
@@ -68,7 +78,7 @@ function ReactQuery({ currentTab, tabID,
       return currentTab.date;
     }
 
-    return rssSettingsData.date;
+    return rssSettingsState.date;
   }
 
   // useEffect(() => {

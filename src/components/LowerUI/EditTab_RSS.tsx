@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 
 import { produce } from "immer";
+import shallow from "zustand/shallow"
 
 import { SingleTabData } from "../../utils/interfaces";
 
-import { rssSettingsState } from "../../state/defaultSettings";
+// import { rssSettingsState } from "../../state/defaultSettings";
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 
 import { uiColorState } from "../../state/colorsState";
+import { useRssSettings } from "../../state/defaultSettingsHooks";
 
 interface Props {
   setWasAnythingClicked: React.Dispatch<React.SetStateAction<boolean>>;
@@ -42,9 +44,11 @@ function EditTab_RSS({
 }: Props): JSX.Element {
   const [tabsData, setTabsData] = tabsDataState.use();
 
-  const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
+  // const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
 
   const [uiColorData, setUiColorData] = uiColorState.use();
+
+  const rssSettingsState = useRssSettings(state => state, shallow)
 
   // let rssLink: string | null | undefined = "no bookmark";
   // rssLink = currentTab.rssLink;
@@ -137,9 +141,9 @@ function EditTab_RSS({
           className="text-red-600 hover:underline cursor-pointer"
           onClick={() => {
             // setResetColorsData(true);
-            setDescriptionCheckbox(rssSettingsData.description);
-            setDateCheckbox(rssSettingsData.date);
-            setRssItemsPerPage(rssSettingsData.itemsPerPage);
+            setDescriptionCheckbox(rssSettingsState.description);
+            setDateCheckbox(rssSettingsState.date);
+            setRssItemsPerPage(rssSettingsState.itemsPerPage);
             setWasAnythingClicked(false);
             setWasCheckboxClicked(false);
             setWasItemsPerPageClicked(false);

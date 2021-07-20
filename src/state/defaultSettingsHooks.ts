@@ -1,4 +1,5 @@
 import create from "zustand";
+import shallow from "zustand/shallow";
 
 interface UseGlobalSettings {
   picBackground: boolean;
@@ -7,6 +8,12 @@ interface UseGlobalSettings {
   limitColGrowth: boolean;
   hideNonDeletable: boolean;
   numberOfCols: 1 | 2 | 3 | 4;
+}
+
+interface RssSettings {
+  date: boolean;
+  description: boolean;
+  itemsPerPage: number;
 }
 
 export const useGlobalSettings = create<UseGlobalSettings>((set) => ({
@@ -18,24 +25,29 @@ export const useGlobalSettings = create<UseGlobalSettings>((set) => ({
   numberOfCols: 4,
 }));
 
-export const useRssSetting = create<{
+export const useRssSettings = create<{
   date: boolean;
   description: boolean;
-  itemsPerPage: 7;
+  itemsPerPage: number;
+  setRssSettings: (rssSettings: RssSettings) => void;
 }>((set) => ({
   date: true,
   description: false,
   itemsPerPage: 7,
+  setRssSettings: (rssSettings) =>
+    set((state) => ({
+      ...rssSettings,
+    })),
 }));
 
 export const useLoggedInState = create<{
   loggedInState: boolean;
-  setLoggedInState: (trueOrFalse: boolean) => void; 
+  setLoggedInState: (trueOrFalse: boolean) => void;
 }>((set) => ({
   loggedInState: false,
-  setLoggedInState: (trueOrFalse) => set( state => ({
-    ...state,
-    loggedInState: trueOrFalse
-  }))
-
+  setLoggedInState: (trueOrFalse) =>
+    set((state) => ({
+      ...state,
+      loggedInState: trueOrFalse,
+    })),
 }));

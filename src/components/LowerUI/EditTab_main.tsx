@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import FocusLock from "react-focus-lock";
 
+import shallow from "zustand/shallow"
+
 import ReactDOM from "react-dom";
 import { useState } from "react";
 
@@ -22,8 +24,11 @@ import {
 
 import { useBookmarks } from "../../state/useBookmarks";
 import { useTabs } from "../../state/useTabs";
+import { useRssSettings } from "../../state/defaultSettingsHooks";
 
-import { rssSettingsState } from "../../state/defaultSettings";
+
+
+// import { rssSettingsState } from "../../state/defaultSettings";
 import { useTabContext } from "../../utils/tabContext";
 
 import { SingleTabData, TabVisAction } from "../../utils/interfaces";
@@ -72,7 +77,10 @@ Props): JSX.Element {
   const editTab = useTabs((store) => store.editTab);
   const deleteTab = useTabs((store) => store.deleteTab);
 
-  const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
+  
+  // const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
+
+  const rssSettingsState = useRssSettings(state => state, shallow)
 
   const tabContext = useTabContext();
 
@@ -119,13 +127,13 @@ Props): JSX.Element {
       return currentTab.description;
     }
 
-    return rssSettingsData.description;
+    return rssSettingsState.description;
   });
   const [dateCheckbox, setDateCheckbox] = useState(() => {
     if (typeof currentTab.date === "boolean") {
       return currentTab.date;
     }
-    return rssSettingsData.date;
+    return rssSettingsState.date;
   });
 
   // checkboxes won't be saved on Save if there were not manipulated
@@ -136,7 +144,7 @@ Props): JSX.Element {
     if (typeof currentTab.itemsPerPage === "number") {
       return currentTab.itemsPerPage;
     }
-    return rssSettingsData.itemsPerPage;
+    return rssSettingsState.itemsPerPage;
   });
 
   // items per page won't be saved on Save if there were not manipulated
