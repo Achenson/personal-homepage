@@ -596,6 +596,8 @@ Warning: Can't perform a React state update on an unmounted component. This is a
 476. Tab: setTabOpenedData change to zustand, otherwise tab toggle won't work
 DONE 477. deleting tag in bookmarks: check if it works porperly in the end DONE
 478. Tab: check edit
+479. tabID, bookmarkID - unify types!
+480. GapAfterTab dragWrapper change to tabDrag from zustand
 
 
 
