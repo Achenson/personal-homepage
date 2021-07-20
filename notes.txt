@@ -560,6 +560,7 @@ DONE 469. close tabColors when clicking color in colors settings (should be same
 DONE 470. change excessive if statements (columns...) to RegEx DONE
 DONE 473. react context for upperVis & tabVis DONE
 DONE 474. bug: cannot delete note & RSS when they are open (fixed with optional chaining) DONE
+DONE 481. useBookmarks, useTabs: move data elsewhere, leave methods only DONE
 
 
 
@@ -598,7 +599,6 @@ DONE 477. deleting tag in bookmarks: check if it works porperly in the end DONE
 478. Tab: check edit
 479. tabID, bookmarkID - unify types!
 480. GapAfterTab dragWrapper change to tabDrag from zustand
-481. useBookmarks, useTabs: move data elsewhere, leave methods only?
 
 
 
