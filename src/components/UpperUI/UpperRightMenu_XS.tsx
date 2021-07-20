@@ -14,6 +14,8 @@ import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 import { uiColorState } from "../../state/colorsState";
 
+import {useLoggedInState} from "../../state/defaultSettingsHooks"
+
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import { globalSettingsState } from "../../state/defaultSettings";
@@ -23,20 +25,25 @@ interface Props {
   setTabType: React.Dispatch<React.SetStateAction<"folder" | "note" | "rss">>;
   // upperVisDispatch: React.Dispatch<UpperVisAction>;
   // upperVisState: UpperVisState;
-  loggedInData: boolean;
-  setLoggedInData: React.Dispatch<React.SetStateAction<boolean>>;
+  // loggedInData: boolean;
+  // setLoggedInData: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function UpperRightMenu({
   // upperVisDispatch,
   // upperVisState,
   setTabType,
-  loggedInData,
-  setLoggedInData,
+  // loggedInData,
+  // setLoggedInData,
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+
+  const loggedInState = useLoggedInState(state => state.loggedInState)
+  const setLoggedInState = useLoggedInState(state => state.setLoggedInState)
+
   const colLimit = globalSettingsData.limitColGrowth;
 
   const upperUiContext = useUpperUiContext();
@@ -174,13 +181,13 @@ function UpperRightMenu({
           }}
 /> */}
         <div className="self-center" style={{ width: "24px", height: "24px" }}>
-          {loggedInData ? (
+          {loggedInState ? (
             <button
               className="h-6 w-5 focus-2-veryDark"
               style={{ width: "22px" }}
               onClick={() => {
                 // upperVisDispatch({ type: "PROFILE_TOGGLE" });
-                setLoggedInData(false);
+                setLoggedInState(false);
                 upperUiContext.upperVisDispatch({
                   type: "MESSAGE_OPEN_LOGOUT",
                 });

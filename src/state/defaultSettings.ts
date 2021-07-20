@@ -25,6 +25,6 @@ export const globalSettingsState = newRidgeState<GlobalSettingsState>({
 // export const tabOpenedState = newRidgeState<null | (string | number)>(null);
 // export const tabEditOpenedState = newRidgeState<null | (string | number)>(null)
 
-export const loggedInState = newRidgeState(false);
+// export const loggedInState = newRidgeState(false);
 
 // export const focusedTabState = newRidgeState<null | (string | number)>(null);

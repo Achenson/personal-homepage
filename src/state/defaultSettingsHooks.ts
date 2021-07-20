@@ -1,4 +1,3 @@
-import { BooleanLiteral } from "typescript";
 import create from "zustand";
 
 interface UseGlobalSettings {
@@ -31,6 +30,12 @@ export const useRssSetting = create<{
 
 export const useLoggedInState = create<{
   loggedInState: boolean;
+  setLoggedInState: (trueOrFalse: boolean) => void; 
 }>((set) => ({
   loggedInState: false,
+  setLoggedInState: (trueOrFalse) => set( state => ({
+    ...state,
+    loggedInState: trueOrFalse
+  }))
+
 }));

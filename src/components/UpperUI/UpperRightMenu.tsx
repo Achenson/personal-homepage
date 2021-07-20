@@ -18,6 +18,7 @@ import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 import { uiColorState } from "../../state/colorsState";
 
+import {useLoggedInState} from "../../state/defaultSettingsHooks"
 
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
@@ -25,7 +26,7 @@ import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 import {
 
   // tabOpenedState,
-  loggedInState,
+  // loggedInState,
   globalSettingsState,
   // focusedTabState,
 } from "../../state/defaultSettings";
@@ -50,7 +51,11 @@ Props): JSX.Element {
   // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   // const [loggedIn, setLoggedIn] = useState(false);
-  const [loggedInData, setLoggedInData] = loggedInState.use();
+  // const [loggedInData, setLoggedInData] = loggedInState.use();
+  const loggedInState = useLoggedInState(state => state.loggedInState)
+  const setLoggedInState = useLoggedInState(state => state.setLoggedInState)
+
+
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   // const [focusedTabData, setFocusedTabData] = focusedTabState.use();
 
@@ -159,8 +164,8 @@ Props): JSX.Element {
         setTabType={setTabType}
         // upperVisDispatch={upperVisDispatch}
         // upperVisState={upperVisState}
-        loggedInData={loggedInData}
-        setLoggedInData={setLoggedInData}
+        // loggedInData={loggedInState}
+        // setLoggedInData={setLoggedInData}
       />
       {/* xs ============================^ */}
 
@@ -219,12 +224,12 @@ Props): JSX.Element {
         </button>
 
         <div style={{ width: "24px", height: "24px" }}>
-          {loggedInData ? (
+          {loggedInState ? (
             <button
               className="h-6 w-6 focus-2-inset-veryDark"
               onClick={() => {
                 // upperVisDispatch({ type: "PROFILE_TOGGLE" });
-                setLoggedInData(false);
+                setLoggedInState(false);
                 upperUiContext.upperVisDispatch({
                   type: "MESSAGE_OPEN_LOGOUT",
                 });

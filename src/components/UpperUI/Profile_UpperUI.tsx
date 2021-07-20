@@ -6,7 +6,8 @@ import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
 import Profile_input from "../UpperUI/Profile_input";
 
-import { loggedInState } from "../../state/defaultSettings";
+// import { loggedInState } from "../../state/defaultSettings";
+import {useLoggedInState} from "../../state/defaultSettingsHooks"
 
 import { uiColorState } from "../../state/colorsState";
 
@@ -28,7 +29,11 @@ Props): JSX.Element {
     "login"
   );
 
-  const [loggedInData, setLoggedInData] = loggedInState.use();
+
+  const loggedInState = useLoggedInState(state => state.loggedInState)
+  const setLoggedInState = useLoggedInState(state => state.setLoggedInState)
+
+  // const [loggedInData, setLoggedInData] = loggedInState.use();
 
   const [inputHover, setInputHover] = useState(false);
 
@@ -171,8 +176,8 @@ Props): JSX.Element {
                     className={`w-24 border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150
                   focus:outline-none focus-visible:ring-1 ring-${uiColorData}`}
                     onClick={() => {
-                      if (loggedInData === false) {
-                        setLoggedInData(true);
+                      if (loggedInState === false) {
+                        setLoggedInState(true);
                         console.log("sthh");
                       }
 
