@@ -22,7 +22,7 @@ import {
 import { useUpperUiContext } from "../../utils/upperUiContext";
 
 import {
-  closeAllTabsState,
+  // closeAllTabsState,
   // tabColorOpenedState,
   // tabEditOpenedState,
   tabOpenedState,
@@ -110,7 +110,7 @@ Props): JSX.Element {
 
   // const [tabsData, setTabsData] = tabsDataState.use();
 
-  const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
+  // const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
 
   // const [state, setstate] = useState(initialState)
 
@@ -120,6 +120,8 @@ Props): JSX.Element {
   const bookmarks = useBookmarks((state) => state.bookmarks);
 
   const tabs = useTabs((store) => store.tabs);
+  const closeAllTabsState = useTabs((store) => store.closeAllTabsState);
+
   const defaultTabContent = useTabs((store) => store.defaultTabContent);
   const toggleTab = useTabs((store) => store.toggleTab);
 
@@ -377,11 +379,11 @@ Props): JSX.Element {
   const [crossVis, setCrossVis] = useState<boolean>(true);
 
   useEffect(() => {
-    if (closeAllTabsData) {
+    if (closeAllTabsState) {
       // tabVisDispatch({ type: "TAB_EDITABLES_CLOSE" });
       tabVisDispatch({ type: "TAB_CONTENT_DEFAULT" });
     }
-  }, [closeAllTabsData]);
+  }, [closeAllTabsState]);
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();

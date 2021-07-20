@@ -21,7 +21,7 @@ import { uiColorState } from "../../state/colorsState";
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import {
-  closeAllTabsState,
+
   tabOpenedState,
   loggedInState,
   globalSettingsState,

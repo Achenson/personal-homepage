@@ -5,8 +5,7 @@ import { SingleTabData } from "../utils/interfaces";
 import { SingleBookmarkData } from "../utils/interfaces";
 
 import { tabsData } from "./tabsData";
-import { isDoStatement } from "typescript";
-import { closeAllTabsState } from "./defaultSettings";
+
 
 interface UseTabs {
   addTab: (singleTabData: SingleTabData) => void;
@@ -46,6 +45,7 @@ interface UseTabs {
   setTabColor: (color: string, tabID: string | number) => void;
   toggleTab: (tabID: string | number, tabOpened: boolean) => void;
   tabs: SingleTabData[];
+  // setting all tabs to default setting (open/close state) after clicking EyeOff
   closeAllTabsState: boolean;
   setCloseAllTabsState: (trueOrFalse: boolean) => void;
   focusedTabState: null | (string | number);

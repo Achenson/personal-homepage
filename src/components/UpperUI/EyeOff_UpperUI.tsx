@@ -6,8 +6,10 @@ import { backgroundColorsUpperUiFocus } from "../../utils/colors_background";
 
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
+import {useTabs} from "../../state/useTabs"
+
 import {
-  closeAllTabsState,
+  // closeAllTabsState,
   globalSettingsState,
   tabOpenedState
 } from "../../state/defaultSettings";
@@ -26,8 +28,10 @@ function EyeOff_UpperUI({
   const [backgroundColorData, setBackgroundColorState] =
     backgroundColorState.use();
 
-  const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
+  // const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
+
+  const setCloseAllTabsState = useTabs(state => state.setCloseAllTabsState)
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const upperUiContext = useUpperUiContext()
 
@@ -73,7 +77,7 @@ function EyeOff_UpperUI({
         // setSelected((b) => !b);
         // setBackgroundColorsToChooseVis((b) => !b);
        upperUiContext.upperVisDispatch({ type: "CLOSE_ALL" });
-        setCloseAllTabsData(true);
+        setCloseAllTabsState(true);
         setTabOpenedData(null)
       }}
       className={`focus:outline-none focus-visible:ring-2 ring-${focusColor()} ring-inset`}

@@ -9,7 +9,6 @@ import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import {
   globalSettingsState,
-  closeAllTabsState,
   tabOpenedState,
 } from "../../state/defaultSettings";
 

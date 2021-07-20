@@ -8,7 +8,7 @@ import {
 } from "../../state/tabsAndBookmarks";
 
 import {
-  closeAllTabsState,
+  
   globalSettingsState,
 } from "../../state/defaultSettings";
 

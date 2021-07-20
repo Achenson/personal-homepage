@@ -8,7 +8,7 @@ import { backgroundColorsUpperUiFocus } from "../../utils/colors_background";
 import { backgroundColorState } from "../../state/colorsState";
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
-import { closeAllTabsState, tabOpenedState } from "../../state/defaultSettings";
+import { tabOpenedState } from "../../state/defaultSettings";
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import { ReactComponent as DocumentSVG } from "../../svgs/document.svg";
