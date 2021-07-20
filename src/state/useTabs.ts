@@ -8,6 +8,9 @@ import { SingleBookmarkData } from "../utils/interfaces";
 
 interface UseTabs {
   addTab: (singleTabData: SingleTabData) => void;
+
+  // moving tabs to lower number cols(left) if globalSettings numberOfCols changes
+  tabsLessColumns: (numberOfCols: 1 | 2 | 3 | 4) => void;
   // deleting tab if there are no bookmarks with this tag (tab's name)
   deleteEmptyTab: (bookmarksAllTags: (string | number)[]) => void;
   deleteTab: (tabID: string | number) => void;
@@ -86,6 +89,27 @@ export const useTabs = create<UseTabs>((set) => ({
       })
     );
   },
+  tabsLessColumns: (numberOfCols) => {
+    set(
+      produce((state: UseTabs) => {
+        state.tabs
+          .filter((obj) => obj.column >= numberOfCols)
+          .sort((a, b) => {
+            if (a.title < b.title) {
+              return -1;
+            }
+            if (a.title > b.title) {
+              return 1;
+            }
+            return 0;
+          })
+          .forEach((obj, i) => {
+            obj.column = numberOfCols;
+            obj.priority = i;
+          });
+      })
+    );
+  },
   deleteEmptyTab: (bookmarksAllTags) =>
     set(
       produce((state: UseTabs) => {
@@ -94,7 +118,6 @@ export const useTabs = create<UseTabs>((set) => ({
             bookmarksAllTags.indexOf(obj.id) === -1 &&
             obj.type === "folder"
           ) {
-
             // setTabsData((previous) =>
             //   produce(previous, (updated) => {
             state.tabs.splice(i, 1);
