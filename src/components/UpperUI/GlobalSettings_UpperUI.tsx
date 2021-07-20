@@ -17,7 +17,7 @@ import {
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import { useWindowSize } from "../../utils/hook_useWindowSize";
-import { tabsDataState } from "../../state/tabsAndBookmarks";
+// import { tabsDataState } from "../../state/tabsAndBookmarks";
 import Settings_inner_xs from "./Settings_inner_xs";
 
 interface Props {
@@ -37,7 +37,7 @@ function GlobalSettings_UpperUI({
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
-  const [tabsData, setTabsData] = tabsDataState.use();
+  // const [tabsData, setTabsData] = tabsDataState.use();
   const upperUiContext = useUpperUiContext()
 
   const windowSize = useWindowSize();

@@ -8,6 +8,7 @@ import {
 } from "../../state/tabsAndBookmarks";
 
 import {useBookmarks} from "../../state/useBookmarks"
+import {useTabs} from "../../state/useTabs"
 
 
 import NewBookmark_UpperUI from "../UpperUI/NewBookmark_UpperUI";
@@ -58,6 +59,7 @@ function Bookmark_newAndEdit({
   // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
 
   const bookmarks = useBookmarks(state => state.bookmarks)
+  const tabs = useTabs(state => state.tabs)
 
   // const [
   //   bookmarksAllTagsData,
@@ -72,9 +74,9 @@ function Bookmark_newAndEdit({
     currentBookmark = bookmarks.filter((obj) => obj.id === bookmarkId)[0];
   }
 
-  const [tabsData, setTabsData] = tabsDataState.use();
+  // const [tabsData, setTabsData] = tabsDataState.use();
 
-  let foldersTab = tabsData.filter((obj) => obj.type === "folder");
+  let foldersTab = tabs.filter((obj) => obj.type === "folder");
 
   const [titleInput, setTitleInput] = useState<string>(
     bookmarkComponentType === "edit"
@@ -104,14 +106,14 @@ function Bookmark_newAndEdit({
 
     if (bookmarkComponentType === "new_lowerUI") {
       
-      if (tabTitle !== tabsData.find(obj=> obj.id === "ALL_TAGS")?.title) {
+      if (tabTitle !== tabs.find(obj=> obj.id === "ALL_TAGS")?.title) {
         return tabTitle as string;
       } else return ""
     }
 
     let arrOut: string[] = [];
 
-    tabsData.forEach((obj) => {
+    tabs.forEach((obj) => {
       if (
         (currentBookmark as SingleBookmarkData).tags.indexOf(obj.id) > -1 &&
         obj.id !== "ALL_TAGS"
@@ -166,7 +168,7 @@ function Bookmark_newAndEdit({
   let notesTitlesArr: string[] = [];
   let rssTitlesArr: string[] = [];
 
-  tabsData.forEach((obj) => {
+  tabs.forEach((obj) => {
     if (obj.type === "note") {
       notesTitlesArr.push(obj.title);
     }

@@ -20,6 +20,7 @@ import {
 
 
 import { useBookmarks } from "../../state/useBookmarks";
+import {  useTabs} from "../../state/useTabs";
 
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
@@ -108,7 +109,10 @@ function NewBookmark_UpperUI({
 }: // setBookmarkVis,
 Props): JSX.Element {
   // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-  const [tabsData, setTabsData] = tabsDataState.use();
+  // const [tabsData, setTabsData] = tabsDataState.use();
+
+  const tabs = useTabs(store => store.tabs)
+  const addTab = useTabs(store => store.addTab)
 
   const bookmarks = useBookmarks(store => store.bookmarks)
   const bookmarksAllTags = useBookmarks(store => store.bookmarksAllTags)  
@@ -275,9 +279,9 @@ Props): JSX.Element {
     let tagsInputArr_ToIds: (string | number)[] = ["ALL_TAGS"];
 
     tagsInputArr.forEach((el) => {
-      let tabCorrespondingToTag = tabsData.find((obj) => obj.title === el);
+      let tabCorrespondingToTag = tabs.find((obj) => obj.title === el);
 
-      let sortedTabsInCol = tabsData
+      let sortedTabsInCol = tabs
         .filter((obj) => obj.column === 1)
         .sort((a, b) => a.priority - b.priority);
 
@@ -297,11 +301,16 @@ Props): JSX.Element {
 
         setBookmarksAllTags([...newBookmarksAllTagsData]);
 
-        setTabsData((previous) =>
-          produce(previous, (updated) => {
-            updated.push(newTab);
-          })
-        );
+        // setTabsData((previous) =>
+        //   produce(previous, (updated) => {
+        //     updated.push(newTab);
+        //   })
+        // );
+
+        addTab(newTab);
+
+
+
       } else {
         // if input is not empty (if it is empty, "ALL_TAG" will be the only tag)
         if (selectablesInputStr !== "" && tabCorrespondingToTag) {

@@ -12,7 +12,10 @@ interface UseTabs {
   // moving tabs to lower number cols(left) if globalSettings numberOfCols changes
   tabsLessColumns: (numberOfCols: 1 | 2 | 3 | 4) => void;
   // reseting tab content (open/closed state) to default
-  defaultTabContent: (tabID: string | number, tabOpenedByDefault: boolean) => void;
+  defaultTabContent: (
+    tabID: string | number,
+    tabOpenedByDefault: boolean
+  ) => void;
   // deleting tab if there are no bookmarks with this tag (tab's name)
   deleteEmptyTab: (bookmarksAllTags: (string | number)[]) => void;
   deleteTab: (tabID: string | number) => void;
