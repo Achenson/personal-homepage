@@ -8,6 +8,67 @@ import { SingleBookmarkData } from "../utils/interfaces";
 
 interface UseTabs {
   addTab: (singleTabData: SingleTabData) => void;
+  deleteTab: (tabID: string | number) => void;
+  editTab: (
+    tabID: string | number,
+    tabTitleInput: string,
+    textAreaValue: string | null,
+    rssLinkInput: string,
+    dateCheckbox: boolean,
+    descriptionCheckbox: boolean,
+    rssItemsPerPage: number,
+    wasTabOpenClicked: boolean,
+    wasCheckboxClicked: boolean,
+    wasItemsPerPageClicked: boolean,
+    tabType: "folder" | "note" | "rss",
+    tabOpen: boolean,
+    setTabOpened_local: React.Dispatch<React.SetStateAction<boolean>>
+
+    /* 
+    
+    
+       produce(previous, (updated) => {
+        let tabToUpdate = updated.find((obj) => obj.id === tabID);
+
+        if (tabToUpdate) {
+          tabToUpdate.title = tabTitleInput;
+          // updated[tabIndex].deletable = currentTab[0].deletable
+          if (wasTabOpenClicked) {
+            tabToUpdate.openedByDefault = tabOpen;
+            setTabOpened_local(tabOpen);
+            tabToUpdate.opened = tabOpen;
+          }
+
+          if (tabType === "note") {
+            tabToUpdate.noteInput = textAreaValue;
+          }
+          if (tabType === "rss") {
+            tabToUpdate.rssLink = rssLinkInput;
+
+            if (wasCheckboxClicked) {
+              tabToUpdate.date = dateCheckbox;
+            }
+
+            if (wasCheckboxClicked) {
+              tabToUpdate.description = descriptionCheckbox;
+            }
+
+            if (wasItemsPerPageClicked) {
+              tabToUpdate.itemsPerPage = rssItemsPerPage;
+            }
+          }
+        }
+      })
+    
+    
+    
+    
+    
+    
+    
+    
+    */
+  ) => void;
   setTabColor: (color: string, tabID: string | number) => void;
   toggleTab: (tabID: string | number, tabOpened: boolean) => void;
   tabs: SingleTabData[];
@@ -19,6 +80,65 @@ export const useTabs = create<UseTabs>((set) => ({
     set(
       produce((state: UseTabs) => {
         state.tabs.push(singleTabData);
+      })
+    );
+  },
+  deleteTab: (tabID) => {
+    produce((state: UseTabs) => {
+      let tabToDelete = state.tabs.find((obj) => obj.id == tabID);
+      if (tabToDelete) {
+        let tabIndex = state.tabs.indexOf(tabToDelete);
+        state.tabs.splice(tabIndex, 1);
+      }
+    });
+  },
+  editTab: (
+    tabID,
+    tabTitleInput,
+    textAreaValue,
+    rssLinkInput,
+    dateCheckbox,
+    descriptionCheckbox,
+    rssItemsPerPage,
+    wasTabOpenClicked,
+    wasCheckboxClicked,
+    wasItemsPerPageClicked,
+    tabType,
+    tabOpen,
+    setTabOpened_local
+  ) => {
+    set(
+      produce((state: UseTabs) => {
+        let tabToUpdate = state.tabs.find((obj) => obj.id === tabID);
+
+        if (tabToUpdate) {
+          tabToUpdate.title = tabTitleInput;
+          // updated[tabIndex].deletable = currentTab[0].deletable
+          if (wasTabOpenClicked) {
+            tabToUpdate.openedByDefault = tabOpen;
+            setTabOpened_local(tabOpen);
+            tabToUpdate.opened = tabOpen;
+          }
+
+          if (tabType === "note") {
+            tabToUpdate.noteInput = textAreaValue;
+          }
+          if (tabType === "rss") {
+            tabToUpdate.rssLink = rssLinkInput;
+
+            if (wasCheckboxClicked) {
+              tabToUpdate.date = dateCheckbox;
+            }
+
+            if (wasCheckboxClicked) {
+              tabToUpdate.description = descriptionCheckbox;
+            }
+
+            if (wasItemsPerPageClicked) {
+              tabToUpdate.itemsPerPage = rssItemsPerPage;
+            }
+          }
+        }
       })
     );
   },
@@ -209,54 +329,6 @@ export const useTabs = create<UseTabs>((set) => ({
     },
   ],
 }));
-
-// export const useBookmarksStore = create<{
-//   bookmarks: SingleBookmarkData[];
-//   deleteBookmark: (removeId: string | number) => void;
-// }>((set) => ({
-//   bookmarks: [
-//     {
-//       id: 1,
-//       title: "facebook",
-//       URL: "https://en.wikipedia.org/wiki/Deadly_Rooms_of_Death",
-//       // tags: ["all", "fun"],
-//       tags: ["ALL_TAGS", "3"],
-//     },
-//     {
-//       id: 2,
-//       title: "tvn24 d",
-//       URL: "https://en.wikipedia.org/wiki/Webfoot_Technologies",
-//       // tags: ["all", "main"],
-//       tags: ["ALL_TAGS", "2"],
-//     },
-//     {
-//       id: 3,
-//       title: "gmail",
-//       URL: "https://en.wikipedia.org/wiki/Microsoft_Windows",
-//       // tags: ["all", "main"],
-//       tags: ["ALL_TAGS", "2"],
-//     },
-//     {
-//       id: 4,
-//       title: "oneMore",
-//       URL: "https://en.wikipedia.org/wiki/Microsoft_Windows",
-//       // tags: ["all", "main"],
-//       tags: ["ALL_TAGS"],
-//     },
-//     {
-//       id: 5,
-//       title: "anotherOne",
-//       URL: "https://en.wikipedia.org/wiki/Microsoft_Windows",
-//       // tags: ["all", "main"],
-//       tags: ["ALL_TAGS"],
-//     },
-//   ],
-//   deleteBookmark: (removeId: string | number) =>
-//     set((state) => ({
-//       ...state,
-//       bookmarks: state.bookmarks.filter(({ id }) => id !== removeId),
-//     })),
-// }));
 
 // let bookmarksAllTagsState = <(string | number)[]>["ALL_TAGS", "2", "3"];
 

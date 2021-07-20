@@ -14,7 +14,7 @@ interface UseBookmarks {
     tags: (string | number)[]
   ) => void;
   deleteBookmark: (
-    removeId: string | number,
+    bookmarkID: string | number,
     singleBookmarkData: SingleBookmarkData
   ) => void;
   addTag: (newFolderTabId: string, bookmarksInputArr: string[]) => void;
@@ -65,7 +65,7 @@ export const useBookmarks = create<UseBookmarks>((set, get) => ({
   // })
   // );
 
-  deleteBookmark: (removeId, singleBookmarkData) => {
+  deleteBookmark: (bookmarkID, singleBookmarkData) => {
     let tagsIdsToDelete: (string | number)[] = [];
 
     singleBookmarkData.tags.forEach((el) => {
@@ -99,7 +99,7 @@ export const useBookmarks = create<UseBookmarks>((set, get) => ({
 
     set((state) => ({
       ...state,
-      bookmarks: state.bookmarks.filter(({ id }) => id !== removeId),
+      bookmarks: state.bookmarks.filter(({ id }) => id !== bookmarkID),
       bookmarksAllTags: [...bookmarksAllTagsData_new],
     }));
   },

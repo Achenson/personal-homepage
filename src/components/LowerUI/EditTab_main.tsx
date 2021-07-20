@@ -20,10 +20,11 @@ import {
   // bookmarksDataState,
 } from "../../state/tabsAndBookmarks";
 
-import {useBookmarks} from "../../state/useBookmarks"
+import { useBookmarks } from "../../state/useBookmarks";
+import { useTabs } from "../../state/useTabs";
 
 import { rssSettingsState } from "../../state/defaultSettings";
-import {useTabContext} from "../../utils/tabContext"
+import { useTabContext } from "../../utils/tabContext";
 
 import { SingleTabData, TabVisAction } from "../../utils/interfaces";
 import { tabErrors } from "../../utils/errors";
@@ -65,11 +66,15 @@ function EditTab({
 Props): JSX.Element {
   // const [deletedTab, setDeletedTab] = deletedTabState.use();
 
-  const [tabsData, setTabsData] = tabsDataState.use();
+  // const [tabsData, setTabsData] = tabsDataState.use();
+
+  const tabs = useTabs((store) => store.tabs);
+  const editTab = useTabs((store) => store.editTab);
+  const deleteTab = useTabs((store) => store.deleteTab);
 
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
 
-  const tabContext = useTabContext()
+  const tabContext = useTabContext();
 
   let firstFieldRef = useRef<HTMLInputElement>(null);
 
@@ -89,10 +94,14 @@ Props): JSX.Element {
     rssLink = currentTab.rssLink;
   }
 
+
+
+
+
   // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
-  const bookmarks = useBookmarks(state => state.bookmarks);
-  const editTag = useBookmarks(state => state.editTag)
-  const deleteTag = useBookmarks(state => state.deleteTag);
+  const bookmarks = useBookmarks((state) => state.bookmarks);
+  const editTag = useBookmarks((state) => state.editTag);
+  const deleteTag = useBookmarks((state) => state.deleteTag);
 
   // for note only
   const [textAreaValue, setTextAreaValue] = useState<string | null>(
@@ -311,7 +320,7 @@ Props): JSX.Element {
     function titleUniquenessCheck() {
       let isUnique: boolean = true;
 
-      tabsData.forEach((obj, i) => {
+      tabs.forEach((obj, i) => {
         // diff than NewTab_UpperUI
         if (obj.title === tabTitleInput && obj.id !== tabID) {
           isUnique = false;
@@ -338,45 +347,59 @@ Props): JSX.Element {
     }
   }
 
-  function editTab() {
-    setTabsData((previous) =>
-      produce(previous, (updated) => {
-        let tabToUpdate = updated.find((obj) => obj.id === tabID);
+  function editTabWrapper() {
+    // setTabsData((previous) =>
+    //   produce(previous, (updated) => {
+    //     let tabToUpdate = updated.find((obj) => obj.id === tabID);
 
-        if (tabToUpdate) {
-          tabToUpdate.title = tabTitleInput;
-          // updated[tabIndex].deletable = currentTab[0].deletable
-          if (wasTabOpenClicked) {
-            tabToUpdate.openedByDefault = tabOpen;
-            setTabOpened_local(tabOpen);
-            tabToUpdate.opened = tabOpen;
-          }
+    //     if (tabToUpdate) {
+    //       tabToUpdate.title = tabTitleInput;
+    //       // updated[tabIndex].deletable = currentTab[0].deletable
+    //       if (wasTabOpenClicked) {
+    //         tabToUpdate.openedByDefault = tabOpen;
+    //         setTabOpened_local(tabOpen);
+    //         tabToUpdate.opened = tabOpen;
+    //       }
 
-          if (tabType === "note") {
-            tabToUpdate.noteInput = textAreaValue;
-          }
-          if (tabType === "rss") {
-            tabToUpdate.rssLink = rssLinkInput;
+    //       if (tabType === "note") {
+    //         tabToUpdate.noteInput = textAreaValue;
+    //       }
+    //       if (tabType === "rss") {
+    //         tabToUpdate.rssLink = rssLinkInput;
 
-            if (wasCheckboxClicked) {
-              tabToUpdate.date = dateCheckbox;
-            }
+    //         if (wasCheckboxClicked) {
+    //           tabToUpdate.date = dateCheckbox;
+    //         }
 
-            if (wasCheckboxClicked) {
-              tabToUpdate.description = descriptionCheckbox;
-            }
+    //         if (wasCheckboxClicked) {
+    //           tabToUpdate.description = descriptionCheckbox;
+    //         }
 
-            if (wasItemsPerPageClicked) {
-              tabToUpdate.itemsPerPage = rssItemsPerPage;
-            }
-          }
-        }
-      })
+    //         if (wasItemsPerPageClicked) {
+    //           tabToUpdate.itemsPerPage = rssItemsPerPage;
+    //         }
+    //       }
+    //     }
+    //   })
+    // );
+
+    editTab(
+      tabID,
+      tabTitleInput,
+      textAreaValue,
+      rssLinkInput,
+      dateCheckbox,
+      descriptionCheckbox,
+      rssItemsPerPage,
+      wasTabOpenClicked,
+      wasCheckboxClicked,
+      wasItemsPerPageClicked,
+      tabType,
+      tabOpen,
+      setTabOpened_local
     );
 
     if (tabType === "folder") {
-
-
       // changing tags in bookmarks
       // setBookmarksData((previous) =>
       //   produce(previous, (updated) => {
@@ -410,61 +433,43 @@ Props): JSX.Element {
       //   })
       // );
 
+      // changing tags in bookmarks
+      // setBookmarksData((previous) =>
+      // produce(previous, (updated) => {
 
-          // changing tags in bookmarks
-          // setBookmarksData((previous) =>
-          // produce(previous, (updated) => {
+      // bookmarks.forEach((obj) => {
+      //   // let bookmarksInputArr = selectablesInputStr.split(", ");
 
+      //   // make array of missing bookmarks
+      //   let missingBookmarks: string[] = [];
 
+      //   arrOfBookmarksNames.forEach((el, i) => {
+      //     if (bookmarksInputArr.indexOf(el) === -1) {
+      //       missingBookmarks.push(el);
+      //     }
+      //   });
 
-            // bookmarks.forEach((obj) => {
-            //   // let bookmarksInputArr = selectablesInputStr.split(", ");
-  
-            //   // make array of missing bookmarks
-            //   let missingBookmarks: string[] = [];
-  
-            //   arrOfBookmarksNames.forEach((el, i) => {
-            //     if (bookmarksInputArr.indexOf(el) === -1) {
-            //       missingBookmarks.push(el);
-            //     }
-            //   });
-  
-            //   // if this bookmarks' title is inside missing bookmarks
-            //   // cut out tabID (current folder) from tags
-            //   if (missingBookmarks.indexOf(obj.title) > -1) {
-            //     obj.tags.splice(obj.tags.indexOf(tabID), 1);
-            //   }
+      //   // if this bookmarks' title is inside missing bookmarks
+      //   // cut out tabID (current folder) from tags
+      //   if (missingBookmarks.indexOf(obj.title) > -1) {
+      //     obj.tags.splice(obj.tags.indexOf(tabID), 1);
+      //   }
 
+      //   //  if link title is present in folder's new input for tags & if folder title wasn't already in tags
+      //   // add new tag
+      //   if (
+      //     bookmarksInputArr.indexOf(obj.title) > -1 &&
+      //     obj.tags.indexOf(tabID) === -1
+      //   ) {
+      //     obj.tags.push(tabID);
+      //   }
+      // });
 
+      // changing a tag in bookmarks
+      editTag(tabID, arrOfBookmarksNames, bookmarksInputArr);
 
-  
-            //   //  if link title is present in folder's new input for tags & if folder title wasn't already in tags
-            //   // add new tag
-            //   if (
-            //     bookmarksInputArr.indexOf(obj.title) > -1 &&
-            //     obj.tags.indexOf(tabID) === -1
-            //   ) {
-            //     obj.tags.push(tabID);
-            //   }
-            // });
-
-             // changing a tag in bookmarks
-            editTag(tabID, arrOfBookmarksNames, bookmarksInputArr);
-
-
-
-
-          // })
-        // );
-
-
-
-
-
-
-
-
-
+      // })
+      // );
     }
   }
 
@@ -478,7 +483,7 @@ Props): JSX.Element {
 
     // 1.edit tab(folder,rss or note)
     // 2. (in case of folders) delete tag from bookmark or add tag to bookmark
-    editTab();
+    editTabWrapper();
 
     // if (tabOpen) {
     //   tabVisDispatch({ type: "TAB_CONTENT_OPEN_AFTER_LOCKING" });
@@ -487,7 +492,7 @@ Props): JSX.Element {
     //   }
 
     // tabVisDispatch({ type: "EDIT_TOGGLE" });
-    tabContext.tabVisDispatch({type: "EDIT_TOGGLE"})
+    tabContext.tabVisDispatch({ type: "EDIT_TOGGLE" });
   }
 
   return (
@@ -661,27 +666,39 @@ Props): JSX.Element {
 
                 // setDeletedTab(tabID);
 
-                setTabsData((previous) =>
-                  produce(previous, (updated) => {
-                    let tabToDelete = updated.find((obj) => obj.id == tabID);
-                    if (tabToDelete) {
-                      let tabIndex = updated.indexOf(tabToDelete);
-                      updated.splice(tabIndex, 1);
-                    }
-                  })
-                );
+
+
+
+                // setTabsData((previous) =>
+                //   produce(previous, (updated) => {
+                //     let tabToDelete = updated.find((obj) => obj.id == tabID);
+                //     if (tabToDelete) {
+                //       let tabIndex = updated.indexOf(tabToDelete);
+                //       updated.splice(tabIndex, 1);
+                //     }
+                //   })
+                // );
+
+
+                
+                  deleteTab(tabID);
+
+
+
+
+                
 
                 // setEditTabVis((b) => !b);
                 // tabVisDispatch({ type: "EDIT_TOGGLE" });
-                tabContext.tabVisDispatch({type: "EDIT_TOGGLE"})
+                tabContext.tabVisDispatch({ type: "EDIT_TOGGLE" });
 
                 // removing deleted tab(tag) for bookmarks
-                
+
                 // bookmarks.forEach((obj, i) => {
-                  //   if (obj.tags.indexOf(tabTitle as string) > -1) {
-                    //     setBookmarksData((previous) =>
-                    //       produce(previous, (updated) => {
-                      //         updated[i].tags.splice(
+                //   if (obj.tags.indexOf(tabTitle as string) > -1) {
+                //     setBookmarksData((previous) =>
+                //       produce(previous, (updated) => {
+                //         updated[i].tags.splice(
                 //           obj.tags.indexOf(tabTitle as string),
                 //           1
                 //         );
@@ -689,13 +706,9 @@ Props): JSX.Element {
                 //     );
                 //   }
                 // });
-                
+
                 // removing deleted tab(tag) for bookmarks
                 deleteTag(tabTitle);
-
-
-
-
               }}
               aria-label={"Delete tab"}
             >
@@ -729,7 +742,7 @@ Props): JSX.Element {
               e.preventDefault();
               // setEditTabVis((b) => !b);
               // tabVisDispatch({ type: "EDIT_TOGGLE" });
-              tabContext.tabVisDispatch({type: "EDIT_TOGGLE"})
+              tabContext.tabVisDispatch({ type: "EDIT_TOGGLE" });
             }}
             aria-label={"Close"}
           >
