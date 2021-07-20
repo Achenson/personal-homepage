@@ -6,7 +6,7 @@ import { ReactComponent as SettingsSVG } from "../../svgs/settingsAlt.svg";
 
 import { UpperVisAction } from "../../utils/interfaces";
 
-import {useUpperUiContext} from "../../utils/upperUiContext"
+import { useUpperUiContext } from "../../utils/upperUiContext";
 
 import { uiColorState } from "../../state/colorsState";
 
@@ -21,8 +21,7 @@ function Settings_inner_xs({
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
-  
-  const upperUiContext = useUpperUiContext()
+  const upperUiContext = useUpperUiContext();
 
   return (
     <div
@@ -38,9 +37,10 @@ function Settings_inner_xs({
           if (currentSettings === "background") return;
 
           // upperVisDispatch({ type: "BACKGROUND_SETTINGS_TOGGLE" });
-          upperUiContext.upperVisDispatch({type: "BACKGROUND_SETTINGS_TOGGLE"})
+          upperUiContext.upperVisDispatch({
+            type: "BACKGROUND_SETTINGS_TOGGLE",
+          });
         }}
-
       >
         <PhotographSVG
           className={`h-full w-full transition-colors duration-75 
@@ -61,7 +61,7 @@ function Settings_inner_xs({
           if (currentSettings === "colors") return;
 
           // upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
-          upperUiContext.upperVisDispatch({type: "COLORS_SETTINGS_TOGGLE"})
+          upperUiContext.upperVisDispatch({ type: "COLORS_SETTINGS_TOGGLE" });
           // setColorsVis((b) => !b);
         }}
         aria-label={"Default tab colors"}
@@ -86,7 +86,7 @@ function Settings_inner_xs({
 
           // setCloseAllTabsData(true);
           // upperVisDispatch({ type: "SETTINGS_TOGGLE" });
-          upperUiContext.upperVisDispatch({type: "SETTINGS_TOGGLE"})
+          upperUiContext.upperVisDispatch({ type: "SETTINGS_TOGGLE" });
         }}
         aria-label={"Global settings"}
       >

@@ -8,10 +8,12 @@ import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 import { uiColorState } from "../../state/colorsState";
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
+import {useTabs} from "../../state/useTabs"
+
 import {
   rssSettingsState,
   globalSettingsState,
-  tabOpenedState,
+  // tabOpenedState,
 } from "../../state/defaultSettings";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
@@ -36,8 +38,12 @@ function GlobalSettings_UpperUI({
 
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-  const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
+  // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
   // const [tabsData, setTabsData] = tabsDataState.use();
+
+  const setTabOpenedState = useTabs(state => state.setTabOpenedState);
+
+
   const upperUiContext = useUpperUiContext()
 
   const windowSize = useWindowSize();
@@ -217,7 +223,7 @@ function GlobalSettings_UpperUI({
                           description: !rssSettingsData.description,
                         });
 
-                        setTabOpenedData(null);
+                        setTabOpenedState(null);
                       }}
                       aria-label={"RSS description on by default"}
                     ></button>
@@ -240,7 +246,7 @@ function GlobalSettings_UpperUI({
                           date: !rssSettingsData.date,
                         });
 
-                        setTabOpenedData(null);
+                        setTabOpenedState(null);
                       }}
                       aria-label={"RSS date on by default"}
                     ></button>
@@ -268,7 +274,7 @@ function GlobalSettings_UpperUI({
                       itemsPerPage: parseInt(e.target.value),
                     });
                     // setWasItemsPerPageClicked(true);
-                    setTabOpenedData(null);
+                    setTabOpenedState(null);
                   }}
                 />
               </div>

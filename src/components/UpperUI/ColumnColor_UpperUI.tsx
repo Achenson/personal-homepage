@@ -9,8 +9,12 @@ import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import {
   globalSettingsState,
-  tabOpenedState,
+  // tabOpenedState,
 } from "../../state/defaultSettings";
+
+import {useTabs} from "../../state/useTabs"
+  // const tabOpenedState = useTabs(state => state.tabOpenedState)
+  
 
 interface Props {
   colNumber: number;
@@ -51,7 +55,8 @@ function ColumnColor_UpperUI({
 
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   // const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
-  const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
+  // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
+  const setTabOpenedState = useTabs(state => state.setTabOpenedState)
 
   const upperUiContext = useUpperUiContext()
 
@@ -110,7 +115,7 @@ function ColumnColor_UpperUI({
         <button
           onClick={() => {
             setDefaultColorsFor(`column_${colNumber}` as any);
-            setTabOpenedData(null);
+            setTabOpenedState(null);
             // setCloseAllTabsData(true);
 
             if (upperUiContext.upperVisState.columnSelected === colNumber) {

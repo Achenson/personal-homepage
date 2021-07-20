@@ -11,7 +11,7 @@ import {useTabs} from "../../state/useTabs"
 import {
   // closeAllTabsState,
   globalSettingsState,
-  tabOpenedState
+  // tabOpenedState
 } from "../../state/defaultSettings";
 
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
@@ -29,9 +29,11 @@ function EyeOff_UpperUI({
     backgroundColorState.use();
 
   // const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
-  const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
+  // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   const setCloseAllTabsState = useTabs(state => state.setCloseAllTabsState)
+  const setTabOpenedState = useTabs(state => state.setTabOpenedState)
+
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const upperUiContext = useUpperUiContext()
 
@@ -78,7 +80,7 @@ function EyeOff_UpperUI({
         // setBackgroundColorsToChooseVis((b) => !b);
        upperUiContext.upperVisDispatch({ type: "CLOSE_ALL" });
         setCloseAllTabsState(true);
-        setTabOpenedData(null)
+        setTabOpenedState(null)
       }}
       className={`focus:outline-none focus-visible:ring-2 ring-${focusColor()} ring-inset`}
       tabIndex={6}

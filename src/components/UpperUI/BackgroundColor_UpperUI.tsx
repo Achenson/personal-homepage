@@ -8,7 +8,7 @@ import { backgroundColorsUpperUiFocus } from "../../utils/colors_background";
 import { backgroundColorState } from "../../state/colorsState";
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
-import { tabOpenedState } from "../../state/defaultSettings";
+// import { tabOpenedState } from "../../state/defaultSettings";
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import { ReactComponent as DocumentSVG } from "../../svgs/document.svg";
@@ -28,7 +28,7 @@ function BackgroundColor_upperUI({
     backgroundColorState.use();
 
   // const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
-  const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
+  // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   const [selected, setSelected] = useState(false);
 

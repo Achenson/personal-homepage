@@ -22,7 +22,7 @@ import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import {
 
-  tabOpenedState,
+  // tabOpenedState,
   loggedInState,
   globalSettingsState,
   focusedTabState,
@@ -43,7 +43,7 @@ function UpperRightMenu({
 Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
   // const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
-  const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
+  // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
   // const [loggedIn, setLoggedIn] = useState(false);
   const [loggedInData, setLoggedInData] = loggedInState.use();

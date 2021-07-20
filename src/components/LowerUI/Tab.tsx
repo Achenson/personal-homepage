@@ -25,7 +25,7 @@ import {
   // closeAllTabsState,
   // tabColorOpenedState,
   // tabEditOpenedState,
-  tabOpenedState,
+  // tabOpenedState,
   globalSettingsState,
   focusedTabState,
 } from "../../state/defaultSettings";
