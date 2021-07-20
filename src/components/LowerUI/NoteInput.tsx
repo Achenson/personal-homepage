@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { tabsDataState } from "../../state/tabsAndBookmarks";
+// import { tabsDataState } from "../../state/tabsAndBookmarks";
 import {
   SingleTabData,
   TabVisAction,
@@ -22,7 +22,7 @@ function NoteInput({
   currentTab,
   // upperVisState,
 }: Props): JSX.Element {
-  const [tabsData, setTabsData] = tabsDataState.use();
+  // const [tabsData, setTabsData] = tabsDataState.use();
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   const tabContext = useTabContext()

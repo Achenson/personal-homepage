@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import SingleRssNews from "./SingleRssNews";
 
-import { tabsDataState } from "../../state/tabsAndBookmarks";
+// import { tabsDataState } from "../../state/tabsAndBookmarks";
 import { rssSettingsState } from "../../state/defaultSettings";
 
 import { SingleTabData } from "../../utils/interfaces";
@@ -33,7 +33,7 @@ interface Props {
 function ReactQuery({ currentTab, tabID, 
   // upperVisState 
 }: Props): JSX.Element {
-  const [tabsData, setTabsData] = tabsDataState.use();
+  // const [tabsData, setTabsData] = tabsDataState.use();
   const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
   // let currentTab = tabsData.filter((obj) => obj.id === tabID);
 

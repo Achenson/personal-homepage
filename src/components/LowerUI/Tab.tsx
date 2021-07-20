@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useReducer, useCallback } from "react";
 
-import {useBookmarks} from "../../state/useBookmarks"
+import { useBookmarks } from "../../state/useBookmarks";
 
 // import Rect, { useRect } from "@reach/rect";
 
@@ -8,7 +8,7 @@ import { produce } from "immer";
 
 import { tabsDataState } from "../../state/tabsAndBookmarks";
 
-import {useTabs} from "../../state/useTabs"
+import { useTabs } from "../../state/useTabs";
 
 import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 import { deletedTabState } from "../../state/tabsAndBookmarks";
@@ -19,7 +19,7 @@ import {
   tabBeingDraggedColor_State,
 } from "../../state/colorsState";
 
-import {useUpperUiContext} from "../../utils/upperUiContext"
+import { useUpperUiContext } from "../../utils/upperUiContext";
 
 import {
   closeAllTabsState,
@@ -108,7 +108,7 @@ Props): JSX.Element {
   const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [focusedTabData, setFocusedTabData] = focusedTabState.use();
 
-  const [tabsData, setTabsData] = tabsDataState.use();
+  // const [tabsData, setTabsData] = tabsDataState.use();
 
   const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
 
@@ -117,12 +117,13 @@ Props): JSX.Element {
   // needed for immediate tab content opening/closing after locking/unlocking
   const [tabOpened_local, setTabOpened_local] = useState(tabOpened);
 
-  const bookmarks = useBookmarks(state => state.bookmarks)
+  const bookmarks = useBookmarks((state) => state.bookmarks);
 
-  const tabs = useTabs(store => store.tabs)
-  const toggleTab = useTabs(store => store.toggleTab)
+  const tabs = useTabs((store) => store.tabs);
+  const defaultTabContent = useTabs((store) => store.defaultTabContent);
+  const toggleTab = useTabs((store) => store.toggleTab);
 
-  const upperUiContext = useUpperUiContext()
+  const upperUiContext = useUpperUiContext();
 
   useEffect(() => {
     setTabOpened_local(tabOpened);
@@ -156,7 +157,7 @@ Props): JSX.Element {
 
   // const [touchScreenMode, setTouchScreenMode] = useState(false);
 
-  let currentTab = tabsData.find((obj) => obj.id === tabID);
+  let currentTab = tabs.find((obj) => obj.id === tabID);
 
   // 0s to not show typescript errors
   // let tabIndex: number = 0;
@@ -224,8 +225,8 @@ Props): JSX.Element {
           editBookmarkVis: null,
         };
       case "TAB_CONTENT_TOGGLE":
-      // !!!!!! to change 
-      setTabOpenedData(tabID);
+        // !!!!!! to change
+        setTabOpenedData(tabID);
 
         // setTabsData((previous) =>
         //   produce(previous, (updated) => {
@@ -238,9 +239,7 @@ Props): JSX.Element {
         //   })
         // );
 
-        toggleTab(tabID, tabOpened)
-
-        
+        toggleTab(tabID, tabOpened);
 
         return {
           ...state,
@@ -251,16 +250,18 @@ Props): JSX.Element {
           // tabContentVis: !state.tabContentVis,
         };
       case "TAB_CONTENT_DEFAULT":
-        setTabsData((previous) =>
-          produce(previous, (updated) => {
-            let tabToUpdate = updated.find((obj) => obj.id === tabID);
+        // setTabsData((previous) =>
+        //   produce(previous, (updated) => {
+        //     let tabToUpdate = updated.find((obj) => obj.id === tabID);
 
-            if (tabToUpdate) {
-              let tabIndex = updated.indexOf(tabToUpdate);
-              updated[tabIndex].opened = tabOpenedByDefault;
-            }
-          })
-        );
+        //     if (tabToUpdate) {
+        //       let tabIndex = updated.indexOf(tabToUpdate);
+        //       updated[tabIndex].opened = tabOpenedByDefault;
+        //     }
+        //   })
+        // );
+
+        defaultTabContent(tabID, tabOpenedByDefault);
 
         return {
           ...state,
@@ -483,9 +484,14 @@ Props): JSX.Element {
   useEffect(() => {
     if (!upperUiContext.upperVisState.tabEditablesOpenable) {
       tabVisDispatch({ type: "TAB_EDITABLES_CLOSE" });
-      upperUiContext.upperVisDispatch({ type: "TAB_EDITABLES_OPENABLE_DEFAULT" });
+      upperUiContext.upperVisDispatch({
+        type: "TAB_EDITABLES_OPENABLE_DEFAULT",
+      });
     }
-  }, [upperUiContext.upperVisState.tabEditablesOpenable, upperUiContext.upperVisDispatch]);
+  }, [
+    upperUiContext.upperVisState.tabEditablesOpenable,
+    upperUiContext.upperVisDispatch,
+  ]);
 
   function textOrIconColor(finalTabColor: string, textOrIcon: "text" | "icon") {
     // exceptions
@@ -758,7 +764,7 @@ Props): JSX.Element {
         {tabOpened_local && tabType === "folder" && (
           <div>
             {bookmarks
-            // {bookmarksData
+              // {bookmarksData
               .filter((el) => el.tags.indexOf(tabID) > -1)
               .map((el, i) => {
                 return (

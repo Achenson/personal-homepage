@@ -598,6 +598,7 @@ DONE 477. deleting tag in bookmarks: check if it works porperly in the end DONE
 478. Tab: check edit
 479. tabID, bookmarkID - unify types!
 480. GapAfterTab dragWrapper change to tabDrag from zustand
+481. useBookmarks, useTabs: move data elsewhere, leave methods only?
 
 
 
