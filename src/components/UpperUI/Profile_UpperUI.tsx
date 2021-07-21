@@ -7,7 +7,7 @@ import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 import Profile_input from "../UpperUI/Profile_input";
 
 // import { loggedInState } from "../../state/defaultSettings";
-import {useLoggedInState} from "../../state/defaultSettingsHooks"
+import {useLoggedInState} from "../../state/useLoggedInState"
 
 import { uiColorState } from "../../state/colorsState";
 

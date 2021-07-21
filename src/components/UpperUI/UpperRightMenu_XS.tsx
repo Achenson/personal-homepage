@@ -14,7 +14,7 @@ import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 import { uiColorState } from "../../state/colorsState";
 
-import {useLoggedInState} from "../../state/defaultSettingsHooks"
+import {useLoggedInState} from "../../state/useLoggedInState"
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 

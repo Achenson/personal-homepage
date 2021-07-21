@@ -18,11 +18,11 @@ import { ReactComponent as XsmallSVG } from "../../svgs/x-small.svg";
 import { ReactComponent as ChevronDownSVG } from "../../svgs/chevron-down.svg";
 import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
-import {
-  // tabsDataState,
-  // bookmarksDataState,
-  // bookmarksAllTagsState,
-} from "../../state/tabsAndBookmarks";
+// import {
+//   // tabsDataState,
+//   // bookmarksDataState,
+//   // bookmarksAllTagsState,
+// } from "../../state/tabsAndBookmarks";
 
 import { SingleBookmarkData, TabVisAction } from "../../utils/interfaces";
 import { bookmarkErrors } from "../../utils/errors";
