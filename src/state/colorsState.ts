@@ -36,13 +36,13 @@ interface ColumnsColors {
 //   column_4: columnColors[3][2],
 // });
 
-export const columnsColorsImg_State = newRidgeState<ColumnsColors>({
-  // column_1: "rgba(0,0,0,0.2)",
-  column_1: imageColumnColors[0][2],
-  column_2: imageColumnColors[0][2],
-  column_3: imageColumnColors[0][2],
-  column_4: imageColumnColors[0][2],
-});
+// export const columnsColorsImg_State = newRidgeState<ColumnsColors>({
+//   // column_1: "rgba(0,0,0,0.2)",
+//   column_1: imageColumnColors[0][2],
+//   column_2: imageColumnColors[0][2],
+//   column_3: imageColumnColors[0][2],
+//   column_4: imageColumnColors[0][2],
+// });
 
 // export const tabBeingDraggedColor_State = newRidgeState<{
 //   tabColor: string

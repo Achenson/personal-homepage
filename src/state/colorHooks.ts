@@ -87,8 +87,6 @@ interface UseColumnsColorsAll extends UseColumnsColorsData {
 
 
 
-
-
 export const useColumnsColors = create<UseColumnsColorsAll>((set) => ({
   column_1: columnColors[0][8],
   column_2: columnColors[1][5],
@@ -102,11 +100,17 @@ export const useColumnsColors = create<UseColumnsColorsAll>((set) => ({
   )
 }));
 
-export const useColumnsColorsImg = create<UseColumnsColorsData>((set) => ({
+export const useColumnsColorsImg = create<UseColumnsColorsAll>((set) => ({
   column_1: imageColumnColors[0][2],
   column_2: imageColumnColors[0][2],
   column_3: imageColumnColors[0][2],
   column_4: imageColumnColors[0][2],
+  setColumsColors: (columnColorsObj) => set(
+    (state) => ({
+      ...state,
+      [columnColorsObj.key]: columnColorsObj.color
+    })
+  )
 }));
 
 export const useTabBeingDraggedColor = create<{

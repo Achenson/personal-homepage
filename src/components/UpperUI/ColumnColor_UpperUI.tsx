@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import {
-  // columnsColorsState,
-  columnsColorsImg_State,
-} from "../../state/colorsState";
+// import {
+//   // columnsColorsState,
+//   columnsColorsImg_State,
+// } from "../../state/colorsState";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 import {useUpperUiContext} from "../../utils/upperUiContext"
@@ -13,7 +13,7 @@ import {useUpperUiContext} from "../../utils/upperUiContext"
 // } from "../../state/defaultSettings";
 import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
-import { useColumnsColors } from "../../state/colorHooks";
+import { useColumnsColors, useColumnsColorsImg } from "../../state/colorHooks";
 import {useTabs} from "../../state/useTabs"
   // const tabOpenedState = useTabs(state => state.tabOpenedState)
   
@@ -55,9 +55,10 @@ function ColumnColor_UpperUI({
 
   // const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
   const columnsColors = useColumnsColors(state=> state, shallow)
+  const columnsColorsImg = useColumnsColorsImg(state=> state, shallow)
 
-  const [columnsColorImg_Data, setColumnsColorImg_Data] =
-    columnsColorsImg_State.use();
+  // const [columnsColorImg_Data, setColumnsColorImg_Data] =
+  //   columnsColorsImg_State.use();
 
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   // const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
@@ -85,15 +86,15 @@ function ColumnColor_UpperUI({
 
     switch (colNumber) {
       case 1:
-        return columnsColorImg_Data.column_1;
+        return columnsColorsImg.column_1;
       case 2:
-        return columnsColorImg_Data.column_2;
+        return columnsColorsImg.column_2;
       case 3:
-        return columnsColorImg_Data.column_3;
+        return columnsColorsImg.column_3;
       case 4:
-        return columnsColorImg_Data.column_4;
+        return columnsColorsImg.column_4;
       default:
-        return columnsColorImg_Data.column_1;
+        return columnsColorsImg.column_1;
     }
   }
 

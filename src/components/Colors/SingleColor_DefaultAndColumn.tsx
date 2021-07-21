@@ -3,15 +3,19 @@ import React from "react";
 // import { noteColorState } from "../../state/colorsState";
 // import { rssColorState } from "../../state/colorsState";
 // import { uiColorState } from "../../state/colorsState";
-import {
-  // columnsColorsState,
-  columnsColorsImg_State,
-} from "../../state/colorsState";
+// import {
+//   // columnsColorsState,
+//   columnsColorsImg_State,
+// } from "../../state/colorsState";
 // import { uiColorState } from "../../state/colorsState";
 
 import { setComplementaryUiColor } from "../../utils/func_complementaryUIcolor";
 import shallow from "zustand/shallow";
-import { useDefaultColors, useColumnsColors } from "../../state/colorHooks";
+import {
+  useDefaultColors,
+  useColumnsColors,
+  useColumnsColorsImg,
+} from "../../state/colorHooks";
 
 import { tabColorsLightFocus } from "../../utils/colors_tab";
 
@@ -56,9 +60,12 @@ function SingleColor_DefaultAndColumn({
 
   // const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const setColumnsColors = useColumnsColors((state) => state.setColumsColors);
+  const setColumnsColorsImg = useColumnsColorsImg(
+    (state) => state.setColumsColors
+  );
 
-  const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
-    columnsColorsImg_State.use();
+  // const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
+  //   columnsColorsImg_State.use();
 
   // const [uiColorData, setUiColorData] = uiColorState.use();
 
@@ -217,17 +224,25 @@ function SingleColor_DefaultAndColumn({
           /column/.test(defaultColorsFor) &&
           colsForBackgroundImg
         ) {
-          setColumnsColorsImg_Data((previous) =>
-            produce(previous, (updated) => {
-              updated[
-                defaultColorsFor as
-                  | "column_1"
-                  | "column_2"
-                  | "column_3"
-                  | "column_4"
-              ] = color;
-            })
-          );
+          // setColumnsColorsImg_Data((previous) =>
+          //   produce(previous, (updated) => {
+          //     updated[
+          //       defaultColorsFor as
+          //         | "column_1"
+          //         | "column_2"
+          //         | "column_3"
+          //         | "column_4"
+          //     ] = color;
+          //   })
+          // );
+          setColumnsColorsImg({
+            key: defaultColorsFor as
+              | "column_1"
+              | "column_2"
+              | "column_3"
+              | "column_4",
+            color: color,
+          });
         }
 
         setSelectedNumber(colorNumber);

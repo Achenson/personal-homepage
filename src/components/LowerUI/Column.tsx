@@ -4,12 +4,12 @@ import React from "react";
 import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 import {useTabs} from "../../state/useTabs"
-import {useColumnsColors} from "../../state/colorHooks"
+import {useColumnsColors, useColumnsColorsImg} from "../../state/colorHooks"
 
-import {
-  // columnsColorsState,
-  columnsColorsImg_State,
-} from "../../state/colorsState";
+// import {
+//   // columnsColorsState,
+//   columnsColorsImg_State,
+// } from "../../state/colorsState";
 // import { globalSettingsState } from "../../state/defaultSettings";
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
@@ -44,10 +44,11 @@ function Column({
   // const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
 
   const columnsColors = useColumnsColors(state => state, shallow)
+  const columnsColorsImg = useColumnsColorsImg(state => state, shallow)
 
 
-  const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
-    columnsColorsImg_State.use();
+  // const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
+  //   columnsColorsImg_State.use();
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   // const [backgroundColorData, setbackgroundColorData] =
   //   backgroundColorState.use();
@@ -71,18 +72,18 @@ function Column({
     }
 
     if (oneColorForAllColumns) {
-      return columnsColorsImg_Data.column_1;
+      return columnsColorsImg.column_1;
     }
 
     switch (colNumber) {
       case 1:
-        return columnsColorsImg_Data.column_1;
+        return columnsColorsImg.column_1;
       case 2:
-        return columnsColorsImg_Data.column_2;
+        return columnsColorsImg.column_2;
       case 3:
-        return columnsColorsImg_Data.column_3;
+        return columnsColorsImg.column_3;
       case 4:
-        return columnsColorsImg_Data.column_4;
+        return columnsColorsImg.column_4;
     }
   }
 

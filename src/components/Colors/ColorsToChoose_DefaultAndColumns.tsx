@@ -8,7 +8,7 @@ import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 
 import { tabColors, tabColorsConcat } from "../../utils/colors_tab";
-import { useDefaultColors, useColumnsColors } from "../../state/colorHooks";
+import { useDefaultColors,  useColumnsColors, useColumnsColorsImg } from "../../state/colorHooks";
 
 
 import {
@@ -24,10 +24,10 @@ import {
 //   rssColorState,
 // } from "../../state/colorsState";
 
-import {
-  // columnsColorsState,
-  columnsColorsImg_State,
-} from "../../state/colorsState";
+// import {
+//   // columnsColorsState,
+//   columnsColorsImg_State,
+// } from "../../state/colorsState";
 
 // import { globalSettingsState } from "../../state/defaultSettings";
 import {useUpperUiContext} from "../../utils/upperUiContext"
@@ -73,10 +73,11 @@ function ColorsToChoose_DefaultAndColumns({
   // const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
 
   const columnsColors = useColumnsColors(state => state, shallow)
+  const columnsColorsImg = useColumnsColorsImg(state => state, shallow)
 
 
-  const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
-    columnsColorsImg_State.use();
+  // const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
+  //   columnsColorsImg_State.use();
 
   const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
 
@@ -122,7 +123,7 @@ function ColorsToChoose_DefaultAndColumns({
         imageColumnColorsConcat.map((color, i) => {
           switch (defaultColorsFor) {
             case "column_1":
-              if (color === columnsColorsImg_Data.column_1) {
+              if (color === columnsColorsImg.column_1) {
                 selectedNumber = calcColorNumbering(
                   color,
                   imageColumnColorsConcat
@@ -130,7 +131,7 @@ function ColorsToChoose_DefaultAndColumns({
               }
               break;
             case "column_2":
-              if (color === columnsColorsImg_Data.column_2) {
+              if (color === columnsColorsImg.column_2) {
                 selectedNumber = calcColorNumbering(
                   color,
                   imageColumnColorsConcat
@@ -138,7 +139,7 @@ function ColorsToChoose_DefaultAndColumns({
               }
               break;
             case "column_3":
-              if (color === columnsColorsImg_Data.column_3) {
+              if (color === columnsColorsImg.column_3) {
                 selectedNumber = calcColorNumbering(
                   color,
                   imageColumnColorsConcat
@@ -146,7 +147,7 @@ function ColorsToChoose_DefaultAndColumns({
               }
               break;
             case "column_4":
-              if (color === columnsColorsImg_Data.column_4) {
+              if (color === columnsColorsImg.column_4) {
                 selectedNumber = calcColorNumbering(
                   color,
                   imageColumnColorsConcat
