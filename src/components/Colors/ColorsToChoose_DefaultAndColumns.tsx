@@ -8,7 +8,7 @@ import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 
 import { tabColors, tabColorsConcat } from "../../utils/colors_tab";
-import { useDefaultColors } from "../../state/colorHooks";
+import { useDefaultColors, useColumnsColors } from "../../state/colorHooks";
 
 
 import {
@@ -25,7 +25,7 @@ import {
 // } from "../../state/colorsState";
 
 import {
-  columnsColorsState,
+  // columnsColorsState,
   columnsColorsImg_State,
 } from "../../state/colorsState";
 
@@ -70,7 +70,11 @@ function ColorsToChoose_DefaultAndColumns({
   // const [noteColorData, setNoteColorData] = noteColorState.use();
   // const [rssColorData, setRssColorData] = rssColorState.use();
 
-  const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
+  // const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
+
+  const columnsColors = useColumnsColors(state => state, shallow)
+
+
   const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
     columnsColorsImg_State.use();
 
@@ -159,22 +163,22 @@ function ColorsToChoose_DefaultAndColumns({
         columnColorsConcat.map((color, i) => {
           switch (defaultColorsFor) {
             case "column_1":
-              if (color === columnsColorsData.column_1) {
+              if (color === columnsColors.column_1) {
                 selectedNumber = calcColorNumbering(color, columnColorsConcat);
               }
               break;
             case "column_2":
-              if (color === columnsColorsData.column_2) {
+              if (color === columnsColors.column_2) {
                 selectedNumber = calcColorNumbering(color, columnColorsConcat);
               }
               break;
             case "column_3":
-              if (color === columnsColorsData.column_3) {
+              if (color === columnsColors.column_3) {
                 selectedNumber = calcColorNumbering(color, columnColorsConcat);
               }
               break;
             case "column_4":
-              if (color === columnsColorsData.column_4) {
+              if (color === columnsColors.column_4) {
                 selectedNumber = calcColorNumbering(color, columnColorsConcat);
               }
               break;

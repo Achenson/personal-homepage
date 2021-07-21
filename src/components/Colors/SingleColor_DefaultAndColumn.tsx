@@ -4,13 +4,14 @@ import React from "react";
 // import { rssColorState } from "../../state/colorsState";
 // import { uiColorState } from "../../state/colorsState";
 import {
-  columnsColorsState,
+  // columnsColorsState,
   columnsColorsImg_State,
 } from "../../state/colorsState";
 // import { uiColorState } from "../../state/colorsState";
 
 import { setComplementaryUiColor } from "../../utils/func_complementaryUIcolor";
-import {useDefaultColors} from "../../state/colorHooks";
+import shallow from "zustand/shallow";
+import { useDefaultColors, useColumnsColors } from "../../state/colorHooks";
 
 import { tabColorsLightFocus } from "../../utils/colors_tab";
 
@@ -51,9 +52,11 @@ function SingleColor_DefaultAndColumn({
   // const [folderColorData, setFolderColorData] = folderColorState.use();
   // const [noteColorData, setNoteColorData] = noteColorState.use();
   // const [rssColorData, setRssColorData] = rssColorState.use();
-  const setDefaultColors = useDefaultColors(state => state.setDefaultColors)
+  const setDefaultColors = useDefaultColors((state) => state.setDefaultColors);
 
-  const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
+  // const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
+  const setColumnsColors = useColumnsColors((state) => state.setColumsColors);
+
   const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
     columnsColorsImg_State.use();
 
@@ -155,22 +158,23 @@ function SingleColor_DefaultAndColumn({
       onClick={() => {
         if (defaultColorsFor === "folders") {
           // setFolderColorData(color);
-          setDefaultColors({key: "folderColor", color: color })
+          setDefaultColors({ key: "folderColor", color: color });
 
           // setComplementaryUiColor(color, setUiColorData);
 
-          setDefaultColors({key: "uiColor", color: setComplementaryUiColor(color)})
+          setDefaultColors({
+            key: "uiColor",
+            color: setComplementaryUiColor(color),
+          });
         }
 
         if (defaultColorsFor === "notes") {
           // setNoteColorData(color);
-          setDefaultColors({key: "noteColor", color: color })
-
-
+          setDefaultColors({ key: "noteColor", color: color });
         }
 
         if (defaultColorsFor === "rss") {
-          setDefaultColors({key: "rssColor", color: color })
+          setDefaultColors({ key: "rssColor", color: color });
           // setRssColorData(color);
         }
 
@@ -183,17 +187,26 @@ function SingleColor_DefaultAndColumn({
           /column/.test(defaultColorsFor) &&
           !colsForBackgroundImg
         ) {
-          setColumnsColorsData((previous) =>
-            produce(previous, (updated) => {
-              updated[
-                defaultColorsFor as
-                  | "column_1"
-                  | "column_2"
-                  | "column_3"
-                  | "column_4"
-              ] = color;
-            })
-          );
+          // setColumnsColorsData((previous) =>
+          //   produce(previous, (updated) => {
+          //     updated[
+          //       defaultColorsFor as
+          //         | "column_1"
+          //         | "column_2"
+          //         | "column_3"
+          //         | "column_4"
+          //     ] = color;
+          //   })
+          // );
+
+          setColumnsColors({
+            key: defaultColorsFor as
+              | "column_1"
+              | "column_2"
+              | "column_3"
+              | "column_4",
+            color: color,
+          });
         }
 
         if (

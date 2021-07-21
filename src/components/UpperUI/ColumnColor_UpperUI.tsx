@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  columnsColorsState,
+  // columnsColorsState,
   columnsColorsImg_State,
 } from "../../state/colorsState";
 
@@ -13,6 +13,7 @@ import {useUpperUiContext} from "../../utils/upperUiContext"
 // } from "../../state/defaultSettings";
 import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+import { useColumnsColors } from "../../state/colorHooks";
 import {useTabs} from "../../state/useTabs"
   // const tabOpenedState = useTabs(state => state.tabOpenedState)
   
@@ -52,7 +53,8 @@ function ColumnColor_UpperUI({
 
   const globalSettings = useGlobalSettings(state => state, shallow)
 
-  const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
+  // const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
+  const columnsColors = useColumnsColors(state=> state, shallow)
 
   const [columnsColorImg_Data, setColumnsColorImg_Data] =
     columnsColorsImg_State.use();
@@ -65,19 +67,19 @@ function ColumnColor_UpperUI({
   const upperUiContext = useUpperUiContext()
 
 
-  function columnsColor(colNumber: number) {
+  function makeColumnsColor(colNumber: number) {
     if (columnType === "NO_BACKGROUND_IMG") {
       switch (colNumber) {
         case 1:
-          return "bg-" + columnsColorData.column_1;
+          return "bg-" + columnsColors.column_1;
         case 2:
-          return "bg-" + columnsColorData.column_2;
+          return "bg-" + columnsColors.column_2;
         case 3:
-          return "bg-" + columnsColorData.column_3;
+          return "bg-" + columnsColors.column_3;
         case 4:
-          return "bg-" + columnsColorData.column_4;
+          return "bg-" + columnsColors.column_4;
         default:
-          return columnsColorData.column_1;
+          return columnsColors.column_1;
       }
     }
 
@@ -134,7 +136,7 @@ function ColumnColor_UpperUI({
             }
           }}
           className={`relative overflow-hidden h-4 w-8 ${
-            columnType === "NO_BACKGROUND_IMG" ? columnsColor(colNumber) : ""
+            columnType === "NO_BACKGROUND_IMG" ? makeColumnsColor(colNumber) : ""
           }
           ${isHoverOnAnyColumn ? "shadow-inner_lg" : ""}
           cursor-pointer ${borderStyle()} border-black hover:shadow-inner_lg
@@ -146,7 +148,7 @@ function ColumnColor_UpperUI({
           `}
           style={{
             backgroundColor: `${
-              columnType === "BACKGROUND_IMG" ? columnsColor(colNumber) : ""
+              columnType === "BACKGROUND_IMG" ? makeColumnsColor(colNumber) : ""
             }`,
           }}
           tabIndex={tabIndex}

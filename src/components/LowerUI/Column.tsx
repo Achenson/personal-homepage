@@ -4,9 +4,10 @@ import React from "react";
 import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 import {useTabs} from "../../state/useTabs"
+import {useColumnsColors} from "../../state/colorHooks"
 
 import {
-  columnsColorsState,
+  // columnsColorsState,
   columnsColorsImg_State,
 } from "../../state/colorsState";
 // import { globalSettingsState } from "../../state/defaultSettings";
@@ -40,7 +41,11 @@ function Column({
   setTabType,
   breakpoint,
 }: Props): JSX.Element {
-  const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
+  // const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
+
+  const columnsColors = useColumnsColors(state => state, shallow)
+
+
   const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
     columnsColorsImg_State.use();
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
@@ -91,18 +96,18 @@ function Column({
     }
 
     if (oneColorForAllColumns) {
-      return "bg-" + columnsColorsData.column_1;
+      return "bg-" + columnsColors.column_1;
     }
 
     switch (colNumber) {
       case 1:
-        return "bg-" + columnsColorsData.column_1;
+        return "bg-" + columnsColors.column_1;
       case 2:
-        return "bg-" + columnsColorsData.column_2;
+        return "bg-" + columnsColors.column_2;
       case 3:
-        return "bg-" + columnsColorsData.column_3;
+        return "bg-" + columnsColors.column_3;
       case 4:
-        return "bg-" + columnsColorsData.column_4;
+        return "bg-" + columnsColors.column_4;
     }
   }
 

@@ -25,16 +25,16 @@ interface ColumnsColors {
   column_4: string;
 }
 
-export const columnsColorsState = newRidgeState<ColumnsColors>({
-  // column_1: "yellow-200",
-  // column_2: "orange-200",
-  // column_3: "red-200",
-  // column_4: "green-200",
-  column_1: columnColors[0][8],
-  column_2: columnColors[1][5],
-  column_3: columnColors[1][8],
-  column_4: columnColors[3][2],
-});
+// export const columnsColorsState = newRidgeState<ColumnsColors>({
+//   // column_1: "yellow-200",
+//   // column_2: "orange-200",
+//   // column_3: "red-200",
+//   // column_4: "green-200",
+//   column_1: columnColors[0][8],
+//   column_2: columnColors[1][5],
+//   column_3: columnColors[1][8],
+//   column_4: columnColors[3][2],
+// });
 
 export const columnsColorsImg_State = newRidgeState<ColumnsColors>({
   // column_1: "rgba(0,0,0,0.2)",

@@ -68,14 +68,41 @@ export const useResetColors = create<{
     })),
 }));
 
-export const useColumnsColors = create((set) => ({
+
+interface ColumnsColorsObj {
+  key: "column_1" | "column_2" | "column_3" | "column_4";
+  color: string;
+}
+
+interface UseColumnsColorsData {
+  column_1: string;
+  column_2: string;
+  column_3: string;
+  column_4: string;
+}
+
+interface UseColumnsColorsAll extends UseColumnsColorsData {
+  setColumsColors: (columnsColorsObj: ColumnsColorsObj) => void;
+}
+
+
+
+
+
+export const useColumnsColors = create<UseColumnsColorsAll>((set) => ({
   column_1: columnColors[0][8],
   column_2: columnColors[1][5],
   column_3: columnColors[1][8],
   column_4: columnColors[3][2],
+  setColumsColors: (columnColorsObj) => set(
+    (state) => ({
+      ...state,
+      [columnColorsObj.key]: columnColorsObj.color
+    })
+  )
 }));
 
-export const useColumnsColorsImg = create((set) => ({
+export const useColumnsColorsImg = create<UseColumnsColorsData>((set) => ({
   column_1: imageColumnColors[0][2],
   column_2: imageColumnColors[0][2],
   column_3: imageColumnColors[0][2],
