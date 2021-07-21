@@ -11,6 +11,7 @@ import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 
 import { useTabs } from "../../state/useTabs";
+import { useTabBeingDraggedColor } from "../../state/colorHooks";
 
 // import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 // import { deletedTabState } from "../../state/tabsAndBookmarks";
@@ -18,7 +19,7 @@ import {
   noteColorState,
   folderColorState,
   rssColorState,
-  tabBeingDraggedColor_State,
+  // tabBeingDraggedColor_State,
 } from "../../state/colorsState";
 
 import { useUpperUiContext } from "../../utils/upperUiContext";
@@ -110,6 +111,8 @@ Props): JSX.Element {
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   const globalSettings = useGlobalSettings(state => state, shallow)
+
+  const setTabBeingDraggedColor = useTabBeingDraggedColor(state => state.setTabBeingDraggedColor)
 
   // const [focusedTabData, setFocusedTabData] = focusedTabState.use();
 
@@ -435,19 +438,19 @@ Props): JSX.Element {
     }),
   });
 
-  const [tabBeingDraggedColor_Data, setTabBeingDraggedColor_Data] =
-    tabBeingDraggedColor_State.use();
+  // const [tabBeingDraggedColor_Data, setTabBeingDraggedColor_Data] =
+  //   tabBeingDraggedColor_State.use();
 
   useEffect(() => {
     if (isDragging) {
-      setTabBeingDraggedColor_Data({ tabColor: finalTabColor });
+      setTabBeingDraggedColor(finalTabColor);
       tabVisDispatch({ type: "TAB_EDITABLES_CLOSE" });
       setTabOpenedState(null);
     }
   }, [
     isDragging,
     finalTabColor,
-    setTabBeingDraggedColor_Data,
+    setTabBeingDraggedColor,
     setTabOpenedState,
   ]);
 

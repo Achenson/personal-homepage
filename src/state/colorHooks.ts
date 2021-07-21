@@ -17,12 +17,11 @@ export const useBackgroundColor = create<{
   setBackgroundColor: (backgroundColor: string) => void;
 }>((set) => ({
   backgroundColor: backgroundColors[0][1],
-  setBackgroundColor: (backgroundColor) => set(
-    (state) => ({
+  setBackgroundColor: (backgroundColor) =>
+    set((state) => ({
       ...state,
-      backgroundColor: backgroundColor
-    })
-  )
+      backgroundColor: backgroundColor,
+    })),
 }));
 
 // export const folderColorState = newRidgeState<string>("teal-500");
@@ -34,15 +33,14 @@ export const useBackgroundColor = create<{
 
 export const useResetColors = create<{
   resetColors: boolean;
-  setResetColors: (trueOrFalse: boolean) => void
+  setResetColors: (trueOrFalse: boolean) => void;
 }>((set) => ({
   resetColors: false,
-  setResetColors: (trueOrFalse) => set(
-    (state) => ({
+  setResetColors: (trueOrFalse) =>
+    set((state) => ({
       ...state,
-      resetColors: trueOrFalse
-    })
-  )
+      resetColors: trueOrFalse,
+    })),
 }));
 
 export const useColumnsColors = create((set) => ({
@@ -59,6 +57,14 @@ export const useColumnsColorsImg = create((set) => ({
   column_4: imageColumnColors[0][2],
 }));
 
-export const useTabBeingDraggedColor = create((set) => ({
+export const useTabBeingDraggedColor = create<{
+  tabBeingDraggedColor: string;
+  setTabBeingDraggedColor: (color: string) => void;
+}>((set) => ({
   tabBeingDraggedColor: "",
+  setTabBeingDraggedColor: (color) =>
+    set((state) => ({
+      ...state,
+      useTabBeingDraggedColor: color,
+    })),
 }));

@@ -42,12 +42,12 @@ export const columnsColorsImg_State = newRidgeState<ColumnsColors>({
   column_4: imageColumnColors[0][2],
 });
 
-export const tabBeingDraggedColor_State = newRidgeState<{
-  tabColor: string
-}>(
-  {tabColor: ""
-}
-)
+// export const tabBeingDraggedColor_State = newRidgeState<{
+//   tabColor: string
+// }>(
+//   {tabColor: ""
+// }
+// )
 
 // export const backgroundColorState = newRidgeState<string>(
 //   // "gray-50"

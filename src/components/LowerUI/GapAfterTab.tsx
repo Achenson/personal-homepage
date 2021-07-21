@@ -9,9 +9,10 @@ import { ItemTypes } from "../../utils/itemsDnd";
 
 import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+import { useTabBeingDraggedColor } from "../../state/colorHooks";
 import {useTabs} from "../../state/useTabs"
 
-import { tabBeingDraggedColor_State } from "../../state/colorsState";
+// import { tabBeingDraggedColor_State } from "../../state/colorsState";
 // import { globalSettingsState } from "../../state/defaultSettings";
 
 interface Item {
@@ -42,12 +43,13 @@ function GapAfterTab({
 
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const globalSettings = useGlobalSettings(state => state, shallow)
+  const tabBeingDraggedColor = useTabBeingDraggedColor(state => state.tabBeingDraggedColor)
 
   const tabs = useTabs(store => store.tabs);
   const dragTab = useTabs(store => store.dragTab);
 
-  const [tabBeingDraggedColor_Data, setTabBeingDraggedColor_Data] =
-    tabBeingDraggedColor_State.use();
+  // const [tabBeingDraggedColor_Data, setTabBeingDraggedColor_Data] =
+  //   tabBeingDraggedColor_State.use();
 
   const [{ isOver }, drop] = useDrop({
     //    required property
@@ -189,7 +191,7 @@ function GapAfterTab({
     //   return `bg-${tabBeingDraggedColor_Data.tabColor} opacity-60`;
     // }
 
-    return `bg-${tabBeingDraggedColor_Data.tabColor} opacity-60`;
+    return `bg-${tabBeingDraggedColor} opacity-60`;
   }
 
   function upperLastGapBorderDrag(): string {
