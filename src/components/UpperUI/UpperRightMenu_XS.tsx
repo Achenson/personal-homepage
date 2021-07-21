@@ -15,8 +15,9 @@ import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+import { useDefaultColors } from "../../state/colorHooks";
 
-import { uiColorState } from "../../state/colorsState";
+// import { uiColorState } from "../../state/colorsState";
 
 import {useLoggedInState} from "../../state/useLoggedInState"
 
@@ -45,7 +46,8 @@ function UpperRightMenu({
 
   const globalSettings = useGlobalSettings(state => state, shallow)
 
-  const [uiColorData, setUiColorData] = uiColorState.use();
+  // const [uiColorData, setUiColorData] = uiColorState.use();
+  const uiColor = useDefaultColors(state => state.uiColor)
 
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
@@ -78,7 +80,7 @@ function UpperRightMenu({
             aria-label={"New folder"}
           >
             <FolderSVG
-              className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+              className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColor}`}
             />
           </button>
 
@@ -97,7 +99,7 @@ function UpperRightMenu({
             aria-label={"New note"}
           >
             <NoteSVG
-              className={`h-6 w-6 cursor-pointer fill-current transition-colors duration-75 text-black hover:text-${uiColorData}`}
+              className={`h-6 w-6 cursor-pointer fill-current transition-colors duration-75 text-black hover:text-${uiColor}`}
             />
           </button>
 
@@ -116,12 +118,12 @@ function UpperRightMenu({
             aria-label={"New rss"}
           >
             <AddRssSVG
-              className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+              className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColor}`}
             />
           </button>
 
           <UserSVG
-            className={`invisible h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+            className={`invisible h-6 self-center cursor-pointer transition-colors duration-75 hover:text-${uiColor}`}
           />
         </div>
       )}
@@ -145,7 +147,7 @@ function UpperRightMenu({
           aria-label={"New bookmark"}
         >
           <BookmarkSVG
-            className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+            className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColor}`}
           />
         </button>
 
@@ -162,7 +164,7 @@ function UpperRightMenu({
           aria-label={"New tab menu"}
         >
           <PlusSquareSVG
-            className={`h-5 w-5 cursor-pointer transition-colors duration-75 fill-current hover:text-${uiColorData} ml-px`}
+            className={`h-5 w-5 cursor-pointer transition-colors duration-75 fill-current hover:text-${uiColor} ml-px`}
           />
         </button>
 
@@ -178,7 +180,7 @@ function UpperRightMenu({
           aria-label={"Settings"}
         >
           <CogSVG
-            className={`h-full w-full cursor-pointer transition-colors duration-75  hover:text-${uiColorData}`}
+            className={`h-full w-full cursor-pointer transition-colors duration-75  hover:text-${uiColor}`}
           />
         </button>
 
@@ -206,7 +208,7 @@ function UpperRightMenu({
               aria-label={"Logout"}
             >
               <LogoutSVG
-                className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+                className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColor}`}
                 style={{ marginLeft: "-1px" }}
               />
             </button>
@@ -224,7 +226,7 @@ function UpperRightMenu({
             >
               <UserSVG
                 // -ml-1
-                className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+                className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColor}`}
                 style={{ marginLeft: "-3px", marginBottom: "0px" }}
               />
             </button>

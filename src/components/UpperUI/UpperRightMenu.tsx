@@ -16,12 +16,13 @@ import { ReactComponent as AddRssSVG } from "../../svgs/rss.svg";
 
 import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
-import { uiColorState } from "../../state/colorsState";
+// import { uiColorState } from "../../state/colorsState";
 
 import {useLoggedInState} from "../../state/useLoggedInState"
 
 import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+import {useDefaultColors } from "../../state/colorHooks";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
@@ -51,7 +52,9 @@ Props): JSX.Element {
 
   const globalSettings = useGlobalSettings(state => state, shallow)
 
-  const [uiColorData, setUiColorData] = uiColorState.use();
+  // const [uiColorData, setUiColorData] = uiColorState.use();
+
+  const uiColor = useDefaultColors(state => state.uiColor)
   // const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
   // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
@@ -104,7 +107,7 @@ Props): JSX.Element {
           aria-label={"New bookmark"}
         >
           <BookmarkSVG
-            className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+            className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColor}`}
           />
         </button>
 
@@ -122,7 +125,7 @@ Props): JSX.Element {
           aria-label={"New folder"}
         >
           <FolderSVG
-            className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData} mr-1`}
+            className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColor} mr-1`}
           />
         </button>
 
@@ -142,7 +145,7 @@ Props): JSX.Element {
           aria-label={"New note"}
         >
           <NoteSVG
-            className={`h-6 w-6 cursor-pointer fill-current transition-colors duration-75 text-black hover:text-${uiColorData}`}
+            className={`h-6 w-6 cursor-pointer fill-current transition-colors duration-75 text-black hover:text-${uiColor}`}
           />
         </button>
         <button
@@ -157,7 +160,7 @@ Props): JSX.Element {
           aria-label={"New RSS channel"}
         >
           <AddRssSVG
-            className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+            className={`h-7 w-7 cursor-pointer transition-colors duration-75 hover:text-${uiColor}`}
           />
         </button>
         {/* <AddRssSVG className={`h-6 cursor-pointer hover:text-${uiColorData}`} */}
@@ -192,7 +195,7 @@ Props): JSX.Element {
           aria-label={"Background mode"}
         >
           <PhotographSVG
-            className={`h-full w-full cursor-pointer transition-colors duration-75 hover:text-${uiColorData} `}
+            className={`h-full w-full cursor-pointer transition-colors duration-75 hover:text-${uiColor} `}
           />
         </button>
 
@@ -207,7 +210,7 @@ Props): JSX.Element {
           aria-label={"Default tab colors"}
         >
           <ColorSVG
-            className={`h-full w-full cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+            className={`h-full w-full cursor-pointer transition-colors duration-75 hover:text-${uiColor}`}
           />
         </button>
 
@@ -224,7 +227,7 @@ Props): JSX.Element {
           aria-label={"Global settings"}
         >
           <SettingsSVG
-            className={`h-full w-full cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+            className={`h-full w-full cursor-pointer transition-colors duration-75 hover:text-${uiColor}`}
           />
         </button>
 
@@ -244,7 +247,7 @@ Props): JSX.Element {
               aria-label={"Logout"}
             >
               <LogoutSVG
-                className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+                className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColor}`}
                 style={{ marginLeft: "0px" }}
               />
             </button>
@@ -260,7 +263,7 @@ Props): JSX.Element {
               aria-label={"Login/register"}
             >
               <UserSVG
-                className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColorData}`}
+                className={`h-6 w-6 cursor-pointer transition-colors duration-75 hover:text-${uiColor}`}
                 style={{ marginLeft: "-2px", marginBottom: "0px" }}
               />
             </button>

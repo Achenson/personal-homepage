@@ -5,16 +5,18 @@ import FocusLock from "react-focus-lock";
 
 import SingleColor_Tab from "./SingleColor_Tab";
 
+import shallow from "zustand/shallow";
+import { useDefaultColors } from "../../state/colorHooks";
 import { tabColors, tabColorsConcat } from "../../utils/colors_tab";
 // import {columnColors} from "../../utils/columnColors";
 import { TabVisAction } from "../../utils/interfaces";
 import {useTabContext} from "../../utils/tabContext"
 
-import {
-  folderColorState,
-  noteColorState,
-  rssColorState,
-} from "../../state/colorsState";
+// import {
+//   folderColorState,
+//   noteColorState,
+//   rssColorState,
+// } from "../../state/colorsState";
 
 interface Props {
   setIconsVis: (value: React.SetStateAction<boolean>) => void;
@@ -42,12 +44,12 @@ Props): JSX.Element {
 
   // }, [document.documentElement.scrollTop])
 
-  const [folderColorData, setFolderColorData] = folderColorState.use();
-  const [noteColorData, setNoteColorData] = noteColorState.use();
-  const [rssColorData, setRssColorData] = rssColorState.use();
+  // const [folderColorData, setFolderColorData] = folderColorState.use();
+  // const [noteColorData, setNoteColorData] = noteColorState.use();
+  // const [rssColorData, setRssColorData] = rssColorState.use();
 
+  const defaultColors = useDefaultColors(state => state, shallow)
   const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
-
   
   // const tabContext = useContext(TabContext)
   const tabContext = useTabContext()
@@ -81,15 +83,15 @@ Props): JSX.Element {
 
     if (!tabColor) {
       if (tabType === "folder") {
-        selectedNumber = calcColorNumbering(folderColorData);
+        selectedNumber = calcColorNumbering(defaultColors.folderColor);
       }
 
       if (tabType === "note") {
-        selectedNumber = calcColorNumbering(noteColorData);
+        selectedNumber = calcColorNumbering(defaultColors.noteColor);
       }
 
       if (tabType === "rss") {
-        selectedNumber = calcColorNumbering(rssColorData);
+        selectedNumber = calcColorNumbering(defaultColors.rssColor);
       }
     }
 

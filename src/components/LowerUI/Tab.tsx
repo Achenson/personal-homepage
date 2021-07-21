@@ -11,16 +11,16 @@ import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 
 import { useTabs } from "../../state/useTabs";
-import { useTabBeingDraggedColor } from "../../state/colorHooks";
+import { useTabBeingDraggedColor, useDefaultColors } from "../../state/colorHooks";
 
 // import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 // import { deletedTabState } from "../../state/tabsAndBookmarks";
-import {
-  noteColorState,
-  folderColorState,
-  rssColorState,
-  // tabBeingDraggedColor_State,
-} from "../../state/colorsState";
+// import {
+//   noteColorState,
+//   folderColorState,
+//   rssColorState,
+//   // tabBeingDraggedColor_State,
+// } from "../../state/colorsState";
 
 import { useUpperUiContext } from "../../utils/upperUiContext";
 
@@ -113,6 +113,8 @@ Props): JSX.Element {
   const globalSettings = useGlobalSettings(state => state, shallow)
 
   const setTabBeingDraggedColor = useTabBeingDraggedColor(state => state.setTabBeingDraggedColor)
+
+  const defaultColors = useDefaultColors(state => state, shallow);
 
   // const [focusedTabData, setFocusedTabData] = focusedTabState.use();
 
@@ -397,9 +399,9 @@ Props): JSX.Element {
     }
   }, [closeAllTabsState]);
 
-  const [folderColorData, setFolderColorData] = folderColorState.use();
-  const [noteColorData, setNoteColorData] = noteColorState.use();
-  const [rssColorData, setRssColorData] = rssColorState.use();
+  // const [folderColorData, setFolderColorData] = folderColorState.use();
+  // const [noteColorData, setNoteColorData] = noteColorState.use();
+  // const [rssColorData, setRssColorData] = rssColorState.use();
 
   let finalTabColor: string = "";
 
@@ -407,15 +409,15 @@ Props): JSX.Element {
     finalTabColor = tabColor;
   } else {
     if (tabType === "folder") {
-      finalTabColor = folderColorData;
+      finalTabColor = defaultColors.folderColor;
     }
 
     if (tabType === "note") {
-      finalTabColor = noteColorData;
+      finalTabColor = defaultColors.noteColor;
     }
 
     if (tabType === "rss") {
-      finalTabColor = rssColorData;
+      finalTabColor = defaultColors.rssColor;
     }
   }
 

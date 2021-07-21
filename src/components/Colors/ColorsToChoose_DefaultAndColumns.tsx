@@ -8,6 +8,9 @@ import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 
 import { tabColors, tabColorsConcat } from "../../utils/colors_tab";
+import { useDefaultColors } from "../../state/colorHooks";
+
+
 import {
   columnColors,
   imageColumnColors,
@@ -15,11 +18,11 @@ import {
   imageColumnColorsConcat,
 } from "../../utils/colors_column";
 
-import {
-  folderColorState,
-  noteColorState,
-  rssColorState,
-} from "../../state/colorsState";
+// import {
+//   folderColorState,
+//   noteColorState,
+//   rssColorState,
+// } from "../../state/colorsState";
 
 import {
   columnsColorsState,
@@ -61,10 +64,11 @@ function ColorsToChoose_DefaultAndColumns({
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   const globalSettings = useGlobalSettings(state => state, shallow)
+  const defaultColors = useDefaultColors(state => state, shallow)
 
-  const [folderColorData, setFolderColorData] = folderColorState.use();
-  const [noteColorData, setNoteColorData] = noteColorState.use();
-  const [rssColorData, setRssColorData] = rssColorState.use();
+  // const [folderColorData, setFolderColorData] = folderColorState.use();
+  // const [noteColorData, setNoteColorData] = noteColorState.use();
+  // const [rssColorData, setRssColorData] = rssColorState.use();
 
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
@@ -187,18 +191,18 @@ function ColorsToChoose_DefaultAndColumns({
     tabColorsConcat.map((color, i) => {
       switch (defaultColorsFor) {
         case "folders":
-          if (color === folderColorData) {
+          if (color === defaultColors.folderColor) {
             selectedNumber = calcColorNumbering(color, tabColorsConcat);
           }
           break;
 
         case "notes":
-          if (color === noteColorData) {
+          if (color === defaultColors.noteColor) {
             selectedNumber = calcColorNumbering(color, tabColorsConcat);
           }
           break;
         case "rss":
-          if (color === rssColorData) {
+          if (color === defaultColors.rssColor) {
             selectedNumber = calcColorNumbering(color, tabColorsConcat);
           }
           break;

@@ -4,7 +4,7 @@ import FocusLock from "react-focus-lock";
 import { produce } from "immer";
 
 import { createBookmark, createFolderTab } from "../../utils/objCreators";
-import { uiColorState } from "../../state/colorsState";
+// import { uiColorState } from "../../state/colorsState";
 
 import { ReactComponent as SaveSVG } from "../../svgs/save.svg";
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
@@ -21,6 +21,7 @@ import { ReactComponent as ChevronUpSVG } from "../../svgs/chevron-up.svg";
 
 import { useBookmarks } from "../../state/useBookmarks";
 import {  useTabs} from "../../state/useTabs";
+import {  useDefaultColors} from "../../state/colorHooks";
 
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
@@ -122,7 +123,8 @@ Props): JSX.Element {
   // const [bookmarksAllTagsData, setBookmarksAllTagsData] =
   //   bookmarksAllTagsState.use();
 
-  const [uiColorData, setUiColorData] = uiColorState.use();
+  // const [uiColorData, setUiColorData] = uiColorState.use();
+  const uiColor = useDefaultColors(state => state.uiColor)
 
   const upperUiContext = useUpperUiContext()
 
@@ -365,7 +367,7 @@ Props): JSX.Element {
         }}
       >
         <div
-          className={`bg-warmGray-100 pb-2 pt-3 pl-2 pr-0.5 border-2 border-${uiColorData} rounded-sm md:mb-48`}
+          className={`bg-warmGray-100 pb-2 pt-3 pl-2 pr-0.5 border-2 border-${uiColor} rounded-sm md:mb-48`}
           style={{ width: "350px" }}
           onClick={(e) => {
             e.stopPropagation();

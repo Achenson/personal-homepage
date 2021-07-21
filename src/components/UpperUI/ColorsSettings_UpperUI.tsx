@@ -9,17 +9,17 @@ import ColorsToChoose_DefaultAndColumns from "../Colors/ColorsToChoose_DefaultAn
 // import { ReactComponent as ColorSVG } from "../../svgs/beaker.svg";
 // import { ReactComponent as SettingsSVG } from "../../svgs/settingsAlt.svg";
 
-import {
-  noteColorState,
-  folderColorState,
-  rssColorState,
-  uiColorState,
-  // resetColorsState,
-} from "../../state/colorsState";
+// import {
+//   noteColorState,
+//   folderColorState,
+//   rssColorState,
+//   uiColorState,
+//   // resetColorsState,
+// } from "../../state/colorsState";
 
 
 import {useTabs} from "../../state/useTabs"
-import { useResetColors } from "../../state/colorHooks";
+import { useResetColors, useDefaultColors } from "../../state/colorHooks";
   
 
 // import { tabOpenedState } from "../../state/defaultSettings";
@@ -30,6 +30,7 @@ import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import { useWindowSize } from "../../utils/hook_useWindowSize";
+import shallow from "zustand/shallow";
 
 interface Props {
   // colorsVis: boolean;
@@ -63,10 +64,15 @@ function ColorsSettings_UpperUI({
 
   const setResetColors = useResetColors(state => state.setResetColors)
 
-  const [folderColorData, setFolderColorData] = folderColorState.use();
-  const [noteColorData, setNoteColorData] = noteColorState.use();
-  const [rssColorData, setRssColorData] = rssColorState.use();
-  const [uiColorData, setUiColorData] = uiColorState.use();
+  const defaultColors = useDefaultColors(state => state, shallow)
+
+  // const [folderColorData, setFolderColorData] = folderColorState.use();
+  // const [noteColorData, setNoteColorData] = noteColorState.use();
+  // const [rssColorData, setRssColorData] = rssColorState.use();
+  // const [uiColorData, setUiColorData] = uiColorState.use();
+
+
+
   // const [resetColorsData, setResetColorsData] = resetColorsState.use();
 
   // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
@@ -134,7 +140,7 @@ function ColorsSettings_UpperUI({
           }}
         >
           <div
-            className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
+            className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${defaultColors.uiColor} rounded-sm relative`}
             style={{ width: `350px`, height: "200px" }}
             // style={{ width: "350px", height: "200px" }}
           >
@@ -178,7 +184,7 @@ function ColorsSettings_UpperUI({
 
                   setTabOpenedState(null);
                 }}
-                className={`h-4 w-8 bg-${folderColorData} cursor-pointer ${
+                className={`h-4 w-8 bg-${defaultColors.folderColor} cursor-pointer ${
                   foldersSelected ? "border-2" : "border"
                 } border-black hover:border-gray-500 focus-1-offset-dark`}
                 aria-label={"Default folders color menu"}
@@ -204,7 +210,7 @@ function ColorsSettings_UpperUI({
 
                   setTabOpenedState(null);
                 }}
-                className={`h-4 w-8 bg-${noteColorData} cursor-pointer ${
+                className={`h-4 w-8 bg-${defaultColors.noteColor} cursor-pointer ${
                   notesSelected ? "border-2" : "border"
                 } border-black hover:border-gray-500 focus-1-offset-dark`}
                 aria-label={"Default notes color menu"}
@@ -230,7 +236,7 @@ function ColorsSettings_UpperUI({
                   setRssSelected((b) => !b);
                   setTabOpenedState(null);
                 }}
-                className={`h-4 w-8 bg-${rssColorData} cursor-pointer ${
+                className={`h-4 w-8 bg-${defaultColors.rssColor} cursor-pointer ${
                   rssSelected ? "border-2" : "border"
                 } border-black hover:border-gray-500 focus-1-offset-dark`}
                 aria-label={"Default RSS color menu"}

@@ -8,8 +8,9 @@ import Profile_input from "../UpperUI/Profile_input";
 
 // import { loggedInState } from "../../state/defaultSettings";
 import {useLoggedInState} from "../../state/useLoggedInState"
+import {useDefaultColors} from "../../state/colorHooks"
 
-import { uiColorState } from "../../state/colorsState";
+// import { uiColorState } from "../../state/colorsState";
 
 import { UpperVisAction } from "../../utils/interfaces";
 
@@ -21,7 +22,8 @@ interface Props {
 
 function Profile_UpperUI({}: //  upperVisDispatch
 Props): JSX.Element {
-  const [uiColorData, setUiColorData] = uiColorState.use();
+  // const [uiColorData, setUiColorData] = uiColorState.use();
+  const uiColor = useDefaultColors(state => state.uiColor)
 
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
@@ -51,9 +53,9 @@ Props): JSX.Element {
 
   // }, [inputHover, setInputHover])
 
-  let finalColorForImgBackgroundMode = uiColorData;
+  let finalColorForImgBackgroundMode = uiColor;
 
-  if (uiColorData === "blueGray-400") {
+  if (uiColor === "blueGray-400") {
     finalColorForImgBackgroundMode = "blueGray-700";
   }
 
@@ -77,7 +79,7 @@ Props): JSX.Element {
           }}
         >
           <div
-            className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
+            className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColor} rounded-sm relative`}
             style={{
               width: `350px`,
             }}
@@ -173,8 +175,8 @@ Props): JSX.Element {
               <div className="flex justify-center">
                 {loginOrRegister === "login" ? (
                   <button
-                    className={`w-24 border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150
-                  focus:outline-none focus-visible:ring-1 ring-${uiColorData}`}
+                    className={`w-24 border border-${uiColor} rounded-md px-1 pb-px hover:bg-${uiColor} hover:bg-opacity-50 transition-colors duration-150
+                  focus:outline-none focus-visible:ring-1 ring-${uiColor}`}
                     onClick={() => {
                       if (loggedInState === false) {
                         setLoggedInState(true);
@@ -195,8 +197,8 @@ Props): JSX.Element {
                   </button>
                 ) : (
                   <button
-                    className={`w-24 border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150
-                  focus:outline-none focus-visible:ring-1 ring-${uiColorData}
+                    className={`w-24 border border-${uiColor} rounded-md px-1 pb-px hover:bg-${uiColor} hover:bg-opacity-50 transition-colors duration-150
+                  focus:outline-none focus-visible:ring-1 ring-${uiColor}
                   `}
                   >
                     Register

@@ -5,11 +5,36 @@ import { backgroundColors } from "../utils/colors_background";
 import { tabColors } from "../utils/colors_tab";
 import { isDoStatement } from "typescript";
 
-export const useDefaultColors = create((set) => ({
+
+interface DefaultColorsData {
+  folderColor: string;
+  noteColor: string;
+  rssColor: string;
+  uiColor: string;
+}
+
+interface DefaultColorObj {
+  key: "folderColor" | "noteColor" | "rssColor" | "uiColor";
+  color: string;
+}
+
+interface DefaultColorsAll extends DefaultColorsData {
+  setDefaultColors: (defaultColorObj: DefaultColorObj) => void;
+  
+}
+
+export const useDefaultColors = create<DefaultColorsAll>((set) => ({
   folderColor: tabColors[7][2],
   noteColor: tabColors[1][2],
   rssColor: tabColors[9][2],
   uiColor: tabColors[7][2],
+  setDefaultColors: (defaultColorObj) => set (
+    (state) => ({
+      ...state,
+      [defaultColorObj.key]: defaultColorObj.color
+    })
+  )
+
 }));
 
 export const useBackgroundColor = create<{

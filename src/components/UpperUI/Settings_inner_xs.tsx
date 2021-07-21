@@ -8,7 +8,8 @@ import { UpperVisAction } from "../../utils/interfaces";
 
 import { useUpperUiContext } from "../../utils/upperUiContext";
 
-import { uiColorState } from "../../state/colorsState";
+// import { uiColorState } from "../../state/colorsState";
+import {useDefaultColors} from "../../state/colorHooks"
 
 interface Props {
   // upperVisDispatch: React.Dispatch<UpperVisAction>;
@@ -19,7 +20,8 @@ function Settings_inner_xs({
   // upperVisDispatch,
   currentSettings,
 }: Props): JSX.Element {
-  const [uiColorData, setUiColorData] = uiColorState.use();
+  // const [uiColorData, setUiColorData] = uiColorState.use();
+  const uiColor = useDefaultColors(state => state.uiColor)
 
   const upperUiContext = useUpperUiContext();
 
@@ -47,7 +49,7 @@ function Settings_inner_xs({
             ${
               currentSettings === "background"
                 ? "text-gray-800"
-                : `text-blueGray-400 cursor-pointer hover:text-${uiColorData}`
+                : `text-blueGray-400 cursor-pointer hover:text-${uiColor}`
             }
             `}
           // style={{ marginLeft: "-5px" }}
@@ -71,7 +73,7 @@ function Settings_inner_xs({
             ${
               currentSettings === "colors"
                 ? "text-gray-800"
-                : `text-blueGray-400 cursor-pointer hover:text-${uiColorData}`
+                : `text-blueGray-400 cursor-pointer hover:text-${uiColor}`
             }
             `}
           style={{ marginRight: "-1px" }}
@@ -95,7 +97,7 @@ function Settings_inner_xs({
             ${
               currentSettings === "global"
                 ? "text-gray-800"
-                : `text-blueGray-400 cursor-pointer hover:text-${uiColorData}`
+                : `text-blueGray-400 cursor-pointer hover:text-${uiColor}`
             }
             `}
         />

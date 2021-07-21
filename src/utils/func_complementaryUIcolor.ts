@@ -1,29 +1,29 @@
 export function setComplementaryUiColor(
   color: string,
-  setUiColorData: (
-    newState: string | ((prev: string) => string),
-    ac?: ((newState: string) => any) | undefined
-  ) => any
-) {
+  // setUiColorData: (
+  //   newState: string | ((prev: string) => string),
+  //   ac?: ((newState: string) => any) | undefined
+  // ) => any
+): string {
 
   if (color === "black") {
-   setUiColorData("blueGray-400");
+  return "blueGray-400"
   }
 
   if (colorRgx("gray").test(color) || colorRgx("Gray").test(color)) {
-    setUiColorData("blueGray-400");
+   return "blueGray-400";
   }
 
   if (colorRgx("yellow").test(color) || colorRgx("amber").test(color)) {
-    setUiColorData("yellow-500");
+   return "yellow-500";
   }
 
   if (colorRgx("orange").test(color)) {
-    setUiColorData("orange-500");
+   return "orange-500";
   }
 
   if (colorRgx("red").test(color)) {
-    setUiColorData("red-400");
+   return "red-400";
   }
 
   if (
@@ -32,34 +32,39 @@ export function setComplementaryUiColor(
     colorRgx("emarald").test(color) ||
     colorRgx("teal").test(color)
   ) {
-    setUiColorData("teal-500");
+  return "teal-500";
   }
 
   if (colorRgx("cyan").test(color) || colorRgx("sky").test(color)) {
-    setUiColorData("sky-500");
+   return "sky-500";
   }
 
   if (colorRgx("blue").test(color) || colorRgx("indigo").test(color)) {
-    setUiColorData("blue-500");
+  return  "blue-500";
   }
 
   if (colorRgx("violet").test(color) || colorRgx("purple").test(color)) {
-    setUiColorData("violet-500");
+    return  "violet-500";
   }
 
   if (colorRgx("fuchsia").test(color)) {
-    setUiColorData("fuchsia-500");
+    return  "fuchsia-500";
   }
 
   if (colorRgx("rose").test(color)) {
-    setUiColorData("rose-400");
+    return "rose-400";
   }
 
   if (colorRgx("pink").test(color)) {
-    setUiColorData("pink-400");
+    return   "pink-400";
   }
+
+  return color
 
   function colorRgx(color: string) {
     return new RegExp(`${color}-`);
   }
+
+
+
 }

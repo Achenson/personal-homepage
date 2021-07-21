@@ -2,11 +2,11 @@ import React from "react";
 
 // import { tabsDataState } from "../../state/tabsAndBookmarks";
 import { produce } from "immer";
-import {
-  folderColorState,
-  noteColorState,
-  rssColorState,
-} from "../../state/colorsState";
+// import {
+//   folderColorState,
+//   noteColorState,
+//   rssColorState,
+// } from "../../state/colorsState";
 
 import {} from "../../state/useTabs"
 
@@ -40,9 +40,9 @@ function SingleColor_Tab({
 
   const setTabColor = useTabs(state => state.setTabColor)
 
-  const [folderColorData, setFolderColorData] = folderColorState.use();
-  const [noteColorData, setNoteColorData] = noteColorState.use();
-  const [rssColorData, setRssColorData] = rssColorState.use();
+  // const [folderColorData, setFolderColorData] = folderColorState.use();
+  // const [noteColorData, setNoteColorData] = noteColorState.use();
+  // const [rssColorData, setRssColorData] = rssColorState.use();
 
 
   let tabIndex = calcTabIndex();

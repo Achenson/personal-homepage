@@ -4,8 +4,9 @@ import FocusLock from "react-focus-lock";
 
 import { useState, useEffect, useRef } from "react";
 
-import { uiColorState } from "../../state/colorsState";
+// import { uiColorState } from "../../state/colorsState";
 
+import { useDefaultColors } from "../../state/colorHooks";
 import { useTabs } from "../../state/useTabs";
 
 import { v4 as uuidv4 } from "uuid";
@@ -80,7 +81,9 @@ Props): JSX.Element {
     (store) => store.setBookmarksAllTags
   );
 
-  const [uiColorData, setUiColorData] = uiColorState.use();
+  // const [uiColorData, setUiColorData] = uiColorState.use();
+
+  const uiColor = useDefaultColors(state => state.uiColor)
 
   const upperUiContext = useUpperUiContext();
 
@@ -228,10 +231,10 @@ Props): JSX.Element {
             aria-label={`${colsNumberingForAria[el]} column`}
           >
             <div
-              className={`h-4 w-4  cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+              className={`h-4 w-4  cursor-pointer transition duration-75 border-2 border-${uiColor} ${
                 tabColumnInput === el
-                  ? `bg-${uiColorData} hover:bg-opacity-50`
-                  : `hover:bg-${uiColorData} hover:bg-opacity-50`
+                  ? `bg-${uiColor} hover:bg-opacity-50`
+                  : `hover:bg-${uiColor} hover:bg-opacity-50`
               } `}
             ></div>
           </button>
@@ -511,7 +514,7 @@ Props): JSX.Element {
         }}
       >
         <div
-          className={`bg-warmGray-100 pb-2 pt-3 pl-2 pr-0.5 border-2 border-${uiColorData} rounded-sm md:mb-48`}
+          className={`bg-warmGray-100 pb-2 pt-3 pl-2 pr-0.5 border-2 border-${uiColor} rounded-sm md:mb-48`}
           style={{ width: "350px" }}
           onClick={(e) => {
             e.stopPropagation();

@@ -8,7 +8,7 @@ import { SingleTabData } from "../../utils/interfaces";
 // import { rssSettingsState } from "../../state/defaultSettings";
 // import { tabsDataState } from "../../state/tabsAndBookmarks";
 
-import { uiColorState } from "../../state/colorsState";
+// import { uiColorState } from "../../state/colorsState";
 import { useRssSettings } from "../../state/defaultSettingsHooks";
 import { useTabs } from "../../state/useTabs";
 
@@ -48,7 +48,7 @@ function EditTab_RSS({
 
   // const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
 
-  const [uiColorData, setUiColorData] = uiColorState.use();
+  // const [uiColorData, setUiColorData] = uiColorState.use();
 
   const rssSettingsState = useRssSettings(state => state, shallow)
   const resetTabRssSettings = useTabs (state => state.resetTabRssSettings)

@@ -1,15 +1,16 @@
 import React from "react";
-import { folderColorState } from "../../state/colorsState";
-import { noteColorState } from "../../state/colorsState";
-import { rssColorState } from "../../state/colorsState";
+// import { folderColorState } from "../../state/colorsState";
+// import { noteColorState } from "../../state/colorsState";
+// import { rssColorState } from "../../state/colorsState";
 // import { uiColorState } from "../../state/colorsState";
 import {
   columnsColorsState,
   columnsColorsImg_State,
 } from "../../state/colorsState";
-import { uiColorState } from "../../state/colorsState";
+// import { uiColorState } from "../../state/colorsState";
 
 import { setComplementaryUiColor } from "../../utils/func_complementaryUIcolor";
+import {useDefaultColors} from "../../state/colorHooks";
 
 import { tabColorsLightFocus } from "../../utils/colors_tab";
 
@@ -47,14 +48,16 @@ function SingleColor_DefaultAndColumn({
 }: Props): JSX.Element {
   // const [tabsData, setTabsData] = tabsDataState.use();
 
-  const [folderColorData, setFolderColorData] = folderColorState.use();
-  const [noteColorData, setNoteColorData] = noteColorState.use();
-  const [rssColorData, setRssColorData] = rssColorState.use();
+  // const [folderColorData, setFolderColorData] = folderColorState.use();
+  // const [noteColorData, setNoteColorData] = noteColorState.use();
+  // const [rssColorData, setRssColorData] = rssColorState.use();
+  const setDefaultColors = useDefaultColors(state => state.setDefaultColors)
+
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
     columnsColorsImg_State.use();
 
-  const [uiColorData, setUiColorData] = uiColorState.use();
+  // const [uiColorData, setUiColorData] = uiColorState.use();
 
   function borderMaker(
     defaultColorsFor:
@@ -151,17 +154,24 @@ function SingleColor_DefaultAndColumn({
       style={{ backgroundColor: `${colsForBackgroundImg ? color : ""}` }}
       onClick={() => {
         if (defaultColorsFor === "folders") {
-          setFolderColorData(color);
+          // setFolderColorData(color);
+          setDefaultColors({key: "folderColor", color: color })
 
-          setComplementaryUiColor(color, setUiColorData);
+          // setComplementaryUiColor(color, setUiColorData);
+
+          setDefaultColors({key: "uiColor", color: setComplementaryUiColor(color)})
         }
 
         if (defaultColorsFor === "notes") {
-          setNoteColorData(color);
+          // setNoteColorData(color);
+          setDefaultColors({key: "noteColor", color: color })
+
+
         }
 
         if (defaultColorsFor === "rss") {
-          setRssColorData(color);
+          setDefaultColors({key: "rssColor", color: color })
+          // setRssColorData(color);
         }
 
         if (

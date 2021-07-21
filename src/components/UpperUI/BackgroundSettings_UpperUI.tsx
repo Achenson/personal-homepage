@@ -10,8 +10,9 @@ import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
 
 
-import { uiColorState } from "../../state/colorsState";
+// import { uiColorState } from "../../state/colorsState";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+import { useDefaultColors} from "../../state/colorHooks";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 import {useUpperUiContext} from "../../utils/upperUiContext"
@@ -34,7 +35,8 @@ function BackgroundSettings_UpperUI({
 
   const globalSettings = useGlobalSettings(state => state, shallow)
   const setGlobalSettings = useGlobalSettings(state => state.setGlobalSettings)
-  const [uiColorData, setUiColorData] = uiColorState.use();
+  // const [uiColorData, setUiColorData] = uiColorState.use();
+  const uiColor = useDefaultColors(state=>state.uiColor)
 
   // const [imgBackgroundMode, setImgBackgroundMode] = useState(true);
 
@@ -57,9 +59,9 @@ function BackgroundSettings_UpperUI({
     }
   }, [windowSize.width]);
 
-  let finalColorForImgBackgroundMode = uiColorData;
+  let finalColorForImgBackgroundMode = uiColor;
 
-  if (uiColorData === "blueGray-400") {
+  if (uiColor === "blueGray-400") {
     finalColorForImgBackgroundMode = "blueGray-700";
   }
 
@@ -69,7 +71,7 @@ function BackgroundSettings_UpperUI({
   const noImgDescription = "Full colors for background and columns";
 
   function btnHover() {
-    return `hover:bg-${uiColorData} hover:bg-opacity-50 hover:`;
+    return `hover:bg-${uiColor} hover:bg-opacity-50 hover:`;
   }
 
   return (
@@ -90,7 +92,7 @@ function BackgroundSettings_UpperUI({
           }}
         >
           <div
-            className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
+            className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColor} rounded-sm relative`}
             style={{
               width: `${xsScreen ? "350px" : "417px"}`,
               height: `${xsScreen ? "238px" : "205px"}`,
@@ -194,7 +196,7 @@ function BackgroundSettings_UpperUI({
                       aria-label={"Background image one"}
                     >
                       <span
-                        className={`text-${uiColorData} cursor-pointer hover:underline`}
+                        className={`text-${uiColor} cursor-pointer hover:underline`}
                       >
                         1
                       </span>
@@ -212,7 +214,7 @@ function BackgroundSettings_UpperUI({
                       aria-label={"Background image two"}
                     >
                       <span
-                        className={`text-${uiColorData} cursor-pointer hover:underline`}
+                        className={`text-${uiColor} cursor-pointer hover:underline`}
                       >
                         2
                       </span>
@@ -230,7 +232,7 @@ function BackgroundSettings_UpperUI({
                       aria-label={"Background image three"}
                     >
                       <span
-                        className={`text-${uiColorData} cursor-pointer hover:underline`}
+                        className={`text-${uiColor} cursor-pointer hover:underline`}
                       >
                         3
                       </span>
@@ -252,8 +254,8 @@ function BackgroundSettings_UpperUI({
                   } border border-gray-300`}
                 ></div>
                 <button
-                  className={`border border-${uiColorData} rounded-md px-1 pb-px hover:bg-${uiColorData} hover:bg-opacity-50 transition-colors duration-150
-                focus:outline-none focus-visible:ring-1 ring-${uiColorData}`}
+                  className={`border border-${uiColor} rounded-md px-1 pb-px hover:bg-${uiColor} hover:bg-opacity-50 transition-colors duration-150
+                focus:outline-none focus-visible:ring-1 ring-${uiColor}`}
                 >
                   Upload image
                 </button>

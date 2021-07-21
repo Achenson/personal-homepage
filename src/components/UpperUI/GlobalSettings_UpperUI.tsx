@@ -6,10 +6,11 @@ import { produce } from "immer";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
-import { uiColorState } from "../../state/colorsState";
+// import { uiColorState } from "../../state/colorsState";
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import {useTabs} from "../../state/useTabs"
+import {useDefaultColors} from "../../state/colorHooks"
 import {useRssSettings} from "../../state/defaultSettingsHooks"
 
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
@@ -38,7 +39,9 @@ function GlobalSettings_UpperUI({
   // upperVisDispatch,
   // upperVisState,
 }: Props): JSX.Element {
-  const [uiColorData, setUiColorData] = uiColorState.use();
+  // const [uiColorData, setUiColorData] = uiColorState.use();
+
+  const uiColor = useDefaultColors(state => state.uiColor)
 
   const globalSettings = useGlobalSettings(state => state, shallow)
 const setGlobalSettings = useGlobalSettings(state => state.setGlobalSettings)
@@ -98,8 +101,8 @@ const setGlobalSettings = useGlobalSettings(state => state.setGlobalSettings)
             <p
               className={` ${
                 globalSettings.numberOfCols === el
-                  ? `text-${uiColorData} underline cursor-default`
-                  : `text-black cursor-pointer hover:text-${uiColorData} hover:text-opacity-70`
+                  ? `text-${uiColor} underline cursor-default`
+                  : `text-black cursor-pointer hover:text-${uiColor} hover:text-opacity-70`
               } 
               
               `}
@@ -129,7 +132,7 @@ const setGlobalSettings = useGlobalSettings(state => state.setGlobalSettings)
           }}
         >
           <div
-            className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColorData} rounded-sm relative`}
+            className={`bg-gray-100 pb-3 pt-5 border-2 px-4 border-${uiColor} rounded-sm relative`}
             style={{
               width: `${xsScreen ? "350px" : "417px"}`,
               height: "255px",
@@ -157,11 +160,11 @@ const setGlobalSettings = useGlobalSettings(state => state.setGlobalSettings)
             <div className="flex justify-between items-center mb-2 mt-2">
               <p className="">One color for all columns</p>
               <button
-                className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColor} ${
                   globalSettings.oneColorForAllCols
                     ? // ? `bg-${uiColorData} hover:bg-opacity-50`
                       // : `hover:bg-${uiColorData} hover:bg-opacity-50`
-                      `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                      `bg-${uiColor} bg-opacity-50 hover:border-opacity-30`
                     : `hover:border-opacity-50`
                 } focus-1-offset-dark`}
                 onClick={() => {
@@ -176,11 +179,11 @@ const setGlobalSettings = useGlobalSettings(state => state.setGlobalSettings)
             <div className="flex justify-between items-center mb-2 mt-2">
               <p className="">Limit column width growth</p>
               <button
-                className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColor} ${
                   globalSettings.limitColGrowth
                     ? // ? `bg-${uiColorData} hover:bg-opacity-50`
                       // : `hover:bg-${uiColorData} hover:bg-opacity-50`
-                      `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                      `bg-${uiColor} bg-opacity-50 hover:border-opacity-30`
                     : `hover:border-opacity-50`
                 } focus-1-offset-dark  `}
                 onClick={() => {
@@ -197,9 +200,9 @@ const setGlobalSettings = useGlobalSettings(state => state.setGlobalSettings)
             <div className="flex justify-between items-center mb-2 mt-2">
               <p className="">Hide folder containing all bookmarks</p>
               <button
-                className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColor} ${
                   globalSettings.hideNonDeletable
-                    ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                    ? `bg-${uiColor} bg-opacity-50 hover:border-opacity-30`
                     : `hover:border-opacity-50`
                 } focus-1-offset-dark `}
                 onClick={() => {
@@ -214,16 +217,16 @@ const setGlobalSettings = useGlobalSettings(state => state.setGlobalSettings)
 
             <div className="my-0">
               <div
-                className={`flex items-center mb-2 mt-2 justify-between border-${uiColorData} border-t border-opacity-40`}
+                className={`flex items-center mb-2 mt-2 justify-between border-${uiColor} border-t border-opacity-40`}
               >
                 <p className="whitespace-nowrap w-32">RSS Display</p>
 
                 <div className="flex">
                   <div className="flex items-center mr-2">
                     <button
-                      className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                      className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-${uiColor} ${
                         rssSettingsState.description
-                          ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                          ? `bg-${uiColor} bg-opacity-50 hover:border-opacity-30`
                           : `hover:border-opacity-50`
                       } focus-1-offset-dark `}
                       style={{ marginTop: "2px" }}
@@ -253,9 +256,9 @@ const setGlobalSettings = useGlobalSettings(state => state.setGlobalSettings)
 
                   <div className="flex items-center">
                     <button
-                      className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
+                      className={`h-3 w-3 cursor-pointer transition duration-75 border-2 border-${uiColor} ${
                         rssSettingsState.date
-                          ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
+                          ? `bg-${uiColor} bg-opacity-50 hover:border-opacity-30`
                           : `hover:border-opacity-50`
                       } focus-1-offset-dark`}
                       style={{ marginTop: "2px" }}
@@ -285,7 +288,7 @@ const setGlobalSettings = useGlobalSettings(state => state.setGlobalSettings)
               </div>
 
               <div
-                className={`flex items-center mt-2 pb-1 justify-between border-${uiColorData} border-b border-opacity-40`}
+                className={`flex items-center mt-2 pb-1 justify-between border-${uiColor} border-b border-opacity-40`}
               >
                 <p className="whitespace-nowrap w-32">RSS Items per page</p>
                 <input
