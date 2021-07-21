@@ -133,7 +133,7 @@ function Grid({
         setCloseAllTabsState(false);
       }, 500);
     }
-  }, [closeAllTabsState]);
+  }, [closeAllTabsState, setCloseAllTabsState]);
 
   useEffect(() => {
     if (resetColors) {
@@ -151,7 +151,7 @@ function Grid({
 
       setResetColors(false);
     }
-  }, [resetColors, setResetColors]);
+  }, [resetColors, setResetColors, resetAllTabColors]);
 
   useEffect(() => {
     // console.log(bookmarksAllTagsData);
@@ -180,7 +180,7 @@ function Grid({
     // deleting an empty folderTab
     // deleting a tab if there is no tags with the same name in bookmarks
     deleteEmptyTab(bookmarksAllTags);
-  }, [tabs, bookmarksAllTags]);
+  }, [tabs, bookmarksAllTags, deleteEmptyTab]);
 
   useEffect(() => {
     createLessColumns(globalSettings.numberOfCols);
@@ -210,7 +210,7 @@ function Grid({
       //   );
       tabsLessColumns(numberOfCols);
     }
-  }, [globalSettings.numberOfCols]);
+  }, [globalSettings.numberOfCols, tabsLessColumns]);
 
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
     let columnProps = {

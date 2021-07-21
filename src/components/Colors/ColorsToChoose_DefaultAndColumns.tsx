@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import FocusLock from "react-focus-lock";
 
@@ -8,8 +8,11 @@ import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 
 import { tabColors, tabColorsConcat } from "../../utils/colors_tab";
-import { useDefaultColors,  useColumnsColors, useColumnsColorsImg } from "../../state/colorHooks";
-
+import {
+  useDefaultColors,
+  useColumnsColors,
+  useColumnsColorsImg,
+} from "../../state/colorHooks";
 
 import {
   columnColors,
@@ -30,7 +33,7 @@ import {
 // } from "../../state/colorsState";
 
 // import { globalSettingsState } from "../../state/defaultSettings";
-import {useUpperUiContext} from "../../utils/upperUiContext"
+import { useUpperUiContext } from "../../utils/upperUiContext";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 import { backgroundColorsUpperUiFocus } from "../../utils/colors_background";
@@ -63,8 +66,8 @@ function ColorsToChoose_DefaultAndColumns({
 }: Props): JSX.Element {
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  const globalSettings = useGlobalSettings(state => state, shallow)
-  const defaultColors = useDefaultColors(state => state, shallow)
+  const globalSettings = useGlobalSettings((state) => state, shallow);
+  const defaultColors = useDefaultColors((state) => state, shallow);
 
   // const [folderColorData, setFolderColorData] = folderColorState.use();
   // const [noteColorData, setNoteColorData] = noteColorState.use();
@@ -72,55 +75,19 @@ function ColorsToChoose_DefaultAndColumns({
 
   // const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
 
-  const columnsColors = useColumnsColors(state => state, shallow)
-  const columnsColorsImg = useColumnsColorsImg(state => state, shallow)
-
+  const columnsColors = useColumnsColors((state) => state, shallow);
+  const columnsColorsImg = useColumnsColorsImg((state) => state, shallow);
 
   // const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
   //   columnsColorsImg_State.use();
-
-  const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
-
-  const upperUiContext = useUpperUiContext()
-
-  useEffect(() => {
-  
-    setSelectedNumber(calcSelectedNumber())
-
-  }, [defaultColorsFor])
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  });
-
-  function handleKeyDown(event: KeyboardEvent) {
-    if (event.code === "Escape") {
-      if (/column/.test(defaultColorsFor)) {
-        if (upperUiContext.upperVisState.columnSelected !== null) {
-          upperUiContext.upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
-          
-          // setColumnSelected(null);
-        }
-      }
-
-      if (setColorsToChooseVis) {
-        setColorsToChooseVis(false);
-      }
-    }
-  }
-
-  function calcSelectedNumber(): number {
+  const calcSelectedNumber = useCallback((): number => {
     let selectedNumber: number = 0;
 
     if (/column/.test(defaultColorsFor)) {
       // if (globalSettingsData.picBackground) {
 
       if (globalSettings.picBackground) {
-        imageColumnColorsConcat.map((color, i) => {
+        imageColumnColorsConcat.forEach((color, i) => {
           switch (defaultColorsFor) {
             case "column_1":
               if (color === columnsColorsImg.column_1) {
@@ -161,7 +128,7 @@ function ColorsToChoose_DefaultAndColumns({
       }
 
       if (!globalSettings.picBackground) {
-        columnColorsConcat.map((color, i) => {
+        columnColorsConcat.forEach((color, i) => {
           switch (defaultColorsFor) {
             case "column_1":
               if (color === columnsColors.column_1) {
@@ -193,7 +160,7 @@ function ColorsToChoose_DefaultAndColumns({
       return selectedNumber;
     }
 
-    tabColorsConcat.map((color, i) => {
+    tabColorsConcat.forEach((color, i) => {
       switch (defaultColorsFor) {
         case "folders":
           if (color === defaultColors.folderColor) {
@@ -217,7 +184,57 @@ function ColorsToChoose_DefaultAndColumns({
     });
 
     return selectedNumber;
+  }, [
+    columnsColors.column_1,
+    columnsColors.column_2,
+    columnsColors.column_3,
+    columnsColors.column_4,
+    columnsColorsImg.column_1,
+    columnsColorsImg.column_2,
+    columnsColorsImg.column_3,
+    columnsColorsImg.column_4,
+    defaultColors.folderColor,
+    defaultColors.noteColor,
+    defaultColors.rssColor,
+    defaultColorsFor,
+    globalSettings.picBackground,
+  ]);
+
+  const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
+
+  const upperUiContext = useUpperUiContext();
+
+  useEffect(() => {
+    setSelectedNumber(calcSelectedNumber());
+  }, [defaultColorsFor, calcSelectedNumber]);
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  });
+
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.code === "Escape") {
+      if (/column/.test(defaultColorsFor)) {
+        if (upperUiContext.upperVisState.columnSelected !== null) {
+          upperUiContext.upperVisDispatch({ type: "COLORS_COLUMN_TOGGLE" });
+
+          // setColumnSelected(null);
+        }
+      }
+
+      if (setColorsToChooseVis) {
+        setColorsToChooseVis(false);
+      }
+    }
   }
+
+  //  function calcSelectedNumber(): number {
+
+  //   }
 
   function calcColorNumbering(
     color: string,
@@ -296,9 +313,7 @@ function ColorsToChoose_DefaultAndColumns({
         >
           {/column/.test(defaultColorsFor)
             ? mapColumnColors(
-                globalSettings.picBackground
-                  ? imageColumnColors
-                  : columnColors
+                globalSettings.picBackground ? imageColumnColors : columnColors
               )
             : mapTabColors()}
         </div>

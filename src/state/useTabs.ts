@@ -118,7 +118,7 @@ export const useTabs = create<UseTabs>((set) => ({
   deleteTab: (tabID) =>
     set(
       produce((state: UseTabs) => {
-        let tabToDelete = state.tabs.find((obj) => obj.id == tabID);
+        let tabToDelete = state.tabs.find((obj) => obj.id === tabID);
         if (tabToDelete) {
           let tabIndex = state.tabs.indexOf(tabToDelete);
           state.tabs.splice(tabIndex, 1);
@@ -306,7 +306,7 @@ export const useTabs = create<UseTabs>((set) => ({
   resetTabRssSettings: (tabID: string | number) =>
     set((state) =>
       produce((state: UseTabs) => {
-        let currentTab = state.tabs.find((obj) => obj.id == tabID);
+        let currentTab = state.tabs.find((obj) => obj.id === tabID);
         if (currentTab) {
           // let tabIndex = updated.indexOf(tabToDelete);
           // updated.splice(tabIndex, 1);

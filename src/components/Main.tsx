@@ -202,10 +202,10 @@ function Main({}: Props): JSX.Element {
       );
     }
   }, [
-    document.body.style.overflow,
+    // document.body.style.overflow,
     setScrollbarWidth,
-    window.innerWidth,
-    document.documentElement.clientWidth,
+    // window.innerWidth,
+    // document.documentElement.clientWidth,
   ]);
 
   //

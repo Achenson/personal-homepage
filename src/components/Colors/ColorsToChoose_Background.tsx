@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import FocusLock from "react-focus-lock";
 
@@ -20,17 +20,30 @@ interface Props {
 }
 
 function ColorsToChoose_Background({}: //  upperVisDispatch
-  Props): JSX.Element {
-    // const [backgroundColorData, setBackgroundColorData] =
-    //   backgroundColorState.use();
-    const backgroundColor = useBackgroundColor(state=> state.backgroundColor)
-    const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
+Props): JSX.Element {
+  // const [backgroundColorData, setBackgroundColorData] =
+  //   backgroundColorState.use();
+  const backgroundColor = useBackgroundColor((state) => state.backgroundColor);
+
+  const calcSelectedNumber = useCallback((): number => {
+    let selectedNumber: number = 0;
+
+    backgroundColorsConcat.forEach((color, i) => {
+      if (color === backgroundColor) {
+        selectedNumber = calcColorNumbering(color);
+      }
+    });
+
+    return selectedNumber;
+  }, [backgroundColor]);
+
+  const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
 
   const upperUiContext = useUpperUiContext();
 
   useEffect(() => {
     setSelectedNumber(calcSelectedNumber());
-  }, [backgroundColor]);
+  }, [backgroundColor, calcSelectedNumber]);
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -43,20 +56,7 @@ function ColorsToChoose_Background({}: //  upperVisDispatch
   function handleKeyDown(event: KeyboardEvent) {
     if (event.code === "Escape") {
       upperUiContext.upperVisDispatch({ type: "COLORS_BACKGROUND_TOGGLE" });
-
     }
-  }
-
-  function calcSelectedNumber(): number {
-    let selectedNumber: number = 0;
-
-    backgroundColorsConcat.map((color, i) => {
-      if (color === backgroundColor) {
-        selectedNumber = calcColorNumbering(color);
-      }
-    });
-
-    return selectedNumber;
   }
 
   function calcColorNumbering(color: string): number {

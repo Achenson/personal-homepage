@@ -371,7 +371,7 @@ Props): JSX.Element {
     } else {
       setIconsVis(false);
     }
-  }, [focusedTabState]);
+  }, [focusedTabState, tabID]);
 
   const [tabVisState, tabVisDispatch] = useReducer(tabVisReducer, initVisState);
 

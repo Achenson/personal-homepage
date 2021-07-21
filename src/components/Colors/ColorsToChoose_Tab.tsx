@@ -130,10 +130,10 @@ Props): JSX.Element {
     });
   }
 
-  useEffect(() => {
-    console.log(tabColorsConcat);
-    console.log(tabColors);
-  }, [tabColorsConcat, tabColors]);
+  // useEffect(() => {
+  //   console.log(tabColorsConcat);
+  //   console.log(tabColors);
+  // }, [tabColorsConcat, tabColors]);
 
   return (
     <FocusLock>
