@@ -505,8 +505,7 @@ Props): JSX.Element {
       });
     }
   }, [
-    upperUiContext.upperVisState.tabEditablesOpenable,
-    upperUiContext.upperVisDispatch,
+    upperUiContext
   ]);
 
   function textOrIconColor(finalTabColor: string, textOrIcon: "text" | "icon") {
