@@ -11,7 +11,7 @@ import { produce } from "immer";
 import { useTabs } from "../../state/useTabs";
 
 // import { bookmarksDataState } from "../../state/tabsAndBookmarks";
-import { deletedTabState } from "../../state/tabsAndBookmarks";
+// import { deletedTabState } from "../../state/tabsAndBookmarks";
 import {
   noteColorState,
   folderColorState,

@@ -222,6 +222,6 @@ const bookmarksDataState = newRidgeState<SingleBookmarkData[]>([
 
 ]);
 
-export const bookmarksAllTagsState = newRidgeState<(string | number)[]>(["ALL_TAGS", "2", "3"]);
+// const bookmarksAllTagsState = newRidgeState<(string | number)[]>(["ALL_TAGS", "2", "3"]);
 
-export const deletedTabState = newRidgeState<string | number>("");
+// const deletedTabState = newRidgeState<string | number>("");

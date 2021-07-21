@@ -8,7 +8,7 @@ import { ReactComponent as PencilSmallSVG } from "../../svgs/pencilSmall.svg";
 import { ReactComponent as TrashSmallSVG } from "../../svgs/trashSmall.svg";
 import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
-import { bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
+// import { bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
 import {
   globalSettingsState,
   // focusedTabState,
