@@ -12,13 +12,19 @@ import { ReactComponent as ColorSVG } from "../../svgs/beaker.svg";
 import { ReactComponent as AddRssSVG } from "../../svgs/rss.svg";
 import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
+
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+
 import { uiColorState } from "../../state/colorsState";
 
 import {useLoggedInState} from "../../state/useLoggedInState"
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
-import { globalSettingsState } from "../../state/defaultSettings";
+
+
+// import { globalSettingsState } from "../../state/defaultSettings";
 import { useUpperUiContext } from "../../utils/upperUiContext";
 
 interface Props {
@@ -36,15 +42,18 @@ function UpperRightMenu({
   // loggedInData,
   // setLoggedInData,
 }: Props): JSX.Element {
+
+  const globalSettings = useGlobalSettings(state => state, shallow)
+
   const [uiColorData, setUiColorData] = uiColorState.use();
 
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
 
   const loggedInState = useLoggedInState(state => state.loggedInState)
   const setLoggedInState = useLoggedInState(state => state.setLoggedInState)
 
-  const colLimit = globalSettingsData.limitColGrowth;
+  const colLimit = globalSettings.limitColGrowth;
 
   const upperUiContext = useUpperUiContext();
 

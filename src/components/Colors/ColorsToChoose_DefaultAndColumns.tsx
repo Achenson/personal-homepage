@@ -4,6 +4,9 @@ import FocusLock from "react-focus-lock";
 
 import SingleColor_DefaultAndColumn from "./SingleColor_DefaultAndColumn";
 
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+
 import { tabColors, tabColorsConcat } from "../../utils/colors_tab";
 import {
   columnColors,
@@ -23,7 +26,7 @@ import {
   columnsColorsImg_State,
 } from "../../state/colorsState";
 
-import { globalSettingsState } from "../../state/defaultSettings";
+// import { globalSettingsState } from "../../state/defaultSettings";
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
@@ -55,7 +58,9 @@ function ColorsToChoose_DefaultAndColumns({
   // upperVisState,
   setColorsToChooseVis,
 }: Props): JSX.Element {
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+  const globalSettings = useGlobalSettings(state => state, shallow)
 
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
@@ -105,7 +110,7 @@ function ColorsToChoose_DefaultAndColumns({
     if (/column/.test(defaultColorsFor)) {
       // if (globalSettingsData.picBackground) {
 
-      if (globalSettingsData.picBackground) {
+      if (globalSettings.picBackground) {
         imageColumnColorsConcat.map((color, i) => {
           switch (defaultColorsFor) {
             case "column_1":
@@ -146,7 +151,7 @@ function ColorsToChoose_DefaultAndColumns({
         });
       }
 
-      if (!globalSettingsData.picBackground) {
+      if (!globalSettings.picBackground) {
         columnColorsConcat.map((color, i) => {
           switch (defaultColorsFor) {
             case "column_1":
@@ -247,17 +252,17 @@ function ColorsToChoose_DefaultAndColumns({
                 defaultColorsFor={defaultColorsFor}
                 key={j}
                 colsForBackgroundImg={
-                  globalSettingsData.picBackground ? true : false
+                  globalSettings.picBackground ? true : false
                 }
                 colorNumber={
-                  globalSettingsData.picBackground
+                  globalSettings.picBackground
                     ? calcColorNumbering(el, imageColumnColorsConcat)
                     : calcColorNumbering(el, columnColorsConcat)
                 }
                 selectedNumber={selectedNumber}
                 setSelectedNumber={setSelectedNumber}
                 colorArrLength={
-                  globalSettingsData.picBackground
+                  globalSettings.picBackground
                     ? imageColumnColorsConcat.length
                     : columnColorsConcat.length
                 }
@@ -282,7 +287,7 @@ function ColorsToChoose_DefaultAndColumns({
         >
           {/column/.test(defaultColorsFor)
             ? mapColumnColors(
-                globalSettingsData.picBackground
+                globalSettings.picBackground
                   ? imageColumnColors
                   : columnColors
               )

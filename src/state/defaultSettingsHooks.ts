@@ -1,6 +1,7 @@
 import create from "zustand";
 
-interface UseGlobalSettings {
+
+interface UseGlobalSettingsData {
   picBackground: boolean;
   defaultImage: string;
   oneColorForAllCols: boolean;
@@ -9,13 +10,22 @@ interface UseGlobalSettings {
   numberOfCols: 1 | 2 | 3 | 4;
 }
 
-export const useGlobalSettings = create<UseGlobalSettings>((set) => ({
+interface UseGlobalSettingsAll extends UseGlobalSettingsData {
+  setGlobalSettings: (globalSettings: UseGlobalSettingsData) => void;
+}
+
+export const useGlobalSettings = create<UseGlobalSettingsAll>((set) => ({
   picBackground: false,
   defaultImage: "defaultBackground",
   oneColorForAllCols: false,
   limitColGrowth: false,
   hideNonDeletable: false,
   numberOfCols: 4,
+  setGlobalSettings: (globalSettings) => {
+    set( (state) => ({
+      ...globalSettings
+    }))
+  }
 }));
 
 interface RssSettingsData {

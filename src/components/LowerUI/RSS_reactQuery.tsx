@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import SingleRssNews from "./SingleRssNews";
 
-import shallow from "zustand/shallow"
+
 
 // import { tabsDataState } from "../../state/tabsAndBookmarks";
 // import { rssSettingsState } from "../../state/defaultSettings";
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 import { useRssSettings } from "../../state/defaultSettingsHooks";
 
 
@@ -14,7 +16,7 @@ import { SingleTabData } from "../../utils/interfaces";
 import { ReactComponent as ArrowLeft } from "../../svgs/arrowLeft.svg";
 import { ReactComponent as ArrowRight } from "../../svgs/arrowRight.svg";
 
-import { globalSettingsState } from "../../state/defaultSettings";
+// import { globalSettingsState } from "../../state/defaultSettings";
 
 import {
   UpperVisState,
@@ -41,7 +43,7 @@ function ReactQuery({ currentTab, tabID,
 
 
   // const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
-
+  const globalSettings = useGlobalSettings(state => state, shallow)
 const rssSettingsState = useRssSettings(state => state, shallow)
 
 
@@ -52,7 +54,7 @@ const rssSettingsState = useRssSettings(state => state, shallow)
   // const [descriptionVis, setDescriptionVis] = useState(calcDescriptionVis());
   // const [dateVis, setDateVis] = useState(calcDateVis());
 
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   function calcItemsPerPage() {
     // if currentBookmars itemsPerPage is set, return it, otherwise
@@ -266,7 +268,7 @@ const rssSettingsState = useRssSettings(state => state, shallow)
       <div
         className={`flex bg-gray-50 justify-end border-r border-l
     ${
-      globalSettingsData.picBackground ? "" : "border-black border-opacity-10"
+      globalSettings.picBackground ? "" : "border-black border-opacity-10"
     }`}
       >
         <button
@@ -310,7 +312,7 @@ const rssSettingsState = useRssSettings(state => state, shallow)
       <div
         className={`text-center
     ${
-      globalSettingsData.picBackground
+      globalSettings.picBackground
         ? "bg-white bg-opacity-90 border-r border-l"
         : "border-r border-l border-black border-opacity-10"
     }`}

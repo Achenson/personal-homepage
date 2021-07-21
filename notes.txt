@@ -604,6 +604,14 @@ Warning: Can't perform a React state update on an unmounted component. This is a
 
 
 
+
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+
+ const globalSettings = useGlobalSettings(state => state, shallow)
+const setGlobalSettings = useGlobalSettings(state => state.setGlobalSettings)
+
+
 Browserslist: caniuse-lite is outdated. Please run:
 npx browserslist@latest --update-db
 

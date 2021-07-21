@@ -7,6 +7,8 @@ import { useBookmarks } from "../../state/useBookmarks";
 import { produce } from "immer";
 
 // import { tabsDataState } from "../../state/tabsAndBookmarks";
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 
 import { useTabs } from "../../state/useTabs";
 
@@ -21,14 +23,14 @@ import {
 
 import { useUpperUiContext } from "../../utils/upperUiContext";
 
-import {
-  // closeAllTabsState,
-  // tabColorOpenedState,
-  // tabEditOpenedState,
-  // tabOpenedState,
-  globalSettingsState,
-  // focusedTabState,
-} from "../../state/defaultSettings";
+// import {
+//   // closeAllTabsState,
+//   // tabColorOpenedState,
+//   // tabEditOpenedState,
+//   // tabOpenedState,
+//   globalSettingsState,
+//   // focusedTabState,
+// } from "../../state/defaultSettings";
 
 import { ReactComponent as ColorSmallSVG } from "../../svgs/beakerSmall.svg";
 import { ReactComponent as PencilSmallSVG } from "../../svgs/pencilSmall.svg";
@@ -105,7 +107,10 @@ function Tab({
 // noteInput,
 // rssLink
 Props): JSX.Element {
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+  const globalSettings = useGlobalSettings(state => state, shallow)
+
   // const [focusedTabData, setFocusedTabData] = focusedTabState.use();
 
   // const [tabsData, setTabsData] = tabsDataState.use();
@@ -536,7 +541,7 @@ Props): JSX.Element {
     <TabContext.Provider value={tabContextValue}>
       <div
         className={`relative ${
-          globalSettingsData.hideNonDeletable &&
+          globalSettings.hideNonDeletable &&
           // (!(currentTab as SingleTabData).deletable as boolean)
           !tabIsDeletable
             ? "hidden"

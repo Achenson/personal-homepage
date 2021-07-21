@@ -1,8 +1,12 @@
 import React from "react";
 
-import { globalSettingsState } from "../../state/defaultSettings";
+// import { globalSettingsState } from "../../state/defaultSettings";
 
 import { UpperVisState } from "../../utils/interfaces";
+
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+
 
 interface Props {
   title: string;
@@ -25,15 +29,16 @@ function SingeRssNews({
   // upperVisState,
 }: Props): JSX.Element {
   // if (title === "loading data...") {
-  //   return <div>{title}</div>;
-  // }
-  // const [tabsData, setTabsData] = tabsDataState.use();
-
-  // let currentTab = tabsData.filter((obj) => obj.id === tabID);
-
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-
-  function renderDescription(descripion: string) {
+    //   return <div>{title}</div>;
+    // }
+    // const [tabsData, setTabsData] = tabsDataState.use();
+    
+    // let currentTab = tabsData.filter((obj) => obj.id === tabID);
+    
+    // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+    const globalSettings = useGlobalSettings(state => state, shallow)
+    
+    function renderDescription(descripion: string) {
     if (!description) {
       return "short description unavailable";
     }
@@ -55,7 +60,7 @@ function SingeRssNews({
     <div
       className={`bg-gray-50 py-1 px-2
     border border-t-0
-    ${globalSettingsData.picBackground ? "" : "border-black border-opacity-10"}
+    ${globalSettings.picBackground ? "" : "border-black border-opacity-10"}
      `}
     >
     {/*   {areButtonsDisabled() ? (

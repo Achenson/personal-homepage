@@ -9,13 +9,16 @@ import { ReactComponent as TrashSmallSVG } from "../../svgs/trashSmall.svg";
 import { ReactComponent as PhotographSVG } from "../../svgs/photograph.svg";
 
 // import { bookmarksAllTagsState } from "../../state/tabsAndBookmarks";
-import {
-  globalSettingsState,
-  // focusedTabState,
-} from "../../state/defaultSettings";
+// import {
+//   globalSettingsState,
+//   // focusedTabState,
+// } from "../../state/defaultSettings";
 
 import { useUpperUiContext } from "../../utils/upperUiContext";
 
+
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 import { useTabContext } from "../../utils/tabContext";
 
 import {
@@ -64,11 +67,13 @@ function SingleBookmark({
   tabID,
 }: Props): JSX.Element {
 
+  const globalSettings = useGlobalSettings(state => state, shallow)
+
   // const [bookmarksData, setBookmarksData] = bookmarksDataState.use();
   // const [bookmarksAllTagsData, setBookmarksAllTagsData] =
   //   bookmarksAllTagsState.use();
 
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   const tabContext = useTabContext();
 
@@ -109,7 +114,7 @@ function SingleBookmark({
       {tabContext.tabVisState.editBookmarkVis !== bookmarkId && (
         <div
           className={`flex justify-between bg-gray-50 h-10 pt-2 border border-t-0 ${
-            globalSettingsData.picBackground
+            globalSettings.picBackground
               ? ""
               : "border-black border-opacity-10"
           }`}
@@ -204,7 +209,7 @@ function SingleBookmark({
                 //     let bookmarkToDelete = updated.find(
                 //       (obj) => obj.id === singleBookmarkData.id
                 //     );
-                //     if (bookmarkToDelete) {
+                //     if (bookmarkToDelete) {P
                 //       let tabIndex = updated.indexOf(bookmarkToDelete);
                 //       updated.splice(tabIndex, 1);
                 //     }

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ColumnColor_UpperUI from "./ColumnColor_UpperUI";
 import ColorsToChoose_DefaultAndColumns from "../Colors/ColorsToChoose_DefaultAndColumns";
 
-import { globalSettingsState } from "../../state/defaultSettings";
+// import { globalSettingsState } from "../../state/defaultSettings";
 import {useUpperUiContext} from "../../utils/upperUiContext"
 import BackgroundColor_UpperUI from "./BackgroundColor_UpperUI";
 import EyeOff_UpperUI from "./EyeOff_UpperUI";
@@ -12,7 +12,8 @@ import ColorsToChoose_Background from "../Colors/ColorsToChoose_Background";
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
-
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 import { useTabs } from "../../state/useTabs";
 
 interface Props {
@@ -26,12 +27,14 @@ function UpperLeftMenu({
 }: Props): JSX.Element {
   // const [columnSelected, setColumnSelected] = useState<number | null>(null);
 
+  const globalSettings = useGlobalSettings(state => state, shallow)
+
   const [defaultColorsFor, setDefaultColorsFor] =
     useState<"column_1" | "column_2" | "column_3" | "column_4" | "unselected">(
       "unselected"
     );
 
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   const [isHoverOnAnyColumn, setIsHoverOnAnyColumn] = useState(false);
 
@@ -62,7 +65,7 @@ function UpperLeftMenu({
           // upperVisDispatch={upperVisDispatch}
           // upperVisState={upperVisState}
           columnType={
-            globalSettingsData.picBackground
+            globalSettings.picBackground
               ? "BACKGROUND_IMG"
               : "NO_BACKGROUND_IMG"
           }
@@ -85,17 +88,17 @@ function UpperLeftMenu({
         <div
           className="flex bg-white bg-opacity-80"
           onMouseEnter={() => {
-            if (globalSettingsData.oneColorForAllCols) {
+            if (globalSettings.oneColorForAllCols) {
               setIsHoverOnAnyColumn(true);
             }
           }}
           onMouseLeave={() => {
-            if (globalSettingsData.oneColorForAllCols) {
+            if (globalSettings.oneColorForAllCols) {
               setIsHoverOnAnyColumn(false);
             }
           }}
         >
-          {columnsRendering(4, globalSettingsData.oneColorForAllCols)}
+          {columnsRendering(4, globalSettings.oneColorForAllCols)}
         </div>
 
         {/* {globalSettingsData.picBackground ? null : (
@@ -109,7 +112,7 @@ function UpperLeftMenu({
         )} */}
       </div>
       <div className="flex justify-between w-16 ml-2">
-        {globalSettingsData.picBackground ? null : (
+        {globalSettings.picBackground ? null : (
             <BackgroundColor_UpperUI
               // setBackgroundColorsToChooseVis={setBackgroundColorsToChooseVis}
               // upperVisDispatch={upperVisDispatch}

@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
+import shallow from "zustand/shallow";
 import FocusLock from "react-focus-lock";
 
 import { ReactComponent as CancelSVG } from "../../svgs/alphabet-x.svg";
 
-import { globalSettingsState } from "../../state/defaultSettings";
+// import { globalSettingsState } from "../../state/defaultSettings";
+
+
+
+
 
 import { uiColorState } from "../../state/colorsState";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 import {useUpperUiContext} from "../../utils/upperUiContext"
@@ -25,11 +31,14 @@ function BackgroundSettings_UpperUI({
   // upperVisDispatch,
   // upperVisState,
 }: Props): JSX.Element {
+
+  const globalSettings = useGlobalSettings(state => state, shallow)
+  const setGlobalSettings = useGlobalSettings(state => state.setGlobalSettings)
   const [uiColorData, setUiColorData] = uiColorState.use();
 
   // const [imgBackgroundMode, setImgBackgroundMode] = useState(true);
 
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
   const upperUiContext = useUpperUiContext()
 
@@ -115,10 +124,10 @@ function BackgroundSettings_UpperUI({
                 <button
                   className="ml-2 focus-1-offset"
                   onClick={() => {
-                    if (!globalSettingsData.picBackground) {
+                    if (!globalSettings.picBackground) {
                       // setImgBackgroundMode(true);
-                      setGlobalSettingsData({
-                        ...globalSettingsData,
+                      setGlobalSettings({
+                        ...globalSettings,
                         picBackground: true,
                       });
                     }
@@ -127,7 +136,7 @@ function BackgroundSettings_UpperUI({
                 >
                   <span
                     className={`${
-                      globalSettingsData.picBackground
+                      globalSettings.picBackground
                         ? "cursor-default" +
                           " " +
                           "text-" +
@@ -143,10 +152,10 @@ function BackgroundSettings_UpperUI({
                 <button
                   className="ml-1.5 focus-1-offset"
                   onClick={() => {
-                    if (globalSettingsData.picBackground) {
+                    if (globalSettings.picBackground) {
                       // setImgBackgroundMode(false);
-                      setGlobalSettingsData({
-                        ...globalSettingsData,
+                      setGlobalSettings({
+                        ...globalSettings,
                         picBackground: false,
                       });
                     }
@@ -155,7 +164,7 @@ function BackgroundSettings_UpperUI({
                 >
                   <span
                     className={`${
-                      globalSettingsData.picBackground
+                      globalSettings.picBackground
                         ? "hover:text-opacity-50 cursor-pointer text-gray-400"
                         : "cursor-default" +
                           " " +
@@ -168,7 +177,7 @@ function BackgroundSettings_UpperUI({
                 </button>
               </div>
 
-              {globalSettingsData.picBackground ? (
+              {globalSettings.picBackground ? (
                 <div className="text-center">
                   <p className={`mb-2 xs:mb-0`}>{imgDescription_1}</p>
                   <div className={`mb-3`}>
@@ -176,8 +185,8 @@ function BackgroundSettings_UpperUI({
                     <span> </span>
                     <button
                       onClick={() => {
-                        setGlobalSettingsData({
-                          ...globalSettingsData,
+                        setGlobalSettings({
+                          ...globalSettings,
                           defaultImage: "defaultBackground",
                         });
                       }}
@@ -194,8 +203,8 @@ function BackgroundSettings_UpperUI({
                     <span> </span>
                     <button
                       onClick={() => {
-                        setGlobalSettingsData({
-                          ...globalSettingsData,
+                        setGlobalSettings({
+                          ...globalSettings,
                           defaultImage: "defaultBackground_2",
                         });
                       }}
@@ -213,8 +222,8 @@ function BackgroundSettings_UpperUI({
                     <button
                       className="focus-1-offset"
                       onClick={() => {
-                        setGlobalSettingsData({
-                          ...globalSettingsData,
+                        setGlobalSettings({
+                          ...globalSettings,
                           defaultImage: "defaultBackground_3",
                         });
                       }}
@@ -234,7 +243,7 @@ function BackgroundSettings_UpperUI({
 
               <div
                 className={`flex justify-between items-center ${
-                  globalSettingsData.picBackground ? "" : "hidden"
+                  globalSettings.picBackground ? "" : "hidden"
                 }`}
               >
                 <div

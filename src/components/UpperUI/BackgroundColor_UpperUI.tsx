@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import ColorsToChoose_Background from "../Colors/ColorsToChoose_Background";
-import { globalSettingsState } from "../../state/defaultSettings";
+// import { globalSettingsState } from "../../state/defaultSettings";
 
 import { backgroundColorsUpperUiFocus } from "../../utils/colors_background";
 
@@ -9,7 +9,11 @@ import { backgroundColorState } from "../../state/colorsState";
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 // import { tabOpenedState } from "../../state/defaultSettings";
-import {useUpperUiContext} from "../../utils/upperUiContext"
+
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+
+import { useUpperUiContext } from "../../utils/upperUiContext";
 
 import { ReactComponent as DocumentSVG } from "../../svgs/document.svg";
 
@@ -19,11 +23,11 @@ interface Props {
   // upperVisState: UpperVisState;
 }
 
-function BackgroundColor_upperUI({
-  // setBackgroundColorsToChooseVis,
-  // upperVisDispatch,
-  // upperVisState,
-}: Props): JSX.Element {
+function BackgroundColor_upperUI({}: // setBackgroundColorsToChooseVis,
+// upperVisDispatch,
+// upperVisState,
+Props): JSX.Element {
+  const globalSettings = useGlobalSettings((state) => state, shallow);
   const [backgroundColorData, setBackgroundColorState] =
     backgroundColorState.use();
 
@@ -32,9 +36,9 @@ function BackgroundColor_upperUI({
 
   const [selected, setSelected] = useState(false);
 
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  const upperUiContext = useUpperUiContext()
+  const upperUiContext = useUpperUiContext();
 
   function calcIconBackground(pageBackgroundColor: string) {
     if (pageBackgroundColor === "white") {
@@ -55,7 +59,7 @@ function BackgroundColor_upperUI({
   }
 
   function focusColor(): string {
-    if (globalSettingsData.picBackground) {
+    if (globalSettings.picBackground) {
       return "blueGray-400";
     }
 
@@ -75,7 +79,7 @@ function BackgroundColor_upperUI({
           // setTabOpenedData(null)
           // setCloseAllTabsData(true);
           setSelected((b) => !b);
-        upperUiContext.upperVisDispatch({ type: "COLORS_BACKGROUND_TOGGLE" });
+          upperUiContext.upperVisDispatch({ type: "COLORS_BACKGROUND_TOGGLE" });
         }}
         tabIndex={5}
         aria-label={"Background color menu"}
@@ -89,9 +93,9 @@ function BackgroundColor_upperUI({
       </button>
       {upperUiContext.upperVisState.colorsBackgroundVis && (
         <div className="absolute" style={{ bottom: "104px", left: "240px" }}>
-          <ColorsToChoose_Background 
+          <ColorsToChoose_Background
           // upperVisDispatch={upperVisDispatch}
-           />
+          />
         </div>
       )}
     </>

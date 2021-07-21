@@ -7,11 +7,12 @@ import {
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
-import {
-  globalSettingsState,
-  // tabOpenedState,
-} from "../../state/defaultSettings";
-
+// import {
+//   globalSettingsState,
+//   // tabOpenedState,
+// } from "../../state/defaultSettings";
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 import {useTabs} from "../../state/useTabs"
   // const tabOpenedState = useTabs(state => state.tabOpenedState)
   
@@ -48,12 +49,15 @@ function ColumnColor_UpperUI({
   isHoverOnAnyColumn,
   tabIndex
 }: Props): JSX.Element {
+
+  const globalSettings = useGlobalSettings(state => state, shallow)
+
   const [columnsColorData, setColumnsColorData] = columnsColorsState.use();
 
   const [columnsColorImg_Data, setColumnsColorImg_Data] =
     columnsColorsImg_State.use();
 
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   // const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
   // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
   const setTabOpenedState = useTabs(state => state.setTabOpenedState)
@@ -103,7 +107,7 @@ function ColumnColor_UpperUI({
     // selected column (or all columns if oneColorForAllCols is true)
     if (arrIndex > 0) {
       return `border border-t-2 border-b-2 border-r-2 ${
-        globalSettingsData.oneColorForAllCols ? "border-l-0" : ""
+        globalSettings.oneColorForAllCols ? "border-l-0" : ""
       }`;
     }
     return "border-2";
@@ -111,7 +115,7 @@ function ColumnColor_UpperUI({
 
   return (
     <>
-      {arrIndex + 1 <= globalSettingsData.numberOfCols ? (
+      {arrIndex + 1 <= globalSettings.numberOfCols ? (
         <button
           onClick={() => {
             setDefaultColorsFor(`column_${colNumber}` as any);

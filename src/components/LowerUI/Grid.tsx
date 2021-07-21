@@ -7,13 +7,15 @@ import { produce } from "immer";
 //   bookmarksAllTagsState,
 // } from "../../state/tabsAndBookmarks";
 
-import {
+// import {
   
-  globalSettingsState,
-} from "../../state/defaultSettings";
+//   globalSettingsState,
+// } from "../../state/defaultSettings";
 
 import { useBookmarks } from "../../state/useBookmarks";
 import { useTabs } from "../../state/useTabs";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+
 
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 
@@ -25,6 +27,7 @@ import {
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 import Column from "./Column";
+import shallow from "zustand/shallow";
 
 interface Props {
   // upperVisDispatch: React.Dispatch<UpperVisAction>;
@@ -53,8 +56,13 @@ function Grid({
   const closeAllTabsState = useTabs(store => store.closeAllTabsState);
   const setCloseAllTabsState = useTabs(store => store.setCloseAllTabsState);
 
+  const globalSettings = useGlobalSettings(state => state, shallow)
+
   const [resetColorsData, setResetColorsData] = resetColorsState.use();
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+
+  
 
   // const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
 
@@ -171,7 +179,7 @@ function Grid({
   }, [tabs, bookmarksAllTags]);
 
   useEffect(() => {
-    createLessColumns(globalSettingsData.numberOfCols);
+    createLessColumns(globalSettings.numberOfCols);
 
     function createLessColumns(numberOfCols: 1 | 2 | 3 | 4) {
       if (numberOfCols === 4) return;
@@ -198,7 +206,7 @@ function Grid({
       //   );
       tabsLessColumns(numberOfCols);
     }
-  }, [globalSettingsData.numberOfCols]);
+  }, [globalSettings.numberOfCols]);
 
   function renderColumns(numberOfCols: 1 | 2 | 3 | 4) {
     let columnProps = {
@@ -272,7 +280,7 @@ function Grid({
     //   globalSettingsData.limitColGrowth ? "350px" : "9999px"
     // }`;
     const maxColWidth = `${
-      globalSettingsData.limitColGrowth ? "350px" : "9999px"
+      globalSettings.limitColGrowth ? "350px" : "9999px"
     }`;
 
     switch (numberOfCols) {
@@ -323,14 +331,14 @@ function Grid({
         style={{
           // gridTemplateColumns: "repeat(1, minmax(0, 800px))"
           gridTemplateColumns: `${gridSettings(
-            globalSettingsData.numberOfCols,
+            globalSettings.numberOfCols,
             breakpoint
           )}`,
         }}
         // className={`grid gap-x-2 gap-y-6 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4`}
       >
         {typeof breakpoint === "number" &&
-          renderColumns(globalSettingsData.numberOfCols)}
+          renderColumns(globalSettings.numberOfCols)}
       </div>
       <div className="h-72"></div>
     </div>

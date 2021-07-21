@@ -20,16 +20,18 @@ import { uiColorState } from "../../state/colorsState";
 
 import {useLoggedInState} from "../../state/useLoggedInState"
 
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
-import {
+// import {
 
-  // tabOpenedState,
-  // loggedInState,
-  globalSettingsState,
-  // focusedTabState,
-} from "../../state/defaultSettings";
+//   // tabOpenedState,
+//   // loggedInState,
+//   globalSettingsState,
+//   // focusedTabState,
+// } from "../../state/defaultSettings";
 
 import { useTabs } from "../../state/useTabs";
 
@@ -46,6 +48,9 @@ function UpperRightMenu({
 }: // upperVisDispatch,
 // upperVisState,
 Props): JSX.Element {
+
+  const globalSettings = useGlobalSettings(state => state, shallow)
+
   const [uiColorData, setUiColorData] = uiColorState.use();
   // const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
   // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
@@ -56,14 +61,14 @@ Props): JSX.Element {
   const setLoggedInState = useLoggedInState(state => state.setLoggedInState)
 
 
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   // const [focusedTabData, setFocusedTabData] = focusedTabState.use();
 
   const setFocusedTabState = useTabs(state => state.setFocusedTabState)
 
   const upperUiContext = useUpperUiContext();
 
-  const colLimit = globalSettingsData.limitColGrowth;
+  const colLimit = globalSettings.limitColGrowth;
 
   return (
     // <div className=" h-10 w-56 absolute right-0 bottom-0 mb-2 flex justify-between items-center">

@@ -1,13 +1,15 @@
 import React from "react";
 
 // import { tabsDataState } from "../../state/tabsAndBookmarks";
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 import {useTabs} from "../../state/useTabs"
 
 import {
   columnsColorsState,
   columnsColorsImg_State,
 } from "../../state/colorsState";
-import { globalSettingsState } from "../../state/defaultSettings";
+// import { globalSettingsState } from "../../state/defaultSettings";
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
 import UpperLeftMenu from "../UpperUI/UpperLeftMenu";
@@ -41,12 +43,16 @@ function Column({
   const [columnsColorsData, setColumnsColorsData] = columnsColorsState.use();
   const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
     columnsColorsImg_State.use();
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const [backgroundColorData, setbackgroundColorData] =
     backgroundColorState.use();
   // const [tabsData, setTabsData] = tabsDataState.use();
 
   const tabs = useTabs(store => store.tabs)
+
+  const globalSettings = useGlobalSettings(state => state, shallow)
+
+
 
   const upperUiContext = useUpperUiContext()
 
@@ -133,7 +139,7 @@ function Column({
   }
 
   function shouldRightUiRender(breakpoint: 0 | 1 | 2 | 3 | 4 | null): boolean {
-    let nrOfCols = globalSettingsData.numberOfCols;
+    let nrOfCols = globalSettings.numberOfCols;
 
     switch (breakpoint) {
       case 4:
@@ -179,18 +185,18 @@ function Column({
   return (
     <div
       className={`h-full relative flex flex-col ${
-        globalSettingsData.picBackground ? "" : bordersIfNoBackground()
+        globalSettings.picBackground ? "" : bordersIfNoBackground()
       }
        ${calcColumnColor_picBackground(
          colNumber,
-         globalSettingsData.picBackground,
-         globalSettingsData.oneColorForAllCols
+         globalSettings.picBackground,
+         globalSettings.oneColorForAllCols
        )}`}
       style={{
         backgroundColor: calcColumnColor(
           colNumber,
-          globalSettingsData.picBackground,
-          globalSettingsData.oneColorForAllCols
+          globalSettings.picBackground,
+          globalSettings.oneColorForAllCols
         ),
       }}
     >
@@ -222,7 +228,7 @@ function Column({
               <GapAfterTab
                 colNumber={colNumber}
                 tabID={el.id}
-                picBackground={globalSettingsData.picBackground}
+                picBackground={globalSettings.picBackground}
                 isThisLastGap={isThisLastGap(lastTabId, el.id)}
                 isThisTheOnlyGap={false}
               />
@@ -236,7 +242,7 @@ function Column({
           <GapAfterTab
             colNumber={colNumber}
             tabID={null}
-            picBackground={globalSettingsData.picBackground}
+            picBackground={globalSettings.picBackground}
             isThisLastGap={true}
             isThisTheOnlyGap={true}
           />
@@ -275,7 +281,7 @@ function Column({
                 upperUiContext.upperVisState.addTagVis_xs &&
                 (breakpoint === 0 ||
                 // when col growth is limited, UpperRightMenu_XS is both on xs: and sm: breakpoints
-                  (breakpoint === 1 && globalSettingsData.limitColGrowth))
+                  (breakpoint === 1 && globalSettings.limitColGrowth))
                   ? `-58px`
                   : "-30px",
               right: "0px",

@@ -5,7 +5,7 @@ import NewTab_UpperUI from "./UpperUI/NewTab_UpperUI";
 import Colors_UpperUI from "./UpperUI/ColorsSettings_UpperUI";
 import UpperUI from "./UpperUI/UpperUI";
 
-import { globalSettingsState } from "../state/defaultSettings";
+// import { globalSettingsState } from "../state/defaultSettings";
 import { useWindowSize } from "../utils/hook_useWindowSize";
 
 import { backgroundColorState } from "../state/colorsState";
@@ -18,6 +18,9 @@ import {
   UpperVisState,
   TabVisAction,
 } from "../utils/interfaces";
+
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../state/defaultSettingsHooks";
 
 import { UpperUiContext } from "../utils/upperUiContext";
 
@@ -152,7 +155,8 @@ function upperVisReducer(
 }
 
 function Main({}: Props): JSX.Element {
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  const globalSettings = useGlobalSettings((state) => state, shallow);
 
   const [backgroundColorData, setBackgroundColorData] =
     backgroundColorState.use();
@@ -260,8 +264,8 @@ function Main({}: Props): JSX.Element {
     <UpperUiContext.Provider value={upperUiValue}>
       <main
         className={`relative min-h-screen ${
-          globalSettingsData.picBackground
-            ? `bg-${globalSettingsData.defaultImage}`
+          globalSettings.picBackground
+            ? `bg-${globalSettings.defaultImage}`
             : `bg-${backgroundColorData}`
         } bg-cover bg-fixed`}
         // style={{ paddingRight: `${paddingRight ? "17px" : ""}` }}

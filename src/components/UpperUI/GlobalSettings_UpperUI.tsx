@@ -12,11 +12,13 @@ import {useUpperUiContext} from "../../utils/upperUiContext"
 import {useTabs} from "../../state/useTabs"
 import {useRssSettings} from "../../state/defaultSettingsHooks"
 
-import {
-  // rssSettingsState,
-  globalSettingsState,
-  // tabOpenedState,
-} from "../../state/defaultSettings";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+
+// import {
+//   // rssSettingsState,
+//   globalSettingsState,
+//   // tabOpenedState,
+// } from "../../state/defaultSettings";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
@@ -38,8 +40,11 @@ function GlobalSettings_UpperUI({
 }: Props): JSX.Element {
   const [uiColorData, setUiColorData] = uiColorState.use();
 
+  const globalSettings = useGlobalSettings(state => state, shallow)
+const setGlobalSettings = useGlobalSettings(state => state.setGlobalSettings)
+
   // const [rssSettingsData, setRssSettingsData] = rssSettingsState.use();
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
 
   // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
@@ -83,8 +88,8 @@ function GlobalSettings_UpperUI({
         <div className="flex items-center ml-2" key={i}>
           <button
             onClick={() => {
-              setGlobalSettingsData({
-                ...globalSettingsData,
+              setGlobalSettings({
+                ...globalSettings,
                 numberOfCols: el,
               });
             }}
@@ -92,7 +97,7 @@ function GlobalSettings_UpperUI({
           >
             <p
               className={` ${
-                globalSettingsData.numberOfCols === el
+                globalSettings.numberOfCols === el
                   ? `text-${uiColorData} underline cursor-default`
                   : `text-black cursor-pointer hover:text-${uiColorData} hover:text-opacity-70`
               } 
@@ -153,16 +158,16 @@ function GlobalSettings_UpperUI({
               <p className="">One color for all columns</p>
               <button
                 className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
-                  globalSettingsData.oneColorForAllCols
+                  globalSettings.oneColorForAllCols
                     ? // ? `bg-${uiColorData} hover:bg-opacity-50`
                       // : `hover:bg-${uiColorData} hover:bg-opacity-50`
                       `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                     : `hover:border-opacity-50`
                 } focus-1-offset-dark`}
                 onClick={() => {
-                  setGlobalSettingsData({
-                    ...globalSettingsData,
-                    oneColorForAllCols: !globalSettingsData.oneColorForAllCols,
+                  setGlobalSettings({
+                    ...globalSettings,
+                    oneColorForAllCols: !globalSettings.oneColorForAllCols,
                   });
                 }}
                 aria-label={"One color for all columns"}
@@ -172,17 +177,17 @@ function GlobalSettings_UpperUI({
               <p className="">Limit column width growth</p>
               <button
                 className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
-                  globalSettingsData.limitColGrowth
+                  globalSettings.limitColGrowth
                     ? // ? `bg-${uiColorData} hover:bg-opacity-50`
                       // : `hover:bg-${uiColorData} hover:bg-opacity-50`
                       `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                     : `hover:border-opacity-50`
                 } focus-1-offset-dark  `}
                 onClick={() => {
-                  setGlobalSettingsData({
-                    ...globalSettingsData,
+                  setGlobalSettings({
+                    ...globalSettings,
                     // oneColorForAllCols: !globalSettingsData.oneColorForAllCols,
-                    limitColGrowth: !globalSettingsData.limitColGrowth,
+                    limitColGrowth: !globalSettings.limitColGrowth,
                   });
                 }}
                 aria-label={"Limit column width growth"}
@@ -193,14 +198,14 @@ function GlobalSettings_UpperUI({
               <p className="">Hide folder containing all bookmarks</p>
               <button
                 className={`h-4 w-4 cursor-pointer transition duration-75 border-2 border-${uiColorData} ${
-                  globalSettingsData.hideNonDeletable
+                  globalSettings.hideNonDeletable
                     ? `bg-${uiColorData} bg-opacity-50 hover:border-opacity-30`
                     : `hover:border-opacity-50`
                 } focus-1-offset-dark `}
                 onClick={() => {
-                  setGlobalSettingsData({
-                    ...globalSettingsData,
-                    hideNonDeletable: !globalSettingsData.hideNonDeletable,
+                  setGlobalSettings({
+                    ...globalSettings,
+                    hideNonDeletable: !globalSettings.hideNonDeletable,
                   });
                 }}
                 aria-label={"Hide folder containing all bookmarks"}

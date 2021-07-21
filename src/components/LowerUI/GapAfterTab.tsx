@@ -7,10 +7,12 @@ import { ItemTypes } from "../../utils/itemsDnd";
 
 // import { tabsDataState } from "../../state/tabsAndBookmarks";
 
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 import {useTabs} from "../../state/useTabs"
 
 import { tabBeingDraggedColor_State } from "../../state/colorsState";
-import { globalSettingsState } from "../../state/defaultSettings";
+// import { globalSettingsState } from "../../state/defaultSettings";
 
 interface Item {
   type: string;
@@ -38,8 +40,8 @@ function GapAfterTab({
 
   // const [tabsData, setTabsData] = tabsDataState.use();
 
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  const globalSettings = useGlobalSettings(state => state, shallow)
 
   const tabs = useTabs(store => store.tabs);
   const dragTab = useTabs(store => store.dragTab);
@@ -195,7 +197,7 @@ function GapAfterTab({
       return calcOpacityOnDrop();
     }
 
-    if (globalSettingsData.picBackground) {
+    if (globalSettings.picBackground) {
       return "";
     }
 
@@ -208,7 +210,7 @@ function GapAfterTab({
         <div ref={drop} className="h-full relative flex flex-col">
           <div
             className={`h-6 ${
-              globalSettingsData.picBackground
+              globalSettings.picBackground
                 ? ""
                 : `border-black border-opacity-10 `
             }
@@ -217,7 +219,7 @@ function GapAfterTab({
           ></div>
 
           {/* 1px height to cover bottom of the column when draggind */}
-          {!globalSettingsData.picBackground && (
+          {!globalSettings.picBackground && (
             <div
               className={`absolute h-px w-full ${
                 isOver ? calcOpacityOnDrop() : ""
@@ -228,7 +230,7 @@ function GapAfterTab({
 
           <div
             className={`w-full flex-grow ${
-              globalSettingsData.picBackground
+              globalSettings.picBackground
                 ? ""
                 : `border-black border-opacity-10 border-l border-r border-b`
             }
@@ -240,7 +242,7 @@ function GapAfterTab({
       ) : (
         <div
           className={`h-6 ${
-            globalSettingsData.picBackground
+            globalSettings.picBackground
               ? ""
               : `border-black border-opacity-10 border-l border-r`
           } ${isOver ? calcOpacityOnDrop() : ""}

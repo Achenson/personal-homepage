@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 import { backgroundColorState } from "../../state/colorsState";
-import { globalSettingsState } from "../../state/defaultSettings";
+// import { globalSettingsState } from "../../state/defaultSettings";
 import { backgroundColors } from "../../utils/colors_background";
 import { useUpperUiContext } from "../../utils/upperUiContext";
+
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+
 
 import "../../utils/fade.css";
 
@@ -16,12 +20,15 @@ interface Props {
 function Message_UpperUI({}: // upperVisDispatch,
 // upperVisState,
 Props): JSX.Element {
+
+  const globalSettings = useGlobalSettings(state => state, shallow)
+
   const [close, setClose] = useState(false);
   const [fadeInEnd, setFadeInEnd] = useState(false);
 
   const [backgroundColorData, setBackgroundColorData] =
     backgroundColorState.use();
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const upperUiContext = useUpperUiContext();
 
   useEffect(() => {
@@ -40,7 +47,7 @@ Props): JSX.Element {
   }, [upperUiContext.upperVisState.messagePopup, setClose, setFadeInEnd]);
 
   function backgroundColor(): string {
-    if (globalSettingsData.picBackground) {
+    if (globalSettings.picBackground) {
       return "white";
     }
 

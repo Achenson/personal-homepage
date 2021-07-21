@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 
 // import { tabsDataState } from "../../state/tabsAndBookmarks";
+
+
 import {
   SingleTabData,
   TabVisAction,
   UpperVisState,
 } from "../../utils/interfaces";
-import { globalSettingsState } from "../../state/defaultSettings";
+// import { globalSettingsState } from "../../state/defaultSettings";
+
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 import {useTabContext} from "../../utils/tabContext"
 
 interface Props {
@@ -23,8 +28,9 @@ function NoteInput({
   // upperVisState,
 }: Props): JSX.Element {
   // const [tabsData, setTabsData] = tabsDataState.use();
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
+  const globalSettings = useGlobalSettings(state => state, shallow)
   const tabContext = useTabContext()
 
   // let currentTab = tabsData.filter((obj) => obj.id === tabID);
@@ -52,7 +58,7 @@ function NoteInput({
   return (
     <div
       className={`${
-        globalSettingsData.picBackground
+        globalSettings.picBackground
           ? "bg-gray-100 bg-opacity-20 border-b border-gray-800 border-opacity-10"
           : "bg-amber-100 border border-black border-opacity-10 border-t-0"
       } p-2 `}
@@ -60,7 +66,7 @@ function NoteInput({
       <div
         className={`p-2 rounded-md overflow-hidden border border-black border-opacity-10
         focus:outline-none focus-visible:ring-2 ring-${
-          globalSettingsData.picBackground ? "gray-50" : "gray-300"
+          globalSettings.picBackground ? "gray-50" : "gray-300"
         } focus:border-opacity-0`}
         style={{ backgroundColor: "rgb(247, 243, 132)" }}
         onClick={() => {

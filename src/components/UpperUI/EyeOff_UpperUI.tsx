@@ -6,13 +6,16 @@ import { backgroundColorsUpperUiFocus } from "../../utils/colors_background";
 
 import {useUpperUiContext} from "../../utils/upperUiContext"
 
+
+import shallow from "zustand/shallow";
+import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 import {useTabs} from "../../state/useTabs"
 
-import {
-  // closeAllTabsState,
-  globalSettingsState,
-  // tabOpenedState
-} from "../../state/defaultSettings";
+// import {
+//   // closeAllTabsState,
+//   globalSettingsState,
+//   // tabOpenedState
+// } from "../../state/defaultSettings";
 
 import { ReactComponent as EyeOffSVG } from "../../svgs/eye-off.svg";
 
@@ -25,6 +28,9 @@ interface Props {
 function EyeOff_UpperUI({ 
   // upperVisDispatch
  }: Props): JSX.Element {
+
+  const globalSettings = useGlobalSettings(state => state, shallow)
+
   const [backgroundColorData, setBackgroundColorState] =
     backgroundColorState.use();
 
@@ -34,7 +40,7 @@ function EyeOff_UpperUI({
   const setCloseAllTabsState = useTabs(state => state.setCloseAllTabsState)
   const setTabOpenedState = useTabs(state => state.setTabOpenedState)
 
-  const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
+  // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const upperUiContext = useUpperUiContext()
 
   function calcIconBackground(pageBackgroundColor: string) {
@@ -48,7 +54,7 @@ function EyeOff_UpperUI({
 
     let whiteRegex = /[3456789]00$/;
 
-    if (globalSettingsData.picBackground) {
+    if (globalSettings.picBackground) {
       return "bg-white text-black";
     }
 
@@ -60,7 +66,7 @@ function EyeOff_UpperUI({
   }
 
   function focusColor(): string {
-    if (globalSettingsData.picBackground) {
+    if (globalSettings.picBackground) {
       return "blueGray-400";
     }
 
