@@ -3,6 +3,7 @@ import create from "zustand";
 import { columnColors, imageColumnColors } from "../utils/colors_column";
 import { backgroundColors } from "../utils/colors_background";
 import { tabColors } from "../utils/colors_tab";
+import { isDoStatement } from "typescript";
 
 export const useDefaultColors = create((set) => ({
   folderColor: tabColors[7][2],
@@ -31,8 +32,17 @@ export const useBackgroundColor = create<{
 
 // export const resetColorsState = newRidgeState<boolean>(false);
 
-export const useResetColorsState = create((set) => ({
-  resetColorsState: false,
+export const useResetColors = create<{
+  resetColors: boolean;
+  setResetColors: (trueOrFalse: boolean) => void
+}>((set) => ({
+  resetColors: false,
+  setResetColors: (trueOrFalse) => set(
+    (state) => ({
+      ...state,
+      resetColors: trueOrFalse
+    })
+  )
 }));
 
 export const useColumnsColors = create((set) => ({

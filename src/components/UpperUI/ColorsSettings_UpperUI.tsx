@@ -14,11 +14,12 @@ import {
   folderColorState,
   rssColorState,
   uiColorState,
-  resetColorsState,
+  // resetColorsState,
 } from "../../state/colorsState";
 
 
 import {useTabs} from "../../state/useTabs"
+import { useResetColors } from "../../state/colorHooks";
   
 
 // import { tabOpenedState } from "../../state/defaultSettings";
@@ -60,11 +61,13 @@ function ColorsSettings_UpperUI({
   // const [columnsSelected, setColumnsSelected] = useState<boolean>(false);
   // const [columnSelected, setColumnSelected] = useState<number | null>(null);
 
+  const setResetColors = useResetColors(state => state.setResetColors)
+
   const [folderColorData, setFolderColorData] = folderColorState.use();
   const [noteColorData, setNoteColorData] = noteColorState.use();
   const [rssColorData, setRssColorData] = rssColorState.use();
   const [uiColorData, setUiColorData] = uiColorState.use();
-  const [resetColorsData, setResetColorsData] = resetColorsState.use();
+  // const [resetColorsData, setResetColorsData] = resetColorsState.use();
 
   // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
@@ -245,7 +248,7 @@ function ColorsSettings_UpperUI({
                 onClick={() => {
                   // setFolderColorData("teal-500");
                   // setNoteColorData("yellow-500");
-                  setResetColorsData(true);
+                  setResetColors(true);
                 }}
                 className="focus-1-offset"
                 aria-label={"Reset colors to default"}

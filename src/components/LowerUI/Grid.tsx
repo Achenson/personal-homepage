@@ -15,14 +15,15 @@ import { produce } from "immer";
 import { useBookmarks } from "../../state/useBookmarks";
 import { useTabs } from "../../state/useTabs";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
+import { useResetColors } from "../../state/colorHooks";
 
 
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 
-import {
-  // backgroundColorState,
-  resetColorsState,
-} from "../../state/colorsState";
+// import {
+//   // backgroundColorState,
+//   resetColorsState,
+// } from "../../state/colorsState";
 
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
@@ -58,7 +59,10 @@ function Grid({
 
   const globalSettings = useGlobalSettings(state => state, shallow)
 
-  const [resetColorsData, setResetColorsData] = resetColorsState.use();
+  const resetColors = useResetColors(state => state.resetColors)
+  const setResetColors = useResetColors(state => state.setResetColors)
+
+  // const [resetColorsData, setResetColorsData] = resetColorsState.use();
 
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
@@ -132,7 +136,7 @@ function Grid({
   }, [closeAllTabsState]);
 
   useEffect(() => {
-    if (resetColorsData) {
+    if (resetColors) {
       // tabsData.forEach((obj, i) => {});
 
       // setTabsData((previous) =>
@@ -145,9 +149,9 @@ function Grid({
 
       resetAllTabColors();
 
-      setResetColorsData(false);
+      setResetColors(false);
     }
-  }, [resetColorsData, setResetColorsData]);
+  }, [resetColors, setResetColors]);
 
   useEffect(() => {
     // console.log(bookmarksAllTagsData);

@@ -14,7 +14,7 @@ export const uiColorState = newRidgeState<string>(tabColors[7][2]);
 // export const rssColorState = newRidgeState<string>("sky-500");
 // export const uiColorState = newRidgeState<string>("teal-500");
 
-export const resetColorsState = newRidgeState<boolean>(false);
+// export const resetColorsState = newRidgeState<boolean>(false);
 
 interface ColumnsColors {
   column_1: string;
