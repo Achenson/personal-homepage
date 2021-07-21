@@ -2,8 +2,11 @@ import React from "react";
 
 import { produce } from "immer";
 
-import { backgroundColorState } from "../../state/colorsState";
+// import { backgroundColorState } from "../../state/colorsState";
 import { backgroundColorsLightFocus } from "../../utils/colors_background";
+
+import { useBackgroundColor } from "../../state/colorHooks";
+
 
 interface Props {
   color: string;
@@ -23,8 +26,12 @@ function SingleColor_Background({
   setSelectedNumber,
   colorArrLength,
 }: Props): JSX.Element {
-  const [backgroundColorData, setBackgroundColorData] =
-    backgroundColorState.use();
+  // const [backgroundColorData, setBackgroundColorData] =
+  //   backgroundColorState.use();
+
+  const setBackgroundColor = useBackgroundColor(
+    (state) => state.setBackgroundColor
+  );
 
   function borderMaker() {
     // if (color !== backgroundColorData) {
@@ -63,7 +70,6 @@ function SingleColor_Background({
     return colorArrLength - selectedNumber + colorNumber + 1;
   }
 
-
   return (
     <button
       className={`h-4 w-4 -mr-px -mt-px bg-${color} cursor-pointer
@@ -72,15 +78,14 @@ function SingleColor_Background({
       focus:outline-none focus-visible:ring-2 ring-${focusColor()} ring-inset
       `}
       onClick={() => {
-        setBackgroundColorData(color);
-        setSelectedNumber(colorNumber)
+        setBackgroundColor(color);
+        setSelectedNumber(colorNumber);
       }}
       tabIndex={tabIndex}
       aria-label={"Choose color"}
     >
       {/* {colorNumber} */}
       {/* {selectedNumber} */}
-     
     </button>
   );
 }

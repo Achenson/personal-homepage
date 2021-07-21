@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 
-import { backgroundColorState } from "../../state/colorsState";
+// import { backgroundColorState } from "../../state/colorsState";
 
 import { backgroundColorsUpperUiFocus } from "../../utils/colors_background";
 
-import {useUpperUiContext} from "../../utils/upperUiContext"
+import { useUpperUiContext } from "../../utils/upperUiContext";
 
+import { useBackgroundColor } from "../../state/colorHooks";
 
 import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
-import {useTabs} from "../../state/useTabs"
+import { useTabs } from "../../state/useTabs";
 
 // import {
 //   // closeAllTabsState,
@@ -25,23 +26,22 @@ interface Props {
   // upperVisDispatch: React.Dispatch<UpperVisAction>;
 }
 
-function EyeOff_UpperUI({ 
-  // upperVisDispatch
- }: Props): JSX.Element {
+function EyeOff_UpperUI({}: // upperVisDispatch
+Props): JSX.Element {
+  const globalSettings = useGlobalSettings((state) => state, shallow);
+  const backgroundColor = useBackgroundColor((state) => state.backgroundColor);
 
-  const globalSettings = useGlobalSettings(state => state, shallow)
-
-  const [backgroundColorData, setBackgroundColorState] =
-    backgroundColorState.use();
+  // const [backgroundColorData, setBackgroundColorState] =
+  //   backgroundColorState.use();
 
   // const [closeAllTabsData, setCloseAllTabsData] = closeAllTabsState.use();
   // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
 
-  const setCloseAllTabsState = useTabs(state => state.setCloseAllTabsState)
-  const setTabOpenedState = useTabs(state => state.setTabOpenedState)
+  const setCloseAllTabsState = useTabs((state) => state.setCloseAllTabsState);
+  const setTabOpenedState = useTabs((state) => state.setTabOpenedState);
 
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-  const upperUiContext = useUpperUiContext()
+  const upperUiContext = useUpperUiContext();
 
   function calcIconBackground(pageBackgroundColor: string) {
     if (pageBackgroundColor === "white") {
@@ -49,7 +49,7 @@ function EyeOff_UpperUI({
     }
 
     if (pageBackgroundColor === "black") {
-      return `bg-white text-${backgroundColorData}`;
+      return `bg-white text-${backgroundColor}`;
     }
 
     let whiteRegex = /[3456789]00$/;
@@ -59,7 +59,7 @@ function EyeOff_UpperUI({
     }
 
     if (whiteRegex.test(pageBackgroundColor)) {
-      return `bg-white text-${backgroundColorData}`;
+      return `bg-white text-${backgroundColor}`;
     } else {
       return `$bg-${pageBackgroundColor}`;
     }
@@ -70,7 +70,7 @@ function EyeOff_UpperUI({
       return "blueGray-400";
     }
 
-    if (backgroundColorsUpperUiFocus.indexOf(backgroundColorData) > -1) {
+    if (backgroundColorsUpperUiFocus.indexOf(backgroundColor) > -1) {
       return "blueGray-300";
     }
 
@@ -84,9 +84,9 @@ function EyeOff_UpperUI({
       onClick={() => {
         // setSelected((b) => !b);
         // setBackgroundColorsToChooseVis((b) => !b);
-       upperUiContext.upperVisDispatch({ type: "CLOSE_ALL" });
+        upperUiContext.upperVisDispatch({ type: "CLOSE_ALL" });
         setCloseAllTabsState(true);
-        setTabOpenedState(null)
+        setTabOpenedState(null);
       }}
       className={`focus:outline-none focus-visible:ring-2 ring-${focusColor()} ring-inset`}
       tabIndex={6}
@@ -95,7 +95,7 @@ function EyeOff_UpperUI({
       <EyeOffSVG
         // className={`h-7 bg-${calcIconBackground(backgroundColorData)} opacity-80 border border-black rounded-lg cursor-pointer fill-current text-${backgroundColorData} hover:border-gray-500`}
         className={`h-7 transition-colors duration-75 ${calcIconBackground(
-          backgroundColorData
+          backgroundColor
         )} opacity-80 border border-black rounded-lg cursor-pointer  hover:border-gray-500`}
       />
     </button>

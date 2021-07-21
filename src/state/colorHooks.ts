@@ -11,8 +11,17 @@ export const useDefaultColors = create((set) => ({
   uiColor: tabColors[7][2],
 }));
 
-export const useBackgroundColor = create((set) => ({
+export const useBackgroundColor = create<{
+  backgroundColor: string;
+  setBackgroundColor: (backgroundColor: string) => void;
+}>((set) => ({
   backgroundColor: backgroundColors[0][1],
+  setBackgroundColor: (backgroundColor) => set(
+    (state) => ({
+      ...state,
+      backgroundColor: backgroundColor
+    })
+  )
 }));
 
 // export const folderColorState = newRidgeState<string>("teal-500");

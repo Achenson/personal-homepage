@@ -8,7 +8,7 @@ import UpperUI from "./UpperUI/UpperUI";
 // import { globalSettingsState } from "../state/defaultSettings";
 import { useWindowSize } from "../utils/hook_useWindowSize";
 
-import { backgroundColorState } from "../state/colorsState";
+// import { backgroundColorState } from "../state/colorsState";
 import Background_UpperUI from "./UpperUI/BackgroundSettings_UpperUI";
 import Settings_UpperUI from "./UpperUI/GlobalSettings_UpperUI";
 import Profile_UpperUI from "./UpperUI/Profile_UpperUI";
@@ -21,6 +21,7 @@ import {
 
 import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../state/defaultSettingsHooks";
+import { useBackgroundColor } from "../state/colorHooks";
 
 import { UpperUiContext } from "../utils/upperUiContext";
 
@@ -157,9 +158,10 @@ function upperVisReducer(
 function Main({}: Props): JSX.Element {
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
   const globalSettings = useGlobalSettings((state) => state, shallow);
+  const backgroundColor = useBackgroundColor((state) => state.backgroundColor);
 
-  const [backgroundColorData, setBackgroundColorData] =
-    backgroundColorState.use();
+  // const [backgroundColorData, setBackgroundColorData] =
+  //   backgroundColorState.use();
 
   // const [columnSelected, setColumnSelected] = useState<number | null >(null);
   const [upperVisState, upperVisDispatch] = useReducer(
@@ -266,7 +268,7 @@ function Main({}: Props): JSX.Element {
         className={`relative min-h-screen ${
           globalSettings.picBackground
             ? `bg-${globalSettings.defaultImage}`
-            : `bg-${backgroundColorData}`
+            : `bg-${backgroundColor}`
         } bg-cover bg-fixed`}
         // style={{ paddingRight: `${paddingRight ? "17px" : ""}` }}
         style={{ paddingRight: `${paddingRight ? `${scrollbarWidth}px` : ""}` }}

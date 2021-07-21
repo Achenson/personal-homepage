@@ -16,7 +16,7 @@ import UpperLeftMenu from "../UpperUI/UpperLeftMenu";
 import UpperRightMenu from "../UpperUI/UpperRightMenu";
 import Message_UpperUI from "../UpperUI/Message_UpperUI";
 
-import { backgroundColorState } from "../../state/colorsState";
+// import { backgroundColorState } from "../../state/colorsState";
 
 import Tab from "./Tab";
 
@@ -44,8 +44,8 @@ function Column({
   const [columnsColorsImg_Data, setColumnsColorsImg_Data] =
     columnsColorsImg_State.use();
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
-  const [backgroundColorData, setbackgroundColorData] =
-    backgroundColorState.use();
+  // const [backgroundColorData, setbackgroundColorData] =
+  //   backgroundColorState.use();
   // const [tabsData, setTabsData] = tabsDataState.use();
 
   const tabs = useTabs(store => store.tabs)

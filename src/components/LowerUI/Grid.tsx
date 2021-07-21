@@ -20,7 +20,7 @@ import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 import { useWindowSize } from "../../utils/hook_useWindowSize";
 
 import {
-  backgroundColorState,
+  // backgroundColorState,
   resetColorsState,
 } from "../../state/colorsState";
 

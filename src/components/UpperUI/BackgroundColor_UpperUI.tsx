@@ -5,12 +5,13 @@ import ColorsToChoose_Background from "../Colors/ColorsToChoose_Background";
 
 import { backgroundColorsUpperUiFocus } from "../../utils/colors_background";
 
-import { backgroundColorState } from "../../state/colorsState";
+// import { backgroundColorState } from "../../state/colorsState";
 import { UpperVisAction, UpperVisState } from "../../utils/interfaces";
 
 // import { tabOpenedState } from "../../state/defaultSettings";
 
 import shallow from "zustand/shallow";
+import { useBackgroundColor } from "../../state/colorHooks";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 
 import { useUpperUiContext } from "../../utils/upperUiContext";
@@ -28,8 +29,9 @@ function BackgroundColor_upperUI({}: // setBackgroundColorsToChooseVis,
 // upperVisState,
 Props): JSX.Element {
   const globalSettings = useGlobalSettings((state) => state, shallow);
-  const [backgroundColorData, setBackgroundColorState] =
-    backgroundColorState.use();
+  const backgroundColor = useBackgroundColor((state) => state.backgroundColor);
+  // const [backgroundColorData, setBackgroundColorState] =
+  //   backgroundColorState.use();
 
   // const [closeAllTabsData, setCloseAllTabsData] =closeAllTabsState.use();
   // const [tabOpenedData, setTabOpenedData] = tabOpenedState.use();
@@ -46,13 +48,13 @@ Props): JSX.Element {
     }
 
     if (pageBackgroundColor === "black") {
-      return `bg-white fill-current text-${backgroundColorData}`;
+      return `bg-white fill-current text-${backgroundColor}`;
     }
 
     let whiteRegex = /[3456789]00$/;
 
     if (whiteRegex.test(pageBackgroundColor)) {
-      return `bg-white fill-current text-${backgroundColorData}`;
+      return `bg-white fill-current text-${backgroundColor}`;
     } else {
       return `$bg-${pageBackgroundColor}`;
     }
@@ -63,7 +65,7 @@ Props): JSX.Element {
       return "blueGray-400";
     }
 
-    if (backgroundColorsUpperUiFocus.indexOf(backgroundColorData) > -1) {
+    if (backgroundColorsUpperUiFocus.indexOf(backgroundColor) > -1) {
       return "blueGray-300";
     }
 
@@ -87,7 +89,7 @@ Props): JSX.Element {
         <DocumentSVG
           // className={`h-7 bg-${calcIconBackground(backgroundColorData)} opacity-80 border border-black rounded-lg cursor-pointer fill-current text-${backgroundColorData} hover:border-gray-500`}
           className={`h-7 transition-colors duration-75 ${calcIconBackground(
-            backgroundColorData
+            backgroundColor
           )} opacity-80 border border-black rounded-lg cursor-pointer  hover:border-gray-500`}
         />
       </button>

@@ -49,7 +49,7 @@ export const tabBeingDraggedColor_State = newRidgeState<{
 }
 )
 
-export const backgroundColorState = newRidgeState<string>(
-  // "gray-50"
-  backgroundColors[0][1]
-)
+// export const backgroundColorState = newRidgeState<string>(
+//   // "gray-50"
+//   backgroundColors[0][1]
+// )

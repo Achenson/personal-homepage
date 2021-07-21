@@ -11,8 +11,8 @@ import { UpperVisAction } from "../../utils/interfaces";
 
 import SingleColor_Background from "./SingleColor_Background";
 
-import { backgroundColorState } from "../../state/colorsState";
-
+// import { backgroundColorState } from "../../state/colorsState";
+import { useBackgroundColor } from "../../state/colorHooks";
 import { useUpperUiContext } from "../../utils/upperUiContext";
 
 interface Props {
@@ -20,16 +20,17 @@ interface Props {
 }
 
 function ColorsToChoose_Background({}: //  upperVisDispatch
-Props): JSX.Element {
-  const [backgroundColorData, setBackgroundColorData] =
-    backgroundColorState.use();
-  const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
+  Props): JSX.Element {
+    // const [backgroundColorData, setBackgroundColorData] =
+    //   backgroundColorState.use();
+    const backgroundColor = useBackgroundColor(state=> state.backgroundColor)
+    const [selectedNumber, setSelectedNumber] = useState(calcSelectedNumber());
 
   const upperUiContext = useUpperUiContext();
 
   useEffect(() => {
     setSelectedNumber(calcSelectedNumber());
-  }, [backgroundColorData]);
+  }, [backgroundColor]);
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -50,7 +51,7 @@ Props): JSX.Element {
     let selectedNumber: number = 0;
 
     backgroundColorsConcat.map((color, i) => {
-      if (color === backgroundColorData) {
+      if (color === backgroundColor) {
         selectedNumber = calcColorNumbering(color);
       }
     });

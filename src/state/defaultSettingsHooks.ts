@@ -1,6 +1,5 @@
 import create from "zustand";
 
-
 interface UseGlobalSettingsData {
   picBackground: boolean;
   defaultImage: string;
@@ -21,11 +20,10 @@ export const useGlobalSettings = create<UseGlobalSettingsAll>((set) => ({
   limitColGrowth: false,
   hideNonDeletable: false,
   numberOfCols: 4,
-  setGlobalSettings: (globalSettings) => {
-    set( (state) => ({
-      ...globalSettings
-    }))
-  }
+  setGlobalSettings: (globalSettings) =>
+    set((state) => ({
+      ...globalSettings,
+    })),
 }));
 
 interface RssSettingsData {
@@ -47,4 +45,3 @@ export const useRssSettings = create<RssSettingsAll>((set) => ({
       ...rssSettingsData,
     })),
 }));
-
