@@ -448,6 +448,8 @@ Props): JSX.Element {
       setTabBeingDraggedColor(finalTabColor);
       tabVisDispatch({ type: "TAB_EDITABLES_CLOSE" });
       setTabOpenedState(null);
+      console.log("dragggind");
+      
     }
   }, [
     isDragging,

@@ -5,7 +5,6 @@ import { backgroundColors } from "../utils/colors_background";
 import { tabColors } from "../utils/colors_tab";
 import { isDoStatement } from "typescript";
 
-
 interface DefaultColorsData {
   folderColor: string;
   noteColor: string;
@@ -20,7 +19,6 @@ interface DefaultColorObj {
 
 interface DefaultColorsAll extends DefaultColorsData {
   setDefaultColors: (defaultColorObj: DefaultColorObj) => void;
-  
 }
 
 export const useDefaultColors = create<DefaultColorsAll>((set) => ({
@@ -28,13 +26,11 @@ export const useDefaultColors = create<DefaultColorsAll>((set) => ({
   noteColor: tabColors[1][2],
   rssColor: tabColors[9][2],
   uiColor: tabColors[7][2],
-  setDefaultColors: (defaultColorObj) => set (
-    (state) => ({
+  setDefaultColors: (defaultColorObj) =>
+    set((state) => ({
       ...state,
-      [defaultColorObj.key]: defaultColorObj.color
-    })
-  )
-
+      [defaultColorObj.key]: defaultColorObj.color,
+    })),
 }));
 
 export const useBackgroundColor = create<{
@@ -68,7 +64,6 @@ export const useResetColors = create<{
     })),
 }));
 
-
 interface ColumnsColorsObj {
   key: "column_1" | "column_2" | "column_3" | "column_4";
   color: string;
@@ -85,19 +80,16 @@ interface UseColumnsColorsAll extends UseColumnsColorsData {
   setColumsColors: (columnsColorsObj: ColumnsColorsObj) => void;
 }
 
-
-
 export const useColumnsColors = create<UseColumnsColorsAll>((set) => ({
   column_1: columnColors[0][8],
   column_2: columnColors[1][5],
   column_3: columnColors[1][8],
   column_4: columnColors[3][2],
-  setColumsColors: (columnColorsObj) => set(
-    (state) => ({
+  setColumsColors: (columnColorsObj) =>
+    set((state) => ({
       ...state,
-      [columnColorsObj.key]: columnColorsObj.color
-    })
-  )
+      [columnColorsObj.key]: columnColorsObj.color,
+    })),
 }));
 
 export const useColumnsColorsImg = create<UseColumnsColorsAll>((set) => ({
@@ -105,12 +97,11 @@ export const useColumnsColorsImg = create<UseColumnsColorsAll>((set) => ({
   column_2: imageColumnColors[0][2],
   column_3: imageColumnColors[0][2],
   column_4: imageColumnColors[0][2],
-  setColumsColors: (columnColorsObj) => set(
-    (state) => ({
+  setColumsColors: (columnColorsObj) =>
+    set((state) => ({
       ...state,
-      [columnColorsObj.key]: columnColorsObj.color
-    })
-  )
+      [columnColorsObj.key]: columnColorsObj.color,
+    })),
 }));
 
 export const useTabBeingDraggedColor = create<{
@@ -121,6 +112,6 @@ export const useTabBeingDraggedColor = create<{
   setTabBeingDraggedColor: (color) =>
     set((state) => ({
       ...state,
-      useTabBeingDraggedColor: color,
+      tabBeingDraggedColor: color,
     })),
 }));
