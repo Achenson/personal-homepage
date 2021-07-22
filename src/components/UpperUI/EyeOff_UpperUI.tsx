@@ -85,7 +85,11 @@ Props): JSX.Element {
         // setSelected((b) => !b);
         // setBackgroundColorsToChooseVis((b) => !b);
         upperUiContext.upperVisDispatch({ type: "CLOSE_ALL" });
-        setCloseAllTabsState(true);
+
+        setTimeout(() => {
+          setCloseAllTabsState(true);
+        });
+
         setTabOpenedState(null);
       }}
       className={`focus:outline-none focus-visible:ring-2 ring-${focusColor()} ring-inset`}

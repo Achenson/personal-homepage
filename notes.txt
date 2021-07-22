@@ -399,6 +399,8 @@ DONE 325. xxx open popup with 3 default images to choose xx -> chosing enablem i
 DONE 326. chevronDown & selectableVis -> unify logic! DONE
 DONE 327. add error to editTab to all only unique titles! DONE
 XXX 328. bigger gap after tab on smaller screen sizes when column is empty? XXX
+DONE 331. unmounted component error (err mentioned alread?) / error in console.log if empty tag auto deletes itself
+also when dragging tabs to empty cols! (fixed with transition from ridge state to zustand) DONE
 DONE 334. saveSVGs onClick -> convert code to functions DONE
 DONE 335. RSS settings - date & description better styles DONE
 DONE 336. Rss SingleLink - empty?? (deleted) DONE
@@ -566,19 +568,16 @@ DONE 477. deleting tag in bookmarks: check if it works porperly in the end DONE
 DONE 478. Tab: check edit DONE
 DONE 481. useBookmarks, useTabs: move data elsewhere, leave methods only DONE
 DONE 483. Tab being dragged color not working? DONE
-
+DONE 484. when clicking a Tab/tab editables/eye off: "Cannot update a component (`Tab`) while rendering a different component (`Tab`)".
+fixed by wrapping hooks from zustand with setTimout. In Tab problem was occuring if there was anything dependend 
+on the state being set by setTabOpenedState. Problem because hooks from zustand change tab data before render is finished? DONE
 
 
 1. tailwind - purgecss at the end of the project
 2. react-scripts 4.0.0 not working with typescript (vulnerability)
 
 329. code order (useEffect, func itp) eg. in 
-331. unmounted component error (err mentioned alread?) / error in console.log if empty tag auto deletes itself
-also when dragging tabs to empty cols!
 
-Warning: Can't perform a React state update on an unmounted component. This is a no-op,
- but it indicates a memory leak in your application.
- To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
  
 332. make biggest components smaller/extaract more funcions out? (max 500 lines of code)
 
@@ -601,8 +600,6 @@ Warning: Can't perform a React state update on an unmounted component. This is a
 479. tabID, bookmarkID - unify types!
 480. GapAfterTab dragWrapper change to tabDrag from zustand
 482. cannot save after reseting rss settings to default: check if it worked with ridge state
-
-
 
 
 

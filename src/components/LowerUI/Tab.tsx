@@ -11,7 +11,10 @@ import shallow from "zustand/shallow";
 import { useGlobalSettings } from "../../state/defaultSettingsHooks";
 
 import { useTabs } from "../../state/useTabs";
-import { useTabBeingDraggedColor, useDefaultColors } from "../../state/colorHooks";
+import {
+  useTabBeingDraggedColor,
+  useDefaultColors,
+} from "../../state/colorHooks";
 
 // import { bookmarksDataState } from "../../state/tabsAndBookmarks";
 // import { deletedTabState } from "../../state/tabsAndBookmarks";
@@ -110,11 +113,13 @@ function Tab({
 Props): JSX.Element {
   // const [globalSettingsData, setGlobalSettingsData] = globalSettingsState.use();
 
-  const globalSettings = useGlobalSettings(state => state, shallow)
+  const globalSettings = useGlobalSettings((state) => state, shallow);
 
-  const setTabBeingDraggedColor = useTabBeingDraggedColor(state => state.setTabBeingDraggedColor)
+  const setTabBeingDraggedColor = useTabBeingDraggedColor(
+    (state) => state.setTabBeingDraggedColor
+  );
 
-  const defaultColors = useDefaultColors(state => state, shallow);
+  const defaultColors = useDefaultColors((state) => state, shallow);
 
   // const [focusedTabData, setFocusedTabData] = focusedTabState.use();
 
@@ -132,8 +137,8 @@ Props): JSX.Element {
   const tabs = useTabs((store) => store.tabs);
   const closeAllTabsState = useTabs((store) => store.closeAllTabsState);
   const tabOpenedState = useTabs((store) => store.tabOpenedState);
-  const focusedTabState = useTabs(store => store.focusedTabState)
-  const setFocusedTabState = useTabs(store => store.setFocusedTabState)
+  const focusedTabState = useTabs((store) => store.focusedTabState);
+  const setFocusedTabState = useTabs((store) => store.setFocusedTabState);
   const setTabOpenedState = useTabs((store) => store.setTabOpenedState);
 
   const defaultTabContent = useTabs((store) => store.defaultTabContent);
@@ -201,7 +206,9 @@ Props): JSX.Element {
     switch (action.type) {
       case "COLORS_SETTINGS_TOGGLE":
         if (!state.colorsVis) {
-          setTabOpenedState(tabID);
+          setTimeout(() => {
+            setTabOpenedState(tabID);
+          });
         }
 
         return {
@@ -221,7 +228,9 @@ Props): JSX.Element {
         };
       case "EDIT_TOGGLE":
         if (!state.editTabVis) {
-          setTabOpenedState(tabID);
+          setTimeout(() => {
+            setTabOpenedState(tabID);
+          });
         }
 
         return {
@@ -241,8 +250,9 @@ Props): JSX.Element {
           editBookmarkVis: null,
         };
       case "TAB_CONTENT_TOGGLE":
-    
-        setTabOpenedState(tabID);
+        setTimeout(() => {
+          setTabOpenedState(tabID);
+        });
 
         // setTabsData((previous) =>
         //   produce(previous, (updated) => {
@@ -255,7 +265,9 @@ Props): JSX.Element {
         //   })
         // );
 
-        toggleTab(tabID, tabOpened);
+        setTimeout(() => {
+          toggleTab(tabID, tabOpened);
+        })
 
         return {
           ...state,
@@ -313,7 +325,9 @@ Props): JSX.Element {
       case "NEW_BOOKMARK_TOOGLE":
         if (!state.newBookmarkVis) {
           // setTabEditOpenedData(tabID);
-          setTabOpenedState(tabID);
+          setTimeout(() => {
+            setTabOpenedState(tabID);
+          });
         }
 
         return {
@@ -326,7 +340,9 @@ Props): JSX.Element {
       case "EDIT_BOOKMARK_OPEN":
         if (!state.editBookmarkVis) {
           // setTabEditOpenedData(tabID);
-          setTabOpenedState(tabID);
+          setTimeout(() => {
+            setTabOpenedState(tabID);
+          });
         }
 
         return {
@@ -348,7 +364,9 @@ Props): JSX.Element {
 
       case "TOUCH_SCREEN_MODE_ON":
         if (!state.touchScreenModeOn) {
-          setTabOpenedState(tabID);
+          setTimeout(() => {
+            setTabOpenedState(tabID);
+          });
         }
 
         return {
@@ -449,14 +467,8 @@ Props): JSX.Element {
       tabVisDispatch({ type: "TAB_EDITABLES_CLOSE" });
       setTabOpenedState(null);
       console.log("dragggind");
-      
     }
-  }, [
-    isDragging,
-    finalTabColor,
-    setTabBeingDraggedColor,
-    setTabOpenedState,
-  ]);
+  }, [isDragging, finalTabColor, setTabBeingDraggedColor, setTabOpenedState]);
 
   const colorsForLightText: string[] = [
     // "orange-500",
@@ -506,9 +518,7 @@ Props): JSX.Element {
         type: "TAB_EDITABLES_OPENABLE_DEFAULT",
       });
     }
-  }, [
-    upperUiContext
-  ]);
+  }, [upperUiContext]);
 
   function textOrIconColor(finalTabColor: string, textOrIcon: "text" | "icon") {
     // exceptions
